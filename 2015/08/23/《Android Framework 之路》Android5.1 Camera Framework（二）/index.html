@@ -1,0 +1,3013 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>《Android Framework 之路》Android5.1 Camera Framework（二） - onlyloveyd</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="上一次讲解了一下CameraService的启动过程，今天梳理一下Camera预览的过程  tartPreview过程 首先，我们还是从应用层的使用入手 Camera.java (packages\apps\legacycamera\src\com\android\camera) 123456Thread mCameraPreviewThread = new Thread(new Runnabl">
+<meta name="keywords" content="Framework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Android Framework 之路》Android5.1 Camera Framework（二）">
+<meta property="og:url" content="http://yoursite.com/2015/08/23/《Android Framework 之路》Android5.1 Camera Framework（二）/index.html">
+<meta property="og:site_name" content="onlyloveyd">
+<meta property="og:description" content="上一次讲解了一下CameraService的启动过程，今天梳理一下Camera预览的过程  tartPreview过程 首先，我们还是从应用层的使用入手 Camera.java (packages\apps\legacycamera\src\com\android\camera) 123456Thread mCameraPreviewThread = new Thread(new Runnabl">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-06-14T12:45:11.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Android Framework 之路》Android5.1 Camera Framework（二）">
+<meta name="twitter:description" content="上一次讲解了一下CameraService的启动过程，今天梳理一下Camera预览的过程  tartPreview过程 首先，我们还是从应用层的使用入手 Camera.java (packages\apps\legacycamera\src\com\android\camera) 123456Thread mCameraPreviewThread = new Thread(new Runnabl">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="《Android Framework 之路》Android5.1 Camera Framework（二）" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2015-08-23T14:37:49.000Z">2015-08-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android源码/">Android源码</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 分钟 读完 (大约 3154 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                《Android Framework 之路》Android5.1 Camera Framework（二）
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>上一次讲解了一下CameraService的启动过程，今天梳理一下Camera预览的过程</p>
+</blockquote>
+<h2 id="tartPreview过程"><a href="#tartPreview过程" class="headerlink" title="tartPreview过程"></a>tartPreview过程</h2><p> 首先，我们还是从应用层的使用入手<br> Camera.java (packages\apps\legacycamera\src\com\android\camera)</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread mCameraPreviewThread = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        initializeCapabilities(); <span class="hljs-comment">//初始化参数</span></span><br><span class="line">        startPreview(); <span class="hljs-comment">//启动预览</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 针对相机应用，采用了单独的线程来处理预览，猜测是为了加快预览显示的速度</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">startPreview</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">        <span class="hljs-comment">// If we're previewing already, stop the preview first (this will blank</span></span><br><span class="line">        <span class="hljs-comment">// the screen).</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mCameraState != PREVIEW_STOPPED) stopPreview();</span><br><span class="line"></span><br><span class="line">        setPreviewDisplay(mSurfaceHolder); <span class="hljs-comment">//设置SurfaceHolder</span></span><br><span class="line">        setDisplayOrientation();       <span class="hljs-comment">//设置显示方向</span></span><br><span class="line">        ......</span><br><span class="line">        setCameraParameters(UPDATE_PARAM_ALL); <span class="hljs-comment">//设置参数</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Inform the mainthread to go on the UI initialization.</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mCameraPreviewThread != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">synchronized</span> (mCameraPreviewThread) &#123;</span><br><span class="line">                mCameraPreviewThread.notify();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            Log.v(TAG, <span class="hljs-string">"startPreview"</span>);</span><br><span class="line">            mCameraDevice.startPreview(); <span class="hljs-comment">//启动预览，若失败，关闭Camera</span></span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">            closeCamera();</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"startPreview failed"</span>, ex);</span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里就是APP中启动预览的过程，过程必然会是<br> java -&gt; JNI -&gt; cpp，<br> 然后通过Binder机制执行到CameraClient中的<br> CameraClient.cpp (av\services\camera\libcameraservice\api1)</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">status_t</span> CameraClient::startPreview() &#123;</span><br><span class="line">    LOG1(<span class="hljs-string">"startPreview (pid %d)"</span>, getCallingPid());</span><br><span class="line">    <span class="hljs-keyword">return</span> startCameraMode(CAMERA_PREVIEW_MODE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里传入的是CAMERA_PREVIEW_MODE，枚举类型是在CameraClient.h中定义的<br> // camera operation mode<br> enum camera_mode {<br> CAMERA_PREVIEW_MODE = 0, // frame automatically released<br> CAMERA_RECORDING_MODE = 1, // frame has to be explicitly released by releaseRecordingFrame()<br> };<br> 第一种是针对普通的预览，第二种是针对录像</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// start preview or recording</span></span><br><span class="line"><span class="hljs-keyword">status_t</span> CameraClient::startCameraMode(camera_mode mode) &#123;</span><br><span class="line">    LOG1(<span class="hljs-string">"startCameraMode(%d)"</span>, mode);</span><br><span class="line">    Mutex::<span class="hljs-function">Autolock <span class="hljs-title">lock</span><span class="hljs-params">(mLock)</span></span>;</span><br><span class="line">    <span class="hljs-keyword">status_t</span> result = checkPidAndHardware();</span><br><span class="line">    <span class="hljs-keyword">if</span> (result != NO_ERROR) <span class="hljs-keyword">return</span> result;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">switch</span>(mode) &#123;</span><br><span class="line">        <span class="hljs-keyword">case</span> CAMERA_PREVIEW_MODE:</span><br><span class="line">            <span class="hljs-keyword">if</span> (mSurface == <span class="hljs-number">0</span> &amp;&amp; mPreviewWindow == <span class="hljs-number">0</span>) &#123; </span><br><span class="line">                LOG1(<span class="hljs-string">"mSurface is not set yet."</span>);</span><br><span class="line">                <span class="hljs-comment">// still able to start preview in this case.</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span> startPreviewMode(); <span class="hljs-comment">//开始预览模式</span></span><br><span class="line">        <span class="hljs-keyword">case</span> CAMERA_RECORDING_MODE:</span><br><span class="line">            <span class="hljs-keyword">if</span> (mSurface == <span class="hljs-number">0</span> &amp;&amp; mPreviewWindow == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                ALOGE(<span class="hljs-string">"mSurface or mPreviewWindow must be set before startRecordingMode."</span>);</span><br><span class="line">                <span class="hljs-keyword">return</span> INVALID_OPERATION;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span> startRecordingMode(); <span class="hljs-comment">//开始录像模式</span></span><br><span class="line">        <span class="hljs-keyword">default</span>:</span><br><span class="line">            <span class="hljs-keyword">return</span> UNKNOWN_ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里我们走的是预览模式</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">status_t</span> CameraClient::startPreviewMode() &#123;</span><br><span class="line">    LOG1(<span class="hljs-string">"startPreviewMode"</span>); <span class="hljs-comment">//LOG1,一直忘记说了，这是有log开关用过setprop可以使用</span></span><br><span class="line">    <span class="hljs-keyword">status_t</span> result = NO_ERROR;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// if preview has been enabled, nothing needs to be done</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (mHardware-&gt;previewEnabled()) &#123; <span class="hljs-comment">//如果已经启动预览，不必重复</span></span><br><span class="line">        <span class="hljs-keyword">return</span> NO_ERROR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (mPreviewWindow != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">//适配显示窗口的大小</span></span><br><span class="line">        native_window_set_scaling_mode(mPreviewWindow.get(),</span><br><span class="line">                NATIVE_WINDOW_SCALING_MODE_SCALE_TO_WINDOW);</span><br><span class="line">        <span class="hljs-comment">//调整帧数据的方向</span></span><br><span class="line">        native_window_set_buffers_transform(mPreviewWindow.get(),</span><br><span class="line">                mOrientation);</span><br><span class="line">    &#125;</span><br><span class="line">    mHardware-&gt;setPreviewWindow(mPreviewWindow); <span class="hljs-comment">//设置mPreviewWindow为显示窗口</span></span><br><span class="line">    result = mHardware-&gt;startPreview();   <span class="hljs-comment">//HAL层启动预览</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> result; <span class="hljs-comment">//返回结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里面涉及到native_window_set_scaling_mode，native_window_set_buffers_transform，直接跟代码，看注释就可以理解，这部分涉及到显示的一些内容，这里暂时不做讲解，native_window_set_scaling_mode设置模式为NATIVE_WINDOW_SCALING_MODE_SCALE_TO_WINDOW，native_window_set_buffers_transform是用来调整方向。<br> 这里有一个问题，mPreviewWindow是从何而来的呢？<br> 还记得我们在应用层的startPreview()方法中会有这么一个过程</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setPreviewDisplay(mSurfaceHolder);</span><br><span class="line">setDisplayOrientation();</span><br></pre></td></tr></table></figure>
+
+<p> 这里的setPreviewDisplay(mSurfaceHolder)，中间的过程大家可以自己跟一下，最后会执行到</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">status_t</span> CameraClient::setPreviewTarget(</span><br><span class="line">        <span class="hljs-keyword">const</span> sp&lt;IGraphicBufferProducer&gt;&amp; bufferProducer) &#123;</span><br><span class="line">    ......</span><br><span class="line">    sp&lt;IBinder&gt; binder;</span><br><span class="line">    sp&lt;ANativeWindow&gt; window;</span><br><span class="line">    <span class="hljs-keyword">if</span> (bufferProducer != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        binder = bufferProducer-&gt;asBinder();</span><br><span class="line">        <span class="hljs-comment">// Using controlledByApp flag to ensure that the buffer queue remains in</span></span><br><span class="line">        <span class="hljs-comment">// async mode for the old camera API, where many applications depend</span></span><br><span class="line">        <span class="hljs-comment">// on that behavior.</span></span><br><span class="line">        window = <span class="hljs-keyword">new</span> Surface(bufferProducer, <span class="hljs-comment">/*controlledByApp*/</span> <span class="hljs-literal">true</span>); <span class="hljs-comment">//这个家伙</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> setPreviewWindow(binder, window);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">status_t</span> CameraClient::setPreviewWindow(<span class="hljs-keyword">const</span> sp&lt;IBinder&gt;&amp; binder,</span><br><span class="line">        <span class="hljs-keyword">const</span> sp&lt;ANativeWindow&gt;&amp; window) &#123;</span><br><span class="line">    Mutex::<span class="hljs-function">Autolock <span class="hljs-title">lock</span><span class="hljs-params">(mLock)</span></span>;</span><br><span class="line">    ......</span><br><span class="line">    <span class="hljs-keyword">if</span> (window != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        result = native_window_api_connect(window.get(), NATIVE_WINDOW_API_CAMERA);</span><br><span class="line">        <span class="hljs-keyword">if</span> (result != NO_ERROR) &#123;</span><br><span class="line">            ALOGE(<span class="hljs-string">"native_window_api_connect failed: %s (%d)"</span>, strerror(-result),</span><br><span class="line">                    result);</span><br><span class="line">            <span class="hljs-keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// If preview has been already started, register preview buffers now.</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (mHardware-&gt;previewEnabled()) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (window != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            native_window_set_scaling_mode(window.get(),</span><br><span class="line">                    NATIVE_WINDOW_SCALING_MODE_SCALE_TO_WINDOW);</span><br><span class="line">            native_window_set_buffers_transform(window.get(), mOrientation);</span><br><span class="line">            result = mHardware-&gt;setPreviewWindow(window);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (result == NO_ERROR) &#123;</span><br><span class="line">        <span class="hljs-comment">// Everything has succeeded.  Disconnect the old window and remember the</span></span><br><span class="line">        <span class="hljs-comment">// new window.</span></span><br><span class="line">        disconnectWindow(mPreviewWindow);</span><br><span class="line">        mSurface = binder;</span><br><span class="line">        mPreviewWindow = window; <span class="hljs-comment">//这里便是赋值的操作了，后面我们操作的mPreviewWindow </span></span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// Something went wrong after we connected to the new window, so</span></span><br><span class="line">        <span class="hljs-comment">// disconnect here.</span></span><br><span class="line">        disconnectWindow(window);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 是不是看的很眼熟，和startPreviewMode()的过程有点相似。这就是mPreviewWindow的赋值过程。<br> 回到setPreviewMode()函数中，其中主要的过程是这两个<br> mHardware-&gt;setPreviewWindow(mPreviewWindow);<br> result = mHardware-&gt;startPreview();<br> 这里都是HAL层的处理，将窗口传下去，然后启动预览，最后数据就可以投射到这个预览窗口上了。<br> 我们继续往下看一下，<br> CameraHardwareInterface.h (av\services\camera\libcameraservice\device1)</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** Set the ANativeWindow to which preview frames are sent */</span></span><br><span class="line"><span class="hljs-keyword">status_t</span> setPreviewWindow(<span class="hljs-keyword">const</span> sp&lt;ANativeWindow&gt;&amp; buf)</span><br><span class="line">&#123;</span><br><span class="line">    ALOGV(<span class="hljs-string">"%s(%s) buf %p"</span>, __FUNCTION__, mName.<span class="hljs-built_in">string</span>(), buf.get());</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (mDevice-&gt;ops-&gt;set_preview_window) &#123;</span><br><span class="line">        mPreviewWindow = buf;</span><br><span class="line">        mHalPreviewWindow.user = <span class="hljs-keyword">this</span>;</span><br><span class="line">        ALOGV(<span class="hljs-string">"%s &amp;mHalPreviewWindow %p mHalPreviewWindow.user %p"</span>, __FUNCTION__,</span><br><span class="line">                &amp;mHalPreviewWindow, mHalPreviewWindow.user);</span><br><span class="line">        <span class="hljs-keyword">return</span> mDevice-&gt;ops-&gt;set_preview_window(mDevice,</span><br><span class="line">                buf.get() ? &amp;mHalPreviewWindow.nw : <span class="hljs-number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> INVALID_OPERATION;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">  * Start preview mode.</span></span><br><span class="line"><span class="hljs-comment">  */</span></span><br><span class="line"> <span class="hljs-keyword">status_t</span> startPreview()</span><br><span class="line"> &#123;</span><br><span class="line">     ALOGV(<span class="hljs-string">"%s(%s)"</span>, __FUNCTION__, mName.<span class="hljs-built_in">string</span>());</span><br><span class="line">     <span class="hljs-keyword">if</span> (mDevice-&gt;ops-&gt;start_preview)</span><br><span class="line">         <span class="hljs-keyword">return</span> mDevice-&gt;ops-&gt;start_preview(mDevice);</span><br><span class="line">     <span class="hljs-keyword">return</span> INVALID_OPERATION;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这是一个空壳，我们去看具体的实现，这里我们看下android5.1源码中Qcom的实现，由于针对HAL层的不同厂商有不同的处理方式，在这里我们就随便找个目录下的进行分析，旨在看流程，理解一些基础的内容，<br> QCamera2Hal.cpp （\device\asus\flo\camera\qcamera2\hal）</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"QCamera2Factory.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">hw_module_t</span> camera_common = &#123;</span><br><span class="line">    tag: HARDWARE_MODULE_TAG,</span><br><span class="line">    module_api_version: CAMERA_MODULE_API_VERSION_1_0,</span><br><span class="line">    hal_api_version: HARDWARE_HAL_API_VERSION,</span><br><span class="line">    id: CAMERA_HARDWARE_MODULE_ID,</span><br><span class="line">    name: <span class="hljs-string">"QCamera Module"</span>,</span><br><span class="line">    author: <span class="hljs-string">"Qualcomm Innovation Center Inc"</span>,</span><br><span class="line">    methods: &amp;qcamera::QCamera2Factory::mModuleMethods,</span><br><span class="line">    dso: <span class="hljs-literal">NULL</span>,</span><br><span class="line">    reserved:  &#123;<span class="hljs-number">0</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">camera_module_t</span> HAL_MODULE_INFO_SYM = &#123;</span><br><span class="line">    common: camera_common,</span><br><span class="line">    get_number_of_cameras: qcamera::QCamera2Factory::get_number_of_cameras,</span><br><span class="line">    get_camera_info: qcamera::QCamera2Factory::get_camera_info,</span><br><span class="line">    set_callbacks: <span class="hljs-literal">NULL</span>,</span><br><span class="line">    get_vendor_tag_ops: <span class="hljs-literal">NULL</span>,</span><br><span class="line">    open_legacy: <span class="hljs-literal">NULL</span>,</span><br><span class="line">    reserved: &#123;<span class="hljs-number">0</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 这里提一下HAL_MODULE_INFO_SYM这个东西，本身就是一个定义在hardware.h下的一个宏，看注释，意思很明显</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define HAL_MODULE_INFO_SYM HMI </span><br><span class="line"><span class="hljs-comment">//.so中将一个符号HMI,获取此符号的地址，就获取到了对应的hw_module_t地址</span></span><br></pre></td></tr></table></figure>
+
+<p> HAL_MODULE_INFO_SYM，这个是HAL 编译生成的so的入口，CameraService会获取这个来操作so<br> camera_common是针对HAL规范定义的一些内容。<br> Camera的open指向的是&amp;qcamera::QCamera2Factory::mModuleMethods中的open方法，如下</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">hw_module_methods_t</span> <span class="hljs-title">QCamera2Factory</span>:</span>:mModuleMethods = &#123;</span><br><span class="line">    open: QCamera2Factory::camera_device_open,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 这个方法中打开设备节点，我们可以看到HAL层中open的过程是很有讲究的，也不能这么说，应为HAL的处理方式基本上都是如此。</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> QCamera2Factory::camera_device_open(</span><br><span class="line">    <span class="hljs-keyword">const</span> struct <span class="hljs-keyword">hw_module_t</span> *<span class="hljs-keyword">module</span>, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *id,</span><br><span class="line">    struct <span class="hljs-keyword">hw_device_t</span> **hw_device)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">module</span> != &amp;HAL_MODULE_INFO_SYM.common) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"Invalid module. Trying to open %p, expect %p"</span>,</span><br><span class="line">            <span class="hljs-keyword">module</span>, &amp;HAL_MODULE_INFO_SYM.common);</span><br><span class="line">        <span class="hljs-keyword">return</span> INVALID_OPERATION;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (!id) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"Invalid camera id"</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> BAD_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> gQCamera2Factory.cameraDeviceOpen(atoi(id), hw_device);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> QCamera2Factory::cameraDeviceOpen(<span class="hljs-keyword">int</span> camera_id,</span><br><span class="line">                    struct <span class="hljs-keyword">hw_device_t</span> **hw_device)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> rc = NO_ERROR;</span><br><span class="line">    <span class="hljs-keyword">if</span> (camera_id &lt; <span class="hljs-number">0</span> || camera_id &gt;= mNumOfCameras)</span><br><span class="line">        <span class="hljs-keyword">return</span> BAD_VALUE;</span><br><span class="line">    <span class="hljs-comment">//到这里才是真正的HAL层的创建，可见HAL层的创建和open操作是相关的</span></span><br><span class="line">    QCamera2HardwareInterface *hw = <span class="hljs-keyword">new</span> QCamera2HardwareInterface(camera_id);</span><br><span class="line">    <span class="hljs-keyword">if</span> (!hw) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"Allocation of hardware interface failed"</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> NO_MEMORY;</span><br><span class="line">    &#125;</span><br><span class="line">    rc = hw-&gt;openCamera(hw_device);</span><br><span class="line">    <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">        <span class="hljs-keyword">delete</span> hw;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 之前在CameraService过程中提到的CameraHardwareInterface空壳就是为这个QCamera2HardwareInterface准备的，具体实现全部都在这个类中。<br> 关于QCamera2HardwareInterface的内容我们在后面会讲到，这里暂且先放一下，接着上面的<br> mHardware-&gt;setPreviewWindow(mPreviewWindow);<br> result = mHardware-&gt;startPreview();<br> 经过CameraHardwareInterface后<br> mDevice-&gt;ops-&gt;set_preview_window(mDevice, buf.get() ? &amp;mHalPreviewWindow.nw : 0);<br> mDevice-&gt;ops-&gt;start_preview(mDevice);<br> 然后经过QCamera2HardwareInterface中的mCameraOps函数指针对应表<br> set_preview_window: QCamera2HardwareInterface::set_preview_window<br> start_preview: QCamera2HardwareInterface::start_preview<br> 所以会调用到</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> QCamera2HardwareInterface::set_preview_window(struct camera_device *device,</span><br><span class="line">        struct preview_stream_ops *window)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> rc = NO_ERROR;</span><br><span class="line">    QCamera2HardwareInterface *hw =</span><br><span class="line">        <span class="hljs-keyword">reinterpret_cast</span>&lt;QCamera2HardwareInterface *&gt;(device-&gt;priv);</span><br><span class="line">    <span class="hljs-keyword">if</span> (!hw) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"%s: NULL camera device"</span>, __func__);</span><br><span class="line">        <span class="hljs-keyword">return</span> BAD_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    hw-&gt;lockAPI();</span><br><span class="line">    rc = hw-&gt;processAPI(QCAMERA_SM_EVT_SET_PREVIEW_WINDOW, (<span class="hljs-keyword">void</span> *)window);</span><br><span class="line">    <span class="hljs-keyword">if</span> (rc == NO_ERROR) &#123;</span><br><span class="line">        hw-&gt;waitAPIResult(QCAMERA_SM_EVT_SET_PREVIEW_WINDOW);</span><br><span class="line">        rc = hw-&gt;m_apiResult.status;</span><br><span class="line">    &#125;</span><br><span class="line">    hw-&gt;unlockAPI();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里会经过一轮状态机，暂时先不讲，然后执行到<br> int QCamera2HardwareInterface::setPreviewWindow(<br> struct preview_stream_ops <em>window)<br> {<br> mPreviewWindow = window;<br> return NO_ERROR;<br> }<br> 同理，startPreview也会执行到<br> int QCamera2HardwareInterface::startPreview()<br> {<br> int32_t rc = NO_ERROR;<br> ALOGD(“%s: E”, *</em>func<strong>);<br> // start preview stream<br> if (mParameters.isZSLMode() &amp;&amp; mParameters.getRecordingHintValue() !=true) {<br> rc = startChannel(QCAMERA_CH_TYPE_ZSL);<br> } else {<br> rc = startChannel(QCAMERA_CH_TYPE_PREVIEW);<br> }<br> ALOGD(“%s: X”, **func</strong>);<br> return rc;<br> }<br> 这里开启通道，可以理解成数据通道，ZSL是之前没有的，所谓ZSL就是触发拍照后不停止预览。<br> 这里看到会根据当前是都支持ZSL模式而进入不同的通道，我们这里就看QCAMERA_CH_TYPE_PREVIEW，startChannel</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int32_t</span> QCamera2HardwareInterface::startChannel(<span class="hljs-keyword">qcamera_ch_type_enum_t</span> ch_type)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int32_t</span> rc = UNKNOWN_ERROR;</span><br><span class="line">    <span class="hljs-keyword">if</span> (m_channels[ch_type] != <span class="hljs-literal">NULL</span>) &#123;</span><br><span class="line">        rc = m_channels[ch_type]-&gt;start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> m_channels是不同的通道的实例的数组，这里如果没有PREVIEW的channel就直接return，岂不是无法启动预览，这个流程感觉有点不对劲。但是这整个过程跟下来也没有看到m_channels相关的初始化过程。</p>
+<p> 这个问题出在我刚才从CameraHardwareInterface跟到QCamera2HardwareInterface的时候跳过的一个内容—–状态机，在状态机中会执行一个preparePreview()的操作</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int32_t</span> QCamera2HardwareInterface::preparePreview()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int32_t</span> rc = NO_ERROR;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (mParameters.isZSLMode() &amp;&amp; mParameters.getRecordingHintValue() !=<span class="hljs-literal">true</span>) &#123;</span><br><span class="line">        rc = addChannel(QCAMERA_CH_TYPE_ZSL); <span class="hljs-comment">//这里我们就添加了一个channel,当然这里是ZSL的</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> rc;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">bool</span> recordingHint = mParameters.getRecordingHintValue(); <span class="hljs-comment">//recording</span></span><br><span class="line">        <span class="hljs-keyword">if</span>(recordingHint) &#123;</span><br><span class="line">            rc = addChannel(QCAMERA_CH_TYPE_SNAPSHOT);  <span class="hljs-comment">//录像中是可以拍照的，需要snapshot channel</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">                <span class="hljs-keyword">return</span> rc;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rc = addChannel(QCAMERA_CH_TYPE_VIDEO); <span class="hljs-comment">//video channel</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">                delChannel(QCAMERA_CH_TYPE_SNAPSHOT);</span><br><span class="line">                <span class="hljs-keyword">return</span> rc;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        rc = addChannel(QCAMERA_CH_TYPE_PREVIEW); <span class="hljs-comment">//添加preview  channel</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (recordingHint) &#123;</span><br><span class="line">                delChannel(QCAMERA_CH_TYPE_SNAPSHOT);</span><br><span class="line">                delChannel(QCAMERA_CH_TYPE_VIDEO);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span> rc;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 在addchannel()的过程中会根据不同的channel类型创建不同的实例，这里我们直接看从addChannel()转到的addPreviewChannel()函数</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int32_t</span> QCamera2HardwareInterface::addPreviewChannel()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-keyword">int32_t</span> rc = NO_ERROR;</span><br><span class="line">    QCameraChannel *pChannel = <span class="hljs-literal">NULL</span>; <span class="hljs-comment">//初始化一个QCameraChanel，后面要使用</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (m_channels[QCAMERA_CH_TYPE_PREVIEW] != <span class="hljs-literal">NULL</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// if we had preview channel before, delete it first</span></span><br><span class="line">        <span class="hljs-keyword">delete</span> m_channels[QCAMERA_CH_TYPE_PREVIEW]; <span class="hljs-comment">//如果之前preview channel存在，干掉</span></span><br><span class="line">        m_channels[QCAMERA_CH_TYPE_PREVIEW] = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pChannel = <span class="hljs-keyword">new</span> QCameraChannel(mCameraHandle-&gt;camera_handle,</span><br><span class="line">                                  mCameraHandle-&gt;ops); </span><br><span class="line">    <span class="hljs-comment">//new 一个新的channel</span></span><br><span class="line">    .....</span><br><span class="line">    <span class="hljs-comment">// meta data stream always coexists with preview if applicable</span></span><br><span class="line">    rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_METADATA,</span><br><span class="line">                            metadata_stream_cb_routine, <span class="hljs-keyword">this</span>);</span><br><span class="line">    <span class="hljs-comment">//添加metadata stream cb</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"%s: add metadata stream failed, ret = %d"</span>, __func__, rc);</span><br><span class="line">        <span class="hljs-keyword">delete</span> pChannel;</span><br><span class="line">        <span class="hljs-keyword">return</span> rc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (isNoDisplayMode()) &#123; <span class="hljs-comment">//判断是否为不需要显示的模式</span></span><br><span class="line">        rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_PREVIEW,</span><br><span class="line">                                nodisplay_preview_stream_cb_routine, <span class="hljs-keyword">this</span>);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">//这里添加preview stream cb到channel中</span></span><br><span class="line">        rc = addStreamToChannel(pChannel, CAM_STREAM_TYPE_PREVIEW,</span><br><span class="line">                                preview_stream_cb_routine, <span class="hljs-keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (rc != NO_ERROR) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"%s: add preview stream failed, ret = %d"</span>, __func__, rc);</span><br><span class="line">        <span class="hljs-keyword">delete</span> pChannel;</span><br><span class="line">        <span class="hljs-keyword">return</span> rc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    m_channels[QCAMERA_CH_TYPE_PREVIEW] = pChannel; <span class="hljs-comment">//维护m_channels数据</span></span><br><span class="line">    <span class="hljs-keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里注册的preview_stream_cb_routine回调，这之后的过程我们暂时先不去看，了解这部分之后，回到之前chanel 的start()，最后会执行到QCameraChannel::start()方法，这里往下的内容我们暂时不往下看，知道这个过程中会执行数据采集，然后返回给HAL层就行了，HAL针对底层返回的数据，我们在哪里获取，做什么对应的处理呢？找到之前注册的Callback.<br> QCamera2HWICallbacks.cpp (\device\asus\flo\camera\qcamera2\hal)</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">void</span> QCamera2HardwareInterface::preview_stream_cb_routine(<span class="hljs-keyword">mm_camera_super_buf_t</span> *super_frame,</span><br><span class="line">                                                          QCameraStream * stream,</span><br><span class="line">                                                          <span class="hljs-keyword">void</span> *userdata)</span><br><span class="line">&#123;</span><br><span class="line">    ALOGD(<span class="hljs-string">"[KPI Perf] %s : BEGIN"</span>, __func__);</span><br><span class="line">    <span class="hljs-keyword">int</span> err = NO_ERROR;</span><br><span class="line">    QCamera2HardwareInterface *pme = (QCamera2HardwareInterface *)userdata;</span><br><span class="line">    QCameraGrallocMemory *memory = (QCameraGrallocMemory *)super_frame-&gt;bufs[<span class="hljs-number">0</span>]-&gt;mem_info;</span><br><span class="line">    ......</span><br><span class="line">    <span class="hljs-keyword">mm_camera_buf_def_t</span> *frame = super_frame-&gt;bufs[<span class="hljs-number">0</span>];</span><br><span class="line">    ......</span><br><span class="line">    <span class="hljs-keyword">if</span> (!pme-&gt;needProcessPreviewFrame()) &#123;</span><br><span class="line">        ALOGE(<span class="hljs-string">"%s: preview is not running, no need to process"</span>, __func__);</span><br><span class="line">        stream-&gt;bufDone(frame-&gt;buf_idx);</span><br><span class="line">        <span class="hljs-built_in">free</span>(super_frame);</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (pme-&gt;needDebugFps()) &#123;</span><br><span class="line">        pme-&gt;debugShowPreviewFPS();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> idx = frame-&gt;buf_idx;</span><br><span class="line">    pme-&gt;dumpFrameToFile(frame-&gt;buffer, frame-&gt;frame_len,</span><br><span class="line">                         frame-&gt;frame_idx, QCAMERA_DUMP_FRM_PREVIEW);</span><br><span class="line">    <span class="hljs-comment">//这里的注释很明显，displayer buffer而这个buffer就是我们需要投射到屏幕上的数据</span></span><br><span class="line">    <span class="hljs-comment">// Display the buffer.</span></span><br><span class="line">    <span class="hljs-keyword">int</span> dequeuedIdx = memory-&gt;displayBuffer(idx); <span class="hljs-comment">//这部分涉及到显示的过程，这里不做赘述</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (dequeuedIdx &lt; <span class="hljs-number">0</span> || dequeuedIdx &gt;= memory-&gt;getCnt()) &#123;</span><br><span class="line">        ALOGD(<span class="hljs-string">"%s: Invalid dequeued buffer index %d from display"</span>,</span><br><span class="line">              __func__, dequeuedIdx);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// Return dequeued buffer back to driver</span></span><br><span class="line">        err = stream-&gt;bufDone(dequeuedIdx);</span><br><span class="line">        <span class="hljs-keyword">if</span> ( err &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            ALOGE(<span class="hljs-string">"stream bufDone failed %d"</span>, err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//针对上层设置的datacallback过程做些处理</span></span><br><span class="line">    <span class="hljs-comment">// Handle preview data callback</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (pme-&gt;mDataCb != <span class="hljs-literal">NULL</span> &amp;&amp; pme-&gt;msgTypeEnabledWithLock(CAMERA_MSG_PREVIEW_FRAME) &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        ......</span><br><span class="line">        <span class="hljs-keyword">qcamera_callback_argm_t</span> cbArg;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(&amp;cbArg, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">qcamera_callback_argm_t</span>));</span><br><span class="line">        cbArg.cb_type = QCAMERA_DATA_CALLBACK;</span><br><span class="line">        cbArg.msg_type = CAMERA_MSG_PREVIEW_FRAME;</span><br><span class="line">        cbArg.data = data;</span><br><span class="line">        <span class="hljs-keyword">if</span> ( previewMem ) &#123;</span><br><span class="line">            cbArg.user_data = previewMem;</span><br><span class="line">            cbArg.release_cb = releaseCameraMemory;</span><br><span class="line">        &#125;</span><br><span class="line">        cbArg.cookie = pme;</span><br><span class="line">        pme-&gt;m_cbNotifier.notifyCallback(cbArg); <span class="hljs-comment">//封装完之后往上甩</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">free</span>(super_frame);</span><br><span class="line">    ALOGD(<span class="hljs-string">"[KPI Perf] %s : END"</span>, __func__);</span><br><span class="line">    <span class="hljs-keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这就是在addPreviewChannel的过程中添加的preview stream callback，当然还有metadata的，暂时先看preview的这个。这里面作的操作就是显示预览数据到窗口中，然后对设置下面的preview callback做对应的callback处理.</p>
+<p> 讲到这里，Camera的预览过程基本上就结束了，关于底层如果采集数据以及HAL中一些其他的内容，在这里没有讲解，主要是要理解这个过程，之后再每一个过程中在往下学习。</p>
+<p> 本文中代码使用的是Android5.1原始代码，欢迎大家留言交流。</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Framework/">Framework</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2015/08/30/《Android Framework 之路》Android5.1 Camera Framework（三）/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">《Android Framework 之路》Android5.1 Camera Framework（三）</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2015/08/15/《Android Framework 之路》Android5.1 Camera Framework（一）/">
+                <span class="level-item">《Android Framework 之路》Android5.1 Camera Framework（一）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Your name
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Your title
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        162
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        81
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android基础/">
+            <span class="level-start">
+                <span class="level-item">Android基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">51</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
+            <span class="level-start">
+                <span class="level-item">Android Studio</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Android安全/">
+            <span class="level-start">
+                <span class="level-item">Android安全</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android应用/">
+            <span class="level-start">
+                <span class="level-item">Android应用</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">25</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开源库/">
+            <span class="level-start">
+                <span class="level-item">Android开源库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android源码/">
+            <span class="level-start">
+                <span class="level-item">Android源码</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android系统/">
+            <span class="level-start">
+                <span class="level-item">Android系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android进阶/">
+            <span class="level-start">
+                <span class="level-item">Android进阶</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Angular/">
+            <span class="level-start">
+                <span class="level-item">Angular</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Flutter/">
+            <span class="level-start">
+                <span class="level-item">Flutter</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LeetCode/">
+            <span class="level-start">
+                <span class="level-item">LeetCode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/微信小程序/">
+            <span class="level-start">
+                <span class="level-item">微信小程序</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/运维/">
+            <span class="level-start">
+                <span class="level-item">运维</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">13</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2014/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2014</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Aandroid实战/">
+                        <span class="tag">Aandroid实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android-Studio/">
+                        <span class="tag">Android Studio</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android基础/">
+                        <span class="tag">Android基础</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android实战/">
+                        <span class="tag">Android实战</span>
+                        <span class="tag is-grey">26</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开源库/">
+                        <span class="tag">Android开源库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android源码/">
+                        <span class="tag">Android源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Angular/">
+                        <span class="tag">Angular</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSDN迁移/">
+                        <span class="tag">CSDN迁移</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CentOS/">
+                        <span class="tag">CentOS</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CodeStyle/">
+                        <span class="tag">CodeStyle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Drawable/">
+                        <span class="tag">Drawable</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EditText/">
+                        <span class="tag">EditText</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FileProvider/">
+                        <span class="tag">FileProvider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flex/">
+                        <span class="tag">Flex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flutter/">
+                        <span class="tag">Flutter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Fragment/">
+                        <span class="tag">Fragment</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Framework/">
+                        <span class="tag">Framework</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gank-io/">
+                        <span class="tag">Gank.io</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HAL/">
+                        <span class="tag">HAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA插件/">
+                        <span class="tag">IDEA插件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JetPack/">
+                        <span class="tag">JetPack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MPAndroidChart/">
+                        <span class="tag">MPAndroidChart</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MacOS/">
+                        <span class="tag">MacOS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MultiDex/">
+                        <span class="tag">MultiDex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mysql/">
+                        <span class="tag">Mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PMDReader/">
+                        <span class="tag">PMDReader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Picasso/">
+                        <span class="tag">Picasso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PowerDesign/">
+                        <span class="tag">PowerDesign</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Realm/">
+                        <span class="tag">Realm</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RecyclerView/">
+                        <span class="tag">RecyclerView</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Retrofit/">
+                        <span class="tag">Retrofit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RxJava/">
+                        <span class="tag">RxJava</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Service/">
+                        <span class="tag">Service</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Smali/">
+                        <span class="tag">Smali</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TabLayout/">
+                        <span class="tag">TabLayout</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tomcat/">
+                        <span class="tag">Tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WanANdroid/">
+                        <span class="tag">WanANdroid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebService/">
+                        <span class="tag">WebService</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Xen/">
+                        <span class="tag">Xen</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/allowBackup/">
+                        <span class="tag">allowBackup</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事件分发/">
+                        <span class="tag">事件分发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动画/">
+                        <span class="tag">动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/四大组件/">
+                        <span class="tag">四大组件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/多线程/">
+                        <span class="tag">多线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/局域网/">
+                        <span class="tag">局域网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/布局控件/">
+                        <span class="tag">布局控件</span>
+                        <span class="tag is-grey">28</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/应用/">
+                        <span class="tag">应用</span>
+                        <span class="tag is-grey">23</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发问题/">
+                        <span class="tag">开发问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开机动画/">
+                        <span class="tag">开机动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源库/">
+                        <span class="tag">开源库</span>
+                        <span class="tag is-grey">24</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信公众号/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/快捷键/">
+                        <span class="tag">快捷键</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/手电筒/">
+                        <span class="tag">手电筒</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/技术选型/">
+                        <span class="tag">技术选型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文本/">
+                        <span class="tag">文本</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/框架/">
+                        <span class="tag">框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/源码分析/">
+                        <span class="tag">源码分析</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/百度地图/">
+                        <span class="tag">百度地图</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统源码/">
+                        <span class="tag">系统源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/终端/">
+                        <span class="tag">终端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/聚合数据/">
+                        <span class="tag">聚合数据</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/自定义View/">
+                        <span class="tag">自定义View</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟化/">
+                        <span class="tag">虚拟化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/译文/">
+                        <span class="tag">译文</span>
+                        <span class="tag is-grey">15</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/贪吃蛇/">
+                        <span class="tag">贪吃蛇</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源配置/">
+                        <span class="tag">资源配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/辅助工具/">
+                        <span class="tag">辅助工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/配置/">
+                        <span class="tag">配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/问题/">
+                        <span class="tag">问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2014/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2014</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Aandroid实战/">
+                        <span class="tag">Aandroid实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android-Studio/">
+                        <span class="tag">Android Studio</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android基础/">
+                        <span class="tag">Android基础</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android实战/">
+                        <span class="tag">Android实战</span>
+                        <span class="tag is-grey">26</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开源库/">
+                        <span class="tag">Android开源库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android源码/">
+                        <span class="tag">Android源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Angular/">
+                        <span class="tag">Angular</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSDN迁移/">
+                        <span class="tag">CSDN迁移</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CentOS/">
+                        <span class="tag">CentOS</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CodeStyle/">
+                        <span class="tag">CodeStyle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Drawable/">
+                        <span class="tag">Drawable</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EditText/">
+                        <span class="tag">EditText</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FileProvider/">
+                        <span class="tag">FileProvider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flex/">
+                        <span class="tag">Flex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flutter/">
+                        <span class="tag">Flutter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Fragment/">
+                        <span class="tag">Fragment</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Framework/">
+                        <span class="tag">Framework</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gank-io/">
+                        <span class="tag">Gank.io</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HAL/">
+                        <span class="tag">HAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA插件/">
+                        <span class="tag">IDEA插件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JetPack/">
+                        <span class="tag">JetPack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MPAndroidChart/">
+                        <span class="tag">MPAndroidChart</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MacOS/">
+                        <span class="tag">MacOS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MultiDex/">
+                        <span class="tag">MultiDex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mysql/">
+                        <span class="tag">Mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PMDReader/">
+                        <span class="tag">PMDReader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Picasso/">
+                        <span class="tag">Picasso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PowerDesign/">
+                        <span class="tag">PowerDesign</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Realm/">
+                        <span class="tag">Realm</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RecyclerView/">
+                        <span class="tag">RecyclerView</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Retrofit/">
+                        <span class="tag">Retrofit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RxJava/">
+                        <span class="tag">RxJava</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Service/">
+                        <span class="tag">Service</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Smali/">
+                        <span class="tag">Smali</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TabLayout/">
+                        <span class="tag">TabLayout</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tomcat/">
+                        <span class="tag">Tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WanANdroid/">
+                        <span class="tag">WanANdroid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebService/">
+                        <span class="tag">WebService</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Xen/">
+                        <span class="tag">Xen</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/allowBackup/">
+                        <span class="tag">allowBackup</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事件分发/">
+                        <span class="tag">事件分发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动画/">
+                        <span class="tag">动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/四大组件/">
+                        <span class="tag">四大组件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/多线程/">
+                        <span class="tag">多线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/局域网/">
+                        <span class="tag">局域网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/布局控件/">
+                        <span class="tag">布局控件</span>
+                        <span class="tag is-grey">28</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/应用/">
+                        <span class="tag">应用</span>
+                        <span class="tag is-grey">23</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发问题/">
+                        <span class="tag">开发问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开机动画/">
+                        <span class="tag">开机动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源库/">
+                        <span class="tag">开源库</span>
+                        <span class="tag is-grey">24</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信公众号/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/快捷键/">
+                        <span class="tag">快捷键</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/手电筒/">
+                        <span class="tag">手电筒</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/技术选型/">
+                        <span class="tag">技术选型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文本/">
+                        <span class="tag">文本</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/框架/">
+                        <span class="tag">框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/源码分析/">
+                        <span class="tag">源码分析</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/百度地图/">
+                        <span class="tag">百度地图</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统源码/">
+                        <span class="tag">系统源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/终端/">
+                        <span class="tag">终端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/聚合数据/">
+                        <span class="tag">聚合数据</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/自定义View/">
+                        <span class="tag">自定义View</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟化/">
+                        <span class="tag">虚拟化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/译文/">
+                        <span class="tag">译文</span>
+                        <span class="tag is-grey">15</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/贪吃蛇/">
+                        <span class="tag">贪吃蛇</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源配置/">
+                        <span class="tag">资源配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/辅助工具/">
+                        <span class="tag">辅助工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/配置/">
+                        <span class="tag">配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/问题/">
+                        <span class="tag">问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="《Android Framework 之路》Android5.1 Camera Framework（二）" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 yidong&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

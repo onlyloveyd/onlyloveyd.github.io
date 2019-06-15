@@ -1,0 +1,3306 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>标签: 源码分析 - onlyloveyd</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="小码过河，人人喊累">
+<meta name="keywords" content="onlyloveyd">
+<meta property="og:type" content="website">
+<meta property="og:title" content="onlyloveyd">
+<meta property="og:url" content="http://yoursite.com/tags/源码分析/index.html">
+<meta property="og:site_name" content="onlyloveyd">
+<meta property="og:description" content="小码过河，人人喊累">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="onlyloveyd">
+<meta name="twitter:description" content="小码过河，人人喊累">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="onlyloveyd" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">源码分析</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-02-14T09:04:35.000Z">2017-02-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    28 分钟 读完 (大约 4198 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/02/14/《Android开源库》 EventBus 用法详解（译文）/">《Android开源库》 EventBus 用法详解（译文）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a href></a>介绍</h2><p> <a href="https://github.com/greenrobot/EventBus" target="_blank" rel="noopener">EventBus</a>是一个使用发布者/订阅者模式 并且低耦合的Android开源库，。 EventBus只需几行代码即可实现中央通信解耦类：简化代码，删除依赖关系，加快应用程序开发速度。</p>
+<p> <img src="https://img-blog.csdn.net/20170214140817726?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<hr>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><a href></a>优势</h2><ul>
+<li>简化组件通信 </li>
+<li>解耦事件发送端和接收端 </li>
+<li>在Activity,Fragment和后天线程之间运行良好 </li>
+<li>避免复杂且易出错的依赖问题和生命周期问题 </li>
+<li>运行速度快。为了高性能专门做过优化 </li>
+<li>jar包小（&lt;50K） </li>
+<li>在实践中已通过100,000,000次安装的应用程序证明 </li>
+<li>具有指定分发线程和用户优先级等高级特性  </li>
+</ul>
+<hr>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a><a href></a>特性</h2><ul>
+<li>简单但强大：EventBus是一个微小的库，具有超级容易学习的API。然而，您的软件架构可能因组件解耦而受益：订阅者在使用事件时不用关心这个事件是谁发送的。</li>
+</ul>
+<ul>
+<li>大量验证：EventBus是最常用的Android库之一：成千上万的应用程序使用EventBus，其中不乏非常受欢迎的应用程序。我们认为差不多有十亿应用程序使用EventBus。</li>
+</ul>
+<ul>
+<li>高性能：Android系统上，性能尤为重要。 EventBus被针对性的做了大量的分析和优化;EventBus可能是这类开源库中速度最快的 解决方案。</li>
+</ul>
+<ul>
+<li>基于API的便捷注解（不牺牲性能）：只需将@Subscribe注解添加订阅方法即可。由于构建的时候花费了时间来建立注解的索引，所以EventBus不需要在应用程序的运行时间执行注释反射，注解反射的方式在Android上相当慢。</li>
+</ul>
+<ul>
+<li>Android主线程发送：当与UI交互时，EventBus可以在主线程中传递事件，而不用去关心事件是从如何发布的。</li>
+</ul>
+<ul>
+<li>后台线程发送：如果您的订阅者长时间运行任务，EventBus也可以使用后台线程来避免UI阻塞。</li>
+</ul>
+<ul>
+<li>事件和订阅者继承：在EventBus中，面向对象的范例适用于事件和订阅者类。让我们假设事件类A是B的父类。类型B的发布事件也将被发布到对A感兴趣的订阅者。类似地，考虑订阅类的继承。</li>
+</ul>
+<ul>
+<li>零配置：您可以从代码中的任何地方立即使用默认的EventBus实例。</li>
+</ul>
+<ul>
+<li>可配置：要根据需要调整EventBus，可以使用构建器模式调整其行为。</li>
+</ul>
+<hr>
+<h2 id="添加EventBus到工程"><a href="#添加EventBus到工程" class="headerlink" title="添加EventBus到工程"></a><a href></a>添加EventBus到工程</h2><p> EventBus在JCenter和Maven Central上可用，因此只需将依赖项添加到项目中。</p>
+<ul>
+<li>Gradle  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>Maven  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.greenrobot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;eventbus&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.greenrobot%22%20AND%20a%3A%22eventbus%22" target="_blank" rel="noopener">jar包</a>  </li>
+</ul>
+<hr>
+<h2 id="开始使用EventBus"><a href="#开始使用EventBus" class="headerlink" title="开始使用EventBus"></a><a href></a>开始使用EventBus</h2><h4 id="一、简单的三步教你使用EvnetBus"><a href="#一、简单的三步教你使用EvnetBus" class="headerlink" title="一、简单的三步教你使用EvnetBus"></a><a href></a>一、简单的三步教你使用EvnetBus</h4><h5 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a><a href></a><strong>定义事件</strong></h5><p> 事件是纯Java对象，没有其他的特殊要求</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class MessageEvent &#123;</span><br><span class="line"> </span><br><span class="line">    public final String message;</span><br><span class="line"> </span><br><span class="line">    public MessageEvent(String message) &#123;</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> #####<strong>准备订阅者</strong></p>
+<p> 订阅者需要实现在事件发布时将被调用的事件处理方法（也称为“订阅方法”）。 这些订阅方法将用@Subscribe注释定义。<br> 注意，使用EventBus 3可以自由选择方法名（没有像EventBus 2中的命名约定）。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// This method will be called when a MessageEvent is posted (in the UI thread for Toast)</span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onMessageEvent(MessageEvent event) &#123;</span><br><span class="line">    Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// This method will be called when a SomeOtherEvent is posted</span><br><span class="line">@Subscribe</span><br><span class="line">public void handleSomethingElse(SomeOtherEvent event) &#123;</span><br><span class="line">    doSomethingWith(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 订阅者还需要向总线注册和注销。 只有订阅者注册后，他们才会收到事件。 在Android的在活动和片段中，通常应该根据其生命周期进行注册。 对于大多数情况下在onStart中注册，在onStop中销毁就OK了。</p>
+<p> #####<strong>发布事件</strong><br> 在代码的任意地方发布事件，所有与当前事件匹配且注册过的订阅者都将会收到事件。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="二、传递线程"><a href="#二、传递线程" class="headerlink" title="二、传递线程"></a><a href></a>二、传递线程</h4><p> EventBus可以为你处理线程：事件可以发布在不同于发布线程的线程中。事件可以发布在和发布线程不同的线程里。一个普遍的场景就是处理UI的变化。在Android系统中，UI更改必须在UI（主）线程中完成。另一方面，网络或者任何耗时的任务，都不允许在主线程中执行。EventBus帮助你处理这些任务并且与UI线程同步（无需深入了解线程转换，使用AsyncTask等）。</p>
+<p> 在EventBus中，你可以通过使用四个ThreadMode中的一个来定义将调用事件处理方法的线程。</p>
+<h5 id="ThreadMode-POSTING"><a href="#ThreadMode-POSTING" class="headerlink" title="ThreadMode: POSTING"></a><a href></a><strong>ThreadMode: POSTING</strong></h5><p> 订阅者将会在事件发布的线程中被调用。这是默认模式。事件的传递是同步完成的，一旦事件发布完成，所有的订阅者都将会被调用。由于完全避免了线程切换，这种模式的开销是最小的。所以，针对那些不需要主线程并且能在很短时间内完成的简单任务，我们推荐使用这种模式。这种模式下的事件处理方法必须快速返回，避免阻塞发布事件的线程，因为这个线程有可能是主线程。<br> 例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Called in the same thread (default)</span><br><span class="line">// ThreadMode is optional here</span><br><span class="line">@Subscribe(threadMode = ThreadMode.POSTING)</span><br><span class="line">public void onMessage(MessageEvent event) &#123;</span><br><span class="line">    log(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="ThreadMode-MAIN"><a href="#ThreadMode-MAIN" class="headerlink" title="ThreadMode: MAIN"></a><a href></a><strong>ThreadMode: MAIN</strong></h5><p> 订阅者将在Android的主线程（有时称为UI线程）中调用。 如果发布线程是主线程，则将直接调用事件处理方法（与ThreadMode.POSTING描述的同步）。 使用此模式的事件处理程序必须快速返回，以避免阻塞主线程。<br> 例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in Android UI&apos;s main thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onMessage(MessageEvent event) &#123;</span><br><span class="line">textField.setText(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="ThreadMode-BACKGROUND"><a href="#ThreadMode-BACKGROUND" class="headerlink" title="ThreadMode: BACKGROUND"></a><a href></a><strong>ThreadMode: BACKGROUND</strong></h5><p> 订阅者将在后台线程中调用。 如果发布线程不是主线程，事件处理程序方法将直接在发布线程中调用。 如果发布线程是主线程，EventBus使用单个后台线程来按顺序传递所有事件。 使用此模式的事件处理方法应尽快返回以避免阻塞后台线程。<br> 例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in the background thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.BACKGROUND)</span><br><span class="line">public void onMessage(MessageEvent event)&#123;</span><br><span class="line">    saveToDisk(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="ThreadMode-ASYNC"><a href="#ThreadMode-ASYNC" class="headerlink" title="ThreadMode: ASYNC"></a><a href></a><strong>ThreadMode: ASYNC</strong></h5><p> 事件处理方法在单独的线程中调用。 这个线程总是独立于发布线程和主线程。 这种模式下，发布事件不会等待事件处理方法的执行结果。 如果事件处理方法的执行需要一些时间，则应该使用此模式，如网络访问。 避免同时触发大量长时间运行的异步处理方法以限制并发线程的数量。 EventBus使用线程池来有效地重用已完成任务的线程。<br> 例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in a separate thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.ASYNC)</span><br><span class="line">public void onMessage(MessageEvent event)&#123;</span><br><span class="line">    backend.send(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="三、配置"><a href="#三、配置" class="headerlink" title="三、配置"></a><a href></a>三、配置</h4><p> 通过EventBusBuilder，我们可以配置EventBus的各个方面。 例如，下面是如何构建一个当发送的事件没有订阅者时不报异常的EventBus</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder()</span><br><span class="line">    .logNoSubscriberMessages(false)</span><br><span class="line">    .sendNoSubscriberEvent(false)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+
+<p> 另外一个例子是，如何构建一个在订阅者排除异常时报错的EventBus</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder().throwSubscriberException(true).build();</span><br></pre></td></tr></table></figure>
+
+<p> <em><strong>注意：默认情况下，EventBus捕获从订阅者方法抛出的异常，并发送不强制要求处理的SubscriberExceptionEvent。</strong></em></p>
+<p> 使用EventBus.getDefault()是一种从应用程序的任何位置获取共享EventBus实例的简单方法。 EventBusBuilder还允许使用方法installDefaultEventBus()配置此默认实例。</p>
+<p> 例如，可以配置默认的EventBus实例来重新抛出在订阅方法中发生的异常。 但是让我们只对DEBUG构建，因为这可能会崩溃的应用程序异常</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();</span><br></pre></td></tr></table></figure>
+
+<p> <em><strong>注意：在第一次使用默认EventBus实例之前，只能执行一次。 后续调用installDefaultEventBus()将抛出异常。 这可确保应用程序中的行为一致。 您的应用程序类是在使用之前配置默认EventBus实例的不错地方。</strong></em></p>
+<hr>
+<p> ####四、粘性事件<br> 一些事件携带在事件发布之后感兴趣的信息。 例如，事件表示某些初始化完成。 或者如果您有一些传感器或位置数据，并且想要保持最近的值。 而不是实现自己的缓存，你可以使用粘性事件。 所以EventBus保持内存中某个类型的最后一个粘性事件。 然后粘性事件可以传递给订阅者或明确地查询。 因此，您不需要任何特殊的逻辑来考虑已有的数据</p>
+<h5 id="粘性示例"><a href="#粘性示例" class="headerlink" title="粘性示例"></a><a href></a><strong>粘性示例</strong></h5><p> 下面表示，一个粘性事件发布了一段时间以前：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().postSticky(new MessageEvent(&quot;Hello everyone!&quot;));</span><br></pre></td></tr></table></figure>
+
+<p> 现在一个新的活动开始。 在注册期间，所有粘性订阅者方法将立即获得先前发布的粘性事件：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    super.onStart();</span><br><span class="line">    EventBus.getDefault().register(this);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// UI updates must run on MainThread</span><br><span class="line">@Subscribe(sticky = true, threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onEvent(MessageEvent event) &#123;   </span><br><span class="line">    textField.setText(event.message);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Override</span><br><span class="line">public void onStop() &#123;</span><br><span class="line">    EventBus.getDefault().unregister(this);    </span><br><span class="line">    super.onStop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> #####<strong>手动获取和删除粘性事件</strong><br> 如你所见，最后一个粘性事件在注册时自动传递给匹配的订阅者。 但有时手动检查粘性事件可能会更方便。 另外，可能需要移除（消费）粘性事件才能使得它们不再被递送。 例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MessageEvent stickyEvent = EventBus.getDefault().getStickyEvent(MessageEvent.class);</span><br><span class="line">// Better check that an event was actually posted before</span><br><span class="line">if(stickyEvent != null) &#123;</span><br><span class="line">    // &quot;Consume&quot; the sticky event</span><br><span class="line">    EventBus.getDefault().removeStickyEvent(stickyEvent);</span><br><span class="line">    // Now do something with it</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 方法removeStickyEvent是重载的：当你传入类时，它将返回先前持有的粘性事件。 使用这个变化，我们可以改进前面的例子：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MessageEvent stickyEvent = EventBus.getDefault().removeStickyEvent(MessageEvent.class);</span><br><span class="line">// Better check that an event was actually posted before</span><br><span class="line">if(stickyEvent != null) &#123;</span><br><span class="line">    // Now do something with it</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="五、优先级和事件取消"><a href="#五、优先级和事件取消" class="headerlink" title="五、优先级和事件取消"></a><a href></a>五、优先级和事件取消</h4><p> 尽管EventBus的大多数用例不需要优先级或事件取消，但在某些特殊情况下它们可能派上用场。 例如，如果应用处于前台，则事件可以触发一些UI逻辑，但如果应用当前对用户不可见，则事件可以不同地反应。</p>
+<p> #####<strong>订阅者优先级</strong><br> 你可以通过在注册期间为订阅者提供优先级来更改事件传递的顺序。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Subscribe(priority = 1);</span><br><span class="line">public void onEvent(MessageEvent event) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 在相同的传递线程（ThreadMode）中，较高优先级的订阅者将在其他优先级较低的订阅者之前接收事件。 默认优先级为0。<br> <em><strong>注意：优先级不影响不同线程模式的订阅者之间的传递顺序！</strong></em></p>
+<h5 id="取消事件传送"><a href="#取消事件传送" class="headerlink" title="取消事件传送"></a><a href></a><strong>取消事件传送</strong></h5><p> 你可以通过从订阅者的事件处理方法调用cancelEventDelivery（Object event）来取消事件传递过程。 任何其他活动传送将被取消，后续订阅者将不会收到活动。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Called in the same thread (default)</span><br><span class="line">@Subscribe</span><br><span class="line">public void onEvent(MessageEvent event)&#123;</span><br><span class="line">    // Process the event</span><br><span class="line">    ...</span><br><span class="line">    // Prevent delivery to other subscribers</span><br><span class="line">    EventBus.getDefault().cancelEventDelivery(event) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 事件通常由更高优先级的订阅者取消。 取消仅限于在发布线程（ThreadMode.PostThread）中运行的事件处理方法。</p>
+<hr>
+<h4 id="六、订阅者索引"><a href="#六、订阅者索引" class="headerlink" title="六、订阅者索引"></a><a href></a>六、订阅者索引</h4><p> 订阅者索引是EventBus 3的一个新功能。它是一个可选的优化，以加速初始订阅者注册。</p>
+<p> 订阅者索引可以在构建时通过EventBus注解创建。 因为不需要使用索引，为了更好的性能建议在Android上使用。</p>
+<h5 id="索引前提条件"><a href="#索引前提条件" class="headerlink" title="索引前提条件"></a><a href></a><strong>索引前提条件</strong></h5><p> 注意，只有@Subscriber方法可以索引，其中订阅者和事件类是public的。 此外，由于Java的注释处理本身的技术限制，@Subscribe注释不能在匿名类中识别。</p>
+<p> 当EventBus不能使用索引时，它会在运行时自动回退到反射。 因此，它仍然可以工作，只是有点慢。</p>
+<h5 id="如何生成索引"><a href="#如何生成索引" class="headerlink" title="如何生成索引"></a><a href></a><strong>如何生成索引</strong></h5><ul>
+<li>使用注解<br> 如果你不使用Android Gradle插件版本2.2.0或更高版本，请使用配置与android-apt。<br> 要启用索引生成，需要使用annotationProcessor属性将EventBus注释处理器添加到构建中。 还要设置参数eventBusIndex来指定要生成的索引的完全限定类。 例如，将以下部分添加到Gradle构建脚本中：  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        javaCompileOptions &#123;</span><br><span class="line">            annotationProcessorOptions &#123;</span><br><span class="line">                arguments = [ eventBusIndex : &apos;com.example.myapp.MyEventBusIndex&apos; ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br><span class="line">    annotationProcessor &apos;org.greenrobot:eventbus-annotation-processor:3.0.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li><p>使用android-apt<br> 如果上述方法不适用于你，你可以使用android-apt Gradle插件添加EventBus注释处理器到你的构建中。 将以下部分添加到Gradle构建脚本中：  </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.neenbedankt.gradle.plugins:android-apt:1.8&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">apply plugin: &apos;com.neenbedankt.android-apt&apos;</span><br><span class="line"> </span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br><span class="line">    apt &apos;org.greenrobot:eventbus-annotation-processor:3.0.1&apos;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">apt &#123;</span><br><span class="line">    arguments &#123;</span><br><span class="line">        eventBusIndex &quot;com.example.myapp.MyEventBusIndex&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下次构建项目时（没有错误），将为您生成由eventBusIndex指定的类。 然后当设置EventBus通过它像这样：</p>
+</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder().addIndex(new MyEventBusIndex()).build();</span><br></pre></td></tr></table></figure>
+
+<p> 或者，如果您想在整个应用程序中使用默认实例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EventBus.builder().addIndex(new MyEventBusIndex()).installDefaultEventBus();</span><br><span class="line">// Now the default instance uses the given index. Use it like this:</span><br><span class="line">EventBus eventBus = EventBus.getDefault();</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="索引你的开源库"><a href="#索引你的开源库" class="headerlink" title="索引你的开源库"></a><a href></a><strong>索引你的开源库</strong></h5><p> 你可以将相同的原则应用于作为库（而不是最终应用程序）的一部分的代码。 这样，您可能有多个索引类，您可以在EventBus设置期间添加所有索引类，例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder()</span><br><span class="line">    .addIndex(new MyEventBusAppIndex())</span><br><span class="line">    .addIndex(new MyEventBusLibIndex()).build();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="七、ProGuard"><a href="#七、ProGuard" class="headerlink" title="七、ProGuard"></a><a href></a>七、ProGuard</h4><p> ProGuard模糊方法名称并可能删除不被调用的方法（死代码删除）。 因为Subscriber方法不是直接调用，ProGuard假定它们未被使用。 因此，如果您启用ProGuard缩减，您必须告诉Proguard保留这些Subscriber方法。</p>
+<p> 在ProGuard配置文件（proguard.cfg）中使用以下规则以防止订阅者被删除：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-keepattributes *Annotation*</span><br><span class="line">-keepclassmembers class ** &#123;</span><br><span class="line">    @org.greenrobot.eventbus.Subscribe &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keep enum org.greenrobot.eventbus.ThreadMode &#123; *; &#125;</span><br><span class="line"> </span><br><span class="line"># Only required if you use AsyncExecutor</span><br><span class="line">-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent &#123;</span><br><span class="line">    &lt;init&gt;(java.lang.Throwable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <em><strong>注意：无论是否使用订户索引，您都需要此配置。</strong></em></p>
+<hr>
+<h4 id="八、AsyncExecutor"><a href="#八、AsyncExecutor" class="headerlink" title="八、AsyncExecutor"></a><a href></a>八、AsyncExecutor</h4><h5 id="AsyncExecutor"><a href="#AsyncExecutor" class="headerlink" title="AsyncExecutor"></a><a href></a><strong>AsyncExecutor</strong></h5><p> AsyncExecutor就像一个线程池，但是具有失败（异常）处理。 失败会抛出异常，AsyncExecutor会将这些异常包装在事件中，并自动发布。</p>
+<p> 免责声明：AsyncExecutor是一个非核心实用程序类。 它可能会在后台线程中保存一些错误处理代码，但它不是一个核心的EventBus类。</p>
+<p> 通常，调用AsyncExecutor.create（）创建一个实例并将其保存在应用程序范围中。 然后执行某些东西，实现RunnableEx接口并将其传递给AsyncExecutor的execute方法。 与Runnable不同，RunnableEx可能会抛出异常。</p>
+<p> 如果RunnableEx实现抛出异常，它将被捕获并被包装到ThrowableFailureEvent中，这将被发布。</p>
+<p> 执行部分示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AsyncExecutor.create().execute(</span><br><span class="line">    new AsyncExecutor.RunnableEx() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() throws LoginException &#123;</span><br><span class="line">            // No need to catch any Exception (here: LoginException)</span><br><span class="line">            remote.login();</span><br><span class="line">            EventBus.getDefault().postSticky(new LoggedInEvent());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p> 接收部分示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void handleLoginEvent(LoggedInEvent event) &#123;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void handleFailureEvent(ThrowableFailureEvent event) &#123;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="AsyncExecutor-Builder"><a href="#AsyncExecutor-Builder" class="headerlink" title="AsyncExecutor Builder"></a><a href></a><strong>AsyncExecutor Builder</strong></h5><p> 如果要自定义AsyncExecutor实例，请调用静态方法AsyncExecutor.builder（）。 它将返回一个构建器，您可以自定义EventBus实例，线程池和失败事件的类。</p>
+<p> 另一个定制选项是执行范围，它提供故障事件上下文信息。 例如，失败事件可能仅与特定的Activity实例或类相关。</p>
+<p> 如果您的自定义失败事件类实现了HasExecutionScope接口，AsyncExecutor将自动设置执行范围。 像这样，您的订阅者可以查询失败事件的执行范围，并根据它做出反应。</p>
+<h2 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a><a href></a>原文出处</h2><p> 翻译原文：<br> <a href="http://greenrobot.org/eventbus/" target="_blank" rel="noopener">http://greenrobot.org/eventbus/</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-01-23T08:31:18.000Z">2017-01-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1742 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/01/23/《Android开源库》 Google 最新Hover Menu(悬浮菜单)/">《Android开源库》 Google 最新Hover Menu(悬浮菜单)</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h2><p> <a href="https://github.com/google/hover" target="_blank" rel="noopener">Hover</a>，这些天大家讨论的比较多的一个开源库，google组织下的一个项目，但是项目介绍中又出现了</p>
+<p> <img src="https://img-blog.csdn.net/20170123145312251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p> Why ?</p>
+<p> 但是这和我又有什么关系，我是来看源码的，优秀的开源代码，不关心出处。 …………_</p>
+<h2 id="官网Demo"><a href="#官网Demo" class="headerlink" title="官网Demo"></a><a href></a>官网Demo</h2><p> <img src="https://raw.githubusercontent.com/matthew-carroll/hover/gh-pages/images/screenrecords/hover-demo-screenrecord.gif" alt="这里写图片描述"></p>
+<p> ##简单使用</p>
+<ol>
+<li>自定义MyNavigationContent，用来显示每个不同的Tab下的内容页  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class MyNavigationContent extends FrameLayout implements NavigatorContent &#123;</span><br><span class="line">    private ImageView imageViewLogo;</span><br><span class="line">    private TextView textViewTitle;</span><br><span class="line">    private int imageResId;</span><br><span class="line">    private String title;</span><br><span class="line"></span><br><span class="line">    public MyNavigationContent(@NonNull Context context, int imageRedId, String title) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">        this.imageResId = imageRedId;</span><br><span class="line">        this.title = title;</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        LayoutInflater.from(getContext()).inflate(R.layout.view_content_text_icon, this, true);</span><br><span class="line">        imageViewLogo = (ImageView) findViewById(R.id.iv_logo);</span><br><span class="line">        textViewTitle = (TextView) findViewById(R.id.tv_title);</span><br><span class="line">        imageViewLogo.setImageResource(imageResId);</span><br><span class="line">        textViewTitle.setText(title);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @NonNull</span><br><span class="line">    @Override</span><br><span class="line">    public View getView() &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onShown(@NonNull Navigator navigator) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onHidden() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<hr>
+<p> 2.自定义HoverMenuAdapter，用于将tab和NavigationContent联系起来</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class HoverDemoMenuAdapter implements HoverMenuAdapter &#123;</span><br><span class="line"></span><br><span class="line">    private final Context mContext;</span><br><span class="line">    private final List&lt;String&gt; mTabIds;</span><br><span class="line">    private final Map&lt;String, NavigatorContent&gt; mData;</span><br><span class="line">    private final Set&lt;ContentChangeListener&gt; mContentChangeListeners = new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public HoverDemoMenuAdapter(@NonNull Context context, @NonNull Map&lt;String, NavigatorContent&gt; data) throws IOException &#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">        mData = data;</span><br><span class="line"></span><br><span class="line">        mTabIds = new ArrayList&lt;&gt;();</span><br><span class="line">        for (String tabId : mData.keySet()) &#123;</span><br><span class="line">            mTabIds.add(tabId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getTabCount() &#123;</span><br><span class="line">        return mTabIds.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View getTabView(int index) &#123;</span><br><span class="line">        ImageView imageView = new ImageView(mContext);</span><br><span class="line">        imageView.setBackgroundResource(R.drawable.bg);</span><br><span class="line">        switch (index) &#123;</span><br><span class="line">            case 0:        imageView.setImageResource(R.drawable.bike);break;</span><br><span class="line">            case 1:        imageView.setImageResource(R.drawable.run);break;</span><br><span class="line">            case 2:        imageView.setImageResource(R.drawable.android);break;</span><br><span class="line">            default:break;</span><br><span class="line">        &#125;</span><br><span class="line">        imageView.setPadding(30,30,30,30);</span><br><span class="line"></span><br><span class="line">        return imageView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public long getTabId(int position) &#123;</span><br><span class="line">        return position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public NavigatorContent getNavigatorContent(int index) &#123;</span><br><span class="line">        String tabId = mTabIds.get(index);</span><br><span class="line">        return mData.get(tabId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addContentChangeListener(@NonNull ContentChangeListener listener) &#123;</span><br><span class="line">        mContentChangeListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void removeContentChangeListener(@NonNull ContentChangeListener listener) &#123;</span><br><span class="line">        mContentChangeListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p> 3.创建继承HoverMenuService的自定义Service</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class HoverDemoService extends HoverMenuService &#123;</span><br><span class="line"></span><br><span class="line">    private HoverDemoMenuAdapter mDemoHoverMenuAdapter;</span><br><span class="line"></span><br><span class="line">    /*显示悬浮按钮*/</span><br><span class="line">    public static void showFloatingMenu(Context context) &#123;</span><br><span class="line">        context.startService(new Intent(context, HoverDemoService.class));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected HoverMenuAdapter createHoverMenuAdapter() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Map&lt;String, NavigatorContent&gt; data = new HashMap&lt;&gt;();</span><br><span class="line">            /*添加tab和对应的NavigationContent*/</span><br><span class="line">            data.put(&quot;1&quot;, new MyNavigationContent(this, R.drawable.bike, &quot;1，自行车是克服心脏功能毛病的最佳工具之一。世界上有半数以上的人是死于心脏病的，骑单车不只能藉腿部的运动压缩血液流动，以及把备注从血管末梢抽回心脏，事实上却同时强化了微血管组织，这叫“附带循环”。强化血管可以使你不受年龄的威胁，青春永驻。 \n&quot; +</span><br><span class="line">                    &quot;2，习惯性的单车运动，更能扩大你的心脏。否则血管愈来愈细，心脏愈来愈退化，到了晚年，你就会体验到它所带来的烦恼，那时你会发现，自行车运动是多么的完美。单车是需要大量氧气的运动，曾经有个老年人以6天时间，完成了460公里的单车旅行。他说：“老年人一周至少要有3次运动，使心脏强化起来，恢复正常功能。你要使心脏激烈跳动，但不可过久。如此它将能适应紧急状况，如赶车或抵抗困境。”\n&quot; +</span><br><span class="line">                    &quot;3，单车运动同时也能防止高血压，有时比药物更有效。还能防止发胖、血管硬化，并使骨骼强半。自行车使你不必用药物来维持健康，而且毫无害处。&quot;));</span><br><span class="line">            data.put(&quot;2&quot;, new MyNavigationContent(this,R.drawable.run, &quot;1.告别臃肿身材。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;许多人开始跑步就是因为减肥，跑步确实减肥的最好运动方式，跑步每分钟比起其他运动燃烧更多的卡路里。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;2.防止你的骨骼，肌肉退化。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;我们的骨骼是和你的身体需求相互协调的。长期坐在显示器前的我们让我们的骨骼越来越脆弱。而长期的，经常的运动会使你的骨骼保持健康。更进一步说就是防止我们身体内部老化的更快。经常的高强度锻炼，例如跑步，被证明可以促进人体荷尔蒙的生长，荷尔蒙就是那些名人为了看起来更年轻而持续注射的药剂。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;3.抵抗疾病\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;跑步可以降低得中风和乳腺癌的风险。经常的跑步已经成为医生对那些容易引发或在已经处在早期的骨质疏松，糖尿病，高血压病人的治疗建议。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;4.维持并提高总体的身体水平。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;跑步是是人们可以采取的最好的锻炼身体的运动。它可以提高胆固醇,降低血液凝块的危险，锻炼你的50%的经常处于闲置状态的肺。跑步还可以通过增加你的淋巴细胞来增强你的免疫力。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; ));</span><br><span class="line">            data.put(&quot;3&quot;, new MyNavigationContent(this,R.drawable.android,&quot;Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。尚未有统一中文名称，中国大陆地区较多人使用“安卓”或“安致”。Android操作系统最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。2007年11月，Google与84家硬件制造商、软件开发商及电信营运商组建开放手机联盟共同研发改良Android系统。随后Google以Apache开源许可证的授权方式，发布了Android的源代码。第一部Android智能手机发布于2008年10月。Android逐渐扩展到平板电脑及其他领域上，如电视、数码相机、游戏机等。2011年第一季度，Android在全球的市场份额首次超过塞班系统，跃居全球第一。 2013年的第四季度，Android平台手机的全球市场份额已经达到78.1%。[1]  2013年09月24日谷歌开发的操作系统Android在迎来了5岁生日，全世界采用这款系统的设备数量已经达到10亿台。&quot;));</span><br><span class="line"></span><br><span class="line">            /*创建Adapter*/</span><br><span class="line">            mDemoHoverMenuAdapter = new HoverDemoMenuAdapter(this, data);</span><br><span class="line">            return mDemoHoverMenuAdapter;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p> 4.入口Activity中设置一个点击事件显示悬浮框</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class DeActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    Button btShow;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_de);</span><br><span class="line"></span><br><span class="line">        btShow = (Button)findViewById(R.id.bt_show);</span><br><span class="line">        btShow.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                HoverDemoService.showFloatingMenu(DeActivity.this);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<p> ##实际效果<br> <img src="https://img-blog.csdn.net/20170123163238822?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p> ##写在最后<br> 博文内容基于如下版本</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;io.mattcarroll.hover:hover:0.9.6&apos;</span><br></pre></td></tr></table></figure>
+
+<p> 个人创建类的方式和Github上推荐的使用方式是相反的，依据个人习惯使用即可。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-12-25T08:27:23.000Z">2016-12-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2066 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/12/25/《Android开源库》 PagerSlidingTabStrip从头到脚/">《Android开源库》 PagerSlidingTabStrip从头到脚</a>
+            
+        </h1>
+        <div class="content">
+            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/53868426" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/53868426</a>   </p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h2><p> <a href="https://github.com/astuetz/PagerSlidingTabStrip" target="_blank" rel="noopener">PagerSlidingTabStrip</a>，是我个人经常使用到的一个和ViewPager配合的页面指示器，可以满足开发过程中常用的需求，如类似于今日头条的首页新闻内容导航栏等等，之前自己开发的<a href="https://github.com/onlyloveyd/JuheNews" target="_blank" rel="noopener">JuheNews</a>和正在开发的<a href="https://github.com/onlyloveyd/GankIOClient" target="_blank" rel="noopener">GankIOClient</a>均有使用到它，所以想对其进行一个全面的介绍。  </p>
+<p> <img src="https://img-blog.csdn.net/20161225095838631" alt="JuheNews"> <img src="https://img-blog.csdn.net/20161225095901710" alt="GankIOClient">  </p>
+<p> PagerSlidingTabStrip源码地址：</p>
+<p> <a href="https://github.com/astuetz/PagerSlidingTabStrip" target="_blank" rel="noopener">https://github.com/astuetz/PagerSlidingTabStrip</a></p>
+<hr>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a><a href></a>简单使用</h2><ul>
+<li>添加库依赖  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;com.astuetz:pagerslidingtabstrip:1.0.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>定义布局文件  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.astuetz.PagerSlidingTabStrip</span><br><span class="line">    android:id=&quot;@+id/psts_indicator&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;40dp&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;android.support.v4.view.ViewPager</span><br><span class="line">    android:id=&quot;@+id/vp_content&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>关联ViewPager  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @BindView(R.id.psts_indicator)</span><br><span class="line">    PagerSlidingTabStrip pstsIndicator;</span><br><span class="line">    @BindView(R.id.activity_main)</span><br><span class="line">    LinearLayout activityMain;</span><br><span class="line">    @BindView(R.id.vp_content)</span><br><span class="line">    ViewPager vpContent;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(this);</span><br><span class="line">        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());</span><br><span class="line">        vpContent.setAdapter(mainPagerAdapter);</span><br><span class="line">        pstsIndicator.setViewPager(vpContent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>结果  <img src="https://img-blog.csdn.net/20161225100453936" alt="这里写图片描述"></li>
+</ul>
+<ul>
+<li>后话<br> 看到这个效果，是不是很炸裂，如此的丑陋，上图是什么属性都没有修改默认的效果图，接着我们看下源码，看下可以从哪方面来进行改造。  </li>
+</ul>
+<hr>
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a><a href></a>源码解析</h2><p> 这个开源库，简单点说就是大家都非常熟悉的自定义View，所以，解读的方式可以从自定义属性到此视图的构造，onMeasure,onLayout, onDraw等等</p>
+<ol>
+<li>自定义的属性值</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;PagerSlidingTabStrip&quot;&gt;</span><br><span class="line">        &lt;!--底部滑动指示器的颜色--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsIndicatorColor&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;!--底部用于给指示器滑动的区域的颜色--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsUnderlineColor&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;!--分割线的颜色--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsDividerColor&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;!--指示器的高度--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsIndicatorHeight&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;!--底部区域的高度--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsUnderlineHeight&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;!--分割线与上下的间距--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsDividerPadding&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;!--每个Tab的左右边距--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsTabPaddingLeftRight&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;!--选中tab的滚动偏移量,个人基本没有用到过--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsScrollOffset&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;!--每个Tab的背景图，StateListDrawable--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsTabBackground&quot; format=&quot;reference&quot; /&gt;</span><br><span class="line">        &lt;!--是否根据tab均为位置，true的时候均分，默认为false,一般都是使用默认值--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsShouldExpand&quot; format=&quot;boolean&quot; /&gt;</span><br><span class="line">        &lt;!--标题文本是否大写，默认为true--&gt;</span><br><span class="line">        &lt;attr name=&quot;pstsTextAllCaps&quot; format=&quot;boolean&quot; /&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 看下大致的布局和属性对号入座<br> <img src="https://img-blog.csdn.net/20161225110620803" alt="这里写图片描述"></p>
+<ol start="2">
+<li>PagerSlidingTabStrip.java类结构</li>
+</ol>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20161225135308515" alt="getter and setter">  </p>
+<p> 类中的getter和setter方法，基本上和上面的自定义属性可以对上号，不仅可以在布局文件中定义，还可以通过java代码进行设置。  </p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20161225135749135" alt="这里写图片描述">  </p>
+<p> 类中使用到的变量，大部分都是和自定义属性挂钩的，主要关注几个</p>
+<pre><code>变量                   | 意义                                                                                     
+-------------------- | --------------------------------------------------------------------------------------- 
+ATTRS                | 引用Android系统的两个属性，文本字体大小和字体颜色                                                           
+pageListener         | 内部使用的OnPagerChangeListener,通过setViewPager实现和ViewPager的联动                               
+delegatePageListener | 暴露给开发者的接口，类本身使用到了两个OnPageChangeListener，一个用来实现自己的逻辑，而这个则是留给开发者实现自己需要针对ViewPager的页面变化的逻辑
+tabsContainer        | 内部容器，用户所见文本指示器和图标指示器的父节点，所以，如果需要针对文本指示器或者是图标指示器做什么操作，通过这个查找孩子节点即可                      </code></pre><hr>
+<p> <img src="https://img-blog.csdn.net/20161225141223354" alt="这里写图片描述">  </p>
+<ul>
+<li>IconTabProvider<br> 类中比较关键的一些内容，接口IconTabProvider，ViewPager对应的Adapter实现该方法并返回每个ViewPager对应的图标即可实现图标指示器。</li>
+</ul>
+<ul>
+<li>PageListener &lt;用户自定义的OnPagerListener的事件处理集成于此处&gt;</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">private class PageListener implements OnPageChangeListener &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line"></span><br><span class="line">           //存储当前位置信息</span><br><span class="line">		currentPosition = position;</span><br><span class="line">		currentPositionOffset = positionOffset;</span><br><span class="line"></span><br><span class="line">           //滑动到子视图</span><br><span class="line">		scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));</span><br><span class="line"></span><br><span class="line">		invalidate();//触发重绘</span><br><span class="line"></span><br><span class="line">           //用户自定义的OnPagerChangeListener事件之onPagerScrolled</span><br><span class="line">		if (delegatePageListener != null) &#123;</span><br><span class="line">			delegatePageListener.onPageScrolled(position, positionOffset, positionOffsetPixels);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line">	    //已经滑动完成，offset归0</span><br><span class="line">		if (state == ViewPager.SCROLL_STATE_IDLE) &#123;</span><br><span class="line">			scrollToChild(pager.getCurrentItem(), 0);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">           //用户自定义的OnPagerChangeListener事件之onPageScrollStateChanged</span><br><span class="line">		if (delegatePageListener != null) &#123;</span><br><span class="line">			delegatePageListener.onPageScrollStateChanged(state);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void onPageSelected(int position) &#123;</span><br><span class="line">	    //这里类内部没有做什么处理，只处理用户自定义的OnPagerSelected方法</span><br><span class="line">		if (delegatePageListener != null) &#123;</span><br><span class="line">			delegatePageListener.onPageSelected(position);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *滑动指定子视图</span><br><span class="line"> */</span><br><span class="line">   private void scrollToChild(int position, int offset) &#123;</span><br><span class="line"></span><br><span class="line">	if (tabCount == 0) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	int newScrollX = tabsContainer.getChildAt(position).getLeft() + offset;</span><br><span class="line"></span><br><span class="line">	if (position &gt; 0 || offset &gt; 0) &#123;</span><br><span class="line">		newScrollX -= scrollOffset;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if (newScrollX != lastScrollX) &#123;</span><br><span class="line">		lastScrollX = newScrollX;</span><br><span class="line">		scrollTo(newScrollX, 0);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<ul>
+<li>PagerSlidingTabStrip构造方法<br> 构造方法的内容不多，基本上全是基本属性的获取，自定义View中常用的TypedArray ，记得回收recycle()，这里关注一下 TypedValue.applyDimension方法的使用，全部转换成px。  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">public PagerSlidingTabStrip(Context context, AttributeSet attrs, int defStyle) &#123;</span><br><span class="line">	super(context, attrs, defStyle);</span><br><span class="line"></span><br><span class="line">	setFillViewport(true);</span><br><span class="line">	setWillNotDraw(false);</span><br><span class="line"></span><br><span class="line">	tabsContainer = new LinearLayout(context);</span><br><span class="line">	tabsContainer.setOrientation(LinearLayout.HORIZONTAL);</span><br><span class="line">	tabsContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));</span><br><span class="line">	addView(tabsContainer);</span><br><span class="line"></span><br><span class="line">	DisplayMetrics dm = getResources().getDisplayMetrics();</span><br><span class="line"></span><br><span class="line">	scrollOffset = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, scrollOffset, dm);</span><br><span class="line">	indicatorHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, indicatorHeight, dm);</span><br><span class="line">	underlineHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, underlineHeight, dm);</span><br><span class="line">	dividerPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dividerPadding, dm);</span><br><span class="line">	tabPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, tabPadding, dm);</span><br><span class="line">	dividerWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dividerWidth, dm);</span><br><span class="line">	tabTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, tabTextSize, dm);</span><br><span class="line"></span><br><span class="line">	// get system attrs (android:textSize and android:textColor)</span><br><span class="line"></span><br><span class="line">	TypedArray a = context.obtainStyledAttributes(attrs, ATTRS);</span><br><span class="line"></span><br><span class="line">	tabTextSize = a.getDimensionPixelSize(0, tabTextSize);</span><br><span class="line">	tabTextColor = a.getColor(1, tabTextColor);</span><br><span class="line"></span><br><span class="line">	a.recycle();</span><br><span class="line"></span><br><span class="line">	// get custom attrs</span><br><span class="line"></span><br><span class="line">	a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);</span><br><span class="line"></span><br><span class="line">	indicatorColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsIndicatorColor, indicatorColor);</span><br><span class="line">	underlineColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnderlineColor, underlineColor);</span><br><span class="line">	dividerColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDividerColor, dividerColor);</span><br><span class="line">	indicatorHeight = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsIndicatorHeight, indicatorHeight);</span><br><span class="line">	underlineHeight = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsUnderlineHeight, underlineHeight);</span><br><span class="line">	dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsDividerPadding, dividerPadding);</span><br><span class="line">	tabPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight, tabPadding);</span><br><span class="line">	tabBackgroundResId = a.getResourceId(R.styleable.PagerSlidingTabStrip_pstsTabBackground, tabBackgroundResId);</span><br><span class="line">	shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsShouldExpand, shouldExpand);</span><br><span class="line">	scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsScrollOffset, scrollOffset);</span><br><span class="line">	textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);</span><br><span class="line"></span><br><span class="line">	a.recycle();</span><br><span class="line"></span><br><span class="line">       /* 初始化矩形Paint */</span><br><span class="line">	rectPaint = new Paint();</span><br><span class="line">	rectPaint.setAntiAlias(true);</span><br><span class="line">	rectPaint.setStyle(Style.FILL);</span><br><span class="line">       /* 初始化分割线Paint */</span><br><span class="line">	dividerPaint = new Paint();</span><br><span class="line">	dividerPaint.setAntiAlias(true);</span><br><span class="line">	dividerPaint.setStrokeWidth(dividerWidth);</span><br><span class="line"></span><br><span class="line">       /* 是否延伸，默认WRAP_CONTENT,这种比较合理 */</span><br><span class="line">	defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);</span><br><span class="line">	expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);</span><br><span class="line"></span><br><span class="line">	if (locale == null) &#123;</span><br><span class="line">		locale = getResources().getConfiguration().locale;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>onDraw  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">	super.onDraw(canvas);</span><br><span class="line"></span><br><span class="line">	if (isInEditMode() || tabCount == 0) &#123;</span><br><span class="line">		return;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	final int height = getHeight();</span><br><span class="line"></span><br><span class="line">	// 设置Indicator颜色</span><br><span class="line">	rectPaint.setColor(indicatorColor);</span><br><span class="line"></span><br><span class="line">	// 获取当前选中Tab</span><br><span class="line">	View currentTab = tabsContainer.getChildAt(currentPosition);</span><br><span class="line">	//获取Left,Right值</span><br><span class="line">	float lineLeft = currentTab.getLeft();</span><br><span class="line">	float lineRight = currentTab.getRight();</span><br><span class="line"></span><br><span class="line">	// if there is an offset, start interpolating left and right coordinates between current and next tab</span><br><span class="line">	if (currentPositionOffset &gt; 0f &amp;&amp; currentPosition &lt; tabCount - 1) &#123;</span><br><span class="line">	    //结合下一个Tab获取当前要绘制的indicator的位置,这里的currentPositionOffset 比较关键，可以看到这个值是与ViewPager相关的，在onPagerScrolled方法中，这个值在不断的更新</span><br><span class="line">		View nextTab = tabsContainer.getChildAt(currentPosition + 1);</span><br><span class="line">		final float nextTabLeft = nextTab.getLeft();</span><br><span class="line">		final float nextTabRight = nextTab.getRight();</span><br><span class="line"></span><br><span class="line">		lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);</span><br><span class="line">		lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);</span><br><span class="line">	&#125;</span><br><span class="line">       // 绘制Indicator</span><br><span class="line">	canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);</span><br><span class="line"></span><br><span class="line">	// 绘制UnderLine</span><br><span class="line">	rectPaint.setColor(underlineColor);</span><br><span class="line">	canvas.drawRect(0, height - underlineHeight, tabsContainer.getWidth(), height, rectPaint);</span><br><span class="line"></span><br><span class="line">	// 绘制分割线</span><br><span class="line">	dividerPaint.setColor(dividerColor);</span><br><span class="line">	for (int i = 0; i &lt; tabCount - 1; i++) &#123;</span><br><span class="line">		View tab = tabsContainer.getChildAt(i);</span><br><span class="line">		canvas.drawLine(tab.getRight(), dividerPadding, tab.getRight(), height - dividerPadding, dividerPaint);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<ul>
+<li>setViewPager， setOnPageChangeListener<br> 一个用来与ViewPager联动，一个用来处理自定义的OnPagerListener逻辑  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public void setViewPager(ViewPager pager) &#123;</span><br><span class="line">		this.pager = pager;</span><br><span class="line"></span><br><span class="line">		if (pager.getAdapter() == null) &#123;</span><br><span class="line">			throw new IllegalStateException(&quot;ViewPager does not have adapter instance.&quot;);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		pager.setOnPageChangeListener(pageListener);</span><br><span class="line"></span><br><span class="line">		notifyDataSetChanged();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void setOnPageChangeListener(OnPageChangeListener listener) &#123;</span><br><span class="line">		this.delegatePageListener = listener;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<ol start="3">
+<li>PagerSlidingTabStrip综合用法</li>
+</ol>
+<ul>
+<li>文本指示器选中后文本大小和颜色变化<br> <img src="https://img-blog.csdn.net/20161225162617006" alt="这里写图片描述"><br> 关键点在于实现自己的OnPagerListener  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">       super.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.activity_main);</span><br><span class="line">       ButterKnife.bind(this);</span><br><span class="line">       MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());</span><br><span class="line">       vpContent.setAdapter(mainPagerAdapter);</span><br><span class="line">       pstsIndicator.setViewPager(vpContent);</span><br><span class="line">       vpContent.addOnPageChangeListener(new ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           public void onPageSelected(int position) &#123;</span><br><span class="line">               updateTextStyle(position);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       updateTextStyle(vpContent.getCurrentItem());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   private void updateTextStyle(int position) &#123;</span><br><span class="line">       LinearLayout tabsContainer = (LinearLayout) pstsIndicator.getChildAt(0);</span><br><span class="line">       for(int i=0; i&lt; tabsContainer.getChildCount(); i++) &#123;</span><br><span class="line">           TextView textView = (TextView) tabsContainer.getChildAt(i);</span><br><span class="line">           if(position == i) &#123;</span><br><span class="line">               textView.setTextSize(18);</span><br><span class="line">               textView.setTextColor(getResources().getColor(R.color.colorToolbar));</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               textView.setTextSize(12);</span><br><span class="line">               textView.setTextColor(getResources().getColor(R.color.colorBlack));</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>图标指示器选中图标颜色变化  </p>
+<p> <img src="https://img-blog.csdn.net/20161226201936086" alt="这里写图片描述">  关键点在于实现自己的OnPagerListener和继承PagerSlidingTabStrip.IconTabProvider</p>
+</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void updateIconStyle(int position) &#123;</span><br><span class="line">    LinearLayout tabsContainer = (LinearLayout) pstsIndicator.getChildAt(0);</span><br><span class="line">    for (int i = 0; i &lt; tabsContainer.getChildCount(); i++) &#123;</span><br><span class="line">        ImageButton imageButton = (ImageButton) tabsContainer.getChildAt(i);</span><br><span class="line">        imageButton.setImageTintMode(PorterDuff.Mode.SRC_IN);</span><br><span class="line">        if (i == position) &#123;</span><br><span class="line">            imageButton.setImageTintList(getResources().getColorStateList(R.color.ib_color_list));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            imageButton.setImageTintList(getResources().getColorStateList(R.color.ib_color_list_normal));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<hr>
+<ol start="4">
+<li><p>写在最后的话<br>PagerSlidingTabStrip，总体来说简洁方便，如果开发者想集成自己的一些内容，比如说Indicator改成其他的形状，或者说想做到既有文字又有图片的效果，都可以自己修改代码来实现，比较的方便。</p>
+<p>祝大家圣诞快乐。</p>
+<p>Ending ~</p>
+</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        Your name
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Your title
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Your location</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        162
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        14
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        81
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Android基础/">
+            <span class="level-start">
+                <span class="level-item">Android基础</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">51</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
+            <span class="level-start">
+                <span class="level-item">Android Studio</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Android安全/">
+            <span class="level-start">
+                <span class="level-item">Android安全</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android应用/">
+            <span class="level-start">
+                <span class="level-item">Android应用</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">25</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android开源库/">
+            <span class="level-start">
+                <span class="level-item">Android开源库</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android源码/">
+            <span class="level-start">
+                <span class="level-item">Android源码</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android系统/">
+            <span class="level-start">
+                <span class="level-item">Android系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Android进阶/">
+            <span class="level-start">
+                <span class="level-item">Android进阶</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Angular/">
+            <span class="level-start">
+                <span class="level-item">Angular</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Flutter/">
+            <span class="level-start">
+                <span class="level-item">Flutter</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Kotlin/">
+            <span class="level-start">
+                <span class="level-item">Kotlin</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LeetCode/">
+            <span class="level-start">
+                <span class="level-item">LeetCode</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/微信小程序/">
+            <span class="level-start">
+                <span class="level-item">微信小程序</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/运维/">
+            <span class="level-start">
+                <span class="level-item">运维</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">13</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2014/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2014</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Aandroid实战/">
+                        <span class="tag">Aandroid实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android-Studio/">
+                        <span class="tag">Android Studio</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android基础/">
+                        <span class="tag">Android基础</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android实战/">
+                        <span class="tag">Android实战</span>
+                        <span class="tag is-grey">26</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开源库/">
+                        <span class="tag">Android开源库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android源码/">
+                        <span class="tag">Android源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Angular/">
+                        <span class="tag">Angular</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSDN迁移/">
+                        <span class="tag">CSDN迁移</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CentOS/">
+                        <span class="tag">CentOS</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CodeStyle/">
+                        <span class="tag">CodeStyle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Drawable/">
+                        <span class="tag">Drawable</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EditText/">
+                        <span class="tag">EditText</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FileProvider/">
+                        <span class="tag">FileProvider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flex/">
+                        <span class="tag">Flex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flutter/">
+                        <span class="tag">Flutter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Fragment/">
+                        <span class="tag">Fragment</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Framework/">
+                        <span class="tag">Framework</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gank-io/">
+                        <span class="tag">Gank.io</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HAL/">
+                        <span class="tag">HAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA插件/">
+                        <span class="tag">IDEA插件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JetPack/">
+                        <span class="tag">JetPack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MPAndroidChart/">
+                        <span class="tag">MPAndroidChart</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MacOS/">
+                        <span class="tag">MacOS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MultiDex/">
+                        <span class="tag">MultiDex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mysql/">
+                        <span class="tag">Mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PMDReader/">
+                        <span class="tag">PMDReader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Picasso/">
+                        <span class="tag">Picasso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PowerDesign/">
+                        <span class="tag">PowerDesign</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Realm/">
+                        <span class="tag">Realm</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RecyclerView/">
+                        <span class="tag">RecyclerView</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Retrofit/">
+                        <span class="tag">Retrofit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RxJava/">
+                        <span class="tag">RxJava</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Service/">
+                        <span class="tag">Service</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Smali/">
+                        <span class="tag">Smali</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TabLayout/">
+                        <span class="tag">TabLayout</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tomcat/">
+                        <span class="tag">Tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WanANdroid/">
+                        <span class="tag">WanANdroid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebService/">
+                        <span class="tag">WebService</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Xen/">
+                        <span class="tag">Xen</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/allowBackup/">
+                        <span class="tag">allowBackup</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事件分发/">
+                        <span class="tag">事件分发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动画/">
+                        <span class="tag">动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/四大组件/">
+                        <span class="tag">四大组件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/多线程/">
+                        <span class="tag">多线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/局域网/">
+                        <span class="tag">局域网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/布局控件/">
+                        <span class="tag">布局控件</span>
+                        <span class="tag is-grey">28</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/应用/">
+                        <span class="tag">应用</span>
+                        <span class="tag is-grey">23</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发问题/">
+                        <span class="tag">开发问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开机动画/">
+                        <span class="tag">开机动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源库/">
+                        <span class="tag">开源库</span>
+                        <span class="tag is-grey">24</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信公众号/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/快捷键/">
+                        <span class="tag">快捷键</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/手电筒/">
+                        <span class="tag">手电筒</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/技术选型/">
+                        <span class="tag">技术选型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文本/">
+                        <span class="tag">文本</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/框架/">
+                        <span class="tag">框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/源码分析/">
+                        <span class="tag">源码分析</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/百度地图/">
+                        <span class="tag">百度地图</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统源码/">
+                        <span class="tag">系统源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/终端/">
+                        <span class="tag">终端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/聚合数据/">
+                        <span class="tag">聚合数据</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/自定义View/">
+                        <span class="tag">自定义View</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟化/">
+                        <span class="tag">虚拟化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/译文/">
+                        <span class="tag">译文</span>
+                        <span class="tag is-grey">15</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/贪吃蛇/">
+                        <span class="tag">贪吃蛇</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源配置/">
+                        <span class="tag">资源配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/辅助工具/">
+                        <span class="tag">辅助工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/配置/">
+                        <span class="tag">配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/问题/">
+                        <span class="tag">问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2014/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2014</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Aandroid实战/">
+                        <span class="tag">Aandroid实战</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android-Studio/">
+                        <span class="tag">Android Studio</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android基础/">
+                        <span class="tag">Android基础</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android实战/">
+                        <span class="tag">Android实战</span>
+                        <span class="tag is-grey">26</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android开源库/">
+                        <span class="tag">Android开源库</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Android源码/">
+                        <span class="tag">Android源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Angular/">
+                        <span class="tag">Angular</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
+                        <span class="tag">BroadcastReceiver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CSDN迁移/">
+                        <span class="tag">CSDN迁移</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CentOS/">
+                        <span class="tag">CentOS</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CodeStyle/">
+                        <span class="tag">CodeStyle</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Drawable/">
+                        <span class="tag">Drawable</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/EditText/">
+                        <span class="tag">EditText</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FileProvider/">
+                        <span class="tag">FileProvider</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flex/">
+                        <span class="tag">Flex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Flutter/">
+                        <span class="tag">Flutter</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Fragment/">
+                        <span class="tag">Fragment</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Framework/">
+                        <span class="tag">Framework</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gank-io/">
+                        <span class="tag">Gank.io</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Gitlab/">
+                        <span class="tag">Gitlab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/HAL/">
+                        <span class="tag">HAL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/IDEA插件/">
+                        <span class="tag">IDEA插件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/JetPack/">
+                        <span class="tag">JetPack</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Kotlin/">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LeetCode/">
+                        <span class="tag">LeetCode</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Linux/">
+                        <span class="tag">Linux</span>
+                        <span class="tag is-grey">6</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MPAndroidChart/">
+                        <span class="tag">MPAndroidChart</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MacOS/">
+                        <span class="tag">MacOS</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Markdown/">
+                        <span class="tag">Markdown</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MultiDex/">
+                        <span class="tag">MultiDex</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Mysql/">
+                        <span class="tag">Mysql</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PMDReader/">
+                        <span class="tag">PMDReader</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Picasso/">
+                        <span class="tag">Picasso</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/PowerDesign/">
+                        <span class="tag">PowerDesign</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Realm/">
+                        <span class="tag">Realm</span>
+                        <span class="tag is-grey">9</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RecyclerView/">
+                        <span class="tag">RecyclerView</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Retrofit/">
+                        <span class="tag">Retrofit</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/RxJava/">
+                        <span class="tag">RxJava</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Service/">
+                        <span class="tag">Service</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Smali/">
+                        <span class="tag">Smali</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/TabLayout/">
+                        <span class="tag">TabLayout</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tomcat/">
+                        <span class="tag">Tomcat</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/View/">
+                        <span class="tag">View</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WanANdroid/">
+                        <span class="tag">WanANdroid</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/WebService/">
+                        <span class="tag">WebService</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Xen/">
+                        <span class="tag">Xen</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/allowBackup/">
+                        <span class="tag">allowBackup</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/事件分发/">
+                        <span class="tag">事件分发</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动画/">
+                        <span class="tag">动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/四大组件/">
+                        <span class="tag">四大组件</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/多线程/">
+                        <span class="tag">多线程</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/局域网/">
+                        <span class="tag">局域网</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/工具/">
+                        <span class="tag">工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/布局控件/">
+                        <span class="tag">布局控件</span>
+                        <span class="tag is-grey">28</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/应用/">
+                        <span class="tag">应用</span>
+                        <span class="tag is-grey">23</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开发问题/">
+                        <span class="tag">开发问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开机动画/">
+                        <span class="tag">开机动画</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源/">
+                        <span class="tag">开源</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/开源库/">
+                        <span class="tag">开源库</span>
+                        <span class="tag is-grey">24</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信公众号/">
+                        <span class="tag">微信公众号</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/快捷键/">
+                        <span class="tag">快捷键</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/手电筒/">
+                        <span class="tag">手电筒</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/技术选型/">
+                        <span class="tag">技术选型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/文本/">
+                        <span class="tag">文本</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/框架/">
+                        <span class="tag">框架</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/源码分析/">
+                        <span class="tag">源码分析</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/百度地图/">
+                        <span class="tag">百度地图</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统源码/">
+                        <span class="tag">系统源码</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/终端/">
+                        <span class="tag">终端</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/聚合数据/">
+                        <span class="tag">聚合数据</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/自定义View/">
+                        <span class="tag">自定义View</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟化/">
+                        <span class="tag">虚拟化</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/设计模式/">
+                        <span class="tag">设计模式</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/译文/">
+                        <span class="tag">译文</span>
+                        <span class="tag is-grey">15</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/贪吃蛇/">
+                        <span class="tag">贪吃蛇</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源/">
+                        <span class="tag">资源</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/资源配置/">
+                        <span class="tag">资源配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/辅助工具/">
+                        <span class="tag">辅助工具</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/配置/">
+                        <span class="tag">配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/问题/">
+                        <span class="tag">问题</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="onlyloveyd" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 yidong&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
