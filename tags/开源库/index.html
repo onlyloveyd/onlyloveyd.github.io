@@ -692,6 +692,264 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-06-25T02:10:31.000Z">2017-06-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1083 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/06/25/《Android开源库》 MPAndroidChart Wiki(译文)～Part 6/">《Android开源库》 MPAndroidChart Wiki(译文)～Part 6</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="22-ViewPortHandler"><a href="#22-ViewPortHandler" class="headerlink" title="22. ViewPortHandler"></a><a href></a>22. ViewPortHandler</h2><p> ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。</p>
+<p> 和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉你也需要很小心的使用它。不恰当的使用可能会导致意想不到的结果。然而，ViewPortHandler提供了很多高阶的方法来修改视窗。</p>
+<h3 id="22-1-获取实例"><a href="#22-1-获取实例" class="headerlink" title="22.1 获取实例"></a><a href></a>22.1 获取实例</h3><p> 可以通过如下方式获取实例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ViewPortHandler handler = chart.getViewPortHandler();</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="22-2-缩放-amp-位移"><a href="#22-2-缩放-amp-位移" class="headerlink" title="22.2 缩放&amp;位移"></a><a href></a>22.2 缩放&amp;位移</h3><pre><code>方法          | 使用        
+----------- | ---------- 
+getScaleX() | 返回X轴上的缩放级别
+getScaleY() | 返回Y轴上的缩放级别
+getTransX() | 返回X轴方向上的位移
+getTransY() | 返回Y轴方向上的位移</code></pre><hr>
+<h3 id="22-3-图表尺寸-amp-内容"><a href="#22-3-图表尺寸-amp-内容" class="headerlink" title="22.3 图表尺寸&amp;内容"></a><a href></a>22.3 图表尺寸&amp;内容</h3><pre><code>方法               | 使用                  
+---------------- | -------------------- 
+getChartWidth()  | 返回图表的宽度             
+getChartHeight() | 返回图表的高度             
+getContentRect() | 返回一个RectF对象表示当前的内容区域</code></pre><p>更多方法请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki#javadoc" target="_blank" rel="noopener">JavaDoc</a>或者学习API</p>
+<hr>
+<h2 id="23-FillFormatter"><a href="#23-FillFormatter" class="headerlink" title="23. FillFormatter"></a><a href></a>23. FillFormatter</h2><p> FillFormatter接口允许自定义LineDataSet的填充行应该在哪里结束。 所有需要做的都是创建一个新类并实现FillFormatter接口。 使用：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public float getFillLinePosition(LineDataSet dataSet, LineDataProvider provider)</span><br></pre></td></tr></table></figure>
+
+<p> 用于实现自定义逻辑的接口的方法，该自定义逻辑计算单个LineDataSet的填充行的结束点。</p>
+<p> 创建一个类实现该接口：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class MyCustomFillFormatter implements FillFormatter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public float getFillLinePosition(LineDataSet dataSet, LineDataProvider dataProvider) &#123;</span><br><span class="line"></span><br><span class="line">        float myDesiredFillPosition = ...;</span><br><span class="line">        // put your logic here...</span><br><span class="line"></span><br><span class="line">        return myDesiredFillPosition;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 然后把自定义的formatter设置到LineDataSet：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineDataSet.setFillFormatter(new MyCustomFillFormatter());</span><br></pre></td></tr></table></figure>
+
+<p> 查看<a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/com/github/mikephil/charting/formatter/DefaultFillFormatter.java" target="_blank" rel="noopener">DefaultFillFormatter</a>的实现</p>
+<hr>
+<h2 id="24-ProGuard"><a href="#24-ProGuard" class="headerlink" title="24. ProGuard"></a><a href></a>24. ProGuard</h2><p> 使用Proguard,需要添加如下配置：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-keep class com.github.mikephil.charting.** &#123; *; &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如果使用proguard但是不配置以上规则，动画会失效。<br> Realm.io对应配置：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-dontwarn io.realm.**</span><br></pre></td></tr></table></figure>
+
+<p> <a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="noopener">其他ProGuard信息</a></p>
+<hr>
+<h2 id="25-Realm-io数据库集成"><a href="#25-Realm-io数据库集成" class="headerlink" title="25. Realm.io数据库集成"></a><a href></a>25. Realm.io数据库集成</h2><p> 请移步官方<a href="https://github.com/PhilJay/MPAndroidChart-Realm" target="_blank" rel="noopener">MPAndroidChart-Realm</a>来了解如何从Realm.io数据库中提取数据填充MPAndroidChart。</p>
+<p> 具体操作指南请查阅<a href="https://github.com/PhilJay/MPAndroidChart-Realm/wiki/Realm.io-database-integration" target="_blank" rel="noopener">此处</a></p>
+<hr>
+<h2 id="26-自定义DataSets"><a href="#26-自定义DataSets" class="headerlink" title="26. 自定义DataSets"></a><a href></a>26. 自定义DataSets</h2><p> 从<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v.2.2.0</a>开始，MP AndroidChart允许你创建自定义的DataSets并在图表中使用它们。</p>
+<h3 id="26-1-必需操作"><a href="#26-1-必需操作" class="headerlink" title="26.1 必需操作"></a><a href></a>26.1 必需操作</h3><ul>
+<li>创建自定义类（如：CustomDataSet） </li>
+<li>继承BaseDataSet&lt; ? extends Entry&gt; </li>
+<li>根据需求实现对应的IDataSet接口。如IBarDataSet </li>
+<li>实现接口对应的方法并返回你期望的结果  </li>
+</ul>
+<hr>
+<h3 id="26-2-示例"><a href="#26-2-示例" class="headerlink" title="26.2 示例"></a><a href></a>26.2 示例</h3><p> 创建一个BarDataSet供BarChart使用：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class CustomBarDataSet extends BaseDataSet&lt;BarEntry&gt; implements IBarDataSet &#123;</span><br><span class="line">    // implement all by the extended class and interface required methods</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 创建CustomBarDataSet后实现所有接口需要实现的方法，然后它就可以像BarDataSet一样在所有的BarChart中使用了。</p>
+<hr>
+<h2 id="27-其他方法"><a href="#27-其他方法" class="headerlink" title="27. 其他方法"></a><a href></a>27. 其他方法</h2><h3 id="27-1-图表内容"><a href="#27-1-图表内容" class="headerlink" title="27.1 图表内容"></a><a href></a>27.1 图表内容</h3><pre><code>方法            | 使用                                            
+------------- | ---------------------------------------------- 
+clear()       | 清空图表中的所有数据（通过设置数据对象为null实现）。调用invalidate()刷新数据
+clearValues() | 清空图表中的数据集，X轴上数据不做修改                           
+isEmpty()     | 判断图表中数据是否为空                                   </code></pre><hr>
+<h3 id="27-2-好用的Getter方法"><a href="#27-2-好用的Getter方法" class="headerlink" title="27.2 好用的Getter方法"></a><a href></a>27.2 好用的Getter方法</h3><pre><code>方法                             | 使用                   
+------------------------------ | --------------------- 
+getData()                      | 返回图表中的Data对象         
+getViewPortHandler()           | 返回ViewPortHandler对象  
+getRenderer()                  | 返回负责绘制图表的DataRender对象
+getCenter()                    | 返回整个图表的中心点.          
+getCenterOffsets()             | 返回图表绘制区域的中心点         
+getPercentOfTotal(float value) | 返回提供的值构成图表内总和的百分比.   
+getYMin()                      | 返回Y轴最小值              
+getYMax()                      | 返回Y轴最大值              
+getLowestVisibleXIndex()       | 返回X轴方向上最小可见索引        
+getHighestVisibleXIndex()      | 返回X轴方向上最大可见索引        </code></pre><hr>
+<h3 id="27-3-更多Chart类方法"><a href="#27-3-更多Chart类方法" class="headerlink" title="27.3 更多Chart类方法"></a><a href></a>27.3 更多Chart类方法</h3><pre><code>方法                                              | 使用                                                  
+----------------------------------------------- | ---------------------------------------------------- 
+saveToGallery(String title)                     | 将当前图表状态以图片的形式保存到图库。记得添加&quot;WRITE_EXTERNAL_STORAGE&quot;权限.  
+saveToPath(String title, String pathOnSD)       | 将当前图表状态以图片的形式保存到指定路径。记得添加&quot;WRITE_EXTERNAL_STORAGE&quot;权限.
+getChartBitmap()                                | 将当前图表状态以Bitmap的形式返回.                                
+setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬件加速, 仅针对API级别11+的设备.                      </code></pre>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-06-22T05:46:53.000Z">2017-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 1933 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/06/22/《Android开源库》 MPAndroidChart Wiki(译文)～Part 5/">《Android开源库》 MPAndroidChart Wiki(译文)～Part 5</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="19-ChartData子类"><a href="#19-ChartData子类" class="headerlink" title="19. ChartData子类"></a><a href></a>19. ChartData子类</h2><p> 这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。</p>
+<h3 id="BarData"><a href="#BarData" class="headerlink" title="BarData"></a><a href></a>BarData</h3><pre><code>方法                           | 使用                                                
+---------------------------- | -------------------------------------------------- 
+setGroupSpace(float percent) | 按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%
+isGrouped()                  | 如果此数据对象分组（由多个DataSet组成），则返回true，否则返回false         </code></pre><hr>
+<h3 id="ScatterData"><a href="#ScatterData" class="headerlink" title="ScatterData"></a><a href></a>ScatterData</h3><pre><code>方法                     | 使用                                 
+---------------------- | ----------------------------------- 
+getGreatestShapeSize() | 返回此数据对象包含的所有ScatterDataSets的最大形状大小。</code></pre><hr>
+<h3 id="PieData"><a href="#PieData" class="headerlink" title="PieData"></a><a href></a>PieData</h3><pre><code>方法                         | 使用                                         
+-------------------------- | ------------------------------------------- 
+getDataSet()               | 返回包含的PieDataSet对象。PieData不能包含多个PieDataSet对象
+setDataSet(PieDataSet set) | 设置PieDataSet                               </code></pre><hr>
+<h3 id="BubbleData"><a href="#BubbleData" class="headerlink" title="BubbleData"></a><a href></a>BubbleData</h3><pre><code>方法                                   | 使用                                                  
+------------------------------------ | ---------------------------------------------------- 
+setHighlightCircleWidth(float width) | 设置当数据对象包含的所有BubbleDataSet对象处于突出显示状态时的环绕该气泡的圆的宽度。单位dp</code></pre><hr>
+<h3 id="CombinedData"><a href="#CombinedData" class="headerlink" title="CombinedData"></a><a href></a>CombinedData</h3><p> 该数据对象被设计为包含所有其他数据对象的实例。使用setData（…）方法提供此对象的数据。这仅用于CombinedChart。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class CombinedData extends ChartData &#123;</span><br><span class="line">    </span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    public CombinedData(List&lt;String&gt; xVals) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public CombinedData(String[] xVals) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(LineData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(BarData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(ScatterData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(CandleData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="20-DataSet类（通用样式）"><a href="#20-DataSet类（通用样式）" class="headerlink" title="20. DataSet类（通用样式）"></a><a href></a>20. DataSet类（通用样式）</h2><p> DataSet是如LineDataSet,BarDataSet等所有数据集类的基类。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class LineDataSet extends DataSet &#123; ...</span><br></pre></td></tr></table></figure>
+
+<p> DataSet代表一组或者一类在图表中归结在一起的数据条目集合。设计它的目的是为了将图表中的不同组数据进行逻辑分离。（比如线形图中的特定一条线，柱形图中的特定一组柱形）</p>
+<p> 以下提到的方法在DataSet类中实现，因此可用于所有子类。</p>
+<h3 id="20-1-数据样式"><a href="#20-1-数据样式" class="headerlink" title="20.1 数据样式"></a><a href></a>20.1 数据样式</h3><pre><code>方法                                  | 使用                                                              
+----------------------------------- | ---------------------------------------------------------------- 
+setValueTextColor(int color)        | 设置 DataSet 数据对象包含的数据的值文本的颜色                                     
+setValueTextColors(List colors)     | 设置一个颜色列表用于显示值                                                   
+setValueTextSize(float size)        | 设置 DataSet 数据对象包含的数据的值文本的大小（单位是dp）                              
+setValueTypeface(Typeface tf)       | 设置 DataSet 数据对象包含的数据的值文本的字体                                     
+setValueFormatter(ValueFormatter f) | 为DataSet 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅此处
+setDrawValues(boolean enabled)      | 启用/禁用 绘制所有 DataSet 数据对象包含的数据的值文本                                </code></pre><p>以上方法同样适用于ChartData对象，只是操作结果针对的是其包含的所有的DataSet。</p>
+<hr>
+<h3 id="20-2-高亮"><a href="#20-2-高亮" class="headerlink" title="20.2 高亮"></a><a href></a>20.2 高亮</h3><pre><code>方法                                                   | 使用                                        
+---------------------------------------------------- | ------------------------------------------ 
+setHighlightEnabled(boolean enabled)                 | 设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets
+setDrawVerticalHighlightIndicator(boolean enabled)   | 启用／禁用纵向选中高亮指示线。如果禁用，指示线将不会被绘制             
+setDrawHorizontalHighlightIndicator(boolean enabled) | 启用／禁用横向选中高亮指示线。如果禁用，指示线将不会被绘制             </code></pre><hr>
+<h3 id="20-3-Getter-Convenience"><a href="#20-3-Getter-Convenience" class="headerlink" title="20.3 Getter/Convenience"></a><a href></a>20.3 Getter/Convenience</h3><pre><code>方法                    | 使用                                              
+--------------------- | ------------------------------------------------ 
+contains(Entry entry) | 检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。</code></pre><hr>
+<h2 id="21-DataSet子类（特定样式）"><a href="#21-DataSet子类（特定样式）" class="headerlink" title="21. DataSet子类（特定样式）"></a><a href></a>21. DataSet子类（特定样式）</h2><p> 本章wiki专注于DataSet类的子类。此处未提及的DataSet的所有其他子类代表它们没有特定的增强功能。</p>
+<h3 id="21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet"><a href="#21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet" class="headerlink" title="21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet"></a><a href></a>21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet</h3><pre><code>方法                           | 使用                                                                                 
+---------------------------- | ----------------------------------------------------------------------------------- 
+setHighLightColor(int color) | 设置高亮颜色。不要忘记用getResources().getColor(…) 或者 Color.rgb(…)来解析颜色（或者使用Color.BLACK这种简单的方式）</code></pre><hr>
+<h3 id="21-2-Line-Bar-Scatter-Candle-amp-RadarDataSet"><a href="#21-2-Line-Bar-Scatter-Candle-amp-RadarDataSet" class="headerlink" title="21.2 Line-, Bar-, Scatter-, Candle- &amp; RadarDataSet"></a><a href></a>21.2 Line-, Bar-, Scatter-, Candle- &amp; RadarDataSet</h3><pre><code>方法                                          | 使用                                                                                                   
+------------------------------------------- | ----------------------------------------------------------------------------------------------------- 
+setDrawHighlightIndicators(boolean enabled) | 启用/禁用垂直和水平高亮指示线。调用setDrawVerticalHighlightIndicator（…）和setDrawHorizo​​ntalHighlightIndicator（…）进行单独配置
+setHighlightLineWidth(float width)          | 设置高亮线（十字准线）的宽度。单位dp                                                                                  </code></pre><hr>
+<h3 id="21-3-Line-amp-RadarDataSet"><a href="#21-3-Line-amp-RadarDataSet" class="headerlink" title="21.3 Line- &amp; RadarDataSet"></a><a href></a>21.3 Line- &amp; RadarDataSet</h3><pre><code>方法                            | 使用                                                                                                                                                  
+----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- 
+setFillColor(int color)       | 设置用于填充线条表面的颜色                                                                                                                                       
+setFillAlpha(int alpha)       | 设置用于填充线条表面（0-255）的Alpha值（透明度），默认值：85,255 =完全不透明，0 =完全透明                                                                                             
+setFillDrawable(Drawable d)   | 设置一个可以覆盖填充区域的Drawable。这也允许使用渐变Drawable                                                                                                              
+setDrawFilled(boolean filled) | 如果DataSet需要绘制填充（表面，区域），而不单单是一条线，那么将此项设置为true，禁用此功能将提升性能。请注意，此方法使用canvas.clipPath（…）方法绘制填充区域。对于API级别&amp;lt;18（Android 4.3）的设备，应关闭图表的硬件加速。具体查阅此处,默认为false
+setLineWidth(float width)     | 设置线条宽度（最小=0.2f,最大10f）;默认1f。注意：细线性能更好，粗线性能更差                                                                                                         </code></pre><hr>
+<p> 以下提到的方法仅适用于具体提到的DataSet子类。</p>
+<h3 id="21-4-LineDataSet"><a href="#21-4-LineDataSet" class="headerlink" title="21.4 LineDataSet"></a><a href></a>21.4 LineDataSet</h3><pre><code>方法                                                                 | 使用                                                                                           
+------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- 
+setCircleRadius(float size)                                        | 设置的圆形值指示符的大小（半径），默认大小= 4F                                                                    
+setDrawCircles(boolean enabled)                                    | 设置为true启用LineDataSet的圆形指示器。默认为true                                                           
+setDrawCubic(boolean enabled)                                      | 如果设置为true，则线条图线将以立方式而不是线性绘制。这对性能有负面影响！默认值：false                                              
+setCubicIntensity(float intensity)                                 | 设置立方体线的强度（如果启用）。 Max = 1f =非常立方，Min = 0.05f =低立方效应，默认值：0.2f                                  
+setCircleColor(int color)                                          | 设置圆形指示器的颜色                                                                                   
+setCircleColors(List colors)                                       | 设置此LineDataSet外圈应具有的颜色。还有需要其他的方法来设置外圈的颜色                                                     
+setCircleColorHole(int color)                                      | 设置内圈的颜色                                                                                      
+setDrawCircleHole(boolean enabled)                                 | 设置为true.在绘制内圈，否则不绘制内圈                                                                        
+enableDashedLine(float lineLength, float spaceLength, float phase) | 启动虚线绘制，具体像&quot;- - - - - -&quot;这样. &quot;lineLength&quot;虚线段长度, &quot;spaceLength&quot;虚线段之间的空隙, &quot;phase&quot;是偏移量，以度数为单位（通常为0）</code></pre><hr>
+<h3 id="21-5-BarDataSet"><a href="#21-5-BarDataSet" class="headerlink" title="21.5 BarDataSet"></a><a href></a>21.5 BarDataSet</h3><pre><code>方法                                | 使用                                                                                   
+--------------------------------- | ------------------------------------------------------------------------------------- 
+setBarSpacePercent(float percent) | 以总条宽的百分比设置条之间的间距                                                                     
+setBarShadowColor(int color)      | 设置用于绘制条形阴影的颜色。条形图的阴影部分是一个用来表示最大值的界面。使用getResources().getColor(…) 或者Color.rgb(…)来设置这个值
+setHighLightAlpha(int alpha)      | 设置用于绘制高亮指示条的alpha值（透明度）。最小值=0（完全透明），最大值=255（完全不透明）                                   
+setStackLabels(String[] labels)   | 设置不同值的条形堆栈的标签，如果有标签的话                                                                </code></pre><hr>
+<h3 id="21-6-ScatterDataSet"><a href="#21-6-ScatterDataSet" class="headerlink" title="21.6 ScatterDataSet"></a><a href></a>21.6 ScatterDataSet</h3><pre><code>方法                                  | 使用                             
+----------------------------------- | ------------------------------- 
+setScatterShapeSize(float size)     | 设置绘制的散点图将具有的密度像素的大小。这仅适用于非自定义形状
+setScatterShape(ScatterShape shape) | 设置在值所在的位置绘制的形状                 </code></pre><hr>
+<h3 id="21-7-CandleDataSet"><a href="#21-7-CandleDataSet" class="headerlink" title="21.7 CandleDataSet"></a><a href></a>21.7 CandleDataSet</h3><pre><code>方法                                         | 使用                                         
+------------------------------------------ | ------------------------------------------- 
+setBodySpace(float space)                  | 设置每个蜡烛体左侧和右侧留出的空间，默认为0.1f（10％），最大0.45f，最小0f
+setShadowWidth(float width)                | 设置蜡烛线的宽度，单位dp。默认3f                         
+setShadowColor(int color)                  | 设置蜡烛线的颜色                                   
+setDecreasingColor(int color)              | 设置当打开&amp;gt;关闭时应该用于此DataSet的唯一的颜色             
+setIncreasingColor(int color)              | 设置当打开&amp;lt;=关闭时应该用于此DataSet的唯一的颜色            
+setDecreasingPaintStyle(Paint.Style style) | 设置当打开&amp;gt;关闭时的Paint风格（填充或者线条）               
+setIncreasingPaintStyle(Paint.Style style) | 设置当打开&amp;lt;=关闭时的Paint风格（填充或者线条）              </code></pre><hr>
+<h3 id="21-8-BubbleDataSet"><a href="#21-8-BubbleDataSet" class="headerlink" title="21.8 BubbleDataSet"></a><a href></a>21.8 BubbleDataSet</h3><pre><code>方法                                   | 使用                      
+------------------------------------ | ------------------------ 
+setHighlightCircleWidth(float width) | 设置在突出显示状态下气泡周围的圆的宽度，单位dp</code></pre><hr>
+<h3 id="21-9-PieDataSet"><a href="#21-9-PieDataSet" class="headerlink" title="21.9 PieDataSet"></a><a href></a>21.9 PieDataSet</h3><pre><code>方法                             | 使用                                      
+------------------------------ | ---------------------------------------- 
+setSliceSpace(float degrees)   | 设置饼图切片之间的空隙。默认：0-&amp;gt;没有空隙，最大20，最小0（没有空隙）
+setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片距离图表中心“偏移”的距离，默认为12f</code></pre>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-06-17T13:44:09.000Z">2017-06-17</time>
                 
                 <div class="level-item">
@@ -832,7 +1090,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-06-10T14:29:20.000Z">2017-06-10</time>
+                <time class="level-item has-text-grey" datetime="2017-06-16T06:33:34.000Z">2017-06-16</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
@@ -842,7 +1100,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <span class="level-item has-text-grey">
                     
                     
-                    29 分钟 读完 (大约 4365 个字)
+                    16 分钟 读完 (大约 2387 个字)
                 </span>
                 
                 
@@ -851,606 +1109,111 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2017/06/10/《Android开源库》 MPAndroidChart Wiki(译文)～Part 1/">《Android开源库》 MPAndroidChart Wiki(译文)～Part 1</a>
+                <a class="has-link-black-ter" href="/2017/06/16/《Android开源库》 MPAndroidChart Wiki(译文)～Part 3/">《Android开源库》 MPAndroidChart Wiki(译文)～Part 3</a>
             
         </h1>
         <div class="content">
-            <h2 id="1-基础入门"><a href="#1-基础入门" class="headerlink" title="1. 基础入门"></a><a href></a>1. 基础入门</h2><h3 id="1-1-添加依赖"><a href="#1-1-添加依赖" class="headerlink" title="1.1 添加依赖"></a><a href></a>1.1 添加依赖</h3><p> <strong>Gradle 工程添加依赖 (推荐使用)</strong><br> 项目级build.gradle中添加:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">	repositories &#123;</span><br><span class="line">		maven &#123; url &quot;https://jitpack.io&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> App下的 build.gradle中添加:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">	compile &apos;com.github.PhilJay:MPAndroidChart:v3.0.2&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Maven</strong><br> pom.xml中添加如下repositories:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;repository&gt;</span><br><span class="line">       &lt;id&gt;jitpack.io&lt;/id&gt;</span><br><span class="line">       &lt;url&gt;https://jitpack.io&lt;/url&gt;</span><br><span class="line">&lt;/repository&gt;</span><br></pre></td></tr></table></figure>
-
-<p> pom.xml中添加如下dependencies</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">       &lt;groupId&gt;com.github.PhilJay&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;MPAndroidChart&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;v3.0.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>直接使用Jar包文件</strong><br> 下载<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">最新的.jar</a>包，拷贝下载的文件到你的Android项目libs文件夹下然后开始使用这个开源库。<br> <strong>拷贝整个工程</strong><br> 使用git clone <a href="https://github.com/PhilJay/MPAndroidChart.git" target="_blank" rel="noopener">https://github.com/PhilJay/MPAndroidChart.git</a> 命令下载整个工程，这个工程包含sample和MPChartLib库，然后你可以将这个库引入到你的Android Studio工程或者是Eclipse工程。</p>
-<hr>
-<h2 id="1-2-创建View"><a href="#1-2-创建View" class="headerlink" title="1.2 创建View"></a><a href></a>1.2 创建View</h2><p> 要使用LineChart, BarChart, ScatterChart, CandleStickChart, PieChart, BubbleChart 或者 RadarChart，我们可以首先在布局XML文件中定义它 ：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.github.mikephil.charting.charts.LineChart</span><br><span class="line">    android:id=&quot;@+id/chart&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 然后我们可以在Fragment，Activity或者其他能拿到它的地方取到对象：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// in this example, a LineChart is initialized from xml</span><br><span class="line">    LineChart chart = (LineChart) findViewById(R.id.chart);</span><br></pre></td></tr></table></figure>
-
-<p> 或者我们直接在代码中创建Chart然后把它添加到布局中去：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// programmatically create a LineChart</span><br><span class="line">    LineChart chart = new LineChart(Context);</span><br><span class="line"></span><br><span class="line">    // get a layout defined in xml</span><br><span class="line">    RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout);</span><br><span class="line">    rl.add(chart); // add the programmatically created chart</span><br></pre></td></tr></table></figure>
+            <h2 id="13-图例"><a href="#13-图例" class="headerlink" title="13. 图例"></a><a href></a>13. 图例</h2><p> 默认情况下，所有的图表都支持图例并且会自动生成。给图表设置完数据之后，图例会被绘制出来。图例通常由多个条目组成，每个条目由标签形式/形状表示。<br> 自动生成的图例包含的条目数取决于不同颜色的数量（跨所有DataSet对象）以及DataSet标签。图例的标签取决于为图表中使用的DataSet对象设置的标签。如果没有指定DataSet对象的标签，图表将自动生成。</p>
+<p> 为了自定义Legend，我们可以通过如下方式从图表中拿到Legend对象：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Legend legend = chart.getLegend();</span><br></pre></td></tr></table></figure>
 
 
-<hr>
-<h3 id="1-3-添加数据"><a href="#1-3-添加数据" class="headerlink" title="1.3 添加数据"></a><a href></a>1.3 添加数据</h3><p> 当你创建了一个chart实例后，你可以生成一些数据然后把它加入到图表中去。下面的例子中我们以LineChart为例，对LineChart而言，Entry类代表有X和Y值的图表中的一个条目。对于其他的Chart类型，如BarChart，你可以使用BarEntry作为数据条目。<br> 为了给你的图表添加数据，你需要想下面这样将你的数据封装成Entry：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">YourData[] dataObjects = ...;</span><br><span class="line"></span><br><span class="line">List&lt;Entry&gt; entries = new ArrayList&lt;Entry&gt;();</span><br><span class="line"></span><br><span class="line">for (YourData data : dataObjects) &#123;</span><br><span class="line"></span><br><span class="line">    // turn your data into Entry objects</span><br><span class="line">    entries.add(new Entry(data.getValueX(), data.getValueY())); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 下一步，你需要将List&lt; Entry&gt;添加到LineDataSet对象中。DataSet对象包含属于一组的数据，并且每个数据有自己独立的风格。如下“Label”只有描述目的如果设置enabled的话，它将会在Legend中显示出来。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LineDataSet dataSet = new LineDataSet(entries, &quot;Label&quot;); // add entries to dataset</span><br><span class="line">dataSet.setColor(...);</span><br><span class="line">dataSet.setValueTextColor(...); // styling, ...</span><br></pre></td></tr></table></figure>
-
-<p> 最后一步，添加LineDataSet到LineData中，LineData包含对应Chart中的所有数据，并且我们可以更深入的定制数据的显示风格。在创建了数据之后我们将其加入到chart中然后刷新一下。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LineData lineData = new LineData(dataSet);</span><br><span class="line">chart.setData(lineData);</span><br><span class="line">chart.invalidate(); // refresh</span><br></pre></td></tr></table></figure>
-
-<p> 上面这些都是很基本的设置和使用。更细节的介绍请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Setting-Data" target="_blank" rel="noopener">setting Data</a>章节—- 结合示例的为你讲解如何给各式各样的图表添加数据。</p>
-<hr>
-<h3 id="1-4-样式"><a href="#1-4-样式" class="headerlink" title="1.4 样式"></a><a href></a>1.4 样式</h3><p> 想要了解chart和数据的设置和样式，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/General-Chart-Settings-&amp;-Styling" target="_blank" rel="noopener">settings &amp; styling</a>章节。对于各种类型的数据和样式，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Specific-chart-settings" target="_blank" rel="noopener">specific settings &amp; styling </a>wiki页面。</p>
-<hr>
-<h2 id="2-Chart交互"><a href="#2-Chart交互" class="headerlink" title="2. Chart交互"></a><a href></a>2. Chart交互</h2><p> MPAndroidChart允许用户完成自定义于Chart View的触摸或者是手势事件，并且通过回调方法响应交互。</p>
-<h3 id="2-1-启用／禁用交互"><a href="#2-1-启用／禁用交互" class="headerlink" title="2.1 启用／禁用交互"></a><a href></a>2.1 启用／禁用交互</h3><pre><code>方法                                         | 作用                           
------------------------------------------- | ----------------------------- 
-setTouchEnabled(boolean enabled)           | 启用或者禁用触摸交互                   
-setDragEnabled(boolean enabled)            | 启用或者禁用拖拽交互                   
-setScaleEnabled(boolean enabled)           | 启用或者禁用缩放交互（X轴和Y轴）            
-setScaleXEnabled(boolean enabled)          | 启用或者禁用X轴缩放交互                 
-setScaleYEnabled(boolean enabled)          | 启用或者禁用Y轴缩放交互                 
-setPinchZoom(boolean enabled)              | 设置为true，则可以使用捏缩放，否则X轴Y轴将会分开缩放
-setDoubleTapToZoomEnabled(boolean enabled) | 设置为false，双击放大功能将会被禁用         </code></pre><hr>
-<h3 id="2-2-图表Fling和减速（针对滑动操作）"><a href="#2-2-图表Fling和减速（针对滑动操作）" class="headerlink" title="2.2 图表Fling和减速（针对滑动操作）"></a><a href></a>2.2 图表Fling和减速（针对滑动操作）</h3><pre><code>方法                                          | 作用                                                                 
-------------------------------------------- | ------------------------------------------------------------------- 
-setDragDecelerationEnabled(boolean enabled) | 如果设置为true，滑动操作完成后图表还会继续滚动。默认值为true                                 
-setDragDecelerationFrictionCoef(float coef) | 减速摩擦系数在[0; 1]间隔，较高的值表示速度将缓慢降低，例如，如果设置为0，它将立即停止。 1是无效值，将自动转换为0.9999。</code></pre><hr>
-<h3 id="2-3-高亮值"><a href="#2-3-高亮值" class="headerlink" title="2.3 高亮值"></a><a href></a>2.3 高亮值</h3><p> 如何通过点击手势高亮数据条目，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Highlighting" target="_blank" rel="noopener">highlighting section</a></p>
-<hr>
-<h3 id="2-4-手势回调"><a href="#2-4-手势回调" class="headerlink" title="2.4 手势回调"></a><a href></a>2.4 手势回调</h3><p> OnChartGestureListener接口可以让我们定义手势响应事件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">public interface OnChartGestureListener &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks when a touch-gesture has started on the chart (ACTION_DOWN)</span><br><span class="line">     *</span><br><span class="line">     * @param me</span><br><span class="line">     * @param lastPerformedGesture</span><br><span class="line">     */</span><br><span class="line">    void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks when a touch-gesture has ended on the chart (ACTION_UP, ACTION_CANCEL)</span><br><span class="line">     *</span><br><span class="line">     * @param me</span><br><span class="line">     * @param lastPerformedGesture</span><br><span class="line">     */</span><br><span class="line">    void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks when the chart is longpressed.</span><br><span class="line">     * </span><br><span class="line">     * @param me</span><br><span class="line">     */</span><br><span class="line">    public void onChartLongPressed(MotionEvent me);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks when the chart is double-tapped.</span><br><span class="line">     * </span><br><span class="line">     * @param me</span><br><span class="line">     */</span><br><span class="line">    public void onChartDoubleTapped(MotionEvent me);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks when the chart is single-tapped.</span><br><span class="line">     * </span><br><span class="line">     * @param me</span><br><span class="line">     */</span><br><span class="line">    public void onChartSingleTapped(MotionEvent me);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Callbacks then a fling gesture is made on the chart.</span><br><span class="line">     * </span><br><span class="line">     * @param me1</span><br><span class="line">     * @param me2</span><br><span class="line">     * @param velocityX</span><br><span class="line">     * @param velocityY</span><br><span class="line">     */</span><br><span class="line">    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY);</span><br><span class="line"></span><br><span class="line">   /**</span><br><span class="line">     * Callbacks when the chart is scaled / zoomed via pinch zoom gesture.</span><br><span class="line">     * </span><br><span class="line">     * @param me</span><br><span class="line">     * @param scaleX scalefactor on the x-axis</span><br><span class="line">     * @param scaleY scalefactor on the y-axis</span><br><span class="line">     */</span><br><span class="line">    public void onChartScale(MotionEvent me, float scaleX, float scaleY);</span><br><span class="line"></span><br><span class="line">   /**</span><br><span class="line">    * Callbacks when the chart is moved / translated via drag gesture.</span><br><span class="line">    *</span><br><span class="line">    * @param me</span><br><span class="line">    * @param dX translation distance on the x-axis</span><br><span class="line">    * @param dY translation distance on the y-axis</span><br><span class="line">    */</span><br><span class="line">    public void onChartTranslate(MotionEvent me, float dX, float dY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 简单地在类中实现上面这个接口，然后设置到对应的chart对象</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chart.setOnChartGestureListener(this);</span><br></pre></td></tr></table></figure>
+<h3 id="13-1-控制Legend是否被绘制"><a href="#13-1-控制Legend是否被绘制" class="headerlink" title="13.1 控制Legend是否被绘制"></a><a href></a>13.1 控制Legend是否被绘制</h3><pre><code>方法                          | 使用                              
+--------------------------- | -------------------------------- 
+setEnabled(boolean enabled) | 设置图例禁用或者启用。如果设置为false,图例将不会被绘制出来</code></pre><hr>
+<h3 id="13-2-样式-修改图例"><a href="#13-2-样式-修改图例" class="headerlink" title="13.2 样式/修改图例"></a><a href></a>13.2 样式/修改图例</h3><pre><code>方法                       | 使用             
+------------------------ | --------------- 
+setTextColor(int color)  | 设置图例标签的文本颜色    
+setTextSize(float size)  | 设置图例标签的字体大小（dp）
+setTypeface(Typeface tf) | 设置图例标签的字体      </code></pre><hr>
+<h3 id="13-3-换行-避免裁剪"><a href="#13-3-换行-避免裁剪" class="headerlink" title="13.3 换行/避免裁剪"></a><a href></a>13.3 换行/避免裁剪</h3><pre><code>方法                                  | 使用                                                                         
+----------------------------------- | --------------------------------------------------------------------------- 
+setWordWrapEnabled(boolean enabled) | 如果设置为true,如果图例标签过长，将会另起一行来展示超出图表范围的内容，而不是截断它。请注意，启动后会降低性能并且这个只对处理图表下的图例标签有效
+setMaxSizePercent(float maxSize)    | 设置最大图例的百分比（相对整个图表大小）。默认为0.95f (95%)                                        </code></pre><hr>
+<h3 id="13-4-自定义图例"><a href="#13-4-自定义图例" class="headerlink" title="13.4 自定义图例"></a><a href></a>13.4 自定义图例</h3><pre><code>方法                                  | 使用                                                                                                                                                                 
+----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+setPosition(LegendPosition pos)     | 设置图例的显示位置。可选项：RIGHT_OF_CHART, RIGHT_OF_CHART_CENTER, RIGHT_OF_CHART_INSIDE, BELOW_CHART_LEFT, BELOW_CHART_RIGHT, BELOW_CHART_CENTER or PIECHART_CENTER (只有饼图使用这个)等等
+setForm(LegendForm shape)           | 设置LegendForm。这是在带有图例条目表示的DataSet的颜色的图例标签旁边绘制的形状。可选项：SQUARE，CIRCLE、LINE。                                                                                            
+setFormSize(float size)             | 设置legend-forms的大小（dp）                                                                                                                                              
+setXEntrySpace(float space)         | 设置横轴上的图例项之间的空间                                                                                                                                                     
+setYEntrySpace(float space)         | 设置垂直轴上的图例条目之间的空间                                                                                                                                                   
+setFormToTextSpace(float space)     | 设置图例标签和相应图例之间的空格                                                                                                                                                   
+setWordWrapEnabled(boolean enabled) | 设置 Legend 是否自动换行？ 目前仅支持BelowChartLeft，BelowChartRight，BelowChartCenter.                                                                                            </code></pre><hr>
+<h3 id="13-5-设置自定义标签-amp-颜色"><a href="#13-5-设置自定义标签-amp-颜色" class="headerlink" title="13.5 设置自定义标签&amp;颜色"></a><a href></a>13.5 设置自定义标签&amp;颜色</h3><pre><code>方法                                       | 使用                                                                                                                
+---------------------------------------- | ------------------------------------------------------------------------------------------------------------------ 
+setCustom(int[] colors, String[] labels) | 设置自定义图例标签和颜色数组，颜色数量和标签数量相同且一一对应。这个方法将使默认的图例计算功能失效。调用resetCustom()来重新打开自动计算图例的功能(然后调用notifyDataSetChanged()来执行重新计算)
+resetCustom()                            | 调用这个方法之后自定义图例标签功能将会失效。标签将会被自动计算(调用notifyDataSetChanged()之后)                                                       
+setExtra(int[] colors, String[] labels)  | 设置颜色数组和标签数据，颜色和标签一一对应，这些标签将会接在自动计算得到的标签之后（如果图例已经被计算出来， 我们需要调用notifyDataSetChanged()来让我们的修改生效）                     </code></pre><hr>
+<h3 id="13-6-示例"><a href="#13-6-示例" class="headerlink" title="13.6 示例"></a><a href></a>13.6 示例</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Legend l = chart.getLegend();</span><br><span class="line">   l.setFormSize(10f); // set the size of the legend forms/shapes</span><br><span class="line">   l.setForm(LegendForm.CIRCLE); // set what type of form/shape should be used</span><br><span class="line">   l.setPosition(LegendPosition.BELOW_CHART_LEFT);</span><br><span class="line">   l.setTypeface(...);</span><br><span class="line">   l.setTextSize(12f);</span><br><span class="line">   l.setTextColor(Color.BLACK);</span><br><span class="line">   l.setXEntrySpace(5f); // set the space between the legend entries on the x-axis</span><br><span class="line">   l.setYEntrySpace(5f); // set the space between the legend entries on the y-axis</span><br><span class="line"></span><br><span class="line">   // set custom labels and colors</span><br><span class="line">   l.setCustom(ColorTemplate.VORDIPLOM_COLORS, new String[] &#123; &quot;Set1&quot;, &quot;Set2&quot;, &quot;Set3&quot;, &quot;Set4&quot;, &quot;Set5&quot; &#125;);</span><br><span class="line"></span><br><span class="line">   // and many more...</span><br></pre></td></tr></table></figure>
 
 
 <hr>
-<h2 id="3-高亮"><a href="#3-高亮" class="headerlink" title="3. 高亮"></a><a href></a>3. 高亮</h2><p> 本节重点介绍通过点击手势和基于版本v3.0.0以编程方式突出显示图表中的条目的主题。</p>
-<h3 id="3-1-启用／禁用高亮"><a href="#3-1-启用／禁用高亮" class="headerlink" title="3.1 启用／禁用高亮"></a><a href></a>3.1 启用／禁用高亮</h3><pre><code>方法                                          | 作用                                                       
-------------------------------------------- | --------------------------------------------------------- 
-setHighlightPerDragEnabled(boolean enabled) | 在图表上将其设置为true，以便在完全缩小时在图表上拖动时突出显示。 默认值：true              
-setHighlightPerTapEnabled(boolean enabled)  | 在图表上将其设置为false可防止点击手势突出显示值。 仍然可以通过拖动或以编程方式突出显示值。 默认值：true
-setMaxHighlightDistance(float distanceDp)   | 设置最大高亮距离(dp)。 图表上条目大于这个距离不会触发高亮。 默认值：500dp               </code></pre><p>除此之外，单独的DataSet也能配置高亮：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dataSet.setHighlightEnabled(true); // allow highlighting for DataSet</span><br><span class="line"></span><br><span class="line">// set this to false to disable the drawing of highlight indicator (lines)</span><br><span class="line">dataSet.setDrawHighlightIndicators(true); </span><br><span class="line">dataSet.setHighlightColor(Color.BLACK); // color for highlight indicator</span><br><span class="line">// and more...</span><br></pre></td></tr></table></figure>
+<h2 id="14-动态-amp-实时数据"><a href="#14-动态-amp-实时数据" class="headerlink" title="14. 动态 &amp; 实时数据"></a><a href></a>14. 动态 &amp; 实时数据</h2><p> 从版本<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">v1.6.3</a>开始支持，持续改进中。</p>
+<p> 为了实现动态增删图表中的数据，开源库提供了大量的方法，方便我们实现图表中DataSet 数据条目的增加和删除。</p>
+<h3 id="14-1-动态添加-删除数据的可能性"><a href="#14-1-动态添加-删除数据的可能性" class="headerlink" title="14.1 动态添加/删除数据的可能性"></a><a href></a>14.1 动态添加/删除数据的可能性</h3><p> DataSet类（和它的所有子类）：</p>
+<pre><code>方法                | 使用                
+----------------- | ------------------ 
+addEntry(Entry e) | 把指定Entry添加到DataSet</code></pre><p>ChartData类（和它的所有子类）</p>
+<pre><code>方法                                  | 使用                       
+----------------------------------- | ------------------------- 
+addEntry(Entry e, int dataSetIndex) | 把指定Entry添加到DataSet的指定索引位置
+addDataSet(DataSet d)               | 把指定DataSet添加到ChartData中  </code></pre><p>除此之外，还存在动态移除数据的方法，具体如下：</p>
+<p> DateSet类（和它的所有子类）</p>
+<pre><code>方法                                     | 使用                                       
+-------------------------------------- | ----------------------------------------- 
+public boolean removeFirst()           | 移除第一个Entry(索引为0)。成功返回true,失败返回false      
+public boolean removeLast()            | 移除最后一个Entry(索引为size-1)。成功返回true,失败返回false
+public boolean removeEntry(Entry e)    | 移除指定Entry。成功返回true                       
+public boolean removeEntry(int xIndex) | 移除指定索引的Entry。成功返回true                    </code></pre><p>ChartData类（和它的所有子类）</p>
+<pre><code>方法                                                       | 使用                                             
+-------------------------------------------------------- | ----------------------------------------------- 
+public boolean removeEntry(Entry e, int dataSetIndex)    | 移除指定索引位置DataSet中的给定Entry对象。成功则返回true           
+public boolean removeEntry(int xIndex, int dataSetIndex) | 移除指定索引位置DataSet中的给定xIndex索引对应的Entry对象。成功则返回true
+public boolean removeDataSet(DataSet d)                  | 从ChartData中移除指定DataSet。成功则返回true               
+public boolean removeDataSet(int index)                  | 从ChartData中移除指定索引位置对应的DataSet。成功则返回true        </code></pre><hr>
+<h3 id="14-2-注意"><a href="#14-2-注意" class="headerlink" title="14.2 注意"></a><a href></a>14.2 注意</h3><p> 在动态增加或者删除数据之后，记得调用notifyDataSetChanged() ，然后调用invalidate()来执行刷新操作。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// EXAMPLE 1</span><br><span class="line">// add entries to the &quot;data&quot; object</span><br><span class="line">exampleData.addEntry(...);</span><br><span class="line">chart.notifyDataSetChanged(); // let the chart know it&apos;s data changed</span><br><span class="line">chart.invalidate(); // refresh</span><br><span class="line"></span><br><span class="line">// EXAMPLE 2</span><br><span class="line">// add entries to &quot;dataSet&quot; object</span><br><span class="line">dataSet.addEntry(...);</span><br><span class="line">exampleData.notifyDataChanged(); // let the data know a dataSet changed</span><br><span class="line">chart.notifyDataSetChanged(); // let the chart know it&apos;s data changed</span><br><span class="line">chart.invalidate(); // refresh</span><br></pre></td></tr></table></figure>
 
-
+<p> 注意：像moveViewTo(…)这样的方法，将会自动调用invalidate()。</p>
 <hr>
-<h3 id="3-2-代码实现高亮"><a href="#3-2-代码实现高亮" class="headerlink" title="3.2 代码实现高亮"></a><a href></a>3.2 代码实现高亮</h3><pre><code>方法                                                              | 作用                                                                      
---------------------------------------------------------------- | ------------------------------------------------------------------------ 
-highlightValue(float x, int dataSetIndex, boolean callListener) | 突出显示给定DataSet中指定x位置的值。 dataSetIndex为-1时撤消所有高亮。 callListener决定了是否调用选择监听器。
-highlightValue(Highlight high, boolean callListener)            | 突出显示由提供的高光对象表示的值。 提供null以撤销所有突出显示。 callListener决定了是否调用选择监听器。            
-highlightValues(Highlight[] highs)                              | 突出显示highs代表的高光对象表示的值。提供null或者是空数组取消所有高亮                                 
-getHighlighted()                                                | 以highlight[]的形式返回包含所有高光条目信息，X坐标，DateSet索引                               </code></pre><hr>
-<h3 id="3-3-选择回调"><a href="#3-3-选择回调" class="headerlink" title="3.3 选择回调"></a><a href></a>3.3 选择回调</h3><p> 开源库提供了大量用来处理交互的监听器。OnChartValueSelectedListener是其中一个，用来处理通过触摸高亮数据条目时处理回调：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public interface OnChartValueSelectedListener &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Called when a value has been selected inside the chart.</span><br><span class="line">    *</span><br><span class="line">    * @param e The selected Entry.</span><br><span class="line">    * @param h The corresponding highlight object that contains information</span><br><span class="line">    * about the highlighted position</span><br><span class="line">    */</span><br><span class="line">    public void onValueSelected(Entry e, Highlight h);</span><br><span class="line">    /**</span><br><span class="line">    * Called when nothing has been selected or an &quot;un-select&quot; has been made.</span><br><span class="line">    */</span><br><span class="line">    public void onNothingSelected();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 在需要接受回调的类中实现上面这个接口，然后将监听器设置到Chart即可</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chart.setOnChartValueSelectedListener(this);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="3-4-Highlight类"><a href="#3-4-Highlight类" class="headerlink" title="3.4 Highlight类"></a><a href></a>3.4 Highlight类</h3><p> Hightlight类代表一个高亮条目的所有数据，如高亮条目本身，它的DataSet，它在界面上的绘制位置等等。这个类可以用来得到当前高亮条目的信息，或者用来告诉Chart，需要高亮哪些条目。为了实现这些目的，Highlight类提供了两个构造方法：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/** constructor for standard highlight */</span><br><span class="line">public Highlight(float x, int dataSetIndex) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">/** constructor for stacked BarEntry highlight */</span><br><span class="line">public Highlight(float x, int dataSetIndex, int stackIndex) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 通过构造函数你可以创建Hightlight对象，然后通过代码的方式实现高亮：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// highlight the entry and x-position 50 in the first (0) DataSet</span><br><span class="line">Highlight highlight = new Highlight(50f, 0); </span><br><span class="line"></span><br><span class="line">chart.highlightValue(highlight, false); // highlight this value, don&apos;t call listener</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="3-5-自定义高亮器"><a href="#3-5-自定义高亮器" class="headerlink" title="3.5 自定义高亮器"></a><a href></a>3.5 自定义高亮器</h3><p> 所有以高亮手势形式显示的用户输入都由默认的ChartHighlighter类进行内部处理。 使用以下方法可以用自定义实现替换默认的highligher：</p>
-<pre><code>方法                                           | 作用                                                   
--------------------------------------------- | ----------------------------------------------------- 
-setHighlighter(ChartHighlighter highlighter) | 设置一个自定义高亮器来处理所有图表上的高亮事件。你的自定义高亮器必须继承ChartHighlighter类</code></pre><hr>
-<h2 id="4-轴"><a href="#4-轴" class="headerlink" title="4. 轴"></a><a href></a>4. 轴</h2><p> 该wiki页面重点介绍AxisBase类，XAxis（<a href="https://github.com/PhilJay/MPAndroidChart/wiki/XAxis" target="_blank" rel="noopener">XAxis</a>）和YAxis（<a href="https://github.com/PhilJay/MPAndroidChart/wiki/YAxis" target="_blank" rel="noopener">YAxis</a>）的基础类。 在v2.0.0中引入<br> 下面提到的以下方法都可以应用于两个轴。</p>
+<h3 id="14-3-动态数据示例"><a href="#14-3-动态数据示例" class="headerlink" title="14.3 动态数据示例"></a><a href></a>14.3 动态数据示例</h3><p> 有关如何实现动态数据添加/删除的示例，请参考示例应用程序和其中的如下Activity：</p>
 <ul>
-<li>轴类允许特定的样式，包括以下组件/部件（可以包括）：<br> 标签（以垂直（y轴）或水平（x轴）对齐绘制），其中包含轴描述值 </li>
-<li>所谓的“轴线”被直接绘制在标签附近并与标签平行 </li>
-<li>“网格线”，各自源自水平方向的轴标签 </li>
-<li>限制线，允许呈现特殊信息，如边界或约束  <h3 id="4-1-控制轴线绘制（哪些部分需要绘制）"><a href="#4-1-控制轴线绘制（哪些部分需要绘制）" class="headerlink" title="4.1 控制轴线绘制（哪些部分需要绘制）"></a><a href></a>4.1 控制轴线绘制（哪些部分需要绘制）</h3></li>
-</ul>
-<pre><code>方法                                | 作用                                   
---------------------------------- | ------------------------------------- 
-setEnabled(boolean enabled)       | 设置轴启用或禁用。 如果禁用，无论任何其他设置如何，都不会绘制轴的任何部分
-setDrawLabels(boolean enabled)    | 将其设置为true可以绘制轴的标签。                   
-setDrawAxisLine(boolean enabled)  | 如果沿着轴（轴线）的线应该被绘制，则将其设置为true。         
-setDrawGridLines(boolean enabled) | 将其设置为true可以绘制轴的网格线。                  </code></pre><hr>
-<h3 id="4-2-自定义轴的范围（最小值／最大值）"><a href="#4-2-自定义轴的范围（最小值／最大值）" class="headerlink" title="4.2 自定义轴的范围（最小值／最大值）"></a><a href></a>4.2 自定义轴的范围（最小值／最大值）</h3><pre><code>方法                                      | 作用                                                                                           
---------------------------------------- | --------------------------------------------------------------------------------------------- 
-setAxisMaximum(float max)               | 设置此轴的自定义最大值。 如果设置，此值将不会根据提供的数据自动计算.                                                          
-resetAxisMaximum()                      | 调用此方法来撤销先前设置的最大值。 通过这样做，你将再次允许轴自动计算它的最大值。                                                    
-setAxisMinimum(float min)               | 设置此轴的自定义最小值。 如果设置，此值将不会根据提供的数据自动计算                                                           
-resetAxisMinimum()                      | 调用此方法来撤销先前设置的最小值。 通过这样做，你将再次允许轴自动计算它的最小值。                                                    
-setStartAtZero(boolean enabled)         | 已弃用 - 请使用setAxisMinValue（…）或setAxisMaxValue（…）                                               
-setInverted(boolean enabled)            | 如果设置为true，则该轴将被反转，这意味着最高值将在底部，最低值在顶部                                                         
-setSpaceTop(float percent)              | 设置图表中最高值的顶部间距（以总轴的百分比表示）与轴上的最高值相比较                                                           
-setSpaceBottom(float percent)           | 设置图表中最低值的底部间距（以总轴范围的百分比表示）与轴上的最低值相比较.                                                        
-setShowOnlyMinMax(boolean enabled)      | 如果启用，该轴将仅显示其最小值和最大值。 这将忽略/覆盖定义的标签计数（如果不强制）.                                                  
-setLabelCount(int count, boolean force) | 设置y轴的标签数量。 请注意，这个数字不是固定的（如果force == false），并且只能近似。 如果强制启用（true），则绘制精确的指定标签计数 - 这可能导致轴上的数字不均匀。
-setPosition(YAxisLabelPosition pos)     | 设置绘制轴标签的位置。 INSIDE_CHART或OUTSIDE_CHART。                                                      
-setGranularity(float gran)              | 设置y轴值之间的最小间隔。 这可以用于在放大到为轴设置的小数位数不再允许区分两个轴值的点时避免重复值。                                          
-setGranularityEnabled(boolean enabled)  | 启用在放大时限制y轴间隔的粒度特征。默认值：false                                                                  </code></pre><hr>
-<h3 id="4-3-样式-修改轴"><a href="#4-3-样式-修改轴" class="headerlink" title="4.3 样式/修改轴"></a><a href></a>4.3 样式/修改轴</h3><pre><code>方法                                                                     | 作用                                                                                
----------------------------------------------------------------------- | ---------------------------------------------------------------------------------- 
-setTextColor(int color)                                                | 设置轴标签的文字颜色.                                                                       
-setTextSize(float size)                                                | 设置轴标签的文字大小(dp)                                                                    
-setTypeface(Typeface tf)                                               | 设置轴标签的字体                                                                          
-setGridColor(int color)                                                | 设置轴网格线的颜色                                                                         
-setGridLineWidth(float width)                                          | 设置轴网格线的宽度                                                                         
-setAxisLineColor(int color)                                            | 设置轴线的颜色                                                                           
-setAxisLineWidth(float width)                                          | 设置轴线的宽度                                                                           
-enableGridDashedLine(float lineLength, float spaceLength, float phase) | 使网格线以虚线模式绘制，例如”- - - - - -”。 “lineLength”控制线段的长度，“spaceLength”控制线间的空间，“phase”控制起点。</code></pre><hr>
-<h3 id="4-4-格式化轴值"><a href="#4-4-格式化轴值" class="headerlink" title="4.4 格式化轴值"></a><a href></a>4.4 格式化轴值</h3><p> 对于格式化轴值，可以使用IAxisValueFormatter接口，你可以使用axis.setValueFormatter(IAxisValueFormatter formatter)方法将自定义格式设置到轴，具体请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-AxisValueFormatter-interface" target="_blank" rel="noopener">here</a></p>
-<hr>
-<h3 id="4-5-限制值"><a href="#4-5-限制值" class="headerlink" title="4.5 限制值"></a><a href></a>4.5 限制值</h3><p> 两个轴都支持所谓的LimitLine，允许提供特殊信息，如边界或约束。 添加到YAxis的LimitLines在水平方向绘制，并且在添加到XAxis时在垂直方向绘制。 下面介绍如何从轴中添加和删除LimitLines：</p>
-<pre><code>方法                                           | 作用                                                                          
--------------------------------------------- | ---------------------------------------------------------------------------- 
-addLimitLine(LimitLine l)                    | 给轴添加一条LimitLine                                                             
-removeLimitLine(LimitLine l)                 | 移除轴上一条指定的LimitLine                                                          
-                                             | 还有很多添加／移除的方法                                                                
-setDrawLimitLinesBehindData(boolean enabled) | 允许控制LimitLines和实际数据之间的z顺序。 如果将此设置为true，则LimitLine将在实际数据之后绘制，否则在顶部。 默认值：false</code></pre><p>限制线（LimitLine类）（正如名称可能指示的），可以使用简单线条为用户提供附加信息。</p>
-<p> 例如，你的图表可能会显示用户使用应用程序记录的各种血压测量结果。 为了通知用户超过140 mmHg的收缩压被认为是健康风险，您可以在140处添加LimitLine来提供该信息。</p>
-<hr>
-<h3 id="4-6-示例代码"><a href="#4-6-示例代码" class="headerlink" title="4.6 示例代码"></a><a href></a>4.6 示例代码</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">YAxis leftAxis = chart.getAxisLeft();</span><br><span class="line"></span><br><span class="line">LimitLine ll = new LimitLine(140f, &quot;Critical Blood Pressure&quot;);</span><br><span class="line">ll.setLineColor(Color.RED);</span><br><span class="line">ll.setLineWidth(4f);</span><br><span class="line">ll.setTextColor(Color.BLACK);</span><br><span class="line">ll.setTextSize(12f);</span><br><span class="line">// .. and more styling options</span><br><span class="line"></span><br><span class="line">leftAxis.addLimitLine(ll);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="5-X轴"><a href="#5-X轴" class="headerlink" title="5. X轴"></a><a href></a>5. X轴</h2><p> XAxis是<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis" target="_blank" rel="noopener">AxisBase</a>的子类，它继承了许多样式和方法。<br> XAxis类（在2.0.0之前的版本中称为 XLabels），是与横轴有关的所有数据和信息容器。 每个Line-，Bar-，Scatter-，CandleStick-和RadarChart都有一个XAxis对象。<br> XAxis类允许特定的样式，包括以下组件（可以包括）以下组件/部件：</p>
-<ul>
-<li>所谓的“轴线”被直接绘制在标签附近并与标签平行 </li>
-<li>“网格线”，各自源于垂直方向的轴标签  通过如下方式获取XAxis实例：</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XAxis xAxis = chart.getXAxis();</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="5-1-自定义XAxis"><a href="#5-1-自定义XAxis" class="headerlink" title="5.1 自定义XAxis"></a><a href></a>5.1 自定义XAxis</h3><pre><code>方法                                 | 作用                                                              
----------------------------------- | ---------------------------------------------------------------- 
-setLabelRotationAngle(float angle) | 设置绘制x轴标签的角度（以度为单位）                                              
-setPosition(XAxisPosition pos)     | 设置XAxis位置。 在TOP，BOTTOM，BOTH_SIDED，TOP_INSIDE或BOTTOM_INSIDE之间进行选择</code></pre><hr>
-<h3 id="5-2-示例代码"><a href="#5-2-示例代码" class="headerlink" title="5.2 示例代码"></a><a href></a>5.2 示例代码</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">XAxis xAxis = chart.getXAxis();</span><br><span class="line">xAxis.setPosition(XAxisPosition.BOTTOM);</span><br><span class="line">xAxis.setTextSize(10f);</span><br><span class="line">xAxis.setTextColor(Color.RED);</span><br><span class="line">xAxis.setDrawAxisLine(true);</span><br><span class="line">xAxis.setDrawGridLines(false);</span><br><span class="line">// set a custom value formatter</span><br><span class="line">xAxis.setValueFormatter(new MyCustomFormatter()); </span><br><span class="line">// and more...</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="6-YAxis"><a href="#6-YAxis" class="headerlink" title="6. YAxis"></a><a href></a>6. YAxis</h2><p> YAxis是<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-Axis" target="_blank" rel="noopener">AxisBase</a>的子类。 这个wiki只描述了YAxis，而不是父类。</p>
-<p> YAxis类（在2.0.0版本的中称为YLabels），是与垂直轴相关的所有数据和信息容器。 每个Line-，Bar-，Scatter或CandleStickChart都有一个左和右YAxis对象，分别负责左轴或右轴。 RadarChart只有一个YAxis。 默认情况下，图表的两个轴都被启用，并将被绘制。<br> 通过如下方式获取YAxis实例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">YAxis leftAxis = chart.getAxisLeft();</span><br><span class="line">YAxis rightAxis = chart.getAxisRight();</span><br><span class="line"></span><br><span class="line">YAxis leftAxis = chart.getAxis(AxisDependency.LEFT);</span><br><span class="line"></span><br><span class="line">YAxis yAxis = radarChart.getYAxis(); // this method radarchart only</span><br></pre></td></tr></table></figure>
-
-<p> 在运行时，使用public AxisDependency getAxisDependency（）来确定此轴表示的图表的边。</p>
-<p> 所有会影响到轴数值范围的自定义设置都需要在设置图表数据之前完成。</p>
-<h3 id="6-1-Axis-Dependency"><a href="#6-1-Axis-Dependency" class="headerlink" title="6.1 Axis Dependency"></a><a href></a>6.1 Axis Dependency</h3><p> 根据默认值，添加到图表的所有数据都会与图表的左侧YAxis对应。 如果没有进一步指定和启用，则右侧的YAxis被调整为与左轴相同的刻度。</p>
-<p> 如果你的图表需要支持不同的轴刻度，则可以通过设置数据应该对应的轴来实现。 这可以通过更改DataSet对象的AxisDependency来实现：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LineDataSet dataSet = ...; // get a dataset</span><br><span class="line">dataSet.setAxisDependency(AxisDependency.RIGHT);</span><br></pre></td></tr></table></figure>
-
-<p> 设置此项将更改你的数据对应的轴。</p>
-<hr>
-<h3 id="6-2-零线"><a href="#6-2-零线" class="headerlink" title="6.2 零线"></a><a href></a>6.2 零线</h3><p> 除了沿YAxis上的每个值水平位置的网格线之外，还有一个所谓的零线，它在轴上的零（0）值处绘制，并且与网格线相似，但可以单独配置。</p>
-<pre><code>方法                               | 作用         
--------------------------------- | ----------- 
-setDrawZeroLine(boolean enabled) | 启用 / 禁用 零线。
-setZeroLineWidth(float width)    | 设置零线的宽度。   
-setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零线示例代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// data has AxisDependency.LEFT</span><br><span class="line">YAxis left = mChart.getAxisLeft();</span><br><span class="line">left.setDrawLabels(false); // no axis labels</span><br><span class="line">left.setDrawAxisLine(false); // no axis line</span><br><span class="line">left.setDrawGridLines(false); // no grid lines</span><br><span class="line">left.setDrawZeroLine(true); // draw a zero line</span><br><span class="line">mChart.getAxisRight().setEnabled(false); // no right axis</span><br></pre></td></tr></table></figure>
-
-<p> 上述代码结果如下所示。 不绘制轴值，不绘制网格线或轴线，只绘制零线。</p>
-<p> <img src="https://camo.githubusercontent.com/bacba4521363fb067c5811ad5beb3370bf1a7504/68747470733a2f2f7261772e6769746875622e636f6d2f5068696c4a61792f4d5043686172742f6d61737465722f73637265656e73686f74732f7a65726f5f6c696e655f6578616d706c655f62617263686172742e706e67" alt="零线"></p>
-<h3 id="6-3-更多示例代码"><a href="#6-3-更多示例代码" class="headerlink" title="6.3 更多示例代码"></a><a href></a>6.3 更多示例代码</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">YAxis yAxis = mChart.getAxisLeft();</span><br><span class="line">yAxis.setTypeface(...); // set a different font</span><br><span class="line">yAxis.setTextSize(12f); // set the text size</span><br><span class="line">yAxis.setAxisMinimum(0f); // start at zero</span><br><span class="line">yAxis.setAxisMaximum(100f); // the axis maximum is 100</span><br><span class="line">yAxis.setTextColor(Color.BLACK);</span><br><span class="line">yAxis.setValueFormatter(new MyValueFormatter());</span><br><span class="line">yAxis.setGranularity(1f); // interval 1</span><br><span class="line">yAxis.setLabelCount(6, true); // force 6 labels</span><br><span class="line">//... and more</span><br></pre></td></tr></table></figure>
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-05-04T07:59:25.000Z">2017-05-04</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 960 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/05/04/《Android 开源库》 Matisse，来自知乎的PhotoPicker/">《Android 开源库》 Matisse，来自知乎的PhotoPicker</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> <a href="https://github.com/zhihu/Matisse" target="_blank" rel="noopener">Matisse</a>，是一款由知乎开源的媒体选择器。</p>
-<ul>
-<li>在Activity和Fragment中使用 </li>
-<li>支持JPEG，PNG，GIF的图片选择和MPEG，MP4格式的视频选择。不能同时选择图片和视频 </li>
-<li>两种主题可供选择，因为知乎也是两种主题 </li>
-<li>图片Loader </li>
-<li>自定义过滤条件  </li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartExample/src/com/xxmassdeveloper/mpchartexample/DynamicalAddingActivity.java" target="_blank" rel="noopener">DynamicalAddingActivity</a> </li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartExample/src/com/xxmassdeveloper/mpchartexample/RealtimeLineChartActivity.java" target="_blank" rel="noopener">RealtimeDataActivity</a>  </li>
 </ul>
 <hr>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;com.zhihu.android:matisse:0.4.3&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="15-修改视窗"><a href="#15-修改视窗" class="headerlink" title="15. 修改视窗"></a><a href></a>15. 修改视窗</h2><p> 本库提供了各种方法来修改视窗（图表的可见部分）。注意，这些修改视窗的方法仅适用于LineChart, BarChart, ScatterChart和CandleStickChart。<br> 下面提到的方法都是Chart类提供的方法。修改视窗的另一种方法是通过<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-ViewPortHandler" target="_blank" rel="noopener">ViewPortHandler</a>直接访问它（没有图表提供的中间安全性）。这仅适用于熟悉API的高级用户。</p>
+<blockquote>
+<p>请注意，只有在设置数据之后才能调用上面这些修改视窗的方法</p>
+</blockquote>
+<h3 id="15-1-限制可见范围"><a href="#15-1-限制可见范围" class="headerlink" title="15.1 限制可见范围"></a><a href></a>15.1 限制可见范围</h3><pre><code>方法                                                                   | 使用                                                                                                              
+-------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- 
+setVisibleXRangeMaximum(float maxXRange)                             | 设置在X轴上一次性最大可见范围。如果这个值设置为10，则X轴取值超过10之外的图表在不滚动的情况是无法被看到的                                                         
+setVisibleXRangeMinimum(float minXRange)                             | 设置在X轴上一次性能看到的最小范围，如果这个值设置成10，则不管你怎么放大，X轴的取值范围都不会小于10                                                            
+setVisibleYRangeMaximum(float maxYRange, AxisDependency axis)        | 设置Y轴上一次性最大可见范围。通过AxisDependency明确对应的Y轴                                                                          
+setViewPortOffsets(float left, float top, float right, float bottom) | 设置当前视窗的自定义偏移量（实际图表窗口侧面的偏移量），设置这个值将阻止图表自动计算其偏移量。使用resetViewPortOffsets()方法来恢复自动计算偏移量的功能。注意，如果你不知道这个是干什么的，请先搞清楚再使用
+resetViewPortOffsets()                                               | 重置所有setViewPortOffsets(…)设置的偏移量。允许图表自动计算所有偏移量                                                                   
+setExtraOffsets(float left, float top, float right, float bottom)    | 在自动计算的偏移量的基础上增加额外的偏移量。这个方法不会改变自动计算的偏移量结果，只是在其基础上追加                                                              </code></pre><hr>
+<h3 id="15-2-移动视图"><a href="#15-2-移动视图" class="headerlink" title="15.2 移动视图"></a><a href></a>15.2 移动视图</h3><pre><code>方法                                                            | 使用                                                                                       
+------------------------------------------------------------- | ----------------------------------------------------------------------------------------- 
+fitScreen()                                                   | 重设所有缩放和拖动，使图表完全适合它的边界（完全缩小）                                                              
+moveViewToX(float xValue)                                     | 将当前视窗的左侧（边）到指定的 x 值                                                                      
+moveViewToY(float yValue, AxisDependency axis)                | 使得指定的y值显示在对应y轴( 左or右 )的中间                                                                
+moveViewTo(float xValue, float yValue, AxisDependency axis)   | 将当前视窗的左侧移动到x轴上的指定x值，并将视窗居中到所提供的y轴上的指定y值，相当于setVisibleXRange(…) 和 setVisibleYRange(…) 组合使用
+centerViewTo(float xValue, float yValue, AxisDependency axis) | 将使当前视窗的中心移动到指定的x值和y值相当于 setVisibleXRange(…) 和 setVisibleYRange(…) 组合使用                   </code></pre><hr>
+<h3 id="15-3-移动视图动画"><a href="#15-3-移动视图动画" class="headerlink" title="15.3 移动视图动画"></a><a href></a>15.3 移动视图动画</h3><pre><code>方法                                                                                   | 使用                             
+------------------------------------------------------------------------------------ | ------------------------------- 
+moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration)   | 和上面moveViewTo结果一样，只是这个过程有动画效果  
+centerViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration) | 和上面centerViewTo结果一样，只是这个过程有动画效果</code></pre><hr>
+<h3 id="15-4-缩放"><a href="#15-4-缩放" class="headerlink" title="15.4 缩放"></a><a href></a>15.4 缩放</h3><pre><code>方法                                                                                                                | 使用                                                     
+----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- 
+zoomIn()                                                                                                          | 以图表中心为中心点，1.4倍步幅放大                                     
+zoomOut()                                                                                                         | 以图表中心为中心点，0.7倍步幅缩小                                     
+zoom(float scaleX, float scaleY, float x, float y)                                                                | 根据所给的参数进行放大或缩小。 参数 x 和 y 是变焦中心的坐标（单位：像素）。 记住，1f = 无放缩 。
+zoomAndCenterAnimated(float scaleX, float scaleY, float xValue, float yValue, AxisDependency axis, long duration) | 按照给定的缩放因子进行缩放，并将视图中心移动到指定位置（带动画）                       </code></pre><hr>
+<h3 id="15-5-完整示例"><a href="#15-5-完整示例" class="headerlink" title="15.5 完整示例"></a><a href></a>15.5 完整示例</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chart.setData(...); // first set data</span><br><span class="line"></span><br><span class="line">// now modify viewport</span><br><span class="line">chart.setVisibleXRangeMaximum(20); // allow 20 values to be displayed at once on the x-axis, not more</span><br><span class="line">chart.moveViewToX(10); // set the left edge of the chart to x-index 10</span><br><span class="line">// moveViewToX(...) also calls invalidate()</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="ProGuard"><a href="#ProGuard" class="headerlink" title="ProGuard"></a>ProGuard</h3><p> 如果使用Glide作为图片加载开源库</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-keep public class * implements com.bumptech.glide.module.GlideModule</span><br><span class="line">-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** &#123;</span><br><span class="line">  **[] $VALUES;</span><br><span class="line">  public *;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># for DexGuard only</span><br><span class="line">-keepresourcexmlelements manifest/application/meta-data@value=GlideModule</span><br></pre></td></tr></table></figure>
-
-<p> 如果使用Picasso作为图片加载开源库</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-dontwarn com.squareup.okhttp.**</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h3><p> 知乎主题</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Matisse.from(MainActivity.this)</span><br><span class="line">        .choose(MimeType.ofAll())</span><br><span class="line">        .countable(true)</span><br><span class="line">        .maxSelectable(9)</span><br><span class="line">        .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))</span><br><span class="line">        .gridExpectedSize(</span><br><span class="line">                getResources().getDimensionPixelSize(R.dimen.grid_expected_size))</span><br><span class="line">        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)</span><br><span class="line">        .thumbnailScale(0.85f)</span><br><span class="line">        .imageEngine(new GlideEngine())</span><br><span class="line">        .forResult(REQUEST_CODE_CHOOSE);</span><br></pre></td></tr></table></figure>
-
-<p> Dracula主题</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Matisse.from(MainActivity.this)</span><br><span class="line">        .choose(MimeType.of(MimeType.JPEG, MimeType.PNG))</span><br><span class="line">        .theme(R.style.Matisse_Dracula)</span><br><span class="line">        .countable(false)</span><br><span class="line">        .maxSelectable(9)</span><br><span class="line">        .imageEngine(new PicassoEngine())</span><br><span class="line">        .forResult(REQUEST_CODE_CHOOSE);</span><br></pre></td></tr></table></figure>
-
-<p> 结果处理</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Uri&gt; mSelected;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">    if (requestCode == REQUEST_CODE_CHOOSE &amp;&amp; resultCode == RESULT_OK) &#123;</span><br><span class="line">        mSelected = Matisse.obtainResult(data);</span><br><span class="line">        Log.d(&quot;Matisse&quot;, &quot;mSelected: &quot; + mSelected);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 更多详细内容请查阅官方<a href="https://github.com/zhihu/Matisse/wiki" target="_blank" rel="noopener">Wiki</a>.</p>
-<hr>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p> 图片来源<a href="https://github.com/zhihu/Matisse" target="_blank" rel="noopener">项目Github</a></p>
-<pre><code>Zhihu Style | Dracula Style | Preview
------------ | ------------- | ------- 
-            |               |        </code></pre><hr>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><p> <img src="https://img-blog.csdn.net/20170503165419314?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="类分析"><a href="#类分析" class="headerlink" title="类分析"></a>类分析</h3><pre><code>类名                     | 描述                                                                            
----------------------- | ------------------------------------------------------------------------------ 
-ImageEngine            | 图片加载接口，方便后面根据Glide和Picasso分别实现                                                
-GlideEngine            | Glide实现ImageEngine                                                            
-PicassoEngine          | Picasso实现ImageEngine                                                          
-Filter                 | 过滤条件抽象类，我们可以通过集成Filter实现对应的过滤条件来对图片进行筛选，可以添加多个Filter,具体参考官方Demo中的GifSizeFilter
-Album                  | 相册Entity                                                                      
-CaptureStrategy        | 拍照相关，媒体处理authority                                                            
-IncapableCause         | 信息处理，toast和dialog                                                             
-Item                   | 选择媒体界面的Item                                                                   
-SelectionSpec          | 选择参数类                                                                         
-AlbumLoader            | 相册CursorLoader                                                                
-AlbumMediaLoader       | 图片和视频CursorLoader                                                             
-AlbumCollection        | AlbumLoader回调                                                                 
-AlbumMediaCollection   | AlbumMediaLoader回调                                                            
-SelectedItemCollection | 被选中项集合                                                                        
-internal/ui包           | 界面显示的Adapter,自定义视图，Fragment和Activity                                          
-internal/utils包        | 工具类                                                                           
-MatisseActivity        | 关键类，执行选择媒体操作的时候展示出来的Activity                                                  
-Matisse                | 开源库的入口和出口，用来传递Activity和Fragment，创建SelectionSpecBuilder和返回结果                   
-MimeType               | 媒体类型                                                                          
-SelectionSpecBuilder   | Build构造类，用来传递参数                                                               </code></pre><h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><h4 id="与PhotoPicker比较"><a href="#与PhotoPicker比较" class="headerlink" title="与PhotoPicker比较"></a>与PhotoPicker比较</h4><ul>
-<li>从MatisseActivity来看的话，大致的设计思路和PhotoPicker相似，都是以单独的Activity为载体，传递参数的方式和PhotoPicker不同，PhotoPicker使用的是bundle, 而Matisse使用的是SelectionSpec单例，启动应用之前，参数全部设置完毕，然后在MatisseActivity通过SelectionSpec.getInstance()拿到单例，获取参数。选择结果和PhotoPicke实现比较相似，都是通过Bundle保存结果通过setResult返回给调用的Activity或者Fragment.<br> SelectedPreviewActivity就是PhotoPicker中的预览Activity，只是没有通过SelectionSpecBuilder对外暴露，要使用的话，我们只能自己显式的调用。</li>
-</ul>
-<ul>
-<li>与PhotoPicker一样，都是采用Android Loader机制作为数据加载的方式，大致原理清楚，自己在平时的开发中还没有用到过，找个机会尝试一下。</li>
-</ul>
-<ul>
-<li>Build设计模式，链式代码编写方式。</li>
-</ul>
-<ul>
-<li>PhotoPicker使用的是Glide作为图片加载框架，而Matisse支持Glide和Picasso，但是Picasso支持的功能Glide全都有，选择一个即可（Picasso不支持Gif）</li>
-</ul>
-<ul>
-<li>Matisse，支持视频文件的选择，PhotoPicker从名字上看就不支持。</li>
-</ul>
-<ul>
-<li>PhotoPicker支持自定义样式，主要是颜色；Matisse，支持两种主题模式，与知乎呼应。</li>
-</ul>
-<hr>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-04-27T14:20:42.000Z">2017-04-27</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 读完 (大约 1502 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/04/27/《Android 开源库》PhotoPicker 从头到脚/">《Android 开源库》PhotoPicker 从头到脚</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p> <a href="https://github.com/donglua/PhotoPicker" target="_blank" rel="noopener">PhotoPicker</a>, 是一款开源的图片选择器。效果上和微信相似。</p>
-<h2 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2. 使用方法"></a>2. 使用方法</h2><h3 id="2-1-添加依赖"><a href="#2-1-添加依赖" class="headerlink" title="2.1 添加依赖"></a>2.1 添加依赖</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;me.iwf.photopicker:PhotoPicker:0.9.5@aar&apos;</span><br><span class="line"></span><br><span class="line">    compile &apos;com.android.support:appcompat-v7:23.4.0&apos;</span><br><span class="line">    compile &apos;com.android.support:recyclerview-v7:23.4.0&apos;</span><br><span class="line">    compile &apos;com.android.support:design:23.4.0&apos;</span><br><span class="line">    compile &apos;com.nineoldandroids:library:2.4.0&apos;</span><br><span class="line">    compile &apos;com.github.bumptech.glide:glide:3.7.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>appcompat-v7version &gt;= 23.0.0   或者使用download源码，然后使用module依赖，我平时使用是这种方式。</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    compile project(&apos;:PhotoPicker&apos;)</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-代码集成"><a href="#2-2-代码集成" class="headerlink" title="2.2 代码集成"></a>2.2 代码集成</h3><p> 如下内容来自<a href="https://github.com/donglua/PhotoPicker" target="_blank" rel="noopener">Github介绍</a></p>
-<ul>
-<li>Pick Photo  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PhotoPicker.builder()</span><br><span class="line">    .setPhotoCount(9)</span><br><span class="line">    .setShowCamera(true)</span><br><span class="line">    .setShowGif(true)</span><br><span class="line">    .setPreviewEnabled(false)</span><br><span class="line">    .start(this, PhotoPicker.REQUEST_CODE);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>Preview Photo  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; photoPaths = ...;</span><br><span class="line"></span><br><span class="line">PhotoPreview.builder()</span><br><span class="line">    .setPhotos(selectedPhotos)</span><br><span class="line">    .setCurrentItem(position)</span><br><span class="line">    .setShowDeleteButton(false)</span><br><span class="line">    .start(MainActivity.this);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>onActivityResult  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">  super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line"></span><br><span class="line">  if (resultCode == RESULT_OK &amp;&amp; requestCode == PhotoPicker.REQUEST_CODE) &#123;</span><br><span class="line">    if (data != null) &#123;</span><br><span class="line">      ArrayList&lt;String&gt; photos = </span><br><span class="line">          data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>AndroidManifest.xml  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;</span><br><span class="line">    &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;</span><br><span class="line">  &lt;application</span><br><span class="line">    ...</span><br><span class="line">    &gt;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    &lt;activity android:name=&quot;me.iwf.photopicker.PhotoPickerActivity&quot;</span><br><span class="line">      android:theme=&quot;@style/Theme.AppCompat.NoActionBar&quot; </span><br><span class="line">       /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;activity android:name=&quot;me.iwf.photopicker.PhotoPagerActivity&quot;</span><br><span class="line">      android:theme=&quot;@style/Theme.AppCompat.NoActionBar&quot;/&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/application&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>Custom Style  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=&quot;actionBarTheme&quot; parent=&quot;ThemeOverlay.AppCompat.Dark.ActionBar&quot;&gt;</span><br><span class="line">  &lt;item name=&quot;android:textColorPrimary&quot;&gt;@android:color/primary_text_light&lt;/item&gt;</span><br><span class="line">  &lt;item name=&quot;actionBarSize&quot;&gt;@dimen/actionBarSize&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;style name=&quot;customTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</span><br><span class="line">  &lt;item name=&quot;actionBarTheme&quot;&gt;@style/actionBarTheme&lt;/item&gt;</span><br><span class="line">  &lt;item name=&quot;colorPrimary&quot;&gt;#FFA500&lt;/item&gt;</span><br><span class="line">  &lt;item name=&quot;actionBarSize&quot;&gt;@dimen/actionBarSize&lt;/item&gt;</span><br><span class="line">  &lt;item name=&quot;colorPrimaryDark&quot;&gt;#CCa500&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>ProGuard  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># Glide</span><br><span class="line">-keep public class * implements com.bumptech.glide.module.GlideModule</span><br><span class="line">-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** &#123;</span><br><span class="line">    **[] $VALUES;</span><br><span class="line">    public *;</span><br><span class="line">&#125;</span><br><span class="line"># nineoldandroids</span><br><span class="line">-keep interface com.nineoldandroids.view.** &#123; *; &#125;</span><br><span class="line">-dontwarn com.nineoldandroids.**</span><br><span class="line">-keep class com.nineoldandroids.** &#123; *; &#125;</span><br><span class="line"># support-v7-appcompat</span><br><span class="line">-keep public class android.support.v7.widget.** &#123; *; &#125;</span><br><span class="line">-keep public class android.support.v7.internal.widget.** &#123; *; &#125;</span><br><span class="line">-keep public class android.support.v7.internal.view.menu.** &#123; *; &#125;</span><br><span class="line">-keep public class * extends android.support.v4.view.ActionProvider &#123;</span><br><span class="line">    public &lt;init&gt;(android.content.Context);</span><br><span class="line">&#125;</span><br><span class="line"># support-design</span><br><span class="line">-dontwarn android.support.design.**</span><br><span class="line">-keep class android.support.design.** &#123; *; &#125;</span><br><span class="line">-keep interface android.support.design.** &#123; *; &#125;</span><br><span class="line">-keep public class android.support.design.R$* &#123; *; &#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<hr>
-<h2 id="3-源码分析"><a href="#3-源码分析" class="headerlink" title="3. 源码分析"></a>3. 源码分析</h2><h3 id="3-1-代码结构"><a href="#3-1-代码结构" class="headerlink" title="3.1 代码结构"></a>3.1 代码结构</h3><p> <img src="https://img-blog.csdn.net/20170427134119636?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ul>
-<li>类说明(按照功能)  <table>
-<thead>
-<tr>
-<th>类名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>PhotoPicker</td>
-<td>内部类PhotoPickerBuilder是关键，设置图片选择参数，启动PhotoPickerActivity均在此</td>
-</tr>
-<tr>
-<td>PhotoPickerActivity</td>
-<td>图片选择界面，两个Fragment:PhotoPickerFragment，ImagePagerFragment，一个用来图片选择，一个用来预览图片</td>
-</tr>
-<tr>
-<td>PhotoPagerActivity</td>
-<td>图片预览界面，和PhotoPickerActivity使用同样的布局文件，但是只有一个Fragment,ImagePagerFragment</td>
-</tr>
-<tr>
-<td>PhotoPreview</td>
-<td>内部类PhotoPreviewBuilder是关键，设置预览参数，启动PhotoPagerActivity均在此</td>
-</tr>
-<tr>
-<td>PhotoPickerFragment</td>
-<td>图片选择Fragment,在PhotoPickerActivity中使用到,Toolbar + RecyclerView + ListPopupWindow</td>
-</tr>
-<tr>
-<td>ImagePagerFragment</td>
-<td>图片预览Framgment,在PhotoPickerActivity中如果支持预览，点击图片后就会切换到此Fragment,单独使用PhotoPreview自然也是用的ImagePagerFragment</td>
-</tr>
-<tr>
-<td>ImageCaptureManager</td>
-<td>拍照管理类，当PhotoPicker中setShowCamera设为true后，点击拍照项，会调用系统相机拍照，相关方法实现均在ImageCaptureManager</td>
-</tr>
-<tr>
-<td>PhotoGridAdapter</td>
-<td>图片选择界面RecyclerView的 Adapter,瀑布流，主要因为它继承SelectableAdapter，平时开发有相同需求可以借鉴一些这个实现</td>
-</tr>
-<tr>
-<td>PopupDirectoryListAdapter</td>
-<td>底部图片分类文件夹ListPopupWindow的Adapter</td>
-</tr>
-<tr>
-<td>MediaStoreHelper</td>
-<td>图片数据查找Helper类，单独拿出来看，Loader的使用</td>
-</tr>
-<tr>
-<td>SelectableAdapter</td>
-<td>自定义用于选择的RecyclerView.Adapter,支持toggleSelection</td>
-</tr>
-<tr>
-<td>Selectable</td>
-<td>Selectable接口，支持toggleSelection</td>
-</tr>
-<tr>
-<td>PhotoPagerAdapter</td>
-<td>ImagePagerFragment中用于预览的ViewPager的Adapter</td>
-</tr>
-<tr>
-<td>PhotoDirectory</td>
-<td>图片目录对象，在PopupDirectoryListAdapter中使用到</td>
-</tr>
-<tr>
-<td>Photo</td>
-<td>图片对象，存放id和Path，分别对应数据库中图片_ID字段和DATA字段</td>
-</tr>
-<tr>
-<td>OnItemCheckListener</td>
-<td>图片选择框的点击事件接口</td>
-</tr>
-<tr>
-<td>OnPhotoClickListener</td>
-<td>图片点击事件接口，应该只有在图片选择器支持预览的情况下使用</td>
-</tr>
-<tr>
-<td>AndroidLifecycleUtils</td>
-<td>判断是否可以加载图片</td>
-</tr>
-<tr>
-<td>FileUtils</td>
-<td>文件处理工具类，只有一个判断文件是否存在的方法</td>
-</tr>
-<tr>
-<td>PermissionsConstant</td>
-<td>关于权限请求的部分常量</td>
-</tr>
-<tr>
-<td>PermissionsUtils</td>
-<td>权限请求工具类</td>
-</tr>
-<tr>
-<td>PhotoDirectoryLoader</td>
-<td>继承CursorLoader，从数据库中读取数据</td>
-</tr>
-<tr>
-<td>SquareItemLayout</td>
-<td>图片选择器Item布局</td>
-</tr>
-<tr>
-<td>TouchImageView</td>
-<td>预览图片自定义元件</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h3 id="3-2-源码设计思路"><a href="#3-2-源码设计思路" class="headerlink" title="3.2 源码设计思路"></a>3.2 源码设计思路</h3><p> 从代码结构和使用方法上来看，PhotoPicker是将图片选择作为一个单独的功能模块解耦出来，以Activity的形式进行PhotoPicker或者是PhotoPreview，在合适的位置创建Intent显示启动PhotoPagerAcitivty(预览)或者是PhotoPickerActivity(选择图片)。针对图片选择的场景，通过onActivityResult得到所选图片的Path。</p>
-<p> <img src="https://img-blog.csdn.net/20170427205359857?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<ul>
-<li>PhotoPicker  <table>
-<thead>
-<tr>
-<th>方法</th>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>setPhotoCount(int photoCount)</td>
-<td>EXTRA_MAX_COUNT(“MAX_COUNT”)</td>
-<td>设置可选的最大图片数量</td>
-</tr>
-<tr>
-<td>setShowCamera(boolean showCamera)</td>
-<td>EXTRA_SHOW_CAMERA(“SHOW_CAMERA”)</td>
-<td>是否显示拍照</td>
-</tr>
-<tr>
-<td>setShowGif(boolean showGif)</td>
-<td>EXTRA_SHOW_GIF(“SHOW_GIF”)</td>
-<td>是否显示gif图</td>
-</tr>
-<tr>
-<td>setGridColumnCount(int columnCount)</td>
-<td>EXTRA_GRID_COLUMN(“column”)</td>
-<td>设置图片选择网格的列数</td>
-</tr>
-<tr>
-<td>setSelected(ArrayList&lt; String&gt; imagesUri)</td>
-<td>EXTRA_ORIGINAL_PHOTOS(“ORIGINAL_PHOTOS”)</td>
-<td>已选照片</td>
-</tr>
-<tr>
-<td>setPreviewEnabled(boolean previewEnabled)</td>
-<td>EXTRA_PREVIEW_ENABLED(“PREVIEW_ENABLED”)</td>
-<td>图片网格视图中是否支持预览</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<pre><code>参数                                     | 描述         
--------------------------------------- | ----------- 
-KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre><hr>
-<ul>
-<li>PhotoPreview  <table>
-<thead>
-<tr>
-<th>方法</th>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>setCurrentItem(int currentItem)</td>
-<td>EXTRA_CURRENT_ITEM(“current_item”)</td>
-<td>设置预览界面当前显示图片序号</td>
-</tr>
-<tr>
-<td>setPhotos(ArrayList&lt; String&gt; photoPaths)</td>
-<td>EXTRA_PHOTOS(“photos”)</td>
-<td>设置预览图片列表，图片Path的ArrayList</td>
-</tr>
-<tr>
-<td>setShowDeleteButton(boolean showDeleteButton)</td>
-<td>EXTRA_SHOW_DELETE(“show_delete”)</td>
-<td>是否显示删除按钮</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<hr>
-<ul>
-<li>Build设计模式<br> PhotoPicker和PhotoPreview都是采用的Build设计模式。利用构建者模式，可以清晰的管理参数，层次清晰，增加代码的可读性，Android源码系统中也有此模式的大量使用，如AlertDialog.Builder等等。<br> PhotoPickerBuilder和PhotoPreviewBuilder正式采用的这种设计模式。  </li>
-</ul>
-<hr>
-<ul>
-<li>Loader机制<br> loader机制，包括LoaderManager，Loader，LoaderCallbacks三部分，<br> LoaderManager 来管理我们的laoder实例，获取来初始化，重启一个loader,<br> Loader 来执行我们的异步操作，有开始，完成，后台等接口实现<br> LoaderCallbacks 来执行我们的loader回调，主要是绑定分发Loader，完成加载，重置数据等<br> MediaStoreHelper中只有一个方法getPhotoDirs，方法中使用<br> activity.getSupportLoaderManager()<br> .initLoader(0, args,<br> new PhotoDirLoaderCallbacks(activity, resultCallback));<br> 的方式初始化Loader,然后在<br> PhotoDirLoaderCallbacks实现<br> LoaderManager.LoaderCallbacks&lt; Cursor&gt;接口。onCreateLoader方法中创建PhotoDirectoryLoader并传入参数，onLoadFinished返回后台数据库查询结果。  </li>
-</ul>
-<hr>
-<h2 id="4-备注"><a href="#4-备注" class="headerlink" title="4. 备注"></a>4. 备注</h2><p> PhotoPicker，可以满足日常开发需求，代码结构非常清晰，可以直接根据自己的需求在源码上进行定制修改。感谢大神的开源精神。</p>
 
         </div>
         
@@ -1502,22 +1265,22 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -1530,7 +1293,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1550,40 +1313,28 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1653,7 +1404,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1677,7 +1428,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1685,7 +1436,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1771,7 +1522,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1785,25 +1536,6 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1845,7 +1577,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1854,7 +1586,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1881,6 +1613,25 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1899,7 +1650,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2042,7 +1793,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2240,7 +1991,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2337,14 +2088,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2366,13 +2117,6 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2505,7 +2249,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2582,7 +2326,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2694,14 +2438,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2729,7 +2473,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2827,14 +2571,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2905,25 +2649,6 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2962,7 +2687,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2971,7 +2696,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2998,6 +2723,25 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -3016,7 +2760,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -3159,7 +2903,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -3357,7 +3101,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -3454,14 +3198,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3483,13 +3227,6 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3622,7 +3359,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3699,7 +3436,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3811,14 +3548,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3846,7 +3583,7 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3944,14 +3681,14 @@ KEY_SELECTED_PHOTOS(“SELECTED_PHOTOS”) | 所选图片Path 列表</code></pre
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

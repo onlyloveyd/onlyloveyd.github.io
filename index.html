@@ -145,123 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 917 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（五）》MVVM/"></a>
-            
-        </h1>
-        <div class="content">
-            <hr>
-<p>title: 《Android 基础（五）》MVVM<br>date: 2016-06-05 11:37:14<br>categories:</p>
-<ul>
-<li>Android基础<br>tags: </li>
-<li>设计模式</li>
-</ul>
-<hr>
-<p>  ###介绍</p>
-<blockquote>
-<p>MVVM，Model-View-ViewModel，与上次讲的MVP模式比较的类似，MVP中需要大量的接口文件，而MVVM模式下，View和ViewModel直接关联，使用上比较方便，简化了代码，大致的结构图如下：</p>
-<p> <img src="https://img-blog.csdn.net/20160605101407509" alt="这里写图片描述"></p>
-<p> 可以看待View和ViewModel是双向的交互，这一点很关键</p>
-</blockquote>
-<p> ###DataBinding<br> Data Binding Library是Google推出的，可以说是针对MVVM模式的支持库，通过在Layout中进行数据的访问，来实现View和Data的双向绑定。不仅使用灵活，用法丰富，而且支持也是相当的广泛，很大程度上降低了代码量和耦合性，减少了开发者的压力。</p>
-<p> <em><strong>build.gradle</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataBinding &#123;</span><br><span class="line">    enabled= true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这样使用比较的方法，当然这个需要当前的Gradle版本支持这个属性</p>
-<p> <em><strong>Layout Data</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;</span><br><span class="line">    &lt;data&gt;</span><br><span class="line">        &lt;import type=&quot;com.example.mraz.mvvmdemo.Model.User&quot;&gt;&lt;/import&gt;</span><br><span class="line">        &lt;variable</span><br><span class="line">            name=&quot;user&quot;</span><br><span class="line">            type=&quot;User&quot;&gt;</span><br><span class="line">        &lt;/variable&gt;</span><br><span class="line">    &lt;/data&gt;</span><br><span class="line">    &lt;LinearLayout ...</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/layout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 最完成使用Layout属性，通过data属性值，添加需要在布局文件中使用的变量和对应的变量类型，也可以先import文件，然后直接使用，不然就需要在type中使用类型的完整路径，当遇到相同的类名的时候，DataBinding支持别名的定义，alias</p>
-<p> <em><strong>Layout Access Data</strong></em></p>
-<p> 布局文件文件中如何实现对绑定数据的访问</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">    android:id=&quot;@+id/tv_username&quot;</span><br><span class="line">    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;@&#123;user.getUsername()&#125;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;TextView</span><br><span class="line">    android:id=&quot;@+id/tv_password&quot;</span><br><span class="line">    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;@&#123;user.getPassword()&#125;&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 使用格式为“@{ }”，大括号中的使用方式与代码中的基本无差别，可以使用方法，也可以使用对应的成员变量，当然如果权限允许的话，如果要直接访问private变量或者方法，显然是不现实的。</p>
-<p> <em><strong>Activity Set Data</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    User user = new User(&quot;&quot;, &quot;&quot;);</span><br><span class="line">    @Bind(R.id.et_username)</span><br><span class="line">    EditText etUsername;</span><br><span class="line">    @Bind(R.id.et_password)</span><br><span class="line">    EditText etPassword;</span><br><span class="line">    @Bind(R.id.tv_username)</span><br><span class="line">    TextView tvUsername;</span><br><span class="line">    @Bind(R.id.tv_password)</span><br><span class="line">    TextView tvPassword;</span><br><span class="line"></span><br><span class="line">    ActivityMainBinding activityMainBinding;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    @OnTextChanged(value = R.id.et_username, callback = OnTextChanged.Callback.TEXT_CHANGED)</span><br><span class="line">    void onUserNameChanged(CharSequence s,int start,int before,int count) &#123;</span><br><span class="line">        user.setUsername(s.toString());</span><br><span class="line">        activityMainBinding.setUser(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnTextChanged(value = R.id.et_password, callback = OnTextChanged.Callback.TEXT_CHANGED)</span><br><span class="line">    void onPasswordChangedps(CharSequence s,int start,int before,int count) &#123;</span><br><span class="line">        user.setPassword(s.toString());</span><br><span class="line">        activityMainBinding.setUser(user);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 几个关键点：</p>
-<ol start="2">
-<li><p>ActivityMainBinding activityMainBinding<br> 这里定义的变量类型ActivityMainBinding 与布局文件对应<br> activity_main ——-&gt; ActivityMainBinding<br> first_second ——-&gt; FirstSecondingBinding<br> Binding类的命名是基于所述layout文件的名称，用大写开头，除去下划线（）以及（）后的第一个字母大写，然后添加“Binding”后缀。这个类将被放置在一个模块封装包里的databinding封装包下<br> Binding类可通过调整data元素中的class属性来重命名或放置在不同的包中。例如：  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;data class=&quot;UserBinding&quot;&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/data&gt;</span><br></pre></td></tr></table></figure>
-
-<p>2.activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);<br>获取ActivityMainBinding对象，用于后面设置变量  </p>
-<ol start="3">
-<li>activityMainBinding.setUser(user);<br>设置数据，User变量</li>
-</ol>
-<p><em><strong>表达式</strong></em><br>常用的表达式和正常的java代码比较类似</p>
-</li>
-</ol>
-<ul>
-<li><p>数学 <strong>+ - / * %</strong> </p>
-</li>
-<li><p>字符串连接 + </p>
-</li>
-<li><p>逻辑 &amp;&amp; || </p>
-</li>
-<li><p>二进制 &amp; | ^ </p>
-</li>
-<li><p>一元运算 + - ! ~ </p>
-</li>
-<li><p>移位 &gt;&gt; &gt;&gt;&gt; &lt;&lt; </p>
-</li>
-<li><p>比较  == &gt; &lt; &gt;= &lt;= </p>
-</li>
-<li><p>instanceof </p>
-</li>
-<li><p>分组 ()  </p>
-<ul>
-<li>null </li>
-</ul>
-</li>
-<li><p>Cast </p>
-</li>
-<li><p>方法调用 </p>
-</li>
-<li><p>数据访问 [] </p>
-</li>
-<li><p>三元运算  ?:  <em><strong>不支持的操作：</strong></em><br>this<br>super<br>new<br>显式泛型调用</p>
-<p>###实际效果图</p>
-<p><img src="https://img-blog.csdn.net/20160605113447276" alt="这里写图片描述"></p>
-<p>备注：<br>关于DataBinding，这里有一篇文章讲得很清晰，推荐一下<br><a href="https://segmentfault.com/a/1190000002876984" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002876984</a></p>
-<p>效果图对应的代码贴了一部分，实现相对比较容易，这里就不赘述了，如果有需要的留言，我再附上。</p>
-</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time>
                 
                 
@@ -426,7 +309,7 @@ getNestedScrollAxes    | 返回NestedScrollingParent的滚动轴                
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1300 个字)
+                    6 分钟 读完 (大约 835 个字)
                 </span>
                 
                 
@@ -435,56 +318,56 @@ getNestedScrollAxes    | 返回NestedScrollingParent的滚动轴                
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/"></a>
+                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/"></a>
             
         </h1>
         <div class="content">
             <hr>
-<p>title: 《Android 基础（二十一）》Android 屏幕适配<br>date: 2016-09-21 13:34:48<br>categories:</p>
+<p>title: 《Android 基础（九）》  Ndk配置与Demo<br>date: 2016-06-28 20:45:09<br>categories:</p>
 <ul>
 <li>Android基础<br>tags: </li>
-<li>屏幕适配</li>
+<li>NDK</li>
 </ul>
 <hr>
-<p>  ###基本概念  </p>
-<p> ####<strong>1. 什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？</strong><br> <strong>屏幕尺寸</strong>是指屏幕对角线的长度。单位是英寸，1英寸=2.54厘米</p>
-<p> <strong>屏幕分辨率</strong>是指在横纵向上的像素点数，单位是px，1px=1像素点，一般是纵向像素横向像素，如1280×720</p>
-<p> <strong>屏幕像素密度</strong>是指每英寸上的像素点数，单位是dpi，即“dot per inch”的缩写，像素密度和屏幕尺寸和屏幕分辨率有关</p>
-<p> <strong>屏幕像素密度计算公式</strong><br> 屏幕像素密度=纵向分辨率2+横向分辨率2屏幕尺寸 屏幕像素密度 = \dfrac{\sqrt{纵向分辨率^2 + 横向分辨率^2}}{屏幕尺寸} 屏幕像素密度=屏幕尺寸纵向分辨率2+横向分辨率2​​<br> 例如：计算Nexus5的屏幕像素密度：<br> 屏幕尺寸：4.95inch、分辨率：1920×1080，屏幕像素密度：445<br> 屏幕像素密度=19202+108024.95=445 屏幕像素密度 = \dfrac{\sqrt{1920^2 + 1080^2}}{4.95} =445屏幕像素密度=4.9519202+10802​​=445<br> 计算结果可以对应上，证明这个结论是OK的。  </p>
-<p> ####<strong>2. 什么是dp、dip、dpi、sp、px？</strong><br> <strong>dp/dip</strong>—-&gt; dip和dp是一个意思，都是Density Independent Pixels的缩写，即密度无关像素，上面我们说过，dpi是屏幕像素密度，假如一英寸里面有160个像素，这个屏幕的像素密度就是160dpi，那么在这种情况下，dp和px如何换算呢？在Android中，规定以160dpi为基准，1dip=1px，如果密度是320dpi，则1dip=2px，以此类推。</p>
-<p> <strong>dpi</strong>—&gt; 屏幕像素密度的单位，“dot per inch”的缩写,上面有介绍</p>
-<p> <strong>sp</strong>—&gt; Scale-Independent Pixels的缩写，可以根据文字大小首选项自动进行缩放。Google推荐我们使用12sp以上的大小，通常可以使用12sp，14sp，18sp，22sp，最好不要使用奇数和小数。</p>
-<p> <strong>px</strong>—&gt; 像素，物理上的绝对单位  </p>
-<p> ####<strong>3. 什么是mdpi、hdpi、xdpi、xxdpi、xxxdpi？</strong></p>
-<pre><code>名称      | 像素密度范围        | 图标尺寸      | 比例 
-------- | ------------- | --------- | --- 
-mdpi    | 120dpi~160dpi | 48x48px   | 1  
-hdpi    | 160dpi~240dpi | 72x72px   | 1.5
-xhdpi   | 240dpi~320dpi | 96x96px   | 2  
-xxhdpi  | 320dpi~480dpi | 144x144px | 3  
-xxxhdpi | 480dpi~640dpi | 192x192px | 4  </code></pre><p> 在处理图标的时候，通过mdpi的48x48然后按照一定的比例制作对应的图标放入对应的文件夹下即可。 ###解决方案  </p>
-<p> ####<strong>1. 使用wrap_content、match_parent、layout_weight</strong><br> <strong>wrap_content</strong>——————-&gt; 包裹内容<br> <strong>match_parent/fill_parent</strong> —&gt; 填满父布局<br> <strong>layout_weight</strong>——————-&gt; 布局权重<br> 前面两个不同多讲，layout_weight</p>
+<p>  ###<strong>介绍</strong></p>
 <blockquote>
-<p>layout_weight只有在Linearlayout中才有效。之所以android:layout_weight会引起争议，是因为在设置该属性的同时，设置android:layout_width为wrap_content和match_parent会造成两种截然相反的效果。</p>
-<p> 公式：所占宽度=原来宽度+剩余空间所占百分比的宽度</p>
-<p> 一般情况，我们都是设置要进行比例分配的方向的宽度为<strong>0dp</strong>，然后再用权重进行分配<br> <strong>A.width：B.widht = A.layout_weight : B.layout_weight</strong></p>
-<p> 但是如果设置要进行比例分配的方向的宽度为<strong>match_parent</strong>,效果就截然相反。<br> <strong>A.width：B.widht = B.layout_weight : A.layout_weight</strong></p>
-<p> Google官方推荐，当使用weight属性时，将width设为0dip即可，效果跟设成wrap_content是一样的。这样weight就可以理解为占比了！</p>
+<p>The NDK is a toolset that allows you to implement parts of your app using native-code languages such as C and C++. For certain types of apps, this can be helpful so you can reuse existing code libraries written in these languages, but most apps do not need the Android NDK.<br> Before downloading the NDK, you should understand that the NDK will not benefit most apps. As a developer, you need to balance its benefits against its drawbacks. Notably, using native code on Android generally does not result in a noticable performance improvement, but it always increases your app complexity. In general, you should only use the NDK if it is essential to your app—never because you simply prefer to program in C/C++.</p>
 </blockquote>
-<p> ####<strong>2. 使用线性布局和相对布局,尽量减少对绝对布局的使用</strong><br> <strong>线性布局</strong>中可以使用layout_weight的方式<br> <strong>相对布局</strong>可以保持容器中子View相对位置的稳定<br> <strong>绝对布局</strong>太过于死板</p>
-<p> ####<strong>3. 使用限定符</strong><br> <strong>尺寸限定符</strong> res/layout-large/main.xml (适用与android 3.2之前)</p>
-<p> <strong>最小限定符</strong> res/layout-sw600dp/main.xml (Small Width, 适用于android 3.2之后)</p>
-<p> ####<strong>4. 使用布局别名</strong><br> 这种方式是通过资源文件使用别名</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resource &gt;</span><br><span class="line">&lt;item name=&quot;main&quot; type=&quot;layout&quot;&gt;@layout/main_twopanes&lt;/item&gt;</span><br><span class="line">&lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<p> ###<strong>配置</strong></p>
+<ol start="2">
+<li>SDK Tool中安装Ndk<br> <img src="https://img-blog.csdn.net/20160628200409794" alt="这里写图片描述"></li>
+</ol>
+<ol start="4">
+<li>设置”Android NDK ocation”，若为自动下载，应该就是在SDK目录下<br> <img src="https://img-blog.csdn.net/20160628200546637" alt="这里写图片描述"></li>
+</ol>
+<ol start="6">
+<li>新建JNI目录（src/main/jni），并且在build.gradle下添加ndk内容 defaultConfig {<br> applicationId “mraz.com.jnidemo”<br> minSdkVersion 15<br> targetSdkVersion 24<br> versionCode 1<br> versionName “1.0”<br> ndk {<br> moduleName ‘jniTest’//这里就是生成so的模块名，<a href="http://xn--libjniTest-k92py04kef1a.so" target="_blank" rel="noopener">也就是libjniTest.so</a><br> }<br> }<br> <img src="https://img-blog.csdn.net/20160628200422807" alt="这里写图片描述"></li>
+</ol>
+<ol start="8">
+<li>Rebuild Project之后出现如下错误，则需要在gradle.properties中设置”android.useDeprecatedNdk=true”<br> <img src="https://img-blog.csdn.net/20160628200434729" alt="这里写图片描述"></li>
+</ol>
+<ol start="10">
+<li><p>新建一个Java类<br><img src="https://img-blog.csdn.net/20160628200449091" alt="这里写图片描述"></p>
+<p>  ###<strong>实际使用</strong><br>经过上面的步骤，我们创建一个java类，其中定义两个native方法<br>JniTest.java</p>
+</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line">public class JniTest &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(&quot;jniTest&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public native String getHello();</span><br><span class="line">    public native int getSum(int a , int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 替换后面的main_twopanes的名称为不同的布局，然后定义在不同的文件夹下，然后使用的过程中使用</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setContentView(R.layout.main)</span><br></pre></td></tr></table></figure>
+<p> 首先，我们需要生成这个类对应的native代码中的头文件，使用javah<br> <img src="https://img-blog.csdn.net/20160628202055519" alt="这里写图片描述"><br> 在Android Studio中使用Terminal，具有tab键联想功能<br> 以Demo为例，生成对应的头文件到jni目录下：<br> javah -d app\src\main\jni<br> -classpath app\build\intermediates\classes\debug mraz.com.jnidemo.JniTest<br> 生成头文件<br> mraz_com_jnidemo_JniTest.h</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/* DO NOT EDIT THIS FILE - it is machine generated */</span><br><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">/* Header for class mraz_com_jnidemo_JniTest */</span><br><span class="line"></span><br><span class="line">#ifndef _Included_mraz_com_jnidemo_JniTest</span><br><span class="line">#define _Included_mraz_com_jnidemo_JniTest</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getHello</span><br><span class="line"> * Signature: ()Ljava/lang/String;</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jstring JNICALL Java_mraz_com_jnidemo_JniTest_getHello</span><br><span class="line">  (JNIEnv *env, jobject object);</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getSum</span><br><span class="line"> * Signature: (II)I</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jint JNICALL Java_mraz_com_jnidemo_JniTest_getSum</span><br><span class="line">  (JNIEnv *env, jobject object, jint a, jint b);</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
 
-<p> 加载的过程中，就可以根据屏幕尺寸和android版本加载不同的布局，但是别名都是main。</p>
-<p> ####<strong>5. 使用屏幕方向限定符</strong><br> 横屏和竖屏的显示方式往往有一些差异。<br> <strong>横屏</strong>： res/values-sw600dp-land/layouts.xml<br> 竖屏： res/values-sw600dp-port/layouts.xml</p>
-<p> ####<strong>6. 使用自动拉伸位图</strong><br> <strong>自动拉伸位图</strong>，即android下特有的.9.png图片格式。<br> <strong>工具</strong>，draw9patch.bat<br> <strong>特点</strong>，  
- 左边和上边点下一个像素或多个像素点，是选择了拉伸的像素，即把选择的像素点进行拉伸。选择的像素点越多，拉伸的程度也越大。</p>
-<p> 右边和下边是选择内容区域，在右边和下边画上直线，交叉的区域就是内容区域。</p>
+<p> 然后在JNI目录下创建对应的源文件mraz_com_jnidemo_JniTest.c<br> 具体实现如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;mraz_com_jnidemo_JniTest.h&quot;</span><br><span class="line">#include&lt;jni.h&gt;</span><br><span class="line">//</span><br><span class="line">// Created by Mraz on 2016/6/28.</span><br><span class="line">//</span><br><span class="line">JNIEXPORT jstring JNICALL Java_mraz_com_jnidemo_JniTest_getHello(JNIEnv *env, jobject object)</span><br><span class="line">&#123;</span><br><span class="line">    return (*env)-&gt;NewStringUTF(env, &quot;hello&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getSum</span><br><span class="line"> * Signature: (II)I</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jint JNICALL Java_mraz_com_jnidemo_JniTest_getSum</span><br><span class="line">        (JNIEnv *env, jobject object, jint a, jint b) &#123;</span><br><span class="line">    return (a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 对应java类JniTest.java，加载so，定义native方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line">/**</span><br><span class="line"> * Created by Mraz on 2016/6/28.</span><br><span class="line"> */</span><br><span class="line">public class JniTest &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(&quot;jniTest&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public native String getHello();</span><br><span class="line">    public native int getSum(int a , int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MainActivity.java中使用JniTest.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        JniTest jniTest = new JniTest();</span><br><span class="line">        Log.e(&quot;yidong&quot;, &quot; hello = &quot; + jniTest.getHello());</span><br><span class="line">        Log.e(&quot;yidong&quot;, &quot; sum = &quot; + jniTest.getSum(4, 6));</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.tv_jni);</span><br><span class="line">        textView.setText(String.valueOf(jniTest.getSum(5, 6)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> ###<strong>实际结果</strong><br> <img src="https://img-blog.csdn.net/20160628204218480" alt="这里写图片描述"></p>
+<p> <img src="https://img-blog.csdn.net/20160628204329671" alt="这里写图片描述"></p>
+<p> 备注：<br> 刚开始接触NDK的内容，慢慢上手，点滴记录~</p>
 
         </div>
         
@@ -568,7 +451,7 @@ xxxhdpi | 480dpi~640dpi | 192x192px | 4  </code></pre><p> 在处理图标的时�
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 835 个字)
+                    9 分钟 读完 (大约 1300 个字)
                 </span>
                 
                 
@@ -577,162 +460,56 @@ xxxhdpi | 480dpi~640dpi | 192x192px | 4  </code></pre><p> 在处理图标的时�
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/"></a>
+                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/"></a>
             
         </h1>
         <div class="content">
             <hr>
-<p>title: 《Android 基础（九）》  Ndk配置与Demo<br>date: 2016-06-28 20:45:09<br>categories:</p>
+<p>title: 《Android 基础（二十一）》Android 屏幕适配<br>date: 2016-09-21 13:34:48<br>categories:</p>
 <ul>
 <li>Android基础<br>tags: </li>
-<li>NDK</li>
+<li>屏幕适配</li>
 </ul>
 <hr>
-<p>  ###<strong>介绍</strong></p>
+<p>  ###基本概念  </p>
+<p> ####<strong>1. 什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？</strong><br> <strong>屏幕尺寸</strong>是指屏幕对角线的长度。单位是英寸，1英寸=2.54厘米</p>
+<p> <strong>屏幕分辨率</strong>是指在横纵向上的像素点数，单位是px，1px=1像素点，一般是纵向像素横向像素，如1280×720</p>
+<p> <strong>屏幕像素密度</strong>是指每英寸上的像素点数，单位是dpi，即“dot per inch”的缩写，像素密度和屏幕尺寸和屏幕分辨率有关</p>
+<p> <strong>屏幕像素密度计算公式</strong><br> 屏幕像素密度=纵向分辨率2+横向分辨率2屏幕尺寸 屏幕像素密度 = \dfrac{\sqrt{纵向分辨率^2 + 横向分辨率^2}}{屏幕尺寸} 屏幕像素密度=屏幕尺寸纵向分辨率2+横向分辨率2​​<br> 例如：计算Nexus5的屏幕像素密度：<br> 屏幕尺寸：4.95inch、分辨率：1920×1080，屏幕像素密度：445<br> 屏幕像素密度=19202+108024.95=445 屏幕像素密度 = \dfrac{\sqrt{1920^2 + 1080^2}}{4.95} =445屏幕像素密度=4.9519202+10802​​=445<br> 计算结果可以对应上，证明这个结论是OK的。  </p>
+<p> ####<strong>2. 什么是dp、dip、dpi、sp、px？</strong><br> <strong>dp/dip</strong>—-&gt; dip和dp是一个意思，都是Density Independent Pixels的缩写，即密度无关像素，上面我们说过，dpi是屏幕像素密度，假如一英寸里面有160个像素，这个屏幕的像素密度就是160dpi，那么在这种情况下，dp和px如何换算呢？在Android中，规定以160dpi为基准，1dip=1px，如果密度是320dpi，则1dip=2px，以此类推。</p>
+<p> <strong>dpi</strong>—&gt; 屏幕像素密度的单位，“dot per inch”的缩写,上面有介绍</p>
+<p> <strong>sp</strong>—&gt; Scale-Independent Pixels的缩写，可以根据文字大小首选项自动进行缩放。Google推荐我们使用12sp以上的大小，通常可以使用12sp，14sp，18sp，22sp，最好不要使用奇数和小数。</p>
+<p> <strong>px</strong>—&gt; 像素，物理上的绝对单位  </p>
+<p> ####<strong>3. 什么是mdpi、hdpi、xdpi、xxdpi、xxxdpi？</strong></p>
+<pre><code>名称      | 像素密度范围        | 图标尺寸      | 比例 
+------- | ------------- | --------- | --- 
+mdpi    | 120dpi~160dpi | 48x48px   | 1  
+hdpi    | 160dpi~240dpi | 72x72px   | 1.5
+xhdpi   | 240dpi~320dpi | 96x96px   | 2  
+xxhdpi  | 320dpi~480dpi | 144x144px | 3  
+xxxhdpi | 480dpi~640dpi | 192x192px | 4  </code></pre><p> 在处理图标的时候，通过mdpi的48x48然后按照一定的比例制作对应的图标放入对应的文件夹下即可。 ###解决方案  </p>
+<p> ####<strong>1. 使用wrap_content、match_parent、layout_weight</strong><br> <strong>wrap_content</strong>——————-&gt; 包裹内容<br> <strong>match_parent/fill_parent</strong> —&gt; 填满父布局<br> <strong>layout_weight</strong>——————-&gt; 布局权重<br> 前面两个不同多讲，layout_weight</p>
 <blockquote>
-<p>The NDK is a toolset that allows you to implement parts of your app using native-code languages such as C and C++. For certain types of apps, this can be helpful so you can reuse existing code libraries written in these languages, but most apps do not need the Android NDK.<br> Before downloading the NDK, you should understand that the NDK will not benefit most apps. As a developer, you need to balance its benefits against its drawbacks. Notably, using native code on Android generally does not result in a noticable performance improvement, but it always increases your app complexity. In general, you should only use the NDK if it is essential to your app—never because you simply prefer to program in C/C++.</p>
+<p>layout_weight只有在Linearlayout中才有效。之所以android:layout_weight会引起争议，是因为在设置该属性的同时，设置android:layout_width为wrap_content和match_parent会造成两种截然相反的效果。</p>
+<p> 公式：所占宽度=原来宽度+剩余空间所占百分比的宽度</p>
+<p> 一般情况，我们都是设置要进行比例分配的方向的宽度为<strong>0dp</strong>，然后再用权重进行分配<br> <strong>A.width：B.widht = A.layout_weight : B.layout_weight</strong></p>
+<p> 但是如果设置要进行比例分配的方向的宽度为<strong>match_parent</strong>,效果就截然相反。<br> <strong>A.width：B.widht = B.layout_weight : A.layout_weight</strong></p>
+<p> Google官方推荐，当使用weight属性时，将width设为0dip即可，效果跟设成wrap_content是一样的。这样weight就可以理解为占比了！</p>
 </blockquote>
-<p> ###<strong>配置</strong></p>
-<ol start="2">
-<li>SDK Tool中安装Ndk<br> <img src="https://img-blog.csdn.net/20160628200409794" alt="这里写图片描述"></li>
-</ol>
-<ol start="4">
-<li>设置”Android NDK ocation”，若为自动下载，应该就是在SDK目录下<br> <img src="https://img-blog.csdn.net/20160628200546637" alt="这里写图片描述"></li>
-</ol>
-<ol start="6">
-<li>新建JNI目录（src/main/jni），并且在build.gradle下添加ndk内容 defaultConfig {<br> applicationId “mraz.com.jnidemo”<br> minSdkVersion 15<br> targetSdkVersion 24<br> versionCode 1<br> versionName “1.0”<br> ndk {<br> moduleName ‘jniTest’//这里就是生成so的模块名，<a href="http://xn--libjniTest-k92py04kef1a.so" target="_blank" rel="noopener">也就是libjniTest.so</a><br> }<br> }<br> <img src="https://img-blog.csdn.net/20160628200422807" alt="这里写图片描述"></li>
-</ol>
-<ol start="8">
-<li>Rebuild Project之后出现如下错误，则需要在gradle.properties中设置”android.useDeprecatedNdk=true”<br> <img src="https://img-blog.csdn.net/20160628200434729" alt="这里写图片描述"></li>
-</ol>
-<ol start="10">
-<li><p>新建一个Java类<br><img src="https://img-blog.csdn.net/20160628200449091" alt="这里写图片描述"></p>
-<p>  ###<strong>实际使用</strong><br>经过上面的步骤，我们创建一个java类，其中定义两个native方法<br>JniTest.java</p>
-</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line">public class JniTest &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(&quot;jniTest&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public native String getHello();</span><br><span class="line">    public native int getSum(int a , int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> ####<strong>2. 使用线性布局和相对布局,尽量减少对绝对布局的使用</strong><br> <strong>线性布局</strong>中可以使用layout_weight的方式<br> <strong>相对布局</strong>可以保持容器中子View相对位置的稳定<br> <strong>绝对布局</strong>太过于死板</p>
+<p> ####<strong>3. 使用限定符</strong><br> <strong>尺寸限定符</strong> res/layout-large/main.xml (适用与android 3.2之前)</p>
+<p> <strong>最小限定符</strong> res/layout-sw600dp/main.xml (Small Width, 适用于android 3.2之后)</p>
+<p> ####<strong>4. 使用布局别名</strong><br> 这种方式是通过资源文件使用别名</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;resource &gt;</span><br><span class="line">&lt;item name=&quot;main&quot; type=&quot;layout&quot;&gt;@layout/main_twopanes&lt;/item&gt;</span><br><span class="line">&lt;resource&gt;</span><br></pre></td></tr></table></figure>
 
-<p> 首先，我们需要生成这个类对应的native代码中的头文件，使用javah<br> <img src="https://img-blog.csdn.net/20160628202055519" alt="这里写图片描述"><br> 在Android Studio中使用Terminal，具有tab键联想功能<br> 以Demo为例，生成对应的头文件到jni目录下：<br> javah -d app\src\main\jni<br> -classpath app\build\intermediates\classes\debug mraz.com.jnidemo.JniTest<br> 生成头文件<br> mraz_com_jnidemo_JniTest.h</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/* DO NOT EDIT THIS FILE - it is machine generated */</span><br><span class="line">#include &lt;jni.h&gt;</span><br><span class="line">/* Header for class mraz_com_jnidemo_JniTest */</span><br><span class="line"></span><br><span class="line">#ifndef _Included_mraz_com_jnidemo_JniTest</span><br><span class="line">#define _Included_mraz_com_jnidemo_JniTest</span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#endif</span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getHello</span><br><span class="line"> * Signature: ()Ljava/lang/String;</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jstring JNICALL Java_mraz_com_jnidemo_JniTest_getHello</span><br><span class="line">  (JNIEnv *env, jobject object);</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getSum</span><br><span class="line"> * Signature: (II)I</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jint JNICALL Java_mraz_com_jnidemo_JniTest_getSum</span><br><span class="line">  (JNIEnv *env, jobject object, jint a, jint b);</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">&#125;</span><br><span class="line">#endif</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<p> 替换后面的main_twopanes的名称为不同的布局，然后定义在不同的文件夹下，然后使用的过程中使用</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setContentView(R.layout.main)</span><br></pre></td></tr></table></figure>
 
-<p> 然后在JNI目录下创建对应的源文件mraz_com_jnidemo_JniTest.c<br> 具体实现如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;mraz_com_jnidemo_JniTest.h&quot;</span><br><span class="line">#include&lt;jni.h&gt;</span><br><span class="line">//</span><br><span class="line">// Created by Mraz on 2016/6/28.</span><br><span class="line">//</span><br><span class="line">JNIEXPORT jstring JNICALL Java_mraz_com_jnidemo_JniTest_getHello(JNIEnv *env, jobject object)</span><br><span class="line">&#123;</span><br><span class="line">    return (*env)-&gt;NewStringUTF(env, &quot;hello&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Class:     mraz_com_jnidemo_JniTest</span><br><span class="line"> * Method:    getSum</span><br><span class="line"> * Signature: (II)I</span><br><span class="line"> */</span><br><span class="line">JNIEXPORT jint JNICALL Java_mraz_com_jnidemo_JniTest_getSum</span><br><span class="line">        (JNIEnv *env, jobject object, jint a, jint b) &#123;</span><br><span class="line">    return (a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 对应java类JniTest.java，加载so，定义native方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line">/**</span><br><span class="line"> * Created by Mraz on 2016/6/28.</span><br><span class="line"> */</span><br><span class="line">public class JniTest &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(&quot;jniTest&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public native String getHello();</span><br><span class="line">    public native int getSum(int a , int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MainActivity.java中使用JniTest.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.jnidemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        JniTest jniTest = new JniTest();</span><br><span class="line">        Log.e(&quot;yidong&quot;, &quot; hello = &quot; + jniTest.getHello());</span><br><span class="line">        Log.e(&quot;yidong&quot;, &quot; sum = &quot; + jniTest.getSum(4, 6));</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.tv_jni);</span><br><span class="line">        textView.setText(String.valueOf(jniTest.getSum(5, 6)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> ###<strong>实际结果</strong><br> <img src="https://img-blog.csdn.net/20160628204218480" alt="这里写图片描述"></p>
-<p> <img src="https://img-blog.csdn.net/20160628204329671" alt="这里写图片描述"></p>
-<p> 备注：<br> 刚开始接触NDK的内容，慢慢上手，点滴记录~</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-14T11:22:12.035Z">2019-06-14</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1001 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/06/14/《Android 基础（七）》 DrawerLayout and NavigationView/"></a>
-            
-        </h1>
-        <div class="content">
-            <hr>
-<p>title: 《Android 基础（七）》 DrawerLayout and NavigationView<br>date: 2016-06-24 22:36:44<br>categories:</p>
-<ul>
-<li>Android基础<br>tags:</li>
-<li>布局控件</li>
-</ul>
-<hr>
-<p>  ###介绍</p>
-<blockquote>
-<p>DrawerLayout是Support Library包中实现了侧滑菜单效果的控件<br> android.support.v4.widget.DrawerLayout</p>
-</blockquote>
-<blockquote>
-<p>NavigationView是一个导航菜单框架，使用menu资源填充数据<br> 常用来配合DrawerLayout使用</p>
-</blockquote>
-<hr>
-<p> ###基本使用  </p>
-<p> ####<strong>DrawerLayout</strong></p>
-<p> <em><strong>布局文件</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.v4.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:id=&quot;@+id/drawerlayout&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line">    ……</span><br><span class="line">&lt;/android.support.v4.widget.DrawerLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 使用DrawerLayout的时候需要将该布局作为根布局，然后在DrawerLayout中添加其他布局作为显示界面。</p>
-<p> <em><strong>代码</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);获取DrawerLayout对象</span><br><span class="line"></span><br><span class="line">//设置监听事件，监听DrawerLayout的状态，打开，关闭，滑动距离，状态改变，可以实现自己的定制</span><br><span class="line">drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onDrawerSlide(View drawerView, float slideOffset) &#123;</span><br><span class="line">        Log.e(TAG , &quot; onDrawerSlide slideOffset = &quot; + slideOffset);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDrawerOpened(View drawerView) &#123;</span><br><span class="line">        Log.e(TAG , &quot; onDrawerOpened &quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDrawerClosed(View drawerView) &#123;</span><br><span class="line">        Log.e(TAG , &quot; onDrawerClosed &quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDrawerStateChanged(int newState) &#123;</span><br><span class="line">        Log.e(TAG , &quot; onDrawerStateChanged &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> DrawerLayout的状态监听，listener的回调提供给开发者使用。</p>
-<p> ####<strong>NavigationView</strong></p>
-<p> <em><strong>布局</strong></em></p>
-<p> header.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;240dp&quot;</span><br><span class="line">    android:background=&quot;@color/colorPrimaryDark&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line"></span><br><span class="line">    //引用GitHub上的开源库</span><br><span class="line">    &lt;de.hdodenhof.circleimageview.CircleImageView</span><br><span class="line">        android:id=&quot;@+id/civ_profile&quot;</span><br><span class="line">        android:layout_width=&quot;150dp&quot;</span><br><span class="line">        android:layout_height=&quot;150dp&quot;</span><br><span class="line">        android:layout_alignParentLeft=&quot;true&quot;</span><br><span class="line">        android:layout_marginLeft=&quot;24dp&quot;</span><br><span class="line">        android:layout_marginStart=&quot;24dp&quot;</span><br><span class="line">        android:layout_marginTop=&quot;20dp&quot;</span><br><span class="line">        android:src=&quot;@drawable/logo&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_name&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_alignLeft=&quot;@+id/civ_profile&quot;</span><br><span class="line">        android:layout_below=&quot;@+id/civ_profile&quot;</span><br><span class="line">        android:layout_marginTop=&quot;10dp&quot;</span><br><span class="line">        android:text=&quot;Askmak Sharon&quot;</span><br><span class="line">        android:textColor=&quot;#FFFFFF&quot;</span><br><span class="line">        android:textSize=&quot;8pt&quot;</span><br><span class="line">        android:textStyle=&quot;bold&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_email&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_alignLeft=&quot;@+id/civ_profile&quot;</span><br><span class="line">        android:layout_below=&quot;@+id/tv_name&quot;</span><br><span class="line">        android:layout_marginTop=&quot;10dp&quot;</span><br><span class="line">        android:text=&quot;onlyloveyd@gmail.com&quot;</span><br><span class="line">        android:textColor=&quot;#FFFFFF&quot;</span><br><span class="line">        android:textSize=&quot;8pt&quot;</span><br><span class="line">        android:textStyle=&quot;italic&quot; /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这里使用了Github上的开关库<a href="https://github.com/hdodenhof/CircleImageView" target="_blank" rel="noopener">de.hdodenhof.circleimageview.CircleImageView</a>，其中可以设置一些属性，这里没有设置，可能是因为我使用的图片风格的原因，将头像的边框加上去后看上去不是那么协调</p>
-<pre><code>属性                      | 意义  
------------------------ | ---- 
-app:civ_border_color=&quot;&quot; | 边框颜色
-app:civ_border_width=&quot;&quot; | 边框宽度
-app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
-<p> second_menu.xml<br> 这里只是名字叫做second_menu而已，没有其他的意思，只是一个普通的menu资源文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/nv_profile&quot;</span><br><span class="line">        android:icon=&quot;@drawable/profile&quot;</span><br><span class="line">        android:orderInCategory=&quot;80&quot;</span><br><span class="line">        android:title=&quot;Profile&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/nv_video&quot;</span><br><span class="line">        android:icon=&quot;@drawable/video&quot;</span><br><span class="line">        android:orderInCategory=&quot;90&quot;</span><br><span class="line">        android:title=&quot;Video&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/nv_help&quot;</span><br><span class="line">        android:icon=&quot;@drawable/help&quot;</span><br><span class="line">        android:orderInCategory=&quot;100&quot;</span><br><span class="line">        android:title=&quot;Help&quot; /&gt;</span><br><span class="line">&lt;/menu&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这个menu资源是用来在NavigationView中使用的导航菜单</p>
-<hr>
-<p> activity_main.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;android.support.v4.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:id=&quot;@+id/drawerlayout&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:orientation=&quot;vertical&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;include layout=&quot;@layout/toolbar&quot;&gt;&lt;/include&gt;</span><br><span class="line"></span><br><span class="line">        &lt;FrameLayout</span><br><span class="line">            android:id=&quot;@+id/frame&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line">            &lt;ImageView</span><br><span class="line">                android:id=&quot;@+id/content_iv&quot;</span><br><span class="line">                android:layout_gravity=&quot;center&quot;</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                android:src=&quot;@mipmap/ic_launcher&quot;/&gt;</span><br><span class="line">        &lt;/FrameLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.NavigationView</span><br><span class="line">        android:id=&quot;@+id/nv_left&quot;</span><br><span class="line">        android:layout_width=&quot;240dp&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:layout_gravity=&quot;start&quot;</span><br><span class="line">        app:headerLayout=&quot;@layout/header&quot;</span><br><span class="line">        app:menu=&quot;@menu/second_menu&quot;&gt;</span><br><span class="line">    &lt;/android.support.design.widget.NavigationView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.v4.widget.DrawerLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 比较关键的几个点  </p>
-<p> android:layout_gravity=“start”<br> app:headerLayout=”@layout/header”//头布局<br> app:menu=”@menu/second_menu”//菜单资源  </p>
-<hr>
-<p> <em><strong>代码</strong></em><br> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.actionbardemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.design.widget.NavigationView;</span><br><span class="line">import android.support.design.widget.Snackbar;</span><br><span class="line">import android.support.v4.view.MenuItemCompat;</span><br><span class="line">import android.support.v4.widget.DrawerLayout;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.support.v7.widget.SearchView;</span><br><span class="line">import android.support.v7.widget.Toolbar;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.view.Gravity;</span><br><span class="line">import android.view.Menu;</span><br><span class="line">import android.view.MenuItem;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.widget.ImageView;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    public static String TAG = &quot;yidong&quot;;</span><br><span class="line">    DrawerLayout drawerLayout;</span><br><span class="line">    NavigationView navigationView;</span><br><span class="line">    Toolbar toolbar;</span><br><span class="line">    ImageView imageView;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);</span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        navigationView = (NavigationView) findViewById(R.id.nv_left);</span><br><span class="line">        imageView = (ImageView) findViewById(R.id.content_iv);</span><br><span class="line"></span><br><span class="line">        setSupportActionBar(toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);</span><br><span class="line"></span><br><span class="line">        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onDrawerSlide(View drawerView, float slideOffset) &#123;</span><br><span class="line">                Log.e(TAG , &quot; onDrawerSlide slideOffset = &quot; + slideOffset);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onDrawerOpened(View drawerView) &#123;</span><br><span class="line">                Log.e(TAG , &quot; onDrawerOpened &quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onDrawerClosed(View drawerView) &#123;</span><br><span class="line">                Log.e(TAG , &quot; onDrawerClosed &quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onDrawerStateChanged(int newState) &#123;</span><br><span class="line">                Log.e(TAG , &quot; onDrawerStateChanged &quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onNavigationItemSelected(MenuItem item) &#123;</span><br><span class="line">                if(drawerLayout.isDrawerOpen(Gravity.LEFT))</span><br><span class="line">                    drawerLayout.closeDrawer(Gravity.LEFT);</span><br><span class="line"></span><br><span class="line">                switch(item.getItemId()) &#123;</span><br><span class="line">                    case R.id.nv_profile:</span><br><span class="line">                        imageView.setImageResource(R.drawable.profile);</span><br><span class="line">                        break;</span><br><span class="line">                    case R.id.nv_video:</span><br><span class="line">                        imageView.setImageResource(R.drawable.video);</span><br><span class="line">                        break;</span><br><span class="line">                    case R.id.nv_help:</span><br><span class="line">                        imageView.setImageResource(R.drawable.help);</span><br><span class="line">                        break;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    ……</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 针对NavigationView中的Menu设置响应事件，使用的方式和上一篇中ActionBar中的菜单资源使用方式相似，都是用过getItemId获取资源的id，然后以此作为依据进行对应的响应操作</p>
-<hr>
-<p> ####<strong>ActionBar和DrawerLayout配合</strong><br> 一般用户的操作就是右滑或者点击ActionBar左上角的Icon出现左侧抽屉菜单<br> 左侧滑动上面的内容已经实现了，点击ActionBar实现抽屉菜单的开关只需要针对左上角的ActionBar的图标做对应的事件处理即可。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setSupportActionBar(toolbar);</span><br><span class="line">toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);</span><br></pre></td></tr></table></figure>
-
-<p> 然后在onOptionsItemSelected中</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">case android.R.id.home:</span><br><span class="line">     if(!drawerLayout.isDrawerOpen(Gravity.LEFT)) &#123;</span><br><span class="line">         drawerLayout.openDrawer(Gravity.LEFT, true);</span><br><span class="line">     &#125;</span><br><span class="line">     break;</span><br></pre></td></tr></table></figure>
-
-<p> 因为ActionBar的NavigationIcon对应的资源ID就是<br> android.R.id.home<br> 根据这个资源ID定制对应的事件响应，上面就是简单的打开左侧的抽屉菜单</p>
-<p> ####<strong>效果图</strong><br> <em><strong>NavigationView菜单响应</strong></em></p>
-<p> <img src="https://img-blog.csdn.net/20160624223024964" alt="这里写图片描述"></p>
-<hr>
-<p> <em><strong>ActionBar左上角图标响应</strong></em></p>
-<p> <img src="https://img-blog.csdn.net/20160624223526314" alt="这里写图片描述"></p>
-<hr>
-<p> ####<strong>源代码</strong><br> <a href="http://download.csdn.net/detail/poorkick/9558960" target="_blank" rel="noopener">###点击下载源代码###</a></p>
+<p> 加载的过程中，就可以根据屏幕尺寸和android版本加载不同的布局，但是别名都是main。</p>
+<p> ####<strong>5. 使用屏幕方向限定符</strong><br> 横屏和竖屏的显示方式往往有一些差异。<br> <strong>横屏</strong>： res/values-sw600dp-land/layouts.xml<br> 竖屏： res/values-sw600dp-port/layouts.xml</p>
+<p> ####<strong>6. 使用自动拉伸位图</strong><br> <strong>自动拉伸位图</strong>，即android下特有的.9.png图片格式。<br> <strong>工具</strong>，draw9patch.bat<br> <strong>特点</strong>，  
+ 左边和上边点下一个像素或多个像素点，是选择了拉伸的像素，即把选择的像素点进行拉伸。选择的像素点越多，拉伸的程度也越大。</p>
+<p> 右边和下边是选择内容区域，在右边和下边画上直线，交叉的区域就是内容区域。</p>
 
         </div>
         
@@ -990,6 +767,157 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 638 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/">《LeetCode-0002》 两数相加-Add Two Numbers</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><a href="https://leetcode-cn.com/problems/add-two-numbers/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers/</a></p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href></a>题目</h2><p> 给出两个  <code>非空</code>  的链表用来表示两个非负的整数。其中，它们各自的位数是按照  <code>逆序</code>  的方式存储的，并且它们的每个节点只能存储  <code>一位</code> 数字。</p>
+<p> 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p> 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p> <strong>示例</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">输出：7 -&gt; 0 -&gt; 8</span><br><span class="line">原因：342 + 465 = 807</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href></a>思路</h2><p> 题目中加粗关键字注意下：</p>
+<ul>
+<li>非空 </li>
+<li>逆序 </li>
+<li>一位  <strong>解释：</strong><br>链表从左往右依次是所待变数字的低位到高位， <code>2 -&gt; 4 -&gt; 3</code> 代表342， <code>5 -&gt; 6 -&gt; 4</code> 代表465，所以没有必要将链表转成数字再进行相加，也没法那样做，应为如果链表相当之长，会超过整形的范围，所以就从低位往高位挨个算就行了。<br>针对单次计算x+y=zx+y=zx+y=z，只需要考虑是否<strong>向前进位</strong>的问题即可。</li>
+</ul>
+<h3 id="第一次提交"><a href="#第一次提交" class="headerlink" title="第一次提交"></a><a href></a>第一次提交</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">              ListNode result = new ListNode(0);</span><br><span class="line">        ListNode current1 = l1, current2 = l2, currentResult = result;</span><br><span class="line">        int carry = 0;</span><br><span class="line">        while (current1 != null &amp;&amp; current2 != null) &#123;</span><br><span class="line">            int val = (current1.val + current2.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current1.val + current2.val + carry) / 10;</span><br><span class="line">            current1 = current1.next;</span><br><span class="line">            current2 = current2.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (current1 != null) &#123;</span><br><span class="line">            int val = (current1.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current1.val + carry) / 10;</span><br><span class="line">            current1 = current1.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (current2 != null) &#123;</span><br><span class="line">            int val = (current2.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current2.val + carry) / 10;</span><br><span class="line">            current2 = current2.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return result.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 第一次提交<strong>未通过</strong></p>
+<pre><code>测试用例    | 我的结果 | 预期结果 
+------- | ---- | ----- 
+［5］,［5］ | ［0］  | ［0，1］</code></pre><p><strong>忽略了上述这种，结果位数比加数位数多且存在进位的情况</strong></p>
+<h3 id="第二次提交"><a href="#第二次提交" class="headerlink" title="第二次提交"></a><a href></a>第二次提交</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val = x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">              ListNode result = new ListNode(0);</span><br><span class="line">        ListNode current1 = l1, current2 = l2, currentResult = result;</span><br><span class="line">        int carry = 0;</span><br><span class="line">        while (current1 != null &amp;&amp; current2 != null) &#123;</span><br><span class="line">            int val = (current1.val + current2.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current1.val + current2.val + carry) / 10;</span><br><span class="line">            current1 = current1.next;</span><br><span class="line">            current2 = current2.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (current1 != null) &#123;</span><br><span class="line">            int val = (current1.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current1.val + carry) / 10;</span><br><span class="line">            current1 = current1.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (current2 != null) &#123;</span><br><span class="line">            int val = (current2.val + carry) % 10;</span><br><span class="line">            currentResult.next = new ListNode(val);</span><br><span class="line">            carry = (current2.val + carry) / 10;</span><br><span class="line">            current2 = current2.next;</span><br><span class="line">            currentResult = currentResult.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(carry!=0) &#123;</span><br><span class="line">            currentResult.next = new ListNode(carry);</span><br><span class="line">        &#125;</span><br><span class="line">        return result.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ol>
+<li>充足的测试用例很重要; </li>
+<li>编写代码的时候，边界条件，特殊情况一定得考虑充分。    </li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 630 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/">《LeetCode-0001》 两数之和-TwoSum</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum/</a></p>
+</blockquote>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href></a>题目</h2><p> 给定一个整数数组 <code>nums</code>  和一个目标值  <code>target</code>  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p> 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<p> <strong>示例</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [2, 7, 11, 15], target = 9</span><br><span class="line"></span><br><span class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</span><br><span class="line">所以返回 [0, 1]</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href></a>思路</h2><h3 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a><a href></a>暴力</h3><p> 最简单的一种思路，两层循环，两两相加后与target比较。但是循环的起点不同，第一个元素和后面的每个元素进行比较，第二个元素也是和它之后的元素进行比较，所以外层的循环起点为0，内层的循环起点则是由外层决定，若外层为i，则内层循环起点为i+1，这样也可以保证，不重复利用数组中同样的元素。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        int[] result = new int[2];</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">            for (int j = i + 1; j &lt; nums.length; j++) &#123;</span><br><span class="line">                if (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                    result[0] = i;</span><br><span class="line">                    result[1] = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a><a href></a>哈希表</h3><p> 暴力方法之所以要循环两次，是因为我们需要找两个数的下标，采用哈希表的方法，在循环过程中存储下标，可以省去嵌套一次循环，但是找结果的方式与暴力方式不太一样。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">            int complement = target - nums[i];</span><br><span class="line">            if (map.containsKey(complement)) &#123;</span><br><span class="line">                return new int[] &#123; map.get(complement), i &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalArgumentException(&quot;No two sum solution&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 上面的暴力方法，是从前往后找另外一半，找到立刻返回，比如</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int nums[] = new int[]&#123;2, 7, 11, 15&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 若target目标值为17，执行过程：</p>
+<pre><code>i,j | 计算结果 | 是否匹配
+--- | ---- | ---- 
+0,1 | 9    | NO  
+0,2 | 13   | NO  
+0,3 | 17   | YES </code></pre><p>若是用哈希表的方式，可以理解为从当前循环点往前找另外一半，利用的是2+3=5，3+2=5，加法的交换律，不管从前往后还是从后往前，都是OK的。<br> 执行过程：</p>
+<pre><code>i | 是否匹配 | 单次循环结束后map            
+- | ---- | ---------------------- 
+0 | NO   | (2, 0)                
+1 | NO   | (2, 0) , (7,1)        
+2 | NO   | (2,0) , (7,1) , (11,3)
+3 | YES  |                       </code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ol>
+<li>某些场景下，暴力方式可能速度更快，但是第二种方式整体时间复杂度更低。 </li>
+<li>第二种采用HashMap 的方式，当然也可以采用其他存储数值和下标的方式。    </li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1028,22 +956,22 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -1056,7 +984,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1076,40 +1004,28 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1179,7 +1095,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1203,7 +1119,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1211,7 +1127,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1297,7 +1213,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1311,25 +1227,6 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1371,7 +1268,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1380,7 +1277,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1407,6 +1304,25 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1425,7 +1341,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1568,7 +1484,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1766,7 +1682,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1863,14 +1779,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1892,13 +1808,6 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2031,7 +1940,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2108,7 +2017,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2220,14 +2129,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2255,7 +2164,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2353,14 +2262,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2431,25 +2340,6 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2488,7 +2378,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2497,7 +2387,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2524,6 +2414,25 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2542,7 +2451,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2685,7 +2594,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2883,7 +2792,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2980,14 +2889,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3009,13 +2918,6 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3148,7 +3050,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3225,7 +3127,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3337,14 +3239,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3372,7 +3274,7 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3470,14 +3372,14 @@ app:civ_fill_color=&quot;&quot;   | 填充颜色</code></pre><hr>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

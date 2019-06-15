@@ -145,129 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-09T00:53:16.000Z">2016-07-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2033 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/09/《Android 基础（十七）》 ViewPager/">《Android 基础（十七）》 ViewPager</a>
-            
-        </h1>
-        <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51865070" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51865070</a>   </p>
-<p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>Layout manager that allows the user to flip left and right<br> through pages of data. You supply an implementation of a<br> {@link PagerAdapter} to generate the pages that the view shows.</p>
-</blockquote>
-<blockquote>
-<p>ViewPager is most often used in conjunction with {@link android.app.Fragment},<br> which is a convenient way to supply and manage the lifecycle of each page.<br> There are standard adapters implemented for using fragments with the ViewPager,<br> which cover the most common use cases. These are<br> {@link android.support.v4.app.FragmentPagerAdapter} and<br> {@link android.support.v4.app.FragmentStatePagerAdapter}; each of these<br> classes have simple code showing how to build a full user interface<br> with them.</p>
-</blockquote>
-<blockquote>
-<p>Views which are annotated with the {@link DecorView} annotation are treated as<br> part of the view pagers ‘decor’. Each decor view’s position can be controlled via<br> its {@code android:layout_gravity} attribute. For example:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-</blockquote>
-<p> &lt;android.support.v4.view.ViewPager<br> android:layout_width=”match_parent”<br> android:layout_height=”match_parent”&gt;<br> &lt;android.support.v4.view.PagerTitleStrip<br> android:layout_width=”match_parent”<br> android:layout_height=”wrap_content”<br> android:layout_gravity=”top” /&gt;<br> &lt;/android.support.v4.view.ViewPager&gt;  </p>
-<blockquote>
-<p>翻译：<br> ViewPager允许用户通过载有数据的页面实现左右滑动。开发者需要自己实现PagerAdapter来生成需要显示的页面。<br> ViewPager通常回合Fragment结合起来使用，这样实现起来比较简单同时也便于管理每个页面的生命周期。Android存在标准的适配器模板针对Fragment和ViewPager结合使用的方式：<br> android.support.v4.app.FragmentPagerAdapter<br> android.support.v4.app.FragmentStatePagerAdapter<br> 每个类都有简单的说明，告诉开发者如何通过他们来实现与用户的交互。</p>
-</blockquote>
-<blockquote>
-<p>被注释成DecorView的视图均可当做ViewPager的一部分，每一个DecorView的位置可以通过 android:layout_gravity属性来控制，例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;android.support.v4.view.ViewPager </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">android:layout_height=&amp;quot;match_parent&amp;quot;&amp;gt;</span><br><span class="line">&amp;lt;android.support.v4.view.PagerTitleStrip</span><br><span class="line">    android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">    android:layout_height=&amp;quot;wrap_content&amp;quot;</span><br><span class="line">    android:layout_gravity=&amp;quot;top&amp;quot; /&amp;gt;</span><br></pre></td></tr></table></figure>
-
-<p> &lt;/android.support.v4.view.ViewPager&gt;  </p>
-<blockquote>
-<p>翻译有点潦草，大致的意思应该是这样~</p>
-</blockquote>
-<hr>
-<p> ###<strong>类结构</strong><br> <img src="https://img-blog.csdn.net/20160709064427451" alt="这里写图片描述"></p>
-<p> 常用成员的功能介绍</p>
-<pre><code>成员                            | 功能                          
------------------------------ | ---------------------------- 
-ViewPager()                   | 构造方法                        
-addOnAdapterChangeListener    | 添加一个OnAdapterChangeListener 
-removeOnAdapterChangeListener | 移除一个OnAdapterChangeListener 
-setCurrentItem                | 设置当前Pager的index             
-addOnePageChangeListener      | 设置一个页面改变监听器                 
-addOnePageChangeListener      | 移除一个页面改变监听器                 
-clearOnPageChangeListener     | 移除所有的页面改变监听器                
-setPageTransformer            | 设置页面之间切换的过程中的PageTransformer</code></pre><h2 id="其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。"><a href="#其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。" class="headerlink" title=" 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 "></a> 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 </h2><p> ###<strong>实际使用</strong>  </p>
-<p> ####<strong>1. 简单显示</strong><br> 布局文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.opensourcedemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v4.view.ViewPager</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:id=&quot;@+id/viewpager&quot;</span><br><span class="line">        &gt;</span><br><span class="line">    &lt;/android.support.v4.view.ViewPager&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 代码内容<br> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.view.ViewPager;</span><br><span class="line">import android.support.v4.widget.ViewDragHelper;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.Window;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;String&gt; sourceList;</span><br><span class="line">    private static final float MIN_SCALE = 0.5f;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        </span><br><span class="line">        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);</span><br><span class="line">        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());</span><br><span class="line">        viewPager.setAdapter(myPagerAdapter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> Adapter类</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.app.Fragment;</span><br><span class="line">import android.support.v4.app.FragmentManager;</span><br><span class="line">import android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Mraz on 2016/7/8.</span><br><span class="line"> */</span><br><span class="line">public class MyPagerAdapter extends FragmentPagerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    public static final String[] titles = &#123;&quot;Android&quot;,&quot; Pet&quot;,&quot;Gift&quot;&#125;;</span><br><span class="line"></span><br><span class="line">    public MyPagerAdapter(FragmentManager fm) &#123;</span><br><span class="line">        super(fm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Fragment getItem(int position) &#123;</span><br><span class="line">        switch (position) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                return new FirstFragment();</span><br><span class="line">            case 1:</span><br><span class="line">                return new SecondFragment();</span><br><span class="line">            case 2:</span><br><span class="line">                return new ThreeFragment();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return 3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MyPagerAdapter 继承FragmentPagerAdapter，当创建这个类并继承FragmentPagerAdapter的时候，AS会提示开发者需要实现两个方法，并且要添加一个构造函数，getItem就是根据位置返回对应的Fragment，getCount就是返回页面数，这里我是直接返回的对应的内容，数目也是固定的，在实际开发过程中，使用ArrayList等数据结构来传递合适的参数，可以更灵活的设置Adapter的内容，使ViewPager的内容更丰富。这里的 FirstFragment，SecondFragment，ThreeFragment内容只是一个简单的图片资源，对应的布局文件也比较简单，不贴代码了。</p>
-<p> 实际效果  </p>
-<p> <img src="https://img-blog.csdn.net/20160709081338443" alt="这里写图片描述"></p>
-<hr>
-<p> ####<strong>2. 添加PageTransformer</strong><br> 代码内容</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">private static final float MIN_SCALE = 0.5f;</span><br><span class="line">...</span><br><span class="line">viewPager.setPageTransformer(true, new ViewPager.PageTransformer() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void transformPage(View view, float position) &#123;</span><br><span class="line"></span><br><span class="line">        int pageWidth = view.getWidth();</span><br><span class="line"></span><br><span class="line">        if (position &lt; -1) &#123; // [-Infinity,-1)</span><br><span class="line">            // This page is way off-screen to the left.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 0) &#123; // [-1,0]</span><br><span class="line">            // Use the default slide transition when moving to the left page</span><br><span class="line">            view.setAlpha(1 + position);</span><br><span class="line">            view.setTranslationX(0);</span><br><span class="line"></span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 1) &#123; // (0,1]</span><br><span class="line">            // Fade the page out.</span><br><span class="line">            view.setAlpha(1 - position);</span><br><span class="line"></span><br><span class="line">            // Counteract the default slide transition</span><br><span class="line">            view.setTranslationX(pageWidth * -position);</span><br><span class="line"></span><br><span class="line">            // Scale the page down (between MIN_SCALE and 1)</span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123; // (1,+Infinity]</span><br><span class="line">            // This page is way off-screen to the right.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> 上面是参照例子写的一个页面切换效果，主要关注的是透明度和大小的改变，在页面切换的过程中，对于离开的页面变透明，变小，进入的页面变明显，变大。看下ViewPager.PageTransformer这个接口</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A PageTransformer is invoked whenever a visible/attached page is scrolled.</span><br><span class="line"> * This offers an opportunity for the application to apply a custom transformation</span><br><span class="line"> * to the page views using animation properties.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;As property animation is only supported as of Android 3.0 and forward,</span><br><span class="line"> * setting a PageTransformer on a ViewPager on earlier platform versions will</span><br><span class="line"> * be ignored.&lt;/p&gt;</span><br><span class="line"> */</span><br><span class="line">public interface PageTransformer &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Apply a property transformation to the given page.</span><br><span class="line">     *</span><br><span class="line">     * @param page Apply the transformation to this page</span><br><span class="line">     * @param position Position of page relative to the current front-and-center</span><br><span class="line">     *                 position of the pager. 0 is front and center. 1 is one full</span><br><span class="line">     *                 page position to the right, and -1 is one page position to the left.</span><br><span class="line">     */</span><br><span class="line">    public void transformPage(View page, float position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 只需要实现一个方法transformPage，传入的参数，第一个参数是页面视图，第二个参数很重要，指的是当前页面所处的一种状态，根据position来判断，我们添加的所有效果，都是要依据这个值来做处理，当我们滑动页面的时候，这个值在不停的变化，并且不同的page的值不相同。</p>
-<pre><code>取值             | 含义                       
--------------- | ------------------------- 
-[-Infinity,-1) | 这个范围的视图已经看不见了            
-[-1,0]         | 即将退出界面的page的变化范围，从0慢慢变成-1
-[0,1]          | 即将进入界面的page的变化范围，从1慢慢变成0 
-(1,+Infinity]  | 这个范围的视图已经看不见了            </code></pre><p>可以把这个取值范围和数据概念——数轴——联系起来，就比较容易理解了，通过上面这个过场和下面的实际效果图，应该可以看出一二，通过这个例子，也可以尝试着实现自定义的过场效果</p>
-<p> 实际效果  </p>
-<p> <img src="https://img-blog.csdn.net/20160709083726790" alt="这里写图片描述"></p>
-<hr>
-<p> ####<strong>3. 添加OnPageChangeListener</strong><br> 代码内容  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrolled position = &quot; + position + &quot; positionOffset = &quot; + positionOffset + &quot; positionOffsetPixels = &quot; + positionOffsetPixels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageSelected(int position) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageSelected position = &quot; + position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrollStateChanged state = &quot; + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> 可以看到当滑动页面的时候，会有一大串的Log打印出来 <img src="https://img-blog.csdn.net/20160709084254877" alt="这里写图片描述"> 看下OnPagerChangeListener这个接口的定义 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Callback interface for responding to changing state of the selected page.</span><br><span class="line"> */</span><br><span class="line">public interface OnPageChangeListener &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when the current page is scrolled, either as part</span><br><span class="line">     * of a programmatically initiated smooth scroll or a user initiated touch scroll.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the first page currently being displayed.</span><br><span class="line">     *                 Page position+1 will be visible if positionOffset is nonzero.</span><br><span class="line">     * @param positionOffset Value from [0, 1) indicating the offset from the page at position.</span><br><span class="line">     * @param positionOffsetPixels Value in pixels indicating the offset from position.</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when a new page becomes selected. Animation is not</span><br><span class="line">     * necessarily complete.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the new selected page.</span><br><span class="line">     */</span><br><span class="line">    public void onPageSelected(int position);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Called when the scroll state changes. Useful for discovering when the user</span><br><span class="line">     * begins dragging, when the pager is automatically settling to the current page,</span><br><span class="line">     * or when it is fully stopped/idle.</span><br><span class="line">     *</span><br><span class="line">     * @param state The new scroll state.</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_IDLE</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_DRAGGING</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_SETTLING</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrollStateChanged(int state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 指的一提的是  positionOffset 这个参数可以在onPageScrolled回调中拿到，而这个数值呢 就是和我们上面自定义过场的时候用到的 transformPage方法中传入的第二个参数position 有联系，只是这里的positionOffset取值范围为[0, 1)，上面的position中取值范围更广，但是从实际上来看，对我们影响比较大的就是当前切换的两个Page，也就是[-1,1]这个取值范围，所谓的负值可以理解成是相对概念，所以，这两个变量之间是存在关系的，如果不理解上面PageTransformer， 可以结合这个positionOffset变量的打印值加以理解。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-07-06T14:04:20.000Z">2016-07-06</time>
                 
                 <div class="level-item">
@@ -1135,6 +1012,75 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-06-24T15:56:19.000Z">2016-06-24</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 337 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/06/24/Android Studio 小技巧（1）：如何导入AAR文件/">Android Studio 小技巧（1）：如何导入AAR文件</a>
+            
+        </h1>
+        <div class="content">
+            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51756472" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51756472</a>   </p>
+<h4 id="1-导入AAR、JAR文件"><a href="#1-导入AAR、JAR文件" class="headerlink" title="1. 导入AAR、JAR文件"></a><strong>1. 导入AAR、JAR文件</strong></h4><p> File- &gt; New -&gt; New Module</p>
+<p> <img src="https://img-blog.csdn.net/20160624233528915" alt="这里写图片描述"></p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20160624233543259" alt="这里写图片描述"></p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20160624233623856" alt="这里写图片描述"></p>
+<hr>
+<p> 这样子AAR文件就导入了，然后在app中的build.gradle中做如下添加   </p>
+<p> dependencies {<br> ……<br> compile project(‘:MODULE-NAME’)<br> }<br> 例如<br> dependencies {<br> ……<br> compile project(‘:circleimageview-2.0.0’)<br> }   </p>
+<p> 也可以直接在app的依赖选项中直接选择最后一个“Module dependency”,然后添加对应的MODULE即可</p>
+<p> jar包也可以采用这种方式导入,但是也可以使用另外一种方式<br> <img src="https://img-blog.csdn.net/20160624234217483" alt="这里写图片描述"></p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20160624234249108" alt="这里写图片描述"></p>
+<pre><code>方式                 | 使用                       
+------------------ | ------------------------- 
+Library dependency | 可以选择一些可用的android原生依赖包    
+File dependency    | 可以选择一些文件形式的依赖包，比如第三方Jar包等
+Module dependency  | 当前工程下的模块依赖               </code></pre><hr>
+<h4 id="2-快速添加Material-Design-Drawable"><a href="#2-快速添加Material-Design-Drawable" class="headerlink" title="2. 快速添加Material Design Drawable"></a><strong>2. 快速添加Material Design Drawable</strong></h4><p> res/drawable 右键 New-&gt; Vector Asset 或者Image Asset<br> <img src="https://img-blog.csdn.net/20160624235315487" alt="这里写图片描述"></p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20160624235300065" alt="这里写图片描述"></p>
+<hr>
+<p> <img src="https://img-blog.csdn.net/20160624235343910" alt="这里写图片描述"></p>
+<p> 同样的方式使用Image Asset界面大同小异。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1179,22 +1125,22 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -1207,7 +1153,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1227,40 +1173,28 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1330,7 +1264,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1354,7 +1288,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1362,7 +1296,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1448,7 +1382,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1462,25 +1396,6 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1522,7 +1437,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1531,7 +1446,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1558,6 +1473,25 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1576,7 +1510,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1719,7 +1653,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1917,7 +1851,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2014,14 +1948,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2043,13 +1977,6 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2182,7 +2109,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2259,7 +2186,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2371,14 +2298,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2406,7 +2333,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2504,14 +2431,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2582,25 +2509,6 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2639,7 +2547,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2648,7 +2556,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2675,6 +2583,25 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2693,7 +2620,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2836,7 +2763,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -3034,7 +2961,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -3131,14 +3058,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3160,13 +3087,6 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3299,7 +3219,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3376,7 +3296,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3488,14 +3408,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3523,7 +3443,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3621,14 +3541,14 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

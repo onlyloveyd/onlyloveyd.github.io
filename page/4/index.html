@@ -145,163 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-04-25T03:18:22.000Z">2018-04-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 371 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/04/25/CentOS + Tomcat + SSL/">CentOS + Tomcat + SSL</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近iOS开发企业应用需要使用HTTPS协议的地址来做应用升级，所以需要搭建一个支持HTTPS的Tomcat</p>
-<h2 id="下载Tomcat"><a href="#下载Tomcat" class="headerlink" title="下载Tomcat"></a><a href></a>下载Tomcat</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-7/v7.0.86/bin/apache-tomcat-7.0.86.tar.gz</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="配置SSL证书"><a href="#配置SSL证书" class="headerlink" title="配置SSL证书"></a><a href></a>配置SSL证书</h2><h4 id="下载SSL证书文件"><a href="#下载SSL证书文件" class="headerlink" title="下载SSL证书文件"></a><a href></a>下载SSL证书文件</h4><p> 腾讯云上申请免费SSL证书，记住设置的密码，配置tomcat的时候会使用到，待申请通过，会颁发证书，下载证书解压后，目录结构如下，应该是针对不用的容器有不用的配置方法。</p>
-<p> <img src="https://img-blog.csdn.net/20180425105143369" alt="这里写图片描述"></p>
-<h4 id="Tomcat下配置证书"><a href="#Tomcat下配置证书" class="headerlink" title="Tomcat下配置证书"></a><a href></a>Tomcat下配置证书</h4><ol>
-<li><p>拷贝上图中Tomcat下的jks文件到 tomcat安装目录下conf 目录 “xxxx/apache-tomcat-7.0.86/conf/”下（当然你也可以使用其他路径，这里方便后续配置server.xml，才放在此处）； </p>
-</li>
-<li><p>编辑“xxxx/apache-tomcat-7.0.86/conf/server.xml” </p>
-</li>
-<li><p>取消下图位置注释，然后添加 <code>keystoreFile=&quot;conf/xxxx.jks&quot; keystorePass=&quot;xxx&quot;</code> ，最后结果下图二<br> <img src="https://img-blog.csdn.net/2018042511030994" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180425110604608" alt="这里写图片描述">  </p>
-<h4 id="Tomcat启动"><a href="#Tomcat启动" class="headerlink" title="Tomcat启动"></a><a href></a>Tomcat启动</h4><p>安装目录，bin目录下</p>
-</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
-
-<p> 访问 “<a href="https://xxxx:8443" target="_blank" rel="noopener">https://xxxx:8443</a>”</p>
-<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a><a href></a>常见问题</h4><h5 id="8443端口未开放"><a href="#8443端口未开放" class="headerlink" title="8443端口未开放"></a><a href></a>8443端口未开放</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --add-port=8443/tcp --permanent</span><br><span class="line"></span><br><span class="line">systemctl restart firewalld.service</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="8443端口被占用"><a href="#8443端口被占用" class="headerlink" title="8443端口被占用"></a><a href></a>8443端口被占用</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i tcp:8443//查询8443端口使用情况</span><br><span class="line">kill -9 xxx //kill掉对应进程</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="lsof-netstat-wget-not-found"><a href="#lsof-netstat-wget-not-found" class="headerlink" title="lsof / netstat / wget not found"></a><a href></a>lsof / netstat / wget not found</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install lsof</span><br><span class="line">yum install net-tools</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-04-21T13:53:00.000Z">2018-04-21</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 426 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/04/21/CentOS + Docker + MySql/">CentOS + Docker + MySql</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Mysql安装"><a href="#Mysql安装" class="headerlink" title="Mysql安装"></a>Mysql安装</h2><h4 id="搜索-1"><a href="#搜索-1" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p> 一般情况下，我都是使用官方镜像或者阿里镜像</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421212533766?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name onlyloveyd-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql:latest</span><br></pre></td></tr></table></figure>
-
-<p> –name 指定数据库名称<br> －e MYSQL_ROOT_PASSWORD=my-secret-pw 配置root账号密码<br> －p 指定端口映射<br> －d 指定镜像<br> <img src="https://img-blog.csdn.net/20180421213041710?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421213203762?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h5 id="进入Mysql-Docker环境"><a href="#进入Mysql-Docker环境" class="headerlink" title="进入Mysql Docker环境"></a>进入Mysql Docker环境</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it onlyloveyd-mysql /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p> onlyloveyd-mysql 替换成 对应容器名</p>
-<h5 id="进入mysql"><a href="#进入mysql" class="headerlink" title="进入mysql"></a>进入mysql</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p> 输入密码后进入mysql<br> <img src="https://img-blog.csdn.net/20180421213747913?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h5 id="配置允许Mysql远程连接"><a href="#配置允许Mysql远程连接" class="headerlink" title="配置允许Mysql远程连接"></a>配置允许Mysql远程连接</h5><p> 使用mysql命令的时候注意以分号结尾。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select host,user,authentication_string from user;</span><br><span class="line">update user set host = &apos;%&apos; where user = &apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421214755807?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p> 存在host为‘％‘，user为‘root‘的记录就代表用户可以在任何一台机器上使用root账号登陆。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-04-21T13:15:10.000Z">2018-04-21</time>
                 
                 <div class="level-item">
@@ -834,6 +677,128 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-01-06T08:18:25.000Z">2018-01-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    18 分钟 读完 (大约 2634 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/01/06/RxJava2小白手册（2）- 线程管理和流程浅析/">RxJava2-线程管理和流程浅析</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> 承接上文，结合使用场景，讨论一下如何告别AsyncTask，就是因为RxJava的强大线程管理功能。</p>
+<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><p> 认识RxJava之前，我们处理异步任务的方式主要有两种：</p>
+<ol>
+<li>AsyncTask</li>
+<li>Thread + Runnable.<br>涉及的代码量相比较RxJava而言大太多，针对Handler处理不好，可能存在内存泄漏的风险。不赘述，看看如何使用RxJava处理异步任务。</li>
+</ol>
+<h3 id="1-异步处理"><a href="#1-异步处理" class="headerlink" title="1. 异步处理"></a>1. 异步处理</h3><h4 id="1-1-代码示例"><a href="#1-1-代码示例" class="headerlink" title="1.1 代码示例"></a>1.1 代码示例</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void subscribe(ObservableEmitter&lt;Integer&gt; e) throws Exception &#123;</span><br><span class="line">        Logger(&quot;Emit 111&quot;);</span><br><span class="line">        e.onNext(111);</span><br><span class="line">        Logger(&quot;Emit 222&quot;);</span><br><span class="line">        e.onNext(222);</span><br><span class="line">        Logger(&quot;Emit onComplete&quot;);</span><br><span class="line">        e.onComplete();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSubscribe(Disposable d) &#123;</span><br><span class="line">        Logger(&quot;onSubscribe&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onNext(Integer integer) &#123;</span><br><span class="line">        Logger(&quot;onNext integer = &quot; + integer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onError(Throwable e) &#123;</span><br><span class="line">        Logger(&quot;onError e = &quot; + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onComplete() &#123;</span><br><span class="line">        Logger(&quot;onComplete&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribeOn(Schedulers.newThread())</span><br><span class="line">        .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">        .subscribe(observer);</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-2-运行结果"><a href="#1-2-运行结果" class="headerlink" title="1.2 运行结果"></a>1.2 运行结果</h4><p> <img src="https://img-blog.csdn.net/20180106112633683" alt="这里写图片描述"><br> 可以清楚的看到，Observer下的操作是在主线程下完成的，而Observable下发射器的发射动作却是在一个新的线程中完成的。通过这种操作，我们可以在subscribe方法中执行耗时操作，然后结果通过onNext()方法返回给主线程，实现异步处理的目的。<br> 常用的场景：访问数据库，网络请求数据，后台计算操作等等。</p>
+<h4 id="1-3-Schedulers-和AndroidSchedulers"><a href="#1-3-Schedulers-和AndroidSchedulers" class="headerlink" title="1.3 Schedulers 和AndroidSchedulers"></a>1.3 Schedulers 和AndroidSchedulers</h4><p> AndroidSchedulers是RxAndroid中的线程调度器，主要用途如上所示，AndroidSchedulers.mainThread，代表Android中的主线程（UI线程）。</p>
+<pre><code>方法                                 | 解释                                  
+---------------------------------- | ------------------------------------ 
+Schedulers.computation()           | 用于计算任务                              
+Schedulers.from(Executor executor) | 使用指定的Executor作为调度器                  
+Schedulers.io()                    | 用于IO密集型任务，如异步阻塞IO操作，这个调度器的线程池会根据需要增长
+Scheduler.newThread()              | 为每个任务创建一个新线程                        
+Scheduler.shutdown()               | 停止调度器                               
+Scheduler.single()                 | 单独线程                                
+Scheduler.start()                  | 启动调度器                               
+Scheduler.trampoline()             | 在当前线程中，但是会等到当前线程任务执行完毕之后再去执行        
+AndroidScheduler.mainThread()      | 主线程                                 </code></pre><h2 id="看看源码"><a href="#看看源码" class="headerlink" title="看看源码"></a>看看源码</h2><h4 id="1-Observable-create"><a href="#1-Observable-create" class="headerlink" title="1. Observable.create()"></a>1. Observable.create()</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; Observable&lt;T&gt; create(ObservableOnSubscribe&lt;T&gt; source) &#123;</span><br><span class="line">    ObjectHelper.requireNonNull(source, &quot;source is null&quot;);</span><br><span class="line">    return RxJavaPlugins.onAssembly(new ObservableCreate&lt;T&gt;(source));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 先执行非空检查，然后通过ObservableCreate来创建Observable。而ObservableCreate继承Observable。看下代码</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">//ObservableCreate继承Observable</span><br><span class="line">public final class ObservableCreate&lt;T&gt; extends Observable&lt;T&gt; &#123;</span><br><span class="line">    //ObservableOnSubscribe接口只有一个subscribe方法</span><br><span class="line">    final ObservableOnSubscribe&lt;T&gt; source;</span><br><span class="line"></span><br><span class="line">    public ObservableCreate(ObservableOnSubscribe&lt;T&gt; source) &#123;</span><br><span class="line">        //赋值，结合上面Observable的create方法，这个source应该是我们new出来的ObservableOnSubscribe</span><br><span class="line">        this.source = source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //这个方法在Observable执行subscribe(Observer)的时候使用到</span><br><span class="line">    @Override</span><br><span class="line">    protected void subscribeActual(Observer&lt;? super T&gt; observer) &#123;</span><br><span class="line">        //创建CreateEmitter，传入observer,内部使用</span><br><span class="line">        CreateEmitter&lt;T&gt; parent = new CreateEmitter&lt;T&gt;(observer);</span><br><span class="line">        //执行observer的onSubscribe方法，parent是CreateEmitter，实现了Disposable，和我们创建Observer时实现的onSubscribe方法一致，没毛病</span><br><span class="line">        observer.onSubscribe(parent);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            //执行subscribe方法，source为ObservableOnSubscribe对象，parent为CreateEmitter，而CreateEmitter实现ObservableEmitter接口，没毛病</span><br><span class="line">            source.subscribe(parent);</span><br><span class="line">        &#125; catch (Throwable ex) &#123;</span><br><span class="line">            Exceptions.throwIfFatal(ex);</span><br><span class="line">            //CreateEmitter执行onError方法</span><br><span class="line">            parent.onError(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //CreateEmitter类继承AtomicReference&lt;Disposable&gt;实现ObservableEmitter和Disposable 接口</span><br><span class="line">    static final class CreateEmitter&lt;T&gt;</span><br><span class="line">    extends AtomicReference&lt;Disposable&gt;</span><br><span class="line">    implements ObservableEmitter&lt;T&gt;, Disposable &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        private static final long serialVersionUID = -3434801548987643227L;</span><br><span class="line"></span><br><span class="line">        //创建过程中传入的Observer</span><br><span class="line">        final Observer&lt;? super T&gt; observer;</span><br><span class="line"></span><br><span class="line">        CreateEmitter(Observer&lt;? super T&gt; observer) &#123;</span><br><span class="line">            this.observer = observer;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //OnNext方法</span><br><span class="line">        @Override</span><br><span class="line">        public void onNext(T t) &#123;</span><br><span class="line">            //非空检查，onNext在2.0之后不允许传入null值作为参数</span><br><span class="line">            if (t == null) &#123;</span><br><span class="line">                onError(new NullPointerException(&quot;onNext called with null. Null values are generally not allowed in 2.x operators and sources.&quot;));</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            //这个对应上我们的上一篇博客，一次性水管，如果isDisposed为true,则发射器发出的事件，将不会被观察者执行</span><br><span class="line">            if (!isDisposed()) &#123;</span><br><span class="line">                observer.onNext(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //onError方法，当tryOnErro返回false的时候，执行RxJavaPlugins.onError(t)，何时tryOnError会返回false呢？看下面</span><br><span class="line">        @Override</span><br><span class="line">        public void onError(Throwable t) &#123;</span><br><span class="line">            //当isDisposed()为true后，会执行RxJavaPlugins.onError(t)操作，也就是说如果在isDisposed()为true的情况下，发射器还发出onError()事件，会导致程序崩溃。具体看下面的运行示例。</span><br><span class="line">            if (!tryOnError(t)) &#123;</span><br><span class="line">                RxJavaPlugins.onError(t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean tryOnError(Throwable t) &#123;</span><br><span class="line">            //也是不允许传入null</span><br><span class="line">            if (t == null) &#123;</span><br><span class="line">                t = new NullPointerException(&quot;onError called with null. Null values are generally not allowed in 2.x operators and sources.&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            //如果isDisposed为false,执行观察者的onError方法，然后执行dispose()操作，也就是观察者不处理后面发射器发送的事件了。估计onComplete()方法中也会有类似的操作流程</span><br><span class="line">            if (!isDisposed()) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    observer.onError(t);</span><br><span class="line">                &#125; finally &#123;</span><br><span class="line">                    dispose();</span><br><span class="line">                &#125;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            //只有当isDisposed为true的时候回返回false，也就是上一个方法回执行RxJavaPlugins.onError(t);操作</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onComplete() &#123;</span><br><span class="line">            //和上面onError(）操作类似，不同的是没有非空检查，因为onComplete没有参数。</span><br><span class="line">            if (!isDisposed()) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    observer.onComplete();</span><br><span class="line">                &#125; finally &#123;</span><br><span class="line">                    dispose();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ……</span><br><span class="line">    &#125;</span><br><span class="line">    ……</span><br><span class="line">    //这部分介绍的是SerializedEmitter，暂无涉及</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 举例说明，isDisposed()为true时，发射器继续发送onError事件会导致程序崩溃。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">           @Override</span><br><span class="line">           public void subscribe(ObservableEmitter&lt;Integer&gt; e) throws Exception &#123;</span><br><span class="line">               Logger(&quot;Emit 111&quot;);</span><br><span class="line">               e.onNext(111);</span><br><span class="line">               Logger(&quot;Emit 222&quot;);</span><br><span class="line">               e.onNext(222);</span><br><span class="line">               Logger(&quot;Emit 333&quot;);</span><br><span class="line">               e.onNext(333);</span><br><span class="line">               Logger(&quot;Emit onError&quot;);</span><br><span class="line">               e.onError(new Throwable(&quot;Test Disposable onError&quot;));</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">       Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() &#123;</span><br><span class="line">           Disposable mDisposable;</span><br><span class="line">           @Override</span><br><span class="line">           public void onSubscribe(Disposable d) &#123;</span><br><span class="line">               Logger(&quot;onSubscribe&quot;);</span><br><span class="line">               mDisposable = d;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           public void onNext(Integer integer) &#123;</span><br><span class="line">               Logger(&quot;onNext integer = &quot; + integer);</span><br><span class="line">               if(mDisposable!=null &amp;&amp; !mDisposable.isDisposed() &amp;&amp; integer == 222) &#123;</span><br><span class="line">                   mDisposable.dispose();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           public void onError(Throwable e) &#123;</span><br><span class="line">               Logger(&quot;onError e = &quot; + e.getMessage());</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           public void onComplete() &#123;</span><br><span class="line">               Logger(&quot;onComplete&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;;</span><br><span class="line">       observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
+
+<p> 运行结果：<br> <img src="https://img-blog.csdn.net/20180106145442678" alt="这里写图片描述"></p>
+<h4 id="2-Observer"><a href="#2-Observer" class="headerlink" title="2. Observer"></a>2. Observer</h4><p> 创建Observer，无甚特殊，注意onSubscribe，onNext，onError传入的参数不能为空以及Disposable 的使用。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer&lt;T&gt; &#123;</span><br><span class="line">    void onSubscribe(@NonNull Disposable d);</span><br><span class="line"></span><br><span class="line">    void onNext(@NonNull T t);</span><br><span class="line"></span><br><span class="line">    void onError(@NonNull Throwable e);</span><br><span class="line"></span><br><span class="line">    void onComplete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-observable-subscribe-observer"><a href="#3-observable-subscribe-observer" class="headerlink" title="3. observable.subscribe(observer);"></a>3. observable.subscribe(observer);</h4><p> 分析一下subscribe方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public final void subscribe(Observer&lt;? super T&gt; observer) &#123;</span><br><span class="line">    //observer非空检查</span><br><span class="line">    ObjectHelper.requireNonNull(observer, &quot;observer is null&quot;);</span><br><span class="line">    try &#123;</span><br><span class="line">        //关联observable和observer</span><br><span class="line">        observer = RxJavaPlugins.onSubscribe(this, observer);</span><br><span class="line"></span><br><span class="line">        ObjectHelper.requireNonNull(observer, &quot;Plugin returned null Observer&quot;);</span><br><span class="line">        //这个方法在Observable中是个抽象方法，但是结合上面Observerable的create过程，可以知道这里实际上调用的是ObservableCreate的subscribeActual方法，也就是上面我们分析的过程，没毛病</span><br><span class="line">        subscribeActual(observer);</span><br><span class="line">    &#125; catch (NullPointerException e) &#123; // NOPMD</span><br><span class="line">        throw e;</span><br><span class="line">    &#125; catch (Throwable e) &#123;</span><br><span class="line">        Exceptions.throwIfFatal(e);</span><br><span class="line">        // can&apos;t call onError because no way to know if a Disposable has been set or not</span><br><span class="line">        // can&apos;t call onSubscribe because the call might have set a Subscription already</span><br><span class="line">        RxJavaPlugins.onError(e);</span><br><span class="line"></span><br><span class="line">        NullPointerException npe = new NullPointerException(&quot;Actually not, but can&apos;t throw other exceptions due to RS&quot;);</span><br><span class="line">        npe.initCause(e);</span><br><span class="line">        throw npe;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 一路看下来，我们就可以很快的和我们做的测试对应上，先调用onSubscribe方法，然后执行subscribe方法中的发射器操作，根据发射器的操作Observer作出对应的处理。</p>
+<h4 id="4-subscribeOn"><a href="#4-subscribeOn" class="headerlink" title="4. subscribeOn"></a>4. subscribeOn</h4><p> subscribeOn用来指定Observable在哪个线程执行自己的subscribe方法。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final Observable&lt;T&gt; subscribeOn(Scheduler scheduler) &#123;</span><br><span class="line">    //scheduler非空检查</span><br><span class="line">    ObjectHelper.requireNonNull(scheduler, &quot;scheduler is null&quot;);</span><br><span class="line">    return RxJavaPlugins.onAssembly(new ObservableSubscribeOn&lt;T&gt;(this, scheduler));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 创建了一个ObservableSubscribeOn，这个类千万别和上面创建Observable过程中使用的ObservableOnSubscribe接口弄混淆，结合当前操作为subscribeOn来记住这个类名。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public ObservableSubscribeOn(ObservableSource&lt;T&gt; source, Scheduler scheduler) &#123;</span><br><span class="line">    super(source);</span><br><span class="line">    this.scheduler = scheduler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Observerable继承自ObservableSource，所以创建ObservableSubscribeOn的时候Observable和scheduler传递过来。<br> ObservableSubscribeOn继承<br> AbstractObservableWithUpstream，而后者又继承Observable。所以实际上经过subscribeOn操作之后，后续操作的对象从Observerable变成了ObservableSubscribeOn，所以，当后面执行subscribe时执行的subscribeActual方法为ObservableSubscribeOn重的对应方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    @Override</span><br><span class="line">    public void subscribeActual(final Observer&lt;? super T&gt; s) &#123;</span><br><span class="line">        //封装Observer，实际Observer由其内部actual维护</span><br><span class="line">        final SubscribeOnObserver&lt;T&gt; parent = new SubscribeOnObserver&lt;T&gt;(s);</span><br><span class="line">        //Observer执行onSubscribe方法，SubscribeOnObserver实现Disposable接口，所以上面的例子中onSubscribe传递的是Disposable类型</span><br><span class="line">        s.onSubscribe(parent);</span><br><span class="line">//这里有3个操作：</span><br><span class="line">//1. 创建SubscribeTask，传入封装后的Observer</span><br><span class="line">//2. 调度器执行scheduleDirect操作</span><br><span class="line">//3. 封装后的Observer执行setDisposable操作</span><br><span class="line"> parent.setDisposable(scheduler.scheduleDirect(new SubscribeTask(parent)));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 关注scheduler.scheduleDirect(new SubscribeTask(parent))，先看下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">final class SubscribeTask implements Runnable &#123;</span><br><span class="line">    private final SubscribeOnObserver&lt;T&gt; parent;</span><br><span class="line"></span><br><span class="line">    SubscribeTask(SubscribeOnObserver&lt;T&gt; parent) &#123;</span><br><span class="line">        this.parent = parent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        source.subscribe(parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 实现Runnable，终于看到一个有点熟悉的东西。传入的parent为封装后的Observer。而source则是创建ObservableSubscribeOn过程中传入的Observable。<br> 在看scheduleDirect方法之前，我们得先弄清楚这个scheduler是个什么东西？在Schedulers类中，不同的Scheduler已经初始化完成。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">    SINGLE = RxJavaPlugins.initSingleScheduler(new SingleTask());</span><br><span class="line"></span><br><span class="line">    COMPUTATION = RxJavaPlugins.initComputationScheduler(new ComputationTask());</span><br><span class="line"></span><br><span class="line">    IO = RxJavaPlugins.initIoScheduler(new IOTask());</span><br><span class="line"></span><br><span class="line">    TRAMPOLINE = TrampolineScheduler.instance();</span><br><span class="line"></span><br><span class="line">    NEW_THREAD = RxJavaPlugins.initNewThreadScheduler(new NewThreadTask());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 就看下NEW_THREAD 这个，首先new NewThreadTask()</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static final class NewThreadTask implements Callable&lt;Scheduler&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Scheduler call() throws Exception &#123;</span><br><span class="line">        return NewThreadHolder.DEFAULT;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static final class NewThreadHolder &#123;</span><br><span class="line">    static final Scheduler DEFAULT = new NewThreadScheduler();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public final class NewThreadScheduler extends Scheduler &#123;</span><br><span class="line"></span><br><span class="line">    final ThreadFactory threadFactory;</span><br><span class="line"></span><br><span class="line">    private static final String THREAD_NAME_PREFIX = &quot;RxNewThreadScheduler&quot;;</span><br><span class="line">    private static final RxThreadFactory THREAD_FACTORY;</span><br><span class="line"></span><br><span class="line">    /** The name of the system property for setting the thread priority for this Scheduler. */</span><br><span class="line">    private static final String KEY_NEWTHREAD_PRIORITY = &quot;rx2.newthread-priority&quot;;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        int priority = Math.max(Thread.MIN_PRIORITY, Math.min(Thread.MAX_PRIORITY,</span><br><span class="line">                Integer.getInteger(KEY_NEWTHREAD_PRIORITY, Thread.NORM_PRIORITY)));</span><br><span class="line"></span><br><span class="line">        THREAD_FACTORY = new RxThreadFactory(THREAD_NAME_PREFIX, priority);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public NewThreadScheduler() &#123;</span><br><span class="line">        this(THREAD_FACTORY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public NewThreadScheduler(ThreadFactory threadFactory) &#123;</span><br><span class="line">        this.threadFactory = threadFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @NonNull</span><br><span class="line">    @Override</span><br><span class="line">    public Worker createWorker() &#123;</span><br><span class="line">        return new NewThreadWorker(threadFactory);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 看到了ThreadFactory，RxThreadFactory，而RxThreadFactory实现了ThreadFactory接口，所以最后还是线程的使用，只是RxJava对这些基础的东西做了深度的封装和流程上的优化，让我们更方便的使用。<br> 回溯到上面的scheduleDirect方法，</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Disposable scheduleDirect(@NonNull Runnable run) &#123;</span><br><span class="line">    return scheduleDirect(run, 0L, TimeUnit.NANOSECONDS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public Disposable scheduleDirect(@NonNull Runnable run, long delay, @NonNull TimeUnit unit) &#123;</span><br><span class="line">    //创建工作线程，以NewThreadScheduler为例，是创建NewThreadWorker</span><br><span class="line">    final Worker w = createWorker();</span><br><span class="line">    //</span><br><span class="line">    final Runnable decoratedRun = RxJavaPlugins.onSchedule(run);</span><br><span class="line"></span><br><span class="line">    //封装出一个带Dispose的Task，方便控制</span><br><span class="line">    DisposeTask task = new DisposeTask(decoratedRun, w);</span><br><span class="line">    //以NewThreadScheduler为例，这里执行的是NewThreadWorker中的schedule方法</span><br><span class="line">    w.schedule(task, delay, unit);</span><br><span class="line"></span><br><span class="line">    return task;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public Disposable schedule(@NonNull final Runnable action, long delayTime, @NonNull TimeUnit unit) &#123;</span><br><span class="line">    if (disposed) &#123;</span><br><span class="line">        return EmptyDisposable.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">    return scheduleActual(action, delayTime, unit, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 忽略disposed的影响，最后执行到scheduleActual</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public ScheduledRunnable scheduleActual(final Runnable run, long delayTime, @NonNull TimeUnit unit, @Nullable DisposableContainer parent) &#123;</span><br><span class="line">     Runnable decoratedRun = RxJavaPlugins.onSchedule(run);</span><br><span class="line"></span><br><span class="line">     ScheduledRunnable sr = new ScheduledRunnable(decoratedRun, parent);</span><br><span class="line"></span><br><span class="line">     if (parent != null) &#123;</span><br><span class="line">         if (!parent.add(sr)) &#123;</span><br><span class="line">             return sr;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     Future&lt;?&gt; f;</span><br><span class="line">     try &#123;</span><br><span class="line">         //直接提交或者进入队列</span><br><span class="line">         if (delayTime &lt;= 0) &#123;</span><br><span class="line">             f = executor.submit((Callable&lt;Object&gt;)sr);</span><br><span class="line">         &#125; else &#123;</span><br><span class="line">             f = executor.schedule((Callable&lt;Object&gt;)sr, delayTime, unit);</span><br><span class="line">         &#125;</span><br><span class="line">         sr.setFuture(f);</span><br><span class="line">     &#125; catch (RejectedExecutionException ex) &#123;</span><br><span class="line">         if (parent != null) &#123;</span><br><span class="line">             parent.remove(sr);</span><br><span class="line">         &#125;</span><br><span class="line">         RxJavaPlugins.onError(ex);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     return sr;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到熟悉的ScheduledExecutorService和Future。<br> 所以，综上所述，其内部也是新创建一个线程，结合Runnable。</p>
+<h4 id="5-observeOn"><a href="#5-observeOn" class="headerlink" title="5. observeOn"></a>5. observeOn</h4><p> 原理我觉得和subscribeOn没有太大的差别。不做赘述。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p> RxJava使用起来方便，其中包含着很多技巧，也不甚了解，只能是慢慢用，慢慢理。</p>
+<p> 【码道长】公众号，最近开始运营，有兴趣的朋友欢迎来访。<br> <img src="https://img-blog.csdn.net/20180106161806477?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-01-06T03:13:08.000Z">2018-01-06</time>
                 
                 <div class="level-item">
@@ -926,6 +891,70 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-11-09T12:29:23.000Z">2017-11-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 677 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/11/09/《Android 进阶（四）》 自定义View之仿Emui开关控件/">《Android 进阶（四）》 自定义View之仿Emui开关控件</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a><a href></a>1. 简介</h2><p> 使用华为手机，发现设置应用中的开关空间颜色听挺好看，所以自己想写一个类似的，当然不可能完全相同，但是大致的效果差不多。<br> 操作步骤：</p>
+<ol>
+<li><p>截图。PS取色； </p>
+</li>
+<li><p>判断左右两边的半径； </p>
+</li>
+<li><p>继承View复写onDraw方法，手动绘制。 </p>
+</li>
+<li><p>控制开关的状态：on／off  </p>
+<h2 id="2-效果"><a href="#2-效果" class="headerlink" title="2. 效果"></a><a href></a>2. 效果</h2><p><img src="https://img-blog.csdn.net/20171109202409135?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+</li>
+</ol>
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a><a href></a>3. 实现</h2><h3 id="3-1-自定义属性"><a href="#3-1-自定义属性" class="headerlink" title="3.1 自定义属性"></a><a href></a>3.1 自定义属性</h3><p> 没有定义，颜色和半径都是按照自己的效果写成固定的，当然也可以写成自定义属性。</p>
+<h3 id="3-2-自定义View代码"><a href="#3-2-自定义View代码" class="headerlink" title="3.2 自定义View代码"></a><a href></a>3.2 自定义View代码</h3><p> 涉及到一些动画的使用和View的事件处理</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">public class CustomSwitchView extends View &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 开关圆点颜色</span><br><span class="line">     */</span><br><span class="line">    private final int SWITCH_DOT_COLOR = 0xffffffff;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 关闭状态下的背景颜色</span><br><span class="line">     */</span><br><span class="line">    private final int OFF_BACKGROUND_COLOR = 0xffe2e2e2;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 打开状态下的背景颜色</span><br><span class="line">     */</span><br><span class="line">    private final int ON_BACKGROUND_COLOR = 0xff007dff;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 边界和开关圆点的间距</span><br><span class="line">     */</span><br><span class="line">    private final int BOUND_DOT_GAP = 8;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 是否打开</span><br><span class="line">     */</span><br><span class="line">    private boolean isOn = false;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 圆点的半径和坐标位置</span><br><span class="line">     */</span><br><span class="line">    private int mRadius;</span><br><span class="line"></span><br><span class="line">    private int startX;</span><br><span class="line">    private int endX;</span><br><span class="line">    private float centerX;</span><br><span class="line">    private float centerY;</span><br><span class="line">    private RectF mRectF;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 开关的画笔</span><br><span class="line">     */</span><br><span class="line">    private Paint mSwitchPaint;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 打开或者关闭</span><br><span class="line">     *</span><br><span class="line">     * @param on true 打开， false 关闭</span><br><span class="line">     */</span><br><span class="line">    public void setOn(boolean on) &#123;</span><br><span class="line">        isOn = on;</span><br><span class="line">        ValueAnimator animator;</span><br><span class="line">        if (on) &#123;</span><br><span class="line">            animator = ValueAnimator.ofFloat(centerX, endX);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            animator = ValueAnimator.ofFloat(centerX, startX);</span><br><span class="line">        &#125;</span><br><span class="line">        animator.setDuration(200);</span><br><span class="line">        animator.setRepeatCount(0);</span><br><span class="line">        animator.setInterpolator(new LinearInterpolator());</span><br><span class="line">        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                centerX = (Float) animation.getAnimatedValue();</span><br><span class="line">                invalidate();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        animator.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        mSwitchPaint = new Paint();</span><br><span class="line">        mSwitchPaint.setColor(OFF_BACKGROUND_COLOR);</span><br><span class="line">        mSwitchPaint.setStrokeWidth(10f);</span><br><span class="line">        mSwitchPaint.setStrokeCap(Paint.Cap.ROUND);</span><br><span class="line">        mSwitchPaint.setAntiAlias(true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</span><br><span class="line">        super.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mRectF = new RectF(getLeft(), getTop(), getRight(), getBottom());</span><br><span class="line">        mRadius = h / 2 - BOUND_DOT_GAP;</span><br><span class="line">        startX = getLeft() + mRadius + BOUND_DOT_GAP / 2;</span><br><span class="line">        endX = getRight() - mRadius - BOUND_DOT_GAP / 2;</span><br><span class="line">        centerX = startX;</span><br><span class="line">        centerY = (getTop() + getBottom()) / 2.0f;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onLayout(boolean changed, int left, int top, int right, int bottom) &#123;</span><br><span class="line">        super.onLayout(changed, left, top, right, bottom);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        if (isOn) &#123;</span><br><span class="line">            mSwitchPaint.setColor(ON_BACKGROUND_COLOR);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mSwitchPaint.setColor(OFF_BACKGROUND_COLOR);</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.drawRoundRect(mRectF, mRadius, mRadius, mSwitchPaint);</span><br><span class="line">        mSwitchPaint.setColor(SWITCH_DOT_COLOR);</span><br><span class="line">        canvas.drawCircle(centerX, centerY, mRadius, mSwitchPaint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        int action = event.getAction();</span><br><span class="line">        switch (action) &#123;</span><br><span class="line">            case MotionEvent.ACTION_DOWN:</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_UP:</span><br><span class="line">                setOn(!isOn);</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_MOVE: &#123;</span><br><span class="line">                float x = event.getX();</span><br><span class="line">                if (x &lt; endX &amp;&amp; x &gt; startX) &#123;</span><br><span class="line">                    centerX = x;</span><br><span class="line">                    invalidate();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-源码"><a href="#4-源码" class="headerlink" title="4. 源码"></a><a href></a>4. 源码</h2><p> 源码依然是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
+<hr>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -970,22 +999,22 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -998,7 +1027,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1018,40 +1047,28 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1121,7 +1138,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1145,7 +1162,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1153,7 +1170,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1239,7 +1256,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1253,25 +1270,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1313,7 +1311,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1322,7 +1320,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1349,6 +1347,25 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1367,7 +1384,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1510,7 +1527,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1708,7 +1725,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1805,14 +1822,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1834,13 +1851,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1973,7 +1983,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2050,7 +2060,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2162,14 +2172,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2197,7 +2207,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2295,14 +2305,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2373,25 +2383,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2430,7 +2421,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2439,7 +2430,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2466,6 +2457,25 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2484,7 +2494,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2627,7 +2637,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2825,7 +2835,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2922,14 +2932,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2951,13 +2961,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3090,7 +3093,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3167,7 +3170,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3279,14 +3282,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3314,7 +3317,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3412,14 +3415,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

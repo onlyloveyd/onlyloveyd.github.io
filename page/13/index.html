@@ -145,71 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-09-03T09:17:39.000Z">2016-09-03</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    6 分钟 读完 (大约 860 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/09/03/《Android 应用 之路》 MPAndroidChart~BarChart/">《Android 应用 之路》 MPAndroidChart~BarChart</a>
-            
-        </h1>
-        <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/52424333" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/52424333</a>   </p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="noopener">MPAndroidChart</a>是PhilJay大神给Android开发者带来的福利。MPAndroidChart是一个功能强大并且使用灵活的图表开源库，支持Android和IOS两种，这里我们暂时只关注Android版本。</p>
-<h3 id="Wiki"><a href="#Wiki" class="headerlink" title="Wiki"></a><a href></a>Wiki</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart/wiki" target="_blank" rel="noopener">https://github.com/PhilJay/MPAndroidChart/wiki</a></p>
-<h3 id="Javadoc"><a href="#Javadoc" class="headerlink" title="Javadoc"></a><a href></a>Javadoc</h3><p> <a href="https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/" target="_blank" rel="noopener">https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/</a></p>
-<h3 id="今日之图-BarChart"><a href="#今日之图-BarChart" class="headerlink" title="今日之图~BarChart"></a><a href></a>今日之图~BarChart</h3><p> 先看图，压压惊<br> <img src="https://img-blog.csdn.net/20160903165040015" alt="这里写图片描述"></p>
-<p> <img src="https://img-blog.csdn.net/20160903165339235" alt="这里写图片描述"></p>
-<p> <em><strong>布局文件</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;mapdemo.example.com.mpandroidchartdemo.MainActivity&quot;&gt;</span><br><span class="line">    &lt;!-- 主布局中添加BarChart--&gt;</span><br><span class="line">    &lt;com.github.mikephil.charting.charts.BarChart</span><br><span class="line">        android:id=&quot;@+id/barchart&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:text=&quot;Hello World!&quot; /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 对于Chart,可以采用布局文件添加方式，也可以采用代码添加方式。</p>
-<p> <em><strong>代码</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Bind(R.id.barchart)</span><br><span class="line">    BarChart barchart;</span><br><span class="line"></span><br><span class="line">    private Random random;//用于产生随机数字</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(this);</span><br><span class="line">        random = new Random();</span><br><span class="line">        initBarChart();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initBarChart() &#123;</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals = new ArrayList&lt;&gt;();//Y轴方向第一组数组</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals2 = new ArrayList&lt;&gt;();//Y轴方向第二组数组</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals3 = new ArrayList&lt;&gt;();//Y轴方向第三组数组</span><br><span class="line">        ArrayList&lt;String&gt; xVals = new ArrayList&lt;&gt;();//X轴数据</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 12; i++) &#123;//添加数据源</span><br><span class="line">            xVals.add((i + 1) + &quot;月&quot;);</span><br><span class="line">            yVals.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line">            yVals2.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line">            yVals3.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet = new BarDataSet(yVals, &quot;小明每月支出&quot;);</span><br><span class="line">        barDataSet.setColor(Color.RED);//设置第一组数据颜色</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet2 = new BarDataSet(yVals2, &quot;小花每月支出&quot;);</span><br><span class="line">        barDataSet2.setColor(Color.GREEN);//设置第二组数据颜色</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet3 = new BarDataSet(yVals3, &quot;小蔡每月支出&quot;);</span><br><span class="line">        barDataSet3.setColor(Color.YELLOW);//设置第三组数据颜色</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;IBarDataSet&gt; threebardata = new ArrayList&lt;&gt;();//IBarDataSet 接口很关键，是添加多组数据的关键结构，LineChart也是可以采用对应的接口类，也可以添加多组数据</span><br><span class="line">        threebardata.add(barDataSet);</span><br><span class="line">        threebardata.add(barDataSet2);</span><br><span class="line">        threebardata.add(barDataSet3);</span><br><span class="line"></span><br><span class="line">        BarData bardata = new BarData(xVals, threebardata);</span><br><span class="line">        barchart.setData(bardata);</span><br><span class="line">        barchart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);//设置注解的位置在左上方</span><br><span class="line">        barchart.getLegend().setForm(Legend.LegendForm.CIRCLE);//这是左边显示小图标的形状</span><br><span class="line"></span><br><span class="line">        barchart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);//设置X轴的位置</span><br><span class="line">        barchart.getXAxis().setDrawGridLines(false);//不显示网格</span><br><span class="line"></span><br><span class="line">        barchart.getAxisRight().setEnabled(false);//右侧不显示Y轴</span><br><span class="line">        barchart.getAxisLeft().setAxisMinValue(0.0f);//设置Y轴显示最小值，不然0下面会有空隙</span><br><span class="line">        barchart.getAxisLeft().setDrawGridLines(false);//不设置Y轴网格</span><br><span class="line"></span><br><span class="line">        barchart.setDescription(&quot;No Deal&quot;);//设置描述</span><br><span class="line">        barchart.setDescriptionTextSize(20.f);//设置描述字体</span><br><span class="line">        barchart.animateXY(1000, 2000);//设置动画</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里，一些使用方式可以具体去看看对应的类机构，比如BarChart</p>
-<p> <img src="https://img-blog.csdn.net/20160903170248772" alt="这里写图片描述"></p>
-<p> 通过查看它对应的源码，可以更好的使用功能，AS会自动的帮我们反编译一些内容，能借助AS很好的学习一些开源Jar包。</p>
-<p> 在上面这个例子中，如何让现实的数值为“xxx元”呢？</p>
-<p> MPAndroidChart中存在ValueFormatter这个东西，通过这个还做一个转换，如实现“xxx元”的效果</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bardata.setValueFormatter(new ValueFormatter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) &#123;</span><br><span class="line">                return entry.getVal() + &quot;元&quot;;//只用拿到对应Entry的值然后加个“元”即可，传入的这几个参数，v就是Y轴的value, entry为数据入口，i就是X轴方向的位置，viewPortHandler应该就是对应View的操作手，控制视图的移动缩放什么的</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160903171238804" alt="这里写图片描述"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-09-02T05:32:30.000Z">2016-09-02</time>
                 
                 <div class="level-item">
@@ -643,7 +578,7 @@ exitUntilCollapsed   | 当你定义了一个minHeight，这个view将在滚动�
                 <span class="level-item has-text-grey">
                     
                     
-                    16 分钟 读完 (大约 2340 个字)
+                    16 分钟 读完 (大约 2341 个字)
                 </span>
                 
                 
@@ -657,62 +592,16 @@ exitUntilCollapsed   | 当你定义了一个minHeight，这个view将在滚动�
         </h1>
         <div class="content">
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 上一篇主要讲解了BootAnimation是从何而来，如何启动，从开机，到SurfaceFlinger服务起来，然后到执行开机动画，如果要深入的看里面的代码，是需要花一定的时间的，我们旨在了解大致的流程，具体流程中的函数，变量意义，具体实现，读者请自研。<br> 由来已知，执行待述~</p>
-<h2 id="BootAnimation执行"><a href="#BootAnimation执行" class="headerlink" title="BootAnimation执行"></a>BootAnimation执行</h2><h3 id="代码位置"><a href="#代码位置" class="headerlink" title="代码位置"></a>代码位置</h3><pre><code>frameworks/base/cmds/bootanimation  
-目录中包含如下文件  
-![这里写图片描述](https://img-blog.csdn.net/20160808125603638)  
-|文件名|作用|  
-|----|----|  
-|Android.mk|mk文件，编译模块使用|  
-|AudioPlayer.cpp、AudioPlayer.h|音频播放|  
-|BootAnimation.cpp、BootAnimation.h|开机动画的源文件和头文件|  
-|bootanimation_main.cpp|开机动画的入口|  </code></pre><h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><pre><code>bootanimation_main.cpp  
-文件中定义main函数，也就是C语言中的执行文件的入口函数  </code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, char** argv)</span><br><span class="line">&#123;</span><br><span class="line">//宏定义判断是否设置进程的优先级</span><br><span class="line">#if defined(HAVE_PTHREADS)</span><br><span class="line">    setpriority(PRIO_PROCESS, 0, ANDROID_PRIORITY_DISPLAY);</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">    char value[PROPERTY_VALUE_MAX];</span><br><span class="line">    //这个配置项决定是否存在开机动画</span><br><span class="line">    property_get(&quot;debug.sf.nobootanimation&quot;, value, &quot;0&quot;);</span><br><span class="line">    int noBootAnimation = atoi(value);</span><br><span class="line">    ALOGI_IF(noBootAnimation,  &quot;boot animation disabled&quot;);</span><br><span class="line">    if (!noBootAnimation) &#123;</span><br><span class="line">        //创建ProcessSate对象</span><br><span class="line">        // 这个过程会打开/dev/binder设备，形成和内核binder机制的交互的通道; 映射fd到内存</span><br><span class="line">        sp&lt;ProcessState&gt; proc(ProcessState::self());</span><br><span class="line">        //创建线程并加入到线程池</span><br><span class="line">        ProcessState::self()-&gt;startThreadPool();</span><br><span class="line"></span><br><span class="line">        // 创建开机动画对象</span><br><span class="line">        sp&lt;BootAnimation&gt; boot = new BootAnimation();</span><br><span class="line">	    //把主线程加入到线程池</span><br><span class="line">        IPCThreadState::self()-&gt;joinThreadPool();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 创建开机动画对象会执行到BootAnimation的构造方法，先看下BootAnimation的头文件<br> BootAnimation.h</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">namespace android &#123;</span><br><span class="line"></span><br><span class="line">class AudioPlayer;</span><br><span class="line">class Surface;</span><br><span class="line">class SurfaceComposerClient;</span><br><span class="line">class SurfaceControl;</span><br><span class="line"></span><br><span class="line">// ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">class BootAnimation : public Thread, public IBinder::DeathRecipient</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">                BootAnimation();</span><br><span class="line">    virtual     ~BootAnimation();</span><br><span class="line"></span><br><span class="line">    sp&lt;SurfaceComposerClient&gt; session() const;</span><br><span class="line"></span><br><span class="line">private:</span><br><span class="line">   virtual bool        threadLoop();</span><br><span class="line">   virtual status_t    readyToRun();</span><br><span class="line">   virtual void        onFirstRef();</span><br><span class="line">   virtual void        binderDied(const wp&lt;IBinder&gt;&amp; who);</span><br><span class="line"></span><br><span class="line">   //Texture类定义</span><br><span class="line">   struct Texture &#123;</span><br><span class="line">       GLint   w; //宽度</span><br><span class="line">       GLint   h; //高度</span><br><span class="line">       GLuint  name; //名称</span><br><span class="line">   &#125;;</span><br><span class="line">   //动画内容结构体</span><br><span class="line">   struct Animation &#123;</span><br><span class="line">       //动画帧</span><br><span class="line">       struct Frame &#123;</span><br><span class="line">           String8 name;</span><br><span class="line">           FileMap* map;</span><br><span class="line">           mutable GLuint tid;</span><br><span class="line">           bool operator &lt; (const Frame&amp; rhs) const &#123;</span><br><span class="line">               return name &lt; rhs.name;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;;</span><br><span class="line">       //动画部分，因为动画可能是由几个部分组成</span><br><span class="line">       struct Part &#123;</span><br><span class="line">           int count;</span><br><span class="line">           int pause;</span><br><span class="line">           String8 path;</span><br><span class="line">           SortedVector&lt;Frame&gt; frames;</span><br><span class="line">           bool playUntilComplete;</span><br><span class="line">           float backgroundColor[3];</span><br><span class="line">           FileMap* audioFile;</span><br><span class="line">       &#125;;</span><br><span class="line">       int fps;</span><br><span class="line">       int width;</span><br><span class="line">       int height;</span><br><span class="line">       Vector&lt;Part&gt; parts;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   status_t initTexture(Texture* texture, AssetManager&amp; asset, const char* name);</span><br><span class="line">   status_t initTexture(const Animation::Frame&amp; frame);</span><br><span class="line">   bool android();</span><br><span class="line">   bool readFile(const char* name, String8&amp; outString);</span><br><span class="line">   bool movie();</span><br><span class="line"></span><br><span class="line">   void checkExit();</span><br><span class="line"></span><br><span class="line">   sp&lt;SurfaceComposerClient&gt;       mSession;</span><br><span class="line">   sp&lt;AudioPlayer&gt;                 mAudioPlayer;</span><br><span class="line">   AssetManager mAssets;</span><br><span class="line">   Texture     mAndroid[2];</span><br><span class="line">   int         mWidth;</span><br><span class="line">   int         mHeight;</span><br><span class="line">   EGLDisplay  mDisplay;</span><br><span class="line">   EGLDisplay  mContext;</span><br><span class="line">   EGLDisplay  mSurface;</span><br><span class="line">   sp&lt;SurfaceControl&gt; mFlingerSurfaceControl;</span><br><span class="line">   sp&lt;Surface&gt; mFlingerSurface;</span><br><span class="line">   ZipFileRO   *mZip;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// ---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">&#125;; // namespace android</span><br><span class="line"></span><br><span class="line">#endif // ANDROID_BOOTANIMATION_H</span><br></pre></td></tr></table></figure>
-
-<p> 大致的定义和声明就是这么多，看下具体实现<br> BootAnimation.cpp<br> 首先执行构造方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BootAnimation::BootAnimation() : Thread(false), mZip(NULL)</span><br><span class="line">&#123;</span><br><span class="line">	//用于界面显示的mSession，与SurfaceFlinger交互的客户端</span><br><span class="line">    mSession = new SurfaceComposerClient();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 然后执行</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void BootAnimation::onFirstRef() &#123;</span><br><span class="line">    status_t err = mSession-&gt;linkToComposerDeath(this);</span><br><span class="line">    ALOGE_IF(err, &quot;linkToComposerDeath failed (%s) &quot;, strerror(-err));</span><br><span class="line">    if (err == NO_ERROR) &#123;</span><br><span class="line">        run(&quot;BootAnimation&quot;, PRIORITY_DISPLAY);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 由于BootAnimation继承Thread类，首先会调用readyToRun函数</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">status_t BootAnimation::readyToRun() &#123;</span><br><span class="line">    mAssets.addDefaultAssets();</span><br><span class="line"></span><br><span class="line">    sp&lt;IBinder&gt; dtoken(SurfaceComposerClient::getBuiltInDisplay(</span><br><span class="line">            ISurfaceComposer::eDisplayIdMain));</span><br><span class="line">    DisplayInfo dinfo;</span><br><span class="line">    status_t status = SurfaceComposerClient::getDisplayInfo(dtoken, &amp;dinfo);</span><br><span class="line">    if (status)</span><br><span class="line">        return -1;</span><br><span class="line"></span><br><span class="line">    // create the native surface</span><br><span class="line">    sp&lt;SurfaceControl&gt; control = session()-&gt;createSurface(String8(&quot;BootAnimation&quot;),</span><br><span class="line">            dinfo.w, dinfo.h, PIXEL_FORMAT_RGB_565);</span><br><span class="line"></span><br><span class="line">    SurfaceComposerClient::openGlobalTransaction();</span><br><span class="line">    control-&gt;setLayer(0x40000000);</span><br><span class="line">    SurfaceComposerClient::closeGlobalTransaction();</span><br><span class="line"></span><br><span class="line">    sp&lt;Surface&gt; s = control-&gt;getSurface();</span><br><span class="line"></span><br><span class="line">    // initialize opengl and egl</span><br><span class="line">    const EGLint attribs[] = &#123;</span><br><span class="line">            EGL_RED_SIZE,   8,</span><br><span class="line">            EGL_GREEN_SIZE, 8,</span><br><span class="line">            EGL_BLUE_SIZE,  8,</span><br><span class="line">            EGL_DEPTH_SIZE, 0,</span><br><span class="line">            EGL_NONE</span><br><span class="line">    &#125;;</span><br><span class="line">    EGLint w, h, dummy;</span><br><span class="line">    EGLint numConfigs;</span><br><span class="line">    EGLConfig config;</span><br><span class="line">    EGLSurface surface;</span><br><span class="line">    EGLContext context;</span><br><span class="line"></span><br><span class="line">    EGLDisplay display = eglGetDisplay(EGL_DEFAULT_DISPLAY);</span><br><span class="line"></span><br><span class="line">    eglInitialize(display, 0, 0);</span><br><span class="line">    eglChooseConfig(display, attribs, &amp;config, 1, &amp;numConfigs);</span><br><span class="line">    surface = eglCreateWindowSurface(display, config, s.get(), NULL);</span><br><span class="line">    context = eglCreateContext(display, config, NULL, NULL);</span><br><span class="line">    eglQuerySurface(display, surface, EGL_WIDTH, &amp;w);</span><br><span class="line">    eglQuerySurface(display, surface, EGL_HEIGHT, &amp;h);</span><br><span class="line"></span><br><span class="line">    if (eglMakeCurrent(display, surface, surface, context) == EGL_FALSE)</span><br><span class="line">        return NO_INIT;</span><br><span class="line"></span><br><span class="line">    mDisplay = display;</span><br><span class="line">    mContext = context;</span><br><span class="line">    mSurface = surface;</span><br><span class="line">    mWidth = w;</span><br><span class="line">    mHeight = h;</span><br><span class="line">    mFlingerSurfaceControl = control;</span><br><span class="line">    mFlingerSurface = s;</span><br><span class="line"></span><br><span class="line">    // If the device has encryption turned on or is in process</span><br><span class="line">    // of being encrypted we show the encrypted boot animation.</span><br><span class="line">    char decrypt[PROPERTY_VALUE_MAX];</span><br><span class="line">    property_get(&quot;vold.decrypt&quot;, decrypt, &quot;&quot;);</span><br><span class="line"></span><br><span class="line">    bool encryptedAnimation = atoi(decrypt) != 0 || !strcmp(&quot;trigger_restart_min_framework&quot;, decrypt);</span><br><span class="line"></span><br><span class="line">    ZipFileRO* zipFile = NULL;</span><br><span class="line">    if ((encryptedAnimation &amp;&amp;</span><br><span class="line">            (access(SYSTEM_ENCRYPTED_BOOTANIMATION_FILE, R_OK) == 0) &amp;&amp;</span><br><span class="line">            ((zipFile = ZipFileRO::open(SYSTEM_ENCRYPTED_BOOTANIMATION_FILE)) != NULL)) ||</span><br><span class="line"></span><br><span class="line">            ((access(OEM_BOOTANIMATION_FILE, R_OK) == 0) &amp;&amp;</span><br><span class="line">            ((zipFile = ZipFileRO::open(OEM_BOOTANIMATION_FILE)) != NULL)) ||</span><br><span class="line"></span><br><span class="line">            ((access(SYSTEM_BOOTANIMATION_FILE, R_OK) == 0) &amp;&amp;</span><br><span class="line">            ((zipFile = ZipFileRO::open(SYSTEM_BOOTANIMATION_FILE)) != NULL))) &#123;</span><br><span class="line">        mZip = zipFile;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return NO_ERROR;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 上面主要做两个操作：</p>
-<p>初始化显示界面用于播放开机动画，egl的一些内容；<br>根据手机是否加密选择不同的开机动画文件，然后拿到入口zipFile<br>其中用到了一个文件路径在BootAnimation.cpp的开头有定义  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#define OEM_BOOTANIMATION_FILE &quot;/oem/media/bootanimation.zip&quot;   //这个应该是OEM厂商自己定制</span><br><span class="line"></span><br><span class="line">#define SYSTEM_BOOTANIMATION_FILE &quot;/system/media/bootanimation.zip&quot;   //正常情况下的Android原始开机动画</span><br><span class="line"></span><br><span class="line">#define SYSTEM_ENCRYPTED_BOOTANIMATION_FILE &quot;/system/media/bootanimation-encrypted.zip&quot; //加密手机的开机动画</span><br></pre></td></tr></table></figure>
-
-<p> readyToRun方法执行完之后，接着看threaLoop函数</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">bool BootAnimation::threadLoop()</span><br><span class="line">&#123;</span><br><span class="line">    bool r;</span><br><span class="line">    // We have no bootanimation file, so we use the stock android logo</span><br><span class="line">    // animation.</span><br><span class="line">    if (mZip == NULL) &#123;</span><br><span class="line">        r = android(); //没有开机动画文件，执行android logo</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        r = movie(); //存在开机动画文件，则执行对应的开机动画文件解析出来的内容</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);</span><br><span class="line">    eglDestroyContext(mDisplay, mContext);</span><br><span class="line">    eglDestroySurface(mDisplay, mSurface);</span><br><span class="line">    mFlingerSurface.clear();</span><br><span class="line">    mFlingerSurfaceControl.clear();</span><br><span class="line">    eglTerminate(mDisplay);</span><br><span class="line">    IPCThreadState::self()-&gt;stopProcess();</span><br><span class="line">    return r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> ——————————————&gt;android()</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">bool BootAnimation::android()</span><br><span class="line">&#123;</span><br><span class="line">    //初始化两个纹理用于显示logo</span><br><span class="line">    initTexture(&amp;mAndroid[0], mAssets, &quot;images/android-logo-mask.png&quot;);</span><br><span class="line">    initTexture(&amp;mAndroid[1], mAssets, &quot;images/android-logo-shine.png&quot;);</span><br><span class="line"></span><br><span class="line">    // clear screen 清屏</span><br><span class="line">    glShadeModel(GL_FLAT);</span><br><span class="line">    glDisable(GL_DITHER);</span><br><span class="line">    glDisable(GL_SCISSOR_TEST);</span><br><span class="line">    glClearColor(0,0,0,1);</span><br><span class="line">    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">    eglSwapBuffers(mDisplay, mSurface);</span><br><span class="line"></span><br><span class="line">    glEnable(GL_TEXTURE_2D);</span><br><span class="line">    glTexEnvx(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);</span><br><span class="line"></span><br><span class="line">    const GLint xc = (mWidth  - mAndroid[0].w) / 2;</span><br><span class="line">    const GLint yc = (mHeight - mAndroid[0].h) / 2;</span><br><span class="line">    const Rect updateRect(xc, yc, xc + mAndroid[0].w, yc + mAndroid[0].h);</span><br><span class="line"></span><br><span class="line">    glScissor(updateRect.left, mHeight - updateRect.bottom, updateRect.width(),</span><br><span class="line">            updateRect.height());</span><br><span class="line"></span><br><span class="line">    // Blend state</span><br><span class="line">    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</span><br><span class="line">    glTexEnvx(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);</span><br><span class="line"></span><br><span class="line">    const nsecs_t startTime = systemTime();</span><br><span class="line">    //不停的显示知道exitPending()返回true</span><br><span class="line">    do &#123;</span><br><span class="line">        ......</span><br><span class="line">        EGLBoolean res = eglSwapBuffers(mDisplay, mSurface);</span><br><span class="line">        ......</span><br><span class="line"></span><br><span class="line">        checkExit();</span><br><span class="line">    &#125; while (!exitPending());</span><br><span class="line">    glDeleteTextures(1, &amp;mAndroid[0].name);</span><br><span class="line">    glDeleteTextures(1, &amp;mAndroid[1].name);</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 主要工作，初始化显示的logo纹理，不断刷新界面直到exitPending()返回true，exitPenging()是Thread类中定义的函数，在checkExit()函数中通过requestExit()来执行退出</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void BootAnimation::checkExit() &#123;</span><br><span class="line">    // Allow surface flinger to gracefully request shutdown</span><br><span class="line">    char value[PROPERTY_VALUE_MAX];</span><br><span class="line">    //EXIT_PROP_NAME &quot;service.bootanim.exit&quot; 这个配置项在SurfaceFlinger的bootFinished函数中设置为1，然后这里才能退出开机动画，这个过程设计到开机启动到launcher的整个过程，这里不赘述</span><br><span class="line">    property_get(EXIT_PROP_NAME, value, &quot;0&quot;);</span><br><span class="line">    int exitnow = atoi(value);</span><br><span class="line">    if (exitnow) &#123;</span><br><span class="line">        requestExit();</span><br><span class="line">        if (mAudioPlayer != NULL) &#123;</span><br><span class="line">            mAudioPlayer-&gt;requestExit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> ——————————————&gt;movie()<br> movie()这个函数有点长，我们截断一点一点的看</p>
-<p>读取bootanimation.zip中的配置文件  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">if (!readFile(&quot;desc.txt&quot;, desString)) &#123;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line">char const* s = desString.string();</span><br><span class="line">//读取desc.txt文件</span><br><span class="line">// Create and initialize an AudioPlayer if we have an audio_conf.txt file</span><br><span class="line">String8 audioConf;</span><br><span class="line">//判断是否需要创建AudioPlayer,这部分我们暂时不关注</span><br><span class="line">if (readFile(&quot;audio_conf.txt&quot;, audioConf)) &#123;</span><br><span class="line">    mAudioPlayer = new AudioPlayer;</span><br><span class="line">    if (!mAudioPlayer-&gt;init(audioConf.string())) &#123;</span><br><span class="line">        ALOGE(&quot;mAudioPlayer.init failed&quot;);</span><br><span class="line">        mAudioPlayer = NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>解析desc.txt文件，就是上面拿到的那个char const *s  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">for (;;) &#123;</span><br><span class="line">        //一行一行的截取</span><br><span class="line">        const char* endl = strstr(s, &quot;\n&quot;);</span><br><span class="line">        if (!endl) break;</span><br><span class="line">        String8 line(s, endl - s);</span><br><span class="line">        const char* l = line.string();</span><br><span class="line">        //几个需要捕获的参数,帧率 宽高，次数</span><br><span class="line">        int fps, width, height, count, pause;</span><br><span class="line">        char path[ANIM_ENTRY_NAME_MAX];</span><br><span class="line">        char color[7] = &quot;000000&quot;; // default to black if unspecified</span><br><span class="line"></span><br><span class="line">        char pathType;</span><br><span class="line">        //读取帧率和宽高</span><br><span class="line">        if (sscanf(l, &quot;%d %d %d&quot;, &amp;width, &amp;height, &amp;fps) == 3) &#123;</span><br><span class="line">            // ALOGD(&quot;&gt; w=%d, h=%d, fps=%d&quot;, width, height, fps);</span><br><span class="line">            animation.width = width;</span><br><span class="line">            animation.height = height;</span><br><span class="line">            animation.fps = fps;</span><br><span class="line">        &#125;</span><br><span class="line">        //或者读取part内容</span><br><span class="line">        else if (sscanf(l, &quot; %c %d %d %s #%6s&quot;, &amp;pathType, &amp;count, &amp;pause, path, color) &gt;= 4) &#123;</span><br><span class="line">            // ALOGD(&quot;&gt; type=%c, count=%d, pause=%d, path=%s, color=%s&quot;, pathType, count, pause, path, color);</span><br><span class="line">            Animation::Part part;</span><br><span class="line">            part.playUntilComplete = pathType == &apos;c&apos;;</span><br><span class="line">            part.count = count;</span><br><span class="line">            part.pause = pause;</span><br><span class="line">            part.path = path;</span><br><span class="line">            part.audioFile = NULL;</span><br><span class="line">            if (!parseColor(color, part.backgroundColor)) &#123;</span><br><span class="line">                ALOGE(&quot;&gt; invalid color &apos;#%s&apos;&quot;, color);</span><br><span class="line">                part.backgroundColor[0] = 0.0f;</span><br><span class="line">                part.backgroundColor[1] = 0.0f;</span><br><span class="line">                part.backgroundColor[2] = 0.0f;</span><br><span class="line">            &#125;</span><br><span class="line">            animation.parts.add(part);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        s = ++endl;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>读取所有的数据  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// read all the data structures</span><br><span class="line">const size_t pcount = animation.parts.size();</span><br><span class="line">void *cookie = NULL;</span><br><span class="line">if (!mZip-&gt;startIteration(&amp;cookie)) &#123;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ZipEntryRO entry;</span><br><span class="line">char name[ANIM_ENTRY_NAME_MAX];</span><br><span class="line">while ((entry = mZip-&gt;nextEntry(cookie)) != NULL) &#123;</span><br><span class="line">    const int foundEntryName = mZip-&gt;getEntryFileName(entry, name, ANIM_ENTRY_NAME_MAX);</span><br><span class="line">    if (foundEntryName &gt; ANIM_ENTRY_NAME_MAX || foundEntryName == -1) &#123;</span><br><span class="line">        ALOGE(&quot;Error fetching entry file name&quot;);</span><br><span class="line">        continue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const String8 entryName(name);</span><br><span class="line">    const String8 path(entryName.getPathDir());</span><br><span class="line">    const String8 leaf(entryName.getPathLeaf());</span><br><span class="line">    if (leaf.size() &gt; 0) &#123;</span><br><span class="line">        for (size_t j=0 ; j&lt;pcount ; j++) &#123;</span><br><span class="line">            if (path == animation.parts[j].path) &#123;</span><br><span class="line">                int method;</span><br><span class="line">                // supports only stored png files</span><br><span class="line">                if (mZip-&gt;getEntryInfo(entry, &amp;method, NULL, NULL, NULL, NULL, NULL)) &#123;</span><br><span class="line">                    if (method == ZipFileRO::kCompressStored) &#123;</span><br><span class="line">                        FileMap* map = mZip-&gt;createEntryFileMap(entry);</span><br><span class="line">                        if (map) &#123;</span><br><span class="line">                            Animation::Part&amp; part(animation.parts.editItemAt(j));</span><br><span class="line">                            if (leaf == &quot;audio.wav&quot;) &#123;</span><br><span class="line">                                // a part may have at most one audio file</span><br><span class="line">                                part.audioFile = map;</span><br><span class="line">                            &#125; else &#123;</span><br><span class="line">                                Animation::Frame frame;</span><br><span class="line">                                frame.name = leaf;</span><br><span class="line">                                frame.map = map;</span><br><span class="line">                                part.frames.add(frame);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mZip-&gt;endIteration(cookie);</span><br></pre></td></tr></table></figure>
-
-
-<p>显示动画  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">// clear screen</span><br><span class="line">glShadeModel(GL_FLAT);</span><br><span class="line">glDisable(GL_DITHER);</span><br><span class="line">glDisable(GL_SCISSOR_TEST);</span><br><span class="line">glDisable(GL_BLEND);</span><br><span class="line">glClearColor(0,0,0,1);</span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">eglSwapBuffers(mDisplay, mSurface);</span><br><span class="line"></span><br><span class="line">glBindTexture(GL_TEXTURE_2D, 0);</span><br><span class="line">glEnable(GL_TEXTURE_2D);</span><br><span class="line">glTexEnvx(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);</span><br><span class="line">glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);</span><br><span class="line">glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);</span><br><span class="line">glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line">glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line"></span><br><span class="line">const int xc = (mWidth - animation.width) / 2;</span><br><span class="line">const int yc = ((mHeight - animation.height) / 2);</span><br><span class="line">nsecs_t lastFrame = systemTime();</span><br><span class="line">nsecs_t frameDuration = s2ns(1) / animation.fps;</span><br><span class="line"></span><br><span class="line">Region clearReg(Rect(mWidth, mHeight));</span><br><span class="line">clearReg.subtractSelf(Rect(xc, yc, xc+animation.width, yc+animation.height));</span><br><span class="line"></span><br><span class="line">for (size_t i=0 ; i&lt;pcount ; i++) &#123;</span><br><span class="line">    const Animation::Part&amp; part(animation.parts[i]);</span><br><span class="line">    const size_t fcount = part.frames.size();</span><br><span class="line">    glBindTexture(GL_TEXTURE_2D, 0);</span><br><span class="line"></span><br><span class="line">    for (int r=0 ; !part.count || r&lt;part.count ; r++) &#123;</span><br><span class="line">        // Exit any non playuntil complete parts immediately</span><br><span class="line">        if(exitPending() &amp;&amp; !part.playUntilComplete)</span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        // only play audio file the first time we animate the part</span><br><span class="line">        if (r == 0 &amp;&amp; mAudioPlayer != NULL &amp;&amp; part.audioFile) &#123;</span><br><span class="line">            mAudioPlayer-&gt;playFile(part.audioFile);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        glClearColor(</span><br><span class="line">                part.backgroundColor[0],</span><br><span class="line">                part.backgroundColor[1],</span><br><span class="line">                part.backgroundColor[2],</span><br><span class="line">                1.0f);</span><br><span class="line"></span><br><span class="line">        for (size_t j=0 ; j&lt;fcount &amp;&amp; (!exitPending() || part.playUntilComplete) ; j++) &#123;</span><br><span class="line">            const Animation::Frame&amp; frame(part.frames[j]);</span><br><span class="line">            nsecs_t lastFrame = systemTime();</span><br><span class="line"></span><br><span class="line">            if (r &gt; 0) &#123;</span><br><span class="line">                glBindTexture(GL_TEXTURE_2D, frame.tid);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (part.count != 1) &#123;</span><br><span class="line">                    glGenTextures(1, &amp;frame.tid);</span><br><span class="line">                    glBindTexture(GL_TEXTURE_2D, frame.tid);</span><br><span class="line">                    glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span><br><span class="line">                    glTexParameterx(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">                &#125;</span><br><span class="line">                initTexture(frame);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (!clearReg.isEmpty()) &#123;</span><br><span class="line">                Region::const_iterator head(clearReg.begin());</span><br><span class="line">                Region::const_iterator tail(clearReg.end());</span><br><span class="line">                glEnable(GL_SCISSOR_TEST);</span><br><span class="line">                while (head != tail) &#123;</span><br><span class="line">                    const Rect&amp; r(*head++);</span><br><span class="line">                    glScissor(r.left, mHeight - r.bottom,</span><br><span class="line">                            r.width(), r.height());</span><br><span class="line">                    glClear(GL_COLOR_BUFFER_BIT);</span><br><span class="line">                &#125;</span><br><span class="line">                glDisable(GL_SCISSOR_TEST);</span><br><span class="line">            &#125;</span><br><span class="line">            glDrawTexiOES(xc, yc, 0, animation.width, animation.height);</span><br><span class="line">            eglSwapBuffers(mDisplay, mSurface);</span><br><span class="line"></span><br><span class="line">            nsecs_t now = systemTime();</span><br><span class="line">            nsecs_t delay = frameDuration - (now - lastFrame);</span><br><span class="line">            //ALOGD(&quot;%lld, %lld&quot;, ns2ms(now - lastFrame), ns2ms(delay));</span><br><span class="line">            lastFrame = now;</span><br><span class="line"></span><br><span class="line">            if (delay &gt; 0) &#123;</span><br><span class="line">                struct timespec spec;</span><br><span class="line">                spec.tv_sec  = (now + delay) / 1000000000;</span><br><span class="line">                spec.tv_nsec = (now + delay) % 1000000000;</span><br><span class="line">                int err;</span><br><span class="line">                do &#123;</span><br><span class="line">                    err = clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &amp;spec, NULL);</span><br><span class="line">                &#125; while (err&lt;0 &amp;&amp; errno == EINTR);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            checkExit();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        usleep(part.pause * ns2us(frameDuration));</span><br><span class="line"></span><br><span class="line">        // For infinite parts, we&apos;ve now played them at least once, so perhaps exit</span><br><span class="line">        if(exitPending() &amp;&amp; !part.count)</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // free the textures for this part</span><br><span class="line">    if (part.count != 1) &#123;</span><br><span class="line">        for (size_t j=0 ; j&lt;fcount ; j++) &#123;</span><br><span class="line">            const Animation::Frame&amp; frame(part.frames[j]);</span><br><span class="line">            glDeleteTextures(1, &amp;frame.tid);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p> 主要工作，贴代码，加自己的理解，有问题留言。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/08/10/《Android Framework 之路》BootAnimation（2）/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -936,6 +825,129 @@ setTorchMode()                   | 设置闪光灯的状态                     
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-07-09T00:53:16.000Z">2016-07-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2033 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/07/09/《Android 基础（十七）》 ViewPager/">《Android 基础（十七）》 ViewPager</a>
+            
+        </h1>
+        <div class="content">
+            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51865070" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51865070</a>   </p>
+<p>  ###<strong>介绍</strong></p>
+<blockquote>
+<p>Layout manager that allows the user to flip left and right<br> through pages of data. You supply an implementation of a<br> {@link PagerAdapter} to generate the pages that the view shows.</p>
+</blockquote>
+<blockquote>
+<p>ViewPager is most often used in conjunction with {@link android.app.Fragment},<br> which is a convenient way to supply and manage the lifecycle of each page.<br> There are standard adapters implemented for using fragments with the ViewPager,<br> which cover the most common use cases. These are<br> {@link android.support.v4.app.FragmentPagerAdapter} and<br> {@link android.support.v4.app.FragmentStatePagerAdapter}; each of these<br> classes have simple code showing how to build a full user interface<br> with them.</p>
+</blockquote>
+<blockquote>
+<p>Views which are annotated with the {@link DecorView} annotation are treated as<br> part of the view pagers ‘decor’. Each decor view’s position can be controlled via<br> its {@code android:layout_gravity} attribute. For example:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<p> &lt;android.support.v4.view.ViewPager<br> android:layout_width=”match_parent”<br> android:layout_height=”match_parent”&gt;<br> &lt;android.support.v4.view.PagerTitleStrip<br> android:layout_width=”match_parent”<br> android:layout_height=”wrap_content”<br> android:layout_gravity=”top” /&gt;<br> &lt;/android.support.v4.view.ViewPager&gt;  </p>
+<blockquote>
+<p>翻译：<br> ViewPager允许用户通过载有数据的页面实现左右滑动。开发者需要自己实现PagerAdapter来生成需要显示的页面。<br> ViewPager通常回合Fragment结合起来使用，这样实现起来比较简单同时也便于管理每个页面的生命周期。Android存在标准的适配器模板针对Fragment和ViewPager结合使用的方式：<br> android.support.v4.app.FragmentPagerAdapter<br> android.support.v4.app.FragmentStatePagerAdapter<br> 每个类都有简单的说明，告诉开发者如何通过他们来实现与用户的交互。</p>
+</blockquote>
+<blockquote>
+<p>被注释成DecorView的视图均可当做ViewPager的一部分，每一个DecorView的位置可以通过 android:layout_gravity属性来控制，例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;android.support.v4.view.ViewPager </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">android:layout_height=&amp;quot;match_parent&amp;quot;&amp;gt;</span><br><span class="line">&amp;lt;android.support.v4.view.PagerTitleStrip</span><br><span class="line">    android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">    android:layout_height=&amp;quot;wrap_content&amp;quot;</span><br><span class="line">    android:layout_gravity=&amp;quot;top&amp;quot; /&amp;gt;</span><br></pre></td></tr></table></figure>
+
+<p> &lt;/android.support.v4.view.ViewPager&gt;  </p>
+<blockquote>
+<p>翻译有点潦草，大致的意思应该是这样~</p>
+</blockquote>
+<hr>
+<p> ###<strong>类结构</strong><br> <img src="https://img-blog.csdn.net/20160709064427451" alt="这里写图片描述"></p>
+<p> 常用成员的功能介绍</p>
+<pre><code>成员                            | 功能                          
+----------------------------- | ---------------------------- 
+ViewPager()                   | 构造方法                        
+addOnAdapterChangeListener    | 添加一个OnAdapterChangeListener 
+removeOnAdapterChangeListener | 移除一个OnAdapterChangeListener 
+setCurrentItem                | 设置当前Pager的index             
+addOnePageChangeListener      | 设置一个页面改变监听器                 
+addOnePageChangeListener      | 移除一个页面改变监听器                 
+clearOnPageChangeListener     | 移除所有的页面改变监听器                
+setPageTransformer            | 设置页面之间切换的过程中的PageTransformer</code></pre><h2 id="其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。"><a href="#其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。" class="headerlink" title=" 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 "></a> 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 </h2><p> ###<strong>实际使用</strong>  </p>
+<p> ####<strong>1. 简单显示</strong><br> 布局文件</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.opensourcedemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v4.view.ViewPager</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:id=&quot;@+id/viewpager&quot;</span><br><span class="line">        &gt;</span><br><span class="line">    &lt;/android.support.v4.view.ViewPager&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 代码内容<br> MainActivity.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.view.ViewPager;</span><br><span class="line">import android.support.v4.widget.ViewDragHelper;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.Window;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;String&gt; sourceList;</span><br><span class="line">    private static final float MIN_SCALE = 0.5f;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        </span><br><span class="line">        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);</span><br><span class="line">        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());</span><br><span class="line">        viewPager.setAdapter(myPagerAdapter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Adapter类</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.app.Fragment;</span><br><span class="line">import android.support.v4.app.FragmentManager;</span><br><span class="line">import android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Mraz on 2016/7/8.</span><br><span class="line"> */</span><br><span class="line">public class MyPagerAdapter extends FragmentPagerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    public static final String[] titles = &#123;&quot;Android&quot;,&quot; Pet&quot;,&quot;Gift&quot;&#125;;</span><br><span class="line"></span><br><span class="line">    public MyPagerAdapter(FragmentManager fm) &#123;</span><br><span class="line">        super(fm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Fragment getItem(int position) &#123;</span><br><span class="line">        switch (position) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                return new FirstFragment();</span><br><span class="line">            case 1:</span><br><span class="line">                return new SecondFragment();</span><br><span class="line">            case 2:</span><br><span class="line">                return new ThreeFragment();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return 3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MyPagerAdapter 继承FragmentPagerAdapter，当创建这个类并继承FragmentPagerAdapter的时候，AS会提示开发者需要实现两个方法，并且要添加一个构造函数，getItem就是根据位置返回对应的Fragment，getCount就是返回页面数，这里我是直接返回的对应的内容，数目也是固定的，在实际开发过程中，使用ArrayList等数据结构来传递合适的参数，可以更灵活的设置Adapter的内容，使ViewPager的内容更丰富。这里的 FirstFragment，SecondFragment，ThreeFragment内容只是一个简单的图片资源，对应的布局文件也比较简单，不贴代码了。</p>
+<p> 实际效果  </p>
+<p> <img src="https://img-blog.csdn.net/20160709081338443" alt="这里写图片描述"></p>
+<hr>
+<p> ####<strong>2. 添加PageTransformer</strong><br> 代码内容</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">private static final float MIN_SCALE = 0.5f;</span><br><span class="line">...</span><br><span class="line">viewPager.setPageTransformer(true, new ViewPager.PageTransformer() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void transformPage(View view, float position) &#123;</span><br><span class="line"></span><br><span class="line">        int pageWidth = view.getWidth();</span><br><span class="line"></span><br><span class="line">        if (position &lt; -1) &#123; // [-Infinity,-1)</span><br><span class="line">            // This page is way off-screen to the left.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 0) &#123; // [-1,0]</span><br><span class="line">            // Use the default slide transition when moving to the left page</span><br><span class="line">            view.setAlpha(1 + position);</span><br><span class="line">            view.setTranslationX(0);</span><br><span class="line"></span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 1) &#123; // (0,1]</span><br><span class="line">            // Fade the page out.</span><br><span class="line">            view.setAlpha(1 - position);</span><br><span class="line"></span><br><span class="line">            // Counteract the default slide transition</span><br><span class="line">            view.setTranslationX(pageWidth * -position);</span><br><span class="line"></span><br><span class="line">            // Scale the page down (between MIN_SCALE and 1)</span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123; // (1,+Infinity]</span><br><span class="line">            // This page is way off-screen to the right.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 上面是参照例子写的一个页面切换效果，主要关注的是透明度和大小的改变，在页面切换的过程中，对于离开的页面变透明，变小，进入的页面变明显，变大。看下ViewPager.PageTransformer这个接口</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A PageTransformer is invoked whenever a visible/attached page is scrolled.</span><br><span class="line"> * This offers an opportunity for the application to apply a custom transformation</span><br><span class="line"> * to the page views using animation properties.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;As property animation is only supported as of Android 3.0 and forward,</span><br><span class="line"> * setting a PageTransformer on a ViewPager on earlier platform versions will</span><br><span class="line"> * be ignored.&lt;/p&gt;</span><br><span class="line"> */</span><br><span class="line">public interface PageTransformer &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Apply a property transformation to the given page.</span><br><span class="line">     *</span><br><span class="line">     * @param page Apply the transformation to this page</span><br><span class="line">     * @param position Position of page relative to the current front-and-center</span><br><span class="line">     *                 position of the pager. 0 is front and center. 1 is one full</span><br><span class="line">     *                 page position to the right, and -1 is one page position to the left.</span><br><span class="line">     */</span><br><span class="line">    public void transformPage(View page, float position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 只需要实现一个方法transformPage，传入的参数，第一个参数是页面视图，第二个参数很重要，指的是当前页面所处的一种状态，根据position来判断，我们添加的所有效果，都是要依据这个值来做处理，当我们滑动页面的时候，这个值在不停的变化，并且不同的page的值不相同。</p>
+<pre><code>取值             | 含义                       
+-------------- | ------------------------- 
+[-Infinity,-1) | 这个范围的视图已经看不见了            
+[-1,0]         | 即将退出界面的page的变化范围，从0慢慢变成-1
+[0,1]          | 即将进入界面的page的变化范围，从1慢慢变成0 
+(1,+Infinity]  | 这个范围的视图已经看不见了            </code></pre><p>可以把这个取值范围和数据概念——数轴——联系起来，就比较容易理解了，通过上面这个过场和下面的实际效果图，应该可以看出一二，通过这个例子，也可以尝试着实现自定义的过场效果</p>
+<p> 实际效果  </p>
+<p> <img src="https://img-blog.csdn.net/20160709083726790" alt="这里写图片描述"></p>
+<hr>
+<p> ####<strong>3. 添加OnPageChangeListener</strong><br> 代码内容  </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrolled position = &quot; + position + &quot; positionOffset = &quot; + positionOffset + &quot; positionOffsetPixels = &quot; + positionOffsetPixels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageSelected(int position) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageSelected position = &quot; + position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrollStateChanged state = &quot; + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 可以看到当滑动页面的时候，会有一大串的Log打印出来 <img src="https://img-blog.csdn.net/20160709084254877" alt="这里写图片描述"> 看下OnPagerChangeListener这个接口的定义 </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Callback interface for responding to changing state of the selected page.</span><br><span class="line"> */</span><br><span class="line">public interface OnPageChangeListener &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when the current page is scrolled, either as part</span><br><span class="line">     * of a programmatically initiated smooth scroll or a user initiated touch scroll.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the first page currently being displayed.</span><br><span class="line">     *                 Page position+1 will be visible if positionOffset is nonzero.</span><br><span class="line">     * @param positionOffset Value from [0, 1) indicating the offset from the page at position.</span><br><span class="line">     * @param positionOffsetPixels Value in pixels indicating the offset from position.</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when a new page becomes selected. Animation is not</span><br><span class="line">     * necessarily complete.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the new selected page.</span><br><span class="line">     */</span><br><span class="line">    public void onPageSelected(int position);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Called when the scroll state changes. Useful for discovering when the user</span><br><span class="line">     * begins dragging, when the pager is automatically settling to the current page,</span><br><span class="line">     * or when it is fully stopped/idle.</span><br><span class="line">     *</span><br><span class="line">     * @param state The new scroll state.</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_IDLE</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_DRAGGING</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_SETTLING</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrollStateChanged(int state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 指的一提的是  positionOffset 这个参数可以在onPageScrolled回调中拿到，而这个数值呢 就是和我们上面自定义过场的时候用到的 transformPage方法中传入的第二个参数position 有联系，只是这里的positionOffset取值范围为[0, 1)，上面的position中取值范围更广，但是从实际上来看，对我们影响比较大的就是当前切换的两个Page，也就是[-1,1]这个取值范围，所谓的负值可以理解成是相对概念，所以，这两个变量之间是存在关系的，如果不理解上面PageTransformer， 可以结合这个positionOffset变量的打印值加以理解。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -980,22 +992,22 @@ setTorchMode()                   | 设置闪光灯的状态                     
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -1008,7 +1020,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1028,40 +1040,28 @@ setTorchMode()                   | 设置闪光灯的状态                     
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1131,7 +1131,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1155,7 +1155,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1163,7 +1163,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1249,7 +1249,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1263,25 +1263,6 @@ setTorchMode()                   | 设置闪光灯的状态                     
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1323,7 +1304,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1332,7 +1313,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1359,6 +1340,25 @@ setTorchMode()                   | 设置闪光灯的状态                     
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1377,7 +1377,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1520,7 +1520,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1718,7 +1718,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1815,14 +1815,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1844,13 +1844,6 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1983,7 +1976,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2060,7 +2053,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2172,14 +2165,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2207,7 +2200,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2305,14 +2298,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2383,25 +2376,6 @@ setTorchMode()                   | 设置闪光灯的状态                     
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2440,7 +2414,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2449,7 +2423,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2476,6 +2450,25 @@ setTorchMode()                   | 设置闪光灯的状态                     
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2494,7 +2487,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2637,7 +2630,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2835,7 +2828,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2932,14 +2925,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2961,13 +2954,6 @@ setTorchMode()                   | 设置闪光灯的状态                     
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3100,7 +3086,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3177,7 +3163,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3289,14 +3275,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3324,7 +3310,7 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3422,14 +3408,14 @@ setTorchMode()                   | 设置闪光灯的状态                     
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

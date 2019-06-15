@@ -155,6 +155,551 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-07T13:04:09.000Z">2017-03-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 分钟 读完 (大约 1662 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/07/《Android开源库》 Realm For Android~ Realm（译文）/">《Android开源库》 Realm For Android~ Realm（译文）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a><a href></a>Realm</h2><p> Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Realm.init(context);</span><br></pre></td></tr></table></figure>
+
+<p> 你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">    Realm.init(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 请别忘了修改 AndroidManifest.xml:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">  android:name=&quot;.MyApplication&quot;</span><br><span class="line">  ...</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="配置Realm"><a href="#配置Realm" class="headerlink" title="配置Realm"></a><a href></a>配置Realm</h4><p> RealmConfiguration 用来配置要被创建的 Realm 的各种特性。最简配置如下所示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = new RealmConfiguration.Builder().build();</span><br></pre></td></tr></table></figure>
+
+<p> 如上配置的 Realm 会被存储在 Context.getFilesDir() 并且命名为 default.realm。</p>
+<p> 一个典型的配置如下所示：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// The RealmConfiguration is created using the builder pattern.</span><br><span class="line">// The Realm file will be located in Context.getFilesDir() with name &quot;myrealm.realm&quot;</span><br><span class="line">RealmConfiguration config = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;myrealm.realm&quot;)</span><br><span class="line">  .encryptionKey(getKey())</span><br><span class="line">  .schemaVersion(42)</span><br><span class="line">  .modules(new MySchemaModule())</span><br><span class="line">  .migration(new MyMigration())</span><br><span class="line">  .build();</span><br><span class="line">// Use the config</span><br><span class="line">Realm realm = Realm.getInstance(config);</span><br></pre></td></tr></table></figure>
+
+<p> 你还可以有多个RealmConfiguration。如此，你便可以控制Realm的版本、结构（schema）和路径。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;myrealm.realm&quot;)</span><br><span class="line">  .schemaVersion(2)</span><br><span class="line">  .modules(new MyCustomSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">RealmConfiguration otherConfig = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;otherrealm.realm&quot;)</span><br><span class="line">  .schemaVersion(5)</span><br><span class="line">  .modules(new MyOtherSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Realm myRealm = Realm.getInstance(myConfig);</span><br><span class="line">Realm otherRealm = Realm.getInstance(otherConfig);</span><br></pre></td></tr></table></figure>
+
+<p> 你可以使用 Realm.getPath() 来获取 Realm 文件的绝对路径。</p>
+<p> 很重要的一点是 Realm 实例是线程单例化的，也就是说多次在同一线程调用静态构建器会返回同一 Realm 实例。</p>
+<hr>
+<h4 id="默认-RealmConfiguration"><a href="#默认-RealmConfiguration" class="headerlink" title="默认 RealmConfiguration"></a><a href></a>默认 RealmConfiguration</h4><p> RealmConfiguration可以保存为默认配置。通过在自定义的Application设置默认的Realm配置，可以使你在代码中的其他地方更加方便地创建针对该默认配置的Realm。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">    // The Realm file will be located in Context.getFilesDir() with name &quot;default.realm&quot;</span><br><span class="line">    Realm.init(this);</span><br><span class="line">    RealmConfiguration config = new RealmConfiguration.Builder().build();</span><br><span class="line">    Realm.setDefaultConfiguration(config);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class MyActivity extends Activity &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    try &#123;</span><br><span class="line">      // ... Do something ...</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      realm.close();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="In-Memory-Realm"><a href="#In-Memory-Realm" class="headerlink" title="In-Memory Realm"></a><a href></a>In-Memory Realm</h4><p> 定义一个非持久化的、存在于内存中的 Realm 实例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = new RealmConfiguration.Builder()</span><br><span class="line">    .name(&quot;myrealm.realm&quot;)</span><br><span class="line">    .inMemory()</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+
+<p> 这样就可以创建一个存在于“内存中的” Realm。“内存中的”Realm 在内存紧张的情况下仍有可能使用到磁盘存储，但是这些磁盘空间都会在Realm实例完全关闭的时候被释放。</p>
+<p> 请注意使用同样的名称同时创建“内存中的”Realm 和常规的（持久化）Realm 是不允许的。</p>
+<p> 当某个“内存中的”Realm 的所有实例引用都被释放，该 Realm 下的数据也同时会被清除。建议在你的应用生命周期中保持对“内存中的” Realm 实例的引用以避免非期望的数据丢失。</p>
+<hr>
+<h4 id="Dynamic-Realm"><a href="#Dynamic-Realm" class="headerlink" title="Dynamic Realm"></a><a href></a>Dynamic Realm</h4><p> 对于普通的 Realm 来说，数据模型被定义成了 RealmObject 的子类。这样做保证了类型安全，但有时候某些数据模型在编译期是无法获得的。例如在处理数据迁移（migration）或CSV文件的时候。</p>
+<p> DynamicRealm 是普通 Realm 的一个变种。它可以在没有 RealmObject 子类的情况下操作 Realm 数据。其对数据的访问是基于字符串而非 RealmObject 的定义。</p>
+<p> 创建 Dynamic Realm 使用与创建普通 Realm 相同的RealmConfiguration，但是它的创建过程会忽略对 schema、migration以及 schema 版本的检查。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();</span><br><span class="line">DynamicRealm realm = DynamicRealm.getInstance(realmConfig);</span><br><span class="line"></span><br><span class="line">// In a DynamicRealm all objects are DynamicRealmObjects</span><br><span class="line">DynamicRealmObject person = realm.createObject(&quot;Person&quot;);</span><br><span class="line"></span><br><span class="line">// All fields are accessed using strings</span><br><span class="line">String name = person.getString(&quot;name&quot;);</span><br><span class="line">int age = person.getInt(&quot;age&quot;);</span><br><span class="line"></span><br><span class="line">// An underlying schema still exists, so accessing a field that does not exist</span><br><span class="line">// will throw an exception</span><br><span class="line">person.getString(&quot;I don&apos;t exist&quot;);</span><br><span class="line"></span><br><span class="line">// Queries still work normally</span><br><span class="line">RealmResults&lt;DynamicRealmObject&gt; persons = realm.where(&quot;Person&quot;)</span><br><span class="line">    .equalTo(&quot;name&quot;, &quot;John&quot;)</span><br><span class="line">    .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> DynamicRealm 以类型安全和性能为代价，换来了更多的灵活性。请在你确实需要这些灵活性的情况下使用。</p>
+<hr>
+<h4 id="关闭Realm实例"><a href="#关闭Realm实例" class="headerlink" title="关闭Realm实例"></a><a href></a>关闭Realm实例</h4><p> Realm 实现了 Closeable 接口以便与释放 native 内存和文件描述符，请务必在使用完毕后关闭 Realm 实例。</p>
+<p> Realm 实例是基于引用计数的, 也就是说假设你在同一个线程中调用了 getInstance() 两次，你需要同样调用 close() 两次以关闭该实例。举例来说，如果你需要实现 Runnable，简单地在函数开始的时候调用 getInstance()，在函数结束的时候调用 close() 即可！</p>
+<p> 对于UI线程，你可以选择在 onDestroy() 方法内调用 realm.close()。</p>
+<p> 如果你想使用除 UI 线程外的 Looper 线程，可以参考以下代码：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class MyThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private Realm realm;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        try &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            //... Setup the handlers using the Realm instance ...</span><br><span class="line">            Lopper.loop();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            if (realm != null) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 对于 AsyncTask，这里有个不错的例子可以参考：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected Void doInBackground(Void... params) &#123;</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    try &#123;</span><br><span class="line">        // ... Use the Realm instance ...</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        realm.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如果你想使用 Thread 和 Runnable 进行一些短期任务，参考如下代码：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/ Run a non-Looper thread with a Realm instance.</span><br><span class="line">Thread thread = new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        Realm realm = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            // ... Use the Realm instance ...</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            if (realm != null) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+
+<p> 如果你很幸运地工作在 minSdkVersion &gt;= 19 且 Java &gt;= 7 之下，可以使用try-with-resources：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">try (Realm realm = Realm.getDefaultInstance()) &#123;</span><br><span class="line">    // No need to close the Realm instance manually</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="自动刷新"><a href="#自动刷新" class="headerlink" title="自动刷新"></a><a href></a>自动刷新</h4><p> 如果 Realm 实例存在于一个带有 Looper 的线程，那么这个 Realm 实例即具有自动更新的功能。这意味这如果发生了 Realm 数据库的变化，那么该 Realm 实例会在下一个事件循环（event loop）中自动更新。这个便捷的功能使你不必花费太多的精力就能保证的UI与数据的实时同步。</p>
+<p> 如果 Realm 的实例所在线程没有绑定 Looper，那么该实例不会被更新直到你手动调用 waitForChange() 方法。请注意，不更新 Realm 以保持对旧数据的引用会造成而外的磁盘和内存开销。这也是为什么要在线程结束时调用 close() 关闭 Realm 实例的一个重要原因。</p>
+<p> 如果你想确定当前 Realm 实例是否有自动更新功能，可以通过调用 isAutoRefresh() 方法查询。</p>
+<hr>
+<h4 id="查找-Realm-数据库文件"><a href="#查找-Realm-数据库文件" class="headerlink" title="查找 Realm 数据库文件"></a><a href></a>查找 Realm 数据库文件</h4><p> 如果你想知道你应用的 Realm 文件的具体路径，请参见这个 StackOverflow上的答案。</p>
+<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h2><p> <a href="https://realm.io/docs/java/latest/#realms" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#realms</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-06T02:32:43.000Z">2017-03-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 分钟 读完 (大约 3072 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/06/《Android开源库》 Realm For Android~ Queries（译文）/">《Android开源库》 Realm For Android~ Queries（译文）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a><a href></a>查询</h2><blockquote>
+<p>Realm 中的所有读取（包括查询）操作都是延迟执行的，且数据绝不会被拷贝。</p>
+<p> Realm 的查询引擎使用 Fluent interface 来构造多条件查询。<br> 使用 User 类 -</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class User extends RealmObject &#123;</span><br><span class="line"></span><br><span class="line">    @PrimaryKey</span><br><span class="line">    private String          name;</span><br><span class="line">    private int             age;</span><br><span class="line"></span><br><span class="line">    @Ignore</span><br><span class="line">    private int             sessionId;</span><br><span class="line"></span><br><span class="line">    // Standard getters &amp; setters generated by your IDE…</span><br><span class="line">    public String getName() &#123; return name; &#125;</span><br><span class="line">    public void   setName(String name) &#123; this.name = name; &#125;</span><br><span class="line">    public int    getAge() &#123; return age; &#125;</span><br><span class="line">    public void   setAge(int age) &#123; this.age = age; &#125;</span><br><span class="line">    public int    getSessionId() &#123; return sessionId; &#125;</span><br><span class="line">    public void   setSessionId(int sessionId) &#123; this.sessionId = sessionId; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 比如查找所有叫做 John 或 Peter 的用户，你可以这么写：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// Build the query looking at all users:</span><br><span class="line">RealmQuery&lt;User&gt; query = realm.where(User.class);</span><br><span class="line"></span><br><span class="line">// Add query conditions:</span><br><span class="line">query.equalTo(&quot;name&quot;, &quot;John&quot;);</span><br><span class="line">query.or().equalTo(&quot;name&quot;, &quot;Peter&quot;);</span><br><span class="line"></span><br><span class="line">// Execute the query:</span><br><span class="line">RealmResults&lt;User&gt; result1 = query.findAll();</span><br><span class="line"></span><br><span class="line">// Or alternatively do the same all at once (the &quot;Fluent interface&quot;):</span><br><span class="line">RealmResults&lt;User&gt; result2 = realm.where(User.class)</span><br><span class="line">                                  .equalTo(&quot;name&quot;, &quot;John&quot;)</span><br><span class="line">                                  .or()</span><br><span class="line">                                  .equalTo(&quot;name&quot;, &quot;Peter&quot;)</span><br><span class="line">                                  .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 这个查询将返回一个包含名为John或者Peter的人的RealmResults实例。在findAll()方法被调用的时候，查询操作就执行了。findAll()是findAll家族的一员，例如findAllSorted()将返回一个排序后的结果集；findAllAsync()将在后台线程中执行异步查询。具体详情请阅<a href="https://realm.io/docs/java/latest/api/io/realm/RealmQuery.html" target="_blank" rel="noopener">API指南</a>。</p>
+<p> 这些对象并非拷贝，也就是说你得到的是一个匹配对象引用的列表，你对匹配对象所有的操作都是直接施加于它的原始对象。RealmResults 继承自 Java 的 AbstractList，行为类似。例如你可以通过 index 来访问其中的某个对象。<br> 当查询没有任何匹配时，返回的 RealmResults 对象将不会为 null，取而代之的是它的 size() 方法将返回 0。</p>
+<p> 修改或删除 RealmResults 中任何一个对象都必须在写入事务中完成。</p>
+<p> 你也可以查询<a href="https://realm.io/docs/java/latest/#link-queries" target="_blank" rel="noopener">关系</a>.</p>
+<hr>
+<h4 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a><a href></a>查询条件</h4><p> 使用where()方法构建一个由RealmQuery 对象代表的查询。一旦构建了RealmQuery ，你可以使用各种各样的谓词来过滤查询得到的数据。大多数谓词意义从字面上都能看出来。</p>
+<p> 谓词的第一个参数是字段名。 如果字段的类型不支持谓词，则抛出异常。 有关详细信息，请参阅RealmQuery的API参考。</p>
+<p> 对于所有数据类型，你有以下谓词：</p>
+<ul>
+<li><p>equalTo() </p>
+</li>
+<li><p>notEqualTo()  要将字段与值列表匹配，请使用in（）。 例如，要查找名称“Jill”，“William”或“Trillian”，您可以在（“name”，new String [] {“Jill”，“William”，“Trillian”}中使用。 in（）谓词适用于字符串，二进制数据和数字字段。</p>
+<p>数字数据类型（包括日期）允许这些附加谓词：</p>
+</li>
+</ul>
+<ul>
+<li>between() (两个端点会被包含在内, 即，有界间隔) </li>
+<li>greaterThan() </li>
+<li>lessThan() </li>
+<li>greaterThanOrEqualTo() </li>
+<li>lessThanOrEqualTo()  字符串字段允许如下附加谓词：</li>
+</ul>
+<ul>
+<li><p>contains() </p>
+</li>
+<li><p>beginsWith() </p>
+</li>
+<li><p>endsWith() </p>
+</li>
+<li><p>like()  所有四个字符串谓词都有可选的第三个参数，用于控制大小写区分。 将其设置为Case.INSENSITIVE以在匹配时忽略大小写，或者将Case.SENSITIVE设置为执行区分大小写匹配。 默认值为Case.SENSITIVE。</p>
+<p>谓词like（）执行glob样式通配符匹配。 匹配模式由字符和一个或多个通配符组成：</p>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li>匹配0个或多个Unicode字符 </li>
+</ul>
+</li>
+<li><p>？匹配1个Unicode字符  例如，考虑一个有四个对象的Realm，名为name的字段，其值有William，Bill，Jill和Trillian。 类似于（“name”，“？ill <em>”）的谓词将匹配前三个对象，类似（“name”，“</em> ia？”）将匹配第一个和最后一个对象。</p>
+<p>二进制数据，字符串和RealmObject（RealmList）的列表可以是空的，即具有零的长度。 如下是检查是否为空的谓词：</p>
+</li>
+</ul>
+<ul>
+<li>isEmpty() </li>
+<li>isNotEmpty()  如果不是必填字段，则值可以为null（记住，RealmObjects字段不是必填，值可以为null）。 用于匹配空值的两个有用谓词是：</li>
+</ul>
+<ul>
+<li>isNull() </li>
+<li>isNotNull()  </li>
+</ul>
+<hr>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a><a href></a>逻辑运算符</h4><p> 每个查询条件都会被被隐式地被逻辑和（&amp;）组合在一起，而逻辑或（or）需要显式地去执行 or()。</p>
+<p> 使用 User 类 -</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class User extends RealmObject &#123;</span><br><span class="line"></span><br><span class="line">    @PrimaryKey</span><br><span class="line">    private String          name;</span><br><span class="line">    private int             age;</span><br><span class="line"></span><br><span class="line">    @Ignore</span><br><span class="line">    private int             sessionId;</span><br><span class="line"></span><br><span class="line">    // Standard getters &amp; setters generated by your IDE…</span><br><span class="line">    public String getName() &#123; return name; &#125;</span><br><span class="line">    public void   setName(String name) &#123; this.name = name; &#125;</span><br><span class="line">    public int    getAge() &#123; return age; &#125;</span><br><span class="line">    public void   setAge(int age) &#123; this.age = age; &#125;</span><br><span class="line">    public int    getSessionId() &#123; return sessionId; &#125;</span><br><span class="line">    public void   setSessionId(int sessionId) &#123; this.sessionId = sessionId; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 你也可以将查询条件组合在一起，使用 beginGroup()（相当于左括号）和 endGroup()（相当于右括号）：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; r = realm.where(User.class)</span><br><span class="line">                            .greaterThan(&quot;age&quot;, 10)  // implicit AND</span><br><span class="line">                            .beginGroup()</span><br><span class="line">                                .equalTo(&quot;name&quot;, &quot;Peter&quot;)</span><br><span class="line">                                .or()</span><br><span class="line">                                .contains(&quot;name&quot;, &quot;Jo&quot;)</span><br><span class="line">                            .endGroup()</span><br><span class="line">                            .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 此外，也可以用 not() 否定一个条件。该 not() 运算符可以与 beginGroup()/endGroup() 一起使用来否定子条件。假如说你想查询名字不是“Peter”或者“Jo.”的User。查询方式如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RealmResult&lt;User&gt; r = realm.where(User.class)</span><br><span class="line">                           .not()</span><br><span class="line">                           .beginGroup()</span><br><span class="line">                                .equalTo(&quot;name&quot;, &quot;Peter&quot;)</span><br><span class="line">                                .or()</span><br><span class="line">                                .contains(&quot;name&quot;, &quot;Jo&quot;)</span><br><span class="line">                            .endGroup()</span><br><span class="line">                            .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 当然，对于这种特定的查询，使用in()更为简洁：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmResult&lt;User&gt; r = realm.where(User.class)</span><br><span class="line">                   .not()</span><br><span class="line">                   .in(&quot;name&quot;, new String[]&#123;&quot;Peter&quot;, &quot;Jo&quot;&#125;)</span><br><span class="line">                    finalAll();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a><a href></a>排序</h4><p> 当你执行完查询获得结果后，可以对它进行排序：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; result = realm.where(User.class).findAll();</span><br><span class="line">result = result.sort(&quot;age&quot;); // Sort ascending</span><br><span class="line">result = result.sort(&quot;age&quot;, Sort.DESCENDING);</span><br></pre></td></tr></table></figure>
+
+<p> 排序默认为升序; 使用Sort.DESCENDING作为第二个可选参数可以修改为降序。 可以同时使用多个字段进行排序。</p>
+<hr>
+<h4 id="唯一值"><a href="#唯一值" class="headerlink" title="唯一值"></a><a href></a>唯一值</h4><p> 使用distinct（）谓词仅返回唯一值。 例如，要了解你的Realm中有多少不同的名字：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;Person&gt; unique = realm.where(Person.class).distinct(&quot;name&quot;);</span><br></pre></td></tr></table></figure>
+
+<p> 只支持整数和字符串字段; 如果你尝试使用distinct（）不支持的字段类型，将抛出异常。 与排序一样，你可以指定多个字段。</p>
+<hr>
+<h4 id="链式查询"><a href="#链式查询" class="headerlink" title="链式查询"></a><a href></a>链式查询</h4><p> 因为查询结果并不会被复制，且在查询提交时并不会被执行，你可以链式串起查询并逐步进行分类筛选：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;Person&gt; teenagers = realm.where(Person.class).between(&quot;age&quot;, 13, 20).findAll();</span><br><span class="line">Person firstJohn = teenagers.where().equalTo(&quot;name&quot;, &quot;John&quot;).findFirst();</span><br></pre></td></tr></table></figure>
+
+<p> 你也可以在子对象上使用链式查询。假设以上 Person 对象包含一个 Dog 对象列表：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class Dog extends RealmObject &#123;</span><br><span class="line">    private int age;</span><br><span class="line">    // getters &amp; setters ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Person extends RealmObject &#123;</span><br><span class="line">    private int age;</span><br><span class="line">    private RealmList&lt;Dog&gt; dogs;</span><br><span class="line">    // getters &amp; setters ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 你可以查询找出所有年龄在 13 和 20 之间的 Person 并且他至少拥有一个 1 岁的 Dog：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;Person&gt; teensWithPups = realm.where(Person.class).between(&quot;age&quot;, 13, 20).equalTo(&quot;dogs.age&quot;, 1).findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 请注意，查询链最终是建立在 RealmResults 上而非 RealmQuery。如果你在某存在的 RealmQuery 上添加更多的查询条件，那么你在修改查询本身，而非查询链。请参考<a href="https://realm.io/docs/java/latest/#link-queries" target="_blank" rel="noopener">关联查询</a>。</p>
+<hr>
+<h4 id="查询结果的自动更新（Auto-Updating-Results）"><a href="#查询结果的自动更新（Auto-Updating-Results）" class="headerlink" title="查询结果的自动更新（Auto-Updating Results）"></a><a href></a>查询结果的自动更新（Auto-Updating Results）</h4><p> RealmResults 是对其所包含数据的实时、自动更新视图，这意味着它永远不需要被重新查询获取。数据对象的改变会在下一次 Looper 事件中被反映到相应的查询结果。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">final RealmResults&lt;Dog&gt; puppies = realm.where(Dog.class).lessThan(&quot;age&quot;, 2).findAll();</span><br><span class="line">puppies.size(); // =&gt; 0</span><br><span class="line"></span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    void public execute(Realm realm) &#123;</span><br><span class="line">        Dog dog = realm.createObject(Dog.class);</span><br><span class="line">        dog.setName(&quot;Fido&quot;);</span><br><span class="line">        dog.setAge(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">puppies.addChangeListener(new RealmChangeListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onChange(RealmResults&lt;Dog&gt; results) &#123;</span><br><span class="line">      // results and puppies point are both up to date</span><br><span class="line">      results.size(); // =&gt; 1</span><br><span class="line">      puppies.size(); // =&gt; 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 这对所有的 RealmResults 有效 —— 无论是否有过滤条件、是否是链式查询。</p>
+<p> RealmResults 的这个特性不仅使得 Realm 快速高效，而且让你的代码更简洁。举例来说，假设你的 Activity 或者 Fragment 依赖于某个查询结果，你可以将相应的 Realm 对象或者 RealmResults 保存为一个属性，你不需要在每次访问时确定其是否被更新 —— Realm 会保证这些。</p>
+<p> 你可以通过订阅 <a href="https://realm.io/cn/docs/java/latest/#notifications" target="_blank" rel="noopener">Realm notifications</a> 来得知 Realm 数据更新了，进而刷新 UI 而不必重新查询获得 RealmResults。</p>
+<p> 因为查询结果的自动更新特性，请不要依赖于固定的索引（indices）、不变的条目数。</p>
+<hr>
+<h4 id="按类型检索对象"><a href="#按类型检索对象" class="headerlink" title="按类型检索对象"></a><a href></a>按类型检索对象</h4><p> 从 Realm 中检索对象的最基本方法是 realm.where(Foo.class).findAll()，它返回了包含被查询模型类的所有对象的 RealmResults。</p>
+<p> 另外还有提供排序功能的 findAll()。参见 realm.where(Foo.class).findAllSorted() 了解详情。</p>
+<hr>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a><a href></a>聚合</h4><p> RealmResult 自带一些聚合方法：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; results = realm.where(User.class).findAll();</span><br><span class="line">long   sum     = results.sum(&quot;age&quot;).longValue();</span><br><span class="line">long   min     = results.min(&quot;age&quot;).longValue();</span><br><span class="line">long   max     = results.max(&quot;age&quot;).longValue();</span><br><span class="line">double average = results.average(&quot;age&quot;);</span><br><span class="line"></span><br><span class="line">long   matches = results.size();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a><a href></a>迭代</h4><p> 可以这样遍历 RealmResults：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; results = realm.where(User.class).findAll();</span><br><span class="line">for (User u : results) &#123;</span><br><span class="line">    // ... do something with the object ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 或者使用 for 循环：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; results = realm.where(User.class).findAll();</span><br><span class="line">for (int i = 0; i &lt; results.size(); i++) &#123;</span><br><span class="line">    User u = results.get(i);</span><br><span class="line">    // ... do something with the object ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> RealmResults 的自动更新会通过 looper 事件触发，但在事件到来之前，某些元素有可能不再满足查询条件或者其已被删除。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">final RealmResults&lt;User&gt; users = getUsers();</span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        users.get(0).deleteFromRealm(); // indirectly delete object</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">for (User user : users) &#123;</span><br><span class="line">    showUser(user); // Will crash for the deleted user</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 为避免该问题，可以使用 RealmResults 的 deleteFromRealm() 方法：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">final RealmResults&lt;User&gt; users = getUsers();</span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        users.deleteFromRealm(0); // Delete and remove object directly</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">for (User user : users) &#123;</span><br><span class="line">    showUser(user); // Deleted user will not be shown</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a><a href></a>删除</h4><p> 你可以从查询结果中删除数据：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// obtain the results of a query</span><br><span class="line">final RealmResults&lt;Dog&gt; results = realm.where(Dog.class).findAll();</span><br><span class="line"></span><br><span class="line">// All changes to data must happen in a transaction</span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        // remove single match</span><br><span class="line">        results.deleteFirstFromRealm();</span><br><span class="line">        results.deleteLastFromRealm();</span><br><span class="line"></span><br><span class="line">        // remove a single object</span><br><span class="line">        Dog dog = results.get(5);</span><br><span class="line">        dog.deleteFromRealm();</span><br><span class="line"></span><br><span class="line">        // Delete all matches</span><br><span class="line">        results.deleteAllFromRealm();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="异步查询（Asynchronous-Queries）"><a href="#异步查询（Asynchronous-Queries）" class="headerlink" title="异步查询（Asynchronous Queries）"></a><a href></a>异步查询（Asynchronous Queries）</h4><p> 可以使用后台线程进行查询。</p>
+<p> Realm 的大部分查询都非常快——快到可以使用在UI线程中而感觉不到延迟。但如果需要进行非常复杂的查询或者在大量数据中进行查询，那么使用后台线程进行查询将会是一个不错的主意。</p>
+<p> 示例：查找名字为 “John” 或者 “Peter” 的用户。</p>
+<p> <a href></a>创建异步查询 </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; result = realm.where(User.class)</span><br><span class="line">                              .equalTo(&quot;name&quot;, &quot;John&quot;)</span><br><span class="line">                              .or()</span><br><span class="line">                              .equalTo(&quot;name&quot;, &quot;Peter&quot;)</span><br><span class="line">                              .findAllAsync();</span><br></pre></td></tr></table></figure>
+
+<p> 请注意，这里的调用并不会阻塞，而是立即返回一个 RealmResults。这很类似于标准 Java 中 <a href="https://developer.android.com/reference/java/util/concurrent/Future.html" target="_blank" rel="noopener">Future</a> 的概念。查询将会在后台线程中被执行，当其完成时，之前返回的 RealmResults 实例会被更新。</p>
+<p> 如果你希望当查询完成、RealmResults 被更新时获得通知，你可以注册一个 RealmChangeListener。这个监听器会在 RealmResults 被更新时被调用（通常是在事务被提交后）。</p>
+<h5 id="注册回调"><a href="#注册回调" class="headerlink" title="注册回调"></a><a href></a>注册回调</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private RealmChangeListener callback = new RealmChangeListener&lt;RealmResults&lt;User&gt;&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onChange(RealmResults&lt;User&gt; results) &#123;</span><br><span class="line">        // called once the query complete and on every update</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    RealmResults&lt;User&gt; result = realm.where(User.class).findAllAsync();</span><br><span class="line">    result.addChangeListener(callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 请在退出 Activity 或者 Fragment 时移除监听器的注册以避免内存泄漏。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public void onStop () &#123;</span><br><span class="line">    result.removeChangeListener(callback); // remove a particular listener</span><br><span class="line">    // or</span><br><span class="line">    result.removeChangeListeners(); // remove all registered listeners</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="检查查询是否完成"><a href="#检查查询是否完成" class="headerlink" title="检查查询是否完成"></a><a href></a>检查查询是否完成</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; result = realm.where(User.class).findAllAsync();</span><br><span class="line">if (result.isLoaded()) &#123;</span><br><span class="line">  // Results are now available</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 同步查询返回的 RealmResults 实例的 isLoaded 方法会永远返回 true。</p>
+<h5 id="强制装载异步查询"><a href="#强制装载异步查询" class="headerlink" title="强制装载异步查询"></a><a href></a>强制装载异步查询</h5><p> 你可以选择性地等待异步查询完成，而这将会阻塞当前线程，使查询变成同步（与 <a href="https://developer.android.com/reference/java/util/concurrent/Future.html#get()" target="_blank" rel="noopener">Future.get()</a> 类似的概念）。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;User&gt; result = realm.where(User.class).findAllAsync();</span><br><span class="line">result.load() // be careful, this will block the current thread until it returns</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="非-Looper-线程"><a href="#非-Looper-线程" class="headerlink" title="非 Looper 线程"></a><a href></a>非 Looper 线程</h5><p> 你可以在 Looper 线程中使用异步查询。异步查询需要使用 <a href="https://developer.android.com/reference/android/os/Handler.html" target="_blank" rel="noopener">Handler</a> 来传递查询结果。在没有 <a href="https://developer.android.com/reference/android/os/Looper.html" target="_blank" rel="noopener">Looper</a> 的线程中使用异步查询会导致 IllegalStateException 异常被抛出。</p>
+<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h2><p> <a href="https://realm.io/docs/java/latest/#queries" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#queries</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-05T13:04:49.000Z">2017-03-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    21 分钟 读完 (大约 3115 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/05/《Android开源库》 Realm For Android~ RelationShips and Writes（译文）/">《Android开源库》 Realm For Android~ RelationShips and Writes（译文）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a><a href></a>关系</h2><p> 任何两个RealmObject都可以链接在一起。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Email extends RealmObject &#123;</span><br><span class="line">    private String address;</span><br><span class="line">    private boolean active;</span><br><span class="line">    // ... setters and getters left out</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Contact extends RealmObject &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private Email email;</span><br><span class="line">    // ... setters and getters left out</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 关系在Realm中开销不大。这意味着保持连接并不会影响速度，并且关系的内部实现在使用内存上也是相当高效的。</p>
+<h4 id="多对一"><a href="#多对一" class="headerlink" title="多对一"></a><a href></a>多对一</h4><p> 在类中简单的定义一个继承自RealmObject的子类作为成员即可：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Contact extends RealmObject &#123;</span><br><span class="line">    private Email email;</span><br><span class="line">    // Other fields…</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 每个联系人（Contact的实例）都有0或1个电子邮件（Email实例）。在Realm中，没有什么可以阻止你在多个联系人中使用相同的电子邮件对象，上述模型可以是多对一关系，但通常用于建模一对一关系。</p>
+<p> 设置RealmObject字段null将清除引用，但对象不会从Realm中删除</p>
+<hr>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a><a href></a>多对多</h4><p> 你可以通过RealmList字段声明从单个对象与任意数量的对象建立关系。例如，假设有多个电子邮件地址的联系人</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Contact extends RealmObject &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public RealmList&lt;Email&gt; emails;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Email extends RealmObject &#123;</span><br><span class="line">    public String address;</span><br><span class="line">    public boolean active;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> RealmLists基本上是RealmObjects的容器，并且RealmList和一个普通的Java List用法基本相同。Realm在不同的RealmLists中可以使用相同的对象两次（或更多），没有限制，因此你可以使用它来建模一对多和多对多关系。</p>
+<p> 你可以创建对象，并使用RealmList.add()将Email对象添加到Contact对象：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        Contact contact = realm.createObject(Contact.class);</span><br><span class="line">        contact.name = &quot;John Doe&quot;;</span><br><span class="line"></span><br><span class="line">        Email email1 = realm.createObject(Email.class);</span><br><span class="line">        email1.address = &quot;john@example.com&quot;;</span><br><span class="line">        email1.active = true;</span><br><span class="line">        contact.emails.add(email1);</span><br><span class="line"></span><br><span class="line">        Email email2 = realm.createObject(Email.class);</span><br><span class="line">        email2.address = &quot;jd@example.com&quot;;</span><br><span class="line">        email2.active = false;</span><br><span class="line">        contact.emails.add(email2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 可以声明递归关系，当建模某些类型的数据时，这些关系可能很有用</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Person extends RealmObject &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public RealmList&lt;Person&gt; friends;</span><br><span class="line">    // Other fields…</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 将RealmList字段的值设置null将清除列表。也就是说，列表将为空（长度为零），但没有对象会被删除。通过getter方法获取RealmList将永远不会返回null。返回的对象总是一个列表，但长度可能为零。</p>
+<hr>
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a><a href></a>连接查询</h4><p> 查询连接和关系时可以的。考虑如下模型：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Person extends RealmObject &#123;</span><br><span class="line">  private String id;</span><br><span class="line">  private String name;</span><br><span class="line">  private RealmList&lt;Dog&gt; dogs;</span><br><span class="line">  // getters and setters</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Dog extends RealmObject &#123;</span><br><span class="line">  private String id;</span><br><span class="line">  private String name;</span><br><span class="line">  private String color;</span><br><span class="line">  // getters and setters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 每个Person可以和狗建立一对多的关系，正如下表所示：</p>
+<p> <img src="https://img-blog.csdn.net/20170305192726691" alt="这里写图片描述"></p>
+<p> 使用连接查询来找一些人</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// persons =&gt; [U1,U2]</span><br><span class="line">RealmResults&lt;Person&gt; persons = realm.where(Person.class)</span><br><span class="line">                                .equalTo(&quot;dogs.color&quot;, &quot;Brown&quot;)</span><br><span class="line">                                .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 首先，请注意，条件中的字段名称”equalTo”包含通过关系的路径（以句点分隔.）。</p>
+<p> 上述查询应读取，查找到拥有名为”布朗”的狗的所有人。重要的是要理解，结果将包含不满足条件的Dog对象，因为它们是Person对象的一部分。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">persons.get(0).getDogs(); // =&gt; [A,B]</span><br><span class="line">persons.get(1).getDogs(); // =&gt; [B,C,D]</span><br></pre></td></tr></table></figure>
+
+<p> 这可以通过以下两个查询进一步检查。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// r1 =&gt; [U1,U2]</span><br><span class="line">RealmResults&lt;Person&gt; r1 = realm.where(Person.class)</span><br><span class="line">                             .equalTo(&quot;dogs.name&quot;, &quot;Fluffy&quot;)</span><br><span class="line">                             .findAll();</span><br><span class="line"></span><br><span class="line">// r2 =&gt; [U1,U2]</span><br><span class="line">RealmResults&lt;Person&gt; r2 = r1.where()</span><br><span class="line">                          .equalTo(&quot;dogs.color&quot;, &quot;Brown&quot;)</span><br><span class="line">                          .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 注意第一个查询如何返回这两个Person对象，因为条件与两个人都匹配。每个Person查询结果都包含一个Dog对象列表- 它们的所有Dog对象（即使是那些不满足原始查询条件的对象）。记住，我们正在寻找有特定种类的Dog（姓名和颜色）的人，而不是实际的狗本身。因此，第二个查询将针对第一个Person查询result（r1）和每个Persons狗进行评估。第二个查询也匹配两个人，但这次是因为狗的颜色。</p>
+<p> 让我们深入一点，以帮助巩固这个概念。请查看以下示例：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/ r1 =&gt; [U1,U2]</span><br><span class="line">RealmResults&lt;Person&gt; r1 = realm.where(Person.class)</span><br><span class="line">                             .equalTo(&quot;dogs.name&quot;, &quot;Fluffy&quot;)</span><br><span class="line">                             .equalTo(&quot;dogs.color&quot;, &quot;Brown&quot;)</span><br><span class="line">                             .findAll();</span><br><span class="line"></span><br><span class="line">// r2 =&gt; [U2]</span><br><span class="line">RealmResults&lt;Person&gt; r2 = realm.where(Person.class)</span><br><span class="line">                             .equalTo(&quot;dogs.name&quot;, &quot;Fluffy&quot;)</span><br><span class="line">                             .findAll()</span><br><span class="line">                             .where()</span><br><span class="line">                             .equalTo(&quot;dogs.color&quot;, &quot;Brown&quot;)</span><br><span class="line">                             .findAll();</span><br><span class="line">                             .where()</span><br><span class="line">                             .equalTo(&quot;dogs.color&quot;, &quot;Yellow&quot;)</span><br><span class="line">                             .findAll();</span><br></pre></td></tr></table></figure>
+
+<p> 第一个查询应该读取，查找到所有有名为”Fluffy”狗的 Person，也找到那些有名为”Brown”狗的Person，然后给我两个的​​交集。第二个查询先读取并查找到所有名为“Fluffy”的狗的Person。然后，给定结果集，找到所有有颜色为“棕色”的狗的Person，并且给定结果集，找到具有颜色为“黄色”的狗的所有人。</p>
+<p> 让我们来看看背后的查询，r1以便充分了解发生了什么。两个条件是equalTo(“<a href="http://dogs.name" target="_blank" rel="noopener">dogs.name</a>”, “Fluffy”)和equalTo(“dogs.color”, “Brown”)。第一个条件满足U1和U2- 这是C1集合。第二个条件也满足U1和U2- 这是C2集合。查询中的逻辑和，和C1和C2的交集是一样的。C1和C2的交集为U1 and U2。因此，r1是U1 and U2。</p>
+<p> 后面的查询r2就不同了。让我们开始分解这次查询以探究竟。查询的第一部分如下所示：RealmResults r2a = realm.where(Person.class).equalTo(“<a href="http://dogs.name" target="_blank" rel="noopener">dogs.name</a>”, “Fluffy”).findAll();。它匹配U1和U2。然后，r2b = r2a.where().equalTo(“dogs.color”, “Brown”).findAll();还是匹配U1和U2（两个人都有棕色的狗）。最后的查询，r2 = r2b.where().equalTo(“dogs.color”, “Yellow”).findAll();只匹配U2，因为只有一个人在棕色狗结果集中有一个黄色的狗，也就是U2</p>
+<hr>
+<h2 id="写"><a href="#写" class="headerlink" title="写"></a><a href></a>写</h2><p> 读操作是隐式的，这意味着可以随时访问和查询对象。所有写操作（添加，修改和删除对象）必须包含在写事务中。写事务可以提交或取消。在提交期间，所有更改都将写入磁盘，并且提交只有在所有更改都可以保留时才会成功。通过取消写入事务，所有更改都将被丢弃。使用写事务，你的数据将始终处于一致状态。</p>
+<p> 写事务也用于确保线程安全</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Obtain a Realm instance</span><br><span class="line">Realm realm = Realm.getDefaultInstance();</span><br><span class="line"></span><br><span class="line">realm.beginTransaction();</span><br><span class="line"></span><br><span class="line">//... add or update objects here ...</span><br><span class="line"></span><br><span class="line">realm.commitTransaction();</span><br></pre></td></tr></table></figure>
+
+<p> 在写事务中使用到你的RealmObjects时，你可能最后想放弃修改。与其提交之后再回退，你可以简单地取消写事务。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">realm.beginTransaction();</span><br><span class="line">User user = realm.createObject(User.class);</span><br><span class="line"></span><br><span class="line">//  ...</span><br><span class="line"></span><br><span class="line">realm.cancelTransaction();</span><br></pre></td></tr></table></figure>
+
+<p> 请注意，写事务可能会相互阻塞。如果你在UI线程和后台线程上同时创建写入事务，这可能会导致ANR错误。为了避免这种情况，在UI线程上创建写事务时使用异步事务。</p>
+<p> Realm是崩溃安全的，所以在一次事务中发生了Exception，Realm本身不会崩溃。只是当前事务中的数据会丢失。如果异常被捕获但应用程序仍在继续，这个时候取消正在执行的事务就显得尤为重要。如果使用executeTransaction()，这些将会自动的执行。</p>
+<p> 感谢Realm的MVCC架构，在写事务打开的时候读取不会被阻塞！这意味着，除非你需要从多个线程同时进行事务，你可以使用一个更大的事务，这些事务如果使用小事务来做的话将会耗费更多的工作量。当你将写事务提交到Realm时，该Realm的所有其他实例将被通知并<a href="https://realm.io/docs/java/latest/#auto-updating" target="_blank" rel="noopener">自动更新</a>。</p>
+<p> Realm中的读写访问是<a href="https://en.wikipedia.org/wiki/ACID" target="_blank" rel="noopener">ACID</a></p>
+<h4 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a><a href></a>创建对象</h4><p> 因为RealmObjects都得绑定到一个领域，他们应该通过Realm直接实例化</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">realm.beginTransaction();</span><br><span class="line">User user = realm.createObject(User.class); // Create a new object</span><br><span class="line">user.setName(&quot;John&quot;);</span><br><span class="line">user.setEmail(&quot;john@corporation.com&quot;);</span><br><span class="line">realm.commitTransaction();</span><br></pre></td></tr></table></figure>
+
+<p> 或者，你可以首先创建一个对象的实例，然后使用<a href="https://realm.io/docs/java/latest/api/io/realm/Realm.html#copyToRealm(E)" target="_blank" rel="noopener">realm.copyToRealm（）</a>添加它。Realm支持尽可能多的自定义构造函数，只要其中一个是<a href="http://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html" target="_blank" rel="noopener">公共的无参数构造函数</a>。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">User user = new User(&quot;John&quot;);</span><br><span class="line">user.setEmail(&quot;john@corporation.com&quot;);</span><br><span class="line"></span><br><span class="line">// Copy the object to Realm. Any further changes must happen on realmUser</span><br><span class="line">realm.beginTransaction();</span><br><span class="line">User realmUser = realm.copyToRealm(user);</span><br><span class="line">realm.commitTransaction();</span><br></pre></td></tr></table></figure>
+
+<p> 当使用时，realm.copyToRealm()重要的是要记住只有返回的对象由Realm管理，所以对原始对象的任何进一步的更改都不会被持久化</p>
+<hr>
+<h4 id="事务块"><a href="#事务块" class="headerlink" title="事务块"></a><a href></a>事务块</h4><p> 不用手动保持跟踪realm.beginTransaction()，realm.commitTransaction()以及realm.cancelTransaction()可以使用<a href="https://realm.io/docs/java/latest/api/io/realm/Realm.html#executeTransaction(io.realm.Realm.Transaction)" target="_blank" rel="noopener">realm.executeTransaction（）</a>方法，它会自动处理开始/提交，发生错误的时候将自动取消</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void execute(Realm realm) &#123;</span><br><span class="line">		User user = realm.createObject(User.class);</span><br><span class="line">		user.setName(&quot;John&quot;);</span><br><span class="line">		user.setEmail(&quot;john@corporation.com&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="异步事务"><a href="#异步事务" class="headerlink" title="异步事务"></a><a href></a>异步事务</h4><p> 因为事务被其他事务阻塞，所以在后台线程上执行所有写操作以避免阻塞UI线程是一个很好的主意。通过使用异步事务，Realm将在后台线程上运行该事务并在事务完成时报告。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">realm.executeTransactionAsync(new Realm.Transaction() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void execute(Realm bgRealm) &#123;</span><br><span class="line">                User user = bgRealm.createObject(User.class);</span><br><span class="line">                user.setName(&quot;John&quot;);</span><br><span class="line">                user.setEmail(&quot;john@corporation.com&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, new Realm.Transaction.OnSuccess() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onSuccess() &#123;</span><br><span class="line">                // Transaction was a success.</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, new Realm.Transaction.OnError() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onError(Throwable error) &#123;</span><br><span class="line">                // Transaction failed and was automatically canceled.</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<p> OnSuccess和OnError回调都是可选的，但是如果提供，它们将在事务成功完成或失败时分别被调用。回调由Looper控制，因此它们只允许在Looper线程上回调。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ealmAsyncTask transaction = realm.executeTransactionAsync(new Realm.Transaction() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void execute(Realm bgRealm) &#123;</span><br><span class="line">                User user = bgRealm.createObject(User.class);</span><br><span class="line">                user.setName(&quot;John&quot;);</span><br><span class="line">                user.setEmail(&quot;john@corporation.com&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, null);</span><br></pre></td></tr></table></figure>
+
+<p> 异步事务由RealmAsyncTask对象表示。如果在事务完成之前退出Activity / Fragment，此对象可用于取消任何挂起的事务。如果回调更新UI，忘记取消事务可能会导致应用程序崩溃。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ublic void onStop () &#123;</span><br><span class="line">    if (transaction != null &amp;&amp; !transaction.isCancelled()) &#123;</span><br><span class="line">        transaction.cancel();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="更新字符串和字节数"><a href="#更新字符串和字节数" class="headerlink" title="更新字符串和字节数"></a><a href></a>更新字符串和字节数</h4><p> Realm是以完整的字段作为操作对象的，不可能更新字符串或字节数组的单个元素。假如你需要更新字符串的第5个元素，你将需要做类似的事情：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        bytes[] bytes = realmObject.binary;</span><br><span class="line">        bytes[4] = &apos;a&apos;;</span><br><span class="line">        realmObject.binary = bytes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 是由于Realm的MVCC架构，它避免了对现有数据的改变，以确保读取数据的其他线程或进程下表现一致。</p>
+<hr>
+<h4 id="快照"><a href="#快照" class="headerlink" title="快照"></a><a href></a>快照</h4><p> 所有Realm集合都是<a href="https://realm.io/docs/java/latest/#auto-updating-results" target="_blank" rel="noopener">实时的</a>。这意味着它们总是反映最新的状态。在大多数情况下，这是可取的，但如果你循环一个集合，目的是修改元素呢？例如：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;Person&gt; guests = realm.where(Person.class).equalTo(&quot;invited&quot;, false).findAll();</span><br><span class="line">realm.beginTransaction();</span><br><span class="line">for (int i = 0; guests.size(); i++) &#123;</span><br><span class="line">    guests.get(i).setInvited(true);</span><br><span class="line">&#125;</span><br><span class="line">realm.commitTransaction();</span><br></pre></td></tr></table></figure>
+
+<p> 通常你会期望这个简单的循环邀请所有客人。因为RealmResults是立即更新，虽然，只有一半的客人最终被邀请！受邀的邀请对象将从该集合中立即删除，这会移动所有元素。当i参数增加时，它将错过一个元素。</p>
+<p> 为了防止这种情况，你可以拍摄集合数据的快照。快照保证元素的顺序不会改变，即使元素被删除或修改。</p>
+<p> Iterator从Realm集合创建的文件将自动使用快照。RealmResults和RealmList可以使用createSnapshot()手动创建快照。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">RealmResults&lt;Person&gt; guests = realm.where(Person.class).equalTo(&quot;invited&quot;, false).findAll();</span><br><span class="line"></span><br><span class="line">// Use an iterator to invite all guests</span><br><span class="line">realm.beginTransaction();</span><br><span class="line">for (Person guest : guests) &#123;</span><br><span class="line">    guest.setInvited(true);</span><br><span class="line">&#125;</span><br><span class="line">realm.commitTransaction();</span><br><span class="line"></span><br><span class="line">// Use a snapshot to invite all guests</span><br><span class="line">realm.beginTransaction();</span><br><span class="line">OrderedRealmCollectionSnapshot&lt;Person&gt; guestsSnapshot = guests.createSnapshot();</span><br><span class="line">for (int i = 0; guestsSnapshot.size(); i++) &#123;</span><br><span class="line">    guestsSnapshot.get(i).setInvited(true);</span><br><span class="line">&#125;</span><br><span class="line">realm.commitTransaction();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h2><p> <a href="https://realm.io/docs/java/latest/#relationships" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#relationships</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-03-04T10:36:33.000Z">2017-03-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 分钟 读完 (大约 2020 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/03/04/《Android开源库》Realm For Android~ Getting Help and Models（译文）/">《Android开源库》Realm For Android~ Getting Help and Models（译文）</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="获得帮助"><a href="#获得帮助" class="headerlink" title="获得帮助"></a><a href></a>获得帮助</h2><p> 你编程时需要帮助？：在 <a href="http://stackoverflow.com/questions/ask?tags=realm" target="_blank" rel="noopener">StackOverflow 上提问</a>。我们在实时监控并且回答 SO 上的相关问题！<br> 要报告一个 bug？：<a href="https://github.com/realm/realm-java/issues/new" target="_blank" rel="noopener">在我们的 GitHub 仓库里新建一个问题</a>，并且尽可能地按问题模板将 bug 描述清楚。<br> 需要一个新功能？：<a href="https://github.com/realm/realm-java/issues/new" target="_blank" rel="noopener">在我们的 GitHub 仓库里新建一个问题</a>，并且尽可能地按问题模板将该功能描述清楚。<br> 想知道接下来将会发生什么？：<a href="https://github.com/realm/realm-java/blob/master/CHANGELOG.md" target="_blank" rel="noopener">看看我们的 changelog</a>。这里有我们即将发布的改动以及修改历史。</p>
+<hr>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a><a href></a>模型</h2><p> Realm 数据模型定义需要继承自 RealmObject 类。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class User extends RealmObject &#123;</span><br><span class="line"></span><br><span class="line">    private String          name;</span><br><span class="line">    private int             age;</span><br><span class="line"></span><br><span class="line">    @Ignore</span><br><span class="line">    private int             sessionId;</span><br><span class="line"></span><br><span class="line">    // Standard getters &amp; setters generated by your IDE…</span><br><span class="line">    public String getName() &#123; return name; &#125;</span><br><span class="line">    public void   setName(String name) &#123; this.name = name; &#125;</span><br><span class="line">    public int    getAge() &#123; return age; &#125;</span><br><span class="line">    public void   setAge(int age) &#123; this.age = age; &#125;</span><br><span class="line">    public int    getSessionId() &#123; return sessionId; &#125;</span><br><span class="line">    public void   setSessionId(int sessionId) &#123; this.sessionId = sessionId; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> Realm 数据模型不仅仅支持 private 成员变量，你还可以使用 public、protected 以及自定义的成员方法。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class User extends RealmObject &#123;</span><br><span class="line"></span><br><span class="line">    public String name;</span><br><span class="line"></span><br><span class="line">    public boolean hasLongName() &#123;</span><br><span class="line">      return name.length() &gt; 7;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean equals(Object o) &#123;</span><br><span class="line">      // Custom equals comparison</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h4 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a><a href></a>字段类型</h4><p> Realm 支持以下字段类型：boolean、byte、short、int、long、float、double、String、Date和byte []。整数类型 short、int 和 long 都被映射到 Realm 内的相同类型（实际上为 long ）。再者，还可以使用 RealmObject 的子类和 RealmList&lt;? extends RealmObject&gt; 来表示模型关系。</p>
+<p> Realm 对象中还可以声明包装类型（boxed type）属性，包括：Boolean、Byte、Short、Integer、Long、Float和Double。通过使用包装类型，可以使这些属性存取空值（null)。</p>
+<hr>
+<h4 id="Required修饰类型和空值（null）"><a href="#Required修饰类型和空值（null）" class="headerlink" title="@Required修饰类型和空值（null）"></a><a href></a>@Required修饰类型和空值（null）</h4><p> 某些时候，空值（null）对于属性并不合适。这时可以使用注解 @Required 告诉 Realm 强制禁止空值（null）被存储。只有 Boolean、 Byte、 Short、 Integer、 Long、 Float、 Double、 String、 byte[] 以及 Date 可以被 @Required 修饰。在其它类型属性上使用 @Required 修饰会导致编译失败。基本数据类型（primitive types）不需要使用注解 @Required，因为他们本身就不可为空。RealmObject 属性永远可以为空。</p>
+<hr>
+<h4 id="忽略的属性"><a href="#忽略的属性" class="headerlink" title="忽略的属性"></a><a href></a>忽略的属性</h4><p> 注解 @Ignore 意味着一个字段不应该被保存到 Realm。某些时候输入的信息包含比模型更多的字段，而你不希望处理这些未使用的数据字段，你可以用 @Ignore 来标识这些你希望被 Realm 忽略的字段</p>
+<hr>
+<h4 id="Auto-Updating-Objects"><a href="#Auto-Updating-Objects" class="headerlink" title="Auto-Updating Objects"></a><a href></a>Auto-Updating Objects</h4><p> RealmObject 是实时的、自动更新的底层数据的映射视图。你不需要去重新获得对象已取得其最新版本。对于数据的改动会即时反应到相关的对象或者查询结果。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">final Dog myDog;</span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        myDog = realm.createObject(Dog.class);</span><br><span class="line">        myDog.setName(&quot;Fido&quot;);</span><br><span class="line">        myDog.setAge(1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        Dog myPuppy = realm.where(Dog.class).equalTo(&quot;age&quot;, 1).findFirst();</span><br><span class="line">        myPuppy.setAge(2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">myDog.getAge(); // =&gt; 2</span><br></pre></td></tr></table></figure>
+
+<p> RealmObject 和 RealmResults 的设计不仅仅是为了更快和更有效率，它们同时也让代码更加简洁以及反应性更强。举例来说，假设你的 Activity 或者 Fragment 依赖于某个 RealmObject 或者 RealmResults，你无需担心何时去刷新或者重新获取它们以更新 UI——它们会自动更新。</p>
+<p> 你可以通过订阅 Realm notifications 来得知 Realm 的数据在何时被更新从而刷新你的 UI。</p>
+<hr>
+<h4 id="索引（Index）属性"><a href="#索引（Index）属性" class="headerlink" title="索引（Index）属性"></a><a href></a>索引（Index）属性</h4><p> 注解 @Index 会为字段增加搜索索引。这会导致插入速度变慢，同时数据文件体积有所增加，但能加速查询。因此建议仅在需要加速查询时才添加索引。目前仅支持索引的属性类型包括：String、byte、short、int、long、boolean和Date。</p>
+<hr>
+<h4 id="主键-primary-keys"><a href="#主键-primary-keys" class="headerlink" title="主键 (primary keys)"></a><a href></a>主键 (primary keys)</h4><p> @PrimaryKey 可以用来定义字段为主键，该字段类型必须为字符串（String）或整数（short、int 或 long）以及它们的包装类型（Short、Int 或 Long）。不可以存在多个主键。使用支持索引的属性类型作为主键同时意味着为该字段建立索引。</p>
+<p> 当创建 Realm 对象时，所有字段会被设置为默认值。为了避免与具有相同主键的另一个对象冲突，建议创建一个 unmanaged 对象，为字段的赋值，然后用 copyToRealm() 方法将该对象复制到 Realm。</p>
+<p> 主键的存在意味着可以使用 copyToRealmOrUpdate() 方法，它会用此主键尝试寻找一个已存在的对象，如果对象存在，就更新该对象；反之，它会创建一个新的对象。当 copyToRealmOrUpdate() 的调用对象没有主键时，会抛出异常。</p>
+<p> 使用主键会对性能产生影响。创建和更新对象将会慢一点，而查询则会变快。很难量化这些性能的差异，因为性能的改变跟你数据库的大小息息相关。</p>
+<p> Realm.createObject()会返回一个所有字段被设置为默认值的新对象。如果该模型类存在主键，那么有可能返回对象的主键的默认值与其它已存在的对象冲突。建议创建一个非托管（unmanaged）Realm 对象，并给其主键赋值，然后调用 copyToRealm() 来避免冲突。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">final MyObject obj = new MyObject();</span><br><span class="line">obj.setId(42);</span><br><span class="line">obj.setName(&quot;Fish&quot;);</span><br><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        // This will create a new object in Realm or throw an exception if the</span><br><span class="line">        // object already exists (same primary key)</span><br><span class="line">        // realm.copyToRealm(obj);</span><br><span class="line"></span><br><span class="line">        // This will update an existing object with the same primary key</span><br><span class="line">        // or create a new object if an object with no primary key = 42</span><br><span class="line">        realm.copyToRealmOrUpdate(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> 字符串（String）和包装类型（Short、Int 或 Long）的主键可以被赋予空值（null）；除非它们同时被 @Required 修饰。</p>
+<hr>
+<h4 id="定制对象（Customizing-Objects）"><a href="#定制对象（Customizing-Objects）" class="headerlink" title="定制对象（Customizing Objects）"></a><a href></a>定制对象（Customizing Objects）</h4><p> 你几乎可以把 RealmObject 当作 POJO 使用。只需扩展 RealmObject，将相应属性声明为 public。不需要 setter 和 getter， 而是直接访问属性。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class Dog extends RealmObject &#123;</span><br><span class="line">    public String name;</span><br><span class="line">    public int age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 你可以像使用其他类一样直接使用 Dog 类。createObject() 和 copyToRealm() 可以帮助你创建一个托管给 Realm 的 Dog 对象。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">realm.executeTransaction(new Realm.Transaction() &#123;</span><br><span class="line">    @Overrride</span><br><span class="line">    public void execute(Realm realm) &#123;</span><br><span class="line">        Dog dog = realm.createObject(Dog.class);</span><br><span class="line">        dog.name = &quot;Fido&quot;;</span><br><span class="line">        dog.age  = 5;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 如果需要的话，你可以在 setter 和 getter 中添加你自己的逻辑。例如你可能需要在保存之前验证值的合法性。另外，你还可以为你的 RealmObject 添加自定义方法。</p>
+<hr>
+<h4 id="限制"><a href="#限制" class="headerlink" title="限制"></a><a href></a>限制</h4><p> 目前不支持 final、transient 和 volatile 修饰的成员变量，这主要是为了 Realm 对象在非托管（unmanaged RealmObject）时候的行为差异化。</p>
+<p> Realm 数据模型不可以继承自除了 RealmObject 以外的其它对象。你可以选择不声明默认无参数构造器，但是如果你声明了，那么该构造器必须为空构造器。这是目前 Realm 的一个限制。但你可以自由添加任意其它的构造器。</p>
+<hr>
+<h4 id="RealmModel-接口"><a href="#RealmModel-接口" class="headerlink" title="RealmModel 接口"></a><a href></a>RealmModel 接口</h4><p> 除直接继承于 RealmObject 来声明 Realm 数据模型之外，还可以通过实现 RealmModel 接口并添加 @RealmClass 修饰符来声明。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@RealmClass</span><br><span class="line">public class User implements RealmModel &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> RealmObject 的所有方法都有其相对应的静态方法。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// With RealmObject</span><br><span class="line">user.isValid();</span><br><span class="line">user.addChangeListener(listener);</span><br><span class="line"></span><br><span class="line">// With RealmModel</span><br><span class="line">RealmObject.isValid(user);</span><br><span class="line">RealmObject.addChangeListener(user, listener);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h2><p> <a href="https://realm.io/docs/java/latest/#getting-help" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#getting-help</a><br> <a href="https://realm.io/docs/java/latest/#models" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#models</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-03-03T03:36:14.000Z">2017-03-03</time>
                 
                 <div class="level-item">
@@ -903,22 +1448,22 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -931,7 +1476,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -951,40 +1496,28 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1054,7 +1587,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1078,7 +1611,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1086,7 +1619,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1172,7 +1705,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1186,25 +1719,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1246,7 +1760,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1255,7 +1769,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1282,6 +1796,25 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1300,7 +1833,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1443,7 +1976,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1641,7 +2174,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1738,14 +2271,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1767,13 +2300,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1906,7 +2432,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1983,7 +2509,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2095,14 +2621,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2130,7 +2656,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2228,14 +2754,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2306,25 +2832,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2363,7 +2870,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2372,7 +2879,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2399,6 +2906,25 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2417,7 +2943,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2560,7 +3086,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2758,7 +3284,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2855,14 +3381,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2884,13 +3410,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3023,7 +3542,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3100,7 +3619,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3212,14 +3731,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3247,7 +3766,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3345,14 +3864,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

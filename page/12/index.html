@@ -145,81 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-10-25T06:43:59.000Z">2016-10-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 553 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/10/25/《Android 基础（二十六）》 渐变色圆角Button/">《Android 基础（二十六）》 渐变色圆角Button</a>
-            
-        </h1>
-        <div class="content">
-            <p>  ###<strong>简介</strong><br> 总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。</p>
-<p> ###<strong>自定义属性</strong><br> 位置：res/values/attrs.xml<br> 格式：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;name_of_style&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;name_of_attr&quot; format=&quot;reference|string|color|boolean|dimension|enum|flag|float|fraction|integer&quot;/&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>format    | 意义                       
---------- | ------------------------- 
-reference | 参考某一资源ID, 如R.drawable.xxx
-string    | 字符串                      
-color     | 颜色                       
-boolean   | 布尔值                      
-dimension | 尺寸值                      
-enum      | 枚举值,例如                   
-flag      | 位或运算，例如：                 
-float     | 浮点数                      
-fraction  | 百分数，例如pivotX,pivotY这一类属性 
-integer   | 整数                       </code></pre><p>###<strong>获取自定义属性</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.name_of_style);</span><br><span class="line"> </span><br><span class="line">Color mColor = typedArray.getColor(R.styleable.name_of_style_name_of_attr, Color.BLUE);//其他的属性获取类似</span><br><span class="line">typedArray.recycle();//记得回收</span><br></pre></td></tr></table></figure>
-
-<p>  名字： R.styleable.{name_of_style} R.styleable.{name_of_style}_{name_of_attr}  ###<strong>举个栗子</strong><br> 举个栗子，实现一个背景为渐变色的圆角按钮，圆角半径，开始颜色，中心颜色，结束颜色，渐变方向用户可自定义。<br>  <strong>attrs.xml</strong> </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;CornerButton&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;corner_radius&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_start_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_center_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_end_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;backgrouund_gradient_orientation&quot;&gt;</span><br><span class="line">            &lt;enum name=&quot;TOP_BOTTOM&quot; value=&quot;0&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;TR_BL&quot; value=&quot;1&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;RIGHT_LEFT&quot; value=&quot;2&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BR_TL&quot; value=&quot;3&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BOTTOM_TOP&quot; value=&quot;4&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BL_TR&quot; value=&quot;5&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;LEFT_RIGHT&quot; value=&quot;6&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;TL_BR&quot; value=&quot;7&quot; /&gt;</span><br><span class="line">        &lt;/attr&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>CornerButton</strong> </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class CornerButton extends Button &#123;</span><br><span class="line"></span><br><span class="line">    private GradientDrawable mBg;</span><br><span class="line">    private float mRandius;</span><br><span class="line">    private int mStartColor;</span><br><span class="line">    private int mCenterColor;</span><br><span class="line">    private int mEndColor;</span><br><span class="line">    private int mOrientation;</span><br><span class="line">    </span><br><span class="line">    public CornerButton(Context context, AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line"></span><br><span class="line">        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CornerButton);</span><br><span class="line">        mRandius = typedArray.getDimension(R.styleable.CornerButton_corner_radius, 10);</span><br><span class="line">        mStartColor = typedArray.getColor(R.styleable.CornerButton_background_start_color, Color.BLUE);</span><br><span class="line">        mCenterColor = typedArray.getColor(R.styleable.CornerButton_background_center_color, Color.GREEN);</span><br><span class="line">        mEndColor = typedArray.getColor(R.styleable.CornerButton_background_end_color, Color.BLACK);</span><br><span class="line">        mOrientation = typedArray.getInt(R.styleable.CornerButton_backgrouund_gradient_orientation, 0);</span><br><span class="line">        typedArray.recycle();</span><br><span class="line"></span><br><span class="line">        int[] colors = &#123;mStartColor, mCenterColor, mEndColor&#125;;</span><br><span class="line">        mBg = new GradientDrawable();</span><br><span class="line">        mBg.setCornerRadius(mRandius);</span><br><span class="line">        mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">        mBg.setColors(colors);</span><br><span class="line">        switch (mOrientation) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                mBg.setOrientation(Orientation.TOP_BOTTOM);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                mBg.setOrientation(Orientation.RIGHT_LEFT);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                mBg.setOrientation(Orientation.BR_TL);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                mBg.setOrientation(Orientation.BOTTOM_TOP);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                mBg.setOrientation(Orientation.BL_TR);</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                mBg.setOrientation(Orientation.LEFT_RIGHT);</span><br><span class="line">                break;</span><br><span class="line">            case 7:</span><br><span class="line">                mBg.setOrientation(Orientation.TL_BR);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        this.setBackground(mBg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>activity_main.xml</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:yidong=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:id=&quot;@+id/activity_main&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;gs.com.customview.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;gs.com.customview.CornerButton</span><br><span class="line">        android:id=&quot;@+id/cb_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        yidong:background_start_color=&quot;#CCFF0000&quot;</span><br><span class="line">        yidong:background_center_color=&quot;#CCAADD00&quot;</span><br><span class="line">        yidong:background_end_color=&quot;#CC00EEFF&quot;</span><br><span class="line">        yidong:corner_radius=&quot;100dp&quot;</span><br><span class="line">        yidong:backgrouund_gradient_orientation=&quot;BOTTOM_TOP&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> xmlns:yidong=“<a href="http://schemas.android.com/apk/res-auto" target="_blank" rel="noopener">http://schemas.android.com/apk/res-auto</a>”  
- 和<br> yidong:corner_radius=“100dp”<br> XML命名空间和属性的Tag对应。</p>
-<p> <strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20161025144229443" alt="这里写图片描述"> <img src="https://img-blog.csdn.net/20161025144247475" alt="这里写图片描述"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-10-16T01:07:18.000Z">2016-10-16</time>
                 
                 <div class="level-item">
@@ -611,11 +536,15 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-09-17T08:12:28.000Z">2016-09-17</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1687 个字)
+                    11 分钟 读完 (大约 1654 个字)
                 </span>
                 
                 
@@ -628,8 +557,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/52563584" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/52563584</a>   </p>
-<p>  ###前言<br> 百度地图的定位功能和基础地图功能是分开的，使用的是另外的jar包和so库文件，详情请关注官网：<br> <a href="http://lbsyun.baidu.com/index.php?title=android-locsdk" target="_blank" rel="noopener">百度定位SDK</a></p>
+            <p>###前言<br> 百度地图的定位功能和基础地图功能是分开的，使用的是另外的jar包和so库文件，详情请关注官网：<br> <a href="http://lbsyun.baidu.com/index.php?title=android-locsdk" target="_blank" rel="noopener">百度定位SDK</a></p>
 <p> ###配置<br> 下载对应的jar包和so库，然后移动到lib目录下<br> <strong>AS中注意事项</strong></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">     main &#123;</span><br><span class="line">       jniLibs.srcDirs = [&apos;libs&apos;]</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -680,7 +608,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1563 个字)
+                    10 分钟 读完 (大约 1564 个字)
                 </span>
                 
                 
@@ -695,40 +623,16 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         <div class="content">
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Android N版本最近发布，Nougat是否好吃，不得而知，慢慢看下~  
 感谢<a href="http://androidxref.com/7.0.0_r1/" target="_blank" rel="noopener">AndroidXref</a>这个网站，给开发者提供了大量的便捷~以后学习Android就靠它了。</p>
-<h2 id="N版本上Framework关于Camera的一些改动"><a href="#N版本上Framework关于Camera的一些改动" class="headerlink" title="N版本上Framework关于Camera的一些改动"></a>N版本上Framework关于Camera的一些改动</h2><h3 id="CameraServer"><a href="#CameraServer" class="headerlink" title="CameraServer"></a>CameraServer</h3><p> N版本之前，CameraService是运行在MediaServer下的，这样存在一定的问题，因为MediaServer下同时还运行这其他的多媒体内容<br> M版本</p>
-<p> /frameworks/av/media/mediaserver/main_mediaserver.cpp</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc __unused, <span class="hljs-keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    signal(SIGPIPE, SIG_IGN);</span><br><span class="line">    <span class="hljs-keyword">char</span> value[PROPERTY_VALUE_MAX];</span><br><span class="line">    <span class="hljs-keyword">bool</span> doLog = (property_get(<span class="hljs-string">"ro.test_harness"</span>, value, <span class="hljs-string">"0"</span>) &gt; <span class="hljs-number">0</span>) &amp;&amp; (atoi(value) == <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">pid_t</span> childPid;</span><br><span class="line">    <span class="hljs-comment">// FIXME The advantage of making the process containing media.log service the parent process of</span></span><br><span class="line">    <span class="hljs-comment">// the process that contains all the other real services, is that it allows us to collect more</span></span><br><span class="line">    <span class="hljs-comment">// detailed information such as signal numbers, stop and continue, resource usage, etc.</span></span><br><span class="line">    <span class="hljs-comment">// But it is also more complex.  Consider replacing this by independent processes, and using</span></span><br><span class="line">    <span class="hljs-comment">// binder on death notification instead.</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (doLog &amp;&amp; (childPid = fork()) != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-comment">// media.log service</span></span><br><span class="line">        <span class="hljs-comment">//prctl(PR_SET_NAME, (unsigned long) "media.log", 0, 0, 0);</span></span><br><span class="line">        <span class="hljs-comment">// unfortunately ps ignores PR_SET_NAME for the main thread, so use this ugly hack</span></span><br><span class="line">        <span class="hljs-built_in">strcpy</span>(argv[<span class="hljs-number">0</span>], <span class="hljs-string">"media.log"</span>);</span><br><span class="line">        sp&lt;ProcessState&gt; proc(ProcessState::self());</span><br><span class="line">        MediaLogService::instantiate();</span><br><span class="line">        ProcessState::self()-&gt;startThreadPool();</span><br><span class="line">        <span class="hljs-keyword">for</span> (;;) &#123;</span><br><span class="line">            <span class="hljs-keyword">siginfo_t</span> info;</span><br><span class="line">            <span class="hljs-keyword">int</span> ret = waitid(P_PID, childPid, &amp;info, WEXITED | WSTOPPED | WCONTINUED);</span><br><span class="line">            <span class="hljs-keyword">if</span> (ret == EINTR) &#123;</span><br><span class="line">                <span class="hljs-keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">if</span> (ret &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">char</span> buffer[<span class="hljs-number">32</span>];</span><br><span class="line">            <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *code;</span><br><span class="line">            <span class="hljs-keyword">switch</span> (info.si_code) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_EXITED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_EXITED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_KILLED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_KILLED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_DUMPED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_DUMPED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_STOPPED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_STOPPED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_TRAPPED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_TRAPPED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_CONTINUED:</span><br><span class="line">                code = <span class="hljs-string">"CLD_CONTINUED"</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">default</span>:</span><br><span class="line">                <span class="hljs-built_in">snprintf</span>(buffer, <span class="hljs-keyword">sizeof</span>(buffer), <span class="hljs-string">"unknown (%d)"</span>, info.si_code);</span><br><span class="line">                code = buffer;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">rusage</span> <span class="hljs-title">usage</span>;</span></span><br><span class="line">            getrusage(RUSAGE_CHILDREN, &amp;usage);</span><br><span class="line">            ALOG(LOG_ERROR, <span class="hljs-string">"media.log"</span>, <span class="hljs-string">"pid %d status %d code %s user %ld.%03lds sys %ld.%03lds"</span>,</span><br><span class="line">                    info.si_pid, info.si_status, code,</span><br><span class="line">                    usage.ru_utime.tv_sec, usage.ru_utime.tv_usec / <span class="hljs-number">1000</span>,</span><br><span class="line">                    usage.ru_stime.tv_sec, usage.ru_stime.tv_usec / <span class="hljs-number">1000</span>);</span><br><span class="line">            sp&lt;IServiceManager&gt; sm = defaultServiceManager();</span><br><span class="line">            sp&lt;IBinder&gt; binder = sm-&gt;getService(String16(<span class="hljs-string">"media.log"</span>));</span><br><span class="line">            <span class="hljs-keyword">if</span> (binder != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                Vector&lt;String16&gt; args;</span><br><span class="line">                binder-&gt;dump(<span class="hljs-number">-1</span>, args);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">switch</span> (info.si_code) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_EXITED:</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_KILLED:</span><br><span class="line">            <span class="hljs-keyword">case</span> CLD_DUMPED: &#123;</span><br><span class="line">                ALOG(LOG_INFO, <span class="hljs-string">"media.log"</span>, <span class="hljs-string">"exiting"</span>);</span><br><span class="line">                _exit(<span class="hljs-number">0</span>);</span><br><span class="line">                <span class="hljs-comment">// not reached</span></span><br><span class="line">                &#125;</span><br><span class="line">            <span class="hljs-keyword">default</span>:</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// all other services</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (doLog) &#123;</span><br><span class="line">            prctl(PR_SET_PDEATHSIG, SIGKILL);   <span class="hljs-comment">// if parent media.log dies before me, kill me also</span></span><br><span class="line">            setpgid(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);                      <span class="hljs-comment">// but if I die first, don't kill my parent</span></span><br><span class="line">        &#125;</span><br><span class="line">        InitializeIcuOrDie();</span><br><span class="line">        sp&lt;ProcessState&gt; proc(ProcessState::self());</span><br><span class="line">        sp&lt;IServiceManager&gt; sm = defaultServiceManager();</span><br><span class="line">        ALOGI(<span class="hljs-string">"ServiceManager: %p"</span>, sm.get());</span><br><span class="line">        AudioFlinger::instantiate();</span><br><span class="line">        MediaPlayerService::instantiate();</span><br><span class="line">        ResourceManagerService::instantiate();</span><br><span class="line">        CameraService::instantiate();</span><br><span class="line">        AudioPolicyService::instantiate();</span><br><span class="line">        SoundTriggerHwService::instantiate();</span><br><span class="line">        RadioService::instantiate();</span><br><span class="line">        registerExtensions();</span><br><span class="line">        ProcessState::self()-&gt;startThreadPool();</span><br><span class="line">        IPCThreadState::self()-&gt;joinThreadPool();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到AudioFlinger，MediaPlayerService, ResourceManagerService,CameraService,AudioPolicyService,SoundTriggerHwService,RadioService等都是运行在这个进程下面的，这样就存在一个问题，假如说其他任何一个服务因为某些原因挂掉了，整个MediaServer将会重启，而这个重启的过程中，倘若相机正在操作，就会出现相机突然挂掉的问题。</p>
-<p> N版本<br> /frameworks/av/media/mediaserver/main_mediaserver.cpp</p>
-<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc __unused, <span class="hljs-keyword">char</span> **argv __unused)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    signal(SIGPIPE, SIG_IGN);</span><br><span class="line"></span><br><span class="line">    sp&lt;ProcessState&gt; proc(ProcessState::self());</span><br><span class="line">    sp&lt;IServiceManager&gt; sm(defaultServiceManager());</span><br><span class="line">    ALOGI(<span class="hljs-string">"ServiceManager: %p"</span>, sm.get());</span><br><span class="line">    InitializeIcuOrDie();</span><br><span class="line">    MediaPlayerService::instantiate();</span><br><span class="line">    ResourceManagerService::instantiate();</span><br><span class="line">    registerExtensions();</span><br><span class="line">    ProcessState::self()-&gt;startThreadPool();</span><br><span class="line">    IPCThreadState::self()-&gt;joinThreadPool();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有没有觉得少了很多，不仅CameraService被抽离出去了，还有一些内容好像也被抽离出去了。<br>在N版本的工程中多出来一个文件夹<br>/frameworks/av/camera/cameraserver/<br><img src="https://img-blog.csdn.net/20160913163509896" alt="这里写图片描述"><br>说明CameraServer是独立于MediaServer的单独的进程，执行PS操作你讲看到独立的Camera进程。</p>
-<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LOG_TAG <span class="hljs-meta-string">"cameraserver"</span></span></span><br><span class="line"><span class="hljs-comment">//#define LOG_NDEBUG 0</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// from LOCAL_C_INCLUDES</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"CameraService.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> android;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc __unused, <span class="hljs-keyword">char</span>** argv __unused)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    signal(SIGPIPE, SIG_IGN);</span><br><span class="line"></span><br><span class="line">    sp&lt;ProcessState&gt; proc(ProcessState::self());</span><br><span class="line">    sp&lt;IServiceManager&gt; sm = defaultServiceManager();</span><br><span class="line">    ALOGI(<span class="hljs-string">"ServiceManager: %p"</span>, sm.get());</span><br><span class="line">    CameraService::instantiate();</span><br><span class="line">    ProcessState::self()-&gt;startThreadPool();</span><br><span class="line">    IPCThreadState::self()-&gt;joinThreadPool();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初始化的过程并没有变化，只是单纯的将它独立出来而已。<br>那么问题来了，CameraService何时启动？<br>看到cameraserver.rc文件，</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">service cameraserver /system/bin/cameraserver</span><br><span class="line">    class main</span><br><span class="line">    user cameraserver</span><br><span class="line">    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct</span><br><span class="line">    ioprio rt 4</span><br><span class="line">    writepid /dev/cpuset/foreground/tasks</span><br></pre></td></tr></table></figure>
-
-<p>也就是说只要加载了cameraserver.rc文件，服务就开始启动了，就会往main_cameraserer.cpp的入口函数中执行，因为mk文件中定义了这个模块为cameraserver</p>
-<figure class="highlight mk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH:= <span class="hljs-variable">$(<span class="hljs-built_in">call</span> my-<span class="hljs-built_in">dir</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">include</span> <span class="hljs-variable">$(CLEAR_VARS)</span></span><br><span class="line"></span><br><span class="line">LOCAL_SRC_FILES:= \</span><br><span class="line">    main_cameraserver.cpp//源文件</span><br><span class="line"></span><br><span class="line">LOCAL_SHARED_LIBRARIES := \//依赖库</span><br><span class="line">    libcameraservice \</span><br><span class="line">    libcutils \</span><br><span class="line">    libutils \</span><br><span class="line">    libbinder \</span><br><span class="line">    libcamera_client</span><br><span class="line"></span><br><span class="line">LOCAL_MODULE:= cameraserver//模块名</span><br><span class="line">LOCAL_32_BIT_ONLY := true//只支持32位</span><br><span class="line"></span><br><span class="line">LOCAL_CFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter//一些编译条件，N版本在编译这一块也作出了很大的改动，有机会再研究下</span><br><span class="line"></span><br><span class="line">LOCAL_INIT_RC := cameraserver.rc</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">include</span> <span class="hljs-variable">$(BUILD_EXECUTABLE)</span>//执行文件</span><br></pre></td></tr></table></figure>
-
-<p>寻找，谁调用的camearserver.rc ???<br>首先我们要看这个文件编译出来之后放在手机的什么位置<br>/build/core/base_rules.mk</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Rule to install the module&apos;s companion init.rc.</span><br><span class="line">my_init_rc := $(LOCAL_INIT_RC_$(my_32_64_bit_suffix))</span><br><span class="line">my_init_rc_src :=</span><br><span class="line">my_init_rc_installed :=</span><br><span class="line">ifndef my_init_rc</span><br><span class="line">my_init_rc := $(LOCAL_INIT_RC)</span><br><span class="line"># Make sure we don&apos;t define the rule twice in multilib module.</span><br><span class="line">LOCAL_INIT_RC :=</span><br><span class="line">endif</span><br><span class="line">ifdef my_init_rc</span><br><span class="line">my_init_rc_src := $(LOCAL_PATH)/$(my_init_rc)</span><br><span class="line">my_init_rc_installed := $(TARGET_OUT$(partition_tag)_ETC)/init/$(notdir $(my_init_rc_src))</span><br><span class="line">$(my_init_rc_installed) : $(my_init_rc_src) | $(ACP)</span><br><span class="line">    @echo &quot;Install: $@&quot;</span><br><span class="line">    $(copy-file-to-new-target)</span><br><span class="line"></span><br><span class="line">$(my_register_name) : $(my_init_rc_installed)</span><br></pre></td></tr></table></figure>
-
-<p>大致可以看出一些端倪，应该是放在xxx/etc/init目录下，这个xxx根据什么看判断，partition_tag变量</p>
-<figure class="highlight mk hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">ifdef</span> LOCAL_IS_HOST_MODULE</span><br><span class="line">  partition_tag :=</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line"><span class="hljs-keyword">ifeq</span> (true,<span class="hljs-variable">$(LOCAL_PROPRIETARY_MODULE)</span>)</span><br><span class="line">  partition_tag := _VENDOR</span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">ifeq</span> (true,<span class="hljs-variable">$(LOCAL_OEM_MODULE)</span>)</span><br><span class="line">  partition_tag := _OEM</span><br><span class="line"><span class="hljs-keyword">else</span> <span class="hljs-keyword">ifeq</span> (true,<span class="hljs-variable">$(LOCAL_ODM_MODULE)</span>)</span><br><span class="line">  partition_tag := _ODM</span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">  <span class="hljs-comment"># The definition of should-install-to-system will be different depending</span></span><br><span class="line">  <span class="hljs-comment"># on which goal (e.g., sdk or just droid) is being built.</span></span><br><span class="line">  partition_tag := <span class="hljs-variable">$(<span class="hljs-built_in">if</span> $(<span class="hljs-built_in">call</span> should-install-to-system,<span class="hljs-variable">$(my_module_tags)</span>)</span>,,_DATA)</span><br><span class="line"><span class="hljs-keyword">endif</span></span><br></pre></td></tr></table></figure>
-
-<p>cameraserver应该是系统所有的，不是oem或者odm特有，存放在system/etc/init目录下。<br>接下面看看这个文件<br>/system/core/init/readme.txt</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">One may specify paths in the mount_all command line to have it import</span><br><span class="line">.rc files at the specified paths instead of the default ones listed above.</span><br><span class="line">This is primarily for supporting factory mode and other non-standard boot</span><br><span class="line">modes.  The three default paths should be used for the normal boot process.</span><br><span class="line"></span><br><span class="line">The intention of these directories is as follows</span><br><span class="line">   1) /system/etc/init/ is for core system items such as</span><br><span class="line">      SurfaceFlinger, MediaService, and logcatd.</span><br><span class="line">   2) /vendor/etc/init/ is for SoC vendor items such as actions or</span><br><span class="line">      daemons needed for core SoC functionality.</span><br><span class="line">   3) /odm/etc/init/ is for device manufacturer items such as</span><br><span class="line">      actions or daemons needed for motion sensor or other peripheral</span><br><span class="line">      functionality.</span><br></pre></td></tr></table></figure>
-
-<p>显然是在执行“mount_all“的时候，CameraServer启动 ~ ，找到启动的位置，这一点和之前的版本是有很大差别的。</p>
-<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>N版本上对于Camera的一些接口采用了Aidl的文件格式<br>frameworks/av/camera/aidl/android/hardware/<br><img src="https://img-blog.csdn.net/20160913171230808" alt="这里写图片描述"></p>
-<p>其他模块想要访问这些接口，需要include libcamera_client模块才行</p>
-<p><img src="https://img-blog.csdn.net/20160913171436512" alt="这里写图片描述"></p>
-<p>mk文件中有说明。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/09/13/《Android Framework 之路》 N版本 Framework Camera的一些改动/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -913,6 +817,71 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-03T09:17:39.000Z">2016-09-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 860 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/09/03/《Android 应用 之路》 MPAndroidChart~BarChart/">《Android 应用 之路》 MPAndroidChart~BarChart</a>
+            
+        </h1>
+        <div class="content">
+            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/52424333" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/52424333</a>   </p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="noopener">MPAndroidChart</a>是PhilJay大神给Android开发者带来的福利。MPAndroidChart是一个功能强大并且使用灵活的图表开源库，支持Android和IOS两种，这里我们暂时只关注Android版本。</p>
+<h3 id="Wiki"><a href="#Wiki" class="headerlink" title="Wiki"></a><a href></a>Wiki</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart/wiki" target="_blank" rel="noopener">https://github.com/PhilJay/MPAndroidChart/wiki</a></p>
+<h3 id="Javadoc"><a href="#Javadoc" class="headerlink" title="Javadoc"></a><a href></a>Javadoc</h3><p> <a href="https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/" target="_blank" rel="noopener">https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/</a></p>
+<h3 id="今日之图-BarChart"><a href="#今日之图-BarChart" class="headerlink" title="今日之图~BarChart"></a><a href></a>今日之图~BarChart</h3><p> 先看图，压压惊<br> <img src="https://img-blog.csdn.net/20160903165040015" alt="这里写图片描述"></p>
+<p> <img src="https://img-blog.csdn.net/20160903165339235" alt="这里写图片描述"></p>
+<p> <em><strong>布局文件</strong></em></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;mapdemo.example.com.mpandroidchartdemo.MainActivity&quot;&gt;</span><br><span class="line">    &lt;!-- 主布局中添加BarChart--&gt;</span><br><span class="line">    &lt;com.github.mikephil.charting.charts.BarChart</span><br><span class="line">        android:id=&quot;@+id/barchart&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:text=&quot;Hello World!&quot; /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 对于Chart,可以采用布局文件添加方式，也可以采用代码添加方式。</p>
+<p> <em><strong>代码</strong></em></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Bind(R.id.barchart)</span><br><span class="line">    BarChart barchart;</span><br><span class="line"></span><br><span class="line">    private Random random;//用于产生随机数字</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(this);</span><br><span class="line">        random = new Random();</span><br><span class="line">        initBarChart();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initBarChart() &#123;</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals = new ArrayList&lt;&gt;();//Y轴方向第一组数组</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals2 = new ArrayList&lt;&gt;();//Y轴方向第二组数组</span><br><span class="line">        ArrayList&lt;BarEntry&gt; yVals3 = new ArrayList&lt;&gt;();//Y轴方向第三组数组</span><br><span class="line">        ArrayList&lt;String&gt; xVals = new ArrayList&lt;&gt;();//X轴数据</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; 12; i++) &#123;//添加数据源</span><br><span class="line">            xVals.add((i + 1) + &quot;月&quot;);</span><br><span class="line">            yVals.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line">            yVals2.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line">            yVals3.add(new BarEntry(random.nextInt(10000), i));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet = new BarDataSet(yVals, &quot;小明每月支出&quot;);</span><br><span class="line">        barDataSet.setColor(Color.RED);//设置第一组数据颜色</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet2 = new BarDataSet(yVals2, &quot;小花每月支出&quot;);</span><br><span class="line">        barDataSet2.setColor(Color.GREEN);//设置第二组数据颜色</span><br><span class="line"></span><br><span class="line">        BarDataSet barDataSet3 = new BarDataSet(yVals3, &quot;小蔡每月支出&quot;);</span><br><span class="line">        barDataSet3.setColor(Color.YELLOW);//设置第三组数据颜色</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;IBarDataSet&gt; threebardata = new ArrayList&lt;&gt;();//IBarDataSet 接口很关键，是添加多组数据的关键结构，LineChart也是可以采用对应的接口类，也可以添加多组数据</span><br><span class="line">        threebardata.add(barDataSet);</span><br><span class="line">        threebardata.add(barDataSet2);</span><br><span class="line">        threebardata.add(barDataSet3);</span><br><span class="line"></span><br><span class="line">        BarData bardata = new BarData(xVals, threebardata);</span><br><span class="line">        barchart.setData(bardata);</span><br><span class="line">        barchart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);//设置注解的位置在左上方</span><br><span class="line">        barchart.getLegend().setForm(Legend.LegendForm.CIRCLE);//这是左边显示小图标的形状</span><br><span class="line"></span><br><span class="line">        barchart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);//设置X轴的位置</span><br><span class="line">        barchart.getXAxis().setDrawGridLines(false);//不显示网格</span><br><span class="line"></span><br><span class="line">        barchart.getAxisRight().setEnabled(false);//右侧不显示Y轴</span><br><span class="line">        barchart.getAxisLeft().setAxisMinValue(0.0f);//设置Y轴显示最小值，不然0下面会有空隙</span><br><span class="line">        barchart.getAxisLeft().setDrawGridLines(false);//不设置Y轴网格</span><br><span class="line"></span><br><span class="line">        barchart.setDescription(&quot;No Deal&quot;);//设置描述</span><br><span class="line">        barchart.setDescriptionTextSize(20.f);//设置描述字体</span><br><span class="line">        barchart.animateXY(1000, 2000);//设置动画</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这里，一些使用方式可以具体去看看对应的类机构，比如BarChart</p>
+<p> <img src="https://img-blog.csdn.net/20160903170248772" alt="这里写图片描述"></p>
+<p> 通过查看它对应的源码，可以更好的使用功能，AS会自动的帮我们反编译一些内容，能借助AS很好的学习一些开源Jar包。</p>
+<p> 在上面这个例子中，如何让现实的数值为“xxx元”呢？</p>
+<p> MPAndroidChart中存在ValueFormatter这个东西，通过这个还做一个转换，如实现“xxx元”的效果</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bardata.setValueFormatter(new ValueFormatter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public String getFormattedValue(float v, Entry entry, int i, ViewPortHandler viewPortHandler) &#123;</span><br><span class="line">                return entry.getVal() + &quot;元&quot;;//只用拿到对应Entry的值然后加个“元”即可，传入的这几个参数，v就是Y轴的value, entry为数据入口，i就是X轴方向的位置，viewPortHandler应该就是对应View的操作手，控制视图的移动缩放什么的</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20160903171238804" alt="这里写图片描述"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -957,22 +926,22 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -985,7 +954,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1005,40 +974,28 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1108,7 +1065,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1132,7 +1089,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1140,7 +1097,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1226,7 +1183,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1240,25 +1197,6 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1300,7 +1238,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1309,7 +1247,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1336,6 +1274,25 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1354,7 +1311,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1497,7 +1454,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1695,7 +1652,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -1792,14 +1749,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1821,13 +1778,6 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -1960,7 +1910,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2037,7 +1987,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2149,14 +2099,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2184,7 +2134,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2282,14 +2232,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2360,25 +2310,6 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2417,7 +2348,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2426,7 +2357,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2453,6 +2384,25 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2471,7 +2421,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2614,7 +2564,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2812,7 +2762,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2909,14 +2859,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2938,13 +2888,6 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3077,7 +3020,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3154,7 +3097,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3266,14 +3209,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3301,7 +3244,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3399,14 +3342,14 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 

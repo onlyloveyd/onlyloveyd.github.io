@@ -145,71 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-09-12T13:23:09.000Z">2017-09-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 403 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/09/12/《Android 基础（四十二）》 MultiDex/">《Android 基础（四十二）》 MultiDex</a>
-            
-        </h1>
-        <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/77946572" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/77946572</a>   </p>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 最近做项目开发的时候，遇到一个问题，NoClassDef,NoMethod之类的错误，但是把log往前看，会发现一些Dalvik的一些报错，看到这些log之后，就会觉得后面的什么方法找不到，类没有定义什么的错误真是的应该出现，那么这些Dalvik的错误怎么解释呢？<br> 因为类似的报错只出现在了一个同事的手机上，而且是KK版本，比较老。介绍下我的分析思路：</p>
-<ol start="2">
-<li><p>确定问题发生位置，注释掉（并解决因注释引起的编译错误）—&gt; Defeat </p>
-</li>
-<li><p>因为是KK版本，调整minSDK到19 —&gt; Defeat </p>
-</li>
-<li><p>删除或者更新引起问题的jar包 —&gt; Defeat </p>
-</li>
-<li><p>考虑到MultiDex在Android5.0 以后默认支持，为兼容旧版本，手动兼容一下<br> ————————&gt;Victory  </p>
-<h2 id="2-配置MultiDex"><a href="#2-配置MultiDex" class="headerlink" title="2. 配置MultiDex"></a><a href></a>2. 配置MultiDex</h2><p>Android5.0及以上版本默认支持MultiDex</p>
-</li>
-</ol>
-<h3 id="2-1-修改build-gradle"><a href="#2-1-修改build-gradle" class="headerlink" title="2.1 修改build.gradle"></a><a href></a>2.1 修改build.gradle</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    compileSdkVersion 21 </span><br><span class="line">    buildToolsVersion &quot;21.1.0&quot;</span><br><span class="line"></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line">        minSdkVersion 14</span><br><span class="line">        targetSdkVersion 21</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        // Enabling MultiDex support.</span><br><span class="line">        multiDexEnabled true</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123; compile &apos;com.android.support:multidex:1.0.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-修改application"><a href="#2-2-修改application" class="headerlink" title="2.2 修改application"></a><a href></a>2.2 修改application</h3><p> 三种方法</p>
-<h4 id="2-2-1-在AndroidManifest-xml的application中声明android-support-MultiDex-MultiDexApplication"><a href="#2-2-1-在AndroidManifest-xml的application中声明android-support-MultiDex-MultiDexApplication" class="headerlink" title="2.2.1 在AndroidManifest.xml的application中声明android.support.MultiDex.MultiDexApplication"></a><a href></a>2.2.1 在AndroidManifest.xml的application中声明android.support.MultiDex.MultiDexApplication</h4><h4 id="2-2-2-让自己的application类继承MultiDexApplication；"><a href="#2-2-2-让自己的application类继承MultiDexApplication；" class="headerlink" title="2.2.2 让自己的application类继承MultiDexApplication；"></a><a href></a>2.2.2 让自己的application类继承MultiDexApplication；</h4><h4 id="2-2-3-重写attachBaseContext-方法"><a href="#2-2-3-重写attachBaseContext-方法" class="headerlink" title="2.2.3 重写attachBaseContext()方法"></a><a href></a>2.2.3 重写attachBaseContext()方法</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override </span><br><span class="line">protected void attachBaseContext(Context base) &#123;</span><br><span class="line">    super.attachBaseContext(base);</span><br><span class="line">    MultiDex.install(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="3-推荐文章"><a href="#3-推荐文章" class="headerlink" title="3. 推荐文章"></a><a href></a>3. 推荐文章</h2><p> 更多关于MultiDex可以查阅<br> <a href="https://tech.meituan.com/mt-android-auto-split-dex.html" target="_blank" rel="noopener">美团技术沙龙关于分包的博客</a><br> 或者直接查看<a href="http://androidxref.com/7.1.1_r6/xref/frameworks/multidex/library/src/android/support/multidex/MultiDex.java" target="_blank" rel="noopener">MultiDex源码</a>。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-08-27T05:04:27.000Z">2017-08-27</time>
                 
                 <div class="level-item">
@@ -1009,6 +944,10 @@ public void onTabChanged(String tabId)                                          
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-06-25T02:10:31.000Z">2017-06-25</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -1124,6 +1063,10 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2017-06-22T05:46:53.000Z">2017-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
@@ -1251,6 +1194,146 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2017-06-17T13:44:09.000Z">2017-06-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分钟 读完 (大约 2031 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2017/06/17/《Android开源库》 MPAndroidChart Wiki(译文)～Part 4/">《Android开源库》 MPAndroidChart Wiki(译文)～Part 4</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="16-动画"><a href="#16-动画" class="headerlink" title="16. 动画"></a><a href></a>16. 动画</h2><p> <strong>注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效</strong><br> 在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。</p>
+<p> 所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。<br> 三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。</p>
+<pre><code>方法                                      | 使用                             
+--------------------------------------- | ------------------------------- 
+animateX(int durationMillis)            | X水平轴的图表值动画，这意味着在指定的时间内从左到右 建立图表
+animateY(int durationMillis)            | 垂直轴的图表值动画，这意味着在指定的时间内从下到上 建立图表。
+animateXY(int xDuration, int yDuration) | 两个轴的图表值动画，从左到右，从下到上 建立图表。      </code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mChart.animateX(3000); // animate horizontal 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateY(3000); // animate vertical 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateXY(3000, 3000); // animate horizontal and vertical 3000 milliseconds</span><br></pre></td></tr></table></figure>
+
+<p> 任意一种 animate(…) 动画方法被调用后，无需再调用 invalidate() 方法。</p>
+<h3 id="16-1-缓动动画"><a href="#16-1-缓动动画" class="headerlink" title="16.1 缓动动画"></a><a href></a>16.1 缓动动画</h3><p> 这个库可以让你对动画应用”缓动函数”。<br> 你可以选择以下预定义的静态 Easing.EasingOption :</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public enum EasingOption &#123;</span><br><span class="line">    Linear,</span><br><span class="line">    EaseInQuad,</span><br><span class="line">    EaseOutQuad,</span><br><span class="line">    EaseInOutQuad,</span><br><span class="line">    EaseInCubic,</span><br><span class="line">    EaseOutCubic,</span><br><span class="line">    EaseInOutCubic,</span><br><span class="line">    EaseInQuart,</span><br><span class="line">    EaseOutQuart,</span><br><span class="line">    EaseInOutQuart,</span><br><span class="line">    EaseInSine,</span><br><span class="line">    EaseOutSine,</span><br><span class="line">    EaseInOutSine,</span><br><span class="line">    EaseInExpo,</span><br><span class="line">    EaseOutExpo,</span><br><span class="line">    EaseInOutExpo,</span><br><span class="line">    EaseInCirc,</span><br><span class="line">    EaseOutCirc,</span><br><span class="line">    EaseInOutCirc,</span><br><span class="line">    EaseInElastic,</span><br><span class="line">    EaseOutElastic,</span><br><span class="line">    EaseInOutElastic,</span><br><span class="line">    EaseInBack,</span><br><span class="line">    EaseOutBack,</span><br><span class="line">    EaseInOutBack,</span><br><span class="line">    EaseInBounce,</span><br><span class="line">    EaseOutBounce,</span><br><span class="line">    EaseInOutBounce,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 基本上，有以下两种方式进行 easing 你的动画。</p>
+<ol start="2">
+<li><p>预定义的缓动选项：（下面代码可在所有 Android 版本运行）  </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public void animateY(int durationmillis, Easing.EasingOption option);</span><br></pre></td></tr></table></figure>
+
+<p>例如，调用带有预定义缓动选项的动画方法</p>
+</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// animate both axes with easing</span><br><span class="line">mChart.animateY(3000, Easing.EasingOption.EaseOutBack);</span><br></pre></td></tr></table></figure>
+
+<p> 当你想代码运行在 Android 3.0 (API 11) 以下时，要使用 Easing.EasingOption 。  </p>
+<ol start="2">
+<li>自定义缓动函数（在 Android 3.0 自定义缓动函数会使应用 crash）：</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public void animateY(int durationmillis, EasingFunction function);</span><br></pre></td></tr></table></figure>
+
+<p> 通过创建你自己的easing-function类并且实现EasingFunction接口，你可以实现你自己的easing功能</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Interface for creating custom made easing functions. </span><br><span class="line"> */</span><br><span class="line"> public interface EasingFunction &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Called everytime the animation is updated.</span><br><span class="line">     * @param input - the time passed since the animation started (value between 0 and 1)</span><br><span class="line">     */</span><br><span class="line">     public float getInterpolation(float input);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 然后，按照如下方式使用(注意，这个不能在小于Android3.0的版本上使用，将会导致程序崩溃)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// animate both axes with easing</span><br><span class="line">mChart.animateY(3000, new MyEasingFunction());</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="17-IMarker接口"><a href="#17-IMarker接口" class="headerlink" title="17. IMarker接口"></a><a href></a>17. IMarker接口</h2><p> 自<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a>以来，图表中的标记（弹出窗口）由IMarker接口表示。</p>
+<h3 id="17-1-IMarker接口"><a href="#17-1-IMarker接口" class="headerlink" title="17.1 IMarker接口"></a><a href></a>17.1 IMarker接口</h3><p> 这个接口可以帮助你实现在图表中条目高亮的时候显示自定义的Marker窗口。这个接口给我们提供了如下需要实现的方法：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public interface IMarker &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @return The desired (general) offset you wish the IMarker to have on the x- and y-axis.</span><br><span class="line">     *         By returning x: -(width / 2) you will center the IMarker horizontally.</span><br><span class="line">     *         By returning y: -(height / 2) you will center the IMarker vertically.</span><br><span class="line">     */</span><br><span class="line">    MPPointF getOffset();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @return The offset for drawing at the specific `point`. This allows conditional adjusting of the Marker position.</span><br><span class="line">     *         If you have no adjustments to make, return getOffset().</span><br><span class="line">     *</span><br><span class="line">     * @param posX This is the X position at which the marker wants to be drawn.</span><br><span class="line">     *             You can adjust the offset conditionally based on this argument.</span><br><span class="line">     * @param posY This is the X position at which the marker wants to be drawn.</span><br><span class="line">     *             You can adjust the offset conditionally based on this argument.</span><br><span class="line">     */</span><br><span class="line">    MPPointF getOffsetForDrawingAtPos(float posX, float posY);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method enables a specified custom IMarker to update it&apos;s content every time the IMarker is redrawn.</span><br><span class="line">     *</span><br><span class="line">     * @param e         The Entry the IMarker belongs to. This can also be any subclass of Entry, like BarEntry or</span><br><span class="line">     *                  CandleEntry, simply cast it at runtime.</span><br><span class="line">     * @param highlight The highlight object contains information about the highlighted value such as it&apos;s dataset-index, the</span><br><span class="line">     *                  selected range or stack-index (only stacked bar entries).</span><br><span class="line">     */</span><br><span class="line">    void refreshContent(Entry e, Highlight highlight);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Draws the IMarker on the given position on the screen with the given Canvas object.</span><br><span class="line">     *</span><br><span class="line">     * @param canvas</span><br><span class="line">     * @param posX</span><br><span class="line">     * @param posY</span><br><span class="line">     */</span><br><span class="line">    void draw(Canvas canvas, float posX, float posY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h3 id="17-2-创建一个标记视图"><a href="#17-2-创建一个标记视图" class="headerlink" title="17.2 创建一个标记视图"></a><a href></a>17.2 创建一个标记视图</h3><p> 为了创建一个自定义的标记视图，你需要创建一个实现了IMarker接口的类：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class YourMarkerView implements IMarker &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 实现IMarker接口时返回什么样的值，完全取决于你自己的需求。所以，看看上面关于每个方法的介绍是很有必要的。</p>
+<p> 除了通过实现IMarker接口来创建自己的标记视图，我们还可以通过继承下面提到的一个类来达到同样的目的。这个方法比较简单，并且我们也不需要实现IMarker接口中的所有方法。只有几个特定的方法需要我们复写和自定义。最重要的是复写refreshContent（…）方法来调整标记视图中的数据。一个简单的示例如下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class YourMarkerView extends MarkerView &#123;</span><br><span class="line"></span><br><span class="line">    private TextView tvContent;</span><br><span class="line"></span><br><span class="line">    public MyMarkerView(Context context, int layoutResource) &#123;</span><br><span class="line">        super(context, layoutResource);</span><br><span class="line"></span><br><span class="line">        // find your layout components</span><br><span class="line">        tvContent = (TextView) findViewById(R.id.tvContent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // callbacks everytime the MarkerView is redrawn, can be used to update the</span><br><span class="line">    // content (user-interface)</span><br><span class="line">    @Override</span><br><span class="line">    public void refreshContent(Entry e, Highlight highlight) &#123;</span><br><span class="line"></span><br><span class="line">        tvContent.setText(&quot;&quot; + e.getY());</span><br><span class="line"></span><br><span class="line">        // this will perform necessary layouting</span><br><span class="line">        super.refreshContent(e, highlight);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private MPPointF mOffset; </span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public MPPointF getOffset() &#123;</span><br><span class="line"></span><br><span class="line">        if(mOffset == null) &#123;</span><br><span class="line">           // center the marker horizontally and vertically</span><br><span class="line">           mOffset = new MPPointF(-(getWidth() / 2), -getHeight());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return mOffset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h3 id="17-3-获取／设置Marker"><a href="#17-3-获取／设置Marker" class="headerlink" title="17.3 获取／设置Marker"></a><a href></a>17.3 获取／设置Marker</h3><p> 给图表设置一个Marker，使用setMarker(…)方法：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IMarker marker = new YourMarkerView();</span><br><span class="line">chart.setMarker(marker);</span><br></pre></td></tr></table></figure>
+
+<p> 要访问图表上的一个Marker，使用getMarker()方法：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IMarker marker = chart.getMarker();</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h3 id="17-4-预定义Markers"><a href="#17-4-预定义Markers" class="headerlink" title="17.4 预定义Markers"></a><a href></a>17.4 预定义Markers</h3><p> 除了你自定义的MarkerView，开源库中也给我们提供了几个预定义的markers以供方便快捷的使用。其中包括：</p>
+<ul>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerView.java" target="_blank" rel="noopener">MarkerView</a> :基本marker。允许提供布局文件作为图表上呈现的标记。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。 </li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerImage.java" target="_blank" rel="noopener">MarkerImage</a>:一种绘制图片的标记视图。允许提供一个图片资源作为图表上的标记视图。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。  </li>
+</ul>
+<hr>
+<h3 id="17-5-旧版MarkerView"><a href="#17-5-旧版MarkerView" class="headerlink" title="17.5 旧版MarkerView"></a><a href></a>17.5 旧版MarkerView</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a> 之前，MarkerView类负责在图表高亮部分绘制标记视图。详情请查阅老版的the old <a href="https://github.com/PhilJay/MPAndroidChart/wiki/MarkerView" target="_blank" rel="noopener">MarkerView wiki page</a>.</p>
+<hr>
+<h2 id="18-ChartData类"><a href="#18-ChartData类" class="headerlink" title="18. ChartData类"></a><a href></a>18. ChartData类</h2><p> 本章旨在让你更深入的了解MPAndroidChart中的数据模型。</p>
+<p> ChartData类是像LineData，BarData等等这些数据类的父类。setData()方法可以将数据设置到图表中。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class LineData extends ChartData &#123; ...&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 下面介绍一些ChartData类中的方法，可以直接在它的子类中使用。</p>
+<h3 id="18-1-数据样式"><a href="#18-1-数据样式" class="headerlink" title="18.1 数据样式"></a><a href></a>18.1 数据样式</h3><pre><code>方法                                  | 使用                                                               
+----------------------------------- | ----------------------------------------------------------------- 
+setValueTextColor(int color)        | 设置 DataSets 数据对象包含的数据的值文本的颜色                                     
+setValueTextColors(List colors)     | 设置一个颜色列表用于显示值                                                    
+setValueTextSize(float size)        | 设置 DataSets 数据对象包含的数据的值文本的大小（单位是dp）                              
+setValueTypeface(Typeface tf)       | 设置 DataSets 数据对象包含的数据的值文本的字体                                     
+setValueFormatter(ValueFormatter f) | 为DataSets 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅此处
+setDrawValues(boolean enabled)      | 启用/禁用 绘制所有 DataSets 数据对象包含的数据的值文本                                </code></pre><hr>
+<h3 id="18-2-Getter方法"><a href="#18-2-Getter方法" class="headerlink" title="18.2 Getter方法"></a><a href></a>18.2 Getter方法</h3><pre><code>方法                           | 使用                                              
+---------------------------- | ------------------------------------------------ 
+getDataSetByIndex(int index) | 返回目标 DataSet 列表中给定索引的数据对象。                      
+contains(Entry entry)        | 检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。
+contains(T dataSet)          | 如果数据中包含指定dataSet,返回true否则返回false                </code></pre><hr>
+<h3 id="18-3-清除"><a href="#18-3-清除" class="headerlink" title="18.3 清除"></a><a href></a>18.3 清除</h3><pre><code>方法            | 使用                                                
+------------- | -------------------------------------------------- 
+clearValues() | 清除所有 DataSet 对象和所有 Entries 的数据 。 不会删除所提供的 x-values</code></pre><hr>
+<h3 id="18-4-选中高亮"><a href="#18-4-选中高亮" class="headerlink" title="18.4 选中高亮"></a><a href></a>18.4 选中高亮</h3><pre><code>方法                                                   | 使用                                        
+---------------------------------------------------- | ------------------------------------------ 
+setHighlightEnabled(boolean enabled)                 | 设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets
+setDrawVerticalHighlightIndicator(boolean enabled)   | 启用／即用纵向选中高亮指示线。如果禁用，指示线将不会被绘制             
+setDrawHorizontalHighlightIndicator(boolean enabled) | 用／即用横向选中高亮指示线。如果禁用，指示线将不会被绘制              </code></pre><hr>
+<h3 id="18-5-动态数据"><a href="#18-5-动态数据" class="headerlink" title="18.5 动态数据"></a><a href></a>18.5 动态数据</h3><pre><code>方法                  | 使用                        
+------------------- | -------------------------- 
+notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行所有必需的计算</code></pre><p>想了解如何在数据对象上增加或者移除数据，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Dynamic-&amp;-Realtime-Data" target="_blank" rel="noopener">dynamic &amp; realtime data</a>章节</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1295,22 +1378,22 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
             <div class="level-item has-text-centered">
                 <div>
                     
-                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Your name">
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="Onlyloveyd">
                     
                     
                     <p class="is-size-4 is-block">
-                        Your name
+                        Onlyloveyd
                     </p>
                     
                     
                     <p class="is-size-6 is-block">
-                        Your title
+                        小码过河
                     </p>
                     
                     
                     <p class="is-size-6 is-flex is-flex-center has-text-grey">
                         <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Your location</span>
+                        <span>China，GuiYang</span>
                     </p>
                     
                 </div>
@@ -1323,7 +1406,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        162
+                        163
                     </p>
                 </div>
             </div>
@@ -1343,40 +1426,28 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        80
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/ppoffice" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/onlyloveyd" target="_blank">
                 关注我</a>
         </div>
         
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/ppoffice">
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/onlyloveyd">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+            <a class="level-item button is-white is-marginless" target="_blank" title="CSDN" href="https://blog.csdn.net/poorkick">
                 
-                <i class="fab fa-facebook"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
-                
-                <i class="fab fa-twitter"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
-                
-                <i class="fab fa-dribbble"></i>
+                <i class="blog"></i>
                 
             </a>
             
@@ -1446,7 +1517,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">51</span>
+                <span class="level-item tag">53</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1470,7 +1541,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <span class="level-item">Android应用</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">25</span>
+                <span class="level-item tag">26</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android开源库/">
@@ -1478,7 +1549,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <span class="level-item">Android开源库</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">24</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android源码/">
@@ -1564,7 +1635,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.23px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 10.77px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CSDN迁移/" style="font-size: 13.08px;">CSDN迁移</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 14.62px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 16.15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 10.77px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 18.46px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 15.38px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
     </div>
 </div>
 
@@ -1578,25 +1649,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         <h3 class="menu-label">
             最新文章
         </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
         
         <article class="media">
             
@@ -1638,7 +1690,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1647,7 +1699,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1674,6 +1726,25 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -1692,7 +1763,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1835,7 +1906,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2033,7 +2104,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -2130,14 +2201,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2159,13 +2230,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -2298,7 +2362,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2375,7 +2439,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2487,14 +2551,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -2522,7 +2586,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -2620,14 +2684,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
@@ -2698,25 +2762,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.040Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（五）》MVVM/" class="has-link-black-ter is-size-6"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
             <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
@@ -2755,7 +2800,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -2764,7 +2809,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -2791,6 +2836,25 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
             </div>
         </article>
         
+        <article class="media">
+            
+            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
+                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
 </div>
 
@@ -2809,7 +2873,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2952,7 +3016,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -3150,7 +3214,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -3247,14 +3311,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android实战/">
                         <span class="tag">Android实战</span>
-                        <span class="tag is-grey">26</span>
+                        <span class="tag is-grey">27</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android开源库/">
                         <span class="tag">Android开源库</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3276,13 +3340,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <a class="tags has-addons" href="/tags/BroadcastReceiver/">
                         <span class="tag">BroadcastReceiver</span>
                         <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CSDN迁移/">
-                        <span class="tag">CSDN迁移</span>
-                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -3415,7 +3472,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3492,7 +3549,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RxJava/">
                         <span class="tag">RxJava</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3604,14 +3661,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">29</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">23</span>
+                        <span class="tag is-grey">24</span>
                     </a>
                 </div>
                 
@@ -3639,7 +3696,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">28</span>
                     </a>
                 </div>
                 
@@ -3737,14 +3794,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/设计模式/">
                         <span class="tag">设计模式</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/译文/">
                         <span class="tag">译文</span>
-                        <span class="tag is-grey">15</span>
+                        <span class="tag is-grey">20</span>
                     </a>
                 </div>
                 
