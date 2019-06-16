@@ -254,7 +254,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1200 个字)
+                    8 分钟 读完 (大约 1213 个字)
                 </span>
                 
                 
@@ -267,75 +267,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             
         </h1>
         <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h2><p> RecyclerView是我们开发过程中经常使用到的一个元素，原生的RecyclerView.Adapter基本上可以满足一般的需求，关于RecyclerView的基础介绍请移步：</p>
-<p> <a href="http://blog.csdn.net/poorkick/article/details/51583833" target="_blank" rel="noopener">RecyclerView基础使用</a></p>
-<p> 关于多类型的Item,原生的Adapter可以通过getItemViewType返回对应的ViewHolder类型，然后在onCreateViewHolder传入的type参数，生成不同的ViewHolder，更要命的是数据绑定过程中onBindViewHolder只传入ViewHolder对象和position，针对不同的ViewHolder，我们只能通过instanceof和强制类型装换来对不同的ViewHolder进行不同的数据操作。</p>
-<p> 这样做的弊端就是，后续如果需要添加一个类型，几乎需要修改Adapter类中的每一个方法，不利于维护。</p>
-<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a><a href></a>类结构</h2><p> <img src="https://img-blog.csdn.net/20170111164848636" alt="这里写图片描述"></p>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a><a href></a>目的</h2><ol start="2">
-<li>便于维护。增删Item的类型不需要修改Adapter的代码； </li>
-<li>条例清晰。不同类型的Item对应不同的Bean类，对应不用的ViewHolder,对应不同的layout<br> item type &lt;—-&gt; layout &lt;—&gt; ViewHolder &lt;—-&gt; java bean </li>
-<li>工厂接口。抽象出TypeFactory接口，针对同一个Bean,可以使用不同的layout和不同的ViewHolder。  <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href></a>思路</h2></li>
-</ol>
-<ol start="2">
-<li><p>所有Bean类实现统一Visitable接口，实现type方法，返回对应的layout id; </p>
-</li>
-<li><p>创建BaseViewHolder使用泛型，T为Bean类。使用SparseArray存储View,View的id作为唯一标识。 </p>
-</li>
-<li><p>具体的ViewHolder类，继承BaseViewHolder,传入不同的Bean类，方便不同的ViewHolder中绑定不同的数据。 </p>
-</li>
-<li><p>Adapter实现中使用Visitable List同一处理列表数据，使用事项TypeFactory接口的实例返回ItemType，viewHolder等  </p>
-<h2 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a><a href></a>代码结构</h2><p><img src="https://img-blog.csdn.net/20170113154758678" alt="这里写图片描述"></p>
-</li>
-</ol>
-<h2 id="代码内容"><a href="#代码内容" class="headerlink" title="代码内容"></a><a href></a>代码内容</h2><h3 id="Visitable接口"><a href="#Visitable接口" class="headerlink" title="Visitable接口"></a><a href></a>Visitable接口</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Visitable &#123;</span><br><span class="line">    int type(TypeFactory typeFactory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="TypeFactory接口"><a href="#TypeFactory接口" class="headerlink" title="TypeFactory接口"></a><a href></a>TypeFactory接口</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public interface TypeFactory &#123;</span><br><span class="line">    int type(BannerBean bannerBean);</span><br><span class="line">    int type(ContentBean contentBean);</span><br><span class="line">    int type(SearchBean searchBean);</span><br><span class="line">    int type(DividerBean dividerBean);</span><br><span class="line">    BaseViewHolder createViewHolder(int type, View itemView);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="BaseViewHolder抽象类"><a href="#BaseViewHolder抽象类" class="headerlink" title="BaseViewHolder抽象类"></a><a href></a>BaseViewHolder抽象类</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public abstract  class BaseViewHolder&lt;T&gt; extends RecyclerView.ViewHolder&#123;</span><br><span class="line">    SparseArray&lt;View&gt; mViews;</span><br><span class="line">    View mItemView;</span><br><span class="line"></span><br><span class="line">    public BaseViewHolder(View itemView) &#123;</span><br><span class="line">        super(itemView);</span><br><span class="line">        mItemView = itemView;</span><br><span class="line">        mViews = new SparseArray&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public View getView(int resId) &#123;</span><br><span class="line">        View view = mViews.get(resId);</span><br><span class="line"></span><br><span class="line">        if(view== null) &#123;</span><br><span class="line">            view = mItemView.findViewById(resId);</span><br><span class="line">            mViews.put(resId, view);</span><br><span class="line">        &#125;</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public abstract void bindViewData(T data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="TypeFactory实现类-ItemTypeFactory"><a href="#TypeFactory实现类-ItemTypeFactory" class="headerlink" title="TypeFactory实现类~ItemTypeFactory"></a><a href></a>TypeFactory实现类~ItemTypeFactory</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">public class ItemTypeFactory implements TypeFactory &#123;</span><br><span class="line">    public static final int BANNER_ITEM_LAYOUT = R.layout.rv_item_banner;</span><br><span class="line">    public static final int CONTENT_ITEM_LAYOUT = R.layout.rv_item_content;</span><br><span class="line">    public static final int SEARCH_ITEM_LAYOUT = R.layout.rv_item_search;</span><br><span class="line">    public static final int DIVIDER_ITEM_LAYOUT = R.layout.rv_item_divider;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(BannerBean bannerBean) &#123;</span><br><span class="line">        return BANNER_ITEM_LAYOUT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(ContentBean contentBean) &#123;</span><br><span class="line">        return CONTENT_ITEM_LAYOUT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(DividerBean dividerBean)&#123;</span><br><span class="line">        return DIVIDER_ITEM_LAYOUT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(SearchBean dividerBean)&#123;</span><br><span class="line">        return SEARCH_ITEM_LAYOUT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public BaseViewHolder createViewHolder(int type, View itemView) &#123;</span><br><span class="line">        switch (type) &#123;</span><br><span class="line">            case BANNER_ITEM_LAYOUT:</span><br><span class="line">                return new BannerViewHolder(itemView);</span><br><span class="line">            case SEARCH_ITEM_LAYOUT:</span><br><span class="line">                return new SearchViewHolder(itemView);</span><br><span class="line">            case CONTENT_ITEM_LAYOUT:</span><br><span class="line">                return new ContentViewHolder(itemView);</span><br><span class="line">            case DIVIDER_ITEM_LAYOUT:</span><br><span class="line">                return new DividerViewHolder(itemView);</span><br><span class="line">            default:</span><br><span class="line">                return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="各种Java-Bean类"><a href="#各种Java-Bean类" class="headerlink" title="各种Java Bean类"></a><a href></a>各种Java Bean类</h3><h4 id="BannerBean"><a href="#BannerBean" class="headerlink" title="BannerBean"></a><a href></a>BannerBean</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class BannerBean implements Visitable &#123;</span><br><span class="line">    int[] mResIds;</span><br><span class="line"></span><br><span class="line">    public BannerBean(int[] mResIds) &#123;</span><br><span class="line">        this.mResIds = mResIds;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int[] getmResIds() &#123;</span><br><span class="line">        return mResIds;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setmResIds(int[] mResIds) &#123;</span><br><span class="line">        this.mResIds = mResIds;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(TypeFactory typeFactory) &#123;</span><br><span class="line">        return typeFactory.type(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;200dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;cn.bingoogolapple.bgabanner.BGABanner</span><br><span class="line">        android:id=&quot;@+id/bgabanner_header&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;200dp&quot;&gt;</span><br><span class="line">    &lt;/cn.bingoogolapple.bgabanner.BGABanner&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="ContentBean"><a href="#ContentBean" class="headerlink" title="ContentBean"></a><a href></a>ContentBean</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class ContentBean implements Visitable&#123;</span><br><span class="line">    String content;</span><br><span class="line"></span><br><span class="line">    public String getContent() &#123;</span><br><span class="line">        return content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setContent(String content) &#123;</span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ContentBean(String content) &#123;</span><br><span class="line"></span><br><span class="line">        this.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(TypeFactory typeFactory) &#123;</span><br><span class="line">        return typeFactory.type(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_content&quot;</span><br><span class="line">        android:textStyle=&quot;italic&quot;</span><br><span class="line">        android:fontFamily=&quot;sans-serif-condensed&quot;</span><br><span class="line">        android:textSize=&quot;16sp&quot;</span><br><span class="line">        android:gravity=&quot;center_horizontal&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="DividerBean"><a href="#DividerBean" class="headerlink" title="DividerBean"></a><a href></a>DividerBean</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class DividerBean implements Visitable&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int type(TypeFactory typeFactory) &#123;</span><br><span class="line">        return typeFactory.type(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:background=&quot;@drawable/divider&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="SearchBean"><a href="#SearchBean" class="headerlink" title="SearchBean"></a><a href></a>SearchBean</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class SearchBean implements Visitable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int type(TypeFactory typeFactory) &#123;</span><br><span class="line">        return typeFactory.type(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:orientation=&quot;horizontal&quot; android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;50dp&quot;</span><br><span class="line">    android:padding=&quot;6dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;EditText</span><br><span class="line">        android:layout_marginLeft=&quot;30dp&quot;</span><br><span class="line">        android:id=&quot;@+id/et_search&quot;</span><br><span class="line">        android:layout_width=&quot;0dp&quot;</span><br><span class="line">        android:layout_weight=&quot;9&quot;</span><br><span class="line">        android:maxLines=&quot;1&quot;</span><br><span class="line">        android:textSize=&quot;10sp&quot;</span><br><span class="line">        android:paddingLeft=&quot;10dp&quot;</span><br><span class="line">        android:paddingRight=&quot;10dp&quot;</span><br><span class="line">        android:hint=&quot;输入文字搜索...&quot;</span><br><span class="line">        android:background=&quot;@drawable/bg_search&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id=&quot;@+id/bt_search&quot;</span><br><span class="line">        android:layout_width=&quot;0dp&quot;</span><br><span class="line">        android:layout_weight=&quot;2&quot;</span><br><span class="line">        android:src=&quot;@drawable/search&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="MultiRecyclerAdapter"><a href="#MultiRecyclerAdapter" class="headerlink" title="MultiRecyclerAdapter"></a><a href></a>MultiRecyclerAdapter</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class MultiRecyclerAdapter extends RecyclerView.Adapter&lt;BaseViewHolder&gt; &#123;</span><br><span class="line">    List&lt;Visitable&gt; mData;</span><br><span class="line">    TypeFactory typeFactory;</span><br><span class="line"></span><br><span class="line">    public MultiRecyclerAdapter(List&lt;Visitable&gt; mData) &#123;</span><br><span class="line">        this.mData = mData;</span><br><span class="line">        this.typeFactory = new ItemTypeFactory();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) &#123;</span><br><span class="line">        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);</span><br><span class="line">        return typeFactory.createViewHolder(viewType, view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onBindViewHolder(BaseViewHolder holder, int position) &#123;</span><br><span class="line">        holder.bindViewData(mData.get(position));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemViewType(int position) &#123;</span><br><span class="line">        return mData.get(position).type(typeFactory);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemCount() &#123;</span><br><span class="line">        return (mData != null ? mData.size() : 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a><a href></a>示例</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class MultiActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @BindView(R.id.rv_content)</span><br><span class="line">    RecyclerView rvContent;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_weather);</span><br><span class="line">        ButterKnife.bind(this);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;Visitable&gt; beans = new ArrayList&lt;&gt;();</span><br><span class="line">        int[] resIds = &#123;R.mipmap.banner_one, R.mipmap.banner_two, R.mipmap.banner_three, R.mipmap.banner_four, R.mipmap.banner_five&#125;;</span><br><span class="line">        beans.add(new BannerBean(resIds));</span><br><span class="line">        beans.add(new SearchBean());</span><br><span class="line">        beans.add(new DividerBean());</span><br><span class="line">        beans.add(new ContentBean(&quot;one&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;one&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;one&quot;));</span><br><span class="line">        beans.add(new DividerBean());</span><br><span class="line">        beans.add(new ContentBean(&quot;two&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;two&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;two&quot;));</span><br><span class="line">        beans.add(new DividerBean());</span><br><span class="line">        beans.add(new ContentBean(&quot;three&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;three&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;three&quot;));</span><br><span class="line">        beans.add(new DividerBean());</span><br><span class="line">        beans.add(new ContentBean(&quot;four&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;four&quot;));</span><br><span class="line">        beans.add(new ContentBean(&quot;four&quot;));</span><br><span class="line">        beans.add(new DividerBean());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        MultiRecyclerAdapter multiRecyclerAdapter = new MultiRecyclerAdapter(beans);</span><br><span class="line">        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);</span><br><span class="line"></span><br><span class="line">        rvContent.setAdapter(multiRecyclerAdapter);</span><br><span class="line">        rvContent.setLayoutManager(linearLayoutManager);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="简单效果"><a href="#简单效果" class="headerlink" title="简单效果"></a><a href></a>简单效果</h2><p> <img src="https://img-blog.csdn.net/20170113160414857" alt="这里写图片描述"></p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a><a href></a>写在最后</h2><p> 思路来源：<br> <a href="https://medium.com/@dpreussler/writing-better-adapters-1b09758407d2" target="_blank" rel="noopener">https://medium.com/@dpreussler/writing-better-adapters-1b09758407d2</a></p>
-<p> github上也有很多开源的万能Adapter，但是个人感觉这个思路虽然实现上代码会相对较多，但是层次分析，便于维护，扩展性较好。想要添加一个新类型的ItemType，只需要稍作修改即可快速完成，不用修改Adapter的代码。</p>
-
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>RecyclerView是我们开发过程中经常使用到的一个元素，原生的RecyclerView.Adapter基本上可以满足一般的需求，关于RecyclerView的基础介绍请移步：</p>
+<p><a href="http://blog.csdn.net/poorkick/article/details/51583833" target="_blank" rel="noopener">RecyclerView基础使用</a></p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/01/13/《Android 基础（三十五)》 RecyclerView多类型Item的正确实现姿势/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -513,7 +456,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -604,7 +547,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -644,7 +587,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -722,7 +665,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -739,18 +682,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -758,18 +701,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -777,18 +720,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -796,18 +739,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -815,18 +758,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -850,7 +793,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1136,7 +1079,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1147,7 +1090,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1158,7 +1101,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1169,7 +1112,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1191,7 +1134,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1214,6 +1157,17 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1386,7 +1340,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1478,6 +1432,13 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1603,7 +1564,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1629,6 +1590,13 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1638,7 +1606,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1813,14 +1781,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1849,18 +1810,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1868,18 +1829,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1887,18 +1848,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1906,18 +1867,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1925,18 +1886,18 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1960,7 +1921,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2246,7 +2207,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2257,7 +2218,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2268,7 +2229,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2279,7 +2240,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2301,7 +2262,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2324,6 +2285,17 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2496,7 +2468,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2588,6 +2560,13 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2713,7 +2692,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2739,6 +2718,13 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2748,7 +2734,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2923,14 +2909,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

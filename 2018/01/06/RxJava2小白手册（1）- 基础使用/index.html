@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &amp;apos;io.reactivex.rxjava2:rxandroid:2.0.1&amp;apos;implementation &amp;apos;io.reactivex.r">
+    <meta name="description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &apos;io.reactivex.rxjava2:rxandroid:2.0.1&apos;implementation &apos;io.reactivex.rxjava2:rxjava:2">
 <meta name="keywords" content="Android开源库,RxJava">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJava2-基础使用">
 <meta property="og:url" content="http://yoursite.com/2018/01/06/RxJava2小白手册（1）- 基础使用/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &amp;apos;io.reactivex.rxjava2:rxandroid:2.0.1&amp;apos;implementation &amp;apos;io.reactivex.r">
+<meta property="og:description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &apos;io.reactivex.rxjava2:rxandroid:2.0.1&apos;implementation &apos;io.reactivex.rxjava2:rxjava:2">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T14:17:24.923Z">
+<meta property="og:updated_time" content="2019-06-16T13:37:43.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava2-基础使用">
-<meta name="twitter:description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &amp;apos;io.reactivex.rxjava2:rxandroid:2.0.1&amp;apos;implementation &amp;apos;io.reactivex.r">
+<meta name="twitter:description" content="介绍 RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。 添加依赖12implementation &apos;io.reactivex.rxjava2:rxandroid:2.0.1&apos;implementation &apos;io.reactivex.rxjava2:rxjava:2">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1080 个字)
+                    7 分钟 读完 (大约 1039 个字)
                 </span>
                 
                 
@@ -169,59 +169,58 @@
         </h1>
         <div class="content">
             <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> RxJava，响应式编程，告别AsyncTask，与Retrofit组成了日常开发经典组合。之前，好读书不求甚解得态度，让我对其印象并不深刻，知识层面比较浅薄。为了加深印象，重新学习。</p>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;io.reactivex.rxjava2:rxandroid:2.0.1&apos;</span><br><span class="line">implementation &apos;io.reactivex.rxjava2:rxjava:2.1.7&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="hljs-string">'io.reactivex.rxjava2:rxandroid:2.0.1'</span></span><br><span class="line">implementation <span class="hljs-string">'io.reactivex.rxjava2:rxjava:2.1.7'</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><h3 id="上游和下游（被观察者和观察者）"><a href="#上游和下游（被观察者和观察者）" class="headerlink" title="上游和下游（被观察者和观察者）"></a>上游和下游（被观察者和观察者）</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(<span class="hljs-keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">subscribe</span><span class="hljs-params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        e.onNext(<span class="hljs-number">111</span>);</span><br><span class="line">        e.onNext(<span class="hljs-number">222</span>);</span><br><span class="line">        e.onComplete();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;Integer&gt; observer = <span class="hljs-keyword">new</span> Observer&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSubscribe</span><span class="hljs-params">(Disposable d)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onSubscribe"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onNext</span><span class="hljs-params">(Integer integer)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onNext integer = "</span> + integer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onError e = "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onComplete</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onComplete"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
 
-<h2 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h2><h4 id="1-上游和下游（被观察者和观察者）"><a href="#1-上游和下游（被观察者和观察者）" class="headerlink" title="1. 上游和下游（被观察者和观察者）"></a>1. 上游和下游（被观察者和观察者）</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void subscribe(ObservableEmitter&lt;Integer&gt; e) throws Exception &#123;</span><br><span class="line">        e.onNext(111);</span><br><span class="line">        e.onNext(222);</span><br><span class="line">        e.onComplete();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSubscribe(Disposable d) &#123;</span><br><span class="line">        Logger(&quot;onSubscribe&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onNext(Integer integer) &#123;</span><br><span class="line">        Logger(&quot;onNext integer = &quot; + integer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onError(Throwable e) &#123;</span><br><span class="line">        Logger(&quot;onError e = &quot; + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onComplete() &#123;</span><br><span class="line">        Logger(&quot;onComplete&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-运行结果"><a href="#2-运行结果" class="headerlink" title="2. 运行结果"></a>2. 运行结果</h4><p> <img src="https://img-blog.csdn.net/20180105222144717" alt="这里写图片描述"></p>
-<h4 id="3-流程"><a href="#3-流程" class="headerlink" title="3. 流程"></a>3. 流程</h4><ol>
-<li><p>创建Observable </p>
-</li>
-<li><p>创建Observer </p>
-</li>
-<li><p>Observerable订阅（subscribe）Observer  </p>
-<h4 id="4-Observable"><a href="#4-Observable" class="headerlink" title="4. Observable"></a>4. Observable</h4><p>Observable是一个抽象类，实现ObservableSource接口</p>
-</li>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p><img src="https://img-blog.csdn.net/20180105222144717" alt="这里写图片描述"></p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
+<li>创建Observable</li>
+<li>创建Observer</li>
+<li>Observerable订阅（subscribe）Observer</li>
 </ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public abstract class Observable&lt;T&gt; implements ObservableSource&lt;T&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p>Observable是一个抽象类，实现ObservableSource接口</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Observable</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">ObservableSource</span>&lt;<span class="hljs-title">T</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> 而ObservableSource接口中只有一个订阅方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface ObservableSource&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Subscribes the given Observer to this ObservableSource instance.</span><br><span class="line">     * @param observer the Observer, not null</span><br><span class="line">     * @throws NullPointerException if &#123;@code observer&#125; is null</span><br><span class="line">     */</span><br><span class="line">    void subscribe(@NonNull Observer&lt;? super T&gt; observer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而ObservableSource接口中只有一个订阅方法</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ObservableSource</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Subscribes the given Observer to this ObservableSource instance.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> observer the Observer, not null</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> NullPointerException if &#123;<span class="hljs-doctag">@code</span> observer&#125; is null</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">subscribe</span><span class="hljs-params">(@NonNull Observer&lt;? <span class="hljs-keyword">super</span> T&gt; observer)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 通过create方法创建Observable，稍微追下源码，帮助理解</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; Observable&lt;T&gt; create(ObservableOnSubscribe&lt;T&gt; source) &#123;</span><br><span class="line">    ObjectHelper.requireNonNull(source, &quot;source is null&quot;);</span><br><span class="line">    return RxJavaPlugins.onAssembly(new ObservableCreate&lt;T&gt;(source));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过create方法创建Observable，稍微追下源码，帮助理解</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">Observable&lt;T&gt; <span class="hljs-title">create</span><span class="hljs-params">(ObservableOnSubscribe&lt;T&gt; source)</span> </span>&#123;</span><br><span class="line">    ObjectHelper.requireNonNull(source, <span class="hljs-string">"source is null"</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> RxJavaPlugins.onAssembly(<span class="hljs-keyword">new</span> ObservableCreate&lt;T&gt;(source));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 参数类型为ObservableOnSubscribe接口</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface ObservableOnSubscribe&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Called for each Observer that subscribes.</span><br><span class="line">     * @param e the safe emitter instance, never null</span><br><span class="line">     * @throws Exception on error</span><br><span class="line">     */</span><br><span class="line">    void subscribe(@NonNull ObservableEmitter&lt;T&gt; e) throws Exception;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参数类型为ObservableOnSubscribe接口</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ObservableOnSubscribe</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Called for each Observer that subscribes.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> e the safe emitter instance, never null</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception on error</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">subscribe</span><span class="hljs-params">(@NonNull ObservableEmitter&lt;T&gt; e)</span> <span class="hljs-keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> ObservableEmitter可以理解成发射器，看下它的源码。它继承Emitter。而Emitter中才是我们最基础最常用的功能。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface ObservableEmitter&lt;T&gt; extends Emitter&lt;T&gt; &#123;</span><br><span class="line">    void setDisposable(@Nullable Disposable d);</span><br><span class="line">    void setCancellable(@Nullable Cancellable c);</span><br><span class="line">    boolean isDisposed();</span><br><span class="line">    ObservableEmitter&lt;T&gt; serialize();</span><br><span class="line">    @Experimental</span><br><span class="line">    boolean tryOnError(@NonNull Throwable t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ObservableEmitter可以理解成发射器，看下它的源码。它继承Emitter。而Emitter中才是我们最基础最常用的功能。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ObservableEmitter</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">Emitter</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setDisposable</span><span class="hljs-params">(@Nullable Disposable d)</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setCancellable</span><span class="hljs-params">(@Nullable Cancellable c)</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isDisposed</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function">ObservableEmitter&lt;T&gt; <span class="hljs-title">serialize</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-meta">@Experimental</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tryOnError</span><span class="hljs-params">(@NonNull Throwable t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 上面这部分代码，删除了部分注释，可在源码中查阅。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public interface Emitter&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Signal a normal value.</span><br><span class="line">     * @param value the value to signal, not null</span><br><span class="line">     */</span><br><span class="line">    void onNext(@NonNull T value);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Signal a Throwable exception.</span><br><span class="line">     * @param error the Throwable to signal, not null</span><br><span class="line">     */</span><br><span class="line">    void onError(@NonNull Throwable error);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Signal a completion.</span><br><span class="line">     */</span><br><span class="line">    void onComplete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这部分代码，删除了部分注释，可在源码中查阅。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Emitter</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Signal a normal value.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value the value to signal, not null</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onNext</span><span class="hljs-params">(@NonNull T value)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Signal a Throwable exception.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> error the Throwable to signal, not null</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(@NonNull Throwable error)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Signal a completion.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onComplete</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 从上面Emitter的代码可以看出，我们可以发射三种消息：<br> onNext, onComplete, onError。从语义上就很容易看出他们的作用。<br> 针对三个事件，做一些说明：   </p>
+<p> 从上面Emitter的代码可以看出，我们可以发射三种消息：<br> onNext, onComplete, onError。从语义上就很容易看出他们的作用。<br> 针对三个事件，做一些说明：</p>
 <ol>
-<li>发射器可以发送无限个onNext, Observer也可以接收无限个onNext。   </li>
-<li>发射器发送一个onComplete后, onComplete之后的事件将会继续发送, 而Observer收到第一个onComplete事件之后将不再继续接收事件。   </li>
-<li>发射器发送了一个onError后, onError之后的事件将继续发送, 而Observer收到onError事件之后将不再继续接收事件.   </li>
-<li>发射器可以不发送onComplete或onError。   </li>
-<li>发射器不能同时发出onComplete和onError。   </li>
-<li>不允许发出多个onError或者onComplete</li>
+<li>发射器可以发送无限个onNext, Observer也可以接收无限个onNext；</li>
+<li>发射器发送一个onComplete后, onComplete之后的事件将会继续发送, 而Observer收到第一个onComplete事件之后将不再继续接收事件；</li>
+<li>发射器发送了一个onError后, onError之后的事件将继续发送, 而Observer收到onError事件之后将不再继续接收事件；</li>
+<li>发射器可以不发送onComplete或onError；</li>
+<li>发射器不能同时发出onComplete和onError；</li>
+<li>不允许发出多个onError或者onComplete。</li>
 </ol>
-<h4 id="5-Observer"><a href="#5-Observer" class="headerlink" title="5. Observer"></a>5. Observer</h4><p> 相对于Observable而言，Observer就简单很多，我们只需要针对我们感兴趣的事件作出相应的处理即可。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface Observer&lt;T&gt; &#123;</span><br><span class="line">    void onSubscribe(@NonNull Disposable d);</span><br><span class="line">    void onNext(@NonNull T t);</span><br><span class="line">    void onError(@NonNull Throwable e);</span><br><span class="line">    void onComplete();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p>相对于Observable而言，Observer就简单很多，我们只需要针对我们感兴趣的事件作出相应的处理即可。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Observer</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onSubscribe</span><span class="hljs-params">(@NonNull Disposable d)</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onNext</span><span class="hljs-params">(@NonNull T t)</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(@NonNull Throwable e)</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onComplete</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 这里有一个新内容Disposable，先看代码，“象征一个一次性资源”，从注释上看是这个意思。但是如何理解？</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Represents a disposable resource.</span><br><span class="line"> */</span><br><span class="line">public interface Disposable &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Dispose the resource, the operation should be idempotent.</span><br><span class="line">     */</span><br><span class="line">    void dispose();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Returns true if this resource has been disposed.</span><br><span class="line">     * @return true if this resource has been disposed</span><br><span class="line">     */</span><br><span class="line">    boolean isDisposed();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有一个新内容Disposable，先看代码，“象征一个一次性资源”，从注释上看是这个意思。但是如何理解？</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Represents a disposable resource.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Disposable</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Dispose the resource, the operation should be idempotent.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dispose</span><span class="hljs-params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Returns true if this resource has been disposed.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> true if this resource has been disposed</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isDisposed</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 看个栗子：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(new ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void subscribe(ObservableEmitter&lt;Integer&gt; e) throws Exception &#123;</span><br><span class="line">        e.onNext(111);</span><br><span class="line">        e.onNext(222);</span><br><span class="line">        e.onNext(333);</span><br><span class="line">        e.onComplete();</span><br><span class="line">        e.onNext(444);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;Integer&gt; observer = new Observer&lt;Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">    Disposable mDisposable;</span><br><span class="line">    @Override</span><br><span class="line">    public void onSubscribe(Disposable d) &#123;</span><br><span class="line">        Logger(&quot;onSubscribe&quot;);</span><br><span class="line">        mDisposable = d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onNext(Integer integer) &#123;</span><br><span class="line">        Logger(&quot;onNext integer = &quot; + integer);</span><br><span class="line">        if(integer== 222 &amp;&amp; !mDisposable.isDisposed()) &#123;</span><br><span class="line">            mDisposable.dispose();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onError(Throwable e) &#123;</span><br><span class="line">        Logger(&quot;onError e = &quot; + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onComplete() &#123;</span><br><span class="line">        Logger(&quot;onComplete&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Observable&lt;Integer&gt; observable = Observable.create(<span class="hljs-keyword">new</span> ObservableOnSubscribe&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">subscribe</span><span class="hljs-params">(ObservableEmitter&lt;Integer&gt; e)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        e.onNext(<span class="hljs-number">111</span>);</span><br><span class="line">        e.onNext(<span class="hljs-number">222</span>);</span><br><span class="line">        e.onNext(<span class="hljs-number">333</span>);</span><br><span class="line">        e.onComplete();</span><br><span class="line">        e.onNext(<span class="hljs-number">444</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Observer&lt;Integer&gt; observer = <span class="hljs-keyword">new</span> Observer&lt;Integer&gt;() &#123;</span><br><span class="line"></span><br><span class="line">    Disposable mDisposable;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSubscribe</span><span class="hljs-params">(Disposable d)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onSubscribe"</span>);</span><br><span class="line">        mDisposable = d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onNext</span><span class="hljs-params">(Integer integer)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onNext integer = "</span> + integer);</span><br><span class="line">        <span class="hljs-keyword">if</span>(integer== <span class="hljs-number">222</span> &amp;&amp; !mDisposable.isDisposed()) &#123;</span><br><span class="line">            mDisposable.dispose();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onError e = "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onComplete</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        Logger(<span class="hljs-string">"onComplete"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
 
-<p> 运行结果：<br> <img src="https://img-blog.csdn.net/20180105225934723" alt="这里写图片描述"><br> 可以看到发射器发送了222之后，剩下的事件Observer并没有处理，那么剩下的事件发射器有没有发送呢？在发射器发射事件之前添加log。<br> <img src="https://img-blog.csdn.net/20180105230231952" alt="这里写图片描述"><br> 可以看到发射器的事件并没有受到Disposable影响，只是Observer没有接收到222之后的事件而已。<br> Disposable的作用应该是，截断发射器与Observer之间的事件通道。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p> 【码道长】，一周一更，内容充实。<br> <img src="https://img-blog.csdn.net/20180106111243528?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>运行结果：</p>
+<p><img src="https://img-blog.csdn.net/20180105225934723" alt="这里写图片描述"></p>
+<p>可以看到发射器发送了222之后，剩下的事件Observer并没有处理，那么剩下的事件发射器有没有发送呢？在发射器发射事件之前添加log。</p>
+<p><img src="https://img-blog.csdn.net/20180105230231952" alt="这里写图片描述"></p>
+<p>可以看到发射器的事件并没有受到Disposable影响，只是Observer没有接收到222之后的事件而已。</p>
+<p>Disposable的作用应该是，截断发射器与Observer之间的事件通道。</p>
 
         </div>
         
@@ -380,7 +379,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -471,7 +470,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -511,7 +510,7 @@
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -589,7 +588,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -606,18 +605,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -625,18 +624,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -644,18 +643,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -663,18 +662,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -682,18 +681,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -717,7 +716,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1003,7 +1002,7 @@
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1014,7 +1013,7 @@
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1025,7 +1024,7 @@
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1036,7 +1035,7 @@
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1058,7 +1057,7 @@
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1081,6 +1080,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1253,7 +1263,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1345,6 +1355,13 @@
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1470,7 +1487,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1496,6 +1513,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1505,7 +1529,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1680,14 +1704,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1716,18 +1733,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1735,18 +1752,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1754,18 +1771,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1773,18 +1790,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1792,18 +1809,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1827,7 +1844,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2113,7 +2130,7 @@
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2124,7 +2141,7 @@
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2135,7 +2152,7 @@
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2146,7 +2163,7 @@
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2168,7 +2185,7 @@
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2191,6 +2208,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2363,7 +2391,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2455,6 +2483,13 @@
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2580,7 +2615,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2606,6 +2641,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2615,7 +2657,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2790,14 +2832,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

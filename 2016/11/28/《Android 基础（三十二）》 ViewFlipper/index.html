@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="###简介  View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，Vi">
+    <meta name="description" content="简介 View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlip">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（三十二）》 ViewFlipper">
 <meta property="og:url" content="http://yoursite.com/2016/11/28/《Android 基础（三十二）》 ViewFlipper/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="###简介  View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，Vi">
+<meta property="og:description" content="简介 View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlip">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-14T11:22:12.036Z">
+<meta property="og:updated_time" content="2019-06-16T00:38:16.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（三十二）》 ViewFlipper">
-<meta name="twitter:description" content="###简介  View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，Vi">
+<meta name="twitter:description" content="简介 View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlip">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 414 个字)
+                    3 分钟 读完 (大约 419 个字)
                 </span>
                 
                 
@@ -168,40 +168,60 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>简介</strong></p>
-<blockquote>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlipper帮我们实现了这个工作，我们需要做的就是，选择恰当的时机调用其恰当的方法即可</p>
 </blockquote>
-<p> ###<strong>类结构</strong></p>
-<p> <img src="https://img-blog.csdn.net/20161128084313469" alt="这里写图片描述"></p>
-<pre><code>方法                        | 意义             
-------------------------- | --------------- 
-startFlipping             | 开始浏览           
-stopFlipping              | 停止浏览           
-setFlipInterval           | 设置View之间切换的时间间隔
-getAccessibilityClassName | 获取类名称          
-isFlipping                | 判断是否正在浏览       
-setAutoStart              | 设置是否自动开始浏览     
-isAutoStart               | 判断是否为自动开始浏览    </code></pre><p>###<strong>基本使用</strong>  </p>
-<ol>
-<li>动画定义<br>scalein.xml</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;scale</span><br><span class="line">        android:duration=&quot;1000&quot;</span><br><span class="line">        android:fromXScale=&quot;0.2&quot;</span><br><span class="line">        android:fromYScale=&quot;0.2&quot;</span><br><span class="line">        android:toYScale=&quot;1&quot;</span><br><span class="line">        android:toXScale=&quot;1&quot;</span><br><span class="line">        android:pivotX=&quot;50%&quot;</span><br><span class="line">        android:pivotY=&quot;50%&quot;</span><br><span class="line">        &gt;</span><br><span class="line">    &lt;/scale&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 
-<p> scaleout.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;scale</span><br><span class="line">        android:duration=&quot;1000&quot;</span><br><span class="line">        android:fromXScale=&quot;1&quot;</span><br><span class="line">        android:fromYScale=&quot;1&quot;</span><br><span class="line">        android:toYScale=&quot;0.2&quot;</span><br><span class="line">        android:toXScale=&quot;0.2&quot;</span><br><span class="line">        android:pivotX=&quot;50%&quot;</span><br><span class="line">        android:pivotY=&quot;50%&quot;&gt;</span><br><span class="line">    &lt;/scale&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p><img src="https://img-blog.csdn.net/20161128084313469" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startFlipping</td>
+<td>开始浏览</td>
+</tr>
+<tr>
+<td>stopFlipping</td>
+<td>停止浏览</td>
+</tr>
+<tr>
+<td>setFlipInterval</td>
+<td>设置View之间切换的时间间隔</td>
+</tr>
+<tr>
+<td>getAccessibilityClassName</td>
+<td>获取类名称</td>
+</tr>
+<tr>
+<td>isFlipping</td>
+<td>判断是否正在浏览</td>
+</tr>
+<tr>
+<td>setAutoStart</td>
+<td>设置是否自动开始浏览</td>
+</tr>
+<tr>
+<td>isAutoStart</td>
+<td>判断是否为自动开始浏览</td>
+</tr>
+</tbody></table>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="动画定义"><a href="#动画定义" class="headerlink" title="动画定义"></a>动画定义</h3><p>scalein.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">set</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">scale</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:duration</span>=<span class="hljs-string">"1000"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:fromXScale</span>=<span class="hljs-string">"0.2"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:fromYScale</span>=<span class="hljs-string">"0.2"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:toYScale</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:toXScale</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:pivotX</span>=<span class="hljs-string">"50%"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:pivotY</span>=<span class="hljs-string">"50%"</span></span></span><br><span class="line"><span class="hljs-tag">        &gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">scale</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>布局文件<br>activity_main.xml</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:id=&quot;@+id/activity_main&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    tools:context=&quot;jzfp.gs.com.animationdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v7.widget.Toolbar</span><br><span class="line">        android:id=&quot;@+id/toolbar&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;?attr/actionBarSize&quot;</span><br><span class="line">        android:background=&quot;@color/colorPrimary&quot;&gt;&lt;/android.support.v7.widget.Toolbar&gt;</span><br><span class="line"></span><br><span class="line">    &lt;！--渐入动画 和 渐出动画定义--&gt;</span><br><span class="line">    &lt;ViewFlipper</span><br><span class="line">        android:id=&quot;@+id/vf&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:inAnimation=&quot;@anim/scalein&quot;</span><br><span class="line">        android:outAnimation=&quot;@anim/scaleout&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;ImageView</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:background=&quot;@mipmap/one&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;ImageView</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:background=&quot;@mipmap/two&quot; /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;ImageView</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:background=&quot;@mipmap/three&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/ViewFlipper&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>scaleout.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">set</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">scale</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:duration</span>=<span class="hljs-string">"1000"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:fromXScale</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:fromYScale</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:toYScale</span>=<span class="hljs-string">"0.2"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:toXScale</span>=<span class="hljs-string">"0.2"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:pivotX</span>=<span class="hljs-string">"50%"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:pivotY</span>=<span class="hljs-string">"50%"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">scale</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>左右滑动切换</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    private ViewFlipper viewFlipper = null;</span><br><span class="line">    float PosX = 0, CurrentX = 0;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.left);</span><br><span class="line">        setSupportActionBar(toolbar);//设置ActionBar</span><br><span class="line"></span><br><span class="line">        viewFlipper = (ViewFlipper) findViewById(R.id.vf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        switch (event.getAction()) &#123;</span><br><span class="line">            case MotionEvent.ACTION_DOWN:</span><br><span class="line">                PosX = event.getX();</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_MOVE:</span><br><span class="line">                CurrentX = event.getX();</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_UP:</span><br><span class="line">                if (CurrentX - PosX &gt; 25.0) &#123;//向右滑动切换到上一页</span><br><span class="line">                    viewFlipper.showPrevious();</span><br><span class="line">                &#125; else if (CurrentX - PosX &lt; -25.0) &#123;//向左滑动，切换到下一页</span><br><span class="line">                    viewFlipper.showNext();</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h3><p>activity_main.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/activity_main"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"jzfp.gs.com.animationdemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.Toolbar</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"?attr/actionBarSize"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@color/colorPrimary"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.Toolbar</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">！--渐入动画</span> 和 渐出动画定义<span class="hljs-attr">--</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">ViewFlipper</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/vf"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:inAnimation</span>=<span class="hljs-string">"@anim/scalein"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:outAnimation</span>=<span class="hljs-string">"@anim/scaleout"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@mipmap/one"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@mipmap/two"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@mipmap/three"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">ViewFlipper</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20161128091235217" alt="这里写图片描述"></p>
+<h3 id="左右滑动切换"><a href="#左右滑动切换" class="headerlink" title="左右滑动切换"></a>左右滑动切换</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> ViewFlipper viewFlipper = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-keyword">float</span> PosX = <span class="hljs-number">0</span>, CurrentX = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.left);</span><br><span class="line">        setSupportActionBar(toolbar);<span class="hljs-comment">//设置ActionBar</span></span><br><span class="line"></span><br><span class="line">        viewFlipper = (ViewFlipper) findViewById(R.id.vf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouchEvent</span><span class="hljs-params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (event.getAction()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">                PosX = event.getX();</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">                CurrentX = event.getX();</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_UP:</span><br><span class="line">                <span class="hljs-keyword">if</span> (CurrentX - PosX &gt; <span class="hljs-number">25.0</span>) &#123;<span class="hljs-comment">//向右滑动切换到上一页</span></span><br><span class="line">                    viewFlipper.showPrevious();</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (CurrentX - PosX &lt; -<span class="hljs-number">25.0</span>) &#123;<span class="hljs-comment">//向左滑动，切换到下一页</span></span><br><span class="line">                    viewFlipper.showNext();</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p><img src="https://img-blog.csdn.net/20161128091235217" alt="这里写图片描述"></p>
 
         </div>
         
@@ -360,7 +380,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -451,7 +471,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -491,7 +511,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -569,7 +589,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -586,18 +606,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -605,18 +625,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -624,18 +644,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -643,18 +663,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -662,18 +682,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -697,7 +717,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -983,7 +1003,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -994,7 +1014,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1005,7 +1025,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1016,7 +1036,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1038,7 +1058,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1061,6 +1081,17 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1233,7 +1264,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1325,6 +1356,13 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1450,7 +1488,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1476,6 +1514,13 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1485,7 +1530,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1660,14 +1705,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1696,18 +1734,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1715,18 +1753,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1734,18 +1772,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1753,18 +1791,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1772,18 +1810,18 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1807,7 +1845,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2093,7 +2131,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2104,7 +2142,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2115,7 +2153,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2126,7 +2164,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2148,7 +2186,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2171,6 +2209,17 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2343,7 +2392,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2435,6 +2484,13 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2560,7 +2616,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2586,6 +2642,13 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2595,7 +2658,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2770,14 +2833,7 @@ isAutoStart               | 判断是否为自动开始浏览    </code></pre><p
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1920 个字)
+                    12 分钟 读完 (大约 1873 个字)
                 </span>
                 
                 
@@ -178,92 +178,23 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a><a href></a>1. 简介</h2><p> 看下类的英文说明：</p>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>看下类的英文说明：</p>
 <blockquote>
-<p>This is the class for text whose content is immutable but to which<br> markup objects can be attached and detached.<br> For mutable text, see {@link SpannableStringBuilder}.</p>
-<p> 装饰物可以添加和删除的定长文本。针对不定长文本，请使用SpannableStringBuilder。<br> 翻译不当，凑合着看吧。</p>
+<p>This is the class for text whose content is immutable but to which<br>markup objects can be attached and detached.<br>For mutable text, see {@link SpannableStringBuilder}.</p>
 </blockquote>
-<hr>
-<h2 id="2-类源码"><a href="#2-类源码" class="headerlink" title="2. 类源码"></a><a href></a>2. 类源码</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class SpannableString</span><br><span class="line">extends SpannableStringInternal</span><br><span class="line">implements CharSequence, GetChars, Spannable</span><br><span class="line">&#123;</span><br><span class="line">    public SpannableString(CharSequence source) &#123;</span><br><span class="line">        super(source, 0, source.length());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private SpannableString(CharSequence source, int start, int end) &#123;</span><br><span class="line">        super(source, start, end);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static SpannableString valueOf(CharSequence source) &#123;</span><br><span class="line">        if (source instanceof SpannableString) &#123;</span><br><span class="line">            return (SpannableString) source;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return new SpannableString(source);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">      what代表span,start和end分别代表文本效果覆盖的起点index和终点index</span><br><span class="line">      flag:</span><br><span class="line">      SPAN_INCLUSIVE_INCLUSIVE:包含起点终点</span><br><span class="line">      SPAN_EXCLUSIVE_EXCLUSIVE:不包含起点终点</span><br><span class="line">      SPAN_INCLUSIVE_EXCLUSIVE:包含起点不包含终点</span><br><span class="line">      SPAN_EXCLUSIVE_INCLUSIVE:不包含起来包含终点</span><br><span class="line">    */</span><br><span class="line">    public void setSpan(Object what, int start, int end, int flags) &#123;</span><br><span class="line">        super.setSpan(what, start, end, flags);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void removeSpan(Object what) &#123;</span><br><span class="line">        super.removeSpan(what);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final CharSequence subSequence(int start, int end) &#123;</span><br><span class="line">        return new SpannableString(this, start, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这个类本身是没有多少内容的，但是如果深究到其父类，可能还是有一些东西可以看到。<br> 整体来说，你可以把他理解成一个高阶的String。SpannableStringBuilder就是高阶的StringBuilder.</p>
-<hr>
-<h2 id="3-基本使用"><a href="#3-基本使用" class="headerlink" title="3. 基本使用"></a><a href></a>3. 基本使用</h2><p> 看下frameworks/base/core/java/android/text/style/目录下的文件内容，大部分是支持的Span种类。一一来过一遍，不管会不会，先看。<br> <img src="https://img-blog.csdn.net/20170811140948790?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 以上就是主要要介绍的内容。</p>
-<h3 id="3-1-AbsoluteSizeSpan"><a href="#3-1-AbsoluteSizeSpan" class="headerlink" title="3.1 *AbsoluteSizeSpan *"></a><a href></a>3.1 *<em>AbsoluteSizeSpan *</em></h3><p> 单位为物理像素</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//pixel size</span><br><span class="line">SpannableString spanString = new SpannableString(&quot;AbsoluteSizeSpan&quot;);</span><br><span class="line">AbsoluteSizeSpan absoluteSizeSpan = new AbsoluteSizeSpan(100);</span><br><span class="line">spanString.setSpan(absoluteSizeSpan, 2, 5, Spannable.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mAbsoluteSizeSpanTextView.setText(spanString);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811142148333?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-2-AlignmentSpan"><a href="#3-2-AlignmentSpan" class="headerlink" title="3.2 *AlignmentSpan *"></a><a href></a>3.2 *<em>AlignmentSpan *</em></h3><p> 支持ALIGN_NORMAL，ALIGN_OPPOSITE，ALIGN_CENTER，效果自行替换尝试</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//文本对齐方式</span><br><span class="line">SpannableString spannableString2 = new SpannableString(</span><br><span class="line">        &quot;AlignmentSpanasdfasdfasdfasdfasdfasdasdfasdfasdasdagsdfsdfasdfsdfasdfasdafsdfsdfsdfsdf&quot;);</span><br><span class="line">AlignmentSpan alignmentSpan = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER);</span><br><span class="line">spannableString2.setSpan(alignmentSpan, 0, spannableString2.length(),</span><br><span class="line">        Spannable.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mAlignmentSpanTextView.setText(spannableString2);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811142301919?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-3-BackgroundColorSpan"><a href="#3-3-BackgroundColorSpan" class="headerlink" title="3.3 *BackgroundColorSpan *"></a><a href></a>3.3 *<em>BackgroundColorSpan *</em></h3><p> 文字背景色改变</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//背景色改变</span><br><span class="line">SpannableString spannableString3 = new SpannableString(&quot;BackgroundColorSpan&quot;);</span><br><span class="line">BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(</span><br><span class="line">        Color.parseColor(&quot;#FFAACC&quot;));</span><br><span class="line">spannableString3.setSpan(backgroundColorSpan, 2, 5, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mBackgroundColorSpanTextView.setText(spannableString3);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152143948?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-4-BulletSpan"><a href="#3-4-BulletSpan" class="headerlink" title="3.4 *BulletSpan *"></a><a href></a>3.4 *<em>BulletSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//小子弹，类似于列表前面的小圆圈</span><br><span class="line">SpannableString spannableString4 = new SpannableString(&quot;BulletSpan&quot;);</span><br><span class="line">spannableString4.setSpan(new BulletSpan(66, 0xff303F9F), 0, spannableString4.length(),</span><br><span class="line">        Spannable.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mBulletSpanTextView.setText(spannableString4);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152253624?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-5-ClickableSpan"><a href="#3-5-ClickableSpan" class="headerlink" title="3.5 *ClickableSpan *"></a><a href></a>3.5 *<em>ClickableSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//可点击</span><br><span class="line">SpannableString spannableString5 = new SpannableString(&quot;ClickableSpan&quot;);</span><br><span class="line">spannableString5.setSpan(new ClickableSpan() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        Toast.makeText(MainActivity.this, &quot;Click&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, 0, 5, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mClickableSpanTextView.setText(spannableString5);</span><br><span class="line">mClickableSpanTextView.setMovementMethod(LinkMovementMethod.getInstance());</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152356102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-6-DrawableMarginSpan"><a href="#3-6-DrawableMarginSpan" class="headerlink" title="3.6 *DrawableMarginSpan *"></a><a href></a>3.6 *<em>DrawableMarginSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Drawable，不占位</span><br><span class="line">SpannableString spannableString6 = new SpannableString(&quot;DrawableMarginSpan&quot;);</span><br><span class="line">DrawableMarginSpan drawableMarginSpan = new DrawableMarginSpan(</span><br><span class="line">        getResources().getDrawable(R.drawable.android), 10);</span><br><span class="line">spannableString6.setSpan(drawableMarginSpan, 0, 0, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mDrawableMarginSpanTextView.setText(spannableString6);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152456331?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-7-DynamicDrawableSpan"><a href="#3-7-DynamicDrawableSpan" class="headerlink" title="3.7 *DynamicDrawableSpan *"></a><a href></a>3.7 *<em>DynamicDrawableSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//DynamicDrawable,占位</span><br><span class="line">SpannableString spannableString7 = new SpannableString(&quot;DynamicDrawableSpan&quot;);</span><br><span class="line">DynamicDrawableSpan dynamicDrawableSpan = new DynamicDrawableSpan() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Drawable getDrawable() &#123;</span><br><span class="line">        Drawable drawable = getResources().getDrawable(R.drawable.android);</span><br><span class="line">        drawable.setBounds(0, 0, 100, 100);</span><br><span class="line">        return drawable;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">spannableString7.setSpan(dynamicDrawableSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mDynamicDrawableSpanTextView.setText(spannableString7);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152543434?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-8-ForegroundColorSpan"><a href="#3-8-ForegroundColorSpan" class="headerlink" title="3.8 *ForegroundColorSpan *"></a><a href></a>3.8 *<em>ForegroundColorSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//前景色</span><br><span class="line">SpannableString spannableString9 = new SpannableString(&quot;ForegroundColorSpan&quot;);</span><br><span class="line">ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(</span><br><span class="line">        Color.parseColor(&quot;#AABBCC&quot;));</span><br><span class="line">spannableString9.setSpan(foregroundColorSpan, 1, spannableString9.length() - 1,</span><br><span class="line">        Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mForegroundColorSpanTextView.setText(spannableString9);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152652072?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-9-IconMarginSpan"><a href="#3-9-IconMarginSpan" class="headerlink" title="3.9 *IconMarginSpan *"></a><a href></a>3.9 *<em>IconMarginSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//图标margin，不占位</span><br><span class="line">SpannableString spannableString10 = new SpannableString(</span><br><span class="line">        &quot;IconMarginSpan------------------------&quot;);</span><br><span class="line">IconMarginSpan iconMarginSpan = new IconMarginSpan(</span><br><span class="line">        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));</span><br><span class="line">spannableString10.setSpan(iconMarginSpan, 0, spannableString10.length(),</span><br><span class="line">        Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mIconMarginSpanTextView.setText(spannableString10);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152802378?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-10-ImageSpan"><a href="#3-10-ImageSpan" class="headerlink" title="3.10 ImageSpan"></a><a href></a>3.10 <strong>ImageSpan</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//图片，占位</span><br><span class="line">SpannableString spannableString11 = new SpannableString(</span><br><span class="line">        &quot;ImageSpan------------------------&quot;);</span><br><span class="line">ImageSpan imageSpan = new ImageSpan(this,</span><br><span class="line">        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));</span><br><span class="line">spannableString11.setSpan(imageSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mImageSpanTextView.setText(spannableString11);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811152918519?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-11-LeadingMarginSpan"><a href="#3-11-LeadingMarginSpan" class="headerlink" title="3.11 *LeadingMarginSpan *"></a><a href></a>3.11 *<em>LeadingMarginSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//控制行前空隙</span><br><span class="line">SpannableString spannableString12 = new SpannableString(</span><br><span class="line">        &quot;LeadingMarginSpan.Standard--------------------------------------------------&quot;);</span><br><span class="line">spannableString12.setSpan(new LeadingMarginSpan.Standard(96, 36), 0,</span><br><span class="line">        spannableString12.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mLeadingMarginSpanTextView.setText(spannableString12);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153121975?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-12-QuoteSpan"><a href="#3-12-QuoteSpan" class="headerlink" title="3.12 *QuoteSpan *"></a><a href></a>3.12 *<em>QuoteSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//左侧出现引用符号 竖线</span><br><span class="line">SpannableString spannableString15 = new SpannableString(&quot;QuoteSpan&quot;);</span><br><span class="line">QuoteSpan quoteSpan = new QuoteSpan(Color.BLACK);</span><br><span class="line">spannableString15.setSpan(quoteSpan, 0, 5, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mQuoteSpanTextView.setText(spannableString15);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153220878?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-13-RelativeSizeSpan"><a href="#3-13-RelativeSizeSpan" class="headerlink" title="*3.13 RelativeSizeSpan *"></a><a href></a>*<em>3.13 RelativeSizeSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//字体放大</span><br><span class="line">SpannableString spannableString17 = new SpannableString(&quot;RelativeSizeSpan&quot;);</span><br><span class="line">RelativeSizeSpan relativeSizeSpan = new RelativeSizeSpan(2.5F);</span><br><span class="line">spannableString17.setSpan(relativeSizeSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mRelativeSizeSpanTextView.setText(spannableString17);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153328099?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-14-ScaleXSpan"><a href="#3-14-ScaleXSpan" class="headerlink" title="*3.14 ScaleXSpan *"></a><a href></a>*<em>3.14 ScaleXSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//字体宽度放大</span><br><span class="line">SpannableString spannableString18 = new SpannableString(&quot;ScaleXSpan&quot;);</span><br><span class="line">ScaleXSpan scaleXSpan = new ScaleXSpan(5);</span><br><span class="line">spannableString18.setSpan(scaleXSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mScaleXSpanTextView.setText(spannableString18);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153441576?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-15-StrikethroughSpan"><a href="#3-15-StrikethroughSpan" class="headerlink" title="*3.15 StrikethroughSpan *"></a><a href></a>*<em>3.15 StrikethroughSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//删除线</span><br><span class="line">SpannableString spannableString19 = new SpannableString(&quot;StrikethroughSpan&quot;);</span><br><span class="line">StrikethroughSpan strikethroughSpan = new StrikethroughSpan();</span><br><span class="line">spannableString19.setSpan(strikethroughSpan, 0, 4, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mStrikethroughSpanTextView.setText(spannableString19);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153528086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-16-StyleSpan"><a href="#3-16-StyleSpan" class="headerlink" title="*3.16 StyleSpan *"></a><a href></a>*<em>3.16 StyleSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//主要由正常、粗体、斜体和同时加粗倾斜四种样式，常量值定义在Typeface类中。构造函数：</span><br><span class="line">SpannableString spannableString20 = new SpannableString(&quot;StyleSpan&quot;);</span><br><span class="line">Parcel parcel = Parcel.obtain();</span><br><span class="line">parcel.writeInt(Typeface.BOLD_ITALIC);</span><br><span class="line">parcel.setDataPosition(0);</span><br><span class="line">StyleSpan styleSpan = new StyleSpan(parcel);</span><br><span class="line">spannableString20.setSpan(styleSpan, 0, spannableString20.length(),</span><br><span class="line">        Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mStyleSpanTextView.setText(spannableString20);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153615341?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-17-SubscriptSpan"><a href="#3-17-SubscriptSpan" class="headerlink" title="*3.17 SubscriptSpan *"></a><a href></a>*<em>3.17 SubscriptSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//下标</span><br><span class="line">SpannableString spannableString21 = new SpannableString(&quot;SubscriptSpan9&quot;);</span><br><span class="line">SubscriptSpan subscriptSpan = new SubscriptSpan();</span><br><span class="line">spannableString21.setSpan(subscriptSpan, 0, spannableString21.length()-7, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mSubscriptSpanTextView.setText(spannableString21);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153702817?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-18-SuperscriptSpan"><a href="#3-18-SuperscriptSpan" class="headerlink" title="*3.18 SuperscriptSpan *"></a><a href></a>*<em>3.18 SuperscriptSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//上标</span><br><span class="line">SpannableString spannableString23 = new SpannableString(&quot;SuperscriptSpan&quot;);</span><br><span class="line">SuperscriptSpan superscriptSpan = new SuperscriptSpan();</span><br><span class="line">spannableString23.setSpan(superscriptSpan, 0, spannableString21.length()-7, Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mSuperscriptSpanTextView.setText(spannableString23);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153755747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-19-TextAppearanceSpan"><a href="#3-19-TextAppearanceSpan" class="headerlink" title="*3.19 TextAppearanceSpan *"></a><a href></a>*<em>3.19 TextAppearanceSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//Sets the text color, size, style, and typeface to match a TextAppearance</span><br><span class="line">SpannableString spannableString24 = new SpannableString(&quot;TextAppearanceSpan&quot;);</span><br><span class="line">TextAppearanceSpan textAppearanceSpan = new TextAppearanceSpan(this, R.style.StyleSpanDemo);</span><br><span class="line">spannableString24.setSpan(textAppearanceSpan, 0, spannableString24.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mTextAppearanceSpanTextView.setText(spannableString24);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811153925688?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-20-TypefaceSpan"><a href="#3-20-TypefaceSpan" class="headerlink" title="*3.20 TypefaceSpan *"></a><a href></a>*<em>3.20 TypefaceSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//字体设置</span><br><span class="line">SpannableString spannableString25 = new SpannableString(&quot;TypefaceSpan&quot;);</span><br><span class="line">TypefaceSpan typefaceSpan= new TypefaceSpan(&quot;monospace&quot;);</span><br><span class="line">spannableString25.setSpan(typefaceSpan, 0, spannableString25.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mTypefaceSpanTextView.setText(spannableString25);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811154012257?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-21-UnderlineSpan"><a href="#3-21-UnderlineSpan" class="headerlink" title="*3.21 UnderlineSpan *"></a><a href></a>*<em>3.21 UnderlineSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//下划线</span><br><span class="line">SpannableString spannableString26 = new SpannableString(&quot;UnderlineSpan&quot;);</span><br><span class="line">UnderlineSpan underlineSpan= new UnderlineSpan();</span><br><span class="line">spannableString26.setSpan(underlineSpan, 0, spannableString25.length() - 4 , Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mUnderlineSpanTextView.setText(spannableString26);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811154101691?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="3-22-URLSpan"><a href="#3-22-URLSpan" class="headerlink" title="*3.22 URLSpan *"></a><a href></a>*<em>3.22 URLSpan *</em></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//URL</span><br><span class="line">SpannableString spannableString27 = new SpannableString(&quot;URLSpan------------------------------&quot;);</span><br><span class="line">URLSpan urlSpan = new URLSpan(&quot;https://www/baidu.com&quot;);</span><br><span class="line">spannableString27.setSpan(urlSpan, 0, spannableString26.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);</span><br><span class="line">mURLSpanTextView.setText(spannableString27);</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20170811154152926?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h2 id="4-备注"><a href="#4-备注" class="headerlink" title="4. 备注"></a><a href></a>4. 备注</h2><p> 示例完整Github:<br> <a href="https://github.com/onlyloveyd/SpannableDemo" target="_blank" rel="noopener">https://github.com/onlyloveyd/SpannableDemo</a><br> 还有部分不常用的Span，暂时没有搞清楚，pass掉，涉及到使用的时候再来</p>
-
+<blockquote>
+<p>装饰物可以添加和删除的定长文本。针对不定长文本，请使用SpannableStringBuilder。  </p>
+</blockquote>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/08/11/《Android 基础（三十九）》 SpannableString/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -339,7 +270,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -430,7 +361,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -470,7 +401,7 @@
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -548,7 +479,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -565,18 +496,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -584,18 +515,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -603,18 +534,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -622,18 +553,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -641,18 +572,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -676,7 +607,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -962,7 +893,7 @@
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -973,7 +904,7 @@
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -984,7 +915,7 @@
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -995,7 +926,7 @@
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1017,7 +948,7 @@
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1040,6 +971,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1212,7 +1154,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1304,6 +1246,13 @@
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1429,7 +1378,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1455,6 +1404,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1464,7 +1420,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1639,14 +1595,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1675,18 +1624,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1694,18 +1643,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1713,18 +1662,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1732,18 +1681,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1751,18 +1700,18 @@
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1786,7 +1735,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2072,7 +2021,7 @@
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2083,7 +2032,7 @@
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2094,7 +2043,7 @@
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2105,7 +2054,7 @@
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2127,7 +2076,7 @@
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2150,6 +2099,17 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2322,7 +2282,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2414,6 +2374,13 @@
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2539,7 +2506,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2565,6 +2532,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2574,7 +2548,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2749,14 +2723,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

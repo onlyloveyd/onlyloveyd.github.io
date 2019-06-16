@@ -145,737 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1072 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/">MacOS 10.11.6 Android源码编译并刷机</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> Mac OS之前是10.14版本，Xcode也是最新的Xcode 10，与官文要求的编译环境相差很大，导致编译过程中出现各种奇葩错误，无力解决，遂重装系统。好在Mac OS重装系统很方便，在线安装即可。所以，安装10.11版本，目前编译Android6.0.1源码无问题。</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a><a href></a>环境</h2><ul>
-<li><p>Mac OS ：10.11.6 OS X EI Capitan </p>
-</li>
-<li><p>JDK：jdk7 </p>
-</li>
-<li><p>Xcode：离线安装的Xcode 7.1 以及对应的Command Line Tool（<a href="https://developer.apple.com/download/more/" target="_blank" rel="noopener">官方下载安装</a>） </p>
-</li>
-<li><p>MacPorts  </p>
-<h2 id="创建分区"><a href="#创建分区" class="headerlink" title="创建分区"></a><a href></a>创建分区</h2><p>mac系统默认是不区分大小写的。</p>
-</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdiutil create -type SPARSE -fs &apos;Case-sensitive Journaled HFS+&apos; -size 150g ~/android.dmg</span><br></pre></td></tr></table></figure>
-
-<p> 这将创建一个.dmg.sparseimage文件，该文件在装载后可用作具有 Android 开发所需格式的驱动盘。<br> 若发现大小不足，可以重新修改</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdiutil resize -size &lt;new-size-you-want&gt;g ~/android.dmg.sparseimage</span><br></pre></td></tr></table></figure>
-
-<p> 在~/.bash_profile添加两个方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># mount the android file image</span><br><span class="line">mountAndroid() &#123; hdiutil attach ~/android.dmg.sparseimage -mountpoint /Volumes/android; &#125;</span><br><span class="line"># unmount the android file image</span><br><span class="line">umountAndroid() &#123; hdiutil detach /Volumes/android; &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a><a href></a>环境准备</h2><h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a><a href></a>JDK安装</h3><h3 id="Xcode7-1-Command-Line-Tool安装（官方下载安装）"><a href="#Xcode7-1-Command-Line-Tool安装（官方下载安装）" class="headerlink" title="Xcode7.1/Command Line Tool安装（官方下载安装）"></a><a href></a>Xcode7.1/Command Line Tool安装（<a href="https://developer.apple.com/download/more/" target="_blank" rel="noopener">官方下载安装</a>）</h3><p> 下载时注意和系统10.11配套的Xcode，以及和Xcode版本对应的Command Line Tool<br> <img src="http://qiniu.fultter.club/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-30%2014.46.59.png" alt></p>
-<h3 id="MacPorts"><a href="#MacPorts" class="headerlink" title="MacPorts"></a><a href></a>MacPorts</h3><p> <a href="http://xn--macports-yj1m.org" target="_blank" rel="noopener">从macports.org</a> 下载安装,请确保 /opt/local/bin 在路径中显示在 /usr/bin 前面。否则，请将以下内容添加到环境变量配置文件(~/.bash_profile)中：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/opt/local/bin:$PATH</span><br></pre></td></tr></table></figure>
-
-<p> 通过 MacPorts 获取 Make、Git 、 GPG、BISON 软件包</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POSIXLY_CORRECT=1 sudo port install gmake libsdl git gnupg bison</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="设置文件描述符数量上限"><a href="#设置文件描述符数量上限" class="headerlink" title="设置文件描述符数量上限"></a><a href></a>设置文件描述符数量上限</h3><p> 在 Mac OS 中，可同时打开的文件描述符的默认数量上限太低，在高度并行的编译流程中，可能会超出此上限。要提高此上限，在~/.bash_profile下添加</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># set the number of open files to be 1024</span><br><span class="line">ulimit -S -n 1024</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a><a href></a>下载</h2><p> 国内采用清华源，国外自便</p>
-<h3 id="Repo"><a href="#Repo" class="headerlink" title="Repo"></a><a href></a>Repo</h3><p> ~目录下新建bin目录，进入后下载repo</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir bin</span><br><span class="line">cd bin</span><br><span class="line">curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo</span><br><span class="line">chmod +x repo</span><br></pre></td></tr></table></figure>
-
-<p> <del>/bin目录加入PATH，</del>/.bash_profile添加</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;~/bin:$PATH&quot;</span><br></pre></td></tr></table></figure>
-
-<p> repo的运行过程中会尝试访问官方的git源更新自己，如果想使用tuna的镜像源进行更新，可以将如下内容复制到你的~/.bash_profile里</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export REPO_URL=&apos;https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/&apos;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a><a href></a>下载源码</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /Volumes/android</span><br><span class="line">mkdir aosp</span><br><span class="line">cd aosp</span><br><span class="line">repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-6.0.1_r1</span><br><span class="line">repo sync</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a><a href></a>编译</h2><h3 id="清理"><a href="#清理" class="headerlink" title="清理"></a><a href></a>清理</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clobber</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="设置环境"><a href="#设置环境" class="headerlink" title="设置环境"></a><a href></a>设置环境</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source build/envsetup.sh</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="选择编译对象"><a href="#选择编译对象" class="headerlink" title="选择编译对象"></a><a href></a>选择编译对象</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lunch</span><br></pre></td></tr></table></figure>
-
-<p> <img src="http://qiniu.fultter.club/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-03-30%2014.55.32.png" alt></p>
-<p> 如果是运行模拟器，选择1即可，如果是编译刷机，根据具体机型选择编译对象。</p>
-<h3 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a><a href></a>编译</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -j8</span><br></pre></td></tr></table></figure>
-
-<p> <strong>-jN</strong> 表示编译并行任务数，这个示电脑情况而定，一般取cpu数的1～2倍就可以</p>
-<h2 id="编译AOSP-8-0-0-r17并刷机"><a href="#编译AOSP-8-0-0-r17并刷机" class="headerlink" title="编译AOSP 8.0.0_r17并刷机"></a><a href></a>编译AOSP 8.0.0_r17并刷机</h2><h3 id="环境变化"><a href="#环境变化" class="headerlink" title="环境变化"></a><a href></a>环境变化</h3><p> jdk7换成 jdk8<br> 为了方便jdk版本切换，在.bash_profile中添加如下内容</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_7_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home</span><br><span class="line">export JAVA_8_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=$JAVA_8_HOME</span><br><span class="line"></span><br><span class="line">alias jdk8=&apos;export JAVA_HOME=$JAVA_8_HOME&apos;</span><br><span class="line">alias jdk7=&apos;export JAVA_HOME=$JAVA_7_HOME&apos;</span><br></pre></td></tr></table></figure>
-
-<p> 然后在终端下使用jdk7或者jdk8来切换环境</p>
-<h3 id="驱动下载"><a href="#驱动下载" class="headerlink" title="驱动下载"></a><a href></a>驱动下载</h3><p> 按照对应的细分版本下载驱动<br> <img src="http://qiniu.fultter.club/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-04-01%2019.33.34.png" alt><br> <img src="http://qiniu.fultter.club/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-04-01%2019.42.40.png" alt><br> 下面是具体下载内容</p>
-<ul>
-<li><a href="http://qiniu.fultter.club/extract-huawei-angler.sh" target="_blank" rel="noopener">extract-huawei-angler.sh</a> </li>
-<li><a href="http://qiniu.fultter.club/extract-huawei-angler.sh" target="_blank" rel="noopener">extract-huawei-angler.sh</a>  下载放至AOSP根目录，执行</li>
-</ul>
-<h3 id="编译-2"><a href="#编译-2" class="headerlink" title="编译"></a><a href></a>编译</h3><p> lunch选择angler，执行编译，待编译完成</p>
-<h3 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a><a href></a>刷机</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 手机连接电脑情况下</span><br><span class="line">adb reboot bootloader </span><br><span class="line"># 进入源码编译输出的目录 </span><br><span class="line">fastboot flashing unlock </span><br><span class="line">fastboot flashall -w </span><br><span class="line">fastboot reboot</span><br></pre></td></tr></table></figure>
-
-<p> <img src="http://qiniu.fultter.club/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-04-01%2019.50.17.png" alt></p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a><a href></a>结果</h3><p> 虽然最后刷入userdata失败，但是不影响运行，系统成功刷入。<br> <img src="http://qiniu.fultter.club/device-2019-04-01-195302%20%281%29.png" alt></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a><a href></a>问题</h2><h3 id="Git下载内容过大"><a href="#Git下载内容过大" class="headerlink" title="Git下载内容过大"></a><a href></a>Git下载内容过大</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.postBuffer 524288000</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Android6-0-1修改build-core-combo-mac-version-mk"><a href="#Android6-0-1修改build-core-combo-mac-version-mk" class="headerlink" title="Android6.0.1修改build/core/combo/mac_version.mk"></a><a href></a>Android6.0.1修改build/core/combo/mac_version.mk</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mac_sdk_versions_supported :=  10.6 10.7 10.8 10.9</span><br></pre></td></tr></table></figure>
-
-<p> 改为</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mac_sdk_versions_supported :=  10.6 10.7 10.8 10.9 10.11</span><br></pre></td></tr></table></figure>
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-21T23:50:01.000Z">2019-03-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android安全/">Android安全</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 343 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/22/《Android 安全（三）》动态调试Smali/">《Android 安全（三）》动态调试Smali</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a><a href></a>环境</h2><ul>
-<li>Android Studio 3.3.2 </li>
-<li>SmaliIdea Plugin </li>
-<li>自己随手写一个Android应用 </li>
-<li>baksmali  <h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a><a href></a>操作</h2></li>
-</ul>
-<h3 id="安装SmaliIdea插件"><a href="#安装SmaliIdea插件" class="headerlink" title="安装SmaliIdea插件"></a><a href></a>安装SmaliIdea插件</h3><ul>
-<li><a href="https://bitbucket.org/JesusFreke/smali/downloads/" target="_blank" rel="noopener">SmaliIDEA 插件</a> </li>
-<li>在线安装  <h3 id="编制测试应用"><a href="#编制测试应用" class="headerlink" title="编制测试应用"></a><a href></a>编制测试应用</h3></li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    private int count = 0;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView textView = findViewById(R.id.tv_content);</span><br><span class="line"></span><br><span class="line">        Button button = findViewById(R.id.bt_change_text);</span><br><span class="line"></span><br><span class="line">        button.setOnClickListener(v -&gt; &#123;</span><br><span class="line">            count++;</span><br><span class="line">            textView.setText(String.format(Locale.CHINESE, &quot;Tap %d&quot;, count));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="打包成Apk文件"><a href="#打包成Apk文件" class="headerlink" title="打包成Apk文件"></a><a href></a>打包成Apk文件</h3><p> 为了保证 <code>android:debuggable=&quot;true&quot;</code> ，我们打包成debug版本即可。或者手动在AndroidManifest.xml文件中设置也行。</p>
-<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a><a href></a>反编译</h3><ul>
-<li><code>baksmali d app-debug.apk -o ~/projects/myapp/src</code>   <h3 id="启动程序并转发端口"><a href="#启动程序并转发端口" class="headerlink" title="启动程序并转发端口"></a><a href></a>启动程序并转发端口</h3></li>
-</ul>
-<ul>
-<li>启动测试程序主界面<br>  <code>adb shell am start -D -n cn.onlyloveyd.smali/cn.onlyloveyd.smali.MainActivity</code> </li>
-</ul>
-<ul>
-<li>启动“Android Device Monitor”，记住pid和后面8700端口，<strong>然后一定关闭Android Device Monitor</strong><br> <img src="http://qiniu.fultter.club/smalifour.png" alt></li>
-</ul>
-<ul>
-<li>转发端口<br> <img src="http://qiniu.fultter.club/smali_jdwp.png" alt></li>
-</ul>
-<h3 id="导入工程至Android-Studio"><a href="#导入工程至Android-Studio" class="headerlink" title="导入工程至Android Studio"></a><a href></a>导入工程至Android Studio</h3><ul>
-<li>“New” -》“import Project”，选择刚才创建的工程目录<br> <img src="http://qiniu.fultter.club/smailone.png" alt></li>
-</ul>
-<ul>
-<li>选择”Create project from existing sources”<br> <img src="http://qiniu.fultter.club/smalitwo.png" alt></li>
-</ul>
-<ul>
-<li>一直继续直到“Finish”</li>
-</ul>
-<ul>
-<li>设置“src”文件加为源文件<br> <img src="http://qiniu.fultter.club/smalithree.png" alt></li>
-</ul>
-<ul>
-<li>“Edit Configurations”并配置JDK<br> <img src="http://qiniu.fultter.club/smalifive.png" alt><br> <img src="http://qiniu.fultter.club/smalisix.png" alt></li>
-</ul>
-<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a><a href></a>调试</h3><ul>
-<li>执行“Run” -》 “Debug XXX” </li>
-<li>跳转到断点处，可执行单步调试<br> <img src="http://qiniu.fultter.club/smaliresult.png" alt>    </li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-20T01:47:28.000Z">2019-03-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android安全/">Android安全</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    37 分钟 读完 (大约 5537 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/20/《Android 安全（二）》Smali语法基础/">《Android 安全（二）》Smali语法基础</a>
-            
-        </h1>
-        <div class="content">
-            <p>  <a href="https://github.com/JesusFreke/smali/wiki" target="_blank" rel="noopener">Github原文</a></p>
-<h2 id="Smali"><a href="#Smali" class="headerlink" title="Smali"></a><a href></a>Smali</h2><p> <a href="https://github.com/JesusFreke/smali" target="_blank" rel="noopener">smali/baksmali </a>是Android的Java VM实现dalvik使用的dex格式的汇编程序/反汇编程序。 语法松散地基于Jasmin/ dedexer的语法，并支持dex格式的全部功能（注释，调试信息，行信息等）</p>
-<h2 id="BuildProcedure-构建程序"><a href="#BuildProcedure-构建程序" class="headerlink" title="BuildProcedure(构建程序)"></a><a href></a>BuildProcedure(构建程序)</h2><h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a><a href></a>依赖</h3><p> 这可能是一份不完整的清单。如果您遇到遗漏的内容，请随时发表评论，我会将其添加</p>
-<ul>
-<li>jdk(8) </li>
-<li>git  其他所有内容都应该通过gradle / gradlew下载</li>
-</ul>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a><a href></a>构建</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/JesusFreke/smali.git</span><br><span class="line">cd smali</span><br><span class="line">./gradlew build</span><br></pre></td></tr></table></figure>
-
-<p> (windows上，使用<strong>gradlew.bat</strong> 代替<strong>./gradlew</strong>)  
- 生成的jar包位置</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smali/build/libs/smali-&lt;version&gt;.jar</span><br><span class="line"></span><br><span class="line">baksmali/build/libs/baksmali-&lt;version&gt;.jar</span><br></pre></td></tr></table></figure>
-
-<p> 除此之外，通过</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew proguard</span><br></pre></td></tr></table></figure>
-
-<p> 可以构建出体积更小混淆后的jar文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smali/build/libs/smali-&lt;version&gt;-small.jar</span><br><span class="line"></span><br><span class="line">baksmali/build/libs/baksmali-&lt;version&gt;-small.jar</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="DeodexInstructions-Deodex说明"><a href="#DeodexInstructions-Deodex说明" class="headerlink" title="DeodexInstructions(Deodex说明)"></a><a href></a>DeodexInstructions(Deodex说明)</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a><a href></a>说明</h3><p> 从v2.1.0开始，baksmali支持反编译ART oat文件。 支持的最低oat版本为56，也就是Android 6.0 / Marshmallow版本中的oat文件版本。 由于与字段排序有关的一些潜在问题，暂不支持M版本之前的oat文件反编译（例如Lollipop）。</p>
-<p> 你可以在oat文件上运行baksmali以获取其中所有odex文件的列表。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; adb pull /system/framework/arm/boot.oat boot.oat</span><br><span class="line">&gt; baksmali boot.oat</span><br><span class="line">boot.oat contains multiple dex files. You must specify which one to disassemble with the -e option</span><br><span class="line">Valid entries include:</span><br><span class="line">/system/framework/core-libart.jar</span><br><span class="line">/system/framework/conscrypt.jar</span><br><span class="line">/system/framework/okhttp.jar</span><br><span class="line">/system/framework/core-junit.jar</span><br><span class="line">/system/framework/bouncycastle.jar</span><br><span class="line">/system/framework/ext.jar</span><br><span class="line">/system/framework/framework.jar</span><br><span class="line">/system/framework/framework.jar:classes2.dex</span><br><span class="line">/system/framework/telephony-common.jar</span><br><span class="line">/system/framework/voip-common.jar</span><br><span class="line">/system/framework/ims-common.jar</span><br><span class="line">/system/framework/mms-common.jar</span><br><span class="line">/system/framework/android.policy.jar</span><br><span class="line">/system/framework/apache-xml.jar</span><br></pre></td></tr></table></figure>
-
-<p> 通过如下操作我们可以反编译boot.oat中的framework jar文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; adb pull /system/framework/arm/boot.oat /tmp/framework/boot.oat</span><br><span class="line">&gt; baksmali -x -c boot.oat -d /tmp/framework -e /system/framework/framework.jar /tmp/framework/boot.oat -o framework</span><br></pre></td></tr></table></figure>
-
-<p> 或者通过如下方式反编译一个应用程序oat</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; adb pull /system/framework/arm/boot.oat /tmp/framework/boot.oat</span><br><span class="line">&gt; adb pull /system/app/Calculator/oat/arm/Calculator.odex Calculator.odex</span><br><span class="line">&gt; baksmali -x -c boot.oat -d /tmp/framework Calculator.odex -o Calculator</span><br></pre></td></tr></table></figure>
-
-<p> 注意，在反编译oat文件时不需要-a选项来指定API Level，baksmali会自动使用oat文件中的API Level。</p>
-<p> 从v1.4.0开始，deodexing过程已经大大简化了，不再需要通过-c选项指定其他类路径。</p>
-<p> Deodexing现在很简单</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baksmali -a &lt;api_level&gt; -x &lt;odex_file&gt; -d &lt;framework_dir&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="odex文件常识"><a href="#odex文件常识" class="headerlink" title="odex文件常识"></a><a href></a>odex文件常识</h3><p> 简而言之，odex文件就是classes.dex文件的优化版本，针对特定设备的优化。 值得一提的是，odex文件依赖于生成时加载的每个“BOOTCLASSPATH”文件。 odex文件仅在与这些确切的BOOTCLASSPATH文件一起使用时才有效。 dalvik通过存储odex文件所依赖的每个文件的校验和来强制执行此操作，并确保在加载odex文件时每个文件的校验和匹配。</p>
-<p> 除了加载的主apk / jar之外，BOOTCLASSPATH只是可以加载类的jars / apk列表而已。 一般android系统的基础BOOTCLASSPATH中包含5个jar包 - core.jar，ext.jar，framework.jar，android.policy.jar和services.jar。 这些都可以在/ system / framework中找到。 但是，有些apks依赖于额外的jar或apks文件。 例如，对于使用谷歌地图的应用程序，com.google.android.maps.jar将附加到该应用程序的apk的BOOTCLASSPATH中。</p>
-<p> 下面这几个由于odex的依赖性造成的问题有时会让事情变得比较麻烦。 首先 - 你不能从一个系统镜像中获取apk + odex文件并在另一个系统映像上运行它（除非其他系统映像使用完全相同的framework文件）。 另一个问题是，如果对任何BOOTCLASSPATH文件进行任何更改，它将使依赖于该文件的每个odex无效 - 基本上每个设备上的apk / jar都会失效。</p>
-<h3 id="Deodexing-反编译Odex"><a href="#Deodexing-反编译Odex" class="headerlink" title="Deodexing(反编译Odex)"></a><a href></a>Deodexing(反编译Odex)</h3><blockquote>
-<p>以下示例默认你使用下载页面上提供的baksmali wrapper脚本来调用baksmali。 如果你是直接调用jar，可以将“baksmali”替换为“java -jar baksmali.jar”</p>
-<p> deodexing的两个主要选项是-x和-d。 -x是告诉baksmali你想要deodex的对象，-d告诉baksmali从哪里加载依赖项。<br> 依赖内容可以是odex文件的形式，也可以是包含classes.dex文件的jar / apk。两者皆可。</p>
-</blockquote>
-<p> 例如，你想从ICS镜像中反编译Calculator.odex文件并且所有的framework odex文件和jar包都放在一个名为framework的文件夹中，你就可以通过如下方式操作：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baksmali -a 15 -x Calculator.odex -d framework -o Calculator</span><br></pre></td></tr></table></figure>
-
-<p> 反编译Calculator.odex，并将生成的deodexed smali文件放入名为Calculator的目录中。</p>
-<h3 id="Troubleshooting-问题解决"><a href="#Troubleshooting-问题解决" class="headerlink" title="Troubleshooting(问题解决)"></a><a href></a>Troubleshooting(问题解决)</h3><h4 id="Heap-Space"><a href="#Heap-Space" class="headerlink" title="Heap Space"></a><a href></a>Heap Space</h4><p> 你可能遇到的一个问题是它是否已用完堆内存。 该错误可能类似于“java.lang.OutOfMemoryError：Java heap space”。 要解决此问题，可以使用-Xmx参数来增加堆大小。 尝试将其设置为512m。 当然，如果需要，你可以进一步增加它。 如果你使用wrapper script来调用baksmali，则可以使用-JXmx。 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baksmali -JXmx512m -x blah.odex</span><br></pre></td></tr></table></figure>
-
-<p> 或者通过如下方式直接调用jar包</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx512m -jar baksmali.jar -x blah.odex</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Registers-寄存器"><a href="#Registers-寄存器" class="headerlink" title="Registers(寄存器)"></a><a href></a>Registers(寄存器)</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a href></a>介绍</h3><p> 在dalvik字节码中，寄存器是32位，并且可以保存任何类型的值。 2个寄存器用于保存64位类型（Long和Double）。</p>
-<h3 id="置顶方法中寄存器数量"><a href="#置顶方法中寄存器数量" class="headerlink" title="置顶方法中寄存器数量"></a><a href></a>置顶方法中寄存器数量</h3><p> 有两种方法可以指定方法中有多少可用寄存器。 .registers指令指定方法中<strong>寄存器的总数</strong>，而.locals指令指定方法中<strong>非参数寄存器</strong>的数量。 寄存器总数包括保存方法参数所需的寄存器。</p>
-<h3 id="方法参数如何传递至方法"><a href="#方法参数如何传递至方法" class="headerlink" title="方法参数如何传递至方法"></a><a href></a>方法参数如何传递至方法</h3><p> 调用方法时，方法的参数将会被放置到倒数的n个寄存器中。如果某个方法有2个参数，5个寄存器（v0-v4），此时参数会被放置到最后两个寄存器中，也就是v3和v4。<br> 对于非static方法，第一个参数永远都是调用该方法的对象。<br> 比如，非static方法<strong>LMyObject;-&gt;callMe(II)V.</strong>，这个方法有2个int型参数，但是还存在一个隐型的 <strong>LMyObject;</strong> 参数在两个整型参数之前，所以这个方法有3个参数。</p>
-<p> 假设通过.registers 5 指令或者.local 2指令(i.e. 2个local寄存器和3个参数寄存器)来指定这个方法有5个寄存器(v0 - v4)，当方法被调用时，调用此方法的对象(也就是 this 引用)将会被放置到v2寄存器中，而第一个整型参数将会被放置到v3寄存器中，第二个整型参数会被放置到v4寄存器中。</p>
-<p> 对于static方法，只是少了一个隐型参数，this而已。</p>
-<h3 id="Register-names-寄存器名称"><a href="#Register-names-寄存器名称" class="headerlink" title="Register names(寄存器名称)"></a><a href></a>Register names(寄存器名称)</h3><p> 对于寄存器，有两种命名方案：普通的v开头命名方案和针对参数寄存器的p开头命名方案。我们继续看上面那个有3个参数，5个寄存器的方法，下面这个表格分别用两种命名方式来表示寄存器。</p>
-<pre><code>Local | Param | 数量         
------ | ----- | ----------- 
-v0    |       | 第一个local寄存器
-v1    |       | 第二个local寄存器
-v2    | p0    | 第一个参数寄存器   
-v3    | p1    | 第二个参数寄存器   
-v4    | p2    | 第三个参数寄存器   </code></pre><h3 id="Motivation-for-introducing-parameter-registers-引入参数寄存器的原因"><a href="#Motivation-for-introducing-parameter-registers-引入参数寄存器的原因" class="headerlink" title="Motivation for introducing parameter registers(引入参数寄存器的原因)"></a><a href></a>Motivation for introducing parameter registers(引入参数寄存器的原因)</h3><p> p开头命名方案的引入是为了解决大家在编辑smali过程中的共同烦恼。比方说，你想添加一下代码到一个有几个参数的方法，然后你发现，你需要一个额外的寄存器。你可能会想“这不是小问题嘛，只需要在.registers指令上加一个不就完事了”。</p>
-<p> 显然，问题不可能那么简单。记住一点，方法参数是存放在可用寄存器中倒数的几个寄存器中。如果你增加寄存器的数量，你将会改变方法参数存放的寄存器。因此，你必须更改.registers指令并重新编号每个参数寄存器。</p>
-<p> 但是如果在整个方法中使用p命名方案引用参数寄存器，则可以轻松更改方法中的寄存器数量，而无需担心重新编号任何现有寄存器。</p>
-<p> 注意：默认情况下，baksmali将使用参数寄存器的p命名方案。如果由于某种原因要禁用此命令并强制baksmali始终使用v命名方案，则可以使用-p / - no-parameter-registers选项。</p>
-<h3 id="Long-Double值"><a href="#Long-Double值" class="headerlink" title="Long/Double值"></a><a href></a>Long/Double值</h3><p> 如前所述，Long和Double类型（分别为J和D）是64位值，需要2个寄存器。在引用方法参数时要记住这一点。<br> 比如，有一个非static方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LMyObject;-&gt;MyMethod(IJZ)V</span><br></pre></td></tr></table></figure>
-
-<p> 方法参数类型依次是：LMyObject;, int, long, bool。所以，这个方法需要5个寄存器来存放参数。</p>
-<pre><code>Register | Type
--------- | ---- 
-p0       | this
-p1       | I   
-p2,p3    | J   
-p4       | Z   </code></pre><h2 id="SmaliBaksmali2-2"><a href="#SmaliBaksmali2-2" class="headerlink" title="SmaliBaksmali2.2"></a><a href></a>SmaliBaksmali2.2</h2><p> v2.2版本后，smail和baksmali有了新的脚手架工具。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">baksmali disassemble app.apk -o app</span><br><span class="line">smali assemble app -o classes.dex</span><br></pre></td></tr></table></figure>
-
-<p> 执行<strong>baksmali help</strong> 和 <strong>smali help</strong> 查看入门内容。</p>
-<p> 注意以下几点：</p>
-<ul>
-<li><p>你可以把apk或者oat文件当成文件夹，单独指定其中的文件作为对象，就像这样  <code>baksmali disassemble app.apk/classes2.dex</code> 。执行 <code>baksmali help input</code> 查阅更多相关信息。 </p>
-</li>
-<li><p>deodexing时指定bootclasspath/classpath的命令选项做了小的调整。现在deodexing oat 文件，一般这样操作 <code>adb pull /system/framework framework &amp;&amp; baksmali deodex app.odex -b framework/arm/boot.oat</code>  </p>
-</li>
-<li><p>baksmail现在包含一系列列举dex/oat/apk 文件各种相关信息的命令  </p>
-<ul>
-<li><code>baksmali list dex boot.oat</code> 列举出oat文件中所有dex（此命令也适用于apk文件） </li>
-<li><code>baksmali list classes app.apk</code> 列举apk/dex等文件中的所有类 </li>
-<li><code>baksmali list methods app.apk | wc -l</code> 获取当前dex文件中的方法数   </li>
-</ul>
-</li>
-<li><p>V2.2支持在Nougat版本上解码oat文件，并包含一些针对Marshmallow版本的错误修正 </p>
-</li>
-<li><p>在dexlib2等文件中有一些重大的API更改。因此，如果你打算将工具升级到dexlib2 v2.2，你可能需要花点事件去解决一些问题  </p>
-<h2 id="SmaliBaksmali2-0"><a href="#SmaliBaksmali2-0" class="headerlink" title="SmaliBaksmali2.0"></a><a href></a>SmaliBaksmali2.0</h2><p>smali/baksmali 2.0版本是下一个重大更新版本，主要就是dexlib的更新。当前正处于测试阶段，如果想体验一下，可以自行前往下载界面下载2.0b1 jar文件。</p>
-<p>这对你意味着什么？大部分内容对你没有影响，值得一提的是它运行更快并且使用更少的内存。</p>
-<p>但是，下面这几点你还是需要稍微注意一下。</p>
-</li>
-</ul>
-<h3 id="Multithreading-多线程"><a href="#Multithreading-多线程" class="headerlink" title="Multithreading(多线程)"></a><a href></a>Multithreading(多线程)</h3><p> smali和baksmali现在是多线程的！默认情况下，它们使用可用的CPU数，最多为6。你可以使用-j选项进行设置。<br> 为了在具有多线程的smali中获得最佳性能，最好稍微提高内存。如果你正在使用smali wrapper script，则可以通过添加-JXmx512m选项手动执行此操作。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smali -JXmx512m out -o classes.dex</span><br></pre></td></tr></table></figure>
-
-<p> 当然，你可以使用默认只位512m的<a href="https://smali.googlecode.com/files/smali-512m" target="_blank" rel="noopener">smali wrapper script</a></p>
-<h3 id="Language-Changes-语言改动"><a href="#Language-Changes-语言改动" class="headerlink" title="Language Changes(语言改动)"></a><a href></a>Language Changes(语言改动)</h3><p> 我利用一次重大修订的机会来调整语言本身的一些内容。</p>
-<h3 id="parameter-gt-param"><a href="#parameter-gt-param" class="headerlink" title=".parameter -&gt; .param"></a><a href></a>.parameter -&gt; .param</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.method parameters(IILjava/lang/String;)V</span><br><span class="line">    .parameter</span><br><span class="line">    .parameter</span><br><span class="line">    .parameter stringParameter</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p> 变成</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.method parameters(IILjava/lang/String;)V</span><br><span class="line">    .param p3, &quot;stringParameter&quot;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p> .parameter指令现在为.param，它的工作方式与.local指令类似。 .param指令不是按顺序将.parameter信息与每个参数匹配，而是使用register参数指定与之关联的参数。</p>
-<h3 id="array-data-changes"><a href="#array-data-changes" class="headerlink" title=".array-data changes"></a><a href></a>.array-data changes</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.array-data 0x4</span><br><span class="line">    0x0t 0x0t 0x80t 0x0t</span><br><span class="line">    0x0t 0x0t 0x40t 0x0t</span><br><span class="line">    0x0t 0x0t 0x20t 0x0t</span><br><span class="line">    0x0t 0x0t 0x10t 0x0t</span><br><span class="line">.end array-data</span><br></pre></td></tr></table></figure>
-
-<p> 变成</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.array-data 4</span><br><span class="line">    0x800000</span><br><span class="line">    0x400000</span><br><span class="line">    0x200000</span><br><span class="line">    0x100000</span><br><span class="line">.end array-data</span><br></pre></td></tr></table></figure>
-
-<p> .array-data中的每个数字现在都是它自己的元素，而不是之前的语法，它会连接每个数字的little-endian编码，然后将完整的连接字节数组重新解释为n-byte little-endian序编码元素。</p>
-<h3 id="const-high16-and-const-wide-high16"><a href="#const-high16-and-const-wide-high16" class="headerlink" title="const/high16 and const-wide/high16"></a><a href></a>const/high16 and const-wide/high16</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const/high16 v0, 0x1234</span><br><span class="line">const-wide/high16 v0, 0x1234</span><br></pre></td></tr></table></figure>
-
-<p> 变成</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const/high16 v0, 0x12340000</span><br><span class="line">const-wide/high16 v0, 0x1234000000000000</span><br></pre></td></tr></table></figure>
-
-<p> 更改了* / high16指令的语法，以便它使用加载到寄存器中的实际值，而不仅仅是存储在指令中的16位。</p>
-<p> 也就是说指定除了顶部16位以外的位为非0是错误的。例如 <code>const/high16 v0, 0x12340001</code> 将会是错误的。</p>
-<h2 id="smalidea"><a href="#smalidea" class="headerlink" title="smalidea"></a><a href></a>smalidea</h2><p> smalidea是一个针对Intellij IDEA以及Android Studio 的smali语言插件。</p>
-<h3 id="Download-下载"><a href="#Download-下载" class="headerlink" title="Download(下载)"></a><a href></a>Download(下载)</h3><p> 当前为alpha版本，持续开发中。<br> <img src="https://raw.githubusercontent.com/wiki/JesusFreke/smali/smalidea.png" alt></p>
-<h3 id="Features-特性"><a href="#Features-特性" class="headerlink" title="Features(特性)"></a><a href></a>Features(特性)</h3><h4 id="当前能力"><a href="#当前能力" class="headerlink" title="当前能力"></a><a href></a>当前能力</h4><ul>
-<li>语法高亮/语法错误 </li>
-<li>字节码级调试  <ul>
-<li>断点 </li>
-<li>指令级单步调试 </li>
-<li>给任意寄存器添加watcher </li>
-<li>调试过程中，完全java风格表达式本地窗口支持等   </li>
-</ul>
-</li>
-<li>跳转到定义处 </li>
-<li>查找引用 </li>
-<li>重命名 </li>
-<li>在java代码中引用smali类(但是当前还不能真正被编译) </li>
-<li>问题报告 - 从错误对话框轻松创建新的github问题<br> <img src="https://raw.githubusercontent.com/wiki/JesusFreke/smali/error.png" alt>  <h4 id="计划能力"><a href="#计划能力" class="headerlink" title="计划能力"></a><a href></a>计划能力</h4></li>
-</ul>
-<ul>
-<li>自动补全（指令名称，类名/方法名/变量名等等） </li>
-<li>纯Smali工程编译 </li>
-<li>健壮性错误检测（如，全字节码检测） </li>
-<li>流畅地项目导入过程  <ul>
-<li>自动检测源目录 </li>
-<li>选择SDK   </li>
-</ul>
-</li>
-<li>APK作为新项目导入引导 </li>
-<li>添加“Smali Class”到“New…”菜单中 </li>
-<li>在“locals”窗格中显示具有值的所有寄存器 </li>
-<li>“watch”窗格中设置寄存器的值  <h4 id="有潜力功能"><a href="#有潜力功能" class="headerlink" title="有潜力功能"></a><a href></a>有潜力功能</h4></li>
-</ul>
-<ul>
-<li>smali+java混合工程编译 </li>
-<li>“引入新寄存器” </li>
-<li>导入或者deodex设备framework作为新模块或者作为sdk </li>
-<li>公开寄存器类型分析数据  <ul>
-<li>随时显示寄存器的预期类型 </li>
-<li>寻找寄存器设值位置    <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a><a href></a>安装</h3></li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><p>下载最新<a href="https://bitbucket.org/JesusFreke/smali/downloads" target="_blank" rel="noopener">smalidea zip 文件</a> </p>
-</li>
-<li><p>在IDEA或者Android Studio中“Settings-&gt;Plugins”中”Install plugin from disk” </p>
-</li>
-<li><p>“Apply”并且重启  </p>
-<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a><a href></a>调试</h3><p>注意：单指令单步调试在 IDEA 14.1及以上版本支持(Android Studio是基于IDEA的，所以类似)。而此之前的版本，执行单步调试的时候，回调转到下一个.line指令，而不是下一条指令。</p>
-</li>
-</ol>
-<ol start="2">
-<li>使用baksmali反编译一个应用到”src”文件夹，并将其作为一个新工程的源文件夹。 <code>baksmali d myapp.apk -o ~/projects/myapp/src</code>  </li>
-<li>IDEA中，导入新项目，选择刚才的新工程目录 <code>~/projects/myapp</code>  </li>
-<li>在导入项目时使用“Create project from existing sources”选项 </li>
-<li>项目导入完成后，右键src文件夹，“Mark Directory As-&gt;Sources Root” </li>
-<li>打开项目设置界面，选择或者创建合适的JDK </li>
-<li>在设备上安装启动此应用 </li>
-<li>运行DDMS，找到对应的应用进程 </li>
-<li>在IDEA中，创建一个新的“Remote”调试配置(Run-&gt;Edit Configurations)，并改变调试端口至8700 </li>
-<li>Run -&gt; Debug </li>
-<li>当断点被触发时，应用程序将会暂停，此时你可以单步，添加watch等  或者 在Android Studio3.2下进行如下操作：</li>
-</ol>
-<ol start="2">
-<li>使用baksmali反编译一个应用到”src”文件夹，并将其作为一个新工程的源文件夹。 <code>baksmali d myapp.apk -o ~/projects/myapp/src</code>  </li>
-<li>在Android Studio中，关闭当前项目，执行“Open an existing Android Studio project” </li>
-<li>项目创建完成后，右键src文件夹，“Mark Directory As-&gt;Sources Root” </li>
-<li>确保应用AndroidManifest.xml中“android:debuggable=“true”。打开“USB调试”并且在“开发者选项”中使用“选择待调试应用” </li>
-<li>启动应用程序并将JDWP服务转发到localhost， <code>adb forward tcp:8700 jdwp:$(timeout 0.5 adb jdwp | tail -n 1)</code>  </li>
-<li>在Android Studio中，创建一个新的“Remote”调试配置(Run-&gt;Edit Configurations)，并改变调试端口至8700 </li>
-<li>在Android Studio中， Run -&gt; Debug </li>
-<li>当断点被触发时，应用程序将会暂停，此时你可以单步，添加watch等  <h2 id="TypesMethodsAndField-类型，方法和字段"><a href="#TypesMethodsAndField-类型，方法和字段" class="headerlink" title="TypesMethodsAndField(类型，方法和字段)"></a><a href></a>TypesMethodsAndField(类型，方法和字段)</h2></li>
-</ol>
-<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a><a href></a>类型</h3><p> dalvik字节码有两个主要的类型，基本类型和引用类型。引用对象指的是对象，数组等基础类型外的所有类型。<br> 每个基本类型都由单个字母代表。这并不是我想出来的点子，他们真真实实地以字符串的形式存储在dex文件中。它们在 dex-format.html 文档中被明确的指出来过(Android源码仓中dalvik/docs/dex-format.html)。</p>
-<pre><code>V | void - 只能用于返回类型
-- | --------------- 
-Z | boolean        
-B | byte           
-S | short          
-C | char           
-I | int            
-J | long(64bits)   
-F | float          
-D | double(64bits) </code></pre><p>Object则是以 <code>Lpackage/name/ObjectName;</code> 的形式出现， <code>L</code> 表明这是一个对象类型， <code>package/name/</code> 指代包名， <code>ObjectName</code> 为当前对象类型名称， <code>:</code> 作为对象的结尾。这等价于java的 <code>package.name.ObjectName</code> ，以String这个具体的类型为例子， <code>Ljava/lang/String;</code> 等价于 <code>java.lang.String</code> 。</p>
-<p> Arrays(数字)则是以 <code>[I</code> 的形式出现，这指代的是一个int类型一维数组，也就是java中 <code>int[]</code> 。至于多维数组，只需要在前面添加一个或者多个 <code>[</code> 字符。 <code>[[I</code> = <code>int[][]</code> ， <code>[[[I</code> = <code>int[][][]</code> (注意，数字的最大维度为255)。</p>
-<p> 对象数据，如 <code>[Ljava/lang/String;</code> 道理和上面是一样的。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a><a href></a>方法</h3><p> 方法总是以非常详细的形式指定，包括方法的类型，方法名称，参数类型和返回类型。虚拟机需要所有这些信息才能找到正确的方法，并能够对字节码执行静态分析（用于验证/优化目的）。<br> 一般形式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lpackage/name/ObjectName;-&gt;MethodName(III)Z</span><br></pre></td></tr></table></figure>
-
-<p> 上面这个示例中， <code>Lpackage/name/ObjectName;</code> 表示类型， <code>MethodName</code> 表示方法名， <code>(III)Z</code> 中 <code>III</code> 表示参数类型（3个int型）， <code>Z</code> 表示方法的返回类型（bool类型）。<br> 方法参数一个接一个地列出，它们之间没有分隔符。<br> 下面有一个更复杂的示例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">method(I[[IILjava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;</span><br></pre></td></tr></table></figure>
-
-<p> 等价于</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String method(int, int[][], int, String, Object[])</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a><a href></a>字段</h3><p> 字段同样总是以详细形式指定，包括包含字段的类型，字段名称和字段类型。同样，这些信息也是为了帮助虚拟机能够找到正确的字段，以及对字节码执行静态分析。<br> 一般形式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;</span><br></pre></td></tr></table></figure>
-
-<p> 这应该是不言自明的 - 它们分别是包名，字段名和字段类型。</p>
-<h2 id="UnresolvableOdexInstruction（暂时无法解决的Odex指令）"><a href="#UnresolvableOdexInstruction（暂时无法解决的Odex指令）" class="headerlink" title="UnresolvableOdexInstruction（暂时无法解决的Odex指令）"></a><a href></a>UnresolvableOdexInstruction（暂时无法解决的Odex指令）</h2><h3 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a><a href></a>说明</h3><p> 在deodexing过程中，我们使用baksmali产生的一些smali文件中，你可能会注意到baksmali用一个throw或其他东西替换odexed指令的一些情况，其中的注释如“Replaced unresolvable optimized instruction with a throw”。</p>
-<h3 id="详情"><a href="#详情" class="headerlink" title="详情"></a><a href></a>详情</h3><p> 比如，下面这段java代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object blah = null;</span><br><span class="line">blah.toString();</span><br></pre></td></tr></table></figure>
-
-<p> 相对应的Smali代码为：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const v0, 0</span><br><span class="line">invoke-virtual &#123;v0&#125;, Ljava/lang/Object;-&gt;toString();</span><br></pre></td></tr></table></figure>
-
-<p> 这当然会导致空指针异常 - 但它是有效的代码。在实践中，这些案例更加隐蔽。</p>
-<p> 当代码被odexed时，invoke-virtual指令将被一个invoke-virtual-quick指令替换，如下所示：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const v0, 0</span><br><span class="line">invoke-virtual-quick &#123;v0), vtable@7</span><br></pre></td></tr></table></figure>
-
-<p> 其中vtable @ 7是指向Object是抽象方法表中toString()方法的索引。</p>
-<p> 但请注意，上面的代码并没有提到该方法所在的类。由于v0始终为null，并且我们只有vtable索引，因此baksmali不可能知道要查看哪个类。所以，不可能deodex 这条指令。但是，我们可以尽量对其进行处理：用具有完全相同效果的内容来替换这条指令。记住v0始终为null，所以通过它调用任何方法都会导致空指针。所以Samli就使用同样会抛出空指针的内容来替换这条无法解决的odex指令。</p>
-<p> 除此之外，紧随上面这些无法解决的odex指令的code，由于永远无法执行而成为了冗余代码（除非有其他分支可以访问到它们）。或者在一些其他情况下，代码依赖的是一个我们无法解决的odex指令方法结果，那么这部分代码也是不可能被deodex的，因为，这部分代码无法被访问到，全被移除或者注释掉了。</p>
-<p> 因此，简而言之，这些情况不应影响字节码的语义/功能。当你看到“replaced unresolvable optimized instruction”，不必大惊小怪。Baksmali对这部分呢日用的处理不影响代码功能/语义（如果对功能/语义造成了影响，那就是baksmali的bug）。</p>
-<p> 目前，存在与此相关的已知问题，其中如果try块中的所有代码都被注释掉，因为它依赖一个无法解析的odex指令，则（空）try块保留在其中，并且当安装到设备上时，空 try块会导致dalvik拒绝dex文件。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-16T09:11:16.000Z">2019-03-16</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 431 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/16/Android Device Monitor启动插件/">Android Device Monitor启动插件</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。<br> 官方解释：</p>
-<blockquote>
-<p>Android Device Monitor was deprecated in Android Studio 3.1 and removed from Android Studio 3.2. The features that you could use through the Android Device Monitor have been replaced by new features. The table below helps you decide which features you should use instead of these deprecated and removed features.</p>
-<p> 官方准备弃用Android Device Monitor 并推荐开发者使用对应的新特性作为替代品。具体查阅[官网]。(<a href="https://developer.android.google.cn/studio/profile/monitor" target="_blank" rel="noopener">https://developer.android.google.cn/studio/profile/monitor</a>)  
- 对于习惯使用Android Device Monitor的开发者来说，每次都需要目录下触发monitor很不方便。所以，用最简单的方式将其集成到Android Studio界面上是相对不错的解决方案。</p>
-</blockquote>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a><a href></a>准备</h2><ul>
-<li>开发环境：intellij IDEA </li>
-<li>开发手册：<a href="http://www.jetbrains.org/intellij/sdk/docs/welcome.html" target="_blank" rel="noopener">intellij Official Docs</a> </li>
-<li>参考项目：<a href="https://github.com/maddouri/IntelliJ-OnlineSearch" target="_blank" rel="noopener">IntelliJ-OnlineSearch</a>, <a href="https://github.com/misakuo/svgtoandroid" target="_blank" rel="noopener">svgtoandroid</a>  <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a><a href></a>需求</h2></li>
-</ul>
-<ul>
-<li><p>满足工作环境(Windows, Mac Pro) </p>
-</li>
-<li><p>Android Studio主界面启动 </p>
-</li>
-<li><p>单次配置  </p>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href></a>源代码</h2><p><a href="https://github.com/onlyloveyd/AndroidDeviceMonitorPlugin" target="_blank" rel="noopener">AndroidDeviceMonitorPlugin</a></p>
-</li>
-</ul>
-<h3 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a><a href></a>plugin.xml</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-082852@2x.png" alt></p>
-<p> 如果不清楚菜单分组分类，可以去Android Studio 主工具菜单空白处右键查阅</p>
-<p> <img src="http://qiniu.fultter.club/QQ20190316-083147@2x.png" alt></p>
-<p> 点击“Customize Menus And Toolbars”，得见下方内容</p>
-<p> <img src="http://qiniu.fultter.club/QQ20190316-083217@2x.png" alt></p>
-<h3 id="SettingsConfigurable"><a href="#SettingsConfigurable" class="headerlink" title="SettingsConfigurable"></a><a href></a>SettingsConfigurable</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-083845@2x.png" alt></p>
-<h3 id="LaunchMonitorAction"><a href="#LaunchMonitorAction" class="headerlink" title="LaunchMonitorAction"></a><a href></a>LaunchMonitorAction</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-084225@2x.png" alt></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ul>
-<li>第一次开发Intellij Plugin：Java界面开发早已忘却 </li>
-<li>单纯实现功能，逻辑相对简单，但是插件开发里应该有很多门道 </li>
-<li>多看官文和成功案例    </li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-12T01:22:41.000Z">2019-01-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 201 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/12/《Android 进阶（ 六）》Simple SlideToggleView For Android/">《Android 进阶（ 六）》Simple SlideToggleView For Android</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="SlideToggleView"><a href="#SlideToggleView" class="headerlink" title="SlideToggleView"></a><a href></a>SlideToggleView</h1><p> 🍎A simple SlideToggleView for Android.</p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a><a href></a>Installation</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a><a href></a>Gradle</h3><p> <strong>Step 1.</strong> Add it in your root build.gradle at the end of repositories:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">	...</span><br><span class="line">	maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> Add the dependency</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    iimplementation &apos;com.github.onlyloveyd:SlideToggleView:1.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a><a href></a>Basic Usage</h2><p> <strong>Step 1.</strong> Add <strong>SlideToggleView</strong> into your layout</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;cn.onlyloveyd.slidetoggleview.SlideToggleView</span><br><span class="line">      android:id=&quot;@+id/slideToggleView&quot;</span><br><span class="line">      android:layout_width=&quot;match_parent&quot;</span><br><span class="line">      android:layout_height=&quot;56dp&quot;</span><br><span class="line">      android:layout_marginTop=&quot;40dp&quot;</span><br><span class="line">      android:background=&quot;@drawable/slide_bg&quot;</span><br><span class="line">      app:stv_blockBottomMargin=&quot;2dp&quot;</span><br><span class="line">      app:stv_blockLeftMargin=&quot;2dp&quot;</span><br><span class="line">      app:stv_blockRightMargin=&quot;2dp&quot;</span><br><span class="line">      app:stv_blockTopMargin=&quot;3dp&quot;</span><br><span class="line">      app:stv_remain=&quot;80dp&quot;</span><br><span class="line">      app:stv_slideBlock=&quot;@drawable/slide_block&quot;</span><br><span class="line">      app:stv_text=&quot;Slide To Unlock&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong>(optional)add SlideToggleListener for SlideToggleView</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mBinding.slideToggleView.setSlideToggleListener(new SlideToggleView.SlideToggleListener() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public void onBlockPositionChanged(SlideToggleView view, int left, int total,</span><br><span class="line">               int slide) &#123;</span><br><span class="line">           String content = String.format(Locale.CHINESE, &quot;left: %d - total: %d - slide: %d&quot;,</span><br><span class="line">                   left, total, slide);</span><br><span class="line">           mBinding.shimmerTextView.setText(content);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       @Override</span><br><span class="line">       public void onSlideOpen(SlideToggleView view) &#123;</span><br><span class="line">           Toast.makeText(MainActivity.this, &quot;Slide Toggle is Open&quot;,</span><br><span class="line">                   Toast.LENGTH_SHORT).show();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a><a href></a>Attributes</h2><pre><code>Attribute             | Usage    
---------------------- | --------- 
-stv_text              | 居中文字内容   
-stv_textSize          | 居中文字大小   
-stv_textColor         | 居中文字颜色   
-stv_slideBlock        | 滑块图片     
-stv_blockLeftMargin   | 滑块左间距    
-stv_blockRightMargin  | 滑块左间距    
-stv_blockTopMargin    | 滑块顶部间距   
-stv_blockBottomMargin | 滑块底部间距   
-stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Result"><a href="#Basic-Result" class="headerlink" title="Basic Result"></a><a href></a>Basic Result</h2><p> <img src="http://www.onlyloveyd.cn/upload/2019/01/s9f8khun44i50og2c37kj6kikt.gif" alt="抽奖">   </p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-11T00:58:17.000Z">2019-01-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 344 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/11/Android 7.0 Notification Sound Issue/">Android 7.0 Notification Sound Issue</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近遇到一个问题：<br> 自定义Notification通知声音(一个外部存储MP3文件)，Android7.0版本上无法正常播放。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a><a href></a>分析</h2><ol>
-<li><p>查阅代码是否正常执行，setSound是否设置有效Uri正常执行,设置的Uri有效 </p>
-</li>
-<li><p>查看Log发现权限问题相关Log  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MediaPlayer: Couldn&apos;t open content://xxxxxxxx/new_order.mp3: java.lang.SecurityException: Permission Denial: opening provider android.support.v4.content.FileProvider from ProcessRecord&#123;ce87f22 2005:com.android.systemui/u0a18&#125; (pid=2005, uid=10018) that is not exported from uid 10257</span><br></pre></td></tr></table></figure>
-
-<p>传递参数FileProvider Uri，com.android.systemui无访问权限，导致设置的MP3无法播放</p>
-</li>
-</ol>
-<ol start="2">
-<li>adb shell dumpsys notification查看sound是否为设置的Urisound为设置的Uri，正常  <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><a href></a>解决办法</h2></li>
-</ol>
-<h3 id="使用grantUriPermissions"><a href="#使用grantUriPermissions" class="headerlink" title="使用grantUriPermissions()"></a><a href></a>使用grantUriPermissions()</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grantUriPermission(&quot;com.android.systemui&quot;, sound,</span><br><span class="line">    Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br></pre></td></tr></table></figure>
-
-<p> (这个具体情况可以根据上面分析中的Log确定包名)</p>
-<h3 id="使用android-resource"><a href="#使用android-resource" class="headerlink" title="使用android.resource"></a><a href></a>使用android.resource</h3><p> 假设使用raw资源保存test.mp3文件，然后使用</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(&quot;android.resource://“+ context.getPackageName() + R.id.test);</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(&quot;android.resource://“+ context.getPackageName() + &quot;/raw/test.mp3&quot;);</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="禁止严格模式-amp-不使用FileProvider（不推荐）"><a href="#禁止严格模式-amp-不使用FileProvider（不推荐）" class="headerlink" title="禁止严格模式&amp;不使用FileProvider（不推荐）"></a><a href></a>禁止严格模式&amp;不使用FileProvider（不推荐）</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().build());</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ul>
-<li>Android7.0 注意Uri权限问题</li>
-</ul>
-<ul>
-<li>Android8.0 注意setSound在NotificationChannel完成</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><a href></a>参考</h2><ol start="2">
-<li><a href="https://commonsware.com/blog/2016/09/07/notifications-sounds-android-7p0-aggravation.html" target="_blank" rel="noopener">Notifications, Sounds, Android 7.0, and Aggravation</a> </li>
-<li><a href="https://issuetracker.google.com/issues/37118905" target="_blank" rel="noopener">Google Issue Tracker</a> </li>
-<li><a href="https://stackoverflow.com/questions/39285228/how-to-set-audio-as-ringtone-programmatically-above-android-n?noredirect=1#comment66048508_39285228" target="_blank" rel="noopener">Stackoverflow Issue</a> </li>
-<li><a href="https://issuetracker.google.com/issues/36524161" target="_blank" rel="noopener">Google Fixed</a>    </li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-12-29T05:49:33.000Z">2018-12-29</time>
                 
                 <div class="level-item">
@@ -1246,6 +515,580 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-01T02:43:23.000Z">2018-10-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    23 分钟 读完 (大约 3400 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/01/《Android 基础（四十八）》ConstrainLayout【译】/">《Android 基础（四十八）》ConstrainLayout【译】</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a><a href></a>原文地址</h1><p> <a href="https://developer.android.google.cn/reference/android/support/constraint/ConstraintLayout" target="_blank" rel="noopener">https://developer.android.google.cn/reference/android/support/constraint/ConstraintLayout</a></p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a href></a>介绍</h1><blockquote>
+<p>ConstrainLayout是一个允许开发者灵活地设置控件的位置和大小的ViewGroup。<br> 只要你使用的Android系统版本在9以上，你便可以通过添加依赖的方式来使用ConstrainLayout.</p>
+</blockquote>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a><a href></a>使用</h1><h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a><a href></a>添加依赖</h2><blockquote>
+<p>implementation ‘com.android.support.constraint:constraint-layout:1.1.3’</p>
+</blockquote>
+<h2 id="常用约束"><a href="#常用约束" class="headerlink" title="常用约束"></a><a href></a>常用约束</h2><h3 id="相对定位-Relative-positioning"><a href="#相对定位-Relative-positioning" class="headerlink" title="相对定位(Relative positioning)"></a><a href></a>相对定位(Relative positioning)</h3><p> 相对定位是ConstrainLayout构建布局的一种基本方式。相对定位约束可以帮助我们通过一个给定的Widget来摆放另外一个Widget。我们可以在横纵两个方向上约束Widget。</p>
+<blockquote>
+<p>横向: left, right, start and end sides<br> 纵向: top, bottom sides and text baseline</p>
+<p> 一般思路是将一个 Widget的给定侧约束到其他Widget的另一侧。</p>
+</blockquote>
+<p> 比如，把button B放置到button A的右侧(下图)</p>
+<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/pga1qopccqgo7rccn2jldujc0d.png" alt="alt"></p>
+<p> 实现可以如下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonA&quot; ... /&gt;</span><br><span class="line">&lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line"> app:layout_constraintLeft_toRightOf=&quot;@+id/buttonA&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 上述代码就是告诉系统，我们想让button B的左侧约束到button A的右侧。这样一个位置约束意味着，系统将让button A的右侧和button B的左侧在X轴上具有相同的位置。</p>
+<p> 此类相对位置属性还有很多，具体如下：<br> <img src="http://www.onlyloveyd.cn/upload/2018/10/r0tlg97g86hjcp556qp7bo0ggh.png" alt="alt"></p>
+<ul>
+<li><strong>layout_constraintLeft_toLeftOf</strong> </li>
+<li><strong>layout_constraintLeft_toRightOf</strong> </li>
+<li><strong>layout_constraintRight_toLeftOf</strong> </li>
+<li><strong>layout_constraintRight_toRightOf</strong> </li>
+<li><strong>layout_constraintTop_toTopOf</strong> </li>
+<li><strong>layout_constraintTop_toBottomOf</strong> </li>
+<li><strong>layout_constraintBottom_toTopOf</strong> </li>
+<li><strong>layout_constraintBottom_toBottomOf</strong> </li>
+<li><strong>layout_constraintBaseline_toBaselineOf</strong> </li>
+<li><strong>layout_constraintStart_toEndOf</strong> </li>
+<li><strong>layout_constraintStart_toStartOf</strong> </li>
+<li><strong>layout_constraintEnd_toStartOf</strong> </li>
+<li><strong>layout_constraintEnd_toEndOf</strong>  这些属性通过引用<strong>id</strong>来代表一个Widget，或者使用<strong>parent</strong>来代表父布局</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line">  app:layout_constraintLeft_toLeftOf=&quot;parent&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="边距-Margins"><a href="#边距-Margins" class="headerlink" title="边距(Margins)"></a><a href></a>边距(Margins)</h3><p> <img src="http://www.onlyloveyd.cn/upload/2018/10/shcki04bl0go4qdsod8nf5meao.png" alt="alt"></p>
+<p> 如果设置了边距，则它们将应用于相应的约束，将边距强制设置为目标Widget和源Widget之间的空间。通常的布局边距属性就可以达到此效果。</p>
+<ul>
+<li><strong>android:layout_marginStart</strong> </li>
+<li><strong>android:layout_marginEnd</strong> </li>
+<li><strong>android:layout_marginLeft</strong> </li>
+<li><strong>android:layout_marginTop</strong> </li>
+<li><strong>android:layout_marginRight</strong> </li>
+<li><strong>android:layout_marginBottom</strong>  注意: 边距只能是正数或等于零，采用Dimension形式。</li>
+</ul>
+<h3 id="约束目标GONE后边距处理-Margins-when-connected-to-a-GONE-widget"><a href="#约束目标GONE后边距处理-Margins-when-connected-to-a-GONE-widget" class="headerlink" title="约束目标GONE后边距处理 (Margins when connected to a GONE widget)"></a><a href></a>约束目标GONE后边距处理 (Margins when connected to a GONE widget)</h3><p> 当约束目标的可见性为View.GONE时，你还可以使用以下属性指示要使用的不同边距值：</p>
+<ul>
+<li><p><strong>layout_goneMarginStart</strong> </p>
+</li>
+<li><p><strong>layout_goneMarginEnd</strong> </p>
+</li>
+<li><p><strong>layout_goneMarginLeft</strong> </p>
+</li>
+<li><p><strong>layout_goneMarginTop</strong> </p>
+</li>
+<li><p><strong>layout_goneMarginRight</strong> </p>
+</li>
+<li><p><strong>layout_goneMarginBottom</strong>  </p>
+<h3 id="居中定位和位置偏差"><a href="#居中定位和位置偏差" class="headerlink" title="居中定位和位置偏差"></a><a href></a>居中定位和位置偏差</h3><p>ConstraintLayout的一个有用方面是它如何处理“不可能”的约束。例如，如果我们有如下代码：</p>
+</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.ConstraintLayout ...&gt;</span><br><span class="line">    &lt;Button android:id=&quot;@+id/button&quot; ...</span><br><span class="line">         app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">         app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;</span><br><span class="line">         &lt;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 除非ConstraintLayout恰好具有与Button完全相同的大小，否则两个约束不能同时满足（双方都不能成为我们想要它们的位置）。</p>
+<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/56l42bsil0j5rqt5u6gpc7gbd1.png" alt="alt"></p>
+<p> 在这种情况下，约束的作用就像是相反的力量将Widget拉平（上图）;这样Widget最终将会在父容器中居中显示。这种使用方式在纵轴方向上同样适用。</p>
+<h4 id="偏差-Bias"><a href="#偏差-Bias" class="headerlink" title="偏差(Bias)"></a><a href></a>偏差(Bias)</h4><p> 遇到这种相反的约束时的默认设置是使Widget居中;但是你可以使用偏差属性调整定位以使一侧偏向另一侧。</p>
+<ul>
+<li><strong>layout_constraintHorizontal_bias</strong> </li>
+<li><strong>layout_constraintVertical_bias</strong>  例如，如下代码将使左侧具有30％的偏差而不是默认的50％，使得左侧将更短，Widget更倾向于左侧（具体效果如下图）：</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.ConstraintLayout ...&gt;</span><br><span class="line">       &lt;Button android:id=&quot;@+id/button&quot; ...</span><br><span class="line">           app:layout_constraintHorizontal_bias=&quot;0.3&quot;</span><br><span class="line">           app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">           app:layout_constraintRight_toRightOf=&quot;parent/&gt;</span><br><span class="line">         &lt;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/u5fpnj4qc4jcbra4m6n2hd1r1c.png" alt="alt"></p>
+<p> 使用偏差属性，你可以制作更好地适应屏幕尺寸变化的用户界面。</p>
+<h3 id="环形定位-Circular-positioning-Added-in-1-1"><a href="#环形定位-Circular-positioning-Added-in-1-1" class="headerlink" title="环形定位(Circular positioning (Added in 1.1))"></a><a href></a>环形定位(Circular positioning (Added in 1.1))</h3><p> 你可以以距离或者角度来约束一个Widget中心相对于另一个Widget的中心。这样我们就可以将Widget放置到一个圆环上。具体属性如下：</p>
+<ul>
+<li><strong>layout_constraintCircle</strong> : 引用widget ID </li>
+<li><strong>layout_constraintCircleRadius</strong> : 到另一个widget的距离 </li>
+<li><strong>layout_constraintCircleAngle</strong> : widget需要摆放在哪个角度 (0-360)  <img src="http://www.onlyloveyd.cn/upload/2018/10/t0d1lsuouahrpqv0v619b6trte.png" alt="alt"><br><img src="http://www.onlyloveyd.cn/upload/2018/10/67n9m05ncmjeaqrvgs6ltf7j8v.png" alt="alt"></li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonA&quot; ... /&gt;</span><br><span class="line">  &lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line">      app:layout_constraintCircle=&quot;@+id/buttonA&quot;</span><br><span class="line">      app:layout_constraintCircleRadius=&quot;100dp&quot;</span><br><span class="line">      app:layout_constraintCircleAngle=&quot;45&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="可见性行为-Visibility-behavior"><a href="#可见性行为-Visibility-behavior" class="headerlink" title="可见性行为(Visibility behavior)"></a><a href></a>可见性行为(Visibility behavior)</h3><p> ConstraintLayout对于可见性为<strong>View.GONE</strong>的Widget有明确的处理方式。</p>
+<p> <strong>GONE</strong> widget，一般情况下，将不会显示在界面上，同时也不再是布局中的一部分。</p>
+<p> 但就布局计算而言，GONE Widget仍然是其中的一部分，这是有很大区别的。</p>
+<ul>
+<li><p>对于布局传递，它们的尺寸将被视为零（基本上，它们将被解析为一个点） </p>
+</li>
+<li><p>如果他们对其他Widget有限制，这些限制仍然会得到体现，但任何边距都会等于零  <img src="http://www.onlyloveyd.cn/upload/2018/10/u0iqch7uv4hogo603fsp4jr605.png" alt="alt"></p>
+<p>这种特定的行为可以满足你在不破坏布局的情况下构建布局，只需要暂时将对应的Widget标记为GONE即可，这在构建简单的布局动画时是很有用的。</p>
+<p>如上图，当A GONE后，B使用的左边距是B相对于A的边距。在某些情况下，这个边距可能并不是你所需要的(比如，A相对于容器存在20dp的左边距，B相对于A有40dp的左边距，当A被标记为GONE后，B相对于容器就会存在40dp的左边距)。因此，你可以指定在连接到的Widget标记为GONE时的margin作为备用边距值。具体看上一章节的【约束目标GONE后边距处理】。</p>
+</li>
+</ul>
+<h3 id="尺寸约束-Dimensions-constraints"><a href="#尺寸约束-Dimensions-constraints" class="headerlink" title="尺寸约束(Dimensions constraints)"></a><a href></a>尺寸约束(Dimensions constraints)</h3><h4 id="ConstraintLayout最小尺寸和最大尺寸"><a href="#ConstraintLayout最小尺寸和最大尺寸" class="headerlink" title="ConstraintLayout最小尺寸和最大尺寸"></a><a href></a>ConstraintLayout最小尺寸和最大尺寸</h4><p> 通过如下属性你可以给ConstrainLayout定义最大或是最小尺寸。</p>
+<ul>
+<li><strong>android:minWidth</strong> set the minimum width for the layout </li>
+<li><strong>android:minHeight</strong> set the minimum height for the layout </li>
+<li><strong>android:maxWidth</strong> set the maximum width for the layout </li>
+<li><strong>android:maxHeight</strong> set the maximum height for the layout  当其尺寸设置为WRAP_CONTENT时，这些最小和最大尺寸将会被ConstraintLayout使用到。</li>
+</ul>
+<h4 id="Widgets尺寸约束"><a href="#Widgets尺寸约束" class="headerlink" title="Widgets尺寸约束"></a><a href></a>Widgets尺寸约束</h4><p> Widgets的尺寸需要通过如下三种方式设置<strong>android:layout_width</strong>和<strong>android:layout_height</strong>来明确。</p>
+<ul>
+<li><p>使用一个明确的尺寸大小 (数字值如123dp或者是一个尺寸引用) </p>
+</li>
+<li><p>使用WRAP_CONTENT, 让控件自己计算其大小 </p>
+</li>
+<li><p>使用0dp, 等价于 “MATCH_CONSTRAINT”  <img src="http://www.onlyloveyd.cn/upload/2018/10/2ovn1a1tnqiubquk091p60s3h0.png" alt="alt"></p>
+<p>前两种设置的效果和其他布局一样。最后一个将以匹配所设置的约束的方式调整Widget的大小（上图中（a）wrap_content,（b）0dp）。如果设置来边距，它们也将被计算在内（上图中（c）0dp with margin）。</p>
+<p><strong>重要</strong> 针对ConstrainLayout中的Widget，我们不推荐使用<strong>MATCH_PARENT</strong>。我们可以通过使用MATCH_CONSTRAINT配合约束 Widget 的left/right或者top/bottom 到<strong>“parent”</strong>来定义类似的行为。</p>
+</li>
+</ul>
+<h4 id="WRAP-CONTENT：强制执行约束-Added-in-1-1"><a href="#WRAP-CONTENT：强制执行约束-Added-in-1-1" class="headerlink" title="WRAP_CONTENT：强制执行约束 (Added in 1.1)"></a><a href></a>WRAP_CONTENT：强制执行约束 (Added in 1.1)</h4><p> 如果一个尺寸设置为<strong>WRAP_CONTENT</strong>，在1.1版本之前，他们将会被定义为数值类的尺寸大小，约束将不会限制结果尺寸。一般情况下这样已经足够满足需求并且运行速度也是很快的，但是在某些情况下，你可能想用<strong>WRAP_CONTENT</strong>来设置尺寸，同时也想强制约束来限制结果布局尺寸。这种情况下，你可以使用如下属性：</p>
+<ul>
+<li><p><strong>app:layout_constrainedWidth=”true|false”</strong> </p>
+</li>
+<li><p><strong>app:layout_constrainedHeight=”true|false”</strong>  </p>
+<h4 id="MATCH-CONSTRAINT-Added-in-1-1"><a href="#MATCH-CONSTRAINT-Added-in-1-1" class="headerlink" title="MATCH_CONSTRAINT(Added in 1.1)"></a><a href></a>MATCH_CONSTRAINT(Added in 1.1)</h4><p>当Widget的尺寸被设置为MATCH_CONSTRAINT时，默认的结果就是使用所有可用的空间。如下几个额外的属性可以被使用到：</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>layout_constraintWidth_min and layout_constraintHeight_min : 将为这个尺寸设置最小值</strong> </p>
+</li>
+<li><p><strong>layout_constraintWidth_max and layout_constraintHeight_max : 将为这个尺寸设置最大值</strong> </p>
+</li>
+<li><p><strong>layout_constraintWidth_percent and layout_constraintHeight_percent : 将按相对父布局的百分比来设置尺寸</strong>  </p>
+<h4 id="最小值和最大值-Min-and-Max"><a href="#最小值和最大值-Min-and-Max" class="headerlink" title="最小值和最大值(Min and Max)"></a><a href></a>最小值和最大值(Min and Max)</h4><p>为min和max指示的值可以是Dp单位，也可以是“wrap”，它将使用与WRAP_CONTENT将执行的值相同的值</p>
+</li>
+</ul>
+<h4 id="百分比尺寸-Percent-dimension"><a href="#百分比尺寸-Percent-dimension" class="headerlink" title="百分比尺寸(Percent dimension)"></a><a href></a>百分比尺寸(Percent dimension)</h4><p> 要使用百分比，你需要做如下配置：</p>
+<ul>
+<li><p>尺寸设置为<strong>MATCH_CONSTRAINT（0dp）</strong> </p>
+</li>
+<li><p>默认值设置为percent** app:layout_constraintWidth_default=“percent”** 或者<strong>app:layout_constraintHeight_default=”percent”</strong><br> (备注: 在版本1.1-beta1 and 1.1-beta2中这些配置是需要的, 但是在后续的版本中只要百分比属性被定义，便不再需要这些配置) </p>
+</li>
+<li><p>然后设置<strong>layout_constraintWidth_percent</strong>或者 <strong>layout_constraintHeight_percent</strong>属性值，范围0-1  </p>
+<h4 id="比率"><a href="#比率" class="headerlink" title="比率"></a><a href></a>比率</h4><p>你可以定义Widget的宽高比例。为了实现这个效果，宽高中至少又一个设置为<strong>0dp(i.e.,MATCH_CONSTRAINT)</strong>， 然后给** layout_constraintDimensionRatio**指定一个比例值，如下</p>
+</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;0dp&quot;</span><br><span class="line">    app:layout_constraintDimensionRatio=&quot;1:1&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 这段代码将设置button的宽高一样。比例值可以通过如下两种方式设置：</p>
+<ul>
+<li>float值, 代表宽高的比例 </li>
+<li>比例值按照“width:height”的格式书写  在宽高都设置为MATCH_CONSTRAINT(0dp)时，我们仍然能够使用比例属性。在这种情况下，系统设置满足所有约束的最大尺寸并保持指定的纵横比。要根据另一个的尺寸约束一个特定边，可以预先附加<strong>“W,”</strong>或<strong>“H,”</strong>分别约束宽度或高度。比如，一个尺寸被两个目标约束(宽度0dp并且在父布局居中)，你可以通过在比例值前添加<strong>“W(约束宽度)”</strong>或者<strong>“H(约束高度)”</strong>，来指明约束宽度或者高度。</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:layout_width=&quot;0dp&quot;</span><br><span class="line">                   android:layout_height=&quot;0dp&quot;</span><br><span class="line">       app:layout_constraintDimensionRatio=&quot;H,16:9&quot;</span><br><span class="line">       app:layout_constraintBottom_toBottomOf=&quot;parent&quot;</span><br><span class="line">       app:layout_constraintTop_toTopOf=&quot;parent&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 如上代码，将按照16:9的比例来设置button的高度，而宽度将匹配父布局的约束。也就是这种情况下<strong>宽度:高度=16:9</strong>，由宽度来决定高度。</p>
+<h3 id="链-chain"><a href="#链-chain" class="headerlink" title="链(chain)"></a><a href></a>链(chain)</h3><p> 链在单个轴（水平或垂直）上提供组群行为。另一个轴可以独立约束</p>
+<h4 id="创建一个链"><a href="#创建一个链" class="headerlink" title="创建一个链"></a><a href></a>创建一个链</h4><p> 如果一组Widgets通过双向连接链接在一起，则它们被视为链。（下图展示的是一个由两个Widget组成的最小的链）</p>
+<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/1lapf2latcid3rsddqhjle1jih.png" alt="alt"></p>
+<h4 id="链头"><a href="#链头" class="headerlink" title="链头"></a><a href></a>链头</h4><p> 链由在链的第一个元素上设置的属性控制(我们可以将其视为链的“头”)</p>
+<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/o2cu4q0j4khu1qsmac66ohjc2n.png" alt="alt"></p>
+<p> 头部是水平链的最左侧Widget，垂直链的最顶部Widget。</p>
+<h4 id="链间边距"><a href="#链间边距" class="headerlink" title="链间边距"></a><a href></a>链间边距</h4><p> 如果在双向连接上指定了边距，则他们将会被计算在内。在扩散链的情况下，将从分配的空间中减去这些边距</p>
+<h4 id="链Style"><a href="#链Style" class="headerlink" title="链Style"></a><a href></a>链Style</h4><p> 在链的第一个元素上设置属性<strong>layout_constraintHorizo​​ntal_chainStyle</strong>或<strong>layout_constraintVertical_chainStyle</strong>时，链的行为将根据指定的样式更改（默认为<strong>CHAIN_SPREAD</strong>）</p>
+<ul>
+<li><strong>CHAIN_SPREAD</strong> – 元素将等间距散开(默认style) </li>
+<li>Weighted链 – <strong>CHAIN_SPREAD</strong> 模式, 当一些Widgets设置为MATCH_CONSTRAINT,他们将被分配所有可用空间。 </li>
+<li><strong>CHAIN_SPREAD_INSIDE</strong> – 相似地, 但是链的两端不会被分配空间。 </li>
+<li><strong>CHAIN_PACKED</strong> – 链上元素会被打包在一起。子项的水平或垂直偏差属性将影响整个打包元素的定位。  <img src="http://www.onlyloveyd.cn/upload/2018/10/okuugqrdpqi3qqlae13nt5auv2.png" alt="alt"></li>
+</ul>
+<h5 id="权重链"><a href="#权重链" class="headerlink" title="权重链"></a><a href></a>权重链</h5><p> 链的默认行为是在可用空间中平均分布元素。如果一个或多个元素使用MATCH_CONSTRAINT，则它们将使用可用的空白空间(他们之间平等分配)。<br> <strong>layout_constraintHorizo​​ntal_weight</strong>和<strong>layout_constraintVertical_weight</strong>属性将控制如何使用MATCH_CONSTRAINT在元素之间分配空间。例如，在使用MATCH_CONSTRAINT的包含两个元素的链上，第一个元素使用权重2，第二个元素使用权重1，第一个元素占用的空间将是第二个元素占用的空间的两倍。</p>
+<h5 id="边距和链（1-1版本）"><a href="#边距和链（1-1版本）" class="headerlink" title="边距和链（1.1版本）"></a><a href></a>边距和链（1.1版本）</h5><p> 在链中的元素上使用边距时，边距是相加的<br> 例如，在水平链上，如果一个元素定义了10dp的右边距而下一个元素定义了5dp的左边距，则这两个元素之间产生的边距为15dp。<br> 在计算链用于定位项目的剩余空间时，会同时考虑项目及其边距。剩余空间不包含边距。</p>
+<h3 id="虚拟助手-Virtual-Helper-objects"><a href="#虚拟助手-Virtual-Helper-objects" class="headerlink" title="虚拟助手(Virtual Helper objects)"></a><a href></a>虚拟助手(Virtual Helper objects)</h3><p> 除了之前详述的内在功能外，您还可以使用ConstraintLayout中的特殊帮助程序对象来帮助您进行布局。现在，Guideline可以帮助你创建相对于ConstraintLayout容器定位的水平和垂直Guideline。然后Widgets可以被约束到这些Guideline上。在1.1版本中，Barrier和Group也别加入进来。</p>
+<h3 id="优化器-in-1-1"><a href="#优化器-in-1-1" class="headerlink" title="优化器(in 1.1)"></a><a href></a>优化器(in 1.1)</h3><p> 在1.1版本中，我们提供约束优化器。你可以通过将标记app：layout_optimizationLevel添加到ConstraintLayout元素来决定应用哪些优化。</p>
+<ul>
+<li><strong>none</strong> : 不做任何优化 </li>
+<li><strong>standard</strong> : 默认值. 只优化 direct 和 barrier 约束 </li>
+<li><strong>direct</strong> : 优化 direct 约束 </li>
+<li><strong>barrier</strong> : 优化 barrier 约束 </li>
+<li><strong>chain</strong> : 优化 chain 约束 (试验版) </li>
+<li><strong>dimensions</strong> : 优化 dimensions 测量 (试验版), 减少match constrains元素的测量次数。  此属性是一个掩码，因此您可以通过列出所需的优化来决定打开或关闭特定的优化。例如</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_optimizationLevel=&quot;direct|barrier|chain&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-20T00:40:13.000Z">2018-08-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1008 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/20/《 Linux 》Crond 定时任务/">《 Linux 》Crond 定时任务</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>crond的概念和crontab是不可分割的。crontab是一个命令，常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos(χρόνος)，原意是时间。而crond正是它的守护进程。</p>
+</blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/08/20/《 Linux 》Crond 定时任务/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-08-12T02:24:43.000Z">2018-08-12</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 350 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/08/12/《Android 进阶（四）》自定义组织机构图-LazyOrgView/">《Android 进阶（四）》自定义组织机构图-LazyOrgView</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="LazyOrgView"><a href="#LazyOrgView" class="headerlink" title="LazyOrgView"></a>LazyOrgView</h1><p> 通过自定义View简单实现组织结构图。在网上搜索并没有发现类似的View，由于项目需要，快速实现一个满足项目需求。另外一种实现方式：Google OrgChart或者其他OrgChart.js。</p>
+<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p> <a href="https://github.com/onlyloveyd/LazyOrgView" target="_blank" rel="noopener">LazyOrgView</a></p>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>步骤 1.</strong> 工程根目录build.gradle 添加如下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">          maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Step 2.</strong> 项目build.gradle 添加依赖</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyOrgView:v1.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p> <strong>步骤 1.</strong> 添加 <strong>LazyOrgView</strong> 至布局。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;cn.onlyloveyd.lazyorgview.widget.LazyOrgView</span><br><span class="line">        android:id=&quot;@+id/rv_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/FrameLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>步骤 2.</strong> 使用TreeNode构建跟节点以及其他节点，然后使用addChildNode组织节点关系。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">TreeNode root = new TreeNode(&quot;总经理&quot;);</span><br><span class="line">root.isRoot = true;</span><br><span class="line"></span><br><span class="line">TreeNode A = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Aa = new TreeNode(&quot;行政部&quot;);</span><br><span class="line">TreeNode Ab = new TreeNode(&quot;财务部&quot;);</span><br><span class="line">TreeNode Ac = new TreeNode(&quot;采购部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode B = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ba = new TreeNode(&quot;工程部&quot;);</span><br><span class="line">TreeNode Bb = new TreeNode(&quot;生产部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode C = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ca = new TreeNode(&quot;营销部&quot;);</span><br><span class="line">TreeNode Cb = new TreeNode(&quot;方案造价部&quot;);</span><br><span class="line">TreeNode Cc = new TreeNode(&quot;售后服务部&quot;);</span><br><span class="line"></span><br><span class="line">root.addChildNode(A);</span><br><span class="line">root.addChildNode(B);</span><br><span class="line">root.addChildNode(C);</span><br><span class="line"></span><br><span class="line">A.addChildNode(Aa);</span><br><span class="line">A.addChildNode(Ab);</span><br><span class="line">A.addChildNode(Ac);</span><br><span class="line"></span><br><span class="line">B.addChildNode(Ba);</span><br><span class="line">B.addChildNode(Bb);</span><br><span class="line"></span><br><span class="line">C.addChildNode(Ca);</span><br><span class="line">C.addChildNode(Cb);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>步骤 3.</strong> 给LazyOrgView配置 LazyOrgConfig 以及 rootNode。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lazyOrgView.setRootNode(root);</span><br><span class="line">LazyOrgConfig lazyOrgConfig = new LazyOrgConfig();</span><br><span class="line">lazyOrgConfig.setLineColor(Color.BLUE).setTextSize(12)</span><br><span class="line">             .setLineWidth(1)</span><br><span class="line">             .setTextBgColor(Color.GREEN)</span><br><span class="line">             .setTextBgRes(R.drawable.rect_shape);</span><br><span class="line">lazyOrgView.setLazyOrgConfig(lazyOrgConfig);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="基本效果"><a href="#基本效果" class="headerlink" title="基本效果"></a>基本效果</h2><p> <img src="http://www.onlyloveyd.cn/upload/2018/08/q4ualhdpvuh3lo12iu3v50gt29.png" alt="1"><br> <img src="http://www.onlyloveyd.cn/upload/2018/08/7btem833lsh6fp1lhkqupcvk3l.png" alt="2"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-30T03:33:31.000Z">2018-06-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 分钟 读完 (大约 1804 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/06/30/《Android 基础（四十七）》FileProvider/">《Android 基础（四十七）》FileProvider</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。</p>
+<h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p> 官文Android7.0行为变更说明：</p>
+<p> 对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件 URI 的 intent 离开您的应用，则应用出现故障，并出现 FileUriExposedException 异常。</p>
+<p> 要在应用间共享文件，需要改用content:// 格式的URI，并授予 URI 临时访问权限。<br> 实现此类操作最简单的方法就是使用FileProvider。</p>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="定义FileProvider"><a href="#定义FileProvider" class="headerlink" title="定义FileProvider"></a>定义FileProvider</h3><p> FileProvider本身就能根据file生成content:// Uri，所以我们并没有必要去写一个单独的FileProvider子类。但是在某些情况下，我们可以简单的继承FileProvider，修改类名来实现与FileProvider在名字上的区分，毕竟在AndroidManifest.xml中，名字相同的provider是不被允许的。</p>
+<p> AndroidManifest.xml中申明FileProvider</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;application&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;provider</span><br><span class="line">            android:name=&quot;android.support.v4.content.FileProvider&quot;</span><br><span class="line">            android:authorities=&quot;$&#123;applicationId&#125;.fileprovider&quot;</span><br><span class="line">            android:exported=&quot;false&quot;</span><br><span class="line">            android:grantUriPermissions=&quot;true&quot;&gt;</span><br><span class="line">            &lt;meta-data</span><br><span class="line">                android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;</span><br><span class="line">                android:resource=&quot;@xml/file_paths&quot; /&gt;</span><br><span class="line">        &lt;/provider&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/application&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="明确可用文件"><a href="#明确可用文件" class="headerlink" title="明确可用文件"></a>明确可用文件</h3><p> 上面明确来resource文件为”@xml/file_paths”。那么我们就在file_paths中明确我们的可用位置。</p>
+<p> FileProvider只能为你事先指定的目录中的文件生成内容URI。 要指定目录，请使用&lt; paths &gt;元素的子元素指定其存储区域和XML路径。 例如，以下路径元素告诉FileProvider你打算请求私有文件目录下的images /子目录的内容URI</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;files-path name=&quot;my_images&quot; path=&quot;images/&quot;/&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/paths&gt;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>paths元素                                                | 对应目录                                                                 
+------------------------------------------------------ | --------------------------------------------------------------------- 
+&amp;lt; root-path/&amp;gt;                                    | “/”                                                                  
+&amp;lt; files-path name=”name” path=”path” /&amp;gt;          | Context.getFilesDir()                                                
+&amp;lt; cache-path name=”name” path=”path” /&amp;gt;          | Context.getCacheDir()                                                
+&amp;lt; external-path name=”name” path=”path” /&amp;gt;       | Environment.getExternalStorageDirectory()                            
+&amp;lt; external-files-path name=”name” path=”path” /&amp;gt; | Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)
+&amp;lt; external-cache-path name=”name” path=”path” /&amp;gt; | Context.getExternalCacheDir()                                        
+&amp;lt; external-media-path name=”name” path=”path” /&amp;gt; | Context.getExternalMediaDirs()(API21+)                               </code></pre><p> 这样看可能不太明显，随意新建一个Android工程，打印如上内容，示例工程包名为<br> cn.onlyloveyd.lazyshare</p>
+<p> <img src="https://img-blog.csdn.net/20180630102322857" alt="这里写图片描述"></p>
+<h3 id="为File生成Content-Uri"><a href="#为File生成Content-Uri" class="headerlink" title="为File生成Content Uri"></a>为File生成Content Uri</h3><ul>
+<li>创建需要用Uri表示的文件File </li>
+<li>使用getUriForFile()方法获取对应的Uri.  官方示例:</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = new File(Context.getFilesDir(), &quot;images&quot;);</span><br><span class="line">File newFile = new File(imagePath, &quot;default_image.jpg&quot;);</span><br><span class="line">Uri contentUri = getUriForFile(getContext(), &quot;com.mydomain.fileprovider&quot;, newFile);</span><br></pre></td></tr></table></figure>
+
+<p> 生成的Uri就是</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content://com.mydomain.fileprovider/my_images/default_image.jpg.</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="临时授权Uri"><a href="#临时授权Uri" class="headerlink" title="临时授权Uri"></a>临时授权Uri</h3><p> 给通过getUriForFile()方法返回的Uri授权的步骤：</p>
+<ul>
+<li><p>调用Context.grantUriPermission(package, Uri, mode_flags)。package为包名，Uri为需要临时授权的content Uri。mode_flags可以为FLAG_GRANT_READ_URI_PERMISSION, FLAG_GRANT_WRITE_URI_PERMISSION，根据需求而定。通过revokeUriPermission() 或者重启取消授权。 </p>
+</li>
+<li><p>Intent中setData方法设置Uri </p>
+</li>
+<li><p>Intent setFlags方法设置FLAG_GRANT_READ_URI_PERMISSION 或者FLAG_GRANT_WRITE_URI_PERMISSION。 </p>
+</li>
+<li><p>发送Intent到另一个App  </p>
+<h3 id="传递Uri到另一个应用"><a href="#传递Uri到另一个应用" class="headerlink" title="传递Uri到另一个应用"></a>传递Uri到另一个应用</h3><p>将content:\ Uri提供给客户端应用程序的方式很多。 一种常见的方法是客户端应用程序通过调用startActivityResult()来启动应用程序，发送一个Intent以启动一个Activity，然后通过setResult() 的方式返回给客户端。</p>
+<p>另一种方式是通过调用Intent.setClipData()方法将content:\ Uri放入ClipData对象中，然后将该对象添加到发送给客户端应用程序的Intent中即可。</p>
+</li>
+</ul>
+<h2 id="源码看看"><a href="#源码看看" class="headerlink" title="源码看看"></a>源码看看</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p> <img src="https://img-blog.csdn.net/20180630104041245" alt="这里写图片描述"></p>
+<h3 id="SimplePathStrategy"><a href="#SimplePathStrategy" class="headerlink" title="SimplePathStrategy"></a>SimplePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">static class SimplePathStrategy implements PathStrategy &#123;</span><br><span class="line">    private final String mAuthority;</span><br><span class="line">    private final HashMap&lt;String, File&gt; mRoots = new HashMap&lt;String, File&gt;();</span><br><span class="line"></span><br><span class="line">    SimplePathStrategy(String authority) &#123;</span><br><span class="line">        mAuthority = authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Add a mapping from a name to a filesystem root. The provider only offers</span><br><span class="line">     * access to files that live under configured roots.</span><br><span class="line">     */</span><br><span class="line">     //读取xml配置文件，建立名称和目录的映射表</span><br><span class="line">    void addRoot(String name, File root) &#123;</span><br><span class="line">        //名字不能为空</span><br><span class="line">        if (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Name must not be empty&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // Resolve to canonical path to keep path checking fast</span><br><span class="line">            root = root.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to resolve canonical path for &quot; + root, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mRoots.put(name, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Uri getUriForFile(File file) &#123;</span><br><span class="line">        String path;</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取路径</span><br><span class="line">            path = file.getCanonicalPath();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Find the most-specific root path</span><br><span class="line">        Map.Entry&lt;String, File&gt; mostSpecific = null;</span><br><span class="line">        //遍历查找文件路径对应的名称</span><br><span class="line">        for (Map.Entry&lt;String, File&gt; root : mRoots.entrySet()) &#123;</span><br><span class="line">            final String rootPath = root.getValue().getPath();</span><br><span class="line">            if (path.startsWith(rootPath) &amp;&amp; (mostSpecific == null</span><br><span class="line">                    || rootPath.length() &gt; mostSpecific.getValue().getPath().length())) &#123;</span><br><span class="line">                mostSpecific = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //查询未果，说明在xml中未定义</span><br><span class="line">        if (mostSpecific == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to find configured root that contains &quot; + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Start at first char of path under root</span><br><span class="line">        final String rootPath = mostSpecific.getValue().getPath();</span><br><span class="line">        if (rootPath.endsWith(&quot;/&quot;)) &#123;</span><br><span class="line">            path = path.substring(rootPath.length());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            path = path.substring(rootPath.length() + 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Encode the tag and path separately</span><br><span class="line">        path = Uri.encode(mostSpecific.getKey()) + &apos;/&apos; + Uri.encode(path, &quot;/&quot;);</span><br><span class="line">        //构建content Uri,这就是最后我们拿到的内容</span><br><span class="line">        return new Uri.Builder().scheme(&quot;content&quot;)</span><br><span class="line">                .authority(mAuthority).encodedPath(path).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public File getFileForUri(Uri uri) &#123;</span><br><span class="line">        String path = uri.getEncodedPath();</span><br><span class="line"></span><br><span class="line">        //通过uri反向寻找，和上面的原理差不多，不赘述</span><br><span class="line">        final int splitIndex = path.indexOf(&apos;/&apos;, 1);</span><br><span class="line">        final String tag = Uri.decode(path.substring(1, splitIndex));</span><br><span class="line">        path = Uri.decode(path.substring(splitIndex + 1));</span><br><span class="line"></span><br><span class="line">        final File root = mRoots.get(tag);</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Unable to find configured root for &quot; + uri);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        File file = new File(root, path);</span><br><span class="line">        try &#123;</span><br><span class="line">            file = file.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!file.getPath().startsWith(root.getPath())) &#123;</span><br><span class="line">            throw new SecurityException(&quot;Resolved path jumped beyond configured root&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return file;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="parsePathStrategy"><a href="#parsePathStrategy" class="headerlink" title="parsePathStrategy"></a>parsePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">private static PathStrategy parsePathStrategy(Context context, String authority)</span><br><span class="line">           throws IOException, XmlPullParserException &#123;</span><br><span class="line">       final SimplePathStrategy strat = new SimplePathStrategy(authority);</span><br><span class="line"></span><br><span class="line">       //获取Provider信息</span><br><span class="line">       final ProviderInfo info = context.getPackageManager()</span><br><span class="line">               .resolveContentProvider(authority, PackageManager.GET_META_DATA);</span><br><span class="line">       // 获取&quot;android.support.FILE_PROVIDER_PATHS&quot;对应的xml文件解析对吸纳个;</span><br><span class="line">       final XmlResourceParser in = info.loadXmlMetaData(</span><br><span class="line">               context.getPackageManager(), META_DATA_FILE_PROVIDER_PATHS);</span><br><span class="line">       if (in == null) &#123;</span><br><span class="line">           throw new IllegalArgumentException(</span><br><span class="line">                   &quot;Missing &quot; + META_DATA_FILE_PROVIDER_PATHS + &quot; meta-data&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       int type;</span><br><span class="line">       while ((type = in.next()) != END_DOCUMENT) &#123;</span><br><span class="line">           if (type == START_TAG) &#123;</span><br><span class="line">               final String tag = in.getName();</span><br><span class="line"></span><br><span class="line">               final String name = in.getAttributeValue(null, ATTR_NAME);</span><br><span class="line">               String path = in.getAttributeValue(null, ATTR_PATH);</span><br><span class="line"></span><br><span class="line">               File target = null;</span><br><span class="line">               //&quot;root-path&quot;</span><br><span class="line">               if (TAG_ROOT_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = DEVICE_ROOT;</span><br><span class="line">               //&quot;files-path&quot;</span><br><span class="line">               &#125; else if (TAG_FILES_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getFilesDir();</span><br><span class="line">               //&quot;cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_CACHE_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getCacheDir();</span><br><span class="line">               //&quot;external-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL.equals(tag)) &#123;</span><br><span class="line">                   target = Environment.getExternalStorageDirectory();</span><br><span class="line">               //&quot;external-files-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_FILES.equals(tag)) &#123;</span><br><span class="line">                   File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, null);</span><br><span class="line">                   if (externalFilesDirs.length &gt; 0) &#123;</span><br><span class="line">                       //取数组中的第一个</span><br><span class="line">                       target = externalFilesDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_CACHE.equals(tag)) &#123;</span><br><span class="line">                   File[] externalCacheDirs = ContextCompat.getExternalCacheDirs(context);</span><br><span class="line">                   if (externalCacheDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalCacheDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-media-path&quot; L版本以上才有</span><br><span class="line">               &#125; else if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP</span><br><span class="line">                       &amp;&amp; TAG_EXTERNAL_MEDIA.equals(tag)) &#123;</span><br><span class="line">                   File[] externalMediaDirs = context.getExternalMediaDirs();</span><br><span class="line">                   if (externalMediaDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalMediaDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (target != null) &#123;</span><br><span class="line">                   strat.addRoot(name, buildPath(target, path));</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return strat;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 从上面这个方法可以很直观的了解到在AndroidManifest.xml文件中定义provider以及对应的共享文件路径定义xml的解析过程。以及xml中tag与真实文件路径的对应关系。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">        if (takePictureIntent.resolveActivity(getPackageManager()) != null) &#123;</span><br><span class="line">            String filename = new SimpleDateFormat(&quot;yyyyMMdd-HHmmss&quot;, Locale.CHINA)</span><br><span class="line">                    .format(new Date()) + &quot;.png&quot;;</span><br><span class="line">            File file = new File(Environment.getExternalStorageDirectory(), filename);</span><br><span class="line">            mCurrentPhotoPath = file.getAbsolutePath();</span><br><span class="line"></span><br><span class="line">            Uri fileUri;</span><br><span class="line">            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">                fileUri = getUriForFile(context,</span><br><span class="line">                context.getPackageName() +&quot;.fileprovider&quot;, file);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileUri = Uri.fromFile(file);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);</span><br><span class="line">            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);</span><br><span class="line">        &#125;</span><br><span class="line">……</span><br><span class="line">@Override</span><br><span class="line">    protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">        super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">        if (resultCode == RESULT_OK &amp;&amp; requestCode == REQUEST_CODE_TAKE_PHOTO) &#123;</span><br><span class="line">            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));</span><br><span class="line">        &#125;</span><br><span class="line">        // else tip?</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="应用安装"><a href="#应用安装" class="headerlink" title="应用安装"></a>应用安装</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 需要自己修改安装包路径</span><br><span class="line">File file = new File(Environment.getExternalStorageDirectory(),</span><br><span class="line">        &quot;/onlyloveyd/base.apk&quot;);</span><br><span class="line">Intent intent = new Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);    </span><br><span class="line"></span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    intent.setDataAndType(getUriForFile(context, file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    intent.setDataAndType(Uri.fromFile(file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">&#125;</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-22T13:16:56.000Z">2018-06-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 281 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/06/22/《Android 进阶（三）》 自定义安全键盘-LazyKeyboard/">《Android 进阶（三）》 自定义安全键盘-LazyKeyboard</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h1><p> <a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>Step 1.</strong> 项目根目录下 build.gradle</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">    ...</span><br><span class="line">    maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Step 2.</strong> 模块目录下build.gradle添加依赖</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyKeyboard:v1.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p> <strong>Step 1.</strong> 添加 <strong>SecurityEditText</strong> 至界面布局。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout</span><br><span class="line">     android:id=&quot;@+id/container&quot;</span><br><span class="line">     ...&quot;&gt;</span><br><span class="line"></span><br><span class="line">     &lt;com.gs.keyboard.SecurityEditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard&quot;</span><br><span class="line">         android:layout_width=&quot;match_parent&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;EditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard_two&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"> &lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Step 2.</strong> 初始化 <strong>SecurityKeyboard</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//配置部分属性</span><br><span class="line">SecurityConfigure configure = new SecurityConfigure()</span><br><span class="line">        .setDefaultKeyboardType(KeyboardType.NUMBER)</span><br><span class="line">        .setLetterEnabled(false);</span><br><span class="line">//第一个参数为包含SecurityEditText的视图，安全键盘的显示以其为锚点</span><br><span class="line">securityKeyboard = new SecurityKeyboard(binding.loginLayout, configure);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Step 2.</strong> 目前支持自定义选项 </p>
+<pre><code>自定义选项               | 意义                             
+------------------- | ------------------------------- 
+selectedColor       | 选中键盘类型凸显颜色，默认为0xff66aeff       
+unSelectedColor     | 未选中键盘类型凸显颜色，默认为Color.BLACK     
+isNumberEnabled     | 是否显示数字键盘，默认为true               
+isLetterEnabled     | 是否显示字母键盘，默认为true               
+isSymbolEnabled     | 是否显示符号键盘，默认为true               
+defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</code></pre><h2 id="基础效果"><a href="#基础效果" class="headerlink" title="基础效果"></a>基础效果</h2><p> <img src="https://img-blog.csdn.net/20180622210946292" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622210957666" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622211007566" alt="这里写图片描述"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-06-19T12:58:28.000Z">2018-06-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 492 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/06/19/内网环境下安装部署Docker/">内网环境下安装部署Docker</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大部分公司都有属于自己的内网环境，大部分的集成开发环境也是在内网下部署。最近面临同样的需求，内网CentOS部署GitLab 和 Nexus。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先确定思路，毫无疑问使用Docker是最好的选择，我只用解决Docker的安装问题即可，然后使用Gitlab和Nexus的镜像即可解决问题，后期的延展性也比逐个安装好。<br> 针对Docker的安装，有如下策略</p>
+<ol>
+<li>相同CentOS版本的外网服务器，使用yum –downloadonly命令下载create repo和docker安装的依赖包，然后建立本地源，安装Docker，但是公司并没有CentOS版本完全一致的内外网服务器，所以此方案暂时搁浅； </li>
+<li>利用已经安装好Docker的外网服务器，制作镜像文件，重装内网系统，这个比较费时，暂时不考虑； </li>
+<li>利用一个可同时访问内外网的电脑做代理服务器，实现内网服务器的暂时外网联通，安装完成后，关闭代理服务器。  综上，我优先采用的是方案3。存在一定的安全风险，但是应该问题不大。</li>
+</ol>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p> CCProxy<br> 一台连接内外网的电脑（我使用个人办公电脑）</p>
+<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="简单配置一下CCProxy，参考官方操作手册，相对简单。"><a href="#简单配置一下CCProxy，参考官方操作手册，相对简单。" class="headerlink" title="简单配置一下CCProxy，参考官方操作手册，相对简单。"></a>简单配置一下CCProxy，参考官方操作手册，相对简单。</h3><h3 id="CentOS服务器配置"><a href="#CentOS服务器配置" class="headerlink" title="CentOS服务器配置"></a>CentOS服务器配置</h3><h4 id="全局代理配置"><a href="#全局代理配置" class="headerlink" title="全局代理配置"></a>全局代理配置</h4><p> 端口和IP注意替换成自己代理服务器的端口和IP</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line">http_proxy=http://yourproxy:808/</span><br><span class="line">ftp_proxy=http://yourproxy:808/</span><br><span class="line"><span class="hljs-built_in">export</span> http_proxy</span><br><span class="line"><span class="hljs-built_in">export</span> ftp_proxy</span><br></pre></td></tr></table></figure>
+
+<h4 id="yum代理配置"><a href="#yum代理配置" class="headerlink" title="yum代理配置"></a>yum代理配置</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.conf</span><br><span class="line"></span><br><span class="line">proxy=http://yourproxy:808/</span><br></pre></td></tr></table></figure>
+
+<h4 id="若有其他配置也可以参照上面进行配置"><a href="#若有其他配置也可以参照上面进行配置" class="headerlink" title="若有其他配置也可以参照上面进行配置"></a>若有其他配置也可以参照上面进行配置</h4><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k https://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>参考<a href="https://blog.csdn.net/poorkick/article/details/79937182" target="_blank" rel="noopener">前文</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1334,7 +1177,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -1425,7 +1268,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1465,7 +1308,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -1543,7 +1386,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -1560,18 +1403,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1579,18 +1422,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1598,18 +1441,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1617,18 +1460,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1636,18 +1479,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1671,7 +1514,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1957,7 +1800,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1968,7 +1811,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1979,7 +1822,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1990,7 +1833,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2012,7 +1855,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2035,6 +1878,17 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2207,7 +2061,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2299,6 +2153,13 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2424,7 +2285,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2450,6 +2311,13 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2459,7 +2327,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2634,14 +2502,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2670,18 +2531,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2689,18 +2550,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2708,18 +2569,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2727,18 +2588,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2746,18 +2607,18 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -2781,7 +2642,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -3067,7 +2928,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -3078,7 +2939,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -3089,7 +2950,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -3100,7 +2961,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -3122,7 +2983,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -3145,6 +3006,17 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -3317,7 +3189,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -3409,6 +3281,13 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3534,7 +3413,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3560,6 +3439,13 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3569,7 +3455,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -3744,14 +3630,7 @@ stv_remain            | 滑块打开误差范围值</code></pre><h2 id="Basic-Re
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

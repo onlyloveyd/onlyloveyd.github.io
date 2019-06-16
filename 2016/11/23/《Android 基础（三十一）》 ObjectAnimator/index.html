@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="###简介  ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码">
+    <meta name="description" content="简介 ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码定义，当使用">
 <meta name="keywords" content="动画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（三十一）》 ObjectAnimator">
 <meta property="og:url" content="http://yoursite.com/2016/11/23/《Android 基础（三十一）》 ObjectAnimator/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="###简介  ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码">
+<meta property="og:description" content="简介 ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码定义，当使用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-14T11:22:12.035Z">
+<meta property="og:updated_time" content="2019-06-16T00:17:01.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（三十一）》 ObjectAnimator">
-<meta name="twitter:description" content="###简介  ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码">
+<meta name="twitter:description" content="简介 ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。 Animators可以用过资源文件或者是代码定义，当使用">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1052 个字)
+                    7 分钟 读完 (大约 1053 个字)
                 </span>
                 
                 
@@ -168,31 +168,53 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>简介</strong></p>
-<blockquote>
+            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
 <p>ObjectAnimator，是ValueAnimator的子类，支持利用目标视图的属性来实现动画效果。构造ObjectAnimator的时候，将会提取对应的参数来定义动画对象和对象属性。合适的get/set方法是视图实现属性动画的内部机理，动画过程中，系统将通过get/set方法来实现效果，也就是根据一定的规律来为View设置属性。<br> Animators可以用过资源文件或者是代码定义，当使用资源文件创建的时候，若使用PropertyValuesHolder和Keyframe可以创建出更加复杂的动画，使用PropertyValuesHolder可以实现几个属性的并行变化。<br> 使用Keyframes，可以实现更复杂的动画过程中的属性变化方式。我们可以为每一个Keyframes明确一个fractional value（因子，0-1）来决定在整个动画过程中什么时候到达这个属性值。不设置fractions的时候，这些关键帧将会均匀的分布在整个动画过程中。至于那些没有指定value值的关键帧，将会在动画开始的时候推导出他们的 value。初次之外，我们可以给关键帧添加插值器，整个插值器将会在被设置的这一帧和前一帧动画之间。对于没有设置插值器的关键帧，将会给他们提供一个默认的插值器AccelerateDecelerateInterpolator</p>
 </blockquote>
-<p> ###<strong>XML实现</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;objectAnimator xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:duration=&quot;1000&quot;</span><br><span class="line">    android:repeatCount=&quot;1&quot;</span><br><span class="line">    android:repeatMode=&quot;reverse&quot;&gt;</span><br><span class="line">    &lt;!-- BEGIN_INCLUDE(KeyframeResources) --&gt;</span><br><span class="line">    &lt;propertyValuesHolder android:propertyName=&quot;x&quot;&gt;</span><br><span class="line">        &lt;keyframe</span><br><span class="line">            android:fraction=&quot;0&quot;</span><br><span class="line">            android:value=&quot;800&quot; /&gt;</span><br><span class="line">        &lt;keyframe</span><br><span class="line">            android:fraction=&quot;.2&quot;</span><br><span class="line">            android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br><span class="line">            android:value=&quot;1000&quot; /&gt;</span><br><span class="line">        &lt;keyframe</span><br><span class="line">            android:fraction=&quot;1&quot;</span><br><span class="line">            android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br><span class="line">            android:value=&quot;400&quot; /&gt;</span><br><span class="line">    &lt;/propertyValuesHolder&gt;</span><br><span class="line">    &lt;propertyValuesHolder android:propertyName=&quot;y&quot;&gt;</span><br><span class="line">        &lt;keyframe /&gt;</span><br><span class="line">        &lt;keyframe</span><br><span class="line">            android:fraction=&quot;.2&quot;</span><br><span class="line">            android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br><span class="line">            android:value=&quot;300&quot; /&gt;</span><br><span class="line">        &lt;keyframe</span><br><span class="line">            android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br><span class="line">            android:value=&quot;1000&quot; /&gt;</span><br><span class="line">    &lt;/propertyValuesHolder&gt;</span><br><span class="line">    &lt;!-- END_INCLUDE(KeyframeResources) --&gt;</span><br><span class="line">&lt;/objectAnimator&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="XML实现"><a href="#XML实现" class="headerlink" title="XML实现"></a>XML实现</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">objectAnimator</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:duration</span>=<span class="hljs-string">"1000"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:repeatCount</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:repeatMode</span>=<span class="hljs-string">"reverse"</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- BEGIN_INCLUDE(KeyframeResources) --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">propertyValuesHolder</span> <span class="hljs-attr">android:propertyName</span>=<span class="hljs-string">"x"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:fraction</span>=<span class="hljs-string">"0"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:value</span>=<span class="hljs-string">"800"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:fraction</span>=<span class="hljs-string">".2"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:interpolator</span>=<span class="hljs-string">"@android:anim/accelerate_interpolator"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:value</span>=<span class="hljs-string">"1000"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:fraction</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:interpolator</span>=<span class="hljs-string">"@android:anim/accelerate_interpolator"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:value</span>=<span class="hljs-string">"400"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">propertyValuesHolder</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">propertyValuesHolder</span> <span class="hljs-attr">android:propertyName</span>=<span class="hljs-string">"y"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:fraction</span>=<span class="hljs-string">".2"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:interpolator</span>=<span class="hljs-string">"@android:anim/accelerate_interpolator"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:value</span>=<span class="hljs-string">"300"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">keyframe</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:interpolator</span>=<span class="hljs-string">"@android:anim/accelerate_interpolator"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:value</span>=<span class="hljs-string">"1000"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">propertyValuesHolder</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- END_INCLUDE(KeyframeResources) --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">objectAnimator</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<table>
+<thead>
+<tr>
+<th>objectAnimator属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>android:propertyName</td>
+<td>属性名称</td>
+</tr>
+<tr>
+<td>android:valueTo</td>
+<td>动画结束时属性的值                                 android:valueFrom</td>
+</tr>
+<tr>
+<td>android:duration</td>
+<td>动画时长</td>
+</tr>
+<tr>
+<td>android:startOffset</td>
+<td>动画延迟几秒播放，调用start()方法后延迟</td>
+</tr>
+<tr>
+<td>android:repeatCount</td>
+<td>动画重复次数</td>
+</tr>
+<tr>
+<td>android:repeatMode</td>
+<td>动画重复的方式，restart/reverse</td>
+</tr>
+<tr>
+<td>android:valueType</td>
+<td>属性值类型，intType,floatType,colorType,pathType</td>
+</tr>
+</tbody></table>
+<p>propertyValuesHolder属性值和objectAnimator基本相同<br>keyframe属性值          | 含义<br>——————– | —————<br>android:fraction     | 插值因子<br>android:interpolator | 插值器，用在当前帧和前一帧之间<br>android:value        | 需要设置的属性值</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> width;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> height;</span><br><span class="line">    <span class="hljs-keyword">private</span> ImageView imageView = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> ImageView loveImageView = <span class="hljs-keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.left);</span><br><span class="line">        setSupportActionBar(toolbar);<span class="hljs-comment">//设置ActionBar</span></span><br><span class="line"></span><br><span class="line">        getWidthAndHeight();<span class="hljs-comment">//获取屏幕大小</span></span><br><span class="line">        imageView = (ImageView) findViewById(R.id.ball);</span><br><span class="line">        loveImageView = (ImageView) findViewById(R.id.love);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">      心跳</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAnimation</span><span class="hljs-params">(<span class="hljs-keyword">final</span> View view)</span> </span>&#123;</span><br><span class="line">        PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(<span class="hljs-string">"alpha"</span>, <span class="hljs-number">1f</span>,</span><br><span class="line">                <span class="hljs-number">0.8f</span>, <span class="hljs-number">1f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">1.0f</span>);</span><br><span class="line">        PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(<span class="hljs-string">"scaleX"</span>, <span class="hljs-number">0.6f</span>,</span><br><span class="line">                <span class="hljs-number">0.8f</span>, <span class="hljs-number">1f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">1.0f</span>);</span><br><span class="line">        PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat(<span class="hljs-string">"scaleY"</span>, <span class="hljs-number">0.6f</span>,</span><br><span class="line">                <span class="hljs-number">0.8f</span>, <span class="hljs-number">1f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">1.0f</span>);</span><br><span class="line">        ObjectAnimator.ofPropertyValuesHolder(loveImageView, pvhX, pvhY, pvhZ).setDuration(<span class="hljs-number">1000</span>).start();<span class="hljs-comment">//创建属性动画并开始</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    抛物线</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGtAnimation</span><span class="hljs-params">(<span class="hljs-keyword">final</span> View view)</span> </span>&#123;</span><br><span class="line">        ObjectAnimator anim = ObjectAnimator.ofFloat(imageView, <span class="hljs-string">"yidong"</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>).setDuration(<span class="hljs-number">3000</span>);</span><br><span class="line">        <span class="hljs-comment">/*设置动画更新监听器，通过手动设置属性来实现view属性的改变达到动画的效果*/</span></span><br><span class="line">        anim.addUpdateListener(<span class="hljs-keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span><span class="hljs-params">(ValueAnimator animation)</span> </span>&#123;</span><br><span class="line">                <span class="hljs-keyword">float</span> cVal = (Float) animation.getAnimatedValue();</span><br><span class="line">                imageView.setX(<span class="hljs-number">5</span> * cVal * <span class="hljs-number">100</span>);</span><br><span class="line">                imageView.setY(<span class="hljs-number">5</span> * cVal * <span class="hljs-number">3</span> * cVal * <span class="hljs-number">3</span> * <span class="hljs-number">100</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="hljs-comment">/*设置动画过程监听器，监听开始结束取消等动作*/</span></span><br><span class="line">        anim.addListener(<span class="hljs-keyword">new</span> Animator.AnimatorListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationStart</span><span class="hljs-params">(Animator animation)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- onAnimationStart"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationEnd</span><span class="hljs-params">(Animator animation)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- onAnimationEnd"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationCancel</span><span class="hljs-params">(Animator animation)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- onAnimationCancel"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationRepeat</span><span class="hljs-params">(Animator animation)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- onAnimationRepeat"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="hljs-comment">/*重复魔石*/</span></span><br><span class="line">        anim.setRepeatMode(ValueAnimator.RESTART);</span><br><span class="line">        <span class="hljs-comment">/*重复次数*/</span></span><br><span class="line">        anim.setRepeatCount(<span class="hljs-number">2</span>);</span><br><span class="line">        anim.start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    转圈圈</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doCircleAnimation</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        ObjectAnimator anim = ObjectAnimator.ofFloat(imageView, <span class="hljs-string">"yidong"</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span> * (<span class="hljs-keyword">float</span>) Math.PI).setDuration(<span class="hljs-number">1000</span>);</span><br><span class="line">        anim.addUpdateListener(<span class="hljs-keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span><span class="hljs-params">(ValueAnimator animation)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- value = "</span> + animation.getAnimatedValue());</span><br><span class="line">                <span class="hljs-keyword">float</span> cVal = (Float) animation.getAnimatedValue();</span><br><span class="line">                imageView.setX((<span class="hljs-keyword">float</span>) Math.sin(cVal) * <span class="hljs-number">200</span> + width / <span class="hljs-number">2</span>);</span><br><span class="line">                imageView.setY((<span class="hljs-keyword">float</span>) Math.cos(cVal) * <span class="hljs-number">200</span> + height / <span class="hljs-number">2</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        anim.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">        anim.setRepeatCount(-<span class="hljs-number">1</span>);<span class="hljs-comment">//无限重复</span></span><br><span class="line">        anim.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    从xml文件中提取动画</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doXmlAnimation</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        Animator animator = AnimatorInflater.loadAnimator(<span class="hljs-keyword">this</span>, R.animator.one);<span class="hljs-comment">//从xml文件中添加动画</span></span><br><span class="line">        animator.setTarget(loveImageView);</span><br><span class="line">        animator.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    获取屏幕的宽高</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getWidthAndHeight</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);</span><br><span class="line">        DisplayMetrics dm = <span class="hljs-keyword">new</span> DisplayMetrics();</span><br><span class="line">        wm.getDefaultDisplay().getMetrics(dm);</span><br><span class="line">        width = dm.widthPixels;</span><br><span class="line">        height = dm.heightPixels;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- width = "</span> + width);</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- height = "</span> + height);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>objectAnimator属性值    | 含义                                        
--------------------- | ------------------------------------------ 
-android:propertyName | 属性名称                                      
-android:valueTo      | 动画结束时属性的值                                 
-android:valueFrom    | 动画开始时属性的值                                 
-android:duration     | 动画时长                                      
-android:startOffset  | 动画延迟几秒播放，调用start()方法后延迟                   
-android:repeatCount  | 动画重复次数                                    
-android:repeatMode   | 动画重复的方式，restart/reverse                   
-android:valueType    | 属性值类型，intType,floatType,colorType,pathType</code></pre><p> propertyValuesHolder属性值和objectAnimator基本相同<br>     keyframe属性值          | 含义<br>     ——————– | —————<br>     android:fraction     | 插值因子<br>     android:interpolator | 插值器，用在当前帧和前一帧之间<br>     android:value        | 需要设置的属性值       </p>
-<p>###<strong>代码实现</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    private int width;</span><br><span class="line">    private int height;</span><br><span class="line">    private ImageView imageView = null;</span><br><span class="line">    private ImageView loveImageView = null;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.left);</span><br><span class="line">        setSupportActionBar(toolbar);//设置ActionBar</span><br><span class="line"></span><br><span class="line">        getWidthAndHeight();//获取屏幕大小</span><br><span class="line">        imageView = (ImageView) findViewById(R.id.ball);</span><br><span class="line">        loveImageView = (ImageView) findViewById(R.id.love);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">      心跳</span><br><span class="line">     */</span><br><span class="line">    public void doAnimation(final View view) &#123;</span><br><span class="line">        PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(&quot;alpha&quot;, 1f,</span><br><span class="line">                0.8f, 1f, 0.8f, 1.0f);</span><br><span class="line">        PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat(&quot;scaleX&quot;, 0.6f,</span><br><span class="line">                0.8f, 1f, 0.8f, 1.0f);</span><br><span class="line">        PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat(&quot;scaleY&quot;, 0.6f,</span><br><span class="line">                0.8f, 1f, 0.8f, 1.0f);</span><br><span class="line">        ObjectAnimator.ofPropertyValuesHolder(loveImageView, pvhX, pvhY, pvhZ).setDuration(1000).start();//创建属性动画并开始</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    抛物线</span><br><span class="line">     */</span><br><span class="line">    public void doGtAnimation(final View view) &#123;</span><br><span class="line">        ObjectAnimator anim = ObjectAnimator.ofFloat(imageView, &quot;yidong&quot;, 0, 1, 0).setDuration(3000);</span><br><span class="line">        /*设置动画更新监听器，通过手动设置属性来实现view属性的改变达到动画的效果*/</span><br><span class="line">        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                float cVal = (Float) animation.getAnimatedValue();</span><br><span class="line">                imageView.setX(5 * cVal * 100);</span><br><span class="line">                imageView.setY(5 * cVal * 3 * cVal * 3 * 100);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        /*设置动画过程监听器，监听开始结束取消等动作*/</span><br><span class="line">        anim.addListener(new Animator.AnimatorListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationStart(Animator animation) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- onAnimationStart&quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationEnd(Animator animation) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- onAnimationEnd&quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationCancel(Animator animation) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- onAnimationCancel&quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationRepeat(Animator animation) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- onAnimationRepeat&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        /*重复魔石*/</span><br><span class="line">        anim.setRepeatMode(ValueAnimator.RESTART);</span><br><span class="line">        /*重复次数*/</span><br><span class="line">        anim.setRepeatCount(2);</span><br><span class="line">        anim.start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    转圈圈</span><br><span class="line">     */</span><br><span class="line">    public void doCircleAnimation(View view) &#123;</span><br><span class="line">        ObjectAnimator anim = ObjectAnimator.ofFloat(imageView, &quot;yidong&quot;, 0, 2 * (float) Math.PI).setDuration(1000);</span><br><span class="line">        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- value = &quot; + animation.getAnimatedValue());</span><br><span class="line">                float cVal = (Float) animation.getAnimatedValue();</span><br><span class="line">                imageView.setX((float) Math.sin(cVal) * 200 + width / 2);</span><br><span class="line">                imageView.setY((float) Math.cos(cVal) * 200 + height / 2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        anim.setRepeatMode(ValueAnimator.REVERSE);</span><br><span class="line">        anim.setRepeatCount(-1);//无限重复</span><br><span class="line">        anim.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    从xml文件中提取动画</span><br><span class="line">     */</span><br><span class="line">    public void doXmlAnimation(View view) &#123;</span><br><span class="line">        Animator animator = AnimatorInflater.loadAnimator(this, R.animator.one);//从xml文件中添加动画</span><br><span class="line">        animator.setTarget(loveImageView);</span><br><span class="line">        animator.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">    获取屏幕的宽高</span><br><span class="line">     */</span><br><span class="line">    private void getWidthAndHeight() &#123;</span><br><span class="line">        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);</span><br><span class="line">        DisplayMetrics dm = new DisplayMetrics();</span><br><span class="line">        wm.getDefaultDisplay().getMetrics(dm);</span><br><span class="line">        width = dm.widthPixels;</span><br><span class="line">        height = dm.heightPixels;</span><br><span class="line">        System.err.println(&quot;yidong -- width = &quot; + width);</span><br><span class="line">        System.err.println(&quot;yidong -- height = &quot; + height);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20161123100221687" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20161123104635067" alt="这里写图片描述"></p>
-<p> ###<strong>写在最后</strong><br> 属性动画的内容很丰富，这里只是提到了ObjectAnimator的一些简单实现，很深入和全面的东西，需要自己看源码，熟悉对应的API</p>
+<h3 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h3><p><img src="https://img-blog.csdn.net/20161123100221687" alt="这里写图片描述"></p>
+<p><img src="https://img-blog.csdn.net/20161123104635067" alt="这里写图片描述"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>属性动画的内容很丰富，这里只是提到了ObjectAnimator的一些简单实现，很深入和全面的东西，需要自己看源码，熟悉对应的API。</p>
 
         </div>
         
@@ -351,7 +373,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -442,7 +464,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -482,7 +504,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -560,7 +582,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -577,18 +599,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -596,18 +618,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -615,18 +637,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -634,18 +656,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -653,18 +675,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -688,7 +710,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -974,7 +996,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -985,7 +1007,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -996,7 +1018,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1007,7 +1029,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1029,7 +1051,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1052,6 +1074,17 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1224,7 +1257,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1316,6 +1349,13 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1441,7 +1481,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1467,6 +1507,13 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1476,7 +1523,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1651,14 +1698,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1687,18 +1727,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1706,18 +1746,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1725,18 +1765,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1744,18 +1784,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1763,18 +1803,18 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1798,7 +1838,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2084,7 +2124,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2095,7 +2135,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2106,7 +2146,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2117,7 +2157,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2139,7 +2179,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2162,6 +2202,17 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2334,7 +2385,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2426,6 +2477,13 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2551,7 +2609,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2577,6 +2635,13 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2586,7 +2651,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2761,14 +2826,7 @@ android:valueType    | 属性值类型，intType,floatType,colorType,pathType</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51809476      ###介绍  Source Code中的介绍如下：  Floating action buttons are used for a special type of promoted action. They are dis">
+    <meta name="description" content="简介 Source Code中的介绍如下： Floating action buttons are used for a special type of promoted action. They are distinguishedby a circled icon floating above the UI and have special motion behaviors related to">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（十）》FloatingActionButton">
 <meta property="og:url" content="http://yoursite.com/2016/07/02/《Android 基础（十）》FloatingActionButton/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51809476      ###介绍  Source Code中的介绍如下：  Floating action buttons are used for a special type of promoted action. They are dis">
+<meta property="og:description" content="简介 Source Code中的介绍如下： Floating action buttons are used for a special type of promoted action. They are distinguishedby a circled icon floating above the UI and have special motion behaviors related to">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:03:26.401Z">
+<meta property="og:updated_time" content="2019-06-16T12:58:49.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（十）》FloatingActionButton">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51809476      ###介绍  Source Code中的介绍如下：  Floating action buttons are used for a special type of promoted action. They are dis">
+<meta name="twitter:description" content="简介 Source Code中的介绍如下： Floating action buttons are used for a special type of promoted action. They are distinguishedby a circled icon floating above the UI and have special motion behaviors related to">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 525 个字)
+                    3 分钟 读完 (大约 488 个字)
                 </span>
                 
                 
@@ -168,44 +168,71 @@
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51809476" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51809476</a>   </p>
-<p>  ###<strong>介绍</strong></p>
-<blockquote>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>Source Code中的介绍如下：</p>
-<p> Floating action buttons are used for a special type of promoted action. They are distinguished<br> by a circled icon floating above the UI and have special motion behaviors related to morphing,<br> launching, and the transferring anchor point.</p>
+<p>Floating action buttons are used for a special type of promoted action. They are distinguished<br>by a circled icon floating above the UI and have special motion behaviors related to morphing,<br>launching, and the transferring anchor point.</p>
+<p>Floating action buttons come in two sizes: the default and the mini. The size can be<br>controlled with the {@code fabSize} attribute.</p>
 </blockquote>
 <blockquote>
-<p>Floating action buttons come in two sizes: the default and the mini. The size can be<br> controlled with the {@code fabSize} attribute.</p>
-</blockquote>
-<blockquote>
-<p>As this class descends from {@link ImageView}, you can control the icon which is displayed<br> via {@link # setImageDrawable(Drawable)}.</p>
-</blockquote>
-<blockquote>
-<p>The background color of this view defaults to the your theme’s {@code colorAccent}. If you<br> wish to change this at runtime then you can do so via<br> {@link # setBackgroundTintList(ColorStateList)}.</p>
-</blockquote>
-<blockquote>
+<p>As this class descends from {@link ImageView}, you can control the icon which is displayed<br>via {@link # setImageDrawable(Drawable)}.<br>The background color of this view defaults to the your theme’s {@code colorAccent}. If you<br>wish to change this at runtime then you can do so via<br>{@link # setBackgroundTintList(ColorStateList)}.</p>
 <p>@attr ref android.support.design.R.styleable#FloatingActionButton_fabSize</p>
 </blockquote>
-<p> ###<strong>属性值</strong></p>
-<pre><code>属性值                      | 意义                                                                                                                                                        
------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
-app:backgroundTint       | 设置背景颜色                                                                                                                                                    
-app:fabSize              | 设置FAB的大小，主要有两个取值normal,mini                                                                                                                               
-android:src              | 设置FAB的图标内容                                                                                                                                                
-app:rippleColor          | 设置FAB点击过程中的颜色                                                                                                                                             
-app:elevation            | 设置FAB正常情况下的阴影效果                                                                                                                                           
-app:pressedTranslationZ  | 设置FAB点击时的阴影大小                                                                                                                                             
-app:borderWidth          | 设置边框宽度                                                                                                                                                    
-android:clickable        | 是否可点击true or false                                                                                                                                        
-app:layout_anchor        | 设置FAB的锚点，即以哪个控件为参照点设置位置                                                                                                                                   
-app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.left,right,center_vertical,fill_vertical, center_horizontal,fill_horizontal,center,fill,clip_vertical,clip_horizontal,start,end</code></pre><p>###<strong>具体使用</strong><br> <em><strong>布局文件</strong></em><br> activity_main.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;android.support.design.widget.CoordinatorLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v7.widget.Toolbar</span><br><span class="line">        android:id=&quot;@+id/toolbar&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:background=&quot;?attr/colorPrimaryDark&quot;</span><br><span class="line">        android:minHeight=&quot;?attr/actionBarSize&quot;</span><br><span class="line">        app:navigationIcon=&quot;@drawable/ic_account_balance_black_24dp&quot;</span><br><span class="line">        app:title=&quot;Mraz FAB Demo&quot;&gt;&lt;/android.support.v7.widget.Toolbar&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.FloatingActionButton</span><br><span class="line">        android:id=&quot;@+id/fab_left&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_gravity=&quot;left|bottom&quot;</span><br><span class="line">        android:layout_marginBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">        android:layout_marginLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">        android:clickable=&quot;true&quot;</span><br><span class="line"></span><br><span class="line">        android:onClick=&quot;leftClick&quot;</span><br><span class="line">        android:src=&quot;@drawable/ic_arrow_back_black_24dp&quot;</span><br><span class="line">        app:backgroundTint=&quot;@color/colorPrimary&quot;</span><br><span class="line">        app:fabSize=&quot;mini&quot;</span><br><span class="line">        app:rippleColor=&quot;@color/colorPress&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.FloatingActionButton</span><br><span class="line">        android:id=&quot;@+id/fab_right&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_gravity=&quot;right|bottom&quot;</span><br><span class="line">        android:layout_marginBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">        android:layout_marginRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">        android:clickable=&quot;true&quot;</span><br><span class="line">        android:onClick=&quot;rightClick&quot;</span><br><span class="line">        android:src=&quot;@drawable/ic_arrow_forward_black_24dp&quot;</span><br><span class="line">        app:backgroundTint=&quot;@color/colorLight&quot;</span><br><span class="line">        app:borderWidth=&quot;0dp&quot;</span><br><span class="line">        app:elevation=&quot;20dp&quot;</span><br><span class="line">        app:fabSize=&quot;normal&quot;</span><br><span class="line">        app:pressedTranslationZ=&quot;50dp&quot;</span><br><span class="line">        app:rippleColor=&quot;@color/colorPress&quot; /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.FloatingActionButton</span><br><span class="line">        android:id=&quot;@+id/fab_anchor&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_gravity=&quot;right|bottom&quot;</span><br><span class="line">        android:layout_marginRight=&quot;10dp&quot;</span><br><span class="line">        android:layout_marginTop=&quot;20dp&quot;</span><br><span class="line"></span><br><span class="line">        android:clickable=&quot;true&quot;</span><br><span class="line">        android:onClick=&quot;topClick&quot;</span><br><span class="line">        android:src=&quot;@drawable/ic_arrow_forward_black_24dp&quot;</span><br><span class="line">        app:backgroundTint=&quot;#ff87ffeb&quot;</span><br><span class="line">        app:borderWidth=&quot;0dp&quot;</span><br><span class="line">        app:elevation=&quot;6dp&quot;</span><br><span class="line">        app:fabSize=&quot;normal&quot;</span><br><span class="line">        app:layout_anchor=&quot;@+id/toolbar&quot;</span><br><span class="line">        app:layout_anchorGravity=&quot;right&quot;</span><br><span class="line">        app:pressedTranslationZ=&quot;12dp&quot;</span><br><span class="line">        app:rippleColor=&quot;#33728dff&quot; /&gt;</span><br><span class="line">&lt;/android.support.design.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="属性值"><a href="#属性值" class="headerlink" title="属性值"></a>属性值</h2><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>app:backgroundTint</td>
+<td>设置背景颜色</td>
+</tr>
+<tr>
+<td>app:fabSize</td>
+<td>设置FAB的大小，主要有两个取值normal,mini</td>
+</tr>
+<tr>
+<td>android:src</td>
+<td>设置FAB的图标内容</td>
+</tr>
+<tr>
+<td>app:rippleColor</td>
+<td>设置FAB点击过程中的颜色</td>
+</tr>
+<tr>
+<td>app:elevation</td>
+<td>设置FAB正常情况下的阴影效果</td>
+</tr>
+<tr>
+<td>app:pressedTranslationZ</td>
+<td>设置FAB点击时的阴影大小</td>
+</tr>
+<tr>
+<td>app:borderWidth</td>
+<td>设置边框宽度</td>
+</tr>
+<tr>
+<td>android:clickable</td>
+<td>是否可点击true or false</td>
+</tr>
+<tr>
+<td>app:layout_anchor</td>
+<td>设置FAB的锚点，即以哪个控件为参照点设置位置</td>
+</tr>
+<tr>
+<td>app:layout_anchorGravity</td>
+<td>设置FAB相对锚点的位置，取值:topbottom.left,right,center_vertical,fill_vertical,center_horizontal,fill_horizontal,center,fill,clip_verticalclip_horizontal,start,end</td>
+</tr>
+</tbody></table>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h3><p>activity_main.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.CoordinatorLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.Toolbar</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"?attr/colorPrimaryDark"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:minHeight</span>=<span class="hljs-string">"?attr/actionBarSize"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:navigationIcon</span>=<span class="hljs-string">"@drawable/ic_account_balance_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:title</span>=<span class="hljs-string">"Mraz FAB Demo"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.Toolbar</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_left"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"left|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag"></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"leftClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_back_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"@color/colorPrimary"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"mini"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"@color/colorPress"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_right"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"right|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"rightClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_forward_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"@color/colorLight"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:borderWidth</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:elevation</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"normal"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:pressedTranslationZ</span>=<span class="hljs-string">"50dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"@color/colorPress"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_anchor"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"right|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"10dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag"></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"topClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_forward_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"#ff87ffeb"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:borderWidth</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:elevation</span>=<span class="hljs-string">"6dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"normal"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:layout_anchor</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:layout_anchorGravity</span>=<span class="hljs-string">"right"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:pressedTranslationZ</span>=<span class="hljs-string">"12dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"#33728dff"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> 布局中一共设置了3个FAB，一个在左下角，一个在右下角，一个设置了锚点，颜色可以自己调整，简单的用法就是这个样子，对应的onClick事件在MainActivity中实现。</p>
-<p> <em><strong>代码文件</strong></em><br> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.appbardemo;</span><br><span class="line"></span><br><span class="line">import android.annotation.TargetApi;</span><br><span class="line">import android.os.Build;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.support.v7.widget.Toolbar;</span><br><span class="line">import android.view.View;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    Toolbar toolbar;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @TargetApi(Build.VERSION_CODES.LOLLIPOP)</span><br><span class="line">    public void leftClick(View view) &#123;</span><br><span class="line">        toolbar.setTitle(&quot;Left FAB onClick&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void rightClick(View view) &#123;</span><br><span class="line">        toolbar.setTitle(&quot;Right FAB onClick&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void topClick(View view) &#123;</span><br><span class="line">        toolbar.setTitle(&quot;Top FAB onClick&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>布局中一共设置了3个FAB，一个在左下角，一个在右下角，一个设置了锚点，颜色可以自己调整，简单的用法就是这个样子，对应的onClick事件在MainActivity中实现。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>MainActivity.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.appbardemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.annotation.TargetApi;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Build;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.Toolbar;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.View;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Toolbar toolbar;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@TargetApi</span>(Build.VERSION_CODES.LOLLIPOP)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">leftClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Left FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rightClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Right FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">topClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Top FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20160702071932239" alt="这里写图片描述"></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://img-blog.csdn.net/20160702071932239" alt="这里写图片描述"></p>
 
         </div>
         
@@ -268,8 +295,8 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2016/06/26/《Android 基础（八）》 Palette/">
-                <span class="level-item">《Android 基础（八）》 Palette</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/06/28/《Android 基础（九）》  Ndk配置与Demo/">
+                <span class="level-item">《Android 基础（九）》  Ndk配置与Demo</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -364,7 +391,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -455,7 +482,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -495,7 +522,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -573,7 +600,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -590,18 +617,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -609,18 +636,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -628,18 +655,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -647,18 +674,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -666,18 +693,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -701,7 +728,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -987,7 +1014,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -998,7 +1025,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1009,7 +1036,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1020,7 +1047,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1042,7 +1069,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1065,6 +1092,17 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1237,7 +1275,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1329,6 +1367,13 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1454,7 +1499,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1480,6 +1525,13 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1489,7 +1541,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1664,14 +1716,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1700,18 +1745,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1719,18 +1764,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1738,18 +1783,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1757,18 +1802,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1776,18 +1821,18 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1811,7 +1856,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2097,7 +2142,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2108,7 +2153,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2119,7 +2164,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2130,7 +2175,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2152,7 +2197,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2175,6 +2220,17 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2347,7 +2403,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2439,6 +2495,13 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2564,7 +2627,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2590,6 +2653,13 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2599,7 +2669,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2774,14 +2844,7 @@ app:layout_anchorGravity | 设置FAB相对锚点的位置，取值:top,bottom.le
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

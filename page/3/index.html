@@ -145,580 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-01T02:43:23.000Z">2018-10-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    23 分钟 读完 (大约 3400 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/01/《Android 基础（四十八）》ConstrainLayout【译】/">《Android 基础（四十八）》ConstrainLayout【译】</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a><a href></a>原文地址</h1><p> <a href="https://developer.android.google.cn/reference/android/support/constraint/ConstraintLayout" target="_blank" rel="noopener">https://developer.android.google.cn/reference/android/support/constraint/ConstraintLayout</a></p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a href></a>介绍</h1><blockquote>
-<p>ConstrainLayout是一个允许开发者灵活地设置控件的位置和大小的ViewGroup。<br> 只要你使用的Android系统版本在9以上，你便可以通过添加依赖的方式来使用ConstrainLayout.</p>
-</blockquote>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a><a href></a>使用</h1><h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a><a href></a>添加依赖</h2><blockquote>
-<p>implementation ‘com.android.support.constraint:constraint-layout:1.1.3’</p>
-</blockquote>
-<h2 id="常用约束"><a href="#常用约束" class="headerlink" title="常用约束"></a><a href></a>常用约束</h2><h3 id="相对定位-Relative-positioning"><a href="#相对定位-Relative-positioning" class="headerlink" title="相对定位(Relative positioning)"></a><a href></a>相对定位(Relative positioning)</h3><p> 相对定位是ConstrainLayout构建布局的一种基本方式。相对定位约束可以帮助我们通过一个给定的Widget来摆放另外一个Widget。我们可以在横纵两个方向上约束Widget。</p>
-<blockquote>
-<p>横向: left, right, start and end sides<br> 纵向: top, bottom sides and text baseline</p>
-<p> 一般思路是将一个 Widget的给定侧约束到其他Widget的另一侧。</p>
-</blockquote>
-<p> 比如，把button B放置到button A的右侧(下图)</p>
-<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/pga1qopccqgo7rccn2jldujc0d.png" alt="alt"></p>
-<p> 实现可以如下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonA&quot; ... /&gt;</span><br><span class="line">&lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line"> app:layout_constraintLeft_toRightOf=&quot;@+id/buttonA&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 上述代码就是告诉系统，我们想让button B的左侧约束到button A的右侧。这样一个位置约束意味着，系统将让button A的右侧和button B的左侧在X轴上具有相同的位置。</p>
-<p> 此类相对位置属性还有很多，具体如下：<br> <img src="http://www.onlyloveyd.cn/upload/2018/10/r0tlg97g86hjcp556qp7bo0ggh.png" alt="alt"></p>
-<ul>
-<li><strong>layout_constraintLeft_toLeftOf</strong> </li>
-<li><strong>layout_constraintLeft_toRightOf</strong> </li>
-<li><strong>layout_constraintRight_toLeftOf</strong> </li>
-<li><strong>layout_constraintRight_toRightOf</strong> </li>
-<li><strong>layout_constraintTop_toTopOf</strong> </li>
-<li><strong>layout_constraintTop_toBottomOf</strong> </li>
-<li><strong>layout_constraintBottom_toTopOf</strong> </li>
-<li><strong>layout_constraintBottom_toBottomOf</strong> </li>
-<li><strong>layout_constraintBaseline_toBaselineOf</strong> </li>
-<li><strong>layout_constraintStart_toEndOf</strong> </li>
-<li><strong>layout_constraintStart_toStartOf</strong> </li>
-<li><strong>layout_constraintEnd_toStartOf</strong> </li>
-<li><strong>layout_constraintEnd_toEndOf</strong>  这些属性通过引用<strong>id</strong>来代表一个Widget，或者使用<strong>parent</strong>来代表父布局</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line">  app:layout_constraintLeft_toLeftOf=&quot;parent&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="边距-Margins"><a href="#边距-Margins" class="headerlink" title="边距(Margins)"></a><a href></a>边距(Margins)</h3><p> <img src="http://www.onlyloveyd.cn/upload/2018/10/shcki04bl0go4qdsod8nf5meao.png" alt="alt"></p>
-<p> 如果设置了边距，则它们将应用于相应的约束，将边距强制设置为目标Widget和源Widget之间的空间。通常的布局边距属性就可以达到此效果。</p>
-<ul>
-<li><strong>android:layout_marginStart</strong> </li>
-<li><strong>android:layout_marginEnd</strong> </li>
-<li><strong>android:layout_marginLeft</strong> </li>
-<li><strong>android:layout_marginTop</strong> </li>
-<li><strong>android:layout_marginRight</strong> </li>
-<li><strong>android:layout_marginBottom</strong>  注意: 边距只能是正数或等于零，采用Dimension形式。</li>
-</ul>
-<h3 id="约束目标GONE后边距处理-Margins-when-connected-to-a-GONE-widget"><a href="#约束目标GONE后边距处理-Margins-when-connected-to-a-GONE-widget" class="headerlink" title="约束目标GONE后边距处理 (Margins when connected to a GONE widget)"></a><a href></a>约束目标GONE后边距处理 (Margins when connected to a GONE widget)</h3><p> 当约束目标的可见性为View.GONE时，你还可以使用以下属性指示要使用的不同边距值：</p>
-<ul>
-<li><p><strong>layout_goneMarginStart</strong> </p>
-</li>
-<li><p><strong>layout_goneMarginEnd</strong> </p>
-</li>
-<li><p><strong>layout_goneMarginLeft</strong> </p>
-</li>
-<li><p><strong>layout_goneMarginTop</strong> </p>
-</li>
-<li><p><strong>layout_goneMarginRight</strong> </p>
-</li>
-<li><p><strong>layout_goneMarginBottom</strong>  </p>
-<h3 id="居中定位和位置偏差"><a href="#居中定位和位置偏差" class="headerlink" title="居中定位和位置偏差"></a><a href></a>居中定位和位置偏差</h3><p>ConstraintLayout的一个有用方面是它如何处理“不可能”的约束。例如，如果我们有如下代码：</p>
-</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.ConstraintLayout ...&gt;</span><br><span class="line">    &lt;Button android:id=&quot;@+id/button&quot; ...</span><br><span class="line">         app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">         app:layout_constraintRight_toRightOf=&quot;parent&quot;/&gt;</span><br><span class="line">         &lt;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 除非ConstraintLayout恰好具有与Button完全相同的大小，否则两个约束不能同时满足（双方都不能成为我们想要它们的位置）。</p>
-<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/56l42bsil0j5rqt5u6gpc7gbd1.png" alt="alt"></p>
-<p> 在这种情况下，约束的作用就像是相反的力量将Widget拉平（上图）;这样Widget最终将会在父容器中居中显示。这种使用方式在纵轴方向上同样适用。</p>
-<h4 id="偏差-Bias"><a href="#偏差-Bias" class="headerlink" title="偏差(Bias)"></a><a href></a>偏差(Bias)</h4><p> 遇到这种相反的约束时的默认设置是使Widget居中;但是你可以使用偏差属性调整定位以使一侧偏向另一侧。</p>
-<ul>
-<li><strong>layout_constraintHorizontal_bias</strong> </li>
-<li><strong>layout_constraintVertical_bias</strong>  例如，如下代码将使左侧具有30％的偏差而不是默认的50％，使得左侧将更短，Widget更倾向于左侧（具体效果如下图）：</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.ConstraintLayout ...&gt;</span><br><span class="line">       &lt;Button android:id=&quot;@+id/button&quot; ...</span><br><span class="line">           app:layout_constraintHorizontal_bias=&quot;0.3&quot;</span><br><span class="line">           app:layout_constraintLeft_toLeftOf=&quot;parent&quot;</span><br><span class="line">           app:layout_constraintRight_toRightOf=&quot;parent/&gt;</span><br><span class="line">         &lt;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/u5fpnj4qc4jcbra4m6n2hd1r1c.png" alt="alt"></p>
-<p> 使用偏差属性，你可以制作更好地适应屏幕尺寸变化的用户界面。</p>
-<h3 id="环形定位-Circular-positioning-Added-in-1-1"><a href="#环形定位-Circular-positioning-Added-in-1-1" class="headerlink" title="环形定位(Circular positioning (Added in 1.1))"></a><a href></a>环形定位(Circular positioning (Added in 1.1))</h3><p> 你可以以距离或者角度来约束一个Widget中心相对于另一个Widget的中心。这样我们就可以将Widget放置到一个圆环上。具体属性如下：</p>
-<ul>
-<li><strong>layout_constraintCircle</strong> : 引用widget ID </li>
-<li><strong>layout_constraintCircleRadius</strong> : 到另一个widget的距离 </li>
-<li><strong>layout_constraintCircleAngle</strong> : widget需要摆放在哪个角度 (0-360)  <img src="http://www.onlyloveyd.cn/upload/2018/10/t0d1lsuouahrpqv0v619b6trte.png" alt="alt"><br><img src="http://www.onlyloveyd.cn/upload/2018/10/67n9m05ncmjeaqrvgs6ltf7j8v.png" alt="alt"></li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/buttonA&quot; ... /&gt;</span><br><span class="line">  &lt;Button android:id=&quot;@+id/buttonB&quot; ...</span><br><span class="line">      app:layout_constraintCircle=&quot;@+id/buttonA&quot;</span><br><span class="line">      app:layout_constraintCircleRadius=&quot;100dp&quot;</span><br><span class="line">      app:layout_constraintCircleAngle=&quot;45&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="可见性行为-Visibility-behavior"><a href="#可见性行为-Visibility-behavior" class="headerlink" title="可见性行为(Visibility behavior)"></a><a href></a>可见性行为(Visibility behavior)</h3><p> ConstraintLayout对于可见性为<strong>View.GONE</strong>的Widget有明确的处理方式。</p>
-<p> <strong>GONE</strong> widget，一般情况下，将不会显示在界面上，同时也不再是布局中的一部分。</p>
-<p> 但就布局计算而言，GONE Widget仍然是其中的一部分，这是有很大区别的。</p>
-<ul>
-<li><p>对于布局传递，它们的尺寸将被视为零（基本上，它们将被解析为一个点） </p>
-</li>
-<li><p>如果他们对其他Widget有限制，这些限制仍然会得到体现，但任何边距都会等于零  <img src="http://www.onlyloveyd.cn/upload/2018/10/u0iqch7uv4hogo603fsp4jr605.png" alt="alt"></p>
-<p>这种特定的行为可以满足你在不破坏布局的情况下构建布局，只需要暂时将对应的Widget标记为GONE即可，这在构建简单的布局动画时是很有用的。</p>
-<p>如上图，当A GONE后，B使用的左边距是B相对于A的边距。在某些情况下，这个边距可能并不是你所需要的(比如，A相对于容器存在20dp的左边距，B相对于A有40dp的左边距，当A被标记为GONE后，B相对于容器就会存在40dp的左边距)。因此，你可以指定在连接到的Widget标记为GONE时的margin作为备用边距值。具体看上一章节的【约束目标GONE后边距处理】。</p>
-</li>
-</ul>
-<h3 id="尺寸约束-Dimensions-constraints"><a href="#尺寸约束-Dimensions-constraints" class="headerlink" title="尺寸约束(Dimensions constraints)"></a><a href></a>尺寸约束(Dimensions constraints)</h3><h4 id="ConstraintLayout最小尺寸和最大尺寸"><a href="#ConstraintLayout最小尺寸和最大尺寸" class="headerlink" title="ConstraintLayout最小尺寸和最大尺寸"></a><a href></a>ConstraintLayout最小尺寸和最大尺寸</h4><p> 通过如下属性你可以给ConstrainLayout定义最大或是最小尺寸。</p>
-<ul>
-<li><strong>android:minWidth</strong> set the minimum width for the layout </li>
-<li><strong>android:minHeight</strong> set the minimum height for the layout </li>
-<li><strong>android:maxWidth</strong> set the maximum width for the layout </li>
-<li><strong>android:maxHeight</strong> set the maximum height for the layout  当其尺寸设置为WRAP_CONTENT时，这些最小和最大尺寸将会被ConstraintLayout使用到。</li>
-</ul>
-<h4 id="Widgets尺寸约束"><a href="#Widgets尺寸约束" class="headerlink" title="Widgets尺寸约束"></a><a href></a>Widgets尺寸约束</h4><p> Widgets的尺寸需要通过如下三种方式设置<strong>android:layout_width</strong>和<strong>android:layout_height</strong>来明确。</p>
-<ul>
-<li><p>使用一个明确的尺寸大小 (数字值如123dp或者是一个尺寸引用) </p>
-</li>
-<li><p>使用WRAP_CONTENT, 让控件自己计算其大小 </p>
-</li>
-<li><p>使用0dp, 等价于 “MATCH_CONSTRAINT”  <img src="http://www.onlyloveyd.cn/upload/2018/10/2ovn1a1tnqiubquk091p60s3h0.png" alt="alt"></p>
-<p>前两种设置的效果和其他布局一样。最后一个将以匹配所设置的约束的方式调整Widget的大小（上图中（a）wrap_content,（b）0dp）。如果设置来边距，它们也将被计算在内（上图中（c）0dp with margin）。</p>
-<p><strong>重要</strong> 针对ConstrainLayout中的Widget，我们不推荐使用<strong>MATCH_PARENT</strong>。我们可以通过使用MATCH_CONSTRAINT配合约束 Widget 的left/right或者top/bottom 到<strong>“parent”</strong>来定义类似的行为。</p>
-</li>
-</ul>
-<h4 id="WRAP-CONTENT：强制执行约束-Added-in-1-1"><a href="#WRAP-CONTENT：强制执行约束-Added-in-1-1" class="headerlink" title="WRAP_CONTENT：强制执行约束 (Added in 1.1)"></a><a href></a>WRAP_CONTENT：强制执行约束 (Added in 1.1)</h4><p> 如果一个尺寸设置为<strong>WRAP_CONTENT</strong>，在1.1版本之前，他们将会被定义为数值类的尺寸大小，约束将不会限制结果尺寸。一般情况下这样已经足够满足需求并且运行速度也是很快的，但是在某些情况下，你可能想用<strong>WRAP_CONTENT</strong>来设置尺寸，同时也想强制约束来限制结果布局尺寸。这种情况下，你可以使用如下属性：</p>
-<ul>
-<li><p><strong>app:layout_constrainedWidth=”true|false”</strong> </p>
-</li>
-<li><p><strong>app:layout_constrainedHeight=”true|false”</strong>  </p>
-<h4 id="MATCH-CONSTRAINT-Added-in-1-1"><a href="#MATCH-CONSTRAINT-Added-in-1-1" class="headerlink" title="MATCH_CONSTRAINT(Added in 1.1)"></a><a href></a>MATCH_CONSTRAINT(Added in 1.1)</h4><p>当Widget的尺寸被设置为MATCH_CONSTRAINT时，默认的结果就是使用所有可用的空间。如下几个额外的属性可以被使用到：</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>layout_constraintWidth_min and layout_constraintHeight_min : 将为这个尺寸设置最小值</strong> </p>
-</li>
-<li><p><strong>layout_constraintWidth_max and layout_constraintHeight_max : 将为这个尺寸设置最大值</strong> </p>
-</li>
-<li><p><strong>layout_constraintWidth_percent and layout_constraintHeight_percent : 将按相对父布局的百分比来设置尺寸</strong>  </p>
-<h4 id="最小值和最大值-Min-and-Max"><a href="#最小值和最大值-Min-and-Max" class="headerlink" title="最小值和最大值(Min and Max)"></a><a href></a>最小值和最大值(Min and Max)</h4><p>为min和max指示的值可以是Dp单位，也可以是“wrap”，它将使用与WRAP_CONTENT将执行的值相同的值</p>
-</li>
-</ul>
-<h4 id="百分比尺寸-Percent-dimension"><a href="#百分比尺寸-Percent-dimension" class="headerlink" title="百分比尺寸(Percent dimension)"></a><a href></a>百分比尺寸(Percent dimension)</h4><p> 要使用百分比，你需要做如下配置：</p>
-<ul>
-<li><p>尺寸设置为<strong>MATCH_CONSTRAINT（0dp）</strong> </p>
-</li>
-<li><p>默认值设置为percent** app:layout_constraintWidth_default=“percent”** 或者<strong>app:layout_constraintHeight_default=”percent”</strong><br> (备注: 在版本1.1-beta1 and 1.1-beta2中这些配置是需要的, 但是在后续的版本中只要百分比属性被定义，便不再需要这些配置) </p>
-</li>
-<li><p>然后设置<strong>layout_constraintWidth_percent</strong>或者 <strong>layout_constraintHeight_percent</strong>属性值，范围0-1  </p>
-<h4 id="比率"><a href="#比率" class="headerlink" title="比率"></a><a href></a>比率</h4><p>你可以定义Widget的宽高比例。为了实现这个效果，宽高中至少又一个设置为<strong>0dp(i.e.,MATCH_CONSTRAINT)</strong>， 然后给** layout_constraintDimensionRatio**指定一个比例值，如下</p>
-</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">    android:layout_height=&quot;0dp&quot;</span><br><span class="line">    app:layout_constraintDimensionRatio=&quot;1:1&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这段代码将设置button的宽高一样。比例值可以通过如下两种方式设置：</p>
-<ul>
-<li>float值, 代表宽高的比例 </li>
-<li>比例值按照“width:height”的格式书写  在宽高都设置为MATCH_CONSTRAINT(0dp)时，我们仍然能够使用比例属性。在这种情况下，系统设置满足所有约束的最大尺寸并保持指定的纵横比。要根据另一个的尺寸约束一个特定边，可以预先附加<strong>“W,”</strong>或<strong>“H,”</strong>分别约束宽度或高度。比如，一个尺寸被两个目标约束(宽度0dp并且在父布局居中)，你可以通过在比例值前添加<strong>“W(约束宽度)”</strong>或者<strong>“H(约束高度)”</strong>，来指明约束宽度或者高度。</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:layout_width=&quot;0dp&quot;</span><br><span class="line">                   android:layout_height=&quot;0dp&quot;</span><br><span class="line">       app:layout_constraintDimensionRatio=&quot;H,16:9&quot;</span><br><span class="line">       app:layout_constraintBottom_toBottomOf=&quot;parent&quot;</span><br><span class="line">       app:layout_constraintTop_toTopOf=&quot;parent&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 如上代码，将按照16:9的比例来设置button的高度，而宽度将匹配父布局的约束。也就是这种情况下<strong>宽度:高度=16:9</strong>，由宽度来决定高度。</p>
-<h3 id="链-chain"><a href="#链-chain" class="headerlink" title="链(chain)"></a><a href></a>链(chain)</h3><p> 链在单个轴（水平或垂直）上提供组群行为。另一个轴可以独立约束</p>
-<h4 id="创建一个链"><a href="#创建一个链" class="headerlink" title="创建一个链"></a><a href></a>创建一个链</h4><p> 如果一组Widgets通过双向连接链接在一起，则它们被视为链。（下图展示的是一个由两个Widget组成的最小的链）</p>
-<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/1lapf2latcid3rsddqhjle1jih.png" alt="alt"></p>
-<h4 id="链头"><a href="#链头" class="headerlink" title="链头"></a><a href></a>链头</h4><p> 链由在链的第一个元素上设置的属性控制(我们可以将其视为链的“头”)</p>
-<p> <img src="http://www.onlyloveyd.cn/upload/2018/10/o2cu4q0j4khu1qsmac66ohjc2n.png" alt="alt"></p>
-<p> 头部是水平链的最左侧Widget，垂直链的最顶部Widget。</p>
-<h4 id="链间边距"><a href="#链间边距" class="headerlink" title="链间边距"></a><a href></a>链间边距</h4><p> 如果在双向连接上指定了边距，则他们将会被计算在内。在扩散链的情况下，将从分配的空间中减去这些边距</p>
-<h4 id="链Style"><a href="#链Style" class="headerlink" title="链Style"></a><a href></a>链Style</h4><p> 在链的第一个元素上设置属性<strong>layout_constraintHorizo​​ntal_chainStyle</strong>或<strong>layout_constraintVertical_chainStyle</strong>时，链的行为将根据指定的样式更改（默认为<strong>CHAIN_SPREAD</strong>）</p>
-<ul>
-<li><strong>CHAIN_SPREAD</strong> – 元素将等间距散开(默认style) </li>
-<li>Weighted链 – <strong>CHAIN_SPREAD</strong> 模式, 当一些Widgets设置为MATCH_CONSTRAINT,他们将被分配所有可用空间。 </li>
-<li><strong>CHAIN_SPREAD_INSIDE</strong> – 相似地, 但是链的两端不会被分配空间。 </li>
-<li><strong>CHAIN_PACKED</strong> – 链上元素会被打包在一起。子项的水平或垂直偏差属性将影响整个打包元素的定位。  <img src="http://www.onlyloveyd.cn/upload/2018/10/okuugqrdpqi3qqlae13nt5auv2.png" alt="alt"></li>
-</ul>
-<h5 id="权重链"><a href="#权重链" class="headerlink" title="权重链"></a><a href></a>权重链</h5><p> 链的默认行为是在可用空间中平均分布元素。如果一个或多个元素使用MATCH_CONSTRAINT，则它们将使用可用的空白空间(他们之间平等分配)。<br> <strong>layout_constraintHorizo​​ntal_weight</strong>和<strong>layout_constraintVertical_weight</strong>属性将控制如何使用MATCH_CONSTRAINT在元素之间分配空间。例如，在使用MATCH_CONSTRAINT的包含两个元素的链上，第一个元素使用权重2，第二个元素使用权重1，第一个元素占用的空间将是第二个元素占用的空间的两倍。</p>
-<h5 id="边距和链（1-1版本）"><a href="#边距和链（1-1版本）" class="headerlink" title="边距和链（1.1版本）"></a><a href></a>边距和链（1.1版本）</h5><p> 在链中的元素上使用边距时，边距是相加的<br> 例如，在水平链上，如果一个元素定义了10dp的右边距而下一个元素定义了5dp的左边距，则这两个元素之间产生的边距为15dp。<br> 在计算链用于定位项目的剩余空间时，会同时考虑项目及其边距。剩余空间不包含边距。</p>
-<h3 id="虚拟助手-Virtual-Helper-objects"><a href="#虚拟助手-Virtual-Helper-objects" class="headerlink" title="虚拟助手(Virtual Helper objects)"></a><a href></a>虚拟助手(Virtual Helper objects)</h3><p> 除了之前详述的内在功能外，您还可以使用ConstraintLayout中的特殊帮助程序对象来帮助您进行布局。现在，Guideline可以帮助你创建相对于ConstraintLayout容器定位的水平和垂直Guideline。然后Widgets可以被约束到这些Guideline上。在1.1版本中，Barrier和Group也别加入进来。</p>
-<h3 id="优化器-in-1-1"><a href="#优化器-in-1-1" class="headerlink" title="优化器(in 1.1)"></a><a href></a>优化器(in 1.1)</h3><p> 在1.1版本中，我们提供约束优化器。你可以通过将标记app：layout_optimizationLevel添加到ConstraintLayout元素来决定应用哪些优化。</p>
-<ul>
-<li><strong>none</strong> : 不做任何优化 </li>
-<li><strong>standard</strong> : 默认值. 只优化 direct 和 barrier 约束 </li>
-<li><strong>direct</strong> : 优化 direct 约束 </li>
-<li><strong>barrier</strong> : 优化 barrier 约束 </li>
-<li><strong>chain</strong> : 优化 chain 约束 (试验版) </li>
-<li><strong>dimensions</strong> : 优化 dimensions 测量 (试验版), 减少match constrains元素的测量次数。  此属性是一个掩码，因此您可以通过列出所需的优化来决定打开或关闭特定的优化。例如</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_optimizationLevel=&quot;direct|barrier|chain&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-20T00:40:13.000Z">2018-08-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1008 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/20/《 Linux 》Crond 定时任务/">《 Linux 》Crond 定时任务</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>crond的概念和crontab是不可分割的。crontab是一个命令，常见于Unix和类Unix的操作系统之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于希腊语chronos(χρόνος)，原意是时间。而crond正是它的守护进程。</p>
-</blockquote>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/08/20/《 Linux 》Crond 定时任务/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-08-12T02:24:43.000Z">2018-08-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 350 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/08/12/《Android 进阶（四）》自定义组织机构图-LazyOrgView/">《Android 进阶（四）》自定义组织机构图-LazyOrgView</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="LazyOrgView"><a href="#LazyOrgView" class="headerlink" title="LazyOrgView"></a>LazyOrgView</h1><p> 通过自定义View简单实现组织结构图。在网上搜索并没有发现类似的View，由于项目需要，快速实现一个满足项目需求。另外一种实现方式：Google OrgChart或者其他OrgChart.js。</p>
-<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p> <a href="https://github.com/onlyloveyd/LazyOrgView" target="_blank" rel="noopener">LazyOrgView</a></p>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>步骤 1.</strong> 工程根目录build.gradle 添加如下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">          maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 项目build.gradle 添加依赖</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyOrgView:v1.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p> <strong>步骤 1.</strong> 添加 <strong>LazyOrgView</strong> 至布局。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;cn.onlyloveyd.lazyorgview.widget.LazyOrgView</span><br><span class="line">        android:id=&quot;@+id/rv_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/FrameLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>步骤 2.</strong> 使用TreeNode构建跟节点以及其他节点，然后使用addChildNode组织节点关系。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">TreeNode root = new TreeNode(&quot;总经理&quot;);</span><br><span class="line">root.isRoot = true;</span><br><span class="line"></span><br><span class="line">TreeNode A = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Aa = new TreeNode(&quot;行政部&quot;);</span><br><span class="line">TreeNode Ab = new TreeNode(&quot;财务部&quot;);</span><br><span class="line">TreeNode Ac = new TreeNode(&quot;采购部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode B = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ba = new TreeNode(&quot;工程部&quot;);</span><br><span class="line">TreeNode Bb = new TreeNode(&quot;生产部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode C = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ca = new TreeNode(&quot;营销部&quot;);</span><br><span class="line">TreeNode Cb = new TreeNode(&quot;方案造价部&quot;);</span><br><span class="line">TreeNode Cc = new TreeNode(&quot;售后服务部&quot;);</span><br><span class="line"></span><br><span class="line">root.addChildNode(A);</span><br><span class="line">root.addChildNode(B);</span><br><span class="line">root.addChildNode(C);</span><br><span class="line"></span><br><span class="line">A.addChildNode(Aa);</span><br><span class="line">A.addChildNode(Ab);</span><br><span class="line">A.addChildNode(Ac);</span><br><span class="line"></span><br><span class="line">B.addChildNode(Ba);</span><br><span class="line">B.addChildNode(Bb);</span><br><span class="line"></span><br><span class="line">C.addChildNode(Ca);</span><br><span class="line">C.addChildNode(Cb);</span><br></pre></td></tr></table></figure>
-
-<p> <strong>步骤 3.</strong> 给LazyOrgView配置 LazyOrgConfig 以及 rootNode。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lazyOrgView.setRootNode(root);</span><br><span class="line">LazyOrgConfig lazyOrgConfig = new LazyOrgConfig();</span><br><span class="line">lazyOrgConfig.setLineColor(Color.BLUE).setTextSize(12)</span><br><span class="line">             .setLineWidth(1)</span><br><span class="line">             .setTextBgColor(Color.GREEN)</span><br><span class="line">             .setTextBgRes(R.drawable.rect_shape);</span><br><span class="line">lazyOrgView.setLazyOrgConfig(lazyOrgConfig);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本效果"><a href="#基本效果" class="headerlink" title="基本效果"></a>基本效果</h2><p> <img src="http://www.onlyloveyd.cn/upload/2018/08/q4ualhdpvuh3lo12iu3v50gt29.png" alt="1"><br> <img src="http://www.onlyloveyd.cn/upload/2018/08/7btem833lsh6fp1lhkqupcvk3l.png" alt="2"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-30T03:33:31.000Z">2018-06-30</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1804 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/30/《Android 基础（四十七）》FileProvider/">《Android 基础（四十七）》FileProvider</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。</p>
-<h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p> 官文Android7.0行为变更说明：</p>
-<p> 对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件 URI 的 intent 离开您的应用，则应用出现故障，并出现 FileUriExposedException 异常。</p>
-<p> 要在应用间共享文件，需要改用content:// 格式的URI，并授予 URI 临时访问权限。<br> 实现此类操作最简单的方法就是使用FileProvider。</p>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="定义FileProvider"><a href="#定义FileProvider" class="headerlink" title="定义FileProvider"></a>定义FileProvider</h3><p> FileProvider本身就能根据file生成content:// Uri，所以我们并没有必要去写一个单独的FileProvider子类。但是在某些情况下，我们可以简单的继承FileProvider，修改类名来实现与FileProvider在名字上的区分，毕竟在AndroidManifest.xml中，名字相同的provider是不被允许的。</p>
-<p> AndroidManifest.xml中申明FileProvider</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;application&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;provider</span><br><span class="line">            android:name=&quot;android.support.v4.content.FileProvider&quot;</span><br><span class="line">            android:authorities=&quot;$&#123;applicationId&#125;.fileprovider&quot;</span><br><span class="line">            android:exported=&quot;false&quot;</span><br><span class="line">            android:grantUriPermissions=&quot;true&quot;&gt;</span><br><span class="line">            &lt;meta-data</span><br><span class="line">                android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;</span><br><span class="line">                android:resource=&quot;@xml/file_paths&quot; /&gt;</span><br><span class="line">        &lt;/provider&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/application&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="明确可用文件"><a href="#明确可用文件" class="headerlink" title="明确可用文件"></a>明确可用文件</h3><p> 上面明确来resource文件为”@xml/file_paths”。那么我们就在file_paths中明确我们的可用位置。</p>
-<p> FileProvider只能为你事先指定的目录中的文件生成内容URI。 要指定目录，请使用&lt; paths &gt;元素的子元素指定其存储区域和XML路径。 例如，以下路径元素告诉FileProvider你打算请求私有文件目录下的images /子目录的内容URI</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;files-path name=&quot;my_images&quot; path=&quot;images/&quot;/&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/paths&gt;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>paths元素                                                | 对应目录                                                                 
------------------------------------------------------- | --------------------------------------------------------------------- 
-&amp;lt; root-path/&amp;gt;                                    | “/”                                                                  
-&amp;lt; files-path name=”name” path=”path” /&amp;gt;          | Context.getFilesDir()                                                
-&amp;lt; cache-path name=”name” path=”path” /&amp;gt;          | Context.getCacheDir()                                                
-&amp;lt; external-path name=”name” path=”path” /&amp;gt;       | Environment.getExternalStorageDirectory()                            
-&amp;lt; external-files-path name=”name” path=”path” /&amp;gt; | Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)
-&amp;lt; external-cache-path name=”name” path=”path” /&amp;gt; | Context.getExternalCacheDir()                                        
-&amp;lt; external-media-path name=”name” path=”path” /&amp;gt; | Context.getExternalMediaDirs()(API21+)                               </code></pre><p> 这样看可能不太明显，随意新建一个Android工程，打印如上内容，示例工程包名为<br> cn.onlyloveyd.lazyshare</p>
-<p> <img src="https://img-blog.csdn.net/20180630102322857" alt="这里写图片描述"></p>
-<h3 id="为File生成Content-Uri"><a href="#为File生成Content-Uri" class="headerlink" title="为File生成Content Uri"></a>为File生成Content Uri</h3><ul>
-<li>创建需要用Uri表示的文件File </li>
-<li>使用getUriForFile()方法获取对应的Uri.  官方示例:</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = new File(Context.getFilesDir(), &quot;images&quot;);</span><br><span class="line">File newFile = new File(imagePath, &quot;default_image.jpg&quot;);</span><br><span class="line">Uri contentUri = getUriForFile(getContext(), &quot;com.mydomain.fileprovider&quot;, newFile);</span><br></pre></td></tr></table></figure>
-
-<p> 生成的Uri就是</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content://com.mydomain.fileprovider/my_images/default_image.jpg.</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="临时授权Uri"><a href="#临时授权Uri" class="headerlink" title="临时授权Uri"></a>临时授权Uri</h3><p> 给通过getUriForFile()方法返回的Uri授权的步骤：</p>
-<ul>
-<li><p>调用Context.grantUriPermission(package, Uri, mode_flags)。package为包名，Uri为需要临时授权的content Uri。mode_flags可以为FLAG_GRANT_READ_URI_PERMISSION, FLAG_GRANT_WRITE_URI_PERMISSION，根据需求而定。通过revokeUriPermission() 或者重启取消授权。 </p>
-</li>
-<li><p>Intent中setData方法设置Uri </p>
-</li>
-<li><p>Intent setFlags方法设置FLAG_GRANT_READ_URI_PERMISSION 或者FLAG_GRANT_WRITE_URI_PERMISSION。 </p>
-</li>
-<li><p>发送Intent到另一个App  </p>
-<h3 id="传递Uri到另一个应用"><a href="#传递Uri到另一个应用" class="headerlink" title="传递Uri到另一个应用"></a>传递Uri到另一个应用</h3><p>将content:\ Uri提供给客户端应用程序的方式很多。 一种常见的方法是客户端应用程序通过调用startActivityResult()来启动应用程序，发送一个Intent以启动一个Activity，然后通过setResult() 的方式返回给客户端。</p>
-<p>另一种方式是通过调用Intent.setClipData()方法将content:\ Uri放入ClipData对象中，然后将该对象添加到发送给客户端应用程序的Intent中即可。</p>
-</li>
-</ul>
-<h2 id="源码看看"><a href="#源码看看" class="headerlink" title="源码看看"></a>源码看看</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p> <img src="https://img-blog.csdn.net/20180630104041245" alt="这里写图片描述"></p>
-<h3 id="SimplePathStrategy"><a href="#SimplePathStrategy" class="headerlink" title="SimplePathStrategy"></a>SimplePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">static class SimplePathStrategy implements PathStrategy &#123;</span><br><span class="line">    private final String mAuthority;</span><br><span class="line">    private final HashMap&lt;String, File&gt; mRoots = new HashMap&lt;String, File&gt;();</span><br><span class="line"></span><br><span class="line">    SimplePathStrategy(String authority) &#123;</span><br><span class="line">        mAuthority = authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Add a mapping from a name to a filesystem root. The provider only offers</span><br><span class="line">     * access to files that live under configured roots.</span><br><span class="line">     */</span><br><span class="line">     //读取xml配置文件，建立名称和目录的映射表</span><br><span class="line">    void addRoot(String name, File root) &#123;</span><br><span class="line">        //名字不能为空</span><br><span class="line">        if (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Name must not be empty&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // Resolve to canonical path to keep path checking fast</span><br><span class="line">            root = root.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to resolve canonical path for &quot; + root, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mRoots.put(name, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Uri getUriForFile(File file) &#123;</span><br><span class="line">        String path;</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取路径</span><br><span class="line">            path = file.getCanonicalPath();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Find the most-specific root path</span><br><span class="line">        Map.Entry&lt;String, File&gt; mostSpecific = null;</span><br><span class="line">        //遍历查找文件路径对应的名称</span><br><span class="line">        for (Map.Entry&lt;String, File&gt; root : mRoots.entrySet()) &#123;</span><br><span class="line">            final String rootPath = root.getValue().getPath();</span><br><span class="line">            if (path.startsWith(rootPath) &amp;&amp; (mostSpecific == null</span><br><span class="line">                    || rootPath.length() &gt; mostSpecific.getValue().getPath().length())) &#123;</span><br><span class="line">                mostSpecific = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //查询未果，说明在xml中未定义</span><br><span class="line">        if (mostSpecific == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to find configured root that contains &quot; + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Start at first char of path under root</span><br><span class="line">        final String rootPath = mostSpecific.getValue().getPath();</span><br><span class="line">        if (rootPath.endsWith(&quot;/&quot;)) &#123;</span><br><span class="line">            path = path.substring(rootPath.length());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            path = path.substring(rootPath.length() + 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Encode the tag and path separately</span><br><span class="line">        path = Uri.encode(mostSpecific.getKey()) + &apos;/&apos; + Uri.encode(path, &quot;/&quot;);</span><br><span class="line">        //构建content Uri,这就是最后我们拿到的内容</span><br><span class="line">        return new Uri.Builder().scheme(&quot;content&quot;)</span><br><span class="line">                .authority(mAuthority).encodedPath(path).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public File getFileForUri(Uri uri) &#123;</span><br><span class="line">        String path = uri.getEncodedPath();</span><br><span class="line"></span><br><span class="line">        //通过uri反向寻找，和上面的原理差不多，不赘述</span><br><span class="line">        final int splitIndex = path.indexOf(&apos;/&apos;, 1);</span><br><span class="line">        final String tag = Uri.decode(path.substring(1, splitIndex));</span><br><span class="line">        path = Uri.decode(path.substring(splitIndex + 1));</span><br><span class="line"></span><br><span class="line">        final File root = mRoots.get(tag);</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Unable to find configured root for &quot; + uri);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        File file = new File(root, path);</span><br><span class="line">        try &#123;</span><br><span class="line">            file = file.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!file.getPath().startsWith(root.getPath())) &#123;</span><br><span class="line">            throw new SecurityException(&quot;Resolved path jumped beyond configured root&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return file;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="parsePathStrategy"><a href="#parsePathStrategy" class="headerlink" title="parsePathStrategy"></a>parsePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">private static PathStrategy parsePathStrategy(Context context, String authority)</span><br><span class="line">           throws IOException, XmlPullParserException &#123;</span><br><span class="line">       final SimplePathStrategy strat = new SimplePathStrategy(authority);</span><br><span class="line"></span><br><span class="line">       //获取Provider信息</span><br><span class="line">       final ProviderInfo info = context.getPackageManager()</span><br><span class="line">               .resolveContentProvider(authority, PackageManager.GET_META_DATA);</span><br><span class="line">       // 获取&quot;android.support.FILE_PROVIDER_PATHS&quot;对应的xml文件解析对吸纳个;</span><br><span class="line">       final XmlResourceParser in = info.loadXmlMetaData(</span><br><span class="line">               context.getPackageManager(), META_DATA_FILE_PROVIDER_PATHS);</span><br><span class="line">       if (in == null) &#123;</span><br><span class="line">           throw new IllegalArgumentException(</span><br><span class="line">                   &quot;Missing &quot; + META_DATA_FILE_PROVIDER_PATHS + &quot; meta-data&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       int type;</span><br><span class="line">       while ((type = in.next()) != END_DOCUMENT) &#123;</span><br><span class="line">           if (type == START_TAG) &#123;</span><br><span class="line">               final String tag = in.getName();</span><br><span class="line"></span><br><span class="line">               final String name = in.getAttributeValue(null, ATTR_NAME);</span><br><span class="line">               String path = in.getAttributeValue(null, ATTR_PATH);</span><br><span class="line"></span><br><span class="line">               File target = null;</span><br><span class="line">               //&quot;root-path&quot;</span><br><span class="line">               if (TAG_ROOT_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = DEVICE_ROOT;</span><br><span class="line">               //&quot;files-path&quot;</span><br><span class="line">               &#125; else if (TAG_FILES_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getFilesDir();</span><br><span class="line">               //&quot;cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_CACHE_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getCacheDir();</span><br><span class="line">               //&quot;external-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL.equals(tag)) &#123;</span><br><span class="line">                   target = Environment.getExternalStorageDirectory();</span><br><span class="line">               //&quot;external-files-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_FILES.equals(tag)) &#123;</span><br><span class="line">                   File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, null);</span><br><span class="line">                   if (externalFilesDirs.length &gt; 0) &#123;</span><br><span class="line">                       //取数组中的第一个</span><br><span class="line">                       target = externalFilesDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_CACHE.equals(tag)) &#123;</span><br><span class="line">                   File[] externalCacheDirs = ContextCompat.getExternalCacheDirs(context);</span><br><span class="line">                   if (externalCacheDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalCacheDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-media-path&quot; L版本以上才有</span><br><span class="line">               &#125; else if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP</span><br><span class="line">                       &amp;&amp; TAG_EXTERNAL_MEDIA.equals(tag)) &#123;</span><br><span class="line">                   File[] externalMediaDirs = context.getExternalMediaDirs();</span><br><span class="line">                   if (externalMediaDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalMediaDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (target != null) &#123;</span><br><span class="line">                   strat.addRoot(name, buildPath(target, path));</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return strat;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 从上面这个方法可以很直观的了解到在AndroidManifest.xml文件中定义provider以及对应的共享文件路径定义xml的解析过程。以及xml中tag与真实文件路径的对应关系。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">        if (takePictureIntent.resolveActivity(getPackageManager()) != null) &#123;</span><br><span class="line">            String filename = new SimpleDateFormat(&quot;yyyyMMdd-HHmmss&quot;, Locale.CHINA)</span><br><span class="line">                    .format(new Date()) + &quot;.png&quot;;</span><br><span class="line">            File file = new File(Environment.getExternalStorageDirectory(), filename);</span><br><span class="line">            mCurrentPhotoPath = file.getAbsolutePath();</span><br><span class="line"></span><br><span class="line">            Uri fileUri;</span><br><span class="line">            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">                fileUri = getUriForFile(context,</span><br><span class="line">                context.getPackageName() +&quot;.fileprovider&quot;, file);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileUri = Uri.fromFile(file);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);</span><br><span class="line">            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);</span><br><span class="line">        &#125;</span><br><span class="line">……</span><br><span class="line">@Override</span><br><span class="line">    protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">        super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">        if (resultCode == RESULT_OK &amp;&amp; requestCode == REQUEST_CODE_TAKE_PHOTO) &#123;</span><br><span class="line">            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));</span><br><span class="line">        &#125;</span><br><span class="line">        // else tip?</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="应用安装"><a href="#应用安装" class="headerlink" title="应用安装"></a>应用安装</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 需要自己修改安装包路径</span><br><span class="line">File file = new File(Environment.getExternalStorageDirectory(),</span><br><span class="line">        &quot;/onlyloveyd/base.apk&quot;);</span><br><span class="line">Intent intent = new Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);    </span><br><span class="line"></span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    intent.setDataAndType(getUriForFile(context, file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    intent.setDataAndType(Uri.fromFile(file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">&#125;</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-22T13:16:56.000Z">2018-06-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android进阶/">Android进阶</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 281 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/22/《Android 进阶（三）》 自定义安全键盘-LazyKeyboard/">《Android 进阶（三）》 自定义安全键盘-LazyKeyboard</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h1><p> <a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>Step 1.</strong> 项目根目录下 build.gradle</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">    ...</span><br><span class="line">    maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 模块目录下build.gradle添加依赖</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyKeyboard:v1.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p> <strong>Step 1.</strong> 添加 <strong>SecurityEditText</strong> 至界面布局。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout</span><br><span class="line">     android:id=&quot;@+id/container&quot;</span><br><span class="line">     ...&quot;&gt;</span><br><span class="line"></span><br><span class="line">     &lt;com.gs.keyboard.SecurityEditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard&quot;</span><br><span class="line">         android:layout_width=&quot;match_parent&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;EditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard_two&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"> &lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 初始化 <strong>SecurityKeyboard</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//配置部分属性</span><br><span class="line">SecurityConfigure configure = new SecurityConfigure()</span><br><span class="line">        .setDefaultKeyboardType(KeyboardType.NUMBER)</span><br><span class="line">        .setLetterEnabled(false);</span><br><span class="line">//第一个参数为包含SecurityEditText的视图，安全键盘的显示以其为锚点</span><br><span class="line">securityKeyboard = new SecurityKeyboard(binding.loginLayout, configure);</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 目前支持自定义选项 </p>
-<pre><code>自定义选项               | 意义                             
-------------------- | ------------------------------- 
-selectedColor       | 选中键盘类型凸显颜色，默认为0xff66aeff       
-unSelectedColor     | 未选中键盘类型凸显颜色，默认为Color.BLACK     
-isNumberEnabled     | 是否显示数字键盘，默认为true               
-isLetterEnabled     | 是否显示字母键盘，默认为true               
-isSymbolEnabled     | 是否显示符号键盘，默认为true               
-defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</code></pre><h2 id="基础效果"><a href="#基础效果" class="headerlink" title="基础效果"></a>基础效果</h2><p> <img src="https://img-blog.csdn.net/20180622210946292" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622210957666" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622211007566" alt="这里写图片描述"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-19T12:58:28.000Z">2018-06-19</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 492 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/19/内网环境下安装部署Docker/">内网环境下安装部署Docker</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大部分公司都有属于自己的内网环境，大部分的集成开发环境也是在内网下部署。最近面临同样的需求，内网CentOS部署GitLab 和 Nexus。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先确定思路，毫无疑问使用Docker是最好的选择，我只用解决Docker的安装问题即可，然后使用Gitlab和Nexus的镜像即可解决问题，后期的延展性也比逐个安装好。<br> 针对Docker的安装，有如下策略</p>
-<ol>
-<li>相同CentOS版本的外网服务器，使用yum –downloadonly命令下载create repo和docker安装的依赖包，然后建立本地源，安装Docker，但是公司并没有CentOS版本完全一致的内外网服务器，所以此方案暂时搁浅； </li>
-<li>利用已经安装好Docker的外网服务器，制作镜像文件，重装内网系统，这个比较费时，暂时不考虑； </li>
-<li>利用一个可同时访问内外网的电脑做代理服务器，实现内网服务器的暂时外网联通，安装完成后，关闭代理服务器。  综上，我优先采用的是方案3。存在一定的安全风险，但是应该问题不大。</li>
-</ol>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p> CCProxy<br> 一台连接内外网的电脑（我使用个人办公电脑）</p>
-<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="简单配置一下CCProxy，参考官方操作手册，相对简单。"><a href="#简单配置一下CCProxy，参考官方操作手册，相对简单。" class="headerlink" title="简单配置一下CCProxy，参考官方操作手册，相对简单。"></a>简单配置一下CCProxy，参考官方操作手册，相对简单。</h3><h3 id="CentOS服务器配置"><a href="#CentOS服务器配置" class="headerlink" title="CentOS服务器配置"></a>CentOS服务器配置</h3><h4 id="全局代理配置"><a href="#全局代理配置" class="headerlink" title="全局代理配置"></a>全局代理配置</h4><p> 端口和IP注意替换成自己代理服务器的端口和IP</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line">http_proxy=http://yourproxy:808/</span><br><span class="line">ftp_proxy=http://yourproxy:808/</span><br><span class="line"><span class="hljs-built_in">export</span> http_proxy</span><br><span class="line"><span class="hljs-built_in">export</span> ftp_proxy</span><br></pre></td></tr></table></figure>
-
-<h4 id="yum代理配置"><a href="#yum代理配置" class="headerlink" title="yum代理配置"></a>yum代理配置</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.conf</span><br><span class="line"></span><br><span class="line">proxy=http://yourproxy:808/</span><br></pre></td></tr></table></figure>
-
-<h4 id="若有其他配置也可以参照上面进行配置"><a href="#若有其他配置也可以参照上面进行配置" class="headerlink" title="若有其他配置也可以参照上面进行配置"></a>若有其他配置也可以参照上面进行配置</h4><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>参考<a href="https://blog.csdn.net/poorkick/article/details/79937182" target="_blank" rel="noopener">前文</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-06-09T00:34:04.000Z">2018-06-09</time>
                 
                 <div class="level-item">
@@ -1038,6 +464,479 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-04-21T13:15:10.000Z">2018-04-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 分钟 读完 (大约 623 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/04/21/CentOS + Docker + Gitlab-ce/">CentOS + Docker + Gitlab-ce</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a><a href></a>Docker安装与启动</h2><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a><a href></a>搜索</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a><a href></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a><a href></a>启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="开机自启动"><a href="#开机自启动" class="headerlink" title="开机自启动"></a><a href></a>开机自启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker.service</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a><a href></a>查看状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a><a href></a>查看版本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a><a href></a>查看信息</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="镜像打包和导入"><a href="#镜像打包和导入" class="headerlink" title="镜像打包和导入"></a><a href></a>镜像打包和导入</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//将名为gitlab/gitlab-ce的image打包成gitlab.tar</span><br><span class="line">docker save -o gitlab.tar gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//导入image</span><br><span class="line">docker load -i gitlab.tar</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Gitlab-ce安装"><a href="#Gitlab-ce安装" class="headerlink" title="Gitlab-ce安装"></a><a href></a>Gitlab-ce安装</h2><h4 id="搜索-1"><a href="#搜索-1" class="headerlink" title="搜索"></a><a href></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search gitlab-ce</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a><a href></a>下载</h4><p> 一般情况下，我都是使用官方镜像或者阿里镜像</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a><a href></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i \</span><br><span class="line">    --hostname centos \</span><br><span class="line">    --publish 443:443 --publish 80:80 --publish 22:22 \</span><br><span class="line">    --name gitlab \</span><br><span class="line">    --restart always \</span><br><span class="line">    --volume /srv/gitlab/config:/etc/gitlab \</span><br><span class="line">    --volume /srv/gitlab/logs:/var/log/gitlab \</span><br><span class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</span><br><span class="line">    docker.io/gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
+
+<p> /srv目录下若没有对应文件夹，可自行创建，也可修改成其他文件路径</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a><a href></a>使用</h4><h5 id="进入Gitlab-Docker环境"><a href="#进入Gitlab-Docker环境" class="headerlink" title="进入Gitlab Docker环境"></a><a href></a>进入Gitlab Docker环境</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a><a href></a>全局配置文件</h5><p> 修改下载地址中的显示IP也在此修改</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="ssh端口修改后处理"><a href="#ssh端口修改后处理" class="headerlink" title="ssh端口修改后处理"></a><a href></a>ssh端口修改后处理</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br><span class="line"></span><br><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line">#修改ssh对应host地址</span><br><span class="line">gitlab_rails[&apos;gitlab_ssh_host&apos;] = &apos;xxx.xxx.xxx.xxx&apos;</span><br><span class="line">#修改ssh映射端口</span><br><span class="line">gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 23</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>注意打开服务器上对应的端口</p>
+</blockquote>
+<h5 id="定时备份以及自动上传ftp服务器"><a href="#定时备份以及自动上传ftp服务器" class="headerlink" title="定时备份以及自动上传ftp服务器"></a><a href></a>定时备份以及自动上传ftp服务器</h5><p> 编辑定时任务（每天凌晨两点备份，三点上传。下面sh文件是自编的一个ftp上传脚本）</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /var/spool/cron/root</span><br><span class="line"></span><br><span class="line">  0  2  *  *  *  docker exec -t gitlab gitlab-rake gitlab:backup:create CRON=1</span><br><span class="line">  0  3  *  *  *  /root/BKConfig/upload_bk.sh</span><br></pre></td></tr></table></figure>
+
+<p> 脚本内容</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">ftp -n&lt;&lt;!</span><br><span class="line">open &lt;ftp服务器地址&gt;</span><br><span class="line">user &lt;username&gt; &lt;password&gt;</span><br><span class="line">binary</span><br><span class="line">lcd &lt;待上传的文件夹路径&gt;</span><br><span class="line">prompt</span><br><span class="line">mput *</span><br><span class="line">close</span><br><span class="line">bye</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
+
+<p> ##阿里云加速器</p>
+<h4 id="寻找属于你的加速器"><a href="#寻找属于你的加速器" class="headerlink" title="寻找属于你的加速器"></a><a href></a>寻找属于你的加速器</h4><p> 阿里云官网，登陆以后，找到“弹性计算“下的“容器镜像服务“，然后你就可以看到属于你自己的“镜像加速器“</p>
+<h4 id="服务器Docker镜像配置"><a href="#服务器Docker镜像配置" class="headerlink" title="服务器Docker镜像配置"></a><a href></a>服务器Docker镜像配置</h4><p> /etc/docker/daemon.json</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;&lt;your accelerate address&gt;&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 替换成你自己的加速器地址即可。</p>
+<h4 id="配置完成后重启Docker"><a href="#配置完成后重启Docker" class="headerlink" title="配置完成后重启Docker"></a><a href></a>配置完成后重启Docker</h4><h4 id="docker-overlay2-空间占满100-时，处理方法"><a href="#docker-overlay2-空间占满100-时，处理方法" class="headerlink" title="docker overlay2 空间占满100%时，处理方法"></a><a href></a>docker overlay2 空间占满100%时，处理方法</h4><p> 原文: <a href="https://unix.stackexchange.com/questions/414483/docker-increase-available-disk-space" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/414483/docker-increase-available-disk-space</a><br> 跟换overlay2目录地址：<br> You could move the docker directory to somewhere under /home and create a symlink /var/lib/docker pointing to the new location. For example:</p>
+<p> shut down docker first<br> mv /var/lib/docker /home/<br> ln -s /home/docker/ /var/lib/</p>
+<p> restart docker now<br> Use another directory if /home/docker already exists.</p>
+<p> Instead of, or as well as, the symlink from /var/lib/docker -&gt; /home/docker, you could also reconfigure docker so that it expects to find its directory under /home rather than /var/lib.</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-04-09T13:48:29.000Z">2018-04-09</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 分钟 读完 (大约 1564 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/04/09/《Android 基础（四十五）》 RecyclerView.ItemDecoration源码浅析/">《Android 基础（四十五）》 RecyclerView.ItemDecoration源码浅析</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> RecyclerView目前来说，是日常开发中使用最多的控件，功能强大而且复杂。而Item Decoration作为RecyclerView开发过程中不可或缺的部分，需要深入的了解一下。</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * An ItemDecoration allows the application to add a special drawing and layout offset</span><br><span class="line"> * to specific item views from the adapter&apos;s data set. This can be useful for drawing dividers</span><br><span class="line"> * between items, highlights, visual grouping boundaries and more.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;All ItemDecorations are drawn in the order they were added, before the item</span><br><span class="line"> * views (in &#123;@link ItemDecoration#onDraw(Canvas, RecyclerView, RecyclerView.State) onDraw()&#125;</span><br><span class="line"> * and after the items (in &#123;@link ItemDecoration#onDrawOver(Canvas, RecyclerView,</span><br><span class="line"> * RecyclerView.State)&#125;.&lt;/p&gt;</span><br><span class="line"> */</span><br><span class="line">public abstract static class ItemDecoration &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.</span><br><span class="line">     * Any content drawn by this method will be drawn before the item views are drawn,</span><br><span class="line">     * and will thus appear underneath the views.</span><br><span class="line">     *</span><br><span class="line">     * @param c Canvas to draw into</span><br><span class="line">     * @param parent RecyclerView this ItemDecoration is drawing into</span><br><span class="line">     * @param state The current state of RecyclerView</span><br><span class="line">     */</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent, State state) &#123;</span><br><span class="line">        onDraw(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Override &#123;@link #onDraw(Canvas, RecyclerView, RecyclerView.State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.</span><br><span class="line">     * Any content drawn by this method will be drawn after the item views are drawn</span><br><span class="line">     * and will thus appear over the views.</span><br><span class="line">     *</span><br><span class="line">     * @param c Canvas to draw into</span><br><span class="line">     * @param parent RecyclerView this ItemDecoration is drawing into</span><br><span class="line">     * @param state The current state of RecyclerView.</span><br><span class="line">     */</span><br><span class="line">    public void onDrawOver(Canvas c, RecyclerView parent, State state) &#123;</span><br><span class="line">        onDrawOver(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Override &#123;@link #onDrawOver(Canvas, RecyclerView, RecyclerView.State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void onDrawOver(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Use &#123;@link #getItemOffsets(Rect, View, RecyclerView, State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) &#123;</span><br><span class="line">        outRect.set(0, 0, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Retrieve any offsets for the given item. Each field of &lt;code&gt;outRect&lt;/code&gt; specifies</span><br><span class="line">     * the number of pixels that the item view should be inset by, similar to padding or margin.</span><br><span class="line">     * The default implementation sets the bounds of outRect to 0 and returns.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * If this ItemDecoration does not affect the positioning of item views, it should set</span><br><span class="line">     * all four fields of &lt;code&gt;outRect&lt;/code&gt; (left, top, right, bottom) to zero</span><br><span class="line">     * before returning.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * If you need to access Adapter for additional data, you can call</span><br><span class="line">     * &#123;@link RecyclerView#getChildAdapterPosition(View)&#125; to get the adapter position of the</span><br><span class="line">     * View.</span><br><span class="line">     *</span><br><span class="line">     * @param outRect Rect to receive the output.</span><br><span class="line">     * @param view    The child view to decorate</span><br><span class="line">     * @param parent  RecyclerView this ItemDecoration is decorating</span><br><span class="line">     * @param state   The current state of RecyclerView.</span><br><span class="line">     */</span><br><span class="line">    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) &#123;</span><br><span class="line">        getItemOffsets(outRect, ((LayoutParams) view.getLayoutParams()).getViewLayoutPosition(),</span><br><span class="line">                parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 注意看英文注释，ItemDecoration是用于装饰RecyclerView的Item的，主要关注如下三个方法</p>
+<h2 id="getItemOffsets"><a href="#getItemOffsets" class="headerlink" title="getItemOffsets"></a>getItemOffsets</h2><pre><code>参数      | 意义                          
+------- | ---------------------------- 
+outRect | ItemView的外围矩形               
+view    | ItemView                    
+parent  | RecyclerView,ItemView的Parent
+state   | RecyclerView的状态             </code></pre><p> 直接这样子说看不出效果，上几张图区分一下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =20;</span><br><span class="line">outRect.bottom =20;</span><br><span class="line"></span><br><span class="line">outRect.left=60;</span><br><span class="line">outRect.right =60;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20180409205118149?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =20;</span><br><span class="line">outRect.bottom =20;</span><br><span class="line"></span><br><span class="line">outRect.left=60;</span><br><span class="line">outRect.right =0;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20180409205141863?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =60;</span><br><span class="line">outRect.bottom =60;</span><br><span class="line"></span><br><span class="line">outRect.left=20;</span><br><span class="line">outRect.right =20;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20180409205207700?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 看上去设置outRect设置top,left,right,bottom有一种padding的效果，但是实际上只是它是ItemView外围的空间，你可以将其理解成RecyclerView针对每个ItemView设置的Padding，而不是ItemView自身的padding。</p>
+<h2 id="onDraw"><a href="#onDraw" class="headerlink" title="onDraw"></a>onDraw</h2><pre><code>参数     | 意义                          
+------ | ---------------------------- 
+c      | RecyclerView的Canvas         
+parent | RecyclerView,ItemView的Parent
+state  | RecyclerView的状态             </code></pre><p> onDraw操作是在RecyclerView所在的画布上绘制内容，也就是在ItemView的背后绘制内容，重叠部分会被ItemView遮挡。<br> 比如我们在Item View的背后画一个圆圈圈。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public YdDividerItemDecoration()&#123;</span><br><span class="line">    mPaint = new Paint();</span><br><span class="line">    mPaint.setColor(Color.GREEN);</span><br><span class="line">    mPaint.setAntiAlias(true);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">    super.onDraw(c, parent, state);</span><br><span class="line">    Logger.d(&quot;yidong -- onDraw&quot;);</span><br><span class="line"></span><br><span class="line">    int width = parent.getWidth();</span><br><span class="line">    int height = parent.getHeight();</span><br><span class="line"></span><br><span class="line">    int radius = Math.min(width, height)/2;</span><br><span class="line"></span><br><span class="line">    c.drawCircle(width/2, height/2, radius, mPaint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20180409210308167?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 这个是为了说明，我们操作的画布是RecyclerView的画布，而不是针对ItemView，所以一般情况下，我们需要针对每个ItemView做操作，比如画分割线，官方给出的DividerItemDecoration的onDraw方法</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">    if (parent.getLayoutManager() == null || mDivider == null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (mOrientation == VERTICAL) &#123;</span><br><span class="line">        drawVertical(c, parent);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        drawHorizontal(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">private void drawVertical(Canvas canvas, RecyclerView parent) &#123;</span><br><span class="line">     canvas.save();</span><br><span class="line">     final int left;</span><br><span class="line">     final int right;</span><br><span class="line">     //noinspection AndroidLintNewApi - NewApi lint fails to handle overrides.</span><br><span class="line">     if (parent.getClipToPadding()) &#123;</span><br><span class="line">         left = parent.getPaddingLeft();</span><br><span class="line">         right = parent.getWidth() - parent.getPaddingRight();</span><br><span class="line">         canvas.clipRect(left, parent.getPaddingTop(), right,</span><br><span class="line">                 parent.getHeight() - parent.getPaddingBottom());</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">         left = 0;</span><br><span class="line">         right = parent.getWidth();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     final int childCount = parent.getChildCount();</span><br><span class="line">     for (int i = 0; i &lt; childCount; i++) &#123;</span><br><span class="line">         final View child = parent.getChildAt(i);</span><br><span class="line">         parent.getDecoratedBoundsWithMargins(child, mBounds);</span><br><span class="line">         final int bottom = mBounds.bottom + Math.round(child.getTranslationY());</span><br><span class="line">         final int top = bottom - mDivider.getIntrinsicHeight();</span><br><span class="line">         mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">         mDivider.draw(canvas);</span><br><span class="line">     &#125;</span><br><span class="line">     canvas.restore();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 可以看出都是便利RecyclerView的Item来做操作的。</p>
+<h2 id="onDrawOver"><a href="#onDrawOver" class="headerlink" title="onDrawOver"></a>onDrawOver</h2><pre><code>参数     | 意义                          
+------ | ---------------------------- 
+c      | RecyclerView的Canvas         
+parent | RecyclerView,ItemView的Parent
+state  | RecyclerView的状态             </code></pre><p> 参数类型和意义和onDraw一模一样，但是效果确实在RecyclerView的ItemView之上。<br> 还是换个圆圈圈，代码和上面一样，只是移动到onDrawOver方法下执行。<br> <img src="https://img-blog.csdn.net/20180409210936439?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 可以很明显的看到，我们的圆圈圈覆盖了ItemView。至于谁覆盖谁，显然是绘制顺序的问题。<br> <img src="https://img-blog.csdn.net/2018040921134330?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 可以看到执行顺序，onDrawOver是在onDraw之后的，但是ItemView的绘制是否在这个两个操作之前，从最后的效果来看，是的，但是需要代码证实。直接看RecyclerView绘制相关的方法即可。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void draw(Canvas c) &#123;</span><br><span class="line">    //这里是RecyclerView的绘制过程，和View的绘制过程类似，先是背景，然后是调用</span><br><span class="line">    //recyclerview的onDraw方法绘制自身，然后通过dispatchDraw来绘制子View</span><br><span class="line">    // 而onDraw(下面)执行的就是ItemDecoration的onDraw方法，所以顺序很明显了。</span><br><span class="line">    //ItemDecoration－&gt; ItemView -&gt; ItemDecoration.onDrawOver</span><br><span class="line">    super.draw(c);</span><br><span class="line">    // 执行ItemDecoration onDrawOver方法，最顶层</span><br><span class="line">    final int count = mItemDecorations.size();</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        mItemDecorations.get(i).onDrawOver(c, this, mState);</span><br><span class="line">    &#125;</span><br><span class="line">    ……</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c) &#123;</span><br><span class="line">    super.onDraw(c);</span><br><span class="line"></span><br><span class="line">    // 执行ItemDecoration的onDraw方法，最底层</span><br><span class="line">    final int count = mItemDecorations.size();</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        mItemDecorations.get(i).onDraw(c, this, mState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p> 看清楚了ItemDecoration的实现原理，具体通过什么方式绘制出什么样的图形，应该只是设计和时间的问题，Github上有不错的一些实现，大家有空可以去学习借鉴一下。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-03-07T07:40:32.000Z">2018-03-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 281 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/03/07/《Linux》CentOS7.3 安装MySql/">《Linux》CentOS7.3 安装MySql</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 最近，腾讯云，做活动，购买了一台低配的服务器作为玩具，安装MySql.</p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h3 id="下载mysql的repo源"><a href="#下载mysql的repo源" class="headerlink" title="下载mysql的repo源"></a>下载mysql的repo源</h3><blockquote>
+<p>$ wget <a href="http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="noopener">http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</a></p>
+</blockquote>
+<h3 id="安装mysql-community-release-el7-5-noarch-rpm包"><a href="#安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="安装mysql-community-release-el7-5.noarch.rpm包"></a>安装mysql-community-release-el7-5.noarch.rpm包</h3><blockquote>
+<p>$ sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm</p>
+</blockquote>
+<h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><blockquote>
+<p>$ sudo yum install mysql-server</p>
+<p> 根据提示安装就可以了,不过安装完成后没有密码,需要重置密码</p>
+</blockquote>
+<h3 id="修改owner"><a href="#修改owner" class="headerlink" title="修改owner"></a>修改owner</h3><p> $ sudo chown -R root:root /var/lib/mysql</p>
+<h3 id="重启mysql服务"><a href="#重启mysql服务" class="headerlink" title="重启mysql服务"></a>重启mysql服务</h3><blockquote>
+<p>$ service mysqld restart</p>
+</blockquote>
+<h3 id="登录重置密码："><a href="#登录重置密码：" class="headerlink" title="登录重置密码："></a>登录重置密码：</h3><blockquote>
+<p>$ mysql -u root //直接回车进入mysql控制台<br> mysql &gt; use mysql;<br> mysql &gt; update user set password=password(‘123456’) where user=’root’;<br> mysql &gt; exit;</p>
+</blockquote>
+<h3 id="配置云服务器安全组，打开3306端口"><a href="#配置云服务器安全组，打开3306端口" class="headerlink" title="配置云服务器安全组，打开3306端口"></a>配置云服务器安全组，打开3306端口</h3><h3 id="配置数据库可远程连接"><a href="#配置数据库可远程连接" class="headerlink" title="配置数据库可远程连接"></a>配置数据库可远程连接</h3><h3 id="数据库授权"><a href="#数据库授权" class="headerlink" title="数据库授权"></a>数据库授权</h3><blockquote>
+<p>$ mysql -u root //直接回车进入mysql控制台<br> mysql &gt; use mysql;<br> mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;</p>
+<p> 远程连接数据库的时候需要输入用户名和密码<br> 用户名：root<br> 密码:123456<br> 指点ip:%代表所有Ip,此处也可以输入Ip来指定Ip</p>
+</blockquote>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-02-25T10:24:05.000Z">2018-02-25</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 326 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/02/25/WanAndroidClient/">WanAndroidClient</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 鸿神的<a href="http://wanandroid.com/" target="_blank" rel="noopener">WanAndroid</a>网站后台API已经开放。具体接口详情参考博文：<br> <a href="http://www.wanandroid.com/blog/show/2" target="_blank" rel="noopener">http://www.wanandroid.com/blog/show/2</a><br> 所以，对于不熟悉Kotlin的我而言，借此机会练习一下。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/02/25/WanAndroidClient/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-01-27T14:41:49.000Z">2018-01-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1204 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/01/27/《Android开源库》 Retrofit & WebService/">《Android开源库》 Retrofit &amp; WebService</a>
+            
+        </h1>
+        <div class="content">
+            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/79183920" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/79183920</a>   </p>
+<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 最近工作中需要使用到WebService接口，个人比较喜欢Restful的接口风格，对WebService不是很了解。</p>
+<blockquote>
+<p>Web Service也叫XML Web Service WebService是一种可以接收从Internet或者Intranet上的其它系统中传递过来的请求，轻量级的独立的通讯技术。是:通过SOAP在Web上提供的软件服务，使用WSDL文件进行说明，并通过UDDI进行注册。</p>
+<p> 而对于我们移动开发人员而言，它就是一种数据交互的通道。我们需要了解他的请求结构体和响应结构体。</p>
+</blockquote>
+<h2 id="2-WebService调试工具SoapUI"><a href="#2-WebService调试工具SoapUI" class="headerlink" title="2. WebService调试工具SoapUI"></a><a href></a>2. WebService调试工具SoapUI</h2><p> SoapUI是一个开源测试工具，通过soap/http来检查、调用、实现Web Service的功能/负载/符合性测试。该工具既可作为一个单独的测试软件使用，也可利用插件集成到Eclipse，maven2.X，Netbeans 和intellij中使用。SoapUI Pro是SoapUI的商业非开源版本，实现的功能较开源的SoapUI更多。<br> (找不到资源的可以在文章下方留言)<br> <img src="https://img-blog.csdn.net/20180127220625998?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="3-接口分析（以getMobileCodeInfo为例）"><a href="#3-接口分析（以getMobileCodeInfo为例）" class="headerlink" title="3. 接口分析（以getMobileCodeInfo为例）"></a><a href></a>3. 接口分析（以getMobileCodeInfo为例）</h2><p> 以 <a href="http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl" target="_blank" rel="noopener">http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl</a> 为测试例子</p>
+<p> <img src="https://img-blog.csdn.net/20180127220823070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180127220831236?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p> 从上面两个图可以看到我们得请求体和响应体的结构和内容，以XML格式作为数据交互的结构类型。</p>
+<h2 id="4-程序设计"><a href="#4-程序设计" class="headerlink" title="4. 程序设计"></a><a href></a>4. 程序设计</h2><h3 id="4-1-添加依赖"><a href="#4-1-添加依赖" class="headerlink" title="4.1 添加依赖"></a><a href></a>4.1 添加依赖</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.squareup.okhttp3:okhttp:3.8.0&apos;</span><br><span class="line">implementation &apos;com.parkingwang:okhttp3-loginterceptor:0.5&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:retrofit:2.3.0&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:adapter-rxjava2:2.3.0&apos;</span><br><span class="line">implementation(&apos;com.squareup.retrofit2:converter-simplexml:2.3.0&apos;) &#123;</span><br><span class="line">    exclude module: &apos;stax&apos;</span><br><span class="line">    exclude module: &apos;stax-api&apos;</span><br><span class="line">    exclude module: &apos;xpp3&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-2-请求体设计"><a href="#4-2-请求体设计" class="headerlink" title="4.2 请求体设计"></a><a href></a>4.2 请求体设计</h3><p> 从请求体XML结构而言</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:web=&quot;http://WebXml.com.cn/&quot;&gt;</span><br><span class="line">   &lt;soap:Header/&gt;</span><br><span class="line">   &lt;soap:Body&gt;</span><br><span class="line">      &lt;web:getMobileCodeInfo&gt;</span><br><span class="line">         &lt;!--Optional:--&gt;</span><br><span class="line">         </span><br><span class="line">         &lt;!--Optional:--&gt;</span><br><span class="line">         &lt;web:mobileCode&gt;18507152743&lt;/web:mobileCode&gt;</span><br><span class="line">      &lt;/web:getMobileCodeInfo&gt;</span><br><span class="line">   &lt;/soap:Body&gt;</span><br><span class="line">&lt;/soap:Envelope&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 最外层soap:Envelope<br> 其次soap:Body<br> 最后web:getMobileCodeInfo，而web:getMobileCodeInfo中有一个mobileCode我们可以用变量表示，所以创建如下三个类：<br> MobileCodeRequestEnvelope.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Envelope&quot;)</span><br><span class="line">@NamespaceList(&#123;</span><br><span class="line">        @Namespace(prefix = &quot;xsi&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema-instance&quot;),</span><br><span class="line">        @Namespace(prefix = &quot;xsd&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema&quot;),</span><br><span class="line">        @Namespace(prefix = &quot;soap&quot;, reference = &quot;http://www.w3.org/2003/05/soap-envelope&quot;)</span><br><span class="line">&#125;)</span><br><span class="line">public class MobileCodeRequestEnvelope &#123;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;soap:Body&quot;, required = false)</span><br><span class="line">    private MobileCodeRequestBody body;</span><br><span class="line"></span><br><span class="line">    public MobileCodeRequestBody getBody() &#123;</span><br><span class="line">        return body;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBody(MobileCodeRequestBody body) &#123;</span><br><span class="line">        this.body = body;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MobileCodeRequestBody.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Body&quot;, strict = false)</span><br><span class="line">public class MobileCodeRequestBody &#123;</span><br><span class="line">    @Element(name = &quot;getMobileCodeInfo&quot;, required = false)</span><br><span class="line">    private MobileCodeRequestData mMobileCodeRequestData;</span><br><span class="line"></span><br><span class="line">    public MobileCodeRequestData getMobileCodeRequestData() &#123;</span><br><span class="line">        return mMobileCodeRequestData;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeRequestData(</span><br><span class="line">            MobileCodeRequestData mobileCodeRequestData) &#123;</span><br><span class="line">        mMobileCodeRequestData = mobileCodeRequestData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MobileCodeRequestData.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;getMobileCodeInfo&quot;, strict = false)</span><br><span class="line">@Namespace(reference = &quot;http://WebXml.com.cn/&quot;)</span><br><span class="line">public class MobileCodeRequestData &#123;</span><br><span class="line">    @Element(name = &quot;mobileCode&quot;, required = false)</span><br><span class="line">    private String mobileCode;</span><br><span class="line"></span><br><span class="line">    public String getMobileCode() &#123;</span><br><span class="line">        return mobileCode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCode(String mobileCode) &#123;</span><br><span class="line">        this.mobileCode = mobileCode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-3-响应体设计"><a href="#4-3-响应体设计" class="headerlink" title="4.3 响应体设计"></a><a href></a>4.3 响应体设计</h3><p> 从响应体XML而言</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;</span><br><span class="line">   &lt;soap:Body&gt;</span><br><span class="line">      &lt;getMobileCodeInfoResponse xmlns=&quot;http://WebXml.com.cn/&quot;&gt;</span><br><span class="line">         &lt;getMobileCodeInfoResult&gt;18507152743：湖北 武汉 湖北联通GSM卡&lt;/getMobileCodeInfoResult&gt;</span><br><span class="line">      &lt;/getMobileCodeInfoResponse&gt;</span><br><span class="line">   &lt;/soap:Body&gt;</span><br><span class="line">&lt;/soap:Envelope&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 最外层soap:Envelope<br> 其次soap:Body<br> 然后getMobileCodeInfoResponse，最后getMobileCodeInfoResult，我们可以用变量表示，所以创建如下三个类：</p>
+<p> MobileCodeResponseEnvelope.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Envelope&quot;)</span><br><span class="line">@NamespaceList(&#123;</span><br><span class="line">        @Namespace( prefix = &quot;xsi&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema-instance&quot;),</span><br><span class="line">        @Namespace( prefix = &quot;xsd&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema&quot;),</span><br><span class="line">        @Namespace( prefix = &quot;soap&quot;, reference = &quot;http://www.w3.org/2003/05/soap-envelope&quot;)</span><br><span class="line">&#125;)</span><br><span class="line">public class MobileCodeResponseEnvelope &#123;</span><br><span class="line">    @Element(name = &quot;Body&quot;, required = false)</span><br><span class="line">    private MobileCodeResponseBody mMobildCodeResponseBody;</span><br><span class="line"></span><br><span class="line">    public MobileCodeResponseBody getMobildCodeResponseBody() &#123;</span><br><span class="line">        return mMobildCodeResponseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobildCodeResponseBody(</span><br><span class="line">            MobileCodeResponseBody mobildCodeResponseBody) &#123;</span><br><span class="line">        mMobildCodeResponseBody = mobildCodeResponseBody;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MobileCodeResponseBody.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;Body&quot;)</span><br><span class="line">public class MobileCodeResponseBody &#123;</span><br><span class="line">    public MobileCodeResponseInfo getMobileCodeResponseInfo() &#123;</span><br><span class="line">        return mMobileCodeResponseInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeResponseInfo(</span><br><span class="line">            MobileCodeResponseInfo mobileCodeResponseInfo) &#123;</span><br><span class="line">        mMobileCodeResponseInfo = mobileCodeResponseInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;getMobileCodeInfoResponse&quot;, required = false)</span><br><span class="line">    private MobileCodeResponseInfo mMobileCodeResponseInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> MobileCodeResponseInfo.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;getMobileCodeInfoResponse&quot;,strict = false)</span><br><span class="line">public class MobileCodeResponseInfo &#123;</span><br><span class="line"></span><br><span class="line">    public String getMobileCodeResult() &#123;</span><br><span class="line">        return MobileCodeResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeResult(String mobileCodeResult) &#123;</span><br><span class="line">        MobileCodeResult = mobileCodeResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;getMobileCodeInfoResult&quot;, required = false)</span><br><span class="line">    private String MobileCodeResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-4-接口设计"><a href="#4-4-接口设计" class="headerlink" title="4.4 接口设计"></a><a href></a>4.4 接口设计</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface mobileCodeApi &#123;</span><br><span class="line">    @Headers(&#123;</span><br><span class="line">            &quot;Content-Type: text/xml&quot;,</span><br><span class="line">            &quot;Accept-Charset: utf-8&quot;</span><br><span class="line">    &#125;)</span><br><span class="line">    @POST(&quot;MobileCodeWS.asmx&quot;)</span><br><span class="line">    Call&lt;MobileCodeResponseEnvelope&gt; getMobileCodeInfo(</span><br><span class="line">            @Body MobileCodeRequestEnvelope requestEnvelope);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-5-Retrofit创建"><a href="#4-5-Retrofit创建" class="headerlink" title="4.5 Retrofit创建"></a><a href></a>4.5 Retrofit创建</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class Retrofitance &#123;</span><br><span class="line">    private static Strategy strategy = new AnnotationStrategy();</span><br><span class="line">    private static Serializer serializer = new Persister(strategy);</span><br><span class="line"></span><br><span class="line">    private static OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();</span><br><span class="line"></span><br><span class="line">    private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()</span><br><span class="line">            .addConverterFactory(SimpleXmlConverterFactory.create(serializer))</span><br><span class="line">            .baseUrl(Constant.BASE_URL);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T createMobileCodeService(Class&lt;T&gt; serviceClass) &#123;</span><br><span class="line">        okHttpClient.interceptors().add(new Interceptor() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException &#123;</span><br><span class="line">                Request original = chain.request();</span><br><span class="line"></span><br><span class="line">                Request.Builder requestBuilder = original.newBuilder()</span><br><span class="line">                        .header(&quot;Content-Type&quot;, &quot;text/xml;charset=UTF-8&quot;)</span><br><span class="line">                        .method(original.method(), original.body());</span><br><span class="line"></span><br><span class="line">                Request request = requestBuilder.build();</span><br><span class="line">                return chain.proceed(request);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        OkHttpClient client = okHttpClient.connectTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .addInterceptor(new LogInterceptor())</span><br><span class="line">                .writeTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .readTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .build();</span><br><span class="line">        Retrofit retrofit = retrofitBuilder.client(client).build();</span><br><span class="line">        return retrofit.create(serviceClass);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-6-请求数据"><a href="#4-6-请求数据" class="headerlink" title="4.6 请求数据"></a><a href></a>4.6 请求数据</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mobileCodeApi apiService = Retrofitance.createMobileCodeService(mobileCodeApi.class);</span><br><span class="line">MobileCodeRequestEnvelope requestEnvelope = new MobileCodeRequestEnvelope();</span><br><span class="line">MobileCodeRequestBody requestBody = new MobileCodeRequestBody();</span><br><span class="line">MobileCodeRequestData requestData = new MobileCodeRequestData();</span><br><span class="line"></span><br><span class="line">requestData.setMobileCode(&quot;18507152743&quot;);</span><br><span class="line">requestBody.setMobileCodeRequestData(requestData);</span><br><span class="line">requestEnvelope.setBody(requestBody);</span><br><span class="line"></span><br><span class="line">Call&lt;MobileCodeResponseEnvelope&gt; call = apiService.getMobileCodeInfo(requestEnvelope);</span><br><span class="line">call.enqueue(new Callback&lt;MobileCodeResponseEnvelope&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onResponse(Call&lt;MobileCodeResponseEnvelope&gt; call,</span><br><span class="line">            Response&lt;MobileCodeResponseEnvelope&gt; response) &#123;</span><br><span class="line">        MobileCodeResponseEnvelope mobileCodeResponseEnvelope = response.body();</span><br><span class="line">        if (mobileCodeResponseEnvelope != null) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;请求成功&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            String result =</span><br><span class="line">                    mobileCodeResponseEnvelope.getMobildCodeResponseBody()</span><br><span class="line">                            .getMobileCodeResponseInfo().getMobileCodeResult();</span><br><span class="line">            mTvMobileResult.setText(result);</span><br><span class="line">            System.err.println(&quot;yidong -- result = &quot; + result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(Call&lt;MobileCodeResponseEnvelope&gt; call, Throwable t) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- onFailure&quot;);</span><br><span class="line">        Toast.makeText(MainActivity.this, &quot;请求失败&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-7-效果"><a href="#4-7-效果" class="headerlink" title="4.7 效果"></a><a href></a>4.7 效果</h3><p> <img src="https://img-blog.csdn.net/20180127222506868?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="5-源码地址"><a href="#5-源码地址" class="headerlink" title="5. 源码地址"></a><a href></a>5. 源码地址</h2><p> <a href="https://github.com/onlyloveyd/RetrofitWebService" target="_blank" rel="noopener">RetrofitWebService</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-01-22T12:51:38.000Z">2018-01-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Angular/">Angular</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 327 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/01/22/AngularJS小白（1）：开发环境准备/">AngularJS小白（1）：开发环境准备</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-Sublime-Text-3"><a href="#1-Sublime-Text-3" class="headerlink" title="1. Sublime Text 3"></a>1. Sublime Text 3</h2><h3 id="1-1-注册码"><a href="#1-1-注册码" class="headerlink" title="1.1 注册码"></a>1.1 注册码</h3><p> —– BEGIN LICENSE —–<br> TwitterInc<br> 200 User License<br> EA7E-890007<br> 1D77F72E 390CDD93 4DCBA022 FAF60790<br> 61AA12C0 A37081C5 D0316412 4584D136<br> 94D7F7D4 95BC8C1C 527DA828 560BB037<br> D1EDDD8C AE7B379F 50C9D69D B35179EF<br> 2FE898C4 8E4277A8 555CE714 E1FB0E43<br> D5D52613 C3D12E98 BC49967F 7652EED2<br> 9D2D2E61 67610860 6D338B72 5CF95C69<br> E36B85CC 84991F19 7575D828 470A92AB<br> —— END LICENSE ——</p>
+<h3 id="1-2-安装AngularJS提示插件"><a href="#1-2-安装AngularJS提示插件" class="headerlink" title="1. 2 安装AngularJS提示插件"></a>1. 2 安装AngularJS提示插件</h3><h4 id="1-2-1-安装Package-Control"><a href="#1-2-1-安装Package-Control" class="headerlink" title="1.2.1 安装Package Control"></a>1.2.1 安装Package Control</h4><p> 使用Ctrl+`快捷键或者通过View-&gt;Show Console菜单打开命令行，粘贴如下代码</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), &apos;wb&apos;).write(urllib.request.urlopen( &apos;http://sublime.wbond.net/&apos; + pf.replace(&apos; &apos;,&apos;%20&apos;)).read())</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-2-2-点击Preferences-gt-Package-Control菜单，选择install。"><a href="#1-2-2-点击Preferences-gt-Package-Control菜单，选择install。" class="headerlink" title="1.2.2 点击Preferences -&gt; Package Control菜单，选择install。"></a>1.2.2 点击Preferences -&gt; Package Control菜单，选择install。</h4><h4 id="1-2-3-输入AngularJS即可安装插件"><a href="#1-2-3-输入AngularJS即可安装插件" class="headerlink" title="1.2.3 输入AngularJS即可安装插件"></a>1.2.3 输入AngularJS即可安装插件</h4><p> <img src="https://img-blog.csdn.net/20180122203712722?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="2-Node-js安装"><a href="#2-Node-js安装" class="headerlink" title="2. Node.js安装"></a>2. Node.js安装</h2><h2 id="3-Angular-CLI-安装"><a href="#3-Angular-CLI-安装" class="headerlink" title="3. Angular CLI 安装"></a>3. Angular CLI 安装</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @angular/cli</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-创建项目"><a href="#4-创建项目" class="headerlink" title="4. 创建项目"></a>4. 创建项目</h2><p> 创建新项目</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng new my-app</span><br></pre></td></tr></table></figure>
+
+<p> 启动项目</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-app</span><br><span class="line">ng serve --open</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-编辑项目"><a href="#5-编辑项目" class="headerlink" title="5. 编辑项目"></a>5. 编辑项目</h2><p> <img src="https://img-blog.csdn.net/20180122204959242?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180122205112028?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -1128,7 +1027,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -1219,7 +1118,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1259,7 +1158,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -1337,7 +1236,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -1354,18 +1253,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1373,18 +1272,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1392,18 +1291,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1411,18 +1310,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1430,18 +1329,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1465,7 +1364,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1751,7 +1650,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1762,7 +1661,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1773,7 +1672,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1784,7 +1683,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1806,7 +1705,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1829,6 +1728,17 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2001,7 +1911,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2093,6 +2003,13 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2218,7 +2135,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2244,6 +2161,13 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2253,7 +2177,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2428,14 +2352,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2464,18 +2381,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2483,18 +2400,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2502,18 +2419,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2521,18 +2438,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2540,18 +2457,18 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -2575,7 +2492,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2861,7 +2778,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2872,7 +2789,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2883,7 +2800,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2894,7 +2811,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2916,7 +2833,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2939,6 +2856,17 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -3111,7 +3039,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -3203,6 +3131,13 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3328,7 +3263,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3354,6 +3289,13 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3363,7 +3305,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -3538,14 +3480,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

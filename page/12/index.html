@@ -145,7 +145,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-10-16T01:07:18.000Z">2016-10-16</time>
+                <time class="level-item has-text-grey" datetime="2016-09-21T05:34:48.000Z">2016-09-21</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 410 个字)
+                    9 分钟 读完 (大约 1277 个字)
                 </span>
                 
                 
@@ -164,358 +164,23 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/10/16/《Android 基础（二十五）》 View Animation/">《Android 基础（二十五）》 View Animation</a>
+                <a class="has-link-black-ter" href="/2016/09/21/《Android 基础（二十一）》Android 屏幕适配/">《Android 基础（二十一）》Android 屏幕适配</a>
             
         </h1>
         <div class="content">
-            <p>  ###<strong>简介</strong></p>
-<blockquote>
-<p>视图动画，主要包括位移，透明度，旋转和缩放，View本身的属性并没有发生变化，只是在这个视图上添加一些渐变的效果，所以总体而言，视图动画只能实现一些简单的动画效果，属性动画功能更强大。</p>
-</blockquote>
-<p> ###<strong>使用</strong><br> res/anim目录下创建动画资源文件,存放帧动画和渐变动画，主要tag:<br> set, alpha, scale, tranlate, rotate分别对应动画集合，透明动画，缩放动画，位移动画，旋转动画</p>
-<h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:interpolator=&quot;@[package:]anim/interpolator_resource&quot;</span><br><span class="line">    android:shareInterpolator=[&quot;true&quot; | &quot;false&quot;] &gt;//子元素是否共享这个插值器</span><br><span class="line"></span><br><span class="line">    &lt;!--[0.0   ,   1.0] --&gt;</span><br><span class="line">    &lt;alpha</span><br><span class="line">        android:fromAlpha=&quot;float&quot;</span><br><span class="line">        android:toAlpha=&quot;float&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--[0.0, ？]</span><br><span class="line">    &lt;!-- pivotX,pivotY用来控制缩放的中心点--&gt;</span><br><span class="line">    &lt;scale</span><br><span class="line">        android:fromXScale=&quot;float&quot;</span><br><span class="line">        android:toXScale=&quot;float&quot;</span><br><span class="line">        android:fromYScale=&quot;float&quot;</span><br><span class="line">        android:toYScale=&quot;float&quot;</span><br><span class="line">        android:pivotX=&quot;float&quot;</span><br><span class="line">        android:pivotY=&quot;float&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- in pixels relative to the normal position (such as &quot;5&quot;), in percentage relative to the element width (such as &quot;5%&quot;), or in percentage relative to the parent width (such as &quot;5%p&quot;)--&gt;</span><br><span class="line">    &lt;translate</span><br><span class="line">        android:fromXDelta=&quot;float&quot;</span><br><span class="line">        android:toXDelta=&quot;float&quot;</span><br><span class="line">        android:fromYDelta=&quot;float&quot;</span><br><span class="line">        android:toYDelta=&quot;float&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- android:pivotX, android:pivotY ----  n pixels relative to the object&apos;s left edge (such as &quot;5&quot;), in percentage relative to the object&apos;s left edge (such as &quot;5%&quot;), or in percentage relative to the parent container&apos;s left edge (such as &quot;5%p&quot;) --&gt;</span><br><span class="line">    &lt;rotate</span><br><span class="line">        android:fromDegrees=&quot;float&quot;</span><br><span class="line">        android:toDegrees=&quot;float&quot;</span><br><span class="line">        android:pivotX=&quot;float&quot;</span><br><span class="line">        android:pivotY=&quot;float&quot; /&gt;</span><br><span class="line">    &lt;set&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/set&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<p> ####&lt; scale &gt;</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;scale</span><br><span class="line">        android:duration=&quot;2000&quot;//时常(运行代码不要在这里做注释)</span><br><span class="line">        android:pivotX=&quot;50%&quot;</span><br><span class="line">        android:pivotY=&quot;50%&quot;//缩放中心点为视图的中心</span><br><span class="line">        android:fromXScale=&quot;1.0&quot;//起点大小</span><br><span class="line">        android:fromYScale=&quot;1.0&quot;</span><br><span class="line">        android:toXScale=&quot;2.0&quot;//目标大小</span><br><span class="line">        android:toYScale=&quot;2.0&quot; /&gt;</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20161015222745990" alt="这里写图片描述"></p>
-<p> ####&lt; alpha&gt;</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;alpha</span><br><span class="line">        android:duration=&quot;2000&quot;//时常</span><br><span class="line">        android:fromAlpha=&quot;1.0&quot;//起始透明度</span><br><span class="line">        android:interpolator=&quot;@android:anim/accelerate_decelerate_interpolator&quot;//插值</span><br><span class="line">        android:toAlpha=&quot;0.0&quot; /&gt;//目标透明度</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20161015223200335" alt="这里写图片描述"></p>
-<p> ####&lt; rotate&gt;</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;rotate</span><br><span class="line">        android:duration=&quot;2000&quot;//时常</span><br><span class="line">        android:fromDegrees=&quot;0&quot;//起始角度</span><br><span class="line">        android:interpolator=&quot;@android:anim/decelerate_interpolator&quot;//插值</span><br><span class="line">        android:pivotX=&quot;50%&quot;</span><br><span class="line">        android:pivotY=&quot;50%&quot;//旋转中心点为视图中心</span><br><span class="line">        android:toDegrees=&quot;180&quot; /&gt;//目标角度</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20161015223936869" alt="这里写图片描述"></p>
-<p> ####&lt; translate&gt;</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;translate</span><br><span class="line">        android:duration=&quot;2000&quot;//时常</span><br><span class="line">        android:fromXDelta=&quot;0&quot;</span><br><span class="line">        android:fromYDelta=&quot;0&quot;//起始位置相对于视图的位移</span><br><span class="line">        android:interpolator=&quot;@android:anim/accelerate_interpolator&quot;</span><br><span class="line">        android:toXDelta=&quot;300&quot;</span><br><span class="line">        android:toYDelta=&quot;300&quot; /&gt;//目标位置相对于视图的位移</span><br><span class="line">&lt;/set&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20161015224534781" alt="这里写图片描述"></p>
-<p> ####&lt; set&gt;<br> 将上面的代码各种渐变动画全部防止在&lt; set &gt;tag下，实现共同效果</p>
-<p> <img src="https://img-blog.csdn.net/20161015224700655" alt="这里写图片描述"></p>
-<p> ###<strong>备注</strong><br> 代码中加载动画，例如旋转动画：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rotateAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);</span><br><span class="line">imageView.startAnimation(rotateAnim);</span><br></pre></td></tr></table></figure>
-
-
-
+            <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？"><a href="#什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？" class="headerlink" title="什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？"></a>什么是屏幕尺寸、屏幕分辨率、屏幕像素密度？</h3><p> <strong>屏幕尺寸</strong>是指屏幕对角线的长度。单位是英寸，1英寸=2.54厘米</p>
+<p> <strong>屏幕分辨率</strong>是指在横纵向上的像素点数，单位是px，1px=1像素点，一般是纵向像素横向像素，如1280×720</p>
+<p> <strong>屏幕像素密度</strong>是指每英寸上的像素点数，单位是dpi，即“dot per inch”的缩写，像素密度和屏幕尺寸和屏幕分辨率有关</p>
         </div>
         
         
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-09-28T13:23:20.000Z">2016-09-28</time>
-                
+        <div class="level is-mobile">
+            <div class="level-start">
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
+                <a class="button is-size-7 is-light" href="/2016/09/21/《Android 基础（二十一）》Android 屏幕适配/#more">阅读更多</a>
                 </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    8 分钟 读完 (大约 1230 个字)
-                </span>
-                
-                
             </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/09/28/《Android 基础（二十四）》 EditText/">《Android 基础（二十四）》 EditText</a>
-            
-        </h1>
-        <div class="content">
-            <p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>A text field allows the user to type text into your app. It can be either single line or multi-line. Touching a text field places the cursor and automatically displays the keyboard. In addition to typing, text fields allow for a variety of other activities, such as text selection (cut, copy, paste) and data look-up via auto-completion.<br> You can add a text field to you layout with the EditText object. You should usually do so in your XML layout with a &lt; EditText &gt; element.</p>
-</blockquote>
-<blockquote>
-<p>文本区域给用户输入文字提供了方便，它可以是单行的也可以是多行的。触摸一个文本区域获取光标并且自动弹出键盘。除了可以输入文字，文本区域还可以用来执行如文本选中（剪切，复制和粘贴）和通过自动补全实现的数据查询等功能。你可以通过在布局中添加一个EditText对象来实现文本区域，当然也可以在布局文件中添加EditText Tag.<br> <img src="https://img-blog.csdn.net/20160926221316944" alt="这里写图片描述"></p>
-</blockquote>
-<p> ###<strong>指定键盘类型</strong><br> Text fields can have different input types, such as number, date, password, or email address. The type determines what kind of characters are allowed inside the field, and may prompt the virtual keyboard to optimize its layout for frequently used characters.</p>
-<p> You can specify the type of keyboard you want for your EditText object with the android:inputType attribute. For example, if you want the user to input an email address, you should use the textEmailAddress input type:<br> 文本区域有不同的输入类型，如数字，日期，密码或者邮箱地址。输入类型决定了文本区域内允许输入的字符类型，同时也提示着虚拟键盘给用户展示更加常用的字符集合。我们可以通过使用 android:inputType 属性来明确我们的输入框想要的键盘类型。例如，如果你想要输入邮箱地址，你可以使用textEmailAddress输入类型。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;EditText</span><br><span class="line">    android:id=&quot;@+id/email_address&quot;</span><br><span class="line">    android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:hint=&quot;@string/email_hint&quot;</span><br><span class="line">    android:inputType=&quot;textEmailAddress&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>android:inputType  | Notice       
------------------- | ------------- 
-“none”             | 不弹出键盘        
-“text”             | 普通文本键盘       
-                   |              
-“textEmailAddress” | 普通文本键盘，&quot;@&quot;   
-                   |              
-“textUri”          | 普通文本键盘，&quot;/&quot;   
-                   |              
-“number”           | 数字键盘         
-                   |              
-“phone”            | Phone-Style键盘
-                   |              </code></pre><hr>
-<p> ###<strong>控制其他行为</strong><br>  android:inputType属性不仅可以用来控制显示特定的键盘类型，而且还可以用来明确一些键盘的行为，例如是否大写，自动补全或者是拼写建议等。android:inputType使用按位与的方式，所以可以指定多种行为</p>
-<pre><code>android:inputType  | Notice               
------------------- | --------------------- 
-“textCapSentences” | 正常的文本键盘但是每一句话第一个字母大写 
-                   |                      
-“textCapWords”     | 正常文本键盘但是每一个单词的第一个字母大写
-“textAutoCorrect”  | 自动提示拼写错误             
-                   |                      
-“textPassword”     | 输入的文字都变成点点           
-                   |                      
-“textMultiLine”    | 允许输入多行文本，可以换行        </code></pre><h2 id="关于android-inputType属性有很多，上面都只是一些栗子，感觉应该很全了，大家可以自行研究。"><a href="#关于android-inputType属性有很多，上面都只是一些栗子，感觉应该很全了，大家可以自行研究。" class="headerlink" title=" 关于android:inputType属性有很多，上面都只是一些栗子，感觉应该很全了，大家可以自行研究。  "></a> 关于android:inputType属性有很多，上面都只是一些栗子，感觉应该很全了，大家可以自行研究。 <img src="https://img-blog.csdn.net/20160928173014015" alt="这里写图片描述"> </h2><p> ###<strong>指定键盘行为</strong><br> 除了改变键盘的输入类型,Android允许当用户完成输入指定一个动作，出现的操作指定按钮的回车键和动作,如“搜索”或“发送”键。<br> 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;EditText</span><br><span class="line">    android:id=&quot;@+id/search&quot;</span><br><span class="line">    android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:hint=&quot;@string/search_hint&quot;</span><br><span class="line">    android:inputType=&quot;text&quot;</span><br><span class="line">    android:imeOptions=&quot;actionSearch&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 键盘会显示出“搜索”按钮，横屏之后不仅键盘会出现搜索按钮，右侧还会出现对应的字串<br> <img src="https://img-blog.csdn.net/20160928172551391" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20160928210646473" alt="这里写图片描述"><br> 主要是对 android:imeOptions 属性的使用<br> 这么多的行为可供选择，上面只是举一个栗子</p>
-<p> <img src="https://img-blog.csdn.net/20160928172744832" alt="这里写图片描述"></p>
-<hr>
-<p> ###<strong>对键盘中定义的行为的响应</strong><br> 通过android:imeOptions 定义的行为，我们可以对它定义的行为作出响应.我们可以使用TextView.OnEditorActionListener来进行事件的监听和处理。通过如 IME_ACTION_SEND 或者IME_ACTION_SEARCH等事件ID来针对不同的事件行为做出不同的处理。<br> 例如</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">EditText editText = (EditText) findViewById(R.id.search);</span><br><span class="line">editText.setOnEditorActionListener(new OnEditorActionListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) &#123;</span><br><span class="line">        boolean handled = false;</span><br><span class="line">        if (actionId == EditorInfo.IME_ACTION_SEND) &#123;</span><br><span class="line">            sendMessage();</span><br><span class="line">            handled = true;</span><br><span class="line">        &#125;</span><br><span class="line">        return handled;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p> ###<strong>自定义输入完成后键盘行为的标签</strong><br>  android:imeActionLabel属性就是用来设置这个内容的</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;EditText</span><br><span class="line">    android:id=&quot;@+id/launch_codes&quot;</span><br><span class="line">    android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:hint=&quot;@string/enter_launch_codes&quot;</span><br><span class="line">    android:inputType=&quot;number&quot;</span><br><span class="line">    android:imeActionLabel=&quot;启动&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160928210818752" alt="这里写图片描述"></p>
-<hr>
-<p> ###<strong>自动补全建议</strong><br> 使用AutoCompleteTextView</p>
-<p> <em><strong>布局定义</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;AutoCompleteTextView</span><br><span class="line">    android:completionThreshold=&quot;1&quot;//默认是2，这就是为什么默认输入两个字符才能显示出提示信息的原因</span><br><span class="line">    android:id=&quot;@+id/autocomplete_country&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:text=&quot;@android:string/dialog_alert_title&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>代码实现</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">       super.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">       // Get a reference to the AutoCompleteTextView in the layout</span><br><span class="line">       AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocomplete_country);</span><br><span class="line">       // Get the string array</span><br><span class="line">       String[] countries = getResources().getStringArray(R.array.countries_array);</span><br><span class="line">       // Create the adapter and set it to the AutoCompleteTextView</span><br><span class="line">       ArrayAdapter&lt;String&gt; adapter =</span><br><span class="line">               new ArrayAdapter&lt;String&gt;(this, android.R.layout.simple_list_item_1, countries);</span><br><span class="line">       textView.setAdapter(adapter);//设置提示内容</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>提示数组</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;string-array name=&quot;countries_array&quot;&gt;</span><br><span class="line">    &lt;item&gt;Afghanistan&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Albania&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Algeria&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;American Samoa&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Andorra&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Angola&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Anguilla&lt;/item&gt;</span><br><span class="line">    &lt;item&gt;Antarctica&lt;/item&gt;</span><br><span class="line">&lt;/string-array&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160928212141559" alt="这里写图片描述"></p>
-<hr>
-<p> ###<strong>备注</strong><br> 内容主要来自于Android官网教程：<br> <a href="https://developer.android.com/guide/topics/ui/controls/text.html" target="_blank" rel="noopener">https://developer.android.com/guide/topics/ui/controls/text.html</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-09-25T04:51:49.000Z">2016-09-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Android基础/Android-Studio/">Android Studio</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1035 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/09/25/《Android 基础（二十三）》 Android Studio快捷键/">《Android 基础（二十三）》 Android Studio快捷键</a>
-            
-        </h1>
-        <div class="content">
-            <p>  ###<strong>前言</strong><br> Android Studio对于快捷键的设置比较的灵活，开发者在从不同的平台转移到Android Studio进行Android开发的时候，应该都能找到合适的KeyMap和快捷键使用方式，因为AS直接其他平台的快捷键映射或者是自定义快捷键，比较的方便，此文只为记录。</p>
-<p> ###<strong>KeyMap</strong><br> <img src="https://img-blog.csdn.net/20160925105514944" alt="这里写图片描述"><br> 针对不同的平台有不同的映射<br> <img src="https://img-blog.csdn.net/20160925105914399" alt="这里写图片描述"></p>
-<p> 还可以自定义快捷键，右键点击一项，展开菜单，可以设置键盘快捷键和鼠标快捷键<br> <img src="https://img-blog.csdn.net/20160925110016077" alt="这里写图片描述"></p>
-<p> 针对不同的模块，都可以设置快捷键，比如说编辑过程中的一些操作以及IDE上方的主菜单，版本控制等等，尽管快捷键很方便，但是记忆也是比较费劲的，所以记住一些使用概率很高的快捷键基本上就可以很大程度的提高开发效率<br> <img src="https://img-blog.csdn.net/20160925110609839" alt="这里写图片描述"></p>
-<p> ###<strong>常用快捷键</strong></p>
-<pre><code>File             |                       
----------------- | ---------------------- 
-打开Settings       | Ctrl + ALt + S        
-打开Project Struct | Ctrl + ALt + Shift + S
-保存               | Ctrl + S              
-同步               | Ctrl + Y              
-文件比较，选中一个文件后按快捷键 | Ctrl + D              
-快捷创建             | Ctrl + Alt + Insert   
-                 |                       </code></pre><hr>
-<pre><code>Edit             |                       
----------------- | ---------------------- 
-Undor            | Ctrl + Z              
-Redo             | Ctrl + Shift + Z      
-Cut              | Ctrl + X              
-Copy             | Ctrl + C              
-复制路径名            | Ctrl + Shift + C      
-复制引用             | Ctrl + Shift +Alt + C 
-Paste            | Ctrl + V              
-从复制历史中选择后粘贴      | Ctrl + Shift + V      
-删除               | Delete                
-查找               | Ctrl + F              
-替换               | Ctrl + R              
-浏览下一个查询结果        | F3                    
-浏览上一个查询结果        | Shift + F3            
-向下查找当前选中内容       | Ctrl + F3             
-选中所有和当前选中内容的查找结果 | Ctrl + Alt + Shift + J
-添加当前选中对象为下个查找对象  | Alt + J               
-高亮选中对象的引用        | Ctrl + Shift + F7     
-列选中模式开关          | Alt + Shift + Insert  
-全选               | Ctrl + A              
-扩大选中范围           | Ctrl + W              
-缩小选中范围           | Ctrl + Shift + W      
-自动补全             | Ctrl + Shift + Enter  
-显示提示信息           | Ctrl + Shift + Space  
-合并行              | Ctrl + Shift + J      
-复制一行             | Ctrl + D              
-删除一行             | Ctrl + Y              
-选中内容切换大小写        | Ctrl + Shift + U      
-增加缩进             | Tab                   
-减少缩进             | Shift + Tab           </code></pre><p><strong>备注</strong><br> 列选中<br> <img src="https://img-blog.csdn.net/20160925113853037" alt="这里写图片描述"><br> 行选中, 在Column Selection Mode关闭的情况下，按住 Alt 键执行选中，依然可以出现列选中的效果<br> <img src="https://img-blog.csdn.net/20160925113932491" alt="这里写图片描述"></p>
-<hr>
-<pre><code>View      |                        
---------- | ----------------------- 
-JSON View | Meta + Ctrl + Shift + N
-          |                        </code></pre><hr>
-<pre><code>Navigation  |                       
------------ | ---------------------- 
-跳转到行        | Ctrl + G              
-查找类         | Ctrl + N              
-查找文件        | Ctrl + Shift + N      
-查找Symbols   | Ctrl + Shift + Alt + N
-Back        | Ctrl + Alt + 向左箭头     
-Forward     | Ctrl + Alt + 向右箭头     
-上一个编辑过的地方   | Ctrl + Alt + BackSpace
-代码中下一个报错的地方 | F2                    
-代码中上一个报错的地方 | Shift + F2            
-下一个方法       | Alt + 向下箭头            
-上一个方法       | Alt + 向上箭头            </code></pre><hr>
-<pre><code>Code                      |                                         
-------------------------- | ---------------------------------------- 
-可以覆写的方法                   | Ctrl + O                                
-可以覆写的方法                   | Ctrl + I                                
-生成各种东西                    | Alt + Insert                            
-                          | 一些插件提示的内容也可以用过Generate产生，比如如中的GsonFormat
-Surround With             | Ctrl + Alt + T                          
-                          |                                         
-行注释                       | Alt + /                                 
-取消行注释，在执行一次Alt + /        | Alt + /                                 
-插入模板内容                    | Ctrl + J                                
-                          | 这个可以用来快速打log，注释或者通用的方法，比较方便             
-用模板包裹                     | Ctrl + Alt + J                          
-块注释                       | Alt + Shift + /                         
-取消行注释，在执行一次Alt + Shift+ / | Alt  + Shift + /                        
-格式化代码                     | Alt + Shift + L                         
-解决缩进格式错误                  | Alt + Shift + I                         
-快速导入包和删除不要的包              | Alt + Shift + O                         
-Statements上移              | Ctrl + Shift + 向上箭头                     
-Statements下移              | Ctrl + Shift + 向下箭头                     
-行上移                       | Alt+ Shift + 向上箭头                       
-行下移                       | Alt+ Shift + 向下箭头                       </code></pre><hr>
-<pre><code>Build |          
------ | --------- 
-构建项目  | Ctrl + F9</code></pre><hr>
-<pre><code>Run   |                  
------ | ----------------- 
-Run   | Alt + Shift + F10
-Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致整理一些常用的快捷键，整理的过程中发现了一些自己之前不知道的功能，有收获，对今后的开发工作肯定有正向的帮助，如有错误，请指出。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-09-22T13:34:51.000Z">2016-09-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 710 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/09/22/《Android 基础（二十二）》 EditText 无法显示完全以及尝鲜Android  N/">《Android 基础（二十二）》 EditText 无法显示完全以及尝鲜Android  N</a>
-            
-        </h1>
-        <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/52628134" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/52628134</a>   </p>
-<p>  ###<strong>前言</strong><br> 最近将Android Studio更新到了2.2 ,模拟器的Android版本也来到了最新的Nougat。很令人兴奋的一件事情呢！ 对， 我就是这么没出息。文章结尾来几张图。</p>
-<p> ###<strong>问题</strong><br> 最近遇到一个问题，EditText只读的情况下，在ScrollView下无法滚动，原因应该就是滑动事件优先被ScrollView消耗，导致EditText并没有收到滚动事件，导致如是问题</p>
-<p> 解决办法:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">EditText editText = (EditText) findViewById(R.id.EditText01);</span><br><span class="line">EtOne.setOnTouchListener(new OnTouchListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">        if (v.getId() == R.id.comment1) &#123;</span><br><span class="line">            v.getParent().requestDisallowInterceptTouchEvent(true);//组织父节点消耗滑动事件</span><br><span class="line">                switch (event.getAction() &amp; MotionEvent.ACTION_MASK) &#123;</span><br><span class="line">                    case MotionEvent.ACTION_UP:</span><br><span class="line">                        v.getParent().requestDisallowInterceptTouchEvent(false);</span><br><span class="line">                        break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> 这种情况下，EditText应该是可编辑状态，但是我们的要求是只读，也就是无法编辑，这种情况下，如果用户点击到了文本区域内，会弹出输入法，用户便可以直接输入，这个问题如何解决</p>
-<p> 解决办法:</p>
-<ul>
-<li>阻止输入法弹出  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">editText = (EditText) findViewById(R.id.editText);</span><br><span class="line">editText.setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">    public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">        // TODO Auto-generated method stub</span><br><span class="line">        int inType = editText.getInputType(); // backup the input type</span><br><span class="line">        editText.setInputType(InputType.TYPE_NULL); // disable soft input</span><br><span class="line">        editText.onTouchEvent(event); // call native handler</span><br><span class="line">        editText.setInputType(inType); // restore input type</span><br><span class="line">        editText.setSelection(editText.getText().length());</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>阻止输入法弹出  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edittext.setKeyListener(null);</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<blockquote>
-<p>Sets the key listener to be used with this TextView. This can be null<br> to disallow user input. Note that this method has significant and<br> subtle interactions with soft keyboards and other input method:<br> see {@link KeyListener#getInputType() KeyListener.getContentType()}<br> for important details. Calling this method will replace the current<br> content type of the text view with the content type returned by the<br> key listener.</p>
-</blockquote>
-<p> ###<strong>Android Nougat模拟器</strong><br> Android Studio2.2上的模拟器速度还是比较快的。<br> <img src="https://img-blog.csdn.net/20160922211320833" alt="这里写图片描述"><img src="https://img-blog.csdn.net/20160922211335049" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20160922211434331" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20160922211527849" alt="这里写图片描述"></p>
-<p> Google原生的内容依然是那么的干净，清晰，功能强大。模拟器的功能也是比较健全的。<br> N版本具体更新内容，请关注官网：<br> <a href="https://developer.android.com/about/versions/nougat/android-7.0.html" target="_blank" rel="noopener">https://developer.android.com/about/versions/nougat/android-7.0.html</a></p>
-<p> ###<strong>Android Studio 2.2</strong><br> 正题界面风格没有很大的变化，图标有变化，给我印象最深的是UI编辑器</p>
-<p> <img src="https://img-blog.csdn.net/20160922213211107" alt="这里写图片描述"></p>
-<p> 编辑器中多了一个视图，上方多了一些按钮，右侧的属性可能更丰富了吧，之前我都是全部手写的，真是浪费好的开发工具。具体的更新内容请关注官网：<br> <a href="https://developer.android.com/studio/releases/index.html" target="_blank" rel="noopener">https://developer.android.com/studio/releases/index.html</a></p>
-
-        </div>
-        
         
         
     </div>
@@ -882,6 +547,238 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-09-02T05:32:30.000Z">2016-09-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 744 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/09/02/《Android 应用 之路》 MPAndroidChart~LineChart/">《Android 应用 之路》 MPAndroidChart~LineChart</a>
+            
+        </h1>
+        <div class="content">
+            <p>  ###简介<br> <a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="noopener">MPAndroidChart</a>是PhilJay大神给Android开发者带来的福利。MPAndroidChart是一个功能强大并且使用灵活的图表开源库，支持Android和IOS两种，这里我们暂时只关注Android版本。</p>
+<p> ###Wiki<br> <a href="https://github.com/PhilJay/MPAndroidChart/wiki" target="_blank" rel="noopener">https://github.com/PhilJay/MPAndroidChart/wiki</a></p>
+<p> ###Javadoc<br> <a href="https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/" target="_blank" rel="noopener">https://jitpack.io/com/github/PhilJay/MPAndroidChart/v3.0.0-beta1/javadoc/</a></p>
+<p> ###今日之图~LineChart<br> 先看下效果压压惊，右边的图为左边的图横向拉伸后的效果<br> <img src="https://img-blog.csdn.net/20160902131211001" alt="这里写图片描述"> <img src="https://img-blog.csdn.net/20160902131305188" alt="这里写图片描述"></p>
+<p> <em><strong>布局文件</strong></em></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;com.example.mpandroidchartdemo.MainActivity&quot; &gt;</span><br><span class="line">    &lt;com.github.mikephil.charting.charts.LineChart</span><br><span class="line">        android:id=&quot;@+id/chart&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot; /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 对于Chart,可以采用布局文件添加方式，也可以采用代码添加方式。</p>
+<p> <em><strong>代码</strong></em></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">requestWindowFeature(Window.FEATURE_NO_TITLE);//no title，去掉actionbar</span><br><span class="line">setContentView(R.layout.activity_main);//设置主视图</span><br><span class="line"></span><br><span class="line">chart = (LineChart) findViewById(R.id.chart);</span><br><span class="line"></span><br><span class="line">xVals = new ArrayList&lt;&gt;();</span><br><span class="line">yVals = new ArrayList&lt;&gt;();</span><br><span class="line">random = new Random();//产生随机数字</span><br><span class="line"></span><br><span class="line">for(int i = 0 ; i&lt;12; i++) &#123;</span><br><span class="line">	float x = random.nextInt(10000);//获取value值</span><br><span class="line">	yVals.add(new Entry(x, i));//创建Entry并且添加到Y值的list中，Y轴的值，一个entry代表一个显示的值</span><br><span class="line">	xVals.add( (i+1) + &quot;月&quot;);//横坐标显示xxx月</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dataSet = new LineDataSet(yVals, &quot;金额&quot;);//创建数据集并设置标签</span><br><span class="line"></span><br><span class="line">dataSet.setColors(ColorTemplate.COLORFUL_COLORS);//设置数据集显示的颜色，预支颜色模版ColorTemplate，也可以设置单一颜色和colors</span><br><span class="line"></span><br><span class="line">dataSet.setHighlightEnabled(true);//设置高亮</span><br><span class="line">dataSet.setValueTextColor(Color.BLUE);//设置Value值的显示文字颜色，字体大小和字体种类，这里我没有添加对应字体可以自己修改</span><br><span class="line"></span><br><span class="line">dataSet.setValueTextSize(10.0f);</span><br><span class="line">dataSet.setValueTypeface(null);</span><br><span class="line"></span><br><span class="line">data = new LineData(xVals, dataSet);//创建LineData,x轴List和Y轴数据集为参数</span><br><span class="line"></span><br><span class="line">chart.setData(data);//给图表添加数据</span><br><span class="line">chart.setDescription(&quot;收支状态&quot;);//设置图表描述的内容位置，字体等等</span><br><span class="line">chart.setDescriptionColor(Color.YELLOW);</span><br><span class="line">chart.setDescriptionTextSize(15f);</span><br><span class="line">chart.setDescriptionPosition(540, 40);</span><br><span class="line"></span><br><span class="line">chart.getXAxis().setPosition(XAxisPosition.BOTTOM);//设置X轴的显示位置，通过XAxisPosition枚举类型来设置</span><br><span class="line">chart.getXAxis().setAxisMinValue(0.0f);//设置X轴的最小值</span><br><span class="line">chart.getAxisRight().setEnabled(false);//关闭右边的Y轴，因为默认有两条，左边一条，右边一条，MPAndroidChart中有setEnabled方法的元素基本上都是使能的作用</span><br><span class="line">chart.animateY(3000);//动画效果，MPAndroidChart中还有很多动画效果可以挖掘</span><br><span class="line"></span><br><span class="line">//当值被选中的时候，执行操作显示一个Toast</span><br><span class="line">chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() &#123;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onValueSelected(Entry e, int dataSetIndex, Highlight h) &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">				Toast.makeText(MainActivity.this, String.valueOf(e.getVal()), Toast.LENGTH_SHORT).show();</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			@Override</span><br><span class="line">			public void onNothingSelected() &#123;</span><br><span class="line">				// TODO Auto-generated method stub</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> ###备注<br> 中午抽空看下MPAndroidChart并记录下简单的入门，刚开始，有兴趣的可以直接去GitHub上看下Wiki，当然也有人翻译了这篇英文Wiki，直接搜索MPAndroidChart应该就都可以看到了。至于使用方式，大家应该都很清楚，引用jar包或者下载源码编译吧，我是懒人，前者可选。<br> 世界牛人太多，跟不上脚步了。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-29T13:19:09.000Z">2016-08-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    8 分钟 读完 (大约 1229 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/29/《Android 应用 之路》 百度地图API使用（3）/">《Android 应用 之路》 百度地图API使用（3）</a>
+            
+        </h1>
+        <div class="content">
+            <p>  ###前言<br> 上一篇讲解并实践了百度地图基本显示，地图类型，实时交通图，热力图，地图控制和手势控制，今天看下在地图上添加view和覆盖物。</p>
+<blockquote>
+<p>地图Logo不允许遮挡，可通过mBaiduMap.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);方法可以设置地图边界区域，来避免UI遮挡。<br> 其中参数paddingLeft、paddingTop、paddingRight、paddingBottom参数表示距离屏幕边框的左、上、右、下边距的距离，单位为屏幕坐标的像素密度。</p>
+<p> —————–&gt;利用这个来添加自定义的内容</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>标注覆盖物 </li>
+<li>几何图形覆盖物 </li>
+<li>文字覆盖物 </li>
+<li>弹出窗覆盖物  </li>
+</ul>
+</blockquote>
+</blockquote>
+<p> ###内容<br> 地图上添加View<br> 由于地图的Logo不允许被遮挡，百度自然会想办法针对一些开发者场景作出自己的调整，比如上面所说的setPadding()或者setViewPadding()一样好使，具体的使用分为两步：<br> 第一步，</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mBaiduMap.setPadding(0, 0, 0, 200);</span><br></pre></td></tr></table></figure>
+
+<p> 第二步，</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void addView() &#123;</span><br><span class="line">    TextView textView = new TextView(this);</span><br><span class="line">    textView.setText(&quot;这是用户自定义的View,这个时候logo和底部的一些内容会向上移动，因为MapView设置了底部Padding&quot;);</span><br><span class="line">    textView.setBackgroundResource(R.color.colorPrimary); //创建一个TextView然后往底部放置，官方Demo如是操作</span><br><span class="line">    MapViewLayoutParams.Builder builder = new MapViewLayoutParams.Builder();</span><br><span class="line">    builder.layoutMode(MapViewLayoutParams.ELayoutMode.absoluteMode);</span><br><span class="line">    builder.width(bmapView.getWidth());</span><br><span class="line">    builder.height(200);</span><br><span class="line">    builder.point(new Point(0, bmapView.getHeight()));</span><br><span class="line">    builder.align(MapViewLayoutParams.ALIGN_LEFT, MapViewLayoutParams.ALIGN_BOTTOM);</span><br><span class="line">    bmapView.addView(textView, builder.build());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这样子就在底部添加了一个TextView，当然想添加其他的View自然也是可行的，具体效果图往下看。</p>
+<hr>
+<p> 地理编码，标注覆盖物和弹出窗覆盖物<br> 利用标注覆盖物在地图上的特定位置添加标注，然后给标注覆盖物设置点击监听展示弹出覆盖物</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">//这个是“打点”按钮的点击事件，点击事件发生后，地理编码对象执行Address-&gt;location的解析，解析结果返回之后，拿到对应的点的经纬度，也就是LatLng实例和对应的地址信息，然后执行addMarker操作</span><br><span class="line">private void addPointByEditText() &#123;</span><br><span class="line">    String placename = etPoint.getText().toString();</span><br><span class="line">    final GeoCoder geo = GeoCoder.newInstance();</span><br><span class="line">    geo.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onGetGeoCodeResult(GeoCodeResult geoCodeResult) &#123;</span><br><span class="line">            if (geoCodeResult.getLocation() != null) &#123;</span><br><span class="line">                addMarker(geoCodeResult.getLocation() , geoCodeResult.getAddress());</span><br><span class="line">                //addText(geoCodeResult.getLocation(), &quot;看过来 :&quot; + geoCodeResult.getAddress());//这个是后面添加文字覆盖物的时候使用到的</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Toast.makeText(MainActivity.this, &quot; No Result of GeoCoder! Sorry&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onGetReverseGeoCodeResult(ReverseGeoCodeResult reverseGeoCodeResult) &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    geo.geocode(new GeoCodeOption().address(placename).city(placename));</span><br><span class="line">&#125;</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//添加标注物</span><br><span class="line">private void addMarker(LatLng point, String address) &#123;</span><br><span class="line">    //定义Maker坐标点</span><br><span class="line">    //LatLng point = new LatLng(39.963175, 116.400244);</span><br><span class="line">    //构建MarkerOption，用于在地图上添加Marker</span><br><span class="line">    Bundle bundle = new Bundle();</span><br><span class="line">    bundle.putParcelable(&quot;LATLNG&quot;, point);//传递Bundle对象，方便后面读取对应的info来创建pop window</span><br><span class="line">    bundle.putString(&quot;ADDRESS&quot;, address);</span><br><span class="line">    OverlayOptions option = new MarkerOptions()</span><br><span class="line">            .position(point)</span><br><span class="line">            .icon(bitmap).extraInfo(bundle);</span><br><span class="line">    //在地图上添加Marker，并显示</span><br><span class="line">    mBaiduMap.addOverlay(option);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//设置标注覆盖物的点击事件监听</span><br><span class="line">mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean onMarkerClick(Marker marker) &#123;</span><br><span class="line">		//这里是MarkerOption创建的时候传入的点坐标和对应的地址信息</span><br><span class="line">        if (marker.getExtraInfo() != null) &#123;</span><br><span class="line">            LatLng point = marker.getExtraInfo().getParcelable(&quot;LATLNG&quot;);</span><br><span class="line">            String address = marker.getExtraInfo().getString(&quot;ADDRESS&quot;);</span><br><span class="line">            addPop(point, address);</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//添加弹出窗覆盖物</span><br><span class="line">private void addPop(LatLng point, String message) &#123;</span><br><span class="line">    //创建InfoWindow展示的view</span><br><span class="line">    Button button = new Button(getApplicationContext());</span><br><span class="line">    button.setBackgroundResource(R.drawable.marker_info_bg);</span><br><span class="line">    button.setTextColor(Color.WHITE);</span><br><span class="line">    button.setText(message);</span><br><span class="line"></span><br><span class="line">    //创建InfoWindow , 传入 view， 地理坐标， y 轴偏移量</span><br><span class="line">    InfoWindow mInfoWindow = new InfoWindow(button, point, -47);</span><br><span class="line">    //显示InfoWindow</span><br><span class="line">    mBaiduMap.showInfoWindow(mInfoWindow);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 实际效果图：<br> <img src="https://img-blog.csdn.net/20160829210935367" alt="这里写图片描述"></p>
+<hr>
+<p> 文字覆盖物<br> 文字覆盖物主要就是在地图上添加一些字串， 用上面的代码，将标注覆盖物改成文字覆盖物</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//设置文字覆盖物</span><br><span class="line">private void addText(LatLng point, String message) &#123;</span><br><span class="line"></span><br><span class="line">    //构建文字Option对象，用于在地图上添加文字</span><br><span class="line">    OverlayOptions textOption = new TextOptions()</span><br><span class="line">            .bgColor(0xAAFFFF00)</span><br><span class="line">            .fontSize(35)</span><br><span class="line">            .fontColor(0xFFFF00FF)</span><br><span class="line">            .text(message)</span><br><span class="line">            .rotate(-30)</span><br><span class="line">            .position(point);</span><br><span class="line">    //在地图上添加该文字对象并显示</span><br><span class="line">    mBaiduMap.addOverlay(textOption);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 实际效果图：<br> <img src="https://img-blog.csdn.net/20160829211151869" alt="这里写图片描述"></p>
+<hr>
+<p> 行政区边界搜索和多边形覆盖物<br> 利用DistrictSearch和PolyOverlay，实现圈出行政区域的效果</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">mDistrictSearch = DistrictSearch.newInstance();//创建行政区域查询的实例</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">//添加多边形区域</span><br><span class="line">private void addPoly(String cityname) &#123;</span><br><span class="line">	//建立搜索条件</span><br><span class="line">    DistrictSearchOption option = new DistrictSearchOption().cityName(cityname).districtName(cityname);</span><br><span class="line">    </span><br><span class="line">    //设置搜索监听事件</span><br><span class="line">    mDistrictSearch.setOnDistrictSearchListener(new OnGetDistricSearchResultListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onGetDistrictResult(DistrictResult districtResult) &#123;</span><br><span class="line">            if (districtResult.error == SearchResult.ERRORNO.NO_ERROR) &#123;</span><br><span class="line">                List&lt;List&lt;LatLng&gt;&gt; pointsList = districtResult.getPolylines();</span><br><span class="line">                if (pointsList == null) return;</span><br><span class="line">                //地理边界对象</span><br><span class="line">                LatLngBounds.Builder builder = new LatLngBounds.Builder();</span><br><span class="line">                for (List&lt;LatLng&gt; polyline : pointsList) &#123;</span><br><span class="line">                    OverlayOptions ooPolyline11 = new PolylineOptions().width(10)</span><br><span class="line">                            .points(polyline).dottedLine(true).color(Color.RED);</span><br><span class="line">                    mBaiduMap.addOverlay(ooPolyline11);//添加OverLay</span><br><span class="line"></span><br><span class="line">                    OverlayOptions ooPolygon = new PolygonOptions().points(polyline)</span><br><span class="line">                            .stroke(new Stroke(5, 0xAA00FF88)).fillColor(0xAAFFFF00);</span><br><span class="line">                    mBaiduMap.addOverlay(ooPolygon);//添加OverLay</span><br><span class="line">                    for (LatLng latLng : polyline) &#123;</span><br><span class="line">                        builder.include(latLng);//包含这些点</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    mDistrictSearch.searchDistrict(option);//执行行政区域的搜索</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 实际效果图：<br> <img src="https://img-blog.csdn.net/20160829211745876" alt="这里写图片描述"></p>
+<p> ###备注<br> 今天先看到这里，有时间接着跟~</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-08-27T14:57:56.000Z">2016-08-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1034 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/08/27/《Android 应用 之路》 百度地图API使用（2）/">《Android 应用 之路》 百度地图API使用（2）</a>
+            
+        </h1>
+        <div class="content">
+            <p>  ###简介<br> 上一篇只是大致的提一下百度地图API的Android SDK的基本内容，然后抄袭一个官网上的Demo，今天看一下百度地图的第一部分，地图类型和基本的显示。</p>
+<p> ###简单实战<br> 不同类型地图的显示</p>
+<p> <img src="https://img-blog.csdn.net/20160827215125210" alt="这里写图片描述"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//设置地图类型</span><br><span class="line">//public static final int MAP_TYPE_NORMAL = 1;  普通地图</span><br><span class="line">//public static final int MAP_TYPE_SATELLITE = 2; 卫星地图</span><br><span class="line">//public static final int MAP_TYPE_NONE = 3; 空白地图</span><br><span class="line">private void setMapType(int type) &#123;</span><br><span class="line">    if (mBaiduMap != null) &#123;</span><br><span class="line">        mBaiduMap.setMapType(type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>空白地图  </p>
+<p> <img src="https://img-blog.csdn.net/20160827215834085" alt="这里写图片描述">  </p>
+</li>
+</ul>
+<ul>
+<li><p>正常地图  </p>
+<p> <img src="https://img-blog.csdn.net/20160827215856562" alt="这里写图片描述">  </p>
+</li>
+</ul>
+<ul>
+<li><p>卫星地图  </p>
+<p> <img src="https://img-blog.csdn.net/20160827215921188" alt="这里写图片描述">  </p>
+</li>
+</ul>
+<hr>
+<p> 实时交通图和百度城市热力图</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  实时交通图</span><br><span class="line">  false- &gt; 不开启</span><br><span class="line">  true -&gt; 开启</span><br><span class="line"> */</span><br><span class="line">private void setTrafficMap(boolean enabled) &#123;</span><br><span class="line">    if (mBaiduMap != null) &#123;</span><br><span class="line">        mBaiduMap.setTrafficEnabled(enabled);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> 百度城市热力图</span><br><span class="line"> false- &gt; 不开启</span><br><span class="line"> true -&gt; 开启</span><br><span class="line">*/</span><br><span class="line">private void setHeatMap(boolean enabled) &#123;</span><br><span class="line">    if (mBaiduMap != null) &#123;</span><br><span class="line">        mBaiduMap.setBaiduHeatMapEnabled(enabled);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>实时交通图  </li>
+</ul>
+<pre><code>![这里写图片描述](https://img-blog.csdn.net/20160827220439569)  
+(此图是在地图类型为空白地图时显示的)  </code></pre><ul>
+<li>百度城市交通热力图  </li>
+</ul>
+<pre><code>![这里写图片描述](https://img-blog.csdn.net/20160827220640947)  </code></pre><hr>
+<p> 地图控制和手势</p>
+<blockquote>
+<p>地图控制<br> 地图Logo<br> 默认在左下角显示，不可以移除。<br> 通过mMapView.setLogoPosition(LogoPosition.logoPostionleftBottom);方法，使用枚举类型控制显示的位置，共支持6个显示位置(左下，中下，右下，左上，中上，右上)。<br> 地图Logo不允许遮挡，可通过mBaiduMap.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);方法可以设置地图边界区域，来避免UI遮挡。<br> 其中参数paddingLeft、paddingTop、paddingRight、paddingBottom参数表示距离屏幕边框的左、上、右、下边距的距离，单位为屏幕坐标的像素密度。<br> 指南针<br> 指南针默认为开启状态，可以关闭显示 。<br> 比例尺<br> 比例尺默认为开启状态，可以关闭显示。同时支持设置MaxZoomLevel和minZoomLevel，可通过mMapView.getMapLevel获取当前地图级别下比例尺所表示的距离大小。</p>
+<p> 具体的显示位置和内容如下<br> <img src="https://img-blog.csdn.net/20160827225507232" alt="这里写图片描述"><br> 备注：指南针旋转地图的时候才会出现，一开始加载的时候是不会出现的</p>
+</blockquote>
+<blockquote>
+<p>地图平移<br> 控<br> 制是否启用或禁用平移的功能，默认开启。如果启用，则用户可以平移地图<br> 地图缩放<br> 控制是否启用或禁用缩放手势，默认开启。如果启用，用户可以双指点击或缩放地图视图。<br> 地图俯视（3D）<br> 控制是否启用或禁用俯视（3D）功能，默认开启。如果启用，则用户可使用双指 向下或向上滑动到俯视图。<br> 地图旋转<br> 控制是否启用或禁用地图旋转功能，默认开启。如果启用，则用户可使用双指 旋转来旋转地图。<br> 禁止所有手势<br> 控制是否一并禁止所有手势，默认关闭。如果启用，所有手势都将被禁用。</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">mUiSettings = mBaiduMap.getUiSettings();</span><br><span class="line">setSizeByBoolean(fabZoom, mUiSettings.isZoomGesturesEnabled());</span><br><span class="line">setSizeByBoolean(fabZoom, mUiSettings.isZoomGesturesEnabled());</span><br><span class="line">setSizeByBoolean(fabScroll, mUiSettings.isScrollGesturesEnabled());</span><br><span class="line">setSizeByBoolean(fabOverlook, mUiSettings.isOverlookingGesturesEnabled());</span><br><span class="line">setSizeByBoolean(fabRotate, mUiSettings.isRotateGesturesEnabled());</span><br><span class="line">setSizeByBoolean(fabCompass, mUiSettings.isCompassEnabled());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">private void setSizeByBoolean(FloatingActionButton fab , boolean bl) &#123;</span><br><span class="line">    if(bl) &#123;</span><br><span class="line">        fab.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        fab.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void onClick(View view) &#123;</span><br><span class="line">...</span><br><span class="line">case R.id.fab_zoom:</span><br><span class="line">        if (mUiSettings.isZoomGesturesEnabled()) &#123;</span><br><span class="line">            mUiSettings.setZoomGesturesEnabled(false);</span><br><span class="line">            fabZoom.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mUiSettings.setZoomGesturesEnabled(true);</span><br><span class="line">            fabZoom.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">    case R.id.fab_scroll:</span><br><span class="line">        if (mUiSettings.isScrollGesturesEnabled()) &#123;</span><br><span class="line">            mUiSettings.setScrollGesturesEnabled(false);</span><br><span class="line">            fabScroll.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mUiSettings.setScrollGesturesEnabled(true);</span><br><span class="line">            fabScroll.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">    case R.id.fab_rotate:</span><br><span class="line">        if (mUiSettings.isRotateGesturesEnabled()) &#123;</span><br><span class="line">            mUiSettings.setRotateGesturesEnabled(false);</span><br><span class="line">            fabRotate.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mUiSettings.setRotateGesturesEnabled(true);</span><br><span class="line">            fabRotate.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">    case R.id.fab_overlook:</span><br><span class="line">        if (mUiSettings.isOverlookingGesturesEnabled()) &#123;</span><br><span class="line">            mUiSettings.setOverlookingGesturesEnabled(false);</span><br><span class="line">            fabOverlook.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mUiSettings.setOverlookingGesturesEnabled(true);</span><br><span class="line">            fabOverlook.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">    case R.id.fab_compass:</span><br><span class="line">        if (mUiSettings.isCompassEnabled()) &#123;</span><br><span class="line">            mUiSettings.setCompassEnabled(false);</span><br><span class="line">            fabCompass.setButtonSize(FloatingActionButton.SIZE_MINI);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mUiSettings.setCompassEnabled(true);</span><br><span class="line">            fabCompass.setButtonSize(FloatingActionButton.SIZE_NORMAL);</span><br><span class="line">        &#125;</span><br><span class="line">        break;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>实际结果<br> <img src="https://img-blog.csdn.net/20160827224619339" alt="这里写图片描述"><br> (好像并不能从图里看出什么呵 - - !)  </li>
+</ul>
+<hr>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -974,7 +871,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -1065,7 +962,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1105,7 +1002,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -1183,7 +1080,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -1200,18 +1097,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1219,18 +1116,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1238,18 +1135,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1257,18 +1154,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1276,18 +1173,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1311,7 +1208,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1597,7 +1494,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1608,7 +1505,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1619,7 +1516,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1630,7 +1527,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1652,7 +1549,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1675,6 +1572,17 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1847,7 +1755,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1939,6 +1847,13 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2064,7 +1979,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2090,6 +2005,13 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2099,7 +2021,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2274,14 +2196,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2310,18 +2225,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2329,18 +2244,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2348,18 +2263,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2367,18 +2282,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2386,18 +2301,18 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -2421,7 +2336,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2707,7 +2622,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2718,7 +2633,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2729,7 +2644,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2740,7 +2655,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2762,7 +2677,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2785,6 +2700,17 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2957,7 +2883,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -3049,6 +2975,13 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3174,7 +3107,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3200,6 +3133,13 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3209,7 +3149,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -3384,14 +3324,7 @@ Debug | Alt + Shift + F9 </code></pre><p>###<strong>备注</strong><br> 大致�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

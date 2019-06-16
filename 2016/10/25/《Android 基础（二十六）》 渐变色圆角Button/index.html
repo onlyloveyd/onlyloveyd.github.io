@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="###简介 总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。  ###自定义属性 位置：res/values/attrs.xml 格式： 123456&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encodi">
+    <meta name="description" content="简介总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。">
 <meta name="keywords" content="自定义View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（二十六）》 渐变色圆角Button">
 <meta property="og:url" content="http://yoursite.com/2016/10/25/《Android 基础（二十六）》 渐变色圆角Button/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="###简介 总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。  ###自定义属性 位置：res/values/attrs.xml 格式： 123456&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encodi">
+<meta property="og:description" content="简介总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-14T11:22:12.039Z">
+<meta property="og:updated_time" content="2019-06-16T05:37:48.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（二十六）》 渐变色圆角Button">
-<meta name="twitter:description" content="###简介 总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。  ###自定义属性 位置：res/values/attrs.xml 格式： 123456&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encodi">
+<meta name="twitter:description" content="简介总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 553 个字)
+                    4 分钟 读完 (大约 551 个字)
                 </span>
                 
                 
@@ -168,37 +168,73 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>简介</strong><br> 总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。</p>
-<p> ###<strong>自定义属性</strong><br> 位置：res/values/attrs.xml<br> 格式：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;name_of_style&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;name_of_attr&quot; format=&quot;reference|string|color|boolean|dimension|enum|flag|float|fraction|integer&quot;/&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>总结下之前看的自定义View的内容，结合一个简单的例子，阐述下基本用法和大致的使用流程，这个例子比较简单，更复杂的自定义View，随着自己的学习，后面再慢慢添加。作为一个Android开发者，这部分应该是不可或缺的。</p>
+<a id="more"></a>
 
+<h2 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h2><p>位置：res/values/attrs.xml<br>格式：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">declare-styleable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name_of_style"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name_of_attr"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"reference|string|color|boolean|dimension|enum|flag|float|fraction|integer"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">declare-styleable</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<pre><code>format    | 意义                       
---------- | ------------------------- 
-reference | 参考某一资源ID, 如R.drawable.xxx
-string    | 字符串                      
-color     | 颜色                       
-boolean   | 布尔值                      
-dimension | 尺寸值                      
-enum      | 枚举值,例如                   
-flag      | 位或运算，例如：                 
-float     | 浮点数                      
-fraction  | 百分数，例如pivotX,pivotY这一类属性 
-integer   | 整数                       </code></pre><p>###<strong>获取自定义属性</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.name_of_style);</span><br><span class="line"> </span><br><span class="line">Color mColor = typedArray.getColor(R.styleable.name_of_style_name_of_attr, Color.BLUE);//其他的属性获取类似</span><br><span class="line">typedArray.recycle();//记得回收</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>format</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reference</td>
+<td>参考某一资源ID, 如R.drawable.xxx</td>
+</tr>
+<tr>
+<td>string</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>color</td>
+<td>颜色</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布尔值</td>
+</tr>
+<tr>
+<td>dimension</td>
+<td>尺寸值</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>枚举值</td>
+</tr>
+<tr>
+<td>flag</td>
+<td>位或运算</td>
+</tr>
+<tr>
+<td>float</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>fraction</td>
+<td>百分数，例如pivotX,pivotY这一类属性</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>整数</td>
+</tr>
+</tbody></table>
+<h2 id="获取自定义属性"><a href="#获取自定义属性" class="headerlink" title="获取自定义属性"></a>获取自定义属性</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.name_of_style);</span><br><span class="line"></span><br><span class="line">Color mColor = typedArray.getColor(R.styleable.name_of_style_name_of_attr, Color.BLUE);<span class="hljs-comment">//其他的属性获取类似</span></span><br><span class="line">typedArray.recycle();<span class="hljs-comment">//记得回收</span></span><br></pre></td></tr></table></figure>
 
-<p>  名字： R.styleable.{name_of_style} R.styleable.{name_of_style}_{name_of_attr}  ###<strong>举个栗子</strong><br> 举个栗子，实现一个背景为渐变色的圆角按钮，圆角半径，开始颜色，中心颜色，结束颜色，渐变方向用户可自定义。<br>  <strong>attrs.xml</strong> </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=&quot;CornerButton&quot;&gt;</span><br><span class="line">        &lt;attr name=&quot;corner_radius&quot; format=&quot;dimension&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_start_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_center_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;background_end_color&quot; format=&quot;color&quot; /&gt;</span><br><span class="line">        &lt;attr name=&quot;backgrouund_gradient_orientation&quot;&gt;</span><br><span class="line">            &lt;enum name=&quot;TOP_BOTTOM&quot; value=&quot;0&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;TR_BL&quot; value=&quot;1&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;RIGHT_LEFT&quot; value=&quot;2&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BR_TL&quot; value=&quot;3&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BOTTOM_TOP&quot; value=&quot;4&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;BL_TR&quot; value=&quot;5&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;LEFT_RIGHT&quot; value=&quot;6&quot; /&gt;</span><br><span class="line">            &lt;enum name=&quot;TL_BR&quot; value=&quot;7&quot; /&gt;</span><br><span class="line">        &lt;/attr&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
+<p>名字： R.styleable.{name_of_style} R.styleable.{name_of_style}_{name_of_attr}  </p>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>举个例子，实现一个背景为渐变色的圆角按钮，圆角半径，开始颜色，中心颜色，结束颜色，渐变方向用户可自定义。  </p>
+<h3 id="attrs-xml"><a href="#attrs-xml" class="headerlink" title="attrs.xml"></a>attrs.xml</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">declare-styleable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CornerButton"</span>&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"corner_radius"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"dimension"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"background_start_color"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"background_center_color"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"background_end_color"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"backgrouund_gradient_orientation"</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"TOP_BOTTOM"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"0"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"TR_BL"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"RIGHT_LEFT"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"2"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"BR_TL"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"3"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"BOTTOM_TOP"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"4"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"BL_TR"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"5"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"LEFT_RIGHT"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"6"</span> /&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">enum</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"TL_BR"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"7"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">attr</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">declare-styleable</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> <strong>CornerButton</strong> </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class CornerButton extends Button &#123;</span><br><span class="line"></span><br><span class="line">    private GradientDrawable mBg;</span><br><span class="line">    private float mRandius;</span><br><span class="line">    private int mStartColor;</span><br><span class="line">    private int mCenterColor;</span><br><span class="line">    private int mEndColor;</span><br><span class="line">    private int mOrientation;</span><br><span class="line">    </span><br><span class="line">    public CornerButton(Context context, AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line"></span><br><span class="line">        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CornerButton);</span><br><span class="line">        mRandius = typedArray.getDimension(R.styleable.CornerButton_corner_radius, 10);</span><br><span class="line">        mStartColor = typedArray.getColor(R.styleable.CornerButton_background_start_color, Color.BLUE);</span><br><span class="line">        mCenterColor = typedArray.getColor(R.styleable.CornerButton_background_center_color, Color.GREEN);</span><br><span class="line">        mEndColor = typedArray.getColor(R.styleable.CornerButton_background_end_color, Color.BLACK);</span><br><span class="line">        mOrientation = typedArray.getInt(R.styleable.CornerButton_backgrouund_gradient_orientation, 0);</span><br><span class="line">        typedArray.recycle();</span><br><span class="line"></span><br><span class="line">        int[] colors = &#123;mStartColor, mCenterColor, mEndColor&#125;;</span><br><span class="line">        mBg = new GradientDrawable();</span><br><span class="line">        mBg.setCornerRadius(mRandius);</span><br><span class="line">        mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">        mBg.setColors(colors);</span><br><span class="line">        switch (mOrientation) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                mBg.setOrientation(Orientation.TOP_BOTTOM);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                mBg.setOrientation(Orientation.RIGHT_LEFT);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                mBg.setOrientation(Orientation.BR_TL);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                mBg.setOrientation(Orientation.BOTTOM_TOP);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                mBg.setOrientation(Orientation.BL_TR);</span><br><span class="line">                break;</span><br><span class="line">            case 6:</span><br><span class="line">                mBg.setOrientation(Orientation.LEFT_RIGHT);</span><br><span class="line">                break;</span><br><span class="line">            case 7:</span><br><span class="line">                mBg.setOrientation(Orientation.TL_BR);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        this.setBackground(mBg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="CornerButton"><a href="#CornerButton" class="headerlink" title="CornerButton"></a>CornerButton</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CornerButton</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Button</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> GradientDrawable mBg;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">float</span> mRandius;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mStartColor;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mCenterColor;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mEndColor;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mOrientation;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CornerButton</span><span class="hljs-params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs);</span><br><span class="line"></span><br><span class="line">        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CornerButton);</span><br><span class="line">        mRandius = typedArray.getDimension(R.styleable.CornerButton_corner_radius, <span class="hljs-number">10</span>);</span><br><span class="line">        mStartColor = typedArray.getColor(R.styleable.CornerButton_background_start_color, Color.BLUE);</span><br><span class="line">        mCenterColor = typedArray.getColor(R.styleable.CornerButton_background_center_color, Color.GREEN);</span><br><span class="line">        mEndColor = typedArray.getColor(R.styleable.CornerButton_background_end_color, Color.BLACK);</span><br><span class="line">        mOrientation = typedArray.getInt(R.styleable.CornerButton_backgrouund_gradient_orientation, <span class="hljs-number">0</span>);</span><br><span class="line">        typedArray.recycle();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span>[] colors = &#123;mStartColor, mCenterColor, mEndColor&#125;;</span><br><span class="line">        mBg = <span class="hljs-keyword">new</span> GradientDrawable();</span><br><span class="line">        mBg.setCornerRadius(mRandius);</span><br><span class="line">        mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">        mBg.setColors(colors);</span><br><span class="line">        <span class="hljs-keyword">switch</span> (mOrientation) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.TOP_BOTTOM);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.TR_BL);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.RIGHT_LEFT);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.BR_TL);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.BOTTOM_TOP);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.BL_TR);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.LEFT_RIGHT);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>:</span><br><span class="line">                mBg.setOrientation(Orientation.TL_BR);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">this</span>.setBackground(mBg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <strong>activity_main.xml</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:yidong=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:id=&quot;@+id/activity_main&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot; android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;gs.com.customview.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;gs.com.customview.CornerButton</span><br><span class="line">        android:id=&quot;@+id/cb_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        yidong:background_start_color=&quot;#CCFF0000&quot;</span><br><span class="line">        yidong:background_center_color=&quot;#CCAADD00&quot;</span><br><span class="line">        yidong:background_end_color=&quot;#CC00EEFF&quot;</span><br><span class="line">        yidong:corner_radius=&quot;100dp&quot;</span><br><span class="line">        yidong:backgrouund_gradient_orientation=&quot;BOTTOM_TOP&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="activity-main-xml"><a href="#activity-main-xml" class="headerlink" title="activity_main.xml"></a>activity_main.xml</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">RelativeLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:yidong</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/activity_main"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span> <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingBottom</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingRight</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingTop</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"gs.com.customview.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">gs.com.customview.CornerButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/cb_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">yidong:background_start_color</span>=<span class="hljs-string">"#CCFF0000"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">yidong:background_center_color</span>=<span class="hljs-string">"#CCAADD00"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">yidong:background_end_color</span>=<span class="hljs-string">"#CC00EEFF"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">yidong:corner_radius</span>=<span class="hljs-string">"100dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">yidong:backgrouund_gradient_orientation</span>=<span class="hljs-string">"BOTTOM_TOP"</span></span></span><br><span class="line"><span class="hljs-tag">        /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> xmlns:yidong=“<a href="http://schemas.android.com/apk/res-auto" target="_blank" rel="noopener">http://schemas.android.com/apk/res-auto</a>”  
- 和<br> yidong:corner_radius=“100dp”<br> XML命名空间和属性的Tag对应。</p>
-<p> <strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20161025144229443" alt="这里写图片描述"> <img src="https://img-blog.csdn.net/20161025144247475" alt="这里写图片描述"></p>
+<p>xmlns:yidong=“<a href="http://schemas.android.com/apk/res-auto" target="_blank" rel="noopener">http://schemas.android.com/apk/res-auto</a>”  
+和<br>yidong:corner_radius=“100dp”<br>XML命名空间和属性的Tag对应。</p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://img-blog.csdn.net/20161025144229443" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20161025144247475" alt="这里写图片描述"></p>
 
         </div>
         
@@ -261,8 +297,8 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2016/10/16/《Android 基础（二十五）》 View Animation/">
-                <span class="level-item">《Android 基础（二十五）》 View Animation</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2016/10/24/《Android 基础（二十五）》Frame Animation/">
+                <span class="level-item">《Android 基础（二十五）》Frame Animation</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -357,7 +393,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -448,7 +484,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -488,7 +524,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -566,7 +602,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -583,18 +619,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -602,18 +638,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -621,18 +657,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -640,18 +676,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -659,18 +695,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -694,7 +730,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -980,7 +1016,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -991,7 +1027,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1002,7 +1038,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1013,7 +1049,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1035,7 +1071,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1058,6 +1094,17 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1230,7 +1277,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1322,6 +1369,13 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1447,7 +1501,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1473,6 +1527,13 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1482,7 +1543,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1657,14 +1718,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1693,18 +1747,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1712,18 +1766,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1731,18 +1785,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1750,18 +1804,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1769,18 +1823,18 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1804,7 +1858,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2090,7 +2144,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2101,7 +2155,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2112,7 +2166,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2123,7 +2177,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2145,7 +2199,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2168,6 +2222,17 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2340,7 +2405,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2432,6 +2497,13 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2557,7 +2629,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2583,6 +2655,13 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2592,7 +2671,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2767,14 +2846,7 @@ integer   | 整数                       </code></pre><p>###<strong>获取自定
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

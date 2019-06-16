@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51763047      ###介绍  Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。 看下Source Code Palette , A helper class to extract prominen">
+    <meta name="description" content="介绍 Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。看下Source CodePalette , A helper class to extract prominent colors from an image.A number of colors with different profiles are extracted from the image">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（八）》 Palette">
 <meta property="og:url" content="http://yoursite.com/2016/06/26/《Android 基础（八）》 Palette/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51763047      ###介绍  Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。 看下Source Code Palette , A helper class to extract prominen">
+<meta property="og:description" content="介绍 Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。看下Source CodePalette , A helper class to extract prominent colors from an image.A number of colors with different profiles are extracted from the image">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-14T11:22:12.040Z">
+<meta property="og:updated_time" content="2019-06-16T05:50:31.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（八）》 Palette">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51763047      ###介绍  Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。 看下Source Code Palette , A helper class to extract prominen">
+<meta name="twitter:description" content="介绍 Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。看下Source CodePalette , A helper class to extract prominent colors from an image.A number of colors with different profiles are extracted from the image">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 959 个字)
+                    6 分钟 读完 (大约 956 个字)
                 </span>
                 
                 
@@ -168,62 +168,82 @@
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51763047" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51763047</a>   </p>
-<p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。<br> 看下Source Code<br> Palette , A helper class to extract prominent colors from an image.<br> A number of colors with different profiles are extracted from the image:</p>
-<p> 支持的颜色类型</p>
-<pre><code>颜色            | 类型    
-------------- | ------ 
-Vibrant       | 有活力   
-Vibrant Dark  | 有活力 暗色
-Vibrant Light | 有活力 亮色
-Muted         | 柔和    
-Muted Dark    | 柔和 暗色 
-Muted Light   | 柔和 亮色 </code></pre></blockquote>
-<blockquote>
-<p>使用方法：</p>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>Palette， 英文翻译，调色板，意思比较接近，Google给它的定位应该是颜色萃取器。<br>看下Source Code<br>Palette , A helper class to extract prominent colors from an image.<br>A number of colors with different profiles are extracted from the image</p>
 </blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// Synchronous  同步</span><br><span class="line">Palette p = Palette.from(bitmap).generate();</span><br><span class="line"></span><br><span class="line">&gt;// Asynchronous 异步</span><br><span class="line">&gt;Palette.from(bitmap).generate(new PaletteAsyncListener() &#123;</span><br><span class="line">     public void onGenerated(Palette p) &#123;</span><br><span class="line">         // Use generated instance</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="支持的颜色类型"><a href="#支持的颜色类型" class="headerlink" title="支持的颜色类型"></a>支持的颜色类型</h2><table>
+<thead>
+<tr>
+<th>颜色</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vibrant</td>
+<td>有活力</td>
+</tr>
+<tr>
+<td>Vibrant Dark</td>
+<td>有活力 暗色</td>
+</tr>
+<tr>
+<td>Vibrant Light</td>
+<td>有活力 亮色</td>
+</tr>
+<tr>
+<td>Muted</td>
+<td>柔和</td>
+</tr>
+<tr>
+<td>Muted Dark</td>
+<td>柔和 暗色</td>
+</tr>
+<tr>
+<td>Muted Light</td>
+<td>柔和 亮色</td>
+</tr>
+</tbody></table>
+<h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Synchronous  同步</span></span><br><span class="line">Palette p = Palette.from(bitmap).generate();</span><br><span class="line"></span><br><span class="line">&gt;<span class="hljs-comment">// Asynchronous 异步</span></span><br><span class="line">&gt;Palette.from(bitmap).generate(<span class="hljs-keyword">new</span> PaletteAsyncListener() &#123;</span><br><span class="line">     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onGenerated</span><span class="hljs-params">(Palette p)</span> </span>&#123;</span><br><span class="line">         <span class="hljs-comment">// Use generated instance</span></span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><h4 id="布局设置"><a href="#布局设置" class="headerlink" title="布局设置"></a>布局设置</h4><p>activity_main.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"mraz.com.palettedemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.Toolbar</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"?attr/actionBarSize"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@color/colorPrimaryDark"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.Toolbar</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.RecyclerView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/rv_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.RecyclerView</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<hr>
-<p> ###<strong>Demo示例</strong>  </p>
-<p> ####<em>布局设置</em><br> activity_main.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.palettedemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v7.widget.Toolbar</span><br><span class="line">        android:id=&quot;@+id/toolbar&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;?attr/actionBarSize&quot;</span><br><span class="line">        android:background=&quot;@color/colorPrimaryDark&quot;&gt;&lt;/android.support.v7.widget.Toolbar&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v7.widget.RecyclerView</span><br><span class="line">        android:id=&quot;@+id/rv_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;&gt;&lt;/android.support.v7.widget.RecyclerView&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>RecyclerView中使用Item的布局设置：card_item.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:padding</span>=<span class="hljs-string">"6dp"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">com.makeramen.roundedimageview.RoundedImageView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/riv_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:riv_border_color</span>=<span class="hljs-string">"@color/colorAccent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:riv_border_width</span>=<span class="hljs-string">"1dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:riv_corner_radius</span>=<span class="hljs-string">"20dp"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> RecyclerView中使用Item的布局设置：card_item.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:padding=&quot;6dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;com.makeramen.roundedimageview.RoundedImageView</span><br><span class="line">        android:id=&quot;@+id/riv_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        app:riv_border_color=&quot;@color/colorAccent&quot;</span><br><span class="line">        app:riv_border_width=&quot;1dp&quot;</span><br><span class="line">        app:riv_corner_radius=&quot;20dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>ActionBar上使用的menu资源：main_menu.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">menu</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">item</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/action_add"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:icon</span>=<span class="hljs-string">"@drawable/ic_add_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:title</span>=<span class="hljs-string">"@string/add"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:showAsAction</span>=<span class="hljs-string">"ifRoom"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">item</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/action_del"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:icon</span>=<span class="hljs-string">"@drawable/ic_remove_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:title</span>=<span class="hljs-string">"@string/del"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:showAsAction</span>=<span class="hljs-string">"ifRoom"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">menu</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> ActionBar上使用的menu资源：main_menu.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/action_add&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_add_black_24dp&quot;</span><br><span class="line">        android:title=&quot;@string/add&quot;</span><br><span class="line">        app:showAsAction=&quot;ifRoom&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/action_del&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_remove_black_24dp&quot;</span><br><span class="line">        android:title=&quot;@string/del&quot;</span><br><span class="line">        app:showAsAction=&quot;ifRoom&quot; /&gt;</span><br><span class="line">&lt;/menu&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.palettedemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.graphics.Bitmap;</span><br><span class="line"><span class="hljs-keyword">import</span> android.graphics.BitmapFactory;</span><br><span class="line"><span class="hljs-keyword">import</span> android.graphics.Color;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.graphics.Palette;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.DefaultItemAnimator;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.LinearLayoutManager;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.RecyclerView;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.Toolbar;</span><br><span class="line"><span class="hljs-keyword">import</span> android.util.Log;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.MenuItem;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] resIds = &#123;R.drawable.p_1, R.drawable.p_2, R.drawable.p_3, R.drawable.p_4, R.drawable.p_5, R.drawable.p_6, R.drawable.p_7&#125;;<span class="hljs-comment">//资源图片Id   </span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String[] titles = &#123;<span class="hljs-string">"Vibrant"</span>, <span class="hljs-string">"DarkVibrant"</span>, <span class="hljs-string">"LightVibrant"</span>, <span class="hljs-string">"Muted"</span>, <span class="hljs-string">"DarkMuted"</span>, <span class="hljs-string">"LightMuted"</span>&#125;;<span class="hljs-comment">//6种萃取出来的颜色对应的英文翻译 </span></span><br><span class="line">    <span class="hljs-keyword">private</span> Toolbar toolbar;<span class="hljs-comment">//toolbar</span></span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList&lt;Integer&gt; colorList;<span class="hljs-comment">//存储从Palette中萃取出来的6中颜色</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> clickCount = <span class="hljs-number">0</span>;<span class="hljs-comment">//点击数</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        colorList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);<span class="hljs-comment">//设置ActionBar</span></span><br><span class="line"></span><br><span class="line">        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);</span><br><span class="line">        RecyclerView.LayoutManager layoutManager = <span class="hljs-keyword">new</span> LinearLayoutManager(<span class="hljs-keyword">this</span>, LinearLayoutManager.HORIZONTAL, <span class="hljs-keyword">false</span>);</span><br><span class="line">        MyRecyclerAdapter myRecyclerAdapter = <span class="hljs-keyword">new</span> MyRecyclerAdapter();<span class="hljs-comment">//初始化RecyclerView</span></span><br><span class="line"></span><br><span class="line">        recyclerView.setAdapter(myRecyclerAdapter);</span><br><span class="line">        recyclerView.setLayoutManager(layoutManager);</span><br><span class="line"></span><br><span class="line">        recyclerView.setOnScrollListener(<span class="hljs-keyword">new</span> RecyclerView.OnScrollListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onScrolled</span><span class="hljs-params">(RecyclerView recyclerView, <span class="hljs-keyword">int</span> dx, <span class="hljs-keyword">int</span> dy)</span> </span>&#123;</span><br><span class="line">                <span class="hljs-keyword">int</span> offset = recyclerView.computeHorizontalScrollOffset();</span><br><span class="line">                <span class="hljs-keyword">int</span> width = recyclerView.getChildAt(<span class="hljs-number">0</span>).getWidth();</span><br><span class="line">                <span class="hljs-keyword">int</span> current = offset / width;</span><br><span class="line">                <span class="hljs-keyword">int</span> secondoffset = offset % width;</span><br><span class="line">                <span class="hljs-keyword">if</span> (secondoffset &gt;= width / <span class="hljs-number">2</span>) &#123;</span><br><span class="line">                    current = current + <span class="hljs-number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                setActionBarColor(current);</span><br><span class="line">                clickCount = <span class="hljs-number">0</span>;</span><br><span class="line">                <span class="hljs-keyword">super</span>.onScrolled(recyclerView, dx, dy);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);<span class="hljs-comment">//设置recyclerView的滚动事件监听，以此来改变actionbar支持的颜色</span></span><br><span class="line">        setActionBarColor(<span class="hljs-number">0</span>);<span class="hljs-comment">//首次使用初始化</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onCreateOptionsMenu</span><span class="hljs-params">(Menu menu)</span> </span>&#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.main_menu, menu);<span class="hljs-comment">//初始化菜单资源</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onCreateOptionsMenu(menu);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setActionBarColor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resIds[position]);</span><br><span class="line">        Palette.PaletteAsyncListener paletteAsyncListener = <span class="hljs-keyword">new</span> Palette.PaletteAsyncListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onGenerated</span><span class="hljs-params">(Palette palette)</span> </span>&#123;</span><br><span class="line">                colorList.clear();</span><br><span class="line">                colorList.add(palette.getVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getDarkVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getLightVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getMutedColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getDarkMutedColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getLightMutedColor(Color.WHITE));<span class="hljs-comment">//萃取出六种颜色</span></span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(<span class="hljs-number">0</span>));</span><br><span class="line">                toolbar.setTitle(titles[<span class="hljs-number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Palette.from(bitmap).generate(paletteAsyncListener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onOptionsItemSelected</span><span class="hljs-params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.action_add: &#123;</span><br><span class="line">                clickCount++;</span><br><span class="line">                <span class="hljs-keyword">int</span> index = clickCount % (colorList.size());</span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(index)); <span class="hljs-comment">//通过点击事件切换ActionBar的背景色和标题</span></span><br><span class="line">                toolbar.setTitle(titles[index]);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.action_del: &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (clickCount &gt; <span class="hljs-number">0</span>) clickCount--;</span><br><span class="line">                <span class="hljs-keyword">int</span> index = clickCount % (colorList.size());</span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(index));</span><br><span class="line">                toolbar.setTitle(titles[index]);</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> ####<em>代码使用</em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.palettedemo;</span><br><span class="line"></span><br><span class="line">import android.graphics.Bitmap;</span><br><span class="line">import android.graphics.BitmapFactory;</span><br><span class="line">import android.graphics.Color;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.support.v7.graphics.Palette;</span><br><span class="line">import android.support.v7.widget.DefaultItemAnimator;</span><br><span class="line">import android.support.v7.widget.LinearLayoutManager;</span><br><span class="line">import android.support.v7.widget.RecyclerView;</span><br><span class="line">import android.support.v7.widget.Toolbar;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.view.Menu;</span><br><span class="line">import android.view.MenuItem;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;  </span><br><span class="line">    private final int[] resIds = &#123;R.drawable.p_1, R.drawable.p_2, R.drawable.p_3, R.drawable.p_4, R.drawable.p_5, R.drawable.p_6, R.drawable.p_7&#125;;//资源图片Id   </span><br><span class="line">    private final String[] titles = &#123;&quot;Vibrant&quot;, &quot;DarkVibrant&quot;, &quot;LightVibrant&quot;, &quot;Muted&quot;, &quot;DarkMuted&quot;, &quot;LightMuted&quot;&#125;;//6种萃取出来的颜色对应的英文翻译 </span><br><span class="line">    private Toolbar toolbar;//toolbar</span><br><span class="line">    private ArrayList&lt;Integer&gt; colorList;//存储从Palette中萃取出来的6中颜色</span><br><span class="line">    private int clickCount = 0;//点击数</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        colorList = new ArrayList&lt;&gt;();</span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);//设置ActionBar</span><br><span class="line"></span><br><span class="line">        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);</span><br><span class="line">        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);</span><br><span class="line">        MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter();//初始化RecyclerView</span><br><span class="line"></span><br><span class="line">        recyclerView.setAdapter(myRecyclerAdapter);</span><br><span class="line">        recyclerView.setLayoutManager(layoutManager);</span><br><span class="line">        </span><br><span class="line">        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onScrolled(RecyclerView recyclerView, int dx, int dy) &#123;</span><br><span class="line">                int offset = recyclerView.computeHorizontalScrollOffset();</span><br><span class="line">                int width = recyclerView.getChildAt(0).getWidth();</span><br><span class="line">                int current = offset / width;</span><br><span class="line">                int secondoffset = offset % width;</span><br><span class="line">                if (secondoffset &gt;= width / 2) &#123;</span><br><span class="line">                    current = current + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                setActionBarColor(current);</span><br><span class="line">                clickCount = 0;</span><br><span class="line">                super.onScrolled(recyclerView, dx, dy);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);//设置recyclerView的滚动事件监听，以此来改变actionbar支持的颜色</span><br><span class="line">        setActionBarColor(0);//首次使用初始化</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onCreateOptionsMenu(Menu menu) &#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.main_menu, menu);//初始化菜单资源</span><br><span class="line">        return super.onCreateOptionsMenu(menu);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void setActionBarColor(int position) &#123;</span><br><span class="line">        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resIds[position]);</span><br><span class="line">        Palette.PaletteAsyncListener paletteAsyncListener = new Palette.PaletteAsyncListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onGenerated(Palette palette) &#123;</span><br><span class="line">                colorList.clear();</span><br><span class="line">                colorList.add(palette.getVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getDarkVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getLightVibrantColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getMutedColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getDarkMutedColor(Color.WHITE));</span><br><span class="line">                colorList.add(palette.getLightMutedColor(Color.WHITE));//萃取出六种颜色</span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(0));</span><br><span class="line">                toolbar.setTitle(titles[0]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Palette.from(bitmap).generate(paletteAsyncListener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onOptionsItemSelected(MenuItem item) &#123;</span><br><span class="line">        switch (item.getItemId()) &#123;</span><br><span class="line">            case R.id.action_add: &#123;</span><br><span class="line">                clickCount++;</span><br><span class="line">                int index = clickCount % (colorList.size());</span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(index)); //通过点击事件切换ActionBar的背景色和标题</span><br><span class="line">                toolbar.setTitle(titles[index]);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            case R.id.action_del: &#123;</span><br><span class="line">                if (clickCount &gt; 0) clickCount--;</span><br><span class="line">                int index = clickCount % (colorList.size());</span><br><span class="line">                toolbar.setBackgroundColor(colorList.get(index));</span><br><span class="line">                toolbar.setTitle(titles[index]);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于Palette的使用分为两种：<br>1.同步使用<br>Palette p = Palette.from(bitmap).generate();<br>2.异步使用</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Palette.from(bitmap).generate(<span class="hljs-keyword">new</span> PaletteAsyncListener() &#123;</span><br><span class="line">     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onGenerated</span><span class="hljs-params">(Palette p)</span> </span>&#123;</span><br><span class="line">         <span class="hljs-comment">// Use generated instance</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p> 关于Palette的使用分为两种：<br> 1.同步使用<br> Palette p = Palette.from(bitmap).generate();<br> 2.异步使用</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Palette.from(bitmap).generate(new PaletteAsyncListener() &#123;</span><br><span class="line">     public void onGenerated(Palette p) &#123;</span><br><span class="line">         // Use generated instance</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> ####<em>Demo效果</em></p>
-<pre><code>操作                 | 效果图
------------------- | --- 
-左右滑动ActionBar背景色改变 |    
-切换ActionBar背景色     |    </code></pre><hr>
-<p> ###<strong>API简介</strong></p>
-<ul>
-<li>Palette相关API<br> <img src="https://img-blog.csdn.net/20160626145800117" alt="这里写图片描述"></li>
-</ul>
-<ul>
-<li>直接获取颜色的方法<br> <img src="https://img-blog.csdn.net/20160626153011242" alt="这里写图片描述"><br> 通过创建的Palette直接获取其中的颜色，用来设置UI界面中的一些元素</li>
-</ul>
-<ul>
-<li>获取Swatch的方法<br> <img src="https://img-blog.csdn.net/20160626153206491" alt="这里写图片描述"></li>
-</ul>
-<ul>
-<li><p>这里获取的Swatch中的内容更丰富<br> <img src="https://img-blog.csdn.net/20160626153318965" alt="这里写图片描述"></p>
-<p> 通过Swatch可以获取更丰富的颜色内容，如  </p>
-<p> getTitleTextColor()<br> getBodyTextColor()<br> getRgb()<br> getHsl()  </p>
-<p> 示例中只是使用了一部分的方法，具体的其他方法使用情况类似，根据Bitmap的颜色风格，设置对应的字体颜色，UI资源颜色，可以使界面看上去更加的和谐和美好。</p>
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>效果图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>左右滑动ActionBar背景色改变</td>
+<td><img src="http://img.blog.csdn.net/20160626154442903" alt="这里写图片描述"></td>
+</tr>
+<tr>
+<td>切换ActionBar背景色</td>
+<td><img src="http://img.blog.csdn.net/20160626154454215" alt="这里写图片描述"></td>
+</tr>
+</tbody></table>
+<h2 id="API简介"><a href="#API简介" class="headerlink" title="API简介"></a>API简介</h2><ul>
+<li><p>Palette相关API<br>   <img src="https://img-blog.csdn.net/20160626145800117" alt="这里写图片描述"></p>
+</li>
+<li><p>直接获取颜色的方法<br>   <img src="https://img-blog.csdn.net/20160626153011242" alt="这里写图片描述"><br>   通过创建的Palette直接获取其中的颜色，用来设置UI界面中的一些元素</p>
+</li>
+<li><p>获取Swatch的方法<br><img src="https://img-blog.csdn.net/20160626153206491" alt="这里写图片描述"></p>
+</li>
+<li><p>这里获取的Swatch中的内容更丰富<br><img src="https://img-blog.csdn.net/20160626153318965" alt="这里写图片描述"><br>通过Swatch可以获取更丰富的颜色内容，如 :<br>getTitleTextColor()<br>getBodyTextColor()<br>getRgb()<br>getHsl()<br>示例中只是使用了一部分的方法，具体的其他方法使用情况类似，根据Bitmap的颜色格，设置对应的字体颜色，UI资源颜色，可以使界面看上去更加的和谐和美好。</p>
 </li>
 </ul>
 
@@ -280,9 +300,9 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2016/07/02/《Android 基础（十）》FloatingActionButton/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2016/06/28/《Android 基础（九）》  Ndk配置与Demo/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">《Android 基础（十）》FloatingActionButton</span>
+                <span class="level-item">《Android 基础（九）》  Ndk配置与Demo</span>
             </a>
         </div>
         
@@ -384,7 +404,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -475,7 +495,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -515,7 +535,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -593,7 +613,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -610,18 +630,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -629,18 +649,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -648,18 +668,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -667,18 +687,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -686,18 +706,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -721,7 +741,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1007,7 +1027,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1018,7 +1038,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1029,7 +1049,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1040,7 +1060,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1062,7 +1082,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1085,6 +1105,17 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1257,7 +1288,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1349,6 +1380,13 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1474,7 +1512,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1500,6 +1538,13 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1509,7 +1554,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1684,14 +1729,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1720,18 +1758,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1739,18 +1777,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1758,18 +1796,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1777,18 +1815,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1796,18 +1834,18 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1831,7 +1869,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2117,7 +2155,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2128,7 +2166,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2139,7 +2177,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2150,7 +2188,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2172,7 +2210,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2195,6 +2233,17 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2367,7 +2416,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2459,6 +2508,13 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2584,7 +2640,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2610,6 +2666,13 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2619,7 +2682,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2794,14 +2857,7 @@ Muted Light   | 柔和 亮色 </code></pre></blockquote>
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

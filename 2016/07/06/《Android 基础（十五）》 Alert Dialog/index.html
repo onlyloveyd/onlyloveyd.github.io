@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="###介绍  The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog:   1.Title This is optional an">
+    <meta name="description" content="简介 The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog: 1.TitleThis is optional and should">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（十五）》 Alert Dialog">
 <meta property="og:url" content="http://yoursite.com/2016/07/06/《Android 基础（十五）》 Alert Dialog/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="###介绍  The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog:   1.Title This is optional an">
+<meta property="og:description" content="简介 The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog: 1.TitleThis is optional and should">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:04:05.978Z">
+<meta property="og:updated_time" content="2019-06-16T13:23:31.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（十五）》 Alert Dialog">
-<meta name="twitter:description" content="###介绍  The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog:   1.Title This is optional an">
+<meta name="twitter:description" content="简介 The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog: 1.TitleThis is optional and should">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -168,138 +168,78 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>介绍</strong></p>
-<blockquote>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>The AlertDialog class allows you to build a variety of dialog designs and is often the only dialog class you’ll need. there are three regions of an alert dialog:</p>
-<p> <img src="https://img-blog.csdn.net/20160706115726983" alt="这里写图片描述"><br> 1.Title<br> This is optional and should be used only when the content area is occupied by a detailed message, a list, or custom layout. If you need to state a simple message or question (such as the dialog in figure 1), you don’t need a title.</p>
-<p> 2.Content area<br> This can display a message, a list, or other custom layout.</p>
-<p> 3.Action buttons<br> There should be no more than three action buttons in a dialog.</p>
-<p> 一般的AlertDialog分为2个部分，头部，内容和Action Button，头部包含图标和文字，内容部分可以自定义，也可以使用一些常见的列表，单选项，多选项等内容，Action Button就是常见的OK啊， Cancel啊等等。</p>
+<p><img src="https://img-blog.csdn.net/20160706115726983" alt="这里写图片描述"><br>1.Title<br>This is optional and should be used only when the content area is occupied by a detailed message, a list, or custom layout. If you need to state a simple message or question (such as the dialog in figure 1), you don’t need a title.</p>
+<p>2.Content area<br>This can display a message, a list, or other custom layout.</p>
+<p>3.Action buttons<br>There should be no more than three action buttons in a dialog.</p>
+<p>一般的AlertDialog分为2个部分，头部，内容和Action Button，头部包含图标和文字，内容部分可以自定义，也可以使用一些常见的列表，单选项，多选项等内容，Action Button就是常见的OK啊， Cancel啊等等。</p>
 </blockquote>
-<hr>
-<p> ###<strong>类结构</strong><br> AlertDialog<br> <img src="https://img-blog.csdn.net/20160706121138596" alt="这里写图片描述"></p>
-<p> 重点关注一下Builder类的结构<br> <img src="https://img-blog.csdn.net/20160706122241985" alt="这里写图片描述"></p>
-<p> 关于这些方法的使用说明，这里不做一一介绍，后面通过实例可以看出端倪，不过可以通过查阅API文档熟悉一下，<a href="http://android.xsoftlab.net/reference/android/app/AlertDialog.Builder.html" target="_blank" rel="noopener">AlertDialog.Builder</a></p>
-<hr>
-<p> ###<strong>实际使用</strong></p>
-<p> ####Simple AlertDialog<br> <em><strong>代码使用</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private void showSimpleAlertDialog() &#123;</span><br><span class="line">    //创建alertdialog builder</span><br><span class="line">    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);</span><br><span class="line">    //设置图标，标题，消息内容</span><br><span class="line">    builder.setIcon(getResources().getDrawable(R.drawable.ic_adb_black_24dp))</span><br><span class="line">            .setTitle(R.string.title)</span><br><span class="line">            .setMessage(R.string.content);</span><br><span class="line">    //设置Acton Buttons</span><br><span class="line">    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">            Toast.makeText(mContext, &quot;Cancal is clicked&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">            Toast.makeText(mContext, &quot;OK is clicked&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    builder.setNeutralButton(R.string.reminder, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">            Toast.makeText(mContext, &quot;Remind me later is clicked&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    //显示alert dialog  这个是AlertDialog的show()方法是等价的</span><br><span class="line">    builder.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>AlertDialog<br><img src="https://img-blog.csdn.net/20160706121138596" alt="这里写图片描述"></p>
+<p>重点关注一下Builder类的结构<br><img src="https://img-blog.csdn.net/20160706122241985" alt="这里写图片描述"></p>
+<p>关于这些方法的使用说明，这里不做一一介绍，后面通过实例可以看出端倪，不过可以通过查阅API文档熟悉一下，<a href="http://android.xsoftlab.net/reference/android/app/AlertDialog.Builder.html" target="_blank" rel="noopener">AlertDialog.Builder</a></p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="Simple-AlertDialog"><a href="#Simple-AlertDialog" class="headerlink" title="Simple AlertDialog"></a>Simple AlertDialog</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showSimpleAlertDialog</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//创建alertdialog builder</span></span><br><span class="line">    AlertDialog.Builder builder = <span class="hljs-keyword">new</span> AlertDialog.Builder(mContext);</span><br><span class="line">    <span class="hljs-comment">//设置图标，标题，消息内容</span></span><br><span class="line">    builder.setIcon(getResources().getDrawable(R.drawable.ic_adb_black_24dp))</span><br><span class="line">            .setTitle(R.string.title)</span><br><span class="line">            .setMessage(R.string.content);</span><br><span class="line">    <span class="hljs-comment">//设置Acton Buttons</span></span><br><span class="line">    builder.setNegativeButton(R.string.cancel, <span class="hljs-keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, <span class="hljs-string">"Cancal is clicked"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    builder.setPositiveButton(R.string.ok, <span class="hljs-keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, <span class="hljs-string">"OK is clicked"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    builder.setNeutralButton(R.string.reminder, <span class="hljs-keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, <span class="hljs-string">"Remind me later is clicked"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="hljs-comment">//显示alert dialog  这个是AlertDialog的show()方法是等价的</span></span><br><span class="line">    builder.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <em><strong>效果</strong></em><br> <img src="https://img-blog.csdn.net/20160706130743093" alt="这里写图片描述"></p>
-<p> <em><strong>备注</strong></em></p>
-<pre><code>Action Button     | 意义                 
------------------ | ------------------- 
-setNegativeButton | 做取消、返回等操作，如Cancel  
-setPositiveButton | 做确认、提交等操作，如OK      
-setNeutralButton  | 做中性操作，如Update Later</code></pre><p> AlertDialog.Builder中的show()方法和AlertDialog的show()方法是等价的 <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*****</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> ####AlertDialog With Array<br> <em><strong>代码使用</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public void showAlertDialogWithArray() &#123;</span><br><span class="line">    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);</span><br><span class="line">    builder.setIcon(getResources().getDrawable(R.drawable.ic_assessment_black_24dp))</span><br><span class="line">            .setTitle(R.string.title)</span><br><span class="line">            .setItems(R.array.dialoglist, new DialogInterface.OnClickListener() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void onClick(DialogInterface dialogInterface, int i) &#123;</span><br><span class="line">                    switch (i) &#123;</span><br><span class="line">                        case 0:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.pink);</span><br><span class="line">                            break;</span><br><span class="line">                        case 1:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.stone);</span><br><span class="line">                            break;</span><br><span class="line">                        case 2:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.yellow);</span><br><span class="line">                            break;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    builder.create().show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><img src="https://img-blog.csdn.net/20160706130743093" alt="这里写图片描述"></p>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注_"></a>备注_</h4><table>
+<thead>
+<tr>
+<th>Action Button</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setNegativeButton</td>
+<td>做取消、返回等操作，如Cancel</td>
+</tr>
+<tr>
+<td>setPositiveButton</td>
+<td>做确认、提交等操作，如OK</td>
+</tr>
+<tr>
+<td>setNeutralButton</td>
+<td>做中性操作，如Update Later</td>
+</tr>
+</tbody></table>
+<p>AlertDialog.Builder中的show()方法和AlertDialog的show()方法是等价的 </p>
+<h3 id="AlertDialog-With-Array"><a href="#AlertDialog-With-Array" class="headerlink" title="AlertDialog With Array"></a>AlertDialog With Array</h3><h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showAlertDialogWithArray</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    AlertDialog.Builder builder = <span class="hljs-keyword">new</span> AlertDialog.Builder(mContext);</span><br><span class="line">    builder.setIcon(getResources().getDrawable(R.drawable.ic_assessment_black_24dp))</span><br><span class="line">            .setTitle(R.string.title)</span><br><span class="line">            .setItems(R.array.dialoglist, <span class="hljs-keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">                <span class="hljs-meta">@Override</span></span><br><span class="line">                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">                    <span class="hljs-keyword">switch</span> (i) &#123;</span><br><span class="line">                        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.pink);</span><br><span class="line">                            <span class="hljs-keyword">break</span>;</span><br><span class="line">                        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.stone);</span><br><span class="line">                            <span class="hljs-keyword">break</span>;</span><br><span class="line">                        <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:</span><br><span class="line">                            showTwo.setBackgroundResource(R.color.yellow);</span><br><span class="line">                            <span class="hljs-keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    builder.create().show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <em><strong>效果</strong></em><br> <img src="https://img-blog.csdn.net/20160706130832648" alt="这里写图片描述"></p>
-<p> <em><strong>备注</strong></em></p>
-<pre><code>方法         |                          
----------- | ------------------------- 
-setItems   | 通过array来设置dialog的内容      
-setAdapter | 通过ListAdapter来设置dialog的内容</code></pre><p> ListAdapter可以显示的内容应该比Array要丰富，但是现在开源库很多，针对Dialog的美观的开源库也不少，一般开发过程中会使用现成的。 <strong><strong><strong><strong><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></strong></strong></strong></strong> ####AlertDialog With MultiChoice <strong><em>代码使用</em></strong> <figure class="highlight plain hljs"><figcaption><span>void showAlertDialogWithMutiChoice() &#123; final ArrayList selecteditems </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--------</span><br><span class="line"> ####AlertDialog With Single Choice</span><br><span class="line"></span><br><span class="line"> _**代码使用**_</span><br></pre></td></tr></table></figure></p>
-<pre><code>public void showAlertDialogWithSingleChoice() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-    builder.setIcon(R.drawable.ic_build_black_24dp)
-            .setTitle(R.string.title);
-    builder.setSingleChoiceItems(R.array.places, -1,
-            new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            Toast.makeText(mContext, 
-                    getResources().getStringArray(R.array.places)[i] + &quot; is selected&quot;, 
-                    Toast.LENGTH_SHORT).show();
-        }
-    });
-    builder.create().show();
-}</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> _**效果**_  </span><br><span class="line"> ![这里写图片描述](https://img-blog.csdn.net/20160706131521557)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">--------</span><br><span class="line"> ####Custom Alert Dialog  </span><br><span class="line"> _**代码使用**_</span><br></pre></td></tr></table></figure>
+<h4 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h4><p><img src="https://img-blog.csdn.net/20160706130832648" alt="这里写图片描述"></p>
+<h4 id="备注-1"><a href="#备注-1" class="headerlink" title="备注"></a>备注</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setItems</td>
+<td>通过array来设置dialog的内容</td>
+</tr>
+<tr>
+<td>setAdapter</td>
+<td>通过ListAdapter来设置dialog的内容</td>
+</tr>
+</tbody></table>
+<p>ListAdapter可以显示的内容应该比Array要丰富，但是现在开源库很多，针对Dialog的美观的开源库也不少，一般开发过程中会使用现成的。</p>
+<h3 id="AlertDialog-With-MultiChoice"><a href="#AlertDialog-With-MultiChoice" class="headerlink" title="AlertDialog With MultiChoice"></a>AlertDialog With MultiChoice</h3><h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showAlertDialogWithMutiChoice</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">final</span> ArrayList&lt;String&gt; selecteditems = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    AlertDialog.Builder builder = <span class="hljs-keyword">new</span> AlertDialog.Builder(mContext);</span><br><span class="line">    builder.setIcon(R.drawable.ic_event_seat_black_24dp)</span><br><span class="line">            .setTitle(R.string.title)</span><br><span class="line">            .setMultiChoiceItems(R.array.fruits, <span class="hljs-keyword">null</span>, </span><br><span class="line">                    <span class="hljs-keyword">new</span> DialogInterface.OnMultiChoiceClickListener() &#123;</span><br><span class="line">                <span class="hljs-meta">@Override</span></span><br><span class="line">                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> which, </span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                                    <span class="hljs-keyword">boolean</span> isChecked)</span> </span>&#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (isChecked) &#123;</span><br><span class="line">                        selecteditems.add(getResources()</span><br><span class="line">                                .getStringArray(R.array.fruits)[which]);</span><br><span class="line">                        Toast.makeText(mContext, selecteditems.toString(), Toast.LENGTH_SHORT).show();</span><br><span class="line">                    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                        selecteditems.remove(getResources()</span><br><span class="line">                                .getStringArray(R.array.fruits)[which]);</span><br><span class="line">                        Toast.makeText(mContext, selecteditems.toString(), Toast.LENGTH_SHORT).show();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    builder.create().show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>public void showCustomAlertDialog() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-    builder.setIcon(R.drawable.ic_assessment_black_24dp).setTitle(R.string.login);
-    builder.setView(R.layout.custom_alert);
-    builder.setCustomTitle(LayoutInflater.from(mContext).inflate(R.layout.custom_title , null ));
-    builder.create().show();
-}</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_**自定义布局文件**_</span><br><span class="line"></span><br><span class="line">Title自定义</span><br></pre></td></tr></table></figure>
+<h4 id="效果-2"><a href="#效果-2" class="headerlink" title="效果"></a>效果</h4><p><img src="https://img-blog.csdn.net/20160706131302118" alt="这里写图片描述"> </p>
+<h3 id="AlertDialog-With-Single-Choice"><a href="#AlertDialog-With-Single-Choice" class="headerlink" title="AlertDialog With Single Choice"></a>AlertDialog With Single Choice</h3><h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showAlertDialogWithSingleChoice</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    AlertDialog.Builder builder = <span class="hljs-keyword">new</span> AlertDialog.Builder(mContext);</span><br><span class="line">    builder.setIcon(R.drawable.ic_build_black_24dp)</span><br><span class="line">            .setTitle(R.string.title);</span><br><span class="line">    builder.setSingleChoiceItems(R.array.places, -<span class="hljs-number">1</span>,</span><br><span class="line">            <span class="hljs-keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(DialogInterface dialogInterface, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            Toast.makeText(mContext, </span><br><span class="line">                    getResources().getStringArray(R.array.places)[i] + <span class="hljs-string">" is selected"</span>, </span><br><span class="line">                    Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    builder.create().show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<?xml version="1.0" encoding="utf-8"?>
-<p><linearlayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="60dp" android:background="@drawable/shape_title" android:orientation="horizontal"></linearlayout></p>
-<pre><code>&lt;ImageView
-    android:layout_width=&quot;60dp&quot;
-    android:layout_height=&quot;60dp&quot;
-    android:paddingLeft=&quot;20dp&quot;
-    android:src=&quot;@drawable/ic_adb_black_24dp&quot; /&gt;
+<h4 id="效果-3"><a href="#效果-3" class="headerlink" title="效果"></a>效果</h4><p><img src="https://img-blog.csdn.net/20160706131521557" alt="这里写图片描述"></p>
+<h3 id="Custom-Alert-Dialog"><a href="#Custom-Alert-Dialog" class="headerlink" title="Custom Alert Dialog"></a>Custom Alert Dialog</h3><h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showCustomAlertDialog</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    AlertDialog.Builder builder = <span class="hljs-keyword">new</span> AlertDialog.Builder(mContext);</span><br><span class="line">    builder.setIcon(R.drawable.ic_assessment_black_24dp).setTitle(R.string.login);</span><br><span class="line">    builder.setView(R.layout.custom_alert);</span><br><span class="line">    builder.setCustomTitle(LayoutInflater.from(mContext).inflate(R.layout.custom_title , <span class="hljs-keyword">null</span> ));</span><br><span class="line">    builder.create().show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-&lt;TextView
-    android:layout_width=&quot;wrap_content&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_gravity=&quot;center_vertical&quot;
-    android:layout_marginLeft=&quot;40dp&quot;
-    android:text=&quot;Custom Title&quot;
-    android:textSize=&quot;15pt&quot;
-    android:textStyle=&quot;bold&quot; /&gt;</code></pre>
+<h4 id="自定义布局文件"><a href="#自定义布局文件" class="headerlink" title="自定义布局文件"></a>自定义布局文件</h4><p>Title自定义</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"60dp"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@drawable/shape_title"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">ImageView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"60dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"60dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_adb_black_24dp"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"center_vertical"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"40dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:text</span>=<span class="hljs-string">"Custom Title"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:textSize</span>=<span class="hljs-string">"15pt"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:textStyle</span>=<span class="hljs-string">"bold"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content Area自定义</span><br></pre></td></tr></table></figure>
+<p>Content Area自定义</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_margin</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.TextInputLayout</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"10dp"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">EditText</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:hint</span>=<span class="hljs-string">"UserName"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">android.support.design.widget.TextInputLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.TextInputLayout</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:counterEnabled</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:counterMaxLength</span>=<span class="hljs-string">"40"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">EditText</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:fontFamily</span>=<span class="hljs-string">"sans-serif"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:hint</span>=<span class="hljs-string">"Password"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:inputType</span>=<span class="hljs-string">"textPassword"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">android.support.design.widget.TextInputLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_margin</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@drawable/shaperect"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">"Submit"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">Button</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_weight</span>=<span class="hljs-string">"1"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@drawable/shape_two"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:text</span>=<span class="hljs-string">"Reset"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<?xml version="1.0" encoding="utf-8"?>
-<p><linearlayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_margin="@dimen/activity_horizontal_margin" android:orientation="vertical"></linearlayout></p>
-<pre><code>&lt;android.support.design.widget.TextInputLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_marginTop=&quot;10dp&quot;&gt;
+<h4 id="效果-4"><a href="#效果-4" class="headerlink" title="效果"></a>效果</h4><p> <img src="https://img-blog.csdn.net/20160706134047292" alt="这里写图片描述"></p>
+<h4 id="备注-2"><a href="#备注-2" class="headerlink" title="备注"></a>备注</h4><p>自定义标题栏和显示的内容，Action Button可以通过在Content中添加Button的方式来实现，丰富了Alert Dialog的显示内容，Alert Dialog中应该还有很多东西待挖掘，锄头需要挥起来~</p>
 
-    &lt;EditText
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:hint=&quot;UserName&quot; /&gt;
-&lt;/android.support.design.widget.TextInputLayout&gt;
-
-&lt;android.support.design.widget.TextInputLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    app:counterEnabled=&quot;true&quot;
-    app:counterMaxLength=&quot;40&quot;&gt;
-
-    &lt;EditText
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:fontFamily=&quot;sans-serif&quot;
-        android:hint=&quot;Password&quot;
-        android:inputType=&quot;textPassword&quot; /&gt;
-&lt;/android.support.design.widget.TextInputLayout&gt;
-
-&lt;LinearLayout
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;wrap_content&quot;
-    android:layout_margin=&quot;@dimen/activity_vertical_margin&quot;
-    android:orientation=&quot;horizontal&quot;&gt;
-
-    &lt;Button
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:layout_weight=&quot;1&quot;
-        android:background=&quot;@drawable/shaperect&quot;
-        android:text=&quot;Submit&quot; /&gt;
-
-    &lt;Button
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:layout_weight=&quot;1&quot;
-        android:background=&quot;@drawable/shape_two&quot;
-        android:text=&quot;Reset&quot; /&gt;
-&lt;/LinearLayout&gt;</code></pre>
-
-<pre><code>_**效果**_
-
-![这里写图片描述](https://img-blog.csdn.net/20160706134047292)
-
-_**备注**_
-
-自定义标题栏和显示的内容，Action Button可以通过在Content中添加Button的方式来实现，丰富了Alert Dialog的显示内容，Alert Dialog中应该还有很多东西待挖掘，锄头需要挥起来~
-
-</code></pre>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -457,7 +397,7 @@ _**备注**_
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -548,7 +488,7 @@ _**备注**_
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -588,7 +528,7 @@ _**备注**_
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -666,7 +606,7 @@ _**备注**_
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -683,18 +623,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -702,18 +642,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -721,18 +661,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -740,18 +680,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -759,18 +699,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -794,7 +734,7 @@ _**备注**_
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1080,7 +1020,7 @@ _**备注**_
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1091,7 +1031,7 @@ _**备注**_
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1102,7 +1042,7 @@ _**备注**_
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1113,7 +1053,7 @@ _**备注**_
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1135,7 +1075,7 @@ _**备注**_
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1158,6 +1098,17 @@ _**备注**_
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1330,7 +1281,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1422,6 +1373,13 @@ _**备注**_
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1547,7 +1505,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1573,6 +1531,13 @@ _**备注**_
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1582,7 +1547,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1757,14 +1722,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1793,18 +1751,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1812,18 +1770,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1831,18 +1789,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1850,18 +1808,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1869,18 +1827,18 @@ _**备注**_
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1904,7 +1862,7 @@ _**备注**_
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2190,7 +2148,7 @@ _**备注**_
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2201,7 +2159,7 @@ _**备注**_
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2212,7 +2170,7 @@ _**备注**_
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2223,7 +2181,7 @@ _**备注**_
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2245,7 +2203,7 @@ _**备注**_
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2268,6 +2226,17 @@ _**备注**_
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2440,7 +2409,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2532,6 +2501,13 @@ _**备注**_
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2657,7 +2633,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2683,6 +2659,13 @@ _**备注**_
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2692,7 +2675,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2867,14 +2850,7 @@ _**备注**_
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

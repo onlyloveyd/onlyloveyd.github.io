@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51865070      ###介绍  Layout manager that allows the user to flip left and right through pages of data. You supply an implemen">
+    <meta name="description" content="简介 Layout manager that allows the user to flip left and rightthrough pages of data. You supply an implementation of a{@link PagerAdapter} to generate the pages that the view shows. ViewPager is most o">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（十七）》 ViewPager">
 <meta property="og:url" content="http://yoursite.com/2016/07/09/《Android 基础（十七）》 ViewPager/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51865070      ###介绍  Layout manager that allows the user to flip left and right through pages of data. You supply an implemen">
+<meta property="og:description" content="简介 Layout manager that allows the user to flip left and rightthrough pages of data. You supply an implementation of a{@link PagerAdapter} to generate the pages that the view shows. ViewPager is most o">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:03:37.009Z">
+<meta property="og:updated_time" content="2019-06-16T13:09:42.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（十七）》 ViewPager">
-<meta name="twitter:description" content="版权声明：本文为博主原创文章，未经博主允许不得转载。 https://blog.csdn.net/poorkick/article/details/51865070      ###介绍  Layout manager that allows the user to flip left and right through pages of data. You supply an implemen">
+<meta name="twitter:description" content="简介 Layout manager that allows the user to flip left and rightthrough pages of data. You supply an implementation of a{@link PagerAdapter} to generate the pages that the view shows. ViewPager is most o">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2033 个字)
+                    13 分钟 读完 (大约 1950 个字)
                 </span>
                 
                 
@@ -168,85 +168,115 @@
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51865070" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51865070</a>   </p>
-<p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>Layout manager that allows the user to flip left and right<br> through pages of data. You supply an implementation of a<br> {@link PagerAdapter} to generate the pages that the view shows.</p>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
+<p>Layout manager that allows the user to flip left and right<br>through pages of data. You supply an implementation of a<br>{@link PagerAdapter} to generate the pages that the view shows.</p>
+<p>ViewPager is most often used in conjunction with {@link android.app.Fragment},<br>which is a convenient way to supply and manage the lifecycle of each page.<br>There are standard adapters implemented for using fragments with the ViewPager,<br>which cover the most common use cases. These are<br>{@link android.support.v4.app.FragmentPagerAdapter} and<br>{@link android.support.v4.app.FragmentStatePagerAdapter}; each of these<br>classes have simple code showing how to build a full user interface<br>with them.</p>
+<p>Views which are annotated with the {@link DecorView} annotation are treated as<br>part of the view pagers ‘decor’. Each decor view’s position can be controlled via<br>its {@code android:layout_gravity} attribute. For example:</p>
 </blockquote>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">android.support.v4.view.ViewPager</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v4.view.PagerTitleStrip</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"top"</span> /&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v4.view.ViewPager</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>ViewPager is most often used in conjunction with {@link android.app.Fragment},<br> which is a convenient way to supply and manage the lifecycle of each page.<br> There are standard adapters implemented for using fragments with the ViewPager,<br> which cover the most common use cases. These are<br> {@link android.support.v4.app.FragmentPagerAdapter} and<br> {@link android.support.v4.app.FragmentStatePagerAdapter}; each of these<br> classes have simple code showing how to build a full user interface<br> with them.</p>
-</blockquote>
-<blockquote>
-<p>Views which are annotated with the {@link DecorView} annotation are treated as<br> part of the view pagers ‘decor’. Each decor view’s position can be controlled via<br> its {@code android:layout_gravity} attribute. For example:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-</blockquote>
-<p> &lt;android.support.v4.view.ViewPager<br> android:layout_width=”match_parent”<br> android:layout_height=”match_parent”&gt;<br> &lt;android.support.v4.view.PagerTitleStrip<br> android:layout_width=”match_parent”<br> android:layout_height=”wrap_content”<br> android:layout_gravity=”top” /&gt;<br> &lt;/android.support.v4.view.ViewPager&gt;  </p>
-<blockquote>
-<p>翻译：<br> ViewPager允许用户通过载有数据的页面实现左右滑动。开发者需要自己实现PagerAdapter来生成需要显示的页面。<br> ViewPager通常回合Fragment结合起来使用，这样实现起来比较简单同时也便于管理每个页面的生命周期。Android存在标准的适配器模板针对Fragment和ViewPager结合使用的方式：<br> android.support.v4.app.FragmentPagerAdapter<br> android.support.v4.app.FragmentStatePagerAdapter<br> 每个类都有简单的说明，告诉开发者如何通过他们来实现与用户的交互。</p>
-</blockquote>
-<blockquote>
+<p>翻译：<br>ViewPager允许用户通过载有数据的页面实现左右滑动。开发者需要自己实现PagerAdapter来生成需要显示的页面。<br>ViewPager通常回合Fragment结合起来使用，这样实现起来比较简单同时也便于管理每个页面的生命周期。Android存在标准的适配器模板针对Fragment和ViewPager结合使用的方式：<br>android.support.v4.app.FragmentPagerAdapter<br>android.support.v4.app.FragmentStatePagerAdapter<br>每个类都有简单的说明，告诉开发者如何通过他们来实现与用户的交互。</p>
 <p>被注释成DecorView的视图均可当做ViewPager的一部分，每一个DecorView的位置可以通过 android:layout_gravity属性来控制，例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; &lt;android.support.v4.view.ViewPager </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
-<blockquote>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">android:layout_height=&amp;quot;match_parent&amp;quot;&amp;gt;</span><br><span class="line">&amp;lt;android.support.v4.view.PagerTitleStrip</span><br><span class="line">    android:layout_width=&amp;quot;match_parent&amp;quot;</span><br><span class="line">    android:layout_height=&amp;quot;wrap_content&amp;quot;</span><br><span class="line">    android:layout_gravity=&amp;quot;top&amp;quot; /&amp;gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">android.support.v4.view.ViewPager</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v4.view.PagerTitleStrip</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span>  </span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"top"</span> /&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v4.view.ViewPager</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> &lt;/android.support.v4.view.ViewPager&gt;  </p>
-<blockquote>
-<p>翻译有点潦草，大致的意思应该是这样~</p>
-</blockquote>
-<hr>
-<p> ###<strong>类结构</strong><br> <img src="https://img-blog.csdn.net/20160709064427451" alt="这里写图片描述"></p>
-<p> 常用成员的功能介绍</p>
-<pre><code>成员                            | 功能                          
------------------------------ | ---------------------------- 
-ViewPager()                   | 构造方法                        
-addOnAdapterChangeListener    | 添加一个OnAdapterChangeListener 
-removeOnAdapterChangeListener | 移除一个OnAdapterChangeListener 
-setCurrentItem                | 设置当前Pager的index             
-addOnePageChangeListener      | 设置一个页面改变监听器                 
-addOnePageChangeListener      | 移除一个页面改变监听器                 
-clearOnPageChangeListener     | 移除所有的页面改变监听器                
-setPageTransformer            | 设置页面之间切换的过程中的PageTransformer</code></pre><h2 id="其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。"><a href="#其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。" class="headerlink" title=" 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 "></a> 其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。 </h2><p> ###<strong>实际使用</strong>  </p>
-<p> ####<strong>1. 简单显示</strong><br> 布局文件</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.opensourcedemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v4.view.ViewPager</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:id=&quot;@+id/viewpager&quot;</span><br><span class="line">        &gt;</span><br><span class="line">    &lt;/android.support.v4.view.ViewPager&gt;</span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p><img src="https://img-blog.csdn.net/20160709064427451" alt="这里写图片描述"></p>
+<p>常用成员的功能介绍</p>
+<table>
+<thead>
+<tr>
+<th>成员</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ViewPager()</td>
+<td>构造方法</td>
+</tr>
+<tr>
+<td>addOnAdapterChangeListener</td>
+<td>添加一个OnAdapterChangeListener</td>
+</tr>
+<tr>
+<td>removeOnAdapterChangeListener</td>
+<td>移除一个OnAdapterChangeListener</td>
+</tr>
+<tr>
+<td>setCurrentItem</td>
+<td>设置当前Pager的index</td>
+</tr>
+<tr>
+<td>addOnePageChangeListener</td>
+<td>设置一个页面改变监听器</td>
+</tr>
+<tr>
+<td>addOnePageChangeListener</td>
+<td>移除一个页面改变监听器</td>
+</tr>
+<tr>
+<td>clearOnPageChangeListener</td>
+<td>移除所有的页面改变监听器</td>
+</tr>
+<tr>
+<td>setPageTransformer</td>
+<td>设置页面之间切换的过程中PageTransformer</td>
+</tr>
+</tbody></table>
+<p>其他的一些方法从使用程度上来看比较的少见，源码内容大家通过AS都是可以查看到的。</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="简单显示"><a href="#简单显示" class="headerlink" title="简单显示"></a>简单显示</h3><p>布局文件</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">RelativeLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"mraz.com.opensourcedemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v4.view.ViewPager</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/viewpager"</span></span></span><br><span class="line"><span class="hljs-tag">        &gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v4.view.ViewPager</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> 代码内容<br> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.view.ViewPager;</span><br><span class="line">import android.support.v4.widget.ViewDragHelper;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.util.Log;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.view.Window;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;String&gt; sourceList;</span><br><span class="line">    private static final float MIN_SCALE = 0.5f;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        </span><br><span class="line">        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);</span><br><span class="line">        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());</span><br><span class="line">        viewPager.setAdapter(myPagerAdapter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码内容<br>MainActivity.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v4.view.ViewPager;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v4.widget.ViewDragHelper;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="hljs-keyword">import</span> android.util.Log;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.View;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.Window;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;String&gt; sourceList;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> MIN_SCALE = <span class="hljs-number">0.5f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);</span><br><span class="line">        MyPagerAdapter myPagerAdapter = <span class="hljs-keyword">new</span> MyPagerAdapter(getSupportFragmentManager());</span><br><span class="line">        viewPager.setAdapter(myPagerAdapter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> Adapter类</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line">import android.support.v4.app.Fragment;</span><br><span class="line">import android.support.v4.app.FragmentManager;</span><br><span class="line">import android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Created by Mraz on 2016/7/8.</span><br><span class="line"> */</span><br><span class="line">public class MyPagerAdapter extends FragmentPagerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    public static final String[] titles = &#123;&quot;Android&quot;,&quot; Pet&quot;,&quot;Gift&quot;&#125;;</span><br><span class="line"></span><br><span class="line">    public MyPagerAdapter(FragmentManager fm) &#123;</span><br><span class="line">        super(fm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Fragment getItem(int position) &#123;</span><br><span class="line">        switch (position) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                return new FirstFragment();</span><br><span class="line">            case 1:</span><br><span class="line">                return new SecondFragment();</span><br><span class="line">            case 2:</span><br><span class="line">                return new ThreeFragment();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return 3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adapter类</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.opensourcedemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v4.app.FragmentManager;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Created by Mraz on 2016/7/8.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyPagerAdapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String[] titles = &#123;<span class="hljs-string">"Android"</span>,<span class="hljs-string">" Pet"</span>,<span class="hljs-string">"Gift"</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyPagerAdapter</span><span class="hljs-params">(FragmentManager fm)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(fm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Fragment <span class="hljs-title">getItem</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (position) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FirstFragment();</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SecondFragment();</span><br><span class="line">            <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreeFragment();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> MyPagerAdapter 继承FragmentPagerAdapter，当创建这个类并继承FragmentPagerAdapter的时候，AS会提示开发者需要实现两个方法，并且要添加一个构造函数，getItem就是根据位置返回对应的Fragment，getCount就是返回页面数，这里我是直接返回的对应的内容，数目也是固定的，在实际开发过程中，使用ArrayList等数据结构来传递合适的参数，可以更灵活的设置Adapter的内容，使ViewPager的内容更丰富。这里的 FirstFragment，SecondFragment，ThreeFragment内容只是一个简单的图片资源，对应的布局文件也比较简单，不贴代码了。</p>
-<p> 实际效果  </p>
-<p> <img src="https://img-blog.csdn.net/20160709081338443" alt="这里写图片描述"></p>
-<hr>
-<p> ####<strong>2. 添加PageTransformer</strong><br> 代码内容</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">private static final float MIN_SCALE = 0.5f;</span><br><span class="line">...</span><br><span class="line">viewPager.setPageTransformer(true, new ViewPager.PageTransformer() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void transformPage(View view, float position) &#123;</span><br><span class="line"></span><br><span class="line">        int pageWidth = view.getWidth();</span><br><span class="line"></span><br><span class="line">        if (position &lt; -1) &#123; // [-Infinity,-1)</span><br><span class="line">            // This page is way off-screen to the left.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 0) &#123; // [-1,0]</span><br><span class="line">            // Use the default slide transition when moving to the left page</span><br><span class="line">            view.setAlpha(1 + position);</span><br><span class="line">            view.setTranslationX(0);</span><br><span class="line"></span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else if (position &lt;= 1) &#123; // (0,1]</span><br><span class="line">            // Fade the page out.</span><br><span class="line">            view.setAlpha(1 - position);</span><br><span class="line"></span><br><span class="line">            // Counteract the default slide transition</span><br><span class="line">            view.setTranslationX(pageWidth * -position);</span><br><span class="line"></span><br><span class="line">            // Scale the page down (between MIN_SCALE and 1)</span><br><span class="line">            float scaleFactor = MIN_SCALE</span><br><span class="line">                    + (1 - MIN_SCALE) * (1 - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123; // (1,+Infinity]</span><br><span class="line">            // This page is way off-screen to the right.</span><br><span class="line">            view.setAlpha(0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>MyPagerAdapter 继承FragmentPagerAdapter，当创建这个类并继承FragmentPagerAdapter的时候，AS会提示开发者需要实现两个方法，并且要添加一个构造函数，getItem就是根据位置返回对应的Fragment，getCount就是返回页面数，这里我是直接返回的对应的内容，数目也是固定的，在实际开发过程中，使用ArrayList等数据结构来传递合适的参数，可以更灵活的设置Adapter的内容，使ViewPager的内容更丰富。这里的 FirstFragment，SecondFragment，ThreeFragment内容只是一个简单的图片资源，对应的布局文件也比较简单，不贴代码了。</p>
+<p>实际效果  </p>
+<p><img src="https://img-blog.csdn.net/20160709081338443" alt="这里写图片描述"></p>
+<h3 id="添加PageTransformer"><a href="#添加PageTransformer" class="headerlink" title="添加PageTransformer"></a>添加PageTransformer</h3><p>代码内容</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> MIN_SCALE = <span class="hljs-number">0.5f</span>;</span><br><span class="line">...</span><br><span class="line">viewPager.setPageTransformer(<span class="hljs-keyword">true</span>, <span class="hljs-keyword">new</span> ViewPager.PageTransformer() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">transformPage</span><span class="hljs-params">(View view, <span class="hljs-keyword">float</span> position)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> pageWidth = view.getWidth();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (position &lt; -<span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// [-Infinity,-1)</span></span><br><span class="line">            <span class="hljs-comment">// This page is way off-screen to the left.</span></span><br><span class="line">            view.setAlpha(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (position &lt;= <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// [-1,0]</span></span><br><span class="line">            <span class="hljs-comment">// Use the default slide transition when moving to the left page</span></span><br><span class="line">            view.setAlpha(<span class="hljs-number">1</span> + position);</span><br><span class="line">            view.setTranslationX(<span class="hljs-number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">float</span> scaleFactor = MIN_SCALE</span><br><span class="line">                    + (<span class="hljs-number">1</span> - MIN_SCALE) * (<span class="hljs-number">1</span> - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (position &lt;= <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// (0,1]</span></span><br><span class="line">            <span class="hljs-comment">// Fade the page out.</span></span><br><span class="line">            view.setAlpha(<span class="hljs-number">1</span> - position);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment">// Counteract the default slide transition</span></span><br><span class="line">            view.setTranslationX(pageWidth * -position);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-comment">// Scale the page down (between MIN_SCALE and 1)</span></span><br><span class="line">            <span class="hljs-keyword">float</span> scaleFactor = MIN_SCALE</span><br><span class="line">                    + (<span class="hljs-number">1</span> - MIN_SCALE) * (<span class="hljs-number">1</span> - Math.abs(position));</span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// (1,+Infinity]</span></span><br><span class="line">            <span class="hljs-comment">// This page is way off-screen to the right.</span></span><br><span class="line">            view.setAlpha(<span class="hljs-number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p> 上面是参照例子写的一个页面切换效果，主要关注的是透明度和大小的改变，在页面切换的过程中，对于离开的页面变透明，变小，进入的页面变明显，变大。看下ViewPager.PageTransformer这个接口</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A PageTransformer is invoked whenever a visible/attached page is scrolled.</span><br><span class="line"> * This offers an opportunity for the application to apply a custom transformation</span><br><span class="line"> * to the page views using animation properties.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;As property animation is only supported as of Android 3.0 and forward,</span><br><span class="line"> * setting a PageTransformer on a ViewPager on earlier platform versions will</span><br><span class="line"> * be ignored.&lt;/p&gt;</span><br><span class="line"> */</span><br><span class="line">public interface PageTransformer &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Apply a property transformation to the given page.</span><br><span class="line">     *</span><br><span class="line">     * @param page Apply the transformation to this page</span><br><span class="line">     * @param position Position of page relative to the current front-and-center</span><br><span class="line">     *                 position of the pager. 0 is front and center. 1 is one full</span><br><span class="line">     *                 page position to the right, and -1 is one page position to the left.</span><br><span class="line">     */</span><br><span class="line">    public void transformPage(View page, float position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是参照例子写的一个页面切换效果，主要关注的是透明度和大小的改变，在页面切换的过程中，对于离开的页面变透明，变小，进入的页面变明显，变大。看下ViewPager.PageTransformer这个接口</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * A PageTransformer is invoked whenever a visible/attached page is scrolled.</span></span><br><span class="line"><span class="hljs-comment"> * This offers an opportunity for the application to apply a custom transformation</span></span><br><span class="line"><span class="hljs-comment"> * to the page views using animation properties.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;As property animation is only supported as of Android 3.0 and forward,</span></span><br><span class="line"><span class="hljs-comment"> * setting a PageTransformer on a ViewPager on earlier platform versions will</span></span><br><span class="line"><span class="hljs-comment"> * be ignored.&lt;/p&gt;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">PageTransformer</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Apply a property transformation to the given page.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> page Apply the transformation to this page</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> position Position of page relative to the current front-and-center</span></span><br><span class="line"><span class="hljs-comment">     *                 position of the pager. 0 is front and center. 1 is one full</span></span><br><span class="line"><span class="hljs-comment">     *                 page position to the right, and -1 is one page position to the left.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">transformPage</span><span class="hljs-params">(View page, <span class="hljs-keyword">float</span> position)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 只需要实现一个方法transformPage，传入的参数，第一个参数是页面视图，第二个参数很重要，指的是当前页面所处的一种状态，根据position来判断，我们添加的所有效果，都是要依据这个值来做处理，当我们滑动页面的时候，这个值在不停的变化，并且不同的page的值不相同。</p>
-<pre><code>取值             | 含义                       
--------------- | ------------------------- 
-[-Infinity,-1) | 这个范围的视图已经看不见了            
-[-1,0]         | 即将退出界面的page的变化范围，从0慢慢变成-1
-[0,1]          | 即将进入界面的page的变化范围，从1慢慢变成0 
-(1,+Infinity]  | 这个范围的视图已经看不见了            </code></pre><p>可以把这个取值范围和数据概念——数轴——联系起来，就比较容易理解了，通过上面这个过场和下面的实际效果图，应该可以看出一二，通过这个例子，也可以尝试着实现自定义的过场效果</p>
-<p> 实际效果  </p>
-<p> <img src="https://img-blog.csdn.net/20160709083726790" alt="这里写图片描述"></p>
-<hr>
-<p> ####<strong>3. 添加OnPageChangeListener</strong><br> 代码内容  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrolled position = &quot; + position + &quot; positionOffset = &quot; + positionOffset + &quot; positionOffsetPixels = &quot; + positionOffsetPixels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageSelected(int position) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageSelected position = &quot; + position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line">        Log.e(TAG, &quot;onPageScrollStateChanged state = &quot; + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>只需要实现一个方法transformPage，传入的参数，第一个参数是页面视图，第二个参数很重要，指的是当前页面所处的一种状态，根据position来判断，我们添加的所有效果，都是要依据这个值来做处理，当我们滑动页面的时候，这个值在不停的变化，并且不同的page的值不相同。</p>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[-Infinity,-1)</td>
+<td>这个范围的视图已经看不见了</td>
+</tr>
+<tr>
+<td>[-1,0]</td>
+<td>即将退出界面的page的变化范围，从0慢慢变成-1</td>
+</tr>
+<tr>
+<td>[0,1]</td>
+<td>即将进入界面的page的变化范围，从1慢慢变成0</td>
+</tr>
+<tr>
+<td>(1,+Infinity]</td>
+<td>这个范围的视图已经看不见了</td>
+</tr>
+</tbody></table>
+<p>可以把这个取值范围和数据概念——数轴——联系起来，就比较容易理解了，通过上面这个过场和下面的实际效果图，应该可以看出一二，通过这个例子，也可以尝试着实现自定义的过场效果</p>
+<p>实际效果  </p>
+<p><img src="https://img-blog.csdn.net/20160709083726790" alt="这里写图片描述"></p>
+<h3 id="添加OnPageChangeListener"><a href="#添加OnPageChangeListener" class="headerlink" title="添加OnPageChangeListener"></a>添加OnPageChangeListener</h3><p>代码内容  </p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">viewPager.addOnPageChangeListener(<span class="hljs-keyword">new</span> ViewPager.OnPageChangeListener() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrolled</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position, <span class="hljs-keyword">float</span> positionOffset, <span class="hljs-keyword">int</span> positionOffsetPixels)</span> </span>&#123;</span><br><span class="line">        Log.e(TAG, <span class="hljs-string">"onPageScrolled position = "</span> + position + <span class="hljs-string">" positionOffset = "</span> + positionOffset + <span class="hljs-string">" positionOffsetPixels = "</span> + positionOffsetPixels);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageSelected</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Log.e(TAG, <span class="hljs-string">"onPageSelected position = "</span> + position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrollStateChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">        Log.e(TAG, <span class="hljs-string">"onPageScrollStateChanged state = "</span> + state);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p> 可以看到当滑动页面的时候，会有一大串的Log打印出来 <img src="https://img-blog.csdn.net/20160709084254877" alt="这里写图片描述"> 看下OnPagerChangeListener这个接口的定义 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Callback interface for responding to changing state of the selected page.</span><br><span class="line"> */</span><br><span class="line">public interface OnPageChangeListener &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when the current page is scrolled, either as part</span><br><span class="line">     * of a programmatically initiated smooth scroll or a user initiated touch scroll.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the first page currently being displayed.</span><br><span class="line">     *                 Page position+1 will be visible if positionOffset is nonzero.</span><br><span class="line">     * @param positionOffset Value from [0, 1) indicating the offset from the page at position.</span><br><span class="line">     * @param positionOffsetPixels Value in pixels indicating the offset from position.</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method will be invoked when a new page becomes selected. Animation is not</span><br><span class="line">     * necessarily complete.</span><br><span class="line">     *</span><br><span class="line">     * @param position Position index of the new selected page.</span><br><span class="line">     */</span><br><span class="line">    public void onPageSelected(int position);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Called when the scroll state changes. Useful for discovering when the user</span><br><span class="line">     * begins dragging, when the pager is automatically settling to the current page,</span><br><span class="line">     * or when it is fully stopped/idle.</span><br><span class="line">     *</span><br><span class="line">     * @param state The new scroll state.</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_IDLE</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_DRAGGING</span><br><span class="line">     * @see ViewPager#SCROLL_STATE_SETTLING</span><br><span class="line">     */</span><br><span class="line">    public void onPageScrollStateChanged(int state);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到当滑动页面的时候，会有一大串的Log打印出来 <img src="https://img-blog.csdn.net/20160709084254877" alt="这里写图片描述"> 看下OnPagerChangeListener这个接口的定义</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Callback interface for responding to changing state of the selected page.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">OnPageChangeListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * This method will be invoked when the current page is scrolled, either as part</span></span><br><span class="line"><span class="hljs-comment">     * of a programmatically initiated smooth scroll or a user initiated touch scroll.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> position Position index of the first page currently being displayed.</span></span><br><span class="line"><span class="hljs-comment">     *                 Page position+1 will be visible if positionOffset is nonzero.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> positionOffset Value from [0, 1) indicating the offset from the page at position.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> positionOffsetPixels Value in pixels indicating the offset from position.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrolled</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position, <span class="hljs-keyword">float</span> positionOffset, <span class="hljs-keyword">int</span> positionOffsetPixels)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * This method will be invoked when a new page becomes selected. Animation is not</span></span><br><span class="line"><span class="hljs-comment">     * necessarily complete.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> position Position index of the new selected page.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageSelected</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Called when the scroll state changes. Useful for discovering when the user</span></span><br><span class="line"><span class="hljs-comment">     * begins dragging, when the pager is automatically settling to the current page,</span></span><br><span class="line"><span class="hljs-comment">     * or when it is fully stopped/idle.</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> state The new scroll state.</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> ViewPager#SCROLL_STATE_IDLE</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> ViewPager#SCROLL_STATE_DRAGGING</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@see</span> ViewPager#SCROLL_STATE_SETTLING</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrollStateChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> state)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 指的一提的是  positionOffset 这个参数可以在onPageScrolled回调中拿到，而这个数值呢 就是和我们上面自定义过场的时候用到的 transformPage方法中传入的第二个参数position 有联系，只是这里的positionOffset取值范围为[0, 1)，上面的position中取值范围更广，但是从实际上来看，对我们影响比较大的就是当前切换的两个Page，也就是[-1,1]这个取值范围，所谓的负值可以理解成是相对概念，所以，这两个变量之间是存在关系的，如果不理解上面PageTransformer， 可以结合这个positionOffset变量的打印值加以理解。</p>
+<p>值得的一提的是  positionOffset 这个参数可以在onPageScrolled回调中拿到，而这个数值呢 就是和我们上面自定义过场的时候用到的 transformPage方法中传入的第二个参数position 有联系，只是这里的positionOffset取值范围为[0, 1)，上面的position中取值范围更广，但是从实际上来看，对我们影响比较大的就是当前切换的两个Page，也就是[-1,1]这个取值范围，所谓的负值可以理解成是相对概念，所以，这两个变量之间是存在关系的，如果不理解上面PageTransformer， 可以结合这个positionOffset变量的打印值加以理解。</p>
 
         </div>
         
@@ -405,7 +435,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -496,7 +526,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -536,7 +566,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -614,7 +644,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -631,18 +661,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -650,18 +680,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -669,18 +699,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -688,18 +718,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -707,18 +737,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -742,7 +772,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1028,7 +1058,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1039,7 +1069,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1050,7 +1080,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1061,7 +1091,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1083,7 +1113,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1106,6 +1136,17 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1278,7 +1319,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1370,6 +1411,13 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1495,7 +1543,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1521,6 +1569,13 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1530,7 +1585,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -1705,14 +1760,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1741,18 +1789,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1760,18 +1808,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1779,18 +1827,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1798,18 +1846,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1817,18 +1865,18 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1852,7 +1900,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2138,7 +2186,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2149,7 +2197,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2160,7 +2208,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2171,7 +2219,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2193,7 +2241,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2216,6 +2264,17 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2388,7 +2447,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -2480,6 +2539,13 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2605,7 +2671,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2631,6 +2697,13 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2640,7 +2713,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2815,14 +2888,7 @@ setPageTransformer            | 设置页面之间切换的过程中的PageTrans
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 

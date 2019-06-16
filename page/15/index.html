@@ -145,60 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-06-24T14:36:44.000Z">2016-06-24</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 990 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/06/24/《Android 基础（七）》 DrawerLayout and NavigationView/">《Android 基础（七）》 DrawerLayout and NavigationView</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
-<p>DrawerLayout是Support Library包中实现了侧滑菜单效果的控件<br>android.support.v4.widget.DrawerLayout<br>NavigationView是一个导航菜单框架，使用menu资源填充数据<br>常用来配合DrawerLayout使用</p>
-</blockquote>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/06/24/《Android 基础（七）》 DrawerLayout and NavigationView/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2016-06-22T16:22:59.000Z">2016-06-23</time>
                 
                 <div class="level-item">
@@ -209,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 2003 个字)
+                    13 分钟 读完 (大约 1934 个字)
                 </span>
                 
                 
@@ -222,103 +168,20 @@
             
         </h1>
         <div class="content">
-            <p>###介绍</p>
-<blockquote>
-<p>Action Bar是一种新増的导航栏功能，在Android 3.0之后加入到系统的API当中，它标识了用户当前操作界面的位置，并提供了额外的用户动作、界面导航等功能。使用ActionBar的好处是，它可以给提供一种全局统一的UI界面，使得用户在使用任何一款软件时都懂得该如何操作，并且ActionBar还可以自动适应各种不同大小的屏幕。下面是一张使用ActionBar的界面截图：<br> <img src="https://img-blog.csdn.net/20160622214830176" alt="这里写图片描述"></p>
-<p> 其中，[1]是ActionBar的图标，[2]是两个action按钮，[3]是overflow按钮。</p>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>Action Bar是一种新増的导航栏功能，在Android 3.0之后加入到系统的API当中，它标识了用户当前操作界面的位置，并提供了额外的用户动作、界面导航等功能。使用ActionBar的好处是，它可以给提供一种全局统一的UI界面，使得用户在使用任何一款软件时都懂得该如何操作，并且ActionBar还可以自动适应各种不同大小的屏幕。下面是一张使用ActionBar的界面截图：<br><img src="https://img-blog.csdn.net/20160622214830176" alt="这里写图片描述"></p>
+<p>其中，[1]是ActionBar的图标，[2]是两个action按钮，[3]是overflow按钮。</p>
 </blockquote>
-<p> ###基本使用</p>
-<p> ####添加ActionBar</p>
-<hr>
-<p> <em><strong>–布局文件–</strong></em><br> AndroidStudio自动创建的MainActivity继承自AppCompatActivity本身携带有ActionBar，这里想要使用ToolBar来实现ActionBar的功能，需要先修改下theme</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Base application theme. --&gt;</span><br><span class="line">&lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;</span><br><span class="line">    &lt;!-- Customize your theme here. --&gt;</span><br><span class="line">    &lt;item name=&quot;colorPrimary&quot;&gt;@color/colorPrimary&lt;/item&gt;</span><br><span class="line">    &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/colorPrimaryDark&lt;/item&gt;</span><br><span class="line">    &lt;item name=&quot;colorAccent&quot;&gt;@color/colorAccent&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 使用Theme.AppCompat.Light.NoActionBar作为activity的风格，这里插述一下相关属性代表的界面位置</p>
-<p> <img src="https://img-blog.csdn.net/20160622225422699" alt="这里写图片描述"></p>
-<p> 创建ToolBar对应的xml文件<br> toolbar.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;android.support.v7.widget.Toolbar android:id=&quot;@+id/toolbar&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:background=&quot;?attr/colorPrimary&quot;</span><br><span class="line">    android:minHeight=&quot;?attr/actionBarSize&quot;</span><br><span class="line">    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;</span><br><span class="line">    app:theme=&quot;@style/ThemeOverlay.AppCompat.ActionBar&quot;</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.v7.widget.Toolbar&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这里把这个文件单独作为一个xml方便多个layout中包含</p>
-<p> activity_main.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:id=&quot;@+id/rootlayout&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.actionbardemo.MainActivity&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;include layout=&quot;@layout/toolbar&quot;/&gt;</span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/tv_hello&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;Hello World!&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 主界面对应的layout中include刚才创建的toolbar.xml文件</p>
-<p> main_menu.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item android:id=&quot;@+id/action_search&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_search_black_24dp&quot;</span><br><span class="line">        app:actionViewClass=&quot;android.support.v7.widget.SearchView&quot;</span><br><span class="line">        android:title=&quot;Search&quot;</span><br><span class="line">        android:inputType=&quot;textCapWords&quot;</span><br><span class="line">        android:imeOptions=&quot;actionSearch&quot;</span><br><span class="line">        android:orderInCategory=&quot;80&quot;</span><br><span class="line">        app:showAsAction=&quot;ifRoom|collapseActionView&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item android:id=&quot;@+id/action_settings&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_apps_black_24dp&quot;</span><br><span class="line">        android:title=&quot;Settings&quot;</span><br><span class="line">        android:orderInCategory=&quot;100&quot;</span><br><span class="line">        app:showAsAction=&quot;always&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item android:id=&quot;@+id/action_info&quot;</span><br><span class="line">        android:title=&quot;Details&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_report_black_24dp&quot;</span><br><span class="line">        android:orderInCategory=&quot;90&quot;</span><br><span class="line">        app:showAsAction=&quot;ifRoom&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/menu&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>menu</strong></em> 对应的属性解释一下</p>
-<pre><code>属性值                 | 意义                                                                                                                          
-------------------- | ---------------------------------------------------------------------------------------------------------------------------- 
-id                  | 控件id                                                                                                                        
-title               | 标题（必需）                                                                                                                      
-icon                | 图标                                                                                                                          
-showAsAction        | 控制显示到actionbar还是overflow                                                                                                    
-actionViewClass     | 构建视图所使用的View                                                                                                                
-actionProviderClass | 基本同上                                                                                                                        
-menuCategory        | 同种菜单项的种类。该属性可取4个值：container、system、secondary和alternative。通过menuCategroy属性可以控制菜单项的位置。例如将属性设为system，表示该菜单项是系统菜单，应放在其他种类菜单项的后面。
-orderInCategory     | 同种类菜单的排列顺序。该属性需要设置一个整数值,越小越靠左                                                                                               </code></pre><p><strong><em>showAsAction</em></strong>的几个属性，解释一下</p>
-<pre><code>属性                 | 意义                                                                                                            
------------------- | -------------------------------------------------------------------------------------------------------------- 
-ifRoom             | 根据当前的空间大小调整                                                                                                   
-never              | 永远不会显示。只会在溢出列表中显示，而且只显示标题，所以在定义item的时候，最好把标题都带上                                                               
-always             | 无论是否溢出，都会显示                                                                                                   
-withText           | withText值示意Action bar要显示文本标题。Action bar会尽可能的显示这个标题，但是，如果图标有效并且受到Action bar空间的限制，文本标题有可能显示不全。                  
-collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮中，当用户选择这个按钮时，这个操作视窗展开。否则，这个操作视窗在默认的情况下是可见的，并且即便在用于不适用的时候，也要占据操作栏的有效空间。一般要配合ifRoom一起使用才会有效果。</code></pre><hr>
-<p> <em><strong>–代码使用–</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.actionbardemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.design.widget.Snackbar;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.support.v7.widget.Toolbar;</span><br><span class="line">import android.view.Menu;</span><br><span class="line">import android.view.MenuItem;</span><br><span class="line">import android.widget.LinearLayout;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    LinearLayout rootlayout;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        rootlayout = (LinearLayout) findViewById(R.id.rootlayout);</span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onCreateOptionsMenu(Menu menu) &#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.main_menu, menu);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onOptionsItemSelected(MenuItem item) &#123;</span><br><span class="line">        switch (item.getItemId()) &#123;</span><br><span class="line">            case R.id.action_info:</span><br><span class="line">                Snackbar.make(rootlayout, &quot; Info &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line">            case R.id.action_search:</span><br><span class="line">                Snackbar.make(rootlayout, &quot; Search &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line">            case R.id.action_settings:</span><br><span class="line">                Snackbar.make(rootlayout, &quot; Settings &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return super.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 比较关键的只有3行代码  </p>
-<p> Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar); //获取toolbar<br> setSupportActionBar(toolbar); //设置成ActionBar<br> getMenuInflater().inflate(R.menu.main_menu, menu); //创建actionbar的菜单项  </p>
-<p> 有了这些代码基本上就可以显示ActionBar，当然要实现与用户的交互，就需要对每一个item做对应的响应处理，这里根据菜单的id，做了简单的Snackbar的展示，开发者可以根据自己的需要实现更复杂的逻辑</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public boolean onOptionsItemSelected(MenuItem item) &#123;</span><br><span class="line">    switch (item.getItemId()) &#123;</span><br><span class="line">        case R.id.action_info:</span><br><span class="line">            Snackbar.make(rootlayout, &quot; Info &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">            break;</span><br><span class="line">            ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>–效果图–</strong></em><br> <img src="https://img-blog.csdn.net/20160622234313142" alt="这里写图片描述"></p>
-<hr>
-<p> ####使用Action View<br> 上面的例子中有个比较特殊的Menu Item</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;item android:id=&quot;@+id/action_search&quot;</span><br><span class="line">    android:icon=&quot;@drawable/ic_search_black_24dp&quot;</span><br><span class="line">    app:actionViewClass=&quot;android.support.v7.widget.SearchView&quot;</span><br><span class="line">    android:title=&quot;Search&quot;</span><br><span class="line">    android:inputType=&quot;textCapWords&quot;</span><br><span class="line">    android:imeOptions=&quot;actionSearch&quot;</span><br><span class="line">    android:orderInCategory=&quot;80&quot;</span><br><span class="line">    app:showAsAction=&quot;ifRoom|collapseActionView&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这里使用了actionViewClass，这个要设置shwoAsAction为 ifRoom|collapseActionView使用才行,其实删除collapseActionView，也是可以正常使用，只是体现的方式不一样。获取SearchView的方式</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MenuItem item = menu.findItem(R.id.action_search);</span><br><span class="line">SearchView searchView = (SearchView) item.getActionView();</span><br></pre></td></tr></table></figure>
-
-<p> SerachView 对象拿到之后可以对其属性进行操作。给Action View添加展开和收起的事件监听，实现方式</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public boolean onCreateOptionsMenu(Menu menu) &#123;</span><br><span class="line">    getMenuInflater().inflate(R.menu.main_menu, menu);</span><br><span class="line">    MenuItem searchitem = menu.findItem(R.id.action_search);</span><br><span class="line">    SearchView searchView = (SearchView) searchitem.getActionView();</span><br><span class="line">    MenuItemCompat.setOnActionExpandListener(searchitem, new MenuItemCompat.OnActionExpandListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public boolean onMenuItemActionExpand(MenuItem item) &#123;</span><br><span class="line">            Snackbar.make(rootlayout, &quot; onMenuItemActionExpand &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean onMenuItemActionCollapse(MenuItem item) &#123;</span><br><span class="line">            Snackbar.make(rootlayout, &quot; onMenuItemActionCollapse &quot;, Snackbar.LENGTH_SHORT).show();</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 拿到searchItem之后，执行<br> MenuItemCompat.setOnActionExpandListener(searchitem, new MenuItemCompat.OnActionExpandListener() )；</p>
-<p> <em><strong>–效果图–</strong></em><br> <img src="https://img-blog.csdn.net/20160622234339377" alt="这里写图片描述"></p>
-<hr>
-<p> ####使用ActionProviderClass<br> menu文件中使用</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;item android:title=&quot;Share&quot;</span><br><span class="line">    android:actionProviderClass=&quot;android.widget.ShareActionProvider&quot;</span><br><span class="line">    android:orderInCategory=&quot;100&quot;</span><br><span class="line">    app:showAsAction=&quot;always&quot;</span><br><span class="line">    /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 类似的方式获取ActionProvider</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MenuItem shareItem = menu.findItem(R.id.action_share);</span><br><span class="line">ShareActionProvider mShareActionProvider = (ShareActionProvider)</span><br><span class="line">                MenuItemCompat.getActionProvider(shareItem);</span><br><span class="line">mShareActionProvider.setShareIntent(……);</span><br></pre></td></tr></table></figure>
-
-<p> 针对ActionProvider可以实现自定义的ActionProvider，继承基础类ActionProvider</p>
-<hr>
-<p> ####ActionBar导航<br> 启用ActionBar图标导航的功能，可以允许用户根据当前应用的位置来在不同界面之间切换。比如，A界面展示了一个列表，点击某一项之后进入了B界面，这时B界面就应该启用ActionBar图标导航功能，这样就可以回到A界面。<br> 我们可以通过调用setDisplayHomeAsUpEnabled()方法来启用ActionBar图标导航功能</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">setSupportActionBar(toolbar);</span><br><span class="line">getSupportActionBar().setDisplayHomeAsUpEnabled(true);</span><br></pre></td></tr></table></figure>
-
-<p> 此时ActionBar左侧会出现一个返回的按钮<br> <img src="https://img-blog.csdn.net/20160622235705507" alt="这里写图片描述"></p>
-<p> 针对这返回按钮的事件响应还是在public boolean onOptionsItemSelected(MenuItem item) 方法中实现，它有一个固定的资源Id—- android.R.id.home </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case android.R.id.home:</span><br><span class="line">     finish();</span><br><span class="line">     break;</span><br></pre></td></tr></table></figure>
-
-<p> 简单的执行下和返回键相同的操作。结束当前activity</p>
-<p> <em><strong>实现Activity之间的快速切换</strong></em><br> 新建一个ParentActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.actionbardemo;</span><br><span class="line"></span><br><span class="line">import android.content.Context;</span><br><span class="line">import android.content.Intent;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.widget.TextView;</span><br><span class="line"></span><br><span class="line">public class ParentActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_parent);</span><br><span class="line"></span><br><span class="line">        final Context mContext = this;</span><br><span class="line">        TextView textView = (TextView) findViewById(R.id.tv_parent);</span><br><span class="line">        textView.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                Intent intent = new Intent();</span><br><span class="line">                intent.setClass(mContext , MainActivity.class);</span><br><span class="line">                startActivity(intent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> AndroidManifest.xml文件中做如下修改</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;application</span><br><span class="line">    ……&gt;</span><br><span class="line">    &lt;activity android:name=&quot;.ParentActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;intent-filter&gt;</span><br><span class="line">            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span><br><span class="line">        &lt;/intent-filter&gt;</span><br><span class="line">    &lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">    &lt;activity android:name=&quot;.MainActivity&quot;</span><br><span class="line">        android:parentActivityName=&quot;mraz.com.actionbardemo.ParentActivity&quot;&gt;</span><br><span class="line">    &lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">&lt;/application&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这一句很关键<br> android:parentActivityName=“mraz.com.actionbardemo.ParentActivity”&gt;<br> 设置父Activity的名称，ParentActivity为启动Activity同时是MainActivity的父Activity<br> 然后在MainActivity中针对这个返回按钮做一下处理，不再是简单的结束掉当前的这个Activity了，需要做出对应的导航的处理逻辑</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">case android.R.id.home:</span><br><span class="line">    Intent upIntent = NavUtils.getParentActivityIntent(this);</span><br><span class="line">    if (NavUtils.shouldUpRecreateTask(this, upIntent)) &#123;</span><br><span class="line">        TaskStackBuilder.create(this)</span><br><span class="line">                        .addNextIntentWithParentStack(upIntent)</span><br><span class="line">                        .startActivities();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</span><br><span class="line">            NavUtils.navigateUpTo(this, upIntent);</span><br><span class="line">        &#125;</span><br><span class="line">    break;</span><br></pre></td></tr></table></figure>
-
-<p> 其中，调用NavUtils.getParentActivityIntent()方法可以获取到跳转至父Activity的Intent，然后如果父Activity和当前Activity是在同一个Task中的，则直接调用navigateUpTo()方法进行跳转，如果不是在同一个Task中的，则需要借助TaskStackBuilder来创建一个新的Task。<br> 这样，就按照标准的规范成功实现ActionBar导航的功能了。</p>
-<p> <em><strong>–效果图–</strong></em></p>
-<p> <img src="https://img-blog.csdn.net/20160623002229268" alt="这里写图片描述"></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/06/23/《Android 基础（六）》 ActionBar/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -517,7 +380,8 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         </h1>
         <div class="content">
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>MVP，这里指的并不是篮球比赛中的MVP（最有价值球员），而是一种代码框架和设计思想，它是由MVC演变而来的。<br>MVP模式（Model-View-Presenter）是MVC模式的一个衍生。主要目的是为了解耦，使项目易于维护。Model 是业务逻辑和实体模型,View 是包含Presenter的引用。所要做的就是当有交互时，调用Presenter里的对应方法。通常会通过Activity实现Presenter 是负责完成View于Model间的交互，从Model里取数据，返回给View处理好的数据。<br></p></blockquote>
+<p>MVP，这里指的并不是篮球比赛中的MVP（最有价值球员），而是一种代码框架和设计思想，它是由MVC演变而来的。<br>MVP模式（Model-View-Presenter）是MVC模式的一个衍生。主要目的是为了解耦，使项目易于维护。Model 是业务逻辑和实体模型,View 是包含Presenter的引用。所要做的就是当有交互时，调用Presenter里的对应方法。通常会通过Activity实现Presenter 是负责完成View于Model间的交互，从Model里取数据，返回给View处理好的数据。</p>
+</blockquote>
         </div>
         
         
@@ -556,7 +420,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 280 个字)
+                    2 分钟 读完 (大约 272 个字)
                 </span>
                 
                 
@@ -569,26 +433,17 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
             
         </h1>
         <div class="content">
-            <p>  ####介绍<br> BroadcastReceiver：广播接收者，很形象，广播发送，类比生活中的广播，有能力听得到的都可以介绍到这个信息，然后在大脑中反映。对应到Android中就是SendBroadcast和onReceive。<br> 广播之间信息的传递是通过Intent对象来传递的，Intent调用分为显示调用的隐式调用两种。</p>
-<p> ####使用方法<br> 1 . 广播接收者</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class MyReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">    public static  final String HELLOACTION = &quot;com.example.mraz.learnbroadcastreceiver.android.intent.action.HELLO&quot;;</span><br><span class="line"></span><br><span class="line">    public MyReceiver() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">        String str = intent.getStringExtra(&quot;message&quot;);</span><br><span class="line">        System.out.println(&quot;on Reveiver&quot; + str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 2 . 静态注册<br> AndroidManifest.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver</span><br><span class="line">    android:name=&quot;.MyReceiver&quot;</span><br><span class="line">    android:enabled=&quot;true&quot;</span><br><span class="line">    android:exported=&quot;true&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=&quot;com.example.mraz.learnbroadcastreceiver.android.intent.action.HELLO&quot;/&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 3 . 动态注册</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter intentFilter = new IntentFilter();</span><br><span class="line">intentFilter.addAction(MyReceiver.HELLOACTION);</span><br><span class="line">registerReceiver(myReceiver, intentFilter);</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unregisterReceiver(myReceiver);//解除注册</span><br></pre></td></tr></table></figure>
-
-<p> ####测试结果<br> Demo界面<br> <img src="https://img-blog.csdn.net/20160524235805586" alt="这里写图片描述"></p>
-<p> 静态注册方式下：<br> 发送广播-&gt;取消注册 -&gt;发送广播<br> <img src="https://img-blog.csdn.net/20160524235933040" alt="这里写图片描述"></p>
-<p> 动态注册方式下：<br> 发送广播-&gt;注册广播-&gt;发送广播-&gt; 取消注册 -&gt; 发送广播<br> <img src="https://img-blog.csdn.net/20160525000206193" alt="这里写图片描述"></p>
-<p> 天色已晚，来日再战！！</p>
-
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>BroadcastReceiver：广播接收者，很形象，广播发送，类比生活中的广播，有能力听得到的都可以介绍到这个信息，然后在大脑中反映。对应到Android中就是SendBroadcast和onReceive。<br>广播之间信息的传递是通过Intent对象来传递的，Intent调用分为显示调用的隐式调用两种。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/05/25/《Android 基础（二）》 BroadcastReceiver/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -843,6 +698,71 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2016-05-04T13:55:46.000Z">2016-05-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android应用/">Android应用</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 914 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2016/05/04/《Android 应用 之路》 天气预报（三）/">《Android 应用 之路》 天气预报（三）</a>
+            
+        </h1>
+        <div class="content">
+            <p>  昨天介绍了基本的载入界面，今天介绍下天气信息显示界面的代码</p>
+<ol>
+<li>基本ListView显示 </li>
+<li>搜索框，查询城市  上一篇文章中，载入界面通过showWeatherInfo()方法跳转到天气信息显示界面</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">private void showWeatherInfo() &#123;</span><br><span class="line">    Bundle bundle = new Bundle();//bundle用来传递weatherinfolist</span><br><span class="line">    bundle.putSerializable(Utils.WEATHERINFO, (Serializable) weatherInfoList);</span><br><span class="line">    Intent intent = new Intent(MyActivity.this, MainActivity.class);</span><br><span class="line">    //跳转到MainActivity</span><br><span class="line">    intent.putExtra(Utils.WEATHERINFO, bundle);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">    finish();//结束当前Activity</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如下是用于显示天气信息的MainActivity的内容，注意注释</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends Activity &#123;</span><br><span class="line"></span><br><span class="line">    //定义TAG是用来打Log的</span><br><span class="line">    private static final String TAG = &quot;MyActivity&quot;;</span><br><span class="line">    private ListView mListView;//ListView用来显示天气信息</span><br><span class="line">    private WeatherAdapter mWeatherAdapter;//ListView对应的Adapter</span><br><span class="line">    private EditText mSearchEt;//搜索框</span><br><span class="line"></span><br><span class="line">    private ArrayList&lt;WeatherInfo&gt; weatherInfoList;//全部天气信息List</span><br><span class="line">    private ArrayList&lt;WeatherInfo&gt; resultList;//根据搜索框输入的内容显示的结果List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Called when the activity is first created.</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        resultList = new ArrayList&lt;WeatherInfo&gt;();</span><br><span class="line"></span><br><span class="line">        Intent intent = getIntent();</span><br><span class="line">        Bundle bundle = intent.getBundleExtra(Utils.WEATHERINFO);//获取Intent中携带的信息</span><br><span class="line">        weatherInfoList = (ArrayList&lt;WeatherInfo&gt;) bundle.getSerializable(Utils.WEATHERINFO);</span><br><span class="line">        Log.e(TAG, &quot;weatherinfo = &quot; + weatherInfoList.toString());</span><br><span class="line"></span><br><span class="line">        mSearchEt = (EditText) findViewById(R.id.et_search);</span><br><span class="line">        mListView = (ListView) findViewById(R.id.lvView);</span><br><span class="line">        mWeatherAdapter = new WeatherAdapter(this, weatherInfoList);</span><br><span class="line">        mListView.setAdapter(mWeatherAdapter);</span><br><span class="line"></span><br><span class="line">        //设置TextWathcer()根据输入框的文本变化显示不同的list</span><br><span class="line">        mSearchEt.addTextChangedListener(new TextWatcher() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void afterTextChanged(Editable editable) &#123;</span><br><span class="line">                resultList.clear();</span><br><span class="line">                String searchstr = mSearchEt.getText().toString();</span><br><span class="line">                if(searchstr==null) &#123;</span><br><span class="line">                    mWeatherAdapter.setWeatherInfoList(weatherInfoList);</span><br><span class="line">                    mWeatherAdapter.notifyDataSetChanged();</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    for (int i = 0; i &lt; weatherInfoList.size(); i++) &#123;</span><br><span class="line">                        String cityname = weatherInfoList.get(i).getCity();</span><br><span class="line">                        if (cityname.contains(searchstr) || searchstr.contains(cityname)) &#123;</span><br><span class="line">                            resultList.add(weatherInfoList.get(i));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    //更新Adatper对应的数据</span><br><span class="line">                    mWeatherAdapter.setWeatherInfoList(resultList);</span><br><span class="line">                    mWeatherAdapter.notifyDataSetChanged();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 看看WeatherAdapter的代码，WeatherAdapter继承BaseAdapter</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//继承BaseAdapter，需要复写几个方法</span><br><span class="line">public class WeatherAdapter extends BaseAdapter &#123;</span><br><span class="line">    private static final String TAG = &quot;WeatherAdapter&quot;;</span><br><span class="line">    private Context context;</span><br><span class="line">    private List&lt;WeatherInfo&gt; weatherInfoList;</span><br><span class="line"></span><br><span class="line">    public WeatherAdapter(Context context, List&lt;WeatherInfo&gt; weatherInfoList) &#123;</span><br><span class="line">        this.context = context;</span><br><span class="line">        this.weatherInfoList = weatherInfoList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return weatherInfoList.size();</span><br><span class="line">    &#125;//list的size</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public WeatherInfo getItem(int i) &#123;</span><br><span class="line">        return weatherInfoList.get(i);</span><br><span class="line">    &#125;//获取天气信息</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public long getItemId(int i) &#123;</span><br><span class="line">        return i;</span><br><span class="line">    &#125;//获取Item的id</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View getView(int i, View view, ViewGroup viewGroup) &#123;</span><br><span class="line">    //这个方法比较关键，返回Item view</span><br><span class="line">        if (view == null) &#123;</span><br><span class="line">            view = LayoutInflater.from(context).inflate(R.layout.listviewitem, null);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ImageView weatherimage = (ImageView) view.findViewById(R.id.weatherimage);</span><br><span class="line">        TextView cityname = (TextView) view.findViewById(R.id.cityname);</span><br><span class="line">        TextView temp = (TextView) view.findViewById(R.id.temp);</span><br><span class="line">        TextView weather = (TextView) view.findViewById(R.id.weather);</span><br><span class="line"></span><br><span class="line">        WeatherInfo weatherInfo = weatherInfoList.get(i);</span><br><span class="line">        cityname.setText(weatherInfo.getCity());</span><br><span class="line">        temp.setText(weatherInfo.getTemp1() + &quot; ~ &quot; + weatherInfo.getTemp2());</span><br><span class="line">        String weatherstr = weatherInfo.getWeather();</span><br><span class="line">        weather.setText(weatherstr);</span><br><span class="line">        //这里大致使用几个图片，具体做法，不同的json数据查询api中应该可以查询到支持的天气种类，根据查询到的种类设置不用的图片，这里暂且只分为4种，避免我的apk界面太丑 不忍直视</span><br><span class="line">        if(weatherstr.contains(&quot;雨&quot;)) &#123;</span><br><span class="line">            weatherimage.setImageResource(R.drawable.rain);</span><br><span class="line">        &#125; else if(weatherstr.contains(&quot;阴&quot;)) &#123;</span><br><span class="line">            weatherimage.setImageResource(R.drawable.yin);</span><br><span class="line">        &#125; else if(weatherstr.contains(&quot;云&quot;)) &#123;</span><br><span class="line">            weatherimage.setImageResource(R.drawable.cloud);</span><br><span class="line">        &#125; else if(weatherstr.contains(&quot;雪&quot;)) &#123;</span><br><span class="line">            weatherimage.setImageResource(R.drawable.snow);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            weatherimage.setImageResource(R.drawable.sun);</span><br><span class="line">        &#125;</span><br><span class="line">        return view;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    //方便替换List</span><br><span class="line">    public void setWeatherInfoList(List&lt;WeatherInfo&gt; list) &#123;</span><br><span class="line">        this.weatherInfoList = list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 基本效果图：（录屏大师录屏）<br> <img src="https://img-blog.csdn.net/20160504220248286" alt="这里写图片描述"></p>
+<p> 源代码下载路径：<br> <a href="http://download.csdn.net/detail/poorkick/9510243" target="_blank" rel="noopener">http://download.csdn.net/detail/poorkick/9510243</a></p>
+<p> 缺陷：</p>
+<ol start="2">
+<li>每次进入需要载入数据，可以替换成根据时间戳判断是否数据有更新,当然这个对查询借口有点依赖，本地通过数据库存储当前信息 </li>
+<li>天气信息由于使用的是气象台的，数据更新自己本身无法掌握，可以替换成其他查询接口 </li>
+<li>后续可能会再做一个更完善的天气预报应用，采用新的查询接口和UI界面  界面简陋，代码不完善，见谅，工作之余练手之作。</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -933,7 +853,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        80
+                        81
                     </p>
                 </div>
             </div>
@@ -1024,7 +944,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">53</span>
+                <span class="level-item tag">58</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Android基础/Android-Studio/">
@@ -1064,7 +984,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <span class="level-item">Android源码</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">10</span>
+                <span class="level-item tag">11</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android系统/">
@@ -1142,7 +1062,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 14.62px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 10.77px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 11.54px;">配置</a> <a href="/tags/问题/" style="font-size: 10px;">问题</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
     </div>
 </div>
 
@@ -1159,18 +1079,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1178,18 +1098,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1197,18 +1117,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1216,18 +1136,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -1235,18 +1155,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -1270,7 +1190,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1556,7 +1476,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -1567,7 +1487,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1578,7 +1498,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -1589,7 +1509,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1611,7 +1531,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -1634,6 +1554,17 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1806,7 +1737,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -1898,6 +1829,13 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2023,7 +1961,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2049,6 +1987,13 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2058,7 +2003,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -2233,14 +2178,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2269,18 +2207,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="media-left">
+            <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十五）》Frame Animation/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-10T12:51:43.000Z">2019-06-10</time></div>
+                    <a href="/2019/06/10/《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays/" class="has-link-black-ter is-size-6">《LeetCode-0004》 寻找两个有序数组的中位数-Median of Two Sorted Arrays</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2288,18 +2226,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="media-left">
+            <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.039Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十）》 CoordinatorLayout Behavior/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-01T00:53:29.000Z">2019-06-01</time></div>
+                    <a href="/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/" class="has-link-black-ter is-size-6">《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2307,18 +2245,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0002》 两数相加-Add Two Numbers">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（九）》  Ndk配置与Demo/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T07:01:33.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0002》 两数相加-Add Two Numbers/" class="has-link-black-ter is-size-6">《LeetCode-0002》 两数相加-Add Two Numbers</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2326,18 +2264,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="media-left">
+            <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="《LeetCode-0001》 两数之和-TwoSum">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-05-26T01:53:45.000Z">2019-05-26</time></div>
+                    <a href="/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/" class="has-link-black-ter is-size-6">《LeetCode-0001》 两数之和-TwoSum</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/LeetCode/">LeetCode</a>
                     </p>
                 </div>
             </div>
@@ -2345,18 +2283,18 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
         
         <article class="media">
             
-            <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="media-left">
+            <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="MacOS 10.11.6 Android源码编译并刷机">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-14T11:22:12.037Z">2019-06-14</time></div>
-                    <a href="/2019/06/14/《Android 基础（二十一）》Android 屏幕适配/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-01T11:57:08.000Z">2019-04-01</time></div>
+                    <a href="/2019/04/01/MacOS 10.11.6 Android源码编译并刷机/" class="has-link-black-ter is-size-6">MacOS 10.11.6 Android源码编译并刷机</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/Android系统/">Android系统</a>
                     </p>
                 </div>
             </div>
@@ -2380,7 +2318,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -2666,7 +2604,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">十一月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">8</span>
                 </span>
             </a>
         </li>
@@ -2677,7 +2615,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">十月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -2688,7 +2626,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">九月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">11</span>
                 </span>
             </a>
         </li>
@@ -2699,7 +2637,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">八月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">8</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -2721,7 +2659,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <span class="level-item">六月 2016</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">7</span>
                 </span>
             </a>
         </li>
@@ -2744,6 +2682,17 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2015/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2015</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -2916,7 +2865,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Framework/">
                         <span class="tag">Framework</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">9</span>
                     </a>
                 </div>
                 
@@ -3008,6 +2957,13 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                     <a class="tags has-addons" href="/tags/Mysql/">
                         <span class="tag">Mysql</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NDK/">
+                        <span class="tag">NDK</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3133,7 +3089,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -3159,6 +3115,13 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/屏幕适配/">
+                        <span class="tag">屏幕适配</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3168,7 +3131,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">29</span>
+                        <span class="tag is-grey">31</span>
                     </a>
                 </div>
                 
@@ -3343,14 +3306,7 @@ collapseActionView | 声明了这个操作视窗应该被折叠到一个按钮�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/问题/">
-                        <span class="tag">问题</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
