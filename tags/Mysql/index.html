@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 426 个字)
+                    3 分钟 读完 (大约 440 个字)
                 </span>
                 
                 
@@ -178,51 +178,17 @@
             
         </h1>
         <div class="content">
-            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Mysql安装"><a href="#Mysql安装" class="headerlink" title="Mysql安装"></a>Mysql安装</h2><h4 id="搜索-1"><a href="#搜索-1" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p> 一般情况下，我都是使用官方镜像或者阿里镜像</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421212533766?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name onlyloveyd-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql:latest</span><br></pre></td></tr></table></figure>
-
-<p> –name 指定数据库名称<br> －e MYSQL_ROOT_PASSWORD=my-secret-pw 配置root账号密码<br> －p 指定端口映射<br> －d 指定镜像<br> <img src="https://img-blog.csdn.net/20180421213041710?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421213203762?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h5 id="进入Mysql-Docker环境"><a href="#进入Mysql-Docker环境" class="headerlink" title="进入Mysql Docker环境"></a>进入Mysql Docker环境</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it onlyloveyd-mysql /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p> onlyloveyd-mysql 替换成 对应容器名</p>
-<h5 id="进入mysql"><a href="#进入mysql" class="headerlink" title="进入mysql"></a>进入mysql</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p> 输入密码后进入mysql<br> <img src="https://img-blog.csdn.net/20180421213747913?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h5 id="配置允许Mysql远程连接"><a href="#配置允许Mysql远程连接" class="headerlink" title="配置允许Mysql远程连接"></a>配置允许Mysql远程连接</h5><p> 使用mysql命令的时候注意以分号结尾。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select host,user,authentication_string from user;</span><br><span class="line">update user set host = &apos;%&apos; where user = &apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421214755807?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p> 存在host为‘％‘，user为‘root‘的记录就代表用户可以在任何一台机器上使用root账号登陆。</p>
-
+            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/21/CentOS + Docker + MySql/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -251,7 +217,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 281 个字)
+                    2 分钟 读完 (大约 282 个字)
                 </span>
                 
                 
@@ -264,31 +230,17 @@
             
         </h1>
         <div class="content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 最近，腾讯云，做活动，购买了一台低配的服务器作为玩具，安装MySql.</p>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h3 id="下载mysql的repo源"><a href="#下载mysql的repo源" class="headerlink" title="下载mysql的repo源"></a>下载mysql的repo源</h3><blockquote>
-<p>$ wget <a href="http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="noopener">http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</a></p>
-</blockquote>
-<h3 id="安装mysql-community-release-el7-5-noarch-rpm包"><a href="#安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="安装mysql-community-release-el7-5.noarch.rpm包"></a>安装mysql-community-release-el7-5.noarch.rpm包</h3><blockquote>
-<p>$ sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm</p>
-</blockquote>
-<h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><blockquote>
-<p>$ sudo yum install mysql-server</p>
-<p> 根据提示安装就可以了,不过安装完成后没有密码,需要重置密码</p>
-</blockquote>
-<h3 id="修改owner"><a href="#修改owner" class="headerlink" title="修改owner"></a>修改owner</h3><p> $ sudo chown -R root:root /var/lib/mysql</p>
-<h3 id="重启mysql服务"><a href="#重启mysql服务" class="headerlink" title="重启mysql服务"></a>重启mysql服务</h3><blockquote>
-<p>$ service mysqld restart</p>
-</blockquote>
-<h3 id="登录重置密码："><a href="#登录重置密码：" class="headerlink" title="登录重置密码："></a>登录重置密码：</h3><blockquote>
-<p>$ mysql -u root //直接回车进入mysql控制台<br> mysql &gt; use mysql;<br> mysql &gt; update user set password=password(‘123456’) where user=’root’;<br> mysql &gt; exit;</p>
-</blockquote>
-<h3 id="配置云服务器安全组，打开3306端口"><a href="#配置云服务器安全组，打开3306端口" class="headerlink" title="配置云服务器安全组，打开3306端口"></a>配置云服务器安全组，打开3306端口</h3><h3 id="配置数据库可远程连接"><a href="#配置数据库可远程连接" class="headerlink" title="配置数据库可远程连接"></a>配置数据库可远程连接</h3><h3 id="数据库授权"><a href="#数据库授权" class="headerlink" title="数据库授权"></a>数据库授权</h3><blockquote>
-<p>$ mysql -u root //直接回车进入mysql控制台<br> mysql &gt; use mysql;<br> mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;</p>
-<p> 远程连接数据库的时候需要输入用户名和密码<br> 用户名：root<br> 密码:123456<br> 指点ip:%代表所有Ip,此处也可以输入Ip来指定Ip</p>
-</blockquote>
-
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 最近，腾讯云，做活动，购买了一台低配的服务器作为玩具，安装MySql.</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/03/07/《Linux》CentOS7.3 安装MySql/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -364,7 +316,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -573,7 +525,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1136,7 +1088,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1542,7 +1494,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1557,6 +1509,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2264,7 +2223,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2670,7 +2629,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2685,6 +2644,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

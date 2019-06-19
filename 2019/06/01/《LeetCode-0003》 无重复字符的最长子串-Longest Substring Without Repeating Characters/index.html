@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为">
+    <meta name="description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
 <meta property="og:url" content="http://yoursite.com/2019/06/01/《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为">
+<meta property="og:description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:55:26.964Z">
+<meta property="og:updated_time" content="2019-06-19T13:34:10.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《LeetCode-0003》 无重复字符的最长子串-Longest Substring Without Repeating Characters">
-<meta name="twitter:description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为">
+<meta name="twitter:description" content="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/  题目给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1160 个字)
+                    8 分钟 读完 (大约 1167 个字)
                 </span>
                 
                 
@@ -171,65 +171,200 @@
             <blockquote>
 <p><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/</a></p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href></a>题目</h2><p> 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
-<p> <strong>示例 1:</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+<a id="more"></a>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="hljs-string">"abcabcbb"</span></span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"abc"</span>，所以其长度为 3。</span><br></pre></td></tr></table></figure>
 
-<p> <strong>示例 2:</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="hljs-string">"bbbbb"</span></span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"b"</span>，所以其长度为 1。</span><br></pre></td></tr></table></figure>
 
-<p> <strong>示例 3:</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="hljs-string">"pwwkew"</span></span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 <span class="hljs-string">"wke"</span>，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，<span class="hljs-string">"pwke"</span> 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
 
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href></a>思路</h2><p> 关键点：</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>关键点：</p>
 <ul>
-<li>无重复字符 </li>
+<li>无重复字符</li>
 <li>最长子串  个人解题思路，最长无重复字符子串必然会有一个起点，这个起点我们通过遍历字符串依次从字串首位到末尾，终点我们通过比较依次添加第i位后字符判断当前子串是否存在重复字符来判断。用一个容器来存储当前正在考察的子串，使用TreeSet来存储分析来每个无重复字符的子串长度，主要是TreeSet可以帮我排序。</li>
 </ul>
-<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a><a href></a>解题</h2><h3 id="第一次提交"><a href="#第一次提交" class="headerlink" title="第一次提交"></a><a href></a>第一次提交</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLongestSubstring(String s) &#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; tempRes = new TreeSet&lt;&gt;();</span><br><span class="line">        Stack&lt;Character&gt; result = new Stack&lt;&gt;();</span><br><span class="line">        char[] inputs = s.toCharArray();</span><br><span class="line">        for (int i = 0; i &lt; inputs.length; i++) &#123;</span><br><span class="line">            char current = inputs[i];</span><br><span class="line">            if (result.contains(current)) &#123;</span><br><span class="line">                tempRes.add(result.size());</span><br><span class="line">                result.clear();</span><br><span class="line">            &#125;</span><br><span class="line">            result.push(current);</span><br><span class="line">        &#125;</span><br><span class="line">        tempRes.add(result.size());</span><br><span class="line">        tempRes.comparator();</span><br><span class="line">        return tempRes.last();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><h3 id="第一次提交"><a href="#第一次提交" class="headerlink" title="第一次提交"></a>第一次提交</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> </span>&#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; tempRes = <span class="hljs-keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">        Stack&lt;Character&gt; result = <span class="hljs-keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="hljs-keyword">char</span>[] inputs = s.toCharArray();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; inputs.length; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">char</span> current = inputs[i];</span><br><span class="line">            <span class="hljs-keyword">if</span> (result.contains(current)) &#123;</span><br><span class="line">                tempRes.add(result.size());</span><br><span class="line">                result.clear();</span><br><span class="line">            &#125;</span><br><span class="line">            result.push(current);</span><br><span class="line">        &#125;</span><br><span class="line">        tempRes.add(result.size());</span><br><span class="line">        tempRes.comparator();</span><br><span class="line">        <span class="hljs-keyword">return</span> tempRes.last();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <strong>解题错误：测试用例”dvdf”</strong><br> 第一次提交，我采用堆栈存储当前正在考察的子串，依次添加字符，若出现与堆栈相同的字符，停止添加字符，保存当前堆栈长度，清空堆栈。然后从当前终点开始寻找下一个子串。<br> 这个思路考虑不周全，是有问题的。出现重复字符时，不能清空堆栈并且循环的下一个点应该从当前起点的下一个字符开始。<strong>以测试用例“dvdf”为例子，看看问题处在哪里</strong></p>
-<pre><code>i | 堆栈        | 长度                  
-- | --------- | -------------------- 
-  | push(‘d’) |                     
-0 | {d}       | 1                   
-  | push(‘v’) |                     
-1 | {d, v}    | 2                   
-  | push(‘d’) | 出现重复字符串，保存当前长度2，清空堆栈
-  | push(‘d’) |                     
-2 | {d}       | 1                   
-  | push(‘f’) |                     
-3 | {d,f}     | 2                   
-  |           | 循环结束，保存堆栈长度         </code></pre><h3 id="第二次提交"><a href="#第二次提交" class="headerlink" title="第二次提交"></a><a href></a>第二次提交</h3><p> 总结第一次提交的问题，重新提交。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLongestSubstring(String s) &#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; tempRes = new TreeSet&lt;&gt;();</span><br><span class="line">        Queue&lt;Character&gt; result = new LinkedList&lt;&gt;();</span><br><span class="line">        char[] inputs = s.toCharArray();</span><br><span class="line">        for (int i = 0; i &lt; inputs.length; i++) &#123;</span><br><span class="line">            char current = inputs[i];</span><br><span class="line">            if (result.contains(current)) &#123;</span><br><span class="line">                tempRes.add(result.size());</span><br><span class="line">                result.remove();</span><br><span class="line">                i--;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                result.add(current);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        tempRes.add(result.size());</span><br><span class="line">        tempRes.comparator();</span><br><span class="line">        return tempRes.last();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解题错误：测试用例”dvdf”</strong><br>第一次提交，我采用堆栈存储当前正在考察的子串，依次添加字符，若出现与堆栈相同的字符，停止添加字符，保存当前堆栈长度，清空堆栈。然后从当前终点开始寻找下一个子串。<br>这个思路考虑不周全，是有问题的。出现重复字符时，不能清空堆栈并且循环的下一个点应该从当前起点的下一个字符开始。<strong>以测试用例“dvdf”为例子，看看问题处在哪里</strong></p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>堆栈</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>push(‘d’)</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>{d}</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>push(‘v’)</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>{d, v}</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>push(‘d’)</td>
+<td>出现重复字符串，保存当前长度2，清空堆栈</td>
+</tr>
+<tr>
+<td></td>
+<td>push(‘d’)</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>{d}</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>push(‘f’)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>{d,f}</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>循环结束，保存堆栈长度</td>
+</tr>
+</tbody></table>
+<h3 id="第二次提交"><a href="#第二次提交" class="headerlink" title="第二次提交"></a>第二次提交</h3><p>总结第一次提交的问题，重新提交。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> </span>&#123;</span><br><span class="line">        TreeSet&lt;Integer&gt; tempRes = <span class="hljs-keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line">        Queue&lt;Character&gt; result = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="hljs-keyword">char</span>[] inputs = s.toCharArray();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; inputs.length; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">char</span> current = inputs[i];</span><br><span class="line">            <span class="hljs-keyword">if</span> (result.contains(current)) &#123;</span><br><span class="line">                tempRes.add(result.size());</span><br><span class="line">                result.remove();</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                result.add(current);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        tempRes.add(result.size());</span><br><span class="line">        tempRes.comparator();</span><br><span class="line">        <span class="hljs-keyword">return</span> tempRes.last();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 第二次提交，我把存储子串的数据结构改成来队列，这样，当出现重复子串时，可以快速的移除队头，通过索引减1的方式，来保证到下一个字符时，队列中不会有重复字符。这里有个可优化的点，直接找到当前重复的字符在队列中的位置，然后直接处理。同样是以第一次提交报错的测试用例，看看执行步骤：</p>
-<pre><code>i | 队列       | 长度                     
-- | -------- | ----------------------- 
-  | add(‘d’) |                        
-0 | {d}      | 1                      
-  | add(‘v’) |                        
-1 | {d, v}   | 2                      
-  | add(‘d’) | 出现重复字符串，保存当前长度2，移除队头，–i
-  | add(‘d’) |                        
-2 | {v, d}   | 2                      
-  | add(‘f’) |                        
-3 | {v,d,f}  | 3                      
-  |          | 循环结束，保存堆栈长度            </code></pre><h3 id="第三次提交"><a href="#第三次提交" class="headerlink" title="第三次提交"></a><a href></a>第三次提交</h3><p> 优化后的算法，采用动态规划的方式<br> 设f(i)是从左到右在第i个位置上时 当前最长不重复子串的长度<br> 则分两种情况：<br> (1)第i位上的字母在左侧从未出现 f(i)=f(i-1)+1<br> (2)在左侧出现过，此时计算上一次该字母出现位置和i之间的距离 gap<br> 第一种：<strong>gap&lt;=f(i-1)</strong> 时 f(i)=gap，此时上一次出现的位置在上一个最长不重复子串内部<br> 第二种：<strong>gap&gt;f(i-1)</strong> 时 f(i)=f(i-1)+1</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int lengthOfLongestSubstring(String s) &#123;</span><br><span class="line">        if (s.isEmpty()) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] position = new int[256];</span><br><span class="line">        for (int i = 0; i &lt; position.length; i++) &#123;</span><br><span class="line">            position[i] = -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int max = 0;</span><br><span class="line">        int cur = 0;</span><br><span class="line">        for (int i = 0; i &lt; s.length(); i++) &#123;</span><br><span class="line">            int pos = s.charAt(i);</span><br><span class="line">            if (position[pos] &lt; 0) &#123;</span><br><span class="line">                cur += 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int gap = i - position[pos];</span><br><span class="line">                if (cur &gt;= gap) &#123;</span><br><span class="line">                    cur = gap;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    cur += 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            position[pos] = i;</span><br><span class="line">            max = Math.max(max, cur);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二次提交，我把存储子串的数据结构改成来队列，这样，当出现重复子串时，可以快速的移除队头，通过索引减1的方式，来保证到下一个字符时，队列中不会有重复字符。这里有个可优化的点，直接找到当前重复的字符在队列中的位置，然后直接处理。同样是以第一次提交报错的测试用例，看看执行步骤：</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>队列</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>add(‘d’)</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>{d}</td>
+<td>1</td>
+</tr>
+<tr>
+<td></td>
+<td>add(‘v’)</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>{d, v}</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>add(‘d’)</td>
+<td>出现重复字符串，保存当前长度2，移除队头，–i</td>
+</tr>
+<tr>
+<td></td>
+<td>add(‘d’)</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>{v, d}</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>add(‘f’)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>{v,d,f}</td>
+<td>3</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>循环结束，保存堆栈长度</td>
+</tr>
+</tbody></table>
+<h3 id="第三次提交"><a href="#第三次提交" class="headerlink" title="第三次提交"></a>第三次提交</h3><p>优化后的算法，采用动态规划的方式<br>设f(i)是从左到右在第i个位置上时 当前最长不重复子串的长度<br>则分两种情况：<br>(1)第i位上的字母在左侧从未出现 f(i)=f(i-1)+1<br>(2)在左侧出现过，此时计算上一次该字母出现位置和i之间的距离 gap<br>第一种：<strong>gap&lt;=f(i-1)</strong> 时 f(i)=gap，此时上一次出现的位置在上一个最长不重复子串内部<br>第二种：<strong>gap&gt;f(i-1)</strong> 时 f(i)=f(i-1)+1</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (s.isEmpty()) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] position = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">256</span>];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; position.length; i++) &#123;</span><br><span class="line">            position[i] = -<span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> cur = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> pos = s.charAt(i);</span><br><span class="line">            <span class="hljs-keyword">if</span> (position[pos] &lt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                cur += <span class="hljs-number">1</span>;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">int</span> gap = i - position[pos];</span><br><span class="line">                <span class="hljs-keyword">if</span> (cur &gt;= gap) &#123;</span><br><span class="line">                    cur = gap;</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                    cur += <span class="hljs-number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            position[pos] = i;</span><br><span class="line">            max = Math.max(max, cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 以 <strong>“pwwkew”</strong> 为例子，执行步骤：</p>
-<pre><code>i | cur | max | gap
-- | --- | --- | --- 
-0 | 1   | 1   |    
-1 | 2   | 2   |    
-2 | 1   | 2   | 1  
-3 | 2   | 2   |    
-4 | 3   | 3   |    
-5 | 3   | 3   | 3  </code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ul>
-<li>合适的数据结构事半功倍 </li>
-<li>针对字符串操作的题目，边界和特殊情况一定要多考虑。    </li>
+<p>以 <strong>“pwwkew”</strong> 为例子，执行步骤：</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>cur</th>
+<th>max</th>
+<th>gap</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>合适的数据结构事半功倍</li>
+<li>针对字符串操作的题目，边界和特殊情况一定要多考虑。</li>
 </ul>
 
         </div>
@@ -317,8 +452,8 @@
 		owner: 'onlyloveyd',
 		repo: 'HexoBlog',
 		oauth: {
-			client_id: '086d4052b9aa22c3f98e',
-			client_secret: 'bba7700b5888c722e54735dc5f1f9510c291acc8',
+			client_id: '2f74aa28e7577ea363f4',
+			client_secret: '5f8765c36434710db05359b75a9b0f1806538d02',
 		},
 	})
 	gitment.render('comment-container')
@@ -389,7 +524,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -598,7 +733,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1161,7 +1296,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1567,7 +1702,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1582,6 +1717,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2289,7 +2431,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2695,7 +2837,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2710,6 +2852,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

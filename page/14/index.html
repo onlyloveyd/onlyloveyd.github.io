@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 662 个字)
+                    4 分钟 读完 (大约 664 个字)
                 </span>
                 
                 
@@ -168,44 +168,19 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>A StateListDrawable is a drawable object defined in XML that uses a several different images to represent the same graphic, depending on the state of the object. For example, a Button widget can exist in one of several different states (pressed, focused, or niether) and, using a state list drawable, you can provide a different background image for each state.</p>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>A StateListDrawable is a drawable object defined in XML that uses a several different images to represent the same graphic, depending on the state of the object. For example, a Button widget can exist in one of several different states (pressed, focused, or niether) and, using a state list drawable, you can provide a different background image for each state. You can describe the state list in an XML file. Each graphic is represented by an “item” element inside a single “selector” element. Each “item” uses various attributes to describe the state in which it should be used as the graphic for the drawable.<br>During each state change, the state list is traversed top to bottom and the first item that matches the current state is used—the selection is not based on the “best match,” but simply the first item that meets the minimum criteria of the state.  </p>
 </blockquote>
-<blockquote>
-<p>You can describe the state list in an XML file. Each graphic is represented by an “item” element inside a single “selector” element. Each “item” uses various attributes to describe the state in which it should be used as the graphic for the drawable.</p>
-</blockquote>
-<blockquote>
-<p>During each state change, the state list is traversed top to bottom and the first item that matches the current state is used—the selection is not based on the “best match,” but simply the first item that meets the minimum criteria of the state.<br> 翻译：<br> StateListDrawable 是一种通过XML文件来定义的drawable，使用几个不同的图片来呈现同一个图形，通过object的状态来实现切换。例如，一个Button有几个不同的状态（按压，获取焦点等等），这种情况下，通过使用 state list drawable，你就可以实现在不同的状态下使用不同的背景图片。</p>
-</blockquote>
-<blockquote>
-<p>你可以在一个XML文件中描述state list。通过在根节点selector下定义一个item元素来添加每个图形。每一各item中使用不同的状态属性来定义不用的drawable。</p>
-</blockquote>
-<blockquote>
-<p>当每一次状态改变的时候，state list都会从上到下被遍历一遍，第一个与当前state相匹配的item将会被使用—- 这个选择并不是作出“最匹配”结果，而是简单的找到第一个匹配的状态。</p>
-<p> selector一般都是用来作为有状态改变的View的背景，以此来达到当用户对View进行操作，导致View状态改变时，作出改变，让用户感知View的状态变化。</p>
-</blockquote>
-<p> ###<strong>官方说明</strong><br> 文件位置：<em><strong>res/drawable/filename.xml</strong></em></p>
-<p> 编译资源类型：<em><strong>StateListDrawable</strong></em></p>
-<p> 资源引用：<br> In Java: <em><strong>R.drawable.filename</strong></em><br> In XML: <em><strong>@[package:]drawable/filename</strong></em></p>
-<p> 语法：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:constantSize=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">    android:dither=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">    android:variablePadding=[&quot;true&quot; | &quot;false&quot;] &gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</span><br><span class="line">        android:state_pressed=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_focused=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_hovered=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_selected=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_checkable=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_checked=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_enabled=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_activated=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_window_focused=[&quot;true&quot; | &quot;false&quot;] /&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 更多详细说明，请查阅<a href="http://android.xsoftlab.net/guide/topics/resources/drawable-resource.html" target="_blank" rel="noopener">xsoftlab</a></p>
-<p> ###<strong>实际使用</strong><br> 下面做一个简单的实例，对Button的背景根据状态做一下处理</p>
-<p> <em><strong>XML文件</strong></em></p>
-<p> selector_ts.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/pink&quot; android:state_pressed=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/yellow&quot; android:state_selected=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@drawable/shaperect&quot; android:state_enabled=&quot;false&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/stone&quot; android:state_enabled=&quot;true&quot; /&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 主布局文件（activity_main.xml）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:focusable=&quot;true&quot;</span><br><span class="line">    android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:padding=&quot;10dp&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.tabdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/bt_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;300dp&quot;</span><br><span class="line">        android:background=&quot;@drawable/selector_ts&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_marginTop=&quot;50dp&quot;</span><br><span class="line">        android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_selected&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Select&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_disable&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Disable&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_pressed&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Press&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>代码部分</strong></em> 比较简单，这里就不占用过多的篇幅了，看下简单的效果，大家应该就知道如何编写小小的Activity了。</p>
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20160705080238443" alt="这里写图片描述"></p>
-<p> 更多的内容等待着挖掘机的到来~</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/05/《Android 基础（十四）》 selector/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -234,7 +209,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1016 个字)
+                    6 分钟 读完 (大约 957 个字)
                 </span>
                 
                 
@@ -247,85 +222,19 @@
             
         </h1>
         <div class="content">
-            <p>###<strong>介绍</strong></p>
-<blockquote>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
 <p>简单来说，shape就是用来在xml文件中定义形状，代码解析之后就可以当做Drawable一样使用</p>
 </blockquote>
-<p> ###<strong>官方说明</strong><br> 关于shape定义的drawable</p>
-<p> 文件位置：<em><strong>res/drawable/filename.xml</strong></em></p>
-<p> 编译资源类型：<strong>*<a href="http://android.xsoftlab.net/reference/android/graphics/drawable/GradientDrawable.html" target="_blank" rel="noopener">GradientDrawable</a>*</strong></p>
-<p> 文件引用：<br> In Java: <em><strong>R.drawable.filename</strong></em><br> In XML: <em><strong>@[package:]drawable/filename</strong></em></p>
-<p> 语法：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=[&quot;rectangle&quot; | &quot;oval&quot; | &quot;line&quot; | &quot;ring&quot;] &gt; </span><br><span class="line">    &lt;corners</span><br><span class="line">        android:radius=&quot;integer&quot;</span><br><span class="line">        android:topLeftRadius=&quot;integer&quot;</span><br><span class="line">        android:topRightRadius=&quot;integer&quot;</span><br><span class="line">        android:bottomLeftRadius=&quot;integer&quot;</span><br><span class="line">        android:bottomRightRadius=&quot;integer&quot; /&gt;</span><br><span class="line">    &lt;gradient</span><br><span class="line">        android:angle=&quot;integer&quot;</span><br><span class="line">        android:centerX=&quot;integer&quot;</span><br><span class="line">        android:centerY=&quot;integer&quot;</span><br><span class="line">        android:centerColor=&quot;integer&quot;</span><br><span class="line">        android:endColor=&quot;color&quot;</span><br><span class="line">        android:gradientRadius=&quot;integer&quot;</span><br><span class="line">        android:startColor=&quot;color&quot;</span><br><span class="line">        android:type=[&quot;linear&quot; | &quot;radial&quot; | &quot;sweep&quot;]</span><br><span class="line">        android:useLevel=[&quot;true&quot; | &quot;false&quot;] /&gt;</span><br><span class="line">    &lt;padding</span><br><span class="line">        android:left=&quot;integer&quot;</span><br><span class="line">        android:top=&quot;integer&quot;</span><br><span class="line">        android:right=&quot;integer&quot;</span><br><span class="line">        android:bottom=&quot;integer&quot; /&gt;</span><br><span class="line">    &lt;size</span><br><span class="line">        android:width=&quot;integer&quot;</span><br><span class="line">        android:height=&quot;integer&quot; /&gt;</span><br><span class="line">    &lt;solid</span><br><span class="line">        android:color=&quot;color&quot; /&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;integer&quot;</span><br><span class="line">        android:color=&quot;color&quot;</span><br><span class="line">        android:dashWidth=&quot;integer&quot;</span><br><span class="line">        android:dashGap=&quot;integer&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 这里只做简单的描述，主要看看使用方式。关于元素的详细说明，请看 <a href="http://android.xsoftlab.net/guide/topics/resources/drawable-resource.html" target="_blank" rel="noopener">shape说明</a></p>
-<p> ###<strong>实际使用</strong>  </p>
-<p> ####矩形<br> 填充（solid）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line">    &lt;!--填充颜色 --&gt;</span><br><span class="line">    &lt;solid android:color=&quot;@color/colorAccent&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704204019757" alt="这里写图片描述"></p>
-<hr>
-<p> 描边（stroke）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--填充颜色 --&gt;</span><br><span class="line">    &lt;solid android:color=&quot;@color/colorAccent&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--描边颜色--&gt;</span><br><span class="line">    &lt;!--android:dashGap  虚线间距，这里设置为0则显示的为实线--&gt;</span><br><span class="line">    &lt;!--android:dashWidth 虚线宽度--&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;3dp&quot;</span><br><span class="line">        android:color=&quot;@color/colorPrimaryDark&quot;</span><br><span class="line">        android:dashGap=&quot;0dp&quot;</span><br><span class="line">        android:dashWidth=&quot;10dp&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704204326428" alt="这里写图片描述"></p>
-<hr>
-<p> 圆角（corner）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--填充颜色 --&gt;</span><br><span class="line">    &lt;solid android:color=&quot;@color/colorAccent&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--描边颜色--&gt;</span><br><span class="line">    &lt;!--android:dashGap  虚线间距，这里设置为0则显示的为实线--&gt;</span><br><span class="line">    &lt;!--android:dashWidth 虚线宽度--&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;3dp&quot;</span><br><span class="line">        android:color=&quot;@color/colorPrimaryDark&quot;</span><br><span class="line">        android:dashGap=&quot;4dp&quot;</span><br><span class="line">        android:dashWidth=&quot;10dp&quot; /&gt;</span><br><span class="line">    &lt;!--圆角--&gt;</span><br><span class="line">    &lt;!--android:randius 设置4个叫的圆角半径,会被特定的圆角设定覆盖--&gt;</span><br><span class="line">    &lt;!--android:bottomLeftRadius 左下角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:bottomRightRadius 右下角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:topLeftRandius  左上角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:topRightRadius  右上角的圆角半径--&gt;</span><br><span class="line">    &lt;corners</span><br><span class="line">        android:bottomLeftRadius=&quot;60dp&quot;</span><br><span class="line">        android:radius=&quot;30dp&quot;</span><br><span class="line">        android:topRightRadius=&quot;120dp&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704205641779" alt="这里写图片描述"></p>
-<hr>
-<p> 渐变（gradient）：linear</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--描边颜色--&gt;</span><br><span class="line">    &lt;!--android:dashGap  虚线间距，这里设置为0则显示的为实线--&gt;</span><br><span class="line">    &lt;!--android:dashWidth 虚线宽度--&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;3dp&quot;</span><br><span class="line">        android:color=&quot;@color/colorPrimaryDark&quot;</span><br><span class="line">        android:dashGap=&quot;4dp&quot;</span><br><span class="line">        android:dashWidth=&quot;10dp&quot; /&gt;</span><br><span class="line">    &lt;!--圆角--&gt;</span><br><span class="line">    &lt;!--android:randius 设置4个叫的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:bottomLeftRadius 左下角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:bottomRightRadius 右下角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:topLeftRandius  左上角的圆角半径--&gt;</span><br><span class="line">    &lt;!--android:topRightRadius  右上角的圆角半径--&gt;</span><br><span class="line">    &lt;corners</span><br><span class="line">        android:bottomLeftRadius=&quot;60dp&quot;</span><br><span class="line">        android:radius=&quot;30dp&quot;</span><br><span class="line">        android:topRightRadius=&quot;120dp&quot; /&gt;</span><br><span class="line">    &lt;!--渐变--&gt;</span><br><span class="line">    &lt;gradient</span><br><span class="line">        android:angle=&quot;45&quot;</span><br><span class="line">        android:centerColor=&quot;@color/stone&quot;</span><br><span class="line">        android:endColor=&quot;@color/pink&quot;</span><br><span class="line">        android:startColor=&quot;@color/yellow&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704211945946" alt="这里写图片描述"></p>
-<p> 渐变（gradient）：radial</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;gradient</span><br><span class="line">    android:angle=&quot;90&quot;</span><br><span class="line">    android:startColor=&quot;@color/colorPrimary&quot;</span><br><span class="line">    android:centerColor=&quot;@color/pink&quot;</span><br><span class="line">    android:endColor=&quot;@color/yellow&quot;</span><br><span class="line">    android:gradientRadius=&quot;400dp&quot;</span><br><span class="line">    android:type=&quot;radial&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704212617119" alt="这里写图片描述"></p>
-<p> 渐变（gradient）：sweep</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;gradient</span><br><span class="line">    android:startColor=&quot;@color/colorPrimary&quot;</span><br><span class="line">    android:centerColor=&quot;@color/pink&quot;</span><br><span class="line">    android:endColor=&quot;@color/yellow&quot;</span><br><span class="line">    android:gradientRadius=&quot;400dp&quot;</span><br><span class="line">    android:type=&quot;sweep&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704212819035" alt="这里写图片描述"></p>
-<hr>
-<p> ####圆形<br> 正圆</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">android:shape=&quot;oval&quot;&gt;</span><br><span class="line">&lt;gradient</span><br><span class="line">    android:centerColor=&quot;@color/pink&quot;</span><br><span class="line">    android:endColor=&quot;@color/yellow&quot;</span><br><span class="line">    android:startColor=&quot;@color/colorPrimary&quot; /&gt;</span><br><span class="line">&lt;size</span><br><span class="line">    android:width=&quot;400dp&quot;</span><br><span class="line">    android:height=&quot;400dp&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704220615808" alt="这里写图片描述"></p>
-<hr>
-<p> 椭圆</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">android:shape=&quot;oval&quot;&gt;</span><br><span class="line">&lt;gradient</span><br><span class="line">    android:angle=&quot;90&quot;</span><br><span class="line">    android:centerColor=&quot;@color/pink&quot;</span><br><span class="line">    android:endColor=&quot;@color/yellow&quot;</span><br><span class="line">    android:startColor=&quot;@color/colorPrimary&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704220735638" alt="这里写图片描述"></p>
-<hr>
-<p> ####线条</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;line&quot;&gt;</span><br><span class="line">    &lt;stroke</span><br><span class="line">        android:width=&quot;9dp&quot;</span><br><span class="line">        android:color=&quot;@color/pink&quot; /&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704221944096" alt="这里写图片描述"></p>
-<hr>
-<p> ####环形</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:shape=&quot;ring&quot;</span><br><span class="line">    android:innerRadius=&quot;100dp&quot;</span><br><span class="line">    android:thickness=&quot;50dp&quot;</span><br><span class="line">    android:useLevel=&quot;false&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;gradient android:startColor=&quot;@color/colorAccent&quot;</span><br><span class="line">        android:endColor=&quot;@color/yellow&quot;</span><br><span class="line">        android:centerColor=&quot;@color/pink&quot;/&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160704224322013" alt="这里写图片描述"></p>
-<p> android:useLevel=”false”这个属性值一定要设置成false，根据google官网上的解释：</p>
-<p> <img src="https://img-blog.csdn.net/20160704224653264" alt="这里写图片描述"></p>
-<p> 以下属性只能在 <code>android:shape=&quot;ring&quot;</code> 的时候使用：</p>
-<pre><code>属性                       | 意义                                                                                                        
------------------------- | ---------------------------------------------------------------------------------------------------------- 
-android:innerRadius      | 尺寸，内环的半径                                                                                                  
-android:thickness        | 尺寸，环的厚度                                                                                                   
-android:innerRadiusRatio | 浮点型，以环的宽度比率来表示内环的半径，  例如，如果android:innerRadiusRatio=5，表示内环半径等于环的宽度除以5，这个值是可以被android:innerRadius的值覆盖，默认为9.
-android:thicknessRatio   | 浮点型，以环的宽度比率来表示环的厚度，例如，如果android:thicknessRatio=2，  那么环的厚度就等于环的宽度除以2。这个值是可以被android:thickness覆盖的，默认值是3.    
-android:useLevel         | boolean值，如果当做是LevelListDrawable使用时值为true，否则为false.这个值一般为false,否则你的环可能不会出现                                 </code></pre><hr>
-<p> ###<strong>其他说明</strong><br> 这些自己定义的shape为根节点的drawable xml文件，可以用来当成背景使用在Button,TextView等视图</p>
-<p> 上，同时由于可以设置size大小，也可以用来制作简单的图标等。总而言之，每个细小的东西，都有挖掘的</p>
-<p> 价值，感觉这里面还有一些东西我没有注意到，还要好好的看一下文档。</p>
-<p> 最后，google镜像网站，<a href="http://android.xsoftlab.net/index.html" target="_blank" rel="noopener">xsoftlab</a>，当然有条件的建议使用Google官网。</p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/04/《Android 基础（十三）》 shape/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -354,7 +263,7 @@ android:useLevel         | boolean值，如果当做是LevelListDrawable使用�
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 600 个字)
+                    4 分钟 读完 (大约 568 个字)
                 </span>
                 
                 
@@ -367,43 +276,18 @@ android:useLevel         | boolean值，如果当做是LevelListDrawable使用�
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51816561" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51816561</a>   </p>
-<p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>Layout which wraps an {@link android.widget.EditText} (or descendant) to show a floating label<br> when the hint is hidden due to the user inputting text.</p>
-</blockquote>
-<blockquote>
-<p>Also supports showing an error via {@link #setErrorEnabled(boolean)} and<br> {@link #setError(CharSequence)}, and a character counter via<br> {@link #setCounterEnabled(boolean)}.</p>
-</blockquote>
-<blockquote>
-<p>翻译：<br> TextInputLayout需要包裹一个EditText来实现当用户输入文本的时候，将hint作为一个浮动的标签显示的效果。使用比较多大的两个方法：<br> setError(CharSequence) - &gt; 使能错误消息提示<br> 对应属性值：app:errorEnabled=“true”<br> setCounterEnabled(boolean) -&gt; 使能字符长度显示<br> 对应属性值：app:counterEnabled=“true”</p>
-</blockquote>
-<hr>
-<p> ###<strong>类介绍</strong><br> TextInputLayout的父类是LinearLayout，源码位置<br> frameworks/support/design/src/android/support/design/widget/TextInputLayout.java<br> 类结构视图<br> <img src="https://img-blog.csdn.net/20160703192746979" alt="这里写图片描述"></p>
-<pre><code>方法                      | 意义                
------------------------ | ------------------ 
-setTypeface             | 设置tf字体            
-getEditText             | 获取EditText视图      
-setHint                 | 设置Hint内容          
-setHintEnabled          | 使能hint            
-setHintTextAppearance   | 设置hint的Text Style 
-setErrorEnabled         | 使能错误提示            
-setError                | 设置错误提示消息          
-setCounterEnabled       | 使能计数              
-setCounterMaxLength     | 设置输入框最大长度         
-setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>总体来看，用的比较多的就是错误消息提示和计数功能，对字体的一些设置和TextView和EditText使用方法类似，这个布局的特点就是视觉感受和用户体验比简单的输入框文本框提升很多。符合google的导向，但是很多apk中很少看到人使用，应该大家有更炫酷的方法。</p>
-<hr>
-<p> ###<strong>具体使用</strong><br> <em><strong>布局文件</strong></em><br> activity_main.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:focusable=&quot;true&quot;</span><br><span class="line">    android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.tabdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.TextInputLayout</span><br><span class="line">        android:id=&quot;@+id/til_username&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        app:errorEnabled=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;android.support.design.widget.TextInputEditText</span><br><span class="line">            android:id=&quot;@+id/et_username&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:hint=&quot;Username...&quot; /&gt;</span><br><span class="line">    &lt;/android.support.design.widget.TextInputLayout&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;android.support.design.widget.TextInputLayout</span><br><span class="line">        android:id=&quot;@+id/til_password&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        app:counterEnabled=&quot;true&quot;</span><br><span class="line">        app:counterMaxLength=&quot;40&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;EditText</span><br><span class="line">            android:id=&quot;@+id/et_password&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:hint=&quot;Password...&quot; /&gt;</span><br><span class="line">    &lt;/android.support.design.widget.TextInputLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/bt_showerror&quot;</span><br><span class="line">        android:layout_width=&quot;200dp&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;ShowError&quot;</span><br><span class="line">        android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/bt_clearerror&quot;</span><br><span class="line">        android:layout_width=&quot;200dp&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;ClearError&quot;</span><br><span class="line">        android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>代码内容</strong></em><br> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package mraz.com.tabdemo;</span><br><span class="line"></span><br><span class="line">import android.os.Bundle;</span><br><span class="line">import android.support.design.widget.TextInputLayout;</span><br><span class="line">import android.support.v7.app.AppCompatActivity;</span><br><span class="line">import android.view.View;</span><br><span class="line">import android.widget.Button;</span><br><span class="line"></span><br><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        final TextInputLayout userTextInputLayout = (TextInputLayout) findViewById(R.id.til_username);</span><br><span class="line">        TextInputLayout passTextInputLayout = (TextInputLayout) findViewById(R.id.til_password);</span><br><span class="line"></span><br><span class="line">        Button showErrorBtn = (Button) findViewById(R.id.bt_showerror);</span><br><span class="line">        showErrorBtn.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View view) &#123;</span><br><span class="line">                userTextInputLayout.setError(&quot;UserName is not correct!&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Button clearErrorBtn = (Button) findViewById(R.id.bt_clearerror);</span><br><span class="line">        clearErrorBtn.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View view) &#123;</span><br><span class="line">                userTextInputLayout.setError(&quot;&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 代码上就不上注释了，如果有疑问请提出来，不过代码很简洁，应该问题不大。</p>
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20160703194629129" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20160703194641473" alt="这里写图片描述"></p>
-
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
+<p>Layout which wraps an {@link android.widget.EditText} (or descendant) to show a floating label<br>when the hint is hidden due to the user inputting text.</p></blockquote>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/03/《Android 基础（十二）》 TextInputLayout，让输入框更有灵性/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -432,7 +316,7 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 236 个字)
+                    2 分钟 读完 (大约 237 个字)
                 </span>
                 
                 
@@ -445,20 +329,18 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
             
         </h1>
         <div class="content">
-            <h3 id="问题类型"><a href="#问题类型" class="headerlink" title="问题类型"></a><strong>问题类型</strong></h3><p> 设置Layout中添加一个Button</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/bt_showerror&quot;</span><br><span class="line">    android:layout_width=&quot;200dp&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;ShowError&quot;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 预览界面和真机运行却显示：</p>
-<p> <img src="https://img-blog.csdn.net/20160703172930538" alt="这里写图片描述"></p>
-<p> 与直接设置的字符串的显示不一样，显示的文字都显示了大写。</p>
-<h3 id="原因探索"><a href="#原因探索" class="headerlink" title="原因探索"></a><strong>原因探索</strong></h3><p> AS中针对Activity中设置<br> android:theme=”@style/AppTheme”<br> 而<br> 而AppTheme的父主题是Theme.AppCompat.Light.DarkActionBar，一直追溯，追溯的过程中关注一个属性值：<br> android:textAllCaps<br> 最后可以找到主题中已经将这个属性设置为true，导致最后出现了你看到的现象。</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> 默认的SDK中的设置属性是无法改变的，除非你重新编译对应的framework代码。<br> 这里我们可以直接在对应的Button中设置属性：<br> android:textAllCaps=”false”<br> 这样字体的大小写就正常了</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button android:id=&quot;@+id/bt_showerror&quot;</span><br><span class="line">    android:layout_width=&quot;200dp&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:text=&quot;ShowError&quot;</span><br><span class="line">    android:textAllCaps=&quot;false&quot;</span><br><span class="line">   /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20160703174107010" alt="这里写图片描述"></p>
-
+            <h2 id="问题类型"><a href="#问题类型" class="headerlink" title="问题类型"></a>问题类型</h2><p>Layout中添加一个Button</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/bt_showerror"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"200dp"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"ShowError"</span></span></span><br><span class="line"><span class="hljs-tag">/&gt;</span></span><br></pre></td></tr></table></figure>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/03/Android Studio 小技巧（2）：AS中Button文字默认大写的问题/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -487,7 +369,7 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 709 个字)
+                    5 分钟 读完 (大约 710 个字)
                 </span>
                 
                 
@@ -501,80 +383,17 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
         </h1>
         <div class="content">
             <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>Snackbars provide lightweight feedback about an operation. They show a brief message at the<br>bottom of the screen on mobile and lower left on larger devices. Snackbars appear above all other<br>elements on screen and only one can be displayed at a time.</p>
-<p>They automatically disappear after a timeout or after user interaction elsewhere on the screen,<br>particularly after interactions that summon a new surface or activity. Snackbars can be swiped<br>off screen.</p>
-<p>Snackbars can contain an action which is set via<br>{@link #setAction(CharSequence, android.view.View.OnClickListener)}.<br>To be notified when a snackbar has been shown or dismissed, you can provide a {@link Callback} via {@link #setCallback(Callback)}.</p>
-<p>翻译：<br>Snackbar为用户的一个操作提供轻量级的反馈，他会在手机屏幕的底部或者是大设备的左下方显示一个简洁的消息。Snackbar出现在屏幕所有元素的上面，显示一小会。<br>Snackbar显示一会后会自动消失，用户点击其他地方的时候也会消失，尤其，当显示一个新的界面的时候，Snackbar会滑出界面。<br>Snackbar 可以通过setAction(CharSequence, android.view.View.OnClickListener) 来设置一个点击事件，同时也可以通过setCallback(Callback)来监听snackbar的显示和消失。</p>
-</blockquote>
-<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p>Snackbar中Public属性列表<br><img src="https://img-blog.csdn.net/20160703092002046" alt="这里写图片描述"></p>
-<table>
-<thead>
-<tr>
-<th>方法或接口</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Callback</td>
-<td>抽象函数用来设置SnackBar显示和消失的回调</td>
-</tr>
-<tr>
-<td>make</td>
-<td>创建SnackBar</td>
-</tr>
-<tr>
-<td>setAction</td>
-<td>设置ActionView的响应事件</td>
-</tr>
-<tr>
-<td>show</td>
-<td>显示SnackBar</td>
-</tr>
-<tr>
-<td>dismiss</td>
-<td>收起SnackBar</td>
-</tr>
-<tr>
-<td>setActionTextColor</td>
-<td>设置ActionView的字体颜色</td>
-</tr>
-<tr>
-<td>setText</td>
-<td>设置TextView的显示内容</td>
-</tr>
-<tr>
-<td>setDuration</td>
-<td>设置SnackBar的显示时间</td>
-</tr>
-<tr>
-<td>getDuration</td>
-<td>获取SnackBar的显示时间</td>
-</tr>
-<tr>
-<td>getView</td>
-<td>获取SnackBar的View视图</td>
-</tr>
-<tr>
-<td>setCallback</td>
-<td>设置显示和消失的事件监听</td>
-</tr>
-<tr>
-<td>isShown</td>
-<td>是否已经显示</td>
-</tr>
-<tr>
-<td>shownOrQueued</td>
-<td>是否已经显示或者在队列中等待显示</td>
-</tr>
-</tbody></table>
-<p>整理而言的话，感觉Snackbar就是Toast的一个升级版本，使用的方式和Toast也比较相似。</p>
-<p>创建Snackbar之后一定要记得调用show()方法</p>
-<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.snackdemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.design.widget.Snackbar;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.View;</span><br><span class="line"><span class="hljs-keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="hljs-keyword">import</span> android.widget.RelativeLayout;</span><br><span class="line"><span class="hljs-keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">View</span>.<span class="hljs-title">OnClickListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    RelativeLayout rootLayout;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        rootLayout = (RelativeLayout) findViewById(R.id.root_layout);</span><br><span class="line"></span><br><span class="line">        Button shortButton = (Button) findViewById(R.id.short_button);</span><br><span class="line">        Button longButton = (Button) findViewById(R.id.long_button);</span><br><span class="line"></span><br><span class="line">        shortButton.setOnClickListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">        longButton.setOnClickListener(<span class="hljs-keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (view.getId()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.short_button:</span><br><span class="line">                <span class="hljs-keyword">final</span> Snackbar shortSnackbar = Snackbar.make(rootLayout, <span class="hljs-string">" Short SnackBar"</span>, Snackbar.LENGTH_SHORT);</span><br><span class="line">                shortSnackbar.setAction(<span class="hljs-string">"Click"</span>, <span class="hljs-keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">                            <span class="hljs-meta">@Override</span></span><br><span class="line">                            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">                                Toast.makeText(rootLayout.getContext(), <span class="hljs-string">"Shoort Snackbar onClick"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                );</span><br><span class="line">                shortSnackbar.setActionTextColor(getResources().getColor(R.color.colorPrimaryDark));</span><br><span class="line">                shortSnackbar.show();</span><br><span class="line"></span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.long_button:</span><br><span class="line">                Snackbar longSnackbar = Snackbar.make(rootLayout, <span class="hljs-string">" Long SnackBar"</span>, Snackbar.LENGTH_LONG);</span><br><span class="line">                longSnackbar.setCallback(<span class="hljs-keyword">new</span> SnackCallback());</span><br><span class="line">                longSnackbar.show();</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SnackCallback</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Snackbar</span>.<span class="hljs-title">Callback</span> </span>&#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDismissed</span><span class="hljs-params">(Snackbar snackbar, <span class="hljs-keyword">int</span> event)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>.onDismissed(snackbar, event);</span><br><span class="line">            Toast.makeText(rootLayout.getContext(), <span class="hljs-string">"SnackBar onDismissed"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onShown</span><span class="hljs-params">(Snackbar snackbar)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>.onShown(snackbar);</span><br><span class="line">            Toast.makeText(rootLayout.getContext(), <span class="hljs-string">"SnackBar onShown"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://img-blog.csdn.net/20160703094445277" alt="这里写图片描述"></p>
-
+<p>Snackbars provide lightweight feedback about an operation. They show a brief message at the<br>bottom of the screen on mobile and lower left on larger devices. Snackbars appear above all other<br>elements on screen and only one can be displayed at a time.</p></blockquote>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/03/《Android 基础（十一）》 Snackbar/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -603,7 +422,7 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 488 个字)
+                    3 分钟 读完 (大约 489 个字)
                 </span>
                 
                 
@@ -619,71 +438,17 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
             <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
 <p>Source Code中的介绍如下：</p>
 <p>Floating action buttons are used for a special type of promoted action. They are distinguished<br>by a circled icon floating above the UI and have special motion behaviors related to morphing,<br>launching, and the transferring anchor point.</p>
-<p>Floating action buttons come in two sizes: the default and the mini. The size can be<br>controlled with the {@code fabSize} attribute.</p>
-</blockquote>
-<blockquote>
-<p>As this class descends from {@link ImageView}, you can control the icon which is displayed<br>via {@link # setImageDrawable(Drawable)}.<br>The background color of this view defaults to the your theme’s {@code colorAccent}. If you<br>wish to change this at runtime then you can do so via<br>{@link # setBackgroundTintList(ColorStateList)}.</p>
-<p>@attr ref android.support.design.R.styleable#FloatingActionButton_fabSize</p>
-</blockquote>
-<h2 id="属性值"><a href="#属性值" class="headerlink" title="属性值"></a>属性值</h2><table>
-<thead>
-<tr>
-<th>属性值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>app:backgroundTint</td>
-<td>设置背景颜色</td>
-</tr>
-<tr>
-<td>app:fabSize</td>
-<td>设置FAB的大小，主要有两个取值normal,mini</td>
-</tr>
-<tr>
-<td>android:src</td>
-<td>设置FAB的图标内容</td>
-</tr>
-<tr>
-<td>app:rippleColor</td>
-<td>设置FAB点击过程中的颜色</td>
-</tr>
-<tr>
-<td>app:elevation</td>
-<td>设置FAB正常情况下的阴影效果</td>
-</tr>
-<tr>
-<td>app:pressedTranslationZ</td>
-<td>设置FAB点击时的阴影大小</td>
-</tr>
-<tr>
-<td>app:borderWidth</td>
-<td>设置边框宽度</td>
-</tr>
-<tr>
-<td>android:clickable</td>
-<td>是否可点击true or false</td>
-</tr>
-<tr>
-<td>app:layout_anchor</td>
-<td>设置FAB的锚点，即以哪个控件为参照点设置位置</td>
-</tr>
-<tr>
-<td>app:layout_anchorGravity</td>
-<td>设置FAB相对锚点的位置，取值:topbottom.left,right,center_vertical,fill_vertical,center_horizontal,fill_horizontal,center,fill,clip_verticalclip_horizontal,start,end</td>
-</tr>
-</tbody></table>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h3><p>activity_main.xml</p>
-<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.CoordinatorLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.Toolbar</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:background</span>=<span class="hljs-string">"?attr/colorPrimaryDark"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:minHeight</span>=<span class="hljs-string">"?attr/actionBarSize"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:navigationIcon</span>=<span class="hljs-string">"@drawable/ic_account_balance_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:title</span>=<span class="hljs-string">"Mraz FAB Demo"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.Toolbar</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_left"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"left|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag"></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"leftClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_back_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"@color/colorPrimary"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"mini"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"@color/colorPress"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_right"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"right|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"@dimen/activity_vertical_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"@dimen/activity_horizontal_margin"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"rightClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_forward_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"@color/colorLight"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:borderWidth</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:elevation</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"normal"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:pressedTranslationZ</span>=<span class="hljs-string">"50dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"@color/colorPress"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_anchor"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"right|bottom"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"10dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag"></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:clickable</span>=<span class="hljs-string">"true"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:onClick</span>=<span class="hljs-string">"topClick"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/ic_arrow_forward_black_24dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:backgroundTint</span>=<span class="hljs-string">"#ff87ffeb"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:borderWidth</span>=<span class="hljs-string">"0dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:elevation</span>=<span class="hljs-string">"6dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:fabSize</span>=<span class="hljs-string">"normal"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:layout_anchor</span>=<span class="hljs-string">"@+id/toolbar"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:layout_anchorGravity</span>=<span class="hljs-string">"right"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:pressedTranslationZ</span>=<span class="hljs-string">"12dp"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">app:rippleColor</span>=<span class="hljs-string">"#33728dff"</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>布局中一共设置了3个FAB，一个在左下角，一个在右下角，一个设置了锚点，颜色可以自己调整，简单的用法就是这个样子，对应的onClick事件在MainActivity中实现。</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>MainActivity.java</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.appbardemo;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.annotation.TargetApi;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Build;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="hljs-keyword">import</span> android.support.v7.widget.Toolbar;</span><br><span class="line"><span class="hljs-keyword">import</span> android.view.View;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Toolbar toolbar;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        setSupportActionBar(toolbar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@TargetApi</span>(Build.VERSION_CODES.LOLLIPOP)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">leftClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Left FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rightClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Right FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">topClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        toolbar.setTitle(<span class="hljs-string">"Top FAB onClick"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://img-blog.csdn.net/20160702071932239" alt="这里写图片描述"></p>
-
+<p>Floating action buttons come in two sizes: the default and the mini. The size can be<br>controlled with the {@code fabSize} attribute.</p></blockquote>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/02/《Android 基础（十）》FloatingActionButton/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -820,7 +585,7 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 337 个字)
+                    2 分钟 读完 (大约 293 个字)
                 </span>
                 
                 
@@ -833,34 +598,17 @@ setHintAnimationEnabled | 使能Hint浮动动画，默认为true</code></pre><p>
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/51756472" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/51756472</a>   </p>
-<h4 id="1-导入AAR、JAR文件"><a href="#1-导入AAR、JAR文件" class="headerlink" title="1. 导入AAR、JAR文件"></a><strong>1. 导入AAR、JAR文件</strong></h4><p> File- &gt; New -&gt; New Module</p>
-<p> <img src="https://img-blog.csdn.net/20160624233528915" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20160624233543259" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20160624233623856" alt="这里写图片描述"></p>
-<hr>
-<p> 这样子AAR文件就导入了，然后在app中的build.gradle中做如下添加   </p>
-<p> dependencies {<br> ……<br> compile project(‘:MODULE-NAME’)<br> }<br> 例如<br> dependencies {<br> ……<br> compile project(‘:circleimageview-2.0.0’)<br> }   </p>
-<p> 也可以直接在app的依赖选项中直接选择最后一个“Module dependency”,然后添加对应的MODULE即可</p>
-<p> jar包也可以采用这种方式导入,但是也可以使用另外一种方式<br> <img src="https://img-blog.csdn.net/20160624234217483" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20160624234249108" alt="这里写图片描述"></p>
-<pre><code>方式                 | 使用                       
------------------- | ------------------------- 
-Library dependency | 可以选择一些可用的android原生依赖包    
-File dependency    | 可以选择一些文件形式的依赖包，比如第三方Jar包等
-Module dependency  | 当前工程下的模块依赖               </code></pre><hr>
-<h4 id="2-快速添加Material-Design-Drawable"><a href="#2-快速添加Material-Design-Drawable" class="headerlink" title="2. 快速添加Material Design Drawable"></a><strong>2. 快速添加Material Design Drawable</strong></h4><p> res/drawable 右键 New-&gt; Vector Asset 或者Image Asset<br> <img src="https://img-blog.csdn.net/20160624235315487" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20160624235300065" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20160624235343910" alt="这里写图片描述"></p>
-<p> 同样的方式使用Image Asset界面大同小异。</p>
-
+            <h2 id="导入AAR、JAR文件"><a href="#导入AAR、JAR文件" class="headerlink" title="导入AAR、JAR文件"></a>导入AAR、JAR文件</h2>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/06/24/Android Studio 小技巧（1）：如何导入AAR文件/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1019,7 +767,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -1228,7 +976,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1791,7 +1539,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2197,7 +1945,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2212,6 +1960,13 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2919,7 +2674,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -3325,7 +3080,7 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3340,6 +3095,13 @@ Module dependency  | 当前工程下的模块依赖               </code></pre><
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

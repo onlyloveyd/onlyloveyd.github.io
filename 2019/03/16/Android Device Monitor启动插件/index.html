@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="前言 最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。 官方解释：  Android Device Monitor was deprecated in Android Studio 3.1 and removed from Android Studio 3.2. The features">
+    <meta name="description" content="前言最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。">
 <meta name="keywords" content="IDEA插件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Device Monitor启动插件">
 <meta property="og:url" content="http://yoursite.com/2019/03/16/Android Device Monitor启动插件/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="前言 最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。 官方解释：  Android Device Monitor was deprecated in Android Studio 3.1 and removed from Android Studio 3.2. The features">
+<meta property="og:description" content="前言最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:57:27.756Z">
+<meta property="og:updated_time" content="2019-06-19T13:18:33.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Device Monitor启动插件">
-<meta name="twitter:description" content="前言 最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。 官方解释：  Android Device Monitor was deprecated in Android Studio 3.1 and removed from Android Studio 3.2. The features">
+<meta name="twitter:description" content="前言最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 431 个字)
+                    3 分钟 读完 (大约 443 个字)
                 </span>
                 
                 
@@ -168,37 +168,36 @@
             
         </h1>
         <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。<br> 官方解释：</p>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近使用Android Studio3.3调试应用过程中，需要使用Android Device Monitor，但是界面上找不到入口，印象中之前的版本是存在的。</p>
+<a id="more"></a>
+<p>官方解释：</p>
 <blockquote>
 <p>Android Device Monitor was deprecated in Android Studio 3.1 and removed from Android Studio 3.2. The features that you could use through the Android Device Monitor have been replaced by new features. The table below helps you decide which features you should use instead of these deprecated and removed features.</p>
-<p> 官方准备弃用Android Device Monitor 并推荐开发者使用对应的新特性作为替代品。具体查阅[官网]。(<a href="https://developer.android.google.cn/studio/profile/monitor" target="_blank" rel="noopener">https://developer.android.google.cn/studio/profile/monitor</a>)  
- 对于习惯使用Android Device Monitor的开发者来说，每次都需要目录下触发monitor很不方便。所以，用最简单的方式将其集成到Android Studio界面上是相对不错的解决方案。</p>
+<p>官方准备弃用Android Device Monitor 并推荐开发者使用对应的新特性作为替代品。具体查阅[官网]。(<a href="https://developer.android.google.cn/studio/profile/monitor" target="_blank" rel="noopener">https://developer.android.google.cn/studio/profile/monitor</a>)  
+对于习惯使用Android Device Monitor的开发者来说，每次都需要目录下触发monitor很不方便。所以，用最简单的方式将其集成到Android Studio界面上是相对不错的解决方案。</p>
 </blockquote>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a><a href></a>准备</h2><ul>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul>
 <li>开发环境：intellij IDEA </li>
 <li>开发手册：<a href="http://www.jetbrains.org/intellij/sdk/docs/welcome.html" target="_blank" rel="noopener">intellij Official Docs</a> </li>
-<li>参考项目：<a href="https://github.com/maddouri/IntelliJ-OnlineSearch" target="_blank" rel="noopener">IntelliJ-OnlineSearch</a>, <a href="https://github.com/misakuo/svgtoandroid" target="_blank" rel="noopener">svgtoandroid</a>  <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a><a href></a>需求</h2></li>
+<li>参考项目：<a href="https://github.com/maddouri/IntelliJ-OnlineSearch" target="_blank" rel="noopener">IntelliJ-OnlineSearch</a>, <a href="https://github.com/misakuo/svgtoandroid" target="_blank" rel="noopener">svgtoandroid</a></li>
 </ul>
-<ul>
-<li><p>满足工作环境(Windows, Mac Pro) </p>
-</li>
-<li><p>Android Studio主界面启动 </p>
-</li>
-<li><p>单次配置  </p>
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a><a href></a>源代码</h2><p><a href="https://github.com/onlyloveyd/AndroidDeviceMonitorPlugin" target="_blank" rel="noopener">AndroidDeviceMonitorPlugin</a></p>
-</li>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>满足工作环境(Windows, Mac Pro)</li>
+<li>Android Studio主界面启动</li>
+<li>单次配置</li>
 </ul>
-<h3 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a><a href></a>plugin.xml</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-082852@2x.png" alt></p>
-<p> 如果不清楚菜单分组分类，可以去Android Studio 主工具菜单空白处右键查阅</p>
-<p> <img src="http://qiniu.fultter.club/QQ20190316-083147@2x.png" alt></p>
-<p> 点击“Customize Menus And Toolbars”，得见下方内容</p>
-<p> <img src="http://qiniu.fultter.club/QQ20190316-083217@2x.png" alt></p>
-<h3 id="SettingsConfigurable"><a href="#SettingsConfigurable" class="headerlink" title="SettingsConfigurable"></a><a href></a>SettingsConfigurable</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-083845@2x.png" alt></p>
-<h3 id="LaunchMonitorAction"><a href="#LaunchMonitorAction" class="headerlink" title="LaunchMonitorAction"></a><a href></a>LaunchMonitorAction</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-084225@2x.png" alt></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ul>
-<li>第一次开发Intellij Plugin：Java界面开发早已忘却 </li>
-<li>单纯实现功能，逻辑相对简单，但是插件开发里应该有很多门道 </li>
-<li>多看官文和成功案例    </li>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p><a href="https://github.com/onlyloveyd/AndroidDeviceMonitorPlugin" target="_blank" rel="noopener">AndroidDeviceMonitorPlugin</a></p>
+<h3 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a>plugin.xml</h3><p><img src="http://qiniu.fultter.club/QQ20190316-082852@2x.png" alt="plugin.xml"></p>
+<p>如果不清楚菜单分组分类，可以去Android Studio 主工具菜单空白处右键查阅</p>
+<p><img src="http://qiniu.fultter.club/QQ20190316-083147@2x.png" alt="Customize Menus And Toolbars"></p>
+<p>点击“Customize Menus And Toolbars”，得见下方内容</p>
+<p><img src="http://qiniu.fultter.club/QQ20190316-083217@2x.png" alt="Menu and Toolbars"></p>
+<h3 id="SettingsConfigurable"><a href="#SettingsConfigurable" class="headerlink" title="SettingsConfigurable"></a>SettingsConfigurable</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-083845@2x.png" alt="SettingsConfigurable"></p>
+<h3 id="LaunchMonitorAction"><a href="#LaunchMonitorAction" class="headerlink" title="LaunchMonitorAction"></a>LaunchMonitorAction</h3><p> <img src="http://qiniu.fultter.club/QQ20190316-084225@2x.png" alt="LaunchMonitorAction"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>第一次开发Intellij Plugin：Java界面开发早已忘却</li>
+<li>单纯实现功能，逻辑相对简单，但是插件开发里应该有很多门道</li>
+<li>多看官文和成功案例</li>
 </ul>
 
         </div>
@@ -286,8 +285,8 @@
 		owner: 'onlyloveyd',
 		repo: 'HexoBlog',
 		oauth: {
-			client_id: '086d4052b9aa22c3f98e',
-			client_secret: 'bba7700b5888c722e54735dc5f1f9510c291acc8',
+			client_id: '2f74aa28e7577ea363f4',
+			client_secret: '5f8765c36434710db05359b75a9b0f1806538d02',
 		},
 	})
 	gitment.render('comment-container')
@@ -358,7 +357,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -567,7 +566,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1130,7 +1129,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1536,7 +1535,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1551,6 +1550,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2258,7 +2264,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2664,7 +2670,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2679,6 +2685,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

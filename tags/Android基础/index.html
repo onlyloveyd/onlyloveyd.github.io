@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 344 个字)
+                    2 分钟 读完 (大约 350 个字)
                 </span>
                 
                 
@@ -178,47 +178,17 @@
             
         </h1>
         <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近遇到一个问题：<br> 自定义Notification通知声音(一个外部存储MP3文件)，Android7.0版本上无法正常播放。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a><a href></a>分析</h2><ol>
-<li><p>查阅代码是否正常执行，setSound是否设置有效Uri正常执行,设置的Uri有效 </p>
-</li>
-<li><p>查看Log发现权限问题相关Log  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MediaPlayer: Couldn&apos;t open content://xxxxxxxx/new_order.mp3: java.lang.SecurityException: Permission Denial: opening provider android.support.v4.content.FileProvider from ProcessRecord&#123;ce87f22 2005:com.android.systemui/u0a18&#125; (pid=2005, uid=10018) that is not exported from uid 10257</span><br></pre></td></tr></table></figure>
-
-<p>传递参数FileProvider Uri，com.android.systemui无访问权限，导致设置的MP3无法播放</p>
-</li>
-</ol>
-<ol start="2">
-<li>adb shell dumpsys notification查看sound是否为设置的Urisound为设置的Uri，正常  <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><a href></a>解决办法</h2></li>
-</ol>
-<h3 id="使用grantUriPermissions"><a href="#使用grantUriPermissions" class="headerlink" title="使用grantUriPermissions()"></a><a href></a>使用grantUriPermissions()</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grantUriPermission(&quot;com.android.systemui&quot;, sound,</span><br><span class="line">    Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br></pre></td></tr></table></figure>
-
-<p> (这个具体情况可以根据上面分析中的Log确定包名)</p>
-<h3 id="使用android-resource"><a href="#使用android-resource" class="headerlink" title="使用android.resource"></a><a href></a>使用android.resource</h3><p> 假设使用raw资源保存test.mp3文件，然后使用</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(&quot;android.resource://“+ context.getPackageName() + R.id.test);</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(&quot;android.resource://“+ context.getPackageName() + &quot;/raw/test.mp3&quot;);</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="禁止严格模式-amp-不使用FileProvider（不推荐）"><a href="#禁止严格模式-amp-不使用FileProvider（不推荐）" class="headerlink" title="禁止严格模式&amp;不使用FileProvider（不推荐）"></a><a href></a>禁止严格模式&amp;不使用FileProvider（不推荐）</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().build());</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ul>
-<li>Android7.0 注意Uri权限问题</li>
-</ul>
-<ul>
-<li>Android8.0 注意setSound在NotificationChannel完成</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><a href></a>参考</h2><ol start="2">
-<li><a href="https://commonsware.com/blog/2016/09/07/notifications-sounds-android-7p0-aggravation.html" target="_blank" rel="noopener">Notifications, Sounds, Android 7.0, and Aggravation</a> </li>
-<li><a href="https://issuetracker.google.com/issues/37118905" target="_blank" rel="noopener">Google Issue Tracker</a> </li>
-<li><a href="https://stackoverflow.com/questions/39285228/how-to-set-audio-as-ringtone-programmatically-above-android-n?noredirect=1#comment66048508_39285228" target="_blank" rel="noopener">Stackoverflow Issue</a> </li>
-<li><a href="https://issuetracker.google.com/issues/36524161" target="_blank" rel="noopener">Google Fixed</a>    </li>
-</ol>
-
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近遇到一个问题：<br>自定义Notification通知声音(一个外部存储MP3文件)，Android7.0版本上无法正常播放。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/01/11/Android 7.0 Notification Sound Issue/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -294,7 +264,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -503,7 +473,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1066,7 +1036,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1472,7 +1442,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1487,6 +1457,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2194,7 +2171,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2600,7 +2577,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2615,6 +2592,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

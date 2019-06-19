@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="原文链接： http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions 本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。  在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发">
+    <meta name="description" content="原文链接：http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。 在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。">
 <meta name="keywords" content="Kotlin,译文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Kotlin》 Kotlin Android Extensions (译文)">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/《Kotlin》 Kotlin Android Extensions (译文)/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="原文链接： http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions 本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。  在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发">
+<meta property="og:description" content="原文链接：http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。 在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:54:20.824Z">
+<meta property="og:updated_time" content="2019-06-19T13:47:23.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Kotlin》 Kotlin Android Extensions (译文)">
-<meta name="twitter:description" content="原文链接： http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions 本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。  在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发">
+<meta name="twitter:description" content="原文链接：http://kotlinlang.org/docs/tutorials/android-plugin.html Kotlin Android Extensions本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。 在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 968 个字)
+                    6 分钟 读完 (大约 970 个字)
                 </span>
                 
                 
@@ -168,52 +168,49 @@
             
         </h1>
         <div class="content">
-            <h4 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a><a href></a>原文链接：</h4><p> <a href="http://kotlinlang.org/docs/tutorials/android-plugin.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/android-plugin.html</a></p>
-<h2 id="Kotlin-Android-Extensions"><a href="#Kotlin-Android-Extensions" class="headerlink" title="Kotlin Android Extensions"></a><a href></a>Kotlin Android Extensions</h2><p> 本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。</p>
-<p> 在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><a href></a>背景</h2><p> 每个Android开发人员都很清楚findViewById()方法。 毫无疑问，这是一个难以阅读与维护，并且存在潜在bug的丑陋代码。 虽然有几个可用的库可以为此问题提供解决方案，但依赖于运行时的库，最让你头疼的是它们需要为每个View添加注释字段。</p>
-<p> Kotlin Android Extensions插件允许我们获得与使用这些库后相同的体验，而无需添加任何额外的代码或消耗额外的运行时间。</p>
-<p> 实质上，下面这段代码时OK的：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Using R.layout.activity_main from the main source set</span><br><span class="line">import kotlinx.android.synthetic.main.activity_main.*</span><br><span class="line"></span><br><span class="line">class MyActivity : Activity() &#123;</span><br><span class="line">    override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        textView.setText(&quot;Hello, world!&quot;)</span><br><span class="line">        // Instead of findView(R.id.textView) as TextView</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h4 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h4><p><a href="http://kotlinlang.org/docs/tutorials/android-plugin.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/android-plugin.html</a></p>
+<h2 id="Kotlin-Android-Extensions"><a href="#Kotlin-Android-Extensions" class="headerlink" title="Kotlin Android Extensions"></a>Kotlin Android Extensions</h2><p>本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。</p>
+<p>在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。</p>
+<a id="more"></a>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>每个Android开发人员都很清楚findViewById()方法。 毫无疑问，这是一个难以阅读与维护，并且存在潜在bug的丑陋代码。 虽然有几个可用的库可以为此问题提供解决方案，但依赖于运行时的库，最让你头疼的是它们需要为每个View添加注释字段。</p>
+<p>Kotlin Android Extensions插件允许我们获得与使用这些库后相同的体验，而无需添加任何额外的代码或消耗额外的运行时间。</p>
+<p>实质上，下面这段代码时OK的：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Using R.layout.activity_main from the main source set</span></span><br><span class="line"><span class="hljs-keyword">import</span> kotlinx.android.synthetic.main.activity_main.*</span><br><span class="line"></span><br><span class="line">class MyActivity : Activity() &#123;</span><br><span class="line">    <span class="hljs-function">override fun <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: Bundle?)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        textView.setText(<span class="hljs-string">"Hello, world!"</span>)</span><br><span class="line">        <span class="hljs-comment">// Instead of findView(R.id.textView) as TextView</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> textView是Activity的扩展属性，并且它的类型和acitvity_main.xml文件中申明的一致。</p>
-<hr>
-<h2 id="使用Kotlin-Android-Extensions"><a href="#使用Kotlin-Android-Extensions" class="headerlink" title="使用Kotlin Android Extensions"></a><a href></a>使用Kotlin Android Extensions</h2><h3 id="配置依赖"><a href="#配置依赖" class="headerlink" title="配置依赖"></a><a href></a>配置依赖</h3><p> 在这个教程中，我们将使用Gradle作为我们的操作环境，在 IntelliJ IDEA 环境或者Maven下大同小异。更多关于Kotlin的Gradle配置，请查阅<a href="http://kotlinlang.org/docs/reference/using-gradle.html" target="_blank" rel="noopener">Using Gradle</a>.</p>
-<p> Android Extensions是Kotlin IDEA插件的一部分，你不需要再安装其他的插件。<br> 你需要做的就是使用下面的方式在你的项目及build.gradle中启用Android Extensions Gradle插件：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;kotlin-android-extensions&apos;</span><br></pre></td></tr></table></figure>
+<p>textView是Activity的扩展属性，并且它的类型和acitvity_main.xml文件中申明的一致。</p>
+<h2 id="使用Kotlin-Android-Extensions"><a href="#使用Kotlin-Android-Extensions" class="headerlink" title="使用Kotlin Android Extensions"></a>使用Kotlin Android Extensions</h2><h3 id="配置依赖"><a href="#配置依赖" class="headerlink" title="配置依赖"></a>配置依赖</h3><p>在这个教程中，我们将使用Gradle作为我们的操作环境，在 IntelliJ IDEA 环境或者Maven下大同小异。更多关于Kotlin的Gradle配置，请查阅<a href="http://kotlinlang.org/docs/reference/using-gradle.html" target="_blank" rel="noopener">Using Gradle</a>.</p>
+<p>Android Extensions是Kotlin IDEA插件的一部分，你不需要再安装其他的插件。<br>你需要做的就是使用下面的方式在你的项目及build.gradle中启用Android Extensions Gradle插件：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply <span class="hljs-string">plugin:</span> <span class="hljs-string">'kotlin-android-extensions'</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="引入生成的属性"><a href="#引入生成的属性" class="headerlink" title="引入生成的属性"></a>引入生成的属性</h3><p>使用下面的方式，你可以很方便的一键引入特定布局的所有控件的属性：</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> kotlinx.android.synthetic.main.&lt;layout&gt;.*</span><br></pre></td></tr></table></figure>
 
-<h3 id="引入生成的属性"><a href="#引入生成的属性" class="headerlink" title="引入生成的属性"></a><a href></a>引入生成的属性</h3><p> 使用下面的方式，你可以很方便的一键引入特定布局的所有控件的属性：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import kotlinx.android.synthetic.main.&lt;layout&gt;.*</span><br></pre></td></tr></table></figure>
+<p>所以呢，如果我们的布局是activity_main.xml，我们将引入<br><strong>*kotlinx.android.synthetic.main.activity_main.</strong></p>
+<p>如果我们想使用声称的View的属性（在适配器类中很好用），我们需要引入<br><strong>*kotlinx.android.synthetic.main.activity_main.view.</strong></p>
+<p>一旦我们按照上面的步骤做，我们就可以调用相应的扩展，就是那些在XML文件中的视图之后命名的属性。 例如，对于这个视图：</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">          <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/hello"</span></span></span><br><span class="line"><span class="hljs-tag">          <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"fill_parent"</span></span></span><br><span class="line"><span class="hljs-tag">          <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">          <span class="hljs-attr">android:text</span>=<span class="hljs-string">"Hello World, MyActivity"</span></span></span><br><span class="line"><span class="hljs-tag">          /&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> 所以呢，如果我们的布局是activity_main.xml，我们将引入<br> <em><strong>kotlinx.android.synthetic.main.activity_main.</strong></em>*</p>
-<p> 如果我们想使用声称的View的属性（在适配器类中很好用），我们需要引入<br> <em><strong>kotlinx.android.synthetic.main.activity_main.view.</strong></em>*</p>
-<p> 一旦我们按照上面的步骤做，我们就可以调用相应的扩展，就是那些在XML文件中的视图之后命名的属性。 例如，对于这个视图：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">          android:id=&quot;@+id/hello&quot;</span><br><span class="line">          android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">          android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">          android:text=&quot;Hello World, MyActivity&quot;</span><br><span class="line">          /&gt;</span><br></pre></td></tr></table></figure>
+<p>然后就会存在一个名为hello 的属性</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activity.hello.setText(<span class="hljs-string">"Hi!"</span>)</span><br></pre></td></tr></table></figure>
 
-<p> 然后就会存在一个名为hello 的属性</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activity.hello.setText(&quot;Hi!&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="Android版本"><a href="#Android版本" class="headerlink" title="Android版本"></a>Android版本</h2><p>Android Extensions 插件支持Android 多渠道版本，假如在你的build.gradle中有一个名为free的版本</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        free &#123;</span><br><span class="line">            versionName <span class="hljs-string">"1.0-free"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>然后你就可以通过如下方式导入针对<strong><em>free/res/layout/activity_free.xml</em></strong>的所有生成的属性。</p>
+<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> kotlinx.android.synthetic.free.activity_free.*</span><br></pre></td></tr></table></figure>
 
-<h2 id="Android版本"><a href="#Android版本" class="headerlink" title="Android版本"></a><a href></a>Android版本</h2><p> Android Extensions 插件支持Android 多渠道版本，假如在你的build.gradle中有一个名为free的版本</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        free &#123;</span><br><span class="line">            versionName &quot;1.0-free&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 然后你就可以通过如下方式导入针对<strong><em>free/res/layout/activity_free.xml</em></strong>的所有生成的属性。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import kotlinx.android.synthetic.free.activity_free.*</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="内部原理"><a href="#内部原理" class="headerlink" title="内部原理"></a><a href></a>内部原理</h2><p> Kotlin Android Extensions 是一个Kotlin编译器插件。它执行下面两个操作：</p>
-<ol start="2">
-<li>为每一个Kotlin Activity添加一个隐藏的缓存方法和一个域。这个方法相当之小，基本不会增加APK 的大小。 </li>
-<li>用方法调用替换每一个属性调用。  那么，这是如何工作的呢？<br>当调用一个生成的属性时，如果接收方时存在于模块源代码中的Kotlin Activity或者Fragment，缓存的方法将会被调用。例如，提供</li>
+<h2 id="内部原理"><a href="#内部原理" class="headerlink" title="内部原理"></a>内部原理</h2><p>Kotlin Android Extensions 是一个Kotlin编译器插件。它执行下面两个操作：</p>
+<ol>
+<li>为每一个Kotlin Activity添加一个隐藏的缓存方法和一个域。这个方法相当之小，基本不会增加APK 的大小。</li>
+<li>用方法调用替换每一个属性调用。</li>
 </ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class MyActivity: Activity()</span><br><span class="line">fun MyActivity.a() &#123; </span><br><span class="line">        this.textView.setText(“”) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么，这是如何工作的呢？<br>当调用一个生成的属性时，如果接收方时存在于模块源代码中的Kotlin Activity或者Fragment，缓存的方法将会被调用。例如，提供</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class MyActivity: Activity()</span><br><span class="line">fun MyActivity.a() &#123; </span><br><span class="line">        <span class="hljs-keyword">this</span>.textView.setText(“”)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 一个缓存方法会自动在MyActivity中生成，所有我们可以使用缓存机制。<br> 然而在下面这个例子中</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Activity.b() &#123; </span><br><span class="line">        this.textView.setText(“”)     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个缓存方法会自动在MyActivity中生成，所有我们可以使用缓存机制。<br>然而在下面这个例子中</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Activity.b() &#123; </span><br><span class="line">        <span class="hljs-keyword">this</span>.textView.setText(“”)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 我们不知道这个方法是否仅在我们的源代码的Activity或普通Java Activity中被调用。 因此，即使上一个示例中的MyActivity实例是接收器，我们也不使用缓存。</p>
+<p>我们不知道这个方法是否仅在我们的源代码的Activity或普通Java Activity中被调用。 因此，即使上一个示例中的MyActivity实例是接收器，我们也不使用缓存。</p>
 
         </div>
         
@@ -300,8 +297,8 @@
 		owner: 'onlyloveyd',
 		repo: 'HexoBlog',
 		oauth: {
-			client_id: '086d4052b9aa22c3f98e',
-			client_secret: 'bba7700b5888c722e54735dc5f1f9510c291acc8',
+			client_id: '2f74aa28e7577ea363f4',
+			client_secret: '5f8765c36434710db05359b75a9b0f1806538d02',
 		},
 	})
 	gitment.render('comment-container')
@@ -372,7 +369,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -581,7 +578,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1144,7 +1141,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1550,7 +1547,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1565,6 +1562,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2272,7 +2276,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2678,7 +2682,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2693,6 +2697,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

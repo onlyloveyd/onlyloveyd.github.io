@@ -261,7 +261,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 216 个字)
+                    1 分钟 读完 (大约 217 个字)
                 </span>
                 
                 
@@ -275,15 +275,16 @@
         </h1>
         <div class="content">
             <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>由于Android Studio这个开发工具体量比较大，所以很多功能平时开发的时候不做积累，后续就会随着使用的减少渐渐忘却，所以，写笔记。</p>
-<h2 id="技巧集合"><a href="#技巧集合" class="headerlink" title="技巧集合"></a>技巧集合</h2><h3 id="开发版SHA1和发布版SHA1的获取"><a href="#开发版SHA1和发布版SHA1的获取" class="headerlink" title="开发版SHA1和发布版SHA1的获取"></a>开发版SHA1和发布版SHA1的获取</h3><p> <strong>发布版</strong><br> 发布版就是使用自己创建的keystore文件<br> keytool -list -v -keystore xxxxxxxx</p>
-<p> <strong>开发板</strong><br> keytool -list -v -keystore C:/Users/xxx/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android<br> (xxx代表电脑当前用户名)  </p>
-<h3 id="加快Gradle构建速度"><a href="#加快Gradle构建速度" class="headerlink" title="加快Gradle构建速度"></a>加快Gradle构建速度</h3><p> Build,Execution,Deployment &gt; Compiler<br> 添加<br> <img src="https://img-blog.csdn.net/20161104141503391" alt="这里写图片描述">  </p>
-<p> 创建Asset文件夹，JNI文件夹等<br> <img src="https://img-blog.csdn.net/20161104141909584" alt="这里写图片描述">  </p>
-<h3 id="下载镜像免费代理设置"><a href="#下载镜像免费代理设置" class="headerlink" title="下载镜像免费代理设置"></a>下载镜像免费代理设置</h3><p> Appearance &amp; Behavior &gt; System Settings &gt; HTTP Proxy<br> <img src="https://img-blog.csdn.net/20161104143820376" alt="这里写图片描述"></p>
-<h3 id="手动签名"><a href="#手动签名" class="headerlink" title="手动签名"></a>手动签名</h3><p>jarsgner-verbose-keystore[keystorePath]-singnedjar [apkOut] [apkln] [alias]</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/11/04/《Android 基础（二十七）》 Android Studio常用技巧（免费代理下载Google内容）/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -312,7 +313,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1100 个字)
+                    7 分钟 读完 (大约 1109 个字)
                 </span>
                 
                 
@@ -325,73 +326,20 @@
             
         </h1>
         <div class="content">
-            <h3 id="在线Gif加载"><a href="#在线Gif加载" class="headerlink" title="在线Gif加载"></a><strong>在线Gif加载</strong></h3><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> Glide完美解决</p>
+            <h3 id="在线Gif加载"><a href="#在线Gif加载" class="headerlink" title="在线Gif加载"></a>在线Gif加载</h3><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>Glide完美解决</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(context).load(pic).placeholder(R.drawable.loading).into(imageView);</span><br></pre></td></tr></table></figure>
 
 <p> pic: url地址<br> R.drawable.loading: gif加载之前图片<br> imageView：目标imageview</p>
-<hr>
-<h3 id="Intent调用图库"><a href="#Intent调用图库" class="headerlink" title="Intent调用图库"></a><strong>Intent调用图库</strong></h3><p> 使用L版本手机的时候，通过Intent调用图库，选择图片后出现”不支持的媒体类型”或者是”Failed to read row 0, column 6 from a CursorWindow which has 1 rows, 6 columns”。<br> 由于对数据库这一款疏于了解，不能很快的定位出这个问题，首先想到的办法就是将出问题的文件不要暴露在用户眼前。</p>
-<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = null;</span><br><span class="line">if (Build.VERSION.SDK_INT &lt; 19)</span><br><span class="line">&#123;</span><br><span class="line">    intent = new Intent(Intent.ACTION_GET_CONTENT);</span><br><span class="line">    intent.setType(&quot;image/*&quot;);</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 不同的Android版本，选择系统图库中图片的方式有点差别，这个是需要注意的，Google不断更新API肯定是有原因的，所以，Android版本的兼容性问题是迭代开发和维护工作中不可避免的。单看代码是比较简单，但是当开发者不知道的时候，这个问题可能就会浪费很多时间。</p>
-<hr>
-<h3 id="AlertDialog获取PositionButton，NeturalButton-和-NegativeButton，一定要先调用show-方法"><a href="#AlertDialog获取PositionButton，NeturalButton-和-NegativeButton，一定要先调用show-方法" class="headerlink" title="AlertDialog获取PositionButton，NeturalButton 和 NegativeButton，一定要先调用show()方法"></a><strong>AlertDialog获取PositionButton，NeturalButton 和 NegativeButton，一定要先调用show()方法</strong></h3><h3 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dialog.show();//注意  必须先调用这个，否则下面会报空指针异常</span><br><span class="line">if(xxxxx) &#123;       dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(GONE);</span><br><span class="line">&#125; else &#123;  dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(VISIBLE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="L版本上Toast无法显示"><a href="#L版本上Toast无法显示" class="headerlink" title="L版本上Toast无法显示"></a><strong>L版本上Toast无法显示</strong></h3><h3 id="解决办法-3"><a href="#解决办法-3" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><ol>
-<li><p>L版本上通知管理中，关闭了对应应用的通知权限，去“设置”-&gt; “通知管理”中打开即可 </p>
-</li>
-<li><p>避免因为权限问题导致Toast无法显示，可以尝试自定义完成类似Toast的功能   </p>
-<hr>
-</li>
-</ol>
-<h3 id="TextView走马灯"><a href="#TextView走马灯" class="headerlink" title="TextView走马灯"></a><strong>TextView走马灯</strong></h3><h3 id="解决办法-4"><a href="#解决办法-4" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TextView tv = new TextView(activity);</span><br><span class="line">tv.setText(&quot;XXXXXXXXXXXX&quot;);</span><br><span class="line">tv.setSingleLine(true);</span><br><span class="line">tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);</span><br><span class="line">tv.setMarqueeRepeatLimit(-1);</span><br><span class="line">tv.setFocusable(true);</span><br><span class="line">tv.setFocusableInTouchMode(true);</span><br><span class="line">tv.setHorizontallyScrolling(true);</span><br><span class="line">tv.requestFocus();</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="使用系统ACTION-SEND-发送文字或者图片"><a href="#使用系统ACTION-SEND-发送文字或者图片" class="headerlink" title="使用系统ACTION_SEND 发送文字或者图片"></a><strong>使用系统ACTION_SEND 发送文字或者图片</strong></h3><h3 id="解决办法-5"><a href="#解决办法-5" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> 发送文字</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String message = &quot;This is a sharing Text&quot;;</span><br><span class="line">Intent shareIntent = new Intent();</span><br><span class="line">shareIntent.setAction(Intent.ACTION_SEND);</span><br><span class="line">shareIntent.setType(&quot;text/plain&quot;);</span><br><span class="line">shareIntent.putExtra(Intent.EXTRA_TEXT, message);</span><br><span class="line">this.startActivity(shareIntent);</span><br></pre></td></tr></table></figure>
-
-<p> 发送图片</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* localqrcode是一个bitmap对象*/</span><br><span class="line">String pathofBmp = Images.Media.insertImage(                                activity.getContentResolver(), localqrcode,</span><br><span class="line">                                    &quot;title&quot;, null);</span><br><span class="line">Uri bmpUri = Uri.parse(pathofBmp);//获取本地Uri</span><br><span class="line">Intent intent= new Intent(                              android.content.Intent.ACTION_SEND);</span><br><span class="line">                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">                            intent.putExtra(Intent.EXTRA_STREAM, bmpUri);//流类型</span><br><span class="line">intent.setType(&quot;image/png&quot;);</span><br><span class="line">activity.startActivity(intent.createChooser(intent, &quot;选择&quot;));</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="调用系统资源"><a href="#调用系统资源" class="headerlink" title="调用系统资源"></a><strong>调用系统资源</strong></h3><h3 id="解决办法-6"><a href="#解决办法-6" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取导航栏高度</span><br><span class="line"> */</span><br><span class="line">private int getNavigationBarHeight() &#123;</span><br><span class="line">    boolean hasNavigationBar = getResources().getBoolean(Resources.getSystem().getIdentifier(&quot;config_showNavigationBar&quot;, &quot;bool&quot;, &quot;android&quot;));</span><br><span class="line">    if(hasNavigationBar) &#123;</span><br><span class="line">        return getResources().getDimensionPixelSize(Resources.getSystem().getIdentifier(&quot;navigation_bar_height&quot;, &quot;dimen&quot;,&quot;android&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 通过<br> Resources.getSystem().getIdentifier(“config_showNavigationBar”, “bool”, “android”));<br> 这类方式获取ID，然后通过正常的资源使用方式使用即可   </p>
-<h3 id="Okhttp异常"><a href="#Okhttp异常" class="headerlink" title="Okhttp异常"></a><strong>Okhttp异常</strong></h3><p> Okhttp异常：<br> System.err: java.lang.IllegalStateException: closed</p>
-<p> System.err: at okio.RealBufferedSource.rangeEquals(RealBufferedSourc</p>
-<p> System.err: at okio.RealBufferedSource.rangeEquals(RealBufferedSourc</p>
-<p> System.err: at okhttp3.internal.Util.bomAwareCharset(Util.java:397)</p>
-<p> System.err: at okhttp3.ResponseBody.string(ResponseBody.java:173)</p>
-<h3 id="解决办法-7"><a href="#解决办法-7" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> Response response = okHttpClient.newCall(request).execute();<br> 这里返回的response一般我们后面就会执行response.body().string()，<br> 但是如果连续调用两次response.body().string()，就会出现如上的错误</p>
-<hr>
-<h3 id="actionBar-setDisplayHomeAsUpEnabled-true-后如何修改返回图标"><a href="#actionBar-setDisplayHomeAsUpEnabled-true-后如何修改返回图标" class="headerlink" title="actionBar.setDisplayHomeAsUpEnabled(true);后如何修改返回图标"></a><strong>actionBar.setDisplayHomeAsUpEnabled(true);后如何修改返回图标</strong></h3><h3 id="解决办法-8"><a href="#解决办法-8" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> actionBar.setHomeAsUpIndicator(R.drawable.__picker_back);</p>
-<hr>
-<h3 id="toolbar上menu的标题字体颜色如何修改"><a href="#toolbar上menu的标题字体颜色如何修改" class="headerlink" title="toolbar上menu的标题字体颜色如何修改"></a><strong>toolbar上menu的标题字体颜色如何修改</strong></h3><h3 id="解决办法-9"><a href="#解决办法-9" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> style.xml文件中添加 <code>&lt;item name=&quot;actionMenuTextColor&quot;&gt;#ffffff&lt;/item&gt;</code> </p>
-<hr>
-<h3 id="WebView无法显示图片"><a href="#WebView无法显示图片" class="headerlink" title="WebView无法显示图片"></a><strong>WebView无法显示图片</strong></h3><h3 id="解决办法-10"><a href="#解决办法-10" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">webView.getSettings().setBlockNetworkImage(false);</span><br><span class="line">  if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">      webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="Unable-to-execute-dex-method-ID-not-in-0-0xffff-65536"><a href="#Unable-to-execute-dex-method-ID-not-in-0-0xffff-65536" class="headerlink" title="Unable to execute dex: method ID not in [0, 0xffff]: 65536"></a><strong>Unable to execute dex: method ID not in [0, 0xffff]: 65536</strong></h3><h3 id="解决办法-11"><a href="#解决办法-11" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><p> Eclipse: dex.force.jumbo=true<br> Android Studio : multiDexEnabled true</p>
-<hr>
-<h3 id="自定义Dialog大小"><a href="#自定义Dialog大小" class="headerlink" title="自定义Dialog大小"></a><strong>自定义Dialog大小</strong></h3><h3 id="解决办法-12"><a href="#解决办法-12" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Window dialogWindow = dialog.getWindow();</span><br><span class="line">DensityUtil  du = new DensityUtil(mContext);</span><br><span class="line">WindowManager.LayoutParams p = dialogWindow.getAttributes(); // 获取对话框当前的参数值</span><br><span class="line">p.height = (int) (du.getHeight() * 0.5); // 高度设置为屏幕的0.6，根据实际情况调整</span><br><span class="line">p.width = (int) (du.getWidth() * 0.8); // 宽度设置为屏幕的0.65，根据实际情况调整</span><br><span class="line">dialogWindow.setAttributes(p);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h3 id="Eclipse-Conversion-to-Dalvik-format-failed-with-error-1"><a href="#Eclipse-Conversion-to-Dalvik-format-failed-with-error-1" class="headerlink" title="Eclipse Conversion to Dalvik format failed with error 1"></a><strong>Eclipse Conversion to Dalvik format failed with error 1</strong></h3><h3 id="对我有效的解决办法"><a href="#对我有效的解决办法" class="headerlink" title="对我有效的解决办法"></a><strong>对我有效的解决办法</strong></h3><p> 这个问题的原因比较多，网上有的人说重启一下Eclipse就好了，换一个工作空间就好了。<br> 我尝试了都不行，或许只是对我不行。下面是对我有效的办法：</p>
-<ol start="2">
-<li>关闭自动Build：Project-&gt;Build Automatically  </li>
-<li>clean项目：Project-&gt;Clean  </li>
-<li>手动Build，右键点击项目，然后：Build Project  </li>
-<li>然后再Export项目，报错消失了！    </li>
-</ol>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/10/31/Android开发问题积累/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -592,9 +540,7 @@
         </h1>
         <div class="content">
             <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>A text field allows the user to type text into your app. It can be either single line or multi-line. Touching a text field places the cursor and automatically displays the keyboard. In addition to typing, text fields allow for a variety of other activities, such as text selection (cut, copy, paste) and data look-up via auto-completion.<br>You can add a text field to you layout with the EditText object. You should usually do so in your XML layout with a &lt; EditText &gt; element.</p>
-<p>文本区域给用户输入文字提供了方便，它可以是单行的也可以是多行的。触摸一个文本区域获取光标并且自动弹出键盘。除了可以输入文字，文本区域还可以用来执行如文本选中（剪切，复制和粘贴）和通过自动补全实现的数据查询等功能。你可以通过在布局中添加一个EditText对象来实现文本区域，当然也可以在布局文件中添加EditText Tag.<br><img src="https://img-blog.csdn.net/20160926221316944" alt="这里写图片描述"></p>
-</blockquote>
+<p>A text field allows the user to type text into your app. It can be either single line or multi-line. Touching a text field places the cursor and automatically displays the keyboard. In addition to typing, text fields allow for a variety of other activities, such as text selection (cut, copy, paste) and data look-up via auto-completion.<br>You can add a text field to you layout with the EditText object. You should usually do so in your XML layout with a &lt; EditText &gt; element.</p></blockquote>
         </div>
         
         
@@ -813,7 +759,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -1022,7 +968,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1585,7 +1531,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1991,7 +1937,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2006,6 +1952,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2713,7 +2666,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -3119,7 +3072,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3134,6 +3087,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

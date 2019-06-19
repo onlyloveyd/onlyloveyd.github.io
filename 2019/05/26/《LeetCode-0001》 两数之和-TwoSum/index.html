@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="https://leetcode-cn.com/problems/two-sum/  题目 给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。  你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。  示例 1234给定 nums = [2, 7, 11, 15], target = 9因">
+    <meta name="description" content="https://leetcode-cn.com/problems/two-sum/  题目给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。">
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《LeetCode-0001》 两数之和-TwoSum">
 <meta property="og:url" content="http://yoursite.com/2019/05/26/《LeetCode-0001》 两数之和-TwoSum/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="https://leetcode-cn.com/problems/two-sum/  题目 给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。  你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。  示例 1234给定 nums = [2, 7, 11, 15], target = 9因">
+<meta property="og:description" content="https://leetcode-cn.com/problems/two-sum/  题目给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:55:11.792Z">
+<meta property="og:updated_time" content="2019-06-19T13:39:30.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《LeetCode-0001》 两数之和-TwoSum">
-<meta name="twitter:description" content="https://leetcode-cn.com/problems/two-sum/  题目 给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。  你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。  示例 1234给定 nums = [2, 7, 11, 15], target = 9因">
+<meta name="twitter:description" content="https://leetcode-cn.com/problems/two-sum/  题目给定一个整数数组 nums  和一个目标值  target  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 630 个字)
+                    4 分钟 读完 (大约 633 个字)
                 </span>
                 
                 
@@ -171,36 +171,79 @@
             <blockquote>
 <p><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum/</a></p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href></a>题目</h2><p> 给定一个整数数组 <code>nums</code>  和一个目标值  <code>target</code>  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
-<p> 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
-<p> <strong>示例</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [2, 7, 11, 15], target = 9</span><br><span class="line"></span><br><span class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</span><br><span class="line">所以返回 [0, 1]</span><br></pre></td></tr></table></figure>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个整数数组 <code>nums</code>  和一个目标值  <code>target</code>  ，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<a id="more"></a>
+<p><strong>示例</strong></p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">给定 nums = [2, 7, 11, 15], target = 9</span><br><span class="line"></span><br><span class="line">因为 nums[0] + nums[1] = 2 + 7 = 9</span><br><span class="line">所以返回 [0, 1]</span><br></pre></td></tr></table></figure>
 
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h3><p>最简单的一种思路，两层循环，两两相加后与target比较。但是循环的起点不同，第一个元素和后面的每个元素进行比较，第二个元素也是和它之后的元素进行比较，所以外层的循环起点为0，内层的循环起点则是由外层决定，若外层为i，则内层循环起点为i+1，这样也可以保证，不重复利用数组中同样的元素。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] twoSum(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">2</span>];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                    result[<span class="hljs-number">0</span>] = i;</span><br><span class="line">                    result[<span class="hljs-number">1</span>] = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href></a>思路</h2><h3 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a><a href></a>暴力</h3><p> 最简单的一种思路，两层循环，两两相加后与target比较。但是循环的起点不同，第一个元素和后面的每个元素进行比较，第二个元素也是和它之后的元素进行比较，所以外层的循环起点为0，内层的循环起点则是由外层决定，若外层为i，则内层循环起点为i+1，这样也可以保证，不重复利用数组中同样的元素。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        int[] result = new int[2];</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">            for (int j = i + 1; j &lt; nums.length; j++) &#123;</span><br><span class="line">                if (nums[i] + nums[j] == target) &#123;</span><br><span class="line">                    result[0] = i;</span><br><span class="line">                    result[1] = j;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p>暴力方法之所以要循环两次，是因为我们需要找两个数的下标，采用哈希表的方法，在循环过程中存储下标，可以省去嵌套一次循环，但是找结果的方式与暴力方式不太一样。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] twoSum(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> target) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> complement = target - nums[i];</span><br><span class="line">            <span class="hljs-keyword">if</span> (map.containsKey(complement)) &#123;</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[] &#123; map.get(complement), i &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"No two sum solution"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>上面的暴力方法，是从前往后找另外一半，找到立刻返回，比如</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> nums[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">15</span>&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a><a href></a>哈希表</h3><p> 暴力方法之所以要循环两次，是因为我们需要找两个数的下标，采用哈希表的方法，在循环过程中存储下标，可以省去嵌套一次循环，但是找结果的方式与暴力方式不太一样。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] twoSum(int[] nums, int target) &#123;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; nums.length; i++) &#123;</span><br><span class="line">            int complement = target - nums[i];</span><br><span class="line">            if (map.containsKey(complement)) &#123;</span><br><span class="line">                return new int[] &#123; map.get(complement), i &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalArgumentException(&quot;No two sum solution&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 上面的暴力方法，是从前往后找另外一半，找到立刻返回，比如</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int nums[] = new int[]&#123;2, 7, 11, 15&#125;;</span><br></pre></td></tr></table></figure>
-
-<p> 若target目标值为17，执行过程：</p>
-<pre><code>i,j | 计算结果 | 是否匹配
---- | ---- | ---- 
-0,1 | 9    | NO  
-0,2 | 13   | NO  
-0,3 | 17   | YES </code></pre><p>若是用哈希表的方式，可以理解为从当前循环点往前找另外一半，利用的是2+3=5，3+2=5，加法的交换律，不管从前往后还是从后往前，都是OK的。<br> 执行过程：</p>
-<pre><code>i | 是否匹配 | 单次循环结束后map            
-- | ---- | ---------------------- 
-0 | NO   | (2, 0)                
-1 | NO   | (2, 0) , (7,1)        
-2 | NO   | (2,0) , (7,1) , (11,3)
-3 | YES  |                       </code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a href></a>总结</h2><ol>
-<li>某些场景下，暴力方式可能速度更快，但是第二种方式整体时间复杂度更低。 </li>
-<li>第二种采用HashMap 的方式，当然也可以采用其他存储数值和下标的方式。    </li>
+<p>若target目标值为17，执行过程：</p>
+<table>
+<thead>
+<tr>
+<th>i,j</th>
+<th>计算结果</th>
+<th>是否匹配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0,1</td>
+<td>9</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>0,2</td>
+<td>13</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>0,3</td>
+<td>17</td>
+<td>YES</td>
+</tr>
+</tbody></table>
+<p>若是用哈希表的方式，可以理解为从当前循环点往前找另外一半，利用的是2+3=5，3+2=5，加法的交换律，不管从前往后还是从后往前，都是OK的。<br> 执行过程：</p>
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>是否匹配</th>
+<th>单次循环结束后map</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>NO</td>
+<td>(2, 0)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>NO</td>
+<td>(2, 0) , (7,1)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NO</td>
+<td>(2,0) , (7,1) , (11,3)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>YES</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>某些场景下，暴力方式可能速度更快，但是第二种方式整体时间复杂度低。</li>
+<li>第二种采用HashMap 的方式，当然也可以采用其他存储数值和下标的式。  </li>
 </ol>
 
         </div>
@@ -288,8 +331,8 @@
 		owner: 'onlyloveyd',
 		repo: 'HexoBlog',
 		oauth: {
-			client_id: '086d4052b9aa22c3f98e',
-			client_secret: 'bba7700b5888c722e54735dc5f1f9510c291acc8',
+			client_id: '2f74aa28e7577ea363f4',
+			client_secret: '5f8765c36434710db05359b75a9b0f1806538d02',
 		},
 	})
 	gitment.render('comment-container')
@@ -360,7 +403,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -569,7 +612,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1132,7 +1175,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1538,7 +1581,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1553,6 +1596,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2260,7 +2310,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2666,7 +2716,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2681,6 +2731,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

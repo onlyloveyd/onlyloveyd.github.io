@@ -1191,7 +1191,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分钟 读完 (大约 2650 个字)
+                    17 分钟 读完 (大约 2570 个字)
                 </span>
                 
                 
@@ -1204,108 +1204,18 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
             
         </h1>
         <div class="content">
-            <p>  原文地址：<a href="https://developer.android.google.cn/studio/preview/features/index.html" target="_blank" rel="noopener">https://developer.android.google.cn/studio/preview/features/index.html</a></p>
-<p> 最新Android Studio版本是Android Studio 3.0，本文提供了所有新功能和更改的摘要。 所有这些功能都可以在最新的金丝雀版本中发布，但beta测试版本可能尚未提供。</p>
-<h2 id="核心IDE更改"><a href="#核心IDE更改" class="headerlink" title="核心IDE更改"></a><a href></a>核心IDE更改</h2><ul>
-<li><p>我们将基础IDE从IntelliJ 2016.2升级到2017.1.2，在<a href="https://www.jetbrains.com/idea/whatsnew/#v2016-3" target="_blank" rel="noopener">2016.3</a>和<a href="https://blog.jetbrains.com/idea/2017/02/intellij-idea-2017-1-public-preview-java-9-debugger-vcs-search-editor-and-many-more/" target="_blank" rel="noopener">2017.1</a>中增加了许多新功能，包括参数提示，语义突出显示，搜索中的即时结果等等。 </p>
-</li>
-<li><p>许多新的Lint 检查。 </p>
-</li>
-<li><p>即时运行调试问题<a href="https://code.google.com/p/android/issues/detail?id=234401" target="_blank" rel="noopener">234401</a>已经解决。 如果程序在断点上暂停，应用程序将会重新启动。 但是如果应用程序没有在断点上暂停，那么当只进行方法实现更改时，程序不会重新启动并且热插拔会正常工作。  </p>
-<h2 id="Kotlin语言支持"><a href="#Kotlin语言支持" class="headerlink" title="Kotlin语言支持"></a><a href></a>Kotlin语言支持</h2><p>Android Studio3.0支持Kotlin语言。你可以通过将Java代码转换成Kotlin(点击”Code” &gt; “Convert Java File to Kotlin File”)的方式或者直接使用新建项目向导创建启动Kotlin的项目来在你的工程中使用Kotlin。<a href="https://developer.android.google.cn/kotlin/index.html" target="_blank" rel="noopener">了解更多关于Kotlin in Android</a></p>
-</li>
-</ul>
-<h2 id="JAVA8特性支持"><a href="#JAVA8特性支持" class="headerlink" title="JAVA8特性支持"></a><a href></a>JAVA8特性支持</h2><p> Android Studio 3.0引入了对Java 8库和某些Java 8语言功能的内置支持。 我们不再需要Jack，你应该禁用Jack来使用内置改进后Java 8支持的默认工具链。 要了解更多信息，请阅读使用<a href="https://developer.android.google.cn/studio/preview/features/java8-support.html" target="_blank" rel="noopener">Java 8语言功能</a>。</p>
-<h2 id="全新的Android-Profile"><a href="#全新的Android-Profile" class="headerlink" title="全新的Android Profile"></a><a href></a>全新的Android Profile</h2><p> Android Studio 3.0中的新的<a href="https://developer.android.google.cn/studio/profile/features/android-profiler.html" target="_blank" rel="noopener">Android Profiler</a>提供了一个实时统一的应用程序活动视图。 Android Profiler窗口将替换<a href="https://developer.android.google.cn/studio/profile/am-basics.html" target="_blank" rel="noopener">Android监视器</a>窗口。 要打开Android Profiler，请按照下列步骤操作：</p>
-<ol start="2">
-<li><p>单击”<strong>View&gt;Tool Windows&gt; Android Profiler</strong>“（你也可以在工具栏中单击”<strong>Android Profiler</strong>“）。 </p>
-</li>
-<li><p>从Android Profiler工具栏中选择要配置的设备和应用程序进程。 如果你已通过USB连接设备但未看到它，请确保已<a href="https://developer.android.google.cn/studio/debug/dev-options.html#enable" target="_blank" rel="noopener">启用USB调试</a>。  单击”<strong>NETWORK</strong>“，”<strong>CPU</strong>“或”<strong>MEMORY</strong>“时间线以打开每个分析器的更详细视图。</p>
-<p><img src="https://img-blog.csdn.net/20170521085007971?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>有关每个新的剖析器的更多信息，请参阅以下页面：</p>
-</li>
-</ol>
-<ul>
-<li><a href="https://developer.android.google.cn/studio/profile/network-profiler.html" target="_blank" rel="noopener">网络分析器</a> </li>
-<li><a href="https://developer.android.google.cn/studio/profile/cpu-profiler.html" target="_blank" rel="noopener">CPU分析器</a> </li>
-<li><a href="https://developer.android.google.cn/studio/profile/memory-profiler.html" target="_blank" rel="noopener">内存分析器</a>  作为此更新的一部分，<a href="https://developer.android.google.cn/studio/debug/am-logcat.html" target="_blank" rel="noopener">logcat</a>已移至单独的窗口。</li>
-</ul>
-<h2 id="Instant-Apps支持"><a href="#Instant-Apps支持" class="headerlink" title="Instant Apps支持"></a><a href></a>Instant Apps支持</h2><p> Android Studio3.0提供两种新的Module类型：Instant App Module和Feature Module给开发者用来在我们的项目中创建Instant Apps<br> <img src="https://img-blog.csdn.net/20170521093617441?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Android Studio 3.0还包括一个新的重构模块化操作和<a href="https://developer.android.google.cn/studio/write/app-link-indexing.html" target="_blank" rel="noopener">App Links Assistant</a>，以帮助您实施即时应用。 有关Instant Apps的详细信息，请参阅<a href="https://developer.android.google.cn/topic/instant-apps/index.html" target="_blank" rel="noopener">Android Instant Apps</a>。</p>
-<h2 id="APK调试器"><a href="#APK调试器" class="headerlink" title="APK调试器"></a><a href></a>APK调试器</h2><p> Android Studio 3.0中的新版APK调试器可让你配置和调试APK，而无需将其从Android Studio项目中构建，只要它们是可调试的。 有关使用APK调试器的更多信息，请阅读<a href="https://developer.android.google.cn/studio/preview/features/apk-debugger.html" target="_blank" rel="noopener">Profile and Debug Pre-built APKs</a></p>
-<h2 id="新的设备文件管理器"><a href="#新的设备文件管理器" class="headerlink" title="新的设备文件管理器"></a><a href></a>新的设备文件管理器</h2><p> 新的<a href="https://developer.android.google.cn/studio/debug/device-file-explorer.html" target="_blank" rel="noopener">设备文件资源管理器</a>工具窗口允许您与连接的设备的文件系统无缝交互。<br> <img src="https://img-blog.csdn.net/20170521095033495?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 你可以点击查看Android Studio中的各种文件，并将文件复制到您的计算机。<br> 此功能取代了以前通过DDMS完成的设备文件系统交互。</p>
-<h2 id="支持Android-O-Developer-Preview"><a href="#支持Android-O-Developer-Preview" class="headerlink" title="支持Android O Developer Preview"></a><a href></a>支持Android O Developer Preview</h2><p> Android Studio 3.0增加了如下对 Android O的支持：</p>
-<ul>
-<li><p>一个新的自适应图标向导，允许你创建新的自适应启动器图标资源，并预览它们将如何显示在不同的设备上。 要启动自适应图标向导，请右键单击项目中的<strong>/ res</strong>文件夹，然后单击<strong>“New &gt; Image Asset &gt; Launcher Icons (Adaptive and Legacy)</strong>“。 有关Android O中的自适应启动器图标的更多信息，请参阅<a href="https://developer.android.google.cn/preview/features/adaptive-icons.html" target="_blank" rel="noopener">自适应图标</a>。 </p>
-</li>
-<li><p>新的XML字体预览，字体选择工具以及对可下载字体的支持。 有关Android O中的XML字体和可下载字体的详细信息，请参阅<a href="https://developer.android.google.cn/preview/features/working-with-fonts.html" target="_blank" rel="noopener">使用字体</a>。  </p>
-<h2 id="为Android-Things提供的新模版"><a href="#为Android-Things提供的新模版" class="headerlink" title="为Android Things提供的新模版"></a><a href></a>为Android Things提供的新模版</h2><p>Android Studio 3.0在新项目和新模块向导中包含一组新的模板，因此你可以开始使用Android Things开发物联网设备。 有关更多信息，请参阅<a href="https://developer.android.google.cn/things/index.html" target="_blank" rel="noopener">Android Things</a>。</p>
-</li>
-</ul>
-<h2 id="布局编辑器改进"><a href="#布局编辑器改进" class="headerlink" title="布局编辑器改进"></a><a href></a>布局编辑器改进</h2><p> Android Studio 3.0中的<a href="https://developer.android.google.cn/studio/write/layout-editor.html" target="_blank" rel="noopener">布局编辑器</a>包含许多新的功能增强，其中包括：</p>
-<ul>
-<li><p>更新的组件树，具有改进的拖放视图插入 </p>
-</li>
-<li><p>新错误面板 </p>
-</li>
-<li><p>查看障碍和组的新支持 </p>
-</li>
-<li><p>增强链创造  </p>
-<h2 id="布局检查器的改进"><a href="#布局检查器的改进" class="headerlink" title="布局检查器的改进"></a><a href></a>布局检查器的改进</h2><p>Android Studio 3.0中的布局检查器增加新的改进功能，可以让你更轻松地调试应用程序布局的问题，包括将属性分类为常见类别，并在“查看树”和“属性”面板中将新的搜索功能分组。 要打开布局检查器，请单击<strong>“Tools&gt; Android&gt;Layout Inspector”</strong>。</p>
-</li>
-</ul>
-<h2 id="Google’s-Maven库"><a href="#Google’s-Maven库" class="headerlink" title="Google’s Maven库"></a><a href></a>Google’s Maven库</h2><p> Android支持库Maven依赖关系现在可以在新的Maven存储库中的Android SDK Manager外部使用。 结合命令行<a href="https://developer.android.google.cn/studio/command-line/sdkmanager.html" target="_blank" rel="noopener">sdkmanager</a>工具和<a href="https://developer.android.google.cn/studio/intro/update.html#download-with-gradle" target="_blank" rel="noopener">Gradle</a>，这种新的分发方法简化了使用持续集成系统的Maven依赖关系管理。 要使用新的Maven存储库，请将URL添加到build.gradle文件的repository库中，如下所示：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url &quot;https://maven.google.com&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 想了解更多，请移步<a href="https://developer.android.google.cn/studio/build/dependencies.html#google-maven" target="_blank" rel="noopener">Google Maven and offline repositories</a></p>
-<p> ##APK Analyzer 改进<br> Android Studio3.0针对<a href="https://developer.android.google.cn/studio/build/apk-analyzer.html" target="_blank" rel="noopener">APK Analyzer</a>包含如下改进：</p>
-<ul>
-<li><p>显示以前可用的除了包，类和方法之外的字段 </p>
-</li>
-<li><p>顶部显示和隐藏字段和方法的新过滤选项 </p>
-</li>
-<li><p>在树视图中，以斜体显示的节点是未在DEX文件中定义的引用 </p>
-</li>
-<li><p>对于启用Proguard构建的APK，您可以加载向DEX查看器添加功能的Proguard映射文件，其中包括： </p>
-</li>
-<li><p>粗体节点指示在缩小代码时不应删除节点 </p>
-</li>
-<li><p>启用一个按钮，使得在收缩（shrinking）过程中被删除的节点可见 </p>
-</li>
-<li><p>启用一个按钮，恢复树视图中由Proguard混淆后的节点的原始名称  </p>
-<h2 id="新版Android-Gradle-插件"><a href="#新版Android-Gradle-插件" class="headerlink" title="新版Android Gradle 插件"></a><a href></a>新版Android Gradle 插件</h2><p><a href="https://developer.android.google.cn/studio/preview/features/new-android-plugin.html" target="_blank" rel="noopener">Android plugin 3.0.0-alpha1 and higher</a><br>旨在解决拥有大量模块项目的Android工程的构建性能的问题。当你在项目中使用新的插件的时候，你将感受到如下改进：</p>
-</li>
-</ul>
-<ul>
-<li><p>推迟依赖以达到更快的配置 </p>
-</li>
-<li><p>变量感知（Variant-aware）依赖仅适用于你正在构建的项目和变量 </p>
-</li>
-<li><p>对代码或资源进行简单的更改后，增量构建时间将会比之前的版本快<br> 为了实现这些改进，我们在插件行为，DSL和API上有一些突破性的变化。这会影响构建文件和Gradle插件。有关如何迁移自己的项目以使用此插件的说明，请看<a href="https://developer.android.google.cn/studio/preview/features/new-android-plugin-migration.html" target="_blank" rel="noopener">迁移到新的插件</a>  </p>
-<h2 id="新的Android-模拟器特性"><a href="#新的Android-模拟器特性" class="headerlink" title="新的Android 模拟器特性"></a><a href></a>新的Android 模拟器特性</h2><p>新的Android模拟器包含大量的新特性，具体如下：</p>
-</li>
-</ul>
-<ul>
-<li>新的API Level 24系统映像和Android O Beta系统映像，包括Google Play商店，以促进你的应用程序的端到端测试，并帮助你保持Google Play服务与AVDs的同步。</li>
-</ul>
-<ul>
-<li>支持Windows和Linux机器上的OpenGL ES 3.0系统图像API级别24及更高版本，并在较老的模拟器系统映像上对OpenGL ES 2.0图形性能进行显着改进。</li>
-</ul>
-<blockquote>
-<p>注意：我们目前正在尽力自动启用来自英特尔，NVIDIA和AMD的所有现代GPU的OpenGL ES 3.0,如果运行OpenGL ES 3.x应用程序时遇到问题，系统可能尚未自动启用.你可以通过将以下行添加到〜/ .android / advancedFeatures.ini文件中来手动启用OpenGL ES 3.0<br>  <code>GLESDynamicVersion = true</code> </p>
-</blockquote>
-<ul>
-<li>一种新的更简单的方法来从Android模拟器生成应用的错误报告。 </li>
-<li>一个新的链接，可以在Android问题跟踪器（单击<strong>“Emulator Tool Bar &gt; Extended Controls &gt; Help &gt; Emulator Help &gt; File a Bug”</strong>）上为Android团队快速提交与模拟器相关的错误。 </li>
-<li>用于配置Android模拟器使用的代理设置的新UI。要配置Android模拟器的代理设置，请单击 <strong>“Extended Controls &gt; Settings &gt; Proxy”</strong>. </li>
-<li>在模拟器上支持Android Wear设备的<a href="https://developer.android.google.cn/training/wearables/ui/rotary-input.html#emulator" target="_blank" rel="noopener">rotary input</a>的新支持<br> 有关Android模拟器更新的更多信息，请参阅<a href="https://developer.android.google.cn/studio/releases/emulator.html" target="_blank" rel="noopener">Android模拟器发行说明</a>。  </li>
-</ul>
-<hr>
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a><a href></a>备注</h2><p> 个人微信公众号，欢迎大家扫码关注，Android技术交流或者咨询。</p>
-<p> <img src="https://img-blog.csdn.net/20170422224656227?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">   </p>
-
+            <p>原文地址：<a href="https://developer.android.google.cn/studio/preview/features/index.html" target="_blank" rel="noopener">https://developer.android.google.cn/studio/preview/features/index.html</a></p>
+<p>最新Android Studio版本是Android Studio 3.0，本文提供了所有新功能和更改的摘要。 所有这些功能都可以在最新的金丝雀版本中发布，但beta测试版本可能尚未提供。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/05/21/《Kotlin》 Android Studio3.0 新特性 ～ New Features in Android Studio Preview (译文)/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1334,7 +1244,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 968 个字)
+                    6 分钟 读完 (大约 970 个字)
                 </span>
                 
                 
@@ -1347,55 +1257,19 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
             
         </h1>
         <div class="content">
-            <h4 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a><a href></a>原文链接：</h4><p> <a href="http://kotlinlang.org/docs/tutorials/android-plugin.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/android-plugin.html</a></p>
-<h2 id="Kotlin-Android-Extensions"><a href="#Kotlin-Android-Extensions" class="headerlink" title="Kotlin Android Extensions"></a><a href></a>Kotlin Android Extensions</h2><p> 本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。</p>
-<p> 在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a><a href></a>背景</h2><p> 每个Android开发人员都很清楚findViewById()方法。 毫无疑问，这是一个难以阅读与维护，并且存在潜在bug的丑陋代码。 虽然有几个可用的库可以为此问题提供解决方案，但依赖于运行时的库，最让你头疼的是它们需要为每个View添加注释字段。</p>
-<p> Kotlin Android Extensions插件允许我们获得与使用这些库后相同的体验，而无需添加任何额外的代码或消耗额外的运行时间。</p>
-<p> 实质上，下面这段代码时OK的：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Using R.layout.activity_main from the main source set</span><br><span class="line">import kotlinx.android.synthetic.main.activity_main.*</span><br><span class="line"></span><br><span class="line">class MyActivity : Activity() &#123;</span><br><span class="line">    override fun onCreate(savedInstanceState: Bundle?) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        textView.setText(&quot;Hello, world!&quot;)</span><br><span class="line">        // Instead of findView(R.id.textView) as TextView</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> textView是Activity的扩展属性，并且它的类型和acitvity_main.xml文件中申明的一致。</p>
-<hr>
-<h2 id="使用Kotlin-Android-Extensions"><a href="#使用Kotlin-Android-Extensions" class="headerlink" title="使用Kotlin Android Extensions"></a><a href></a>使用Kotlin Android Extensions</h2><h3 id="配置依赖"><a href="#配置依赖" class="headerlink" title="配置依赖"></a><a href></a>配置依赖</h3><p> 在这个教程中，我们将使用Gradle作为我们的操作环境，在 IntelliJ IDEA 环境或者Maven下大同小异。更多关于Kotlin的Gradle配置，请查阅<a href="http://kotlinlang.org/docs/reference/using-gradle.html" target="_blank" rel="noopener">Using Gradle</a>.</p>
-<p> Android Extensions是Kotlin IDEA插件的一部分，你不需要再安装其他的插件。<br> 你需要做的就是使用下面的方式在你的项目及build.gradle中启用Android Extensions Gradle插件：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;kotlin-android-extensions&apos;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="引入生成的属性"><a href="#引入生成的属性" class="headerlink" title="引入生成的属性"></a><a href></a>引入生成的属性</h3><p> 使用下面的方式，你可以很方便的一键引入特定布局的所有控件的属性：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import kotlinx.android.synthetic.main.&lt;layout&gt;.*</span><br></pre></td></tr></table></figure>
-
-<p> 所以呢，如果我们的布局是activity_main.xml，我们将引入<br> <em><strong>kotlinx.android.synthetic.main.activity_main.</strong></em>*</p>
-<p> 如果我们想使用声称的View的属性（在适配器类中很好用），我们需要引入<br> <em><strong>kotlinx.android.synthetic.main.activity_main.view.</strong></em>*</p>
-<p> 一旦我们按照上面的步骤做，我们就可以调用相应的扩展，就是那些在XML文件中的视图之后命名的属性。 例如，对于这个视图：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">          android:id=&quot;@+id/hello&quot;</span><br><span class="line">          android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">          android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">          android:text=&quot;Hello World, MyActivity&quot;</span><br><span class="line">          /&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 然后就会存在一个名为hello 的属性</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activity.hello.setText(&quot;Hi!&quot;)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Android版本"><a href="#Android版本" class="headerlink" title="Android版本"></a><a href></a>Android版本</h2><p> Android Extensions 插件支持Android 多渠道版本，假如在你的build.gradle中有一个名为free的版本</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        free &#123;</span><br><span class="line">            versionName &quot;1.0-free&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 然后你就可以通过如下方式导入针对<strong><em>free/res/layout/activity_free.xml</em></strong>的所有生成的属性。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import kotlinx.android.synthetic.free.activity_free.*</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="内部原理"><a href="#内部原理" class="headerlink" title="内部原理"></a><a href></a>内部原理</h2><p> Kotlin Android Extensions 是一个Kotlin编译器插件。它执行下面两个操作：</p>
-<ol start="2">
-<li>为每一个Kotlin Activity添加一个隐藏的缓存方法和一个域。这个方法相当之小，基本不会增加APK 的大小。 </li>
-<li>用方法调用替换每一个属性调用。  那么，这是如何工作的呢？<br>当调用一个生成的属性时，如果接收方时存在于模块源代码中的Kotlin Activity或者Fragment，缓存的方法将会被调用。例如，提供</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class MyActivity: Activity()</span><br><span class="line">fun MyActivity.a() &#123; </span><br><span class="line">        this.textView.setText(“”) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 一个缓存方法会自动在MyActivity中生成，所有我们可以使用缓存机制。<br> 然而在下面这个例子中</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Activity.b() &#123; </span><br><span class="line">        this.textView.setText(“”)     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 我们不知道这个方法是否仅在我们的源代码的Activity或普通Java Activity中被调用。 因此，即使上一个示例中的MyActivity实例是接收器，我们也不使用缓存。</p>
-
+            <h4 id="原文链接："><a href="#原文链接：" class="headerlink" title="原文链接："></a>原文链接：</h4><p><a href="http://kotlinlang.org/docs/tutorials/android-plugin.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/android-plugin.html</a></p>
+<h2 id="Kotlin-Android-Extensions"><a href="#Kotlin-Android-Extensions" class="headerlink" title="Kotlin Android Extensions"></a>Kotlin Android Extensions</h2><p>本教程介绍如何使用Kotlin Android Extensions来改进对Android开发的支持。</p>
+<p>在本教程中，我们将介绍使用Kotlin Android Extensions插件所需的步骤，增强Android的开发体验。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/05/18/《Kotlin》 Kotlin Android Extensions (译文)/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1424,7 +1298,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1470 个字)
+                    9 分钟 读完 (大约 1376 个字)
                 </span>
                 
                 
@@ -1437,37 +1311,18 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
             
         </h1>
         <div class="content">
-            <h4 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h4><p> <a href="http://kotlinlang.org/docs/tutorials/kotlin-android.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/kotlin-android.html</a></p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a><a href></a>写在前面</h2><p> Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。今天凌晨Google I/O 上，Google官方表示了对Kotlin语言的支持。所以决定今天开始入坑，学习Kotlin.</p>
-<h2 id="Kotlin在Android上的使用入门"><a href="#Kotlin在Android上的使用入门" class="headerlink" title="Kotlin在Android上的使用入门"></a><a href></a>Kotlin在Android上的使用入门</h2><h3 id="安装Kotlin插件"><a href="#安装Kotlin插件" class="headerlink" title="安装Kotlin插件"></a><a href></a>安装Kotlin插件</h3><p> Kotlin插件从3.0版本开始和Android Studio绑定。如果你使用的是之前的版本，你就需要手动安装Kotlin插件。点击<strong>“FIle”-&gt;“Settings”-&gt;”Plugins “-&gt;“Install JetBrains plugin…”</strong>, 然后搜索Kotlin并安装。如果你在“Welcome to Android Studio”界面，选择<strong>“Configure“-&gt;“Plugins”-&gt;”Install JetBrains plugin… “</strong>,然后搜索Kotlini并安装。安装完成后需要重启IDE。</p>
-<hr>
-<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a><a href></a>创建项目</h3><p> 开始使用Kotlin进行Android开发是非常容易的。 在本教程中，我们将使用Android Studio进行操作。 如果使用Intellij IDEA开发Android，这个过程几乎是一样的。<br> 首先让我们创建一个新的项目。 选择 <strong>“Start a new Android Studio project”</strong>或者<strong>“File”-&gt;“New project”</strong>。 以下对话框将引导你完成新项目创建过程。 你需要为项目命名，并选择你安装的Android SDK版本。 大多数选项可以保留其默认值，因此你只需要按几次“Enter”。</p>
-<p> 命名项目:<br> <img src="https://img-blog.csdn.net/20170518092843172?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> Android Studio 3.0在上面这个界面上回提供一个启用Kotlin支持的选项。勾选上这个选项你就可以跳过下面的<strong>“在项目中配置Kotlin”</strong>步骤。</p>
-<p> 选择Android版本:<br> <img src="https://img-blog.csdn.net/20170518092901025?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 选择一个自动生成的Activity:<br> <img src="https://img-blog.csdn.net/20170518093230077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 命名Activity:<br> <img src="https://img-blog.csdn.net/20170518093239517?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 在Android Studio3.0中，你可以直接通过菜单选项新建Kotlin Activity,这样的话，你就可以跳过下面<strong>“转换Java代码为Kotlin”</strong>步骤。低于3.0的版本，需要使用java创建activity，然后用自动转换工具将其转换成 Kotlin。<br> 一般来说，开始使用Kotlin的最简单方法是将Java Activity自动转换为Kotlin。 请注意，无论何时，与其通过查阅文档来寻找用Kotlin表单旧的表达式的方式，不如直接先使用Java编写它，然后将Java代码复制粘贴到Kotlin文件中，IntelliJ IDEA（或Android Studio）会建议我们转换，然后就可以自动转换成Kotlin。</p>
-<h4 id="转换Java代码为Kotlin"><a href="#转换Java代码为Kotlin" class="headerlink" title="转换Java代码为Kotlin"></a><a href></a>转换Java代码为Kotlin</h4><p> 打开MainActivity.java文件。然后调用动作将Java文件转换为Kotlin文件。 你可以通过几种方法来实现。 最简单的一个是调用<strong>Find Action</strong>并开始输入一个动作名称（如下面的截图）。 或者，您可以通过<strong>“Code”-&gt;“Convert Java File to Kotlin File”</strong>菜单项或者对应的快捷键将Java文件转换为Kotlin。</p>
-<p> <img src="https://img-blog.csdn.net/20170518095143746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 转换完成后，用Kotlin编写的Activity将出现在你眼前</p>
-<p> <img src="https://img-blog.csdn.net/20170518095232012?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="在项目中配置Kotlin"><a href="#在项目中配置Kotlin" class="headerlink" title="在项目中配置Kotlin"></a><a href></a>在项目中配置Kotlin</h4><p> 当你开始编辑Kotlin文件时，Android Studio会向显示Kotlin未配置的提示，所以这个时候你需要配置一下。</p>
-<p> <img src="https://img-blog.csdn.net/20170518095437531?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 然后系统提示你输入Kotlin版本。 从安装版本列表中选择最新版本。</p>
-<p> <img src="https://img-blog.csdn.net/20170518095544858?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 配置Kotlin后，应用程序的build.gradle文件应该会被更新一些内容。 现在你可以看到 <strong>“apply plugin: ‘kotlin-android’”</strong>以及一些依赖项。</p>
-<p> <img src="https://img-blog.csdn.net/20170518095758124?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 最后一件事件就是sync项目。</p>
-<p> <img src="https://img-blog.csdn.net/20170518095838912?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h3 id="构建并发布使用Kotlin编写的Android应用程序"><a href="#构建并发布使用Kotlin编写的Android应用程序" class="headerlink" title="构建并发布使用Kotlin编写的Android应用程序"></a><a href></a>构建并发布使用Kotlin编写的Android应用程序</h3><p> 你现在可以构建应用程序并在模拟器或真机上运行它。 这与Java中的工作方式完全相同。 你可以发布应用程序，并以类似于使用Java编写的Android应用程序的方式进行签名。</p>
-<p> Kotlin有一个相当小的运行时文件大小：库大约是859KB（从1.1.2-2开始）。 这意味着Kotlin对.apk文件大小增加了一点。</p>
-<p> Kotlin编译器生成字节码，因此Kotlin应用程序与Java编写的应用程序的外观和感觉确实没有差别。</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a><a href></a>写在最后</h2><p> 个人微信公众号：Learning_Of_ALL，欢迎大家扫码关注，Android技术交流。</p>
-<p> <img src="https://img-blog.csdn.net/20170422224656227?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">   </p>
-
+            <h4 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h4><p><a href="http://kotlinlang.org/docs/tutorials/kotlin-android.html" target="_blank" rel="noopener">http://kotlinlang.org/docs/tutorials/kotlin-android.html</a></p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。今天凌晨Google I/O 上，Google官方表示了对Kotlin语言的支持。所以决定今天开始入坑，学习Kotlin.</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/05/18/《Kotlin》 Getting started with Android and Kotlin (译文)/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -1711,7 +1566,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -1920,7 +1775,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -2483,7 +2338,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2889,7 +2744,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2904,6 +2759,13 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3611,7 +3473,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -4017,7 +3879,7 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -4032,6 +3894,13 @@ setZeroLineColor(int color)      | 设置零线的颜色    </code></pre><p>零�
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

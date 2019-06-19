@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 492 个字)
+                    3 分钟 读完 (大约 493 个字)
                 </span>
                 
                 
@@ -179,24 +179,16 @@
         </h1>
         <div class="content">
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大部分公司都有属于自己的内网环境，大部分的集成开发环境也是在内网下部署。最近面临同样的需求，内网CentOS部署GitLab 和 Nexus。</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先确定思路，毫无疑问使用Docker是最好的选择，我只用解决Docker的安装问题即可，然后使用Gitlab和Nexus的镜像即可解决问题，后期的延展性也比逐个安装好。<br> 针对Docker的安装，有如下策略</p>
-<ol>
-<li>相同CentOS版本的外网服务器，使用yum –downloadonly命令下载create repo和docker安装的依赖包，然后建立本地源，安装Docker，但是公司并没有CentOS版本完全一致的内外网服务器，所以此方案暂时搁浅； </li>
-<li>利用已经安装好Docker的外网服务器，制作镜像文件，重装内网系统，这个比较费时，暂时不考虑； </li>
-<li>利用一个可同时访问内外网的电脑做代理服务器，实现内网服务器的暂时外网联通，安装完成后，关闭代理服务器。  综上，我优先采用的是方案3。存在一定的安全风险，但是应该问题不大。</li>
-</ol>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p> CCProxy<br> 一台连接内外网的电脑（我使用个人办公电脑）</p>
-<h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><h3 id="简单配置一下CCProxy，参考官方操作手册，相对简单。"><a href="#简单配置一下CCProxy，参考官方操作手册，相对简单。" class="headerlink" title="简单配置一下CCProxy，参考官方操作手册，相对简单。"></a>简单配置一下CCProxy，参考官方操作手册，相对简单。</h3><h3 id="CentOS服务器配置"><a href="#CentOS服务器配置" class="headerlink" title="CentOS服务器配置"></a>CentOS服务器配置</h3><h4 id="全局代理配置"><a href="#全局代理配置" class="headerlink" title="全局代理配置"></a>全局代理配置</h4><p> 端口和IP注意替换成自己代理服务器的端口和IP</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line">http_proxy=http://yourproxy:808/</span><br><span class="line">ftp_proxy=http://yourproxy:808/</span><br><span class="line"><span class="hljs-built_in">export</span> http_proxy</span><br><span class="line"><span class="hljs-built_in">export</span> ftp_proxy</span><br></pre></td></tr></table></figure>
-
-<h4 id="yum代理配置"><a href="#yum代理配置" class="headerlink" title="yum代理配置"></a>yum代理配置</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.conf</span><br><span class="line"></span><br><span class="line">proxy=http://yourproxy:808/</span><br></pre></td></tr></table></figure>
-
-<h4 id="若有其他配置也可以参照上面进行配置"><a href="#若有其他配置也可以参照上面进行配置" class="headerlink" title="若有其他配置也可以参照上面进行配置"></a>若有其他配置也可以参照上面进行配置</h4><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -k https://www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<h3 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h3><p>参考<a href="https://blog.csdn.net/poorkick/article/details/79937182" target="_blank" rel="noopener">前文</a></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/06/19/内网环境下安装部署Docker/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -225,7 +217,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 371 个字)
+                    3 分钟 读完 (大约 375 个字)
                 </span>
                 
                 
@@ -238,36 +230,17 @@
             
         </h1>
         <div class="content">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><a href></a>前言</h2><p> 最近iOS开发企业应用需要使用HTTPS协议的地址来做应用升级，所以需要搭建一个支持HTTPS的Tomcat</p>
-<h2 id="下载Tomcat"><a href="#下载Tomcat" class="headerlink" title="下载Tomcat"></a><a href></a>下载Tomcat</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-7/v7.0.86/bin/apache-tomcat-7.0.86.tar.gz</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="配置SSL证书"><a href="#配置SSL证书" class="headerlink" title="配置SSL证书"></a><a href></a>配置SSL证书</h2><h4 id="下载SSL证书文件"><a href="#下载SSL证书文件" class="headerlink" title="下载SSL证书文件"></a><a href></a>下载SSL证书文件</h4><p> 腾讯云上申请免费SSL证书，记住设置的密码，配置tomcat的时候会使用到，待申请通过，会颁发证书，下载证书解压后，目录结构如下，应该是针对不用的容器有不用的配置方法。</p>
-<p> <img src="https://img-blog.csdn.net/20180425105143369" alt="这里写图片描述"></p>
-<h4 id="Tomcat下配置证书"><a href="#Tomcat下配置证书" class="headerlink" title="Tomcat下配置证书"></a><a href></a>Tomcat下配置证书</h4><ol>
-<li><p>拷贝上图中Tomcat下的jks文件到 tomcat安装目录下conf 目录 “xxxx/apache-tomcat-7.0.86/conf/”下（当然你也可以使用其他路径，这里方便后续配置server.xml，才放在此处）； </p>
-</li>
-<li><p>编辑“xxxx/apache-tomcat-7.0.86/conf/server.xml” </p>
-</li>
-<li><p>取消下图位置注释，然后添加 <code>keystoreFile=&quot;conf/xxxx.jks&quot; keystorePass=&quot;xxx&quot;</code> ，最后结果下图二<br> <img src="https://img-blog.csdn.net/2018042511030994" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180425110604608" alt="这里写图片描述">  </p>
-<h4 id="Tomcat启动"><a href="#Tomcat启动" class="headerlink" title="Tomcat启动"></a><a href></a>Tomcat启动</h4><p>安装目录，bin目录下</p>
-</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
-
-<p> 访问 “<a href="https://xxxx:8443" target="_blank" rel="noopener">https://xxxx:8443</a>”</p>
-<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a><a href></a>常见问题</h4><h5 id="8443端口未开放"><a href="#8443端口未开放" class="headerlink" title="8443端口未开放"></a><a href></a>8443端口未开放</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --add-port=8443/tcp --permanent</span><br><span class="line"></span><br><span class="line">systemctl restart firewalld.service</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="8443端口被占用"><a href="#8443端口被占用" class="headerlink" title="8443端口被占用"></a><a href></a>8443端口被占用</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof -i tcp:8443//查询8443端口使用情况</span><br><span class="line">kill -9 xxx //kill掉对应进程</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="lsof-netstat-wget-not-found"><a href="#lsof-netstat-wget-not-found" class="headerlink" title="lsof / netstat / wget not found"></a><a href></a>lsof / netstat / wget not found</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install lsof</span><br><span class="line">yum install net-tools</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-
-
-
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 最近iOS开发企业应用需要使用HTTPS协议的地址来做应用升级，所以需要搭建一个支持HTTPS的Tomcat</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/25/CentOS + Tomcat + SSL/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -296,7 +269,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 426 个字)
+                    3 分钟 读完 (大约 440 个字)
                 </span>
                 
                 
@@ -309,51 +282,17 @@
             
         </h1>
         <div class="content">
-            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Mysql安装"><a href="#Mysql安装" class="headerlink" title="Mysql安装"></a>Mysql安装</h2><h4 id="搜索-1"><a href="#搜索-1" class="headerlink" title="搜索"></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p> 一般情况下，我都是使用官方镜像或者阿里镜像</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421212533766?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name onlyloveyd-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql:latest</span><br></pre></td></tr></table></figure>
-
-<p> –name 指定数据库名称<br> －e MYSQL_ROOT_PASSWORD=my-secret-pw 配置root账号密码<br> －p 指定端口映射<br> －d 指定镜像<br> <img src="https://img-blog.csdn.net/20180421213041710?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421213203762?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><h5 id="进入Mysql-Docker环境"><a href="#进入Mysql-Docker环境" class="headerlink" title="进入Mysql Docker环境"></a>进入Mysql Docker环境</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it onlyloveyd-mysql /bin/bash</span><br></pre></td></tr></table></figure>
-
-<p> onlyloveyd-mysql 替换成 对应容器名</p>
-<h5 id="进入mysql"><a href="#进入mysql" class="headerlink" title="进入mysql"></a>进入mysql</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p> 输入密码后进入mysql<br> <img src="https://img-blog.csdn.net/20180421213747913?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h5 id="配置允许Mysql远程连接"><a href="#配置允许Mysql远程连接" class="headerlink" title="配置允许Mysql远程连接"></a>配置允许Mysql远程连接</h5><p> 使用mysql命令的时候注意以分号结尾。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select host,user,authentication_string from user;</span><br><span class="line">update user set host = &apos;%&apos; where user = &apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180421214755807?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p> 存在host为‘％‘，user为‘root‘的记录就代表用户可以在任何一台机器上使用root账号登陆。</p>
-
+            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/21/CentOS + Docker + MySql/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -382,7 +321,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 623 个字)
+                    4 分钟 读完 (大约 641 个字)
                 </span>
                 
                 
@@ -395,75 +334,17 @@
             
         </h1>
         <div class="content">
-            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a><a href></a>Docker安装与启动</h2><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a><a href></a>搜索</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a><a href></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a><a href></a>启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="开机自启动"><a href="#开机自启动" class="headerlink" title="开机自启动"></a><a href></a>开机自启动</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker.service</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a><a href></a>查看状态</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a><a href></a>查看版本</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a><a href></a>查看信息</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="镜像打包和导入"><a href="#镜像打包和导入" class="headerlink" title="镜像打包和导入"></a><a href></a>镜像打包和导入</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//将名为gitlab/gitlab-ce的image打包成gitlab.tar</span><br><span class="line">docker save -o gitlab.tar gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//导入image</span><br><span class="line">docker load -i gitlab.tar</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Gitlab-ce安装"><a href="#Gitlab-ce安装" class="headerlink" title="Gitlab-ce安装"></a><a href></a>Gitlab-ce安装</h2><h4 id="搜索-1"><a href="#搜索-1" class="headerlink" title="搜索"></a><a href></a>搜索</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search gitlab-ce</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a><a href></a>下载</h4><p> 一般情况下，我都是使用官方镜像或者阿里镜像</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a><a href></a>安装</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i \</span><br><span class="line">    --hostname centos \</span><br><span class="line">    --publish 443:443 --publish 80:80 --publish 22:22 \</span><br><span class="line">    --name gitlab \</span><br><span class="line">    --restart always \</span><br><span class="line">    --volume /srv/gitlab/config:/etc/gitlab \</span><br><span class="line">    --volume /srv/gitlab/logs:/var/log/gitlab \</span><br><span class="line">    --volume /srv/gitlab/data:/var/opt/gitlab \</span><br><span class="line">    docker.io/gitlab/gitlab-ce</span><br></pre></td></tr></table></figure>
-
-<p> /srv目录下若没有对应文件夹，可自行创建，也可修改成其他文件路径</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a><a href></a>使用</h4><h5 id="进入Gitlab-Docker环境"><a href="#进入Gitlab-Docker环境" class="headerlink" title="进入Gitlab Docker环境"></a><a href></a>进入Gitlab Docker环境</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="全局配置文件"><a href="#全局配置文件" class="headerlink" title="全局配置文件"></a><a href></a>全局配置文件</h5><p> 修改下载地址中的显示IP也在此修改</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/gitlab/gitlab.rb</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="ssh端口修改后处理"><a href="#ssh端口修改后处理" class="headerlink" title="ssh端口修改后处理"></a><a href></a>ssh端口修改后处理</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it gitlab /bin/bash</span><br><span class="line"></span><br><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line">#修改ssh对应host地址</span><br><span class="line">gitlab_rails[&apos;gitlab_ssh_host&apos;] = &apos;xxx.xxx.xxx.xxx&apos;</span><br><span class="line">#修改ssh映射端口</span><br><span class="line">gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 23</span><br></pre></td></tr></table></figure>
-
-
-<blockquote>
-<p>注意打开服务器上对应的端口</p>
-</blockquote>
-<h5 id="定时备份以及自动上传ftp服务器"><a href="#定时备份以及自动上传ftp服务器" class="headerlink" title="定时备份以及自动上传ftp服务器"></a><a href></a>定时备份以及自动上传ftp服务器</h5><p> 编辑定时任务（每天凌晨两点备份，三点上传。下面sh文件是自编的一个ftp上传脚本）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /var/spool/cron/root</span><br><span class="line"></span><br><span class="line">  0  2  *  *  *  docker exec -t gitlab gitlab-rake gitlab:backup:create CRON=1</span><br><span class="line">  0  3  *  *  *  /root/BKConfig/upload_bk.sh</span><br></pre></td></tr></table></figure>
-
-<p> 脚本内容</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">ftp -n&lt;&lt;!</span><br><span class="line">open &lt;ftp服务器地址&gt;</span><br><span class="line">user &lt;username&gt; &lt;password&gt;</span><br><span class="line">binary</span><br><span class="line">lcd &lt;待上传的文件夹路径&gt;</span><br><span class="line">prompt</span><br><span class="line">mput *</span><br><span class="line">close</span><br><span class="line">bye</span><br><span class="line">!</span><br></pre></td></tr></table></figure>
-
-<p> ##阿里云加速器</p>
-<h4 id="寻找属于你的加速器"><a href="#寻找属于你的加速器" class="headerlink" title="寻找属于你的加速器"></a><a href></a>寻找属于你的加速器</h4><p> 阿里云官网，登陆以后，找到“弹性计算“下的“容器镜像服务“，然后你就可以看到属于你自己的“镜像加速器“</p>
-<h4 id="服务器Docker镜像配置"><a href="#服务器Docker镜像配置" class="headerlink" title="服务器Docker镜像配置"></a><a href></a>服务器Docker镜像配置</h4><p> /etc/docker/daemon.json</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [&quot;&lt;your accelerate address&gt;&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 替换成你自己的加速器地址即可。</p>
-<h4 id="配置完成后重启Docker"><a href="#配置完成后重启Docker" class="headerlink" title="配置完成后重启Docker"></a><a href></a>配置完成后重启Docker</h4><h4 id="docker-overlay2-空间占满100-时，处理方法"><a href="#docker-overlay2-空间占满100-时，处理方法" class="headerlink" title="docker overlay2 空间占满100%时，处理方法"></a><a href></a>docker overlay2 空间占满100%时，处理方法</h4><p> 原文: <a href="https://unix.stackexchange.com/questions/414483/docker-increase-available-disk-space" target="_blank" rel="noopener">https://unix.stackexchange.com/questions/414483/docker-increase-available-disk-space</a><br> 跟换overlay2目录地址：<br> You could move the docker directory to somewhere under /home and create a symlink /var/lib/docker pointing to the new location. For example:</p>
-<p> shut down docker first<br> mv /var/lib/docker /home/<br> ln -s /home/docker/ /var/lib/</p>
-<p> restart docker now<br> Use another directory if /home/docker already exists.</p>
-<p> Instead of, or as well as, the symlink from /var/lib/docker -&gt; /home/docker, you could also reconfigure docker so that it expects to find its directory under /home rather than /var/lib.</p>
-
+            <h2 id="Docker安装与启动"><a href="#Docker安装与启动" class="headerlink" title="Docker安装与启动"></a>Docker安装与启动</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search docker</span><br></pre></td></tr></table></figure>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/21/CentOS + Docker + Gitlab-ce/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -539,7 +420,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -748,7 +629,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1311,7 +1192,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1717,7 +1598,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1732,6 +1613,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2439,7 +2327,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2845,7 +2733,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2860,6 +2748,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

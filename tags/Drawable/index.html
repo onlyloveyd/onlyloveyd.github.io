@@ -228,7 +228,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 662 个字)
+                    4 分钟 读完 (大约 664 个字)
                 </span>
                 
                 
@@ -241,44 +241,19 @@
             
         </h1>
         <div class="content">
-            <p>  ###<strong>介绍</strong></p>
-<blockquote>
-<p>A StateListDrawable is a drawable object defined in XML that uses a several different images to represent the same graphic, depending on the state of the object. For example, a Button widget can exist in one of several different states (pressed, focused, or niether) and, using a state list drawable, you can provide a different background image for each state.</p>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>A StateListDrawable is a drawable object defined in XML that uses a several different images to represent the same graphic, depending on the state of the object. For example, a Button widget can exist in one of several different states (pressed, focused, or niether) and, using a state list drawable, you can provide a different background image for each state. You can describe the state list in an XML file. Each graphic is represented by an “item” element inside a single “selector” element. Each “item” uses various attributes to describe the state in which it should be used as the graphic for the drawable.<br>During each state change, the state list is traversed top to bottom and the first item that matches the current state is used—the selection is not based on the “best match,” but simply the first item that meets the minimum criteria of the state.  </p>
 </blockquote>
-<blockquote>
-<p>You can describe the state list in an XML file. Each graphic is represented by an “item” element inside a single “selector” element. Each “item” uses various attributes to describe the state in which it should be used as the graphic for the drawable.</p>
-</blockquote>
-<blockquote>
-<p>During each state change, the state list is traversed top to bottom and the first item that matches the current state is used—the selection is not based on the “best match,” but simply the first item that meets the minimum criteria of the state.<br> 翻译：<br> StateListDrawable 是一种通过XML文件来定义的drawable，使用几个不同的图片来呈现同一个图形，通过object的状态来实现切换。例如，一个Button有几个不同的状态（按压，获取焦点等等），这种情况下，通过使用 state list drawable，你就可以实现在不同的状态下使用不同的背景图片。</p>
-</blockquote>
-<blockquote>
-<p>你可以在一个XML文件中描述state list。通过在根节点selector下定义一个item元素来添加每个图形。每一各item中使用不同的状态属性来定义不用的drawable。</p>
-</blockquote>
-<blockquote>
-<p>当每一次状态改变的时候，state list都会从上到下被遍历一遍，第一个与当前state相匹配的item将会被使用—- 这个选择并不是作出“最匹配”结果，而是简单的找到第一个匹配的状态。</p>
-<p> selector一般都是用来作为有状态改变的View的背景，以此来达到当用户对View进行操作，导致View状态改变时，作出改变，让用户感知View的状态变化。</p>
-</blockquote>
-<p> ###<strong>官方说明</strong><br> 文件位置：<em><strong>res/drawable/filename.xml</strong></em></p>
-<p> 编译资源类型：<em><strong>StateListDrawable</strong></em></p>
-<p> 资源引用：<br> In Java: <em><strong>R.drawable.filename</strong></em><br> In XML: <em><strong>@[package:]drawable/filename</strong></em></p>
-<p> 语法：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:constantSize=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">    android:dither=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">    android:variablePadding=[&quot;true&quot; | &quot;false&quot;] &gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</span><br><span class="line">        android:state_pressed=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_focused=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_hovered=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_selected=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_checkable=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_checked=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_enabled=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_activated=[&quot;true&quot; | &quot;false&quot;]</span><br><span class="line">        android:state_window_focused=[&quot;true&quot; | &quot;false&quot;] /&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 更多详细说明，请查阅<a href="http://android.xsoftlab.net/guide/topics/resources/drawable-resource.html" target="_blank" rel="noopener">xsoftlab</a></p>
-<p> ###<strong>实际使用</strong><br> 下面做一个简单的实例，对Button的背景根据状态做一下处理</p>
-<p> <em><strong>XML文件</strong></em></p>
-<p> selector_ts.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/pink&quot; android:state_pressed=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/yellow&quot; android:state_selected=&quot;true&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@drawable/shaperect&quot; android:state_enabled=&quot;false&quot; /&gt;</span><br><span class="line">    &lt;item android:drawable=&quot;@color/stone&quot; android:state_enabled=&quot;true&quot; /&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 主布局文件（activity_main.xml）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:focusable=&quot;true&quot;</span><br><span class="line">    android:focusableInTouchMode=&quot;true&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:padding=&quot;10dp&quot;</span><br><span class="line">    tools:context=&quot;mraz.com.tabdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Button</span><br><span class="line">        android:id=&quot;@+id/bt_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;300dp&quot;</span><br><span class="line">        android:background=&quot;@drawable/selector_ts&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;LinearLayout</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_marginTop=&quot;50dp&quot;</span><br><span class="line">        android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_selected&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Select&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_disable&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Disable&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;Button</span><br><span class="line">            android:id=&quot;@+id/bt_pressed&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_weight=&quot;1&quot;</span><br><span class="line">            android:text=&quot;Press&quot;</span><br><span class="line">            android:textAllCaps=&quot;false&quot; /&gt;</span><br><span class="line">    &lt;/LinearLayout&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>代码部分</strong></em> 比较简单，这里就不占用过多的篇幅了，看下简单的效果，大家应该就知道如何编写小小的Activity了。</p>
-<p> ###<strong>实际效果</strong><br> <img src="https://img-blog.csdn.net/20160705080238443" alt="这里写图片描述"></p>
-<p> 更多的内容等待着挖掘机的到来~</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2016/07/05/《Android 基础（十四）》 selector/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -354,7 +329,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        81
+                        82
                     </p>
                 </div>
             </div>
@@ -563,7 +538,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.08px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.46px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.54px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.54px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.77px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.31px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.38px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.31px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.85px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.31px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.85px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 16.15px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.77px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.38px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.54px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.54px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.77px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.54px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.54px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.69px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.77px;">开机动画</a> <a href="/tags/开源/" style="font-size: 11.54px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.23px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.54px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.31px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.62px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.54px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.77px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.92px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.31px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
     </div>
 </div>
 
@@ -1126,7 +1101,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -1532,7 +1507,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1547,6 +1522,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2254,7 +2236,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">5</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
@@ -2660,7 +2642,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源/">
                         <span class="tag">开源</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2675,6 +2657,13 @@
                     <a class="tags has-addons" href="/tags/微信公众号/">
                         <span class="tag">微信公众号</span>
                         <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/微信小程序/">
+                        <span class="tag">微信小程序</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
