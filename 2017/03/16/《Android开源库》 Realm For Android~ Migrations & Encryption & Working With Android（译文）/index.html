@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
+    <meta name="description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Realm">
 <meta name="keywords" content="译文,Realm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 Realm For Android~ Migrations &amp; Encryption &amp; Working With Android（译文）">
 <meta property="og:url" content="http://yoursite.com/2017/03/16/《Android开源库》 Realm For Android~ Migrations & Encryption & Working With Android（译文）/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
+<meta property="og:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Realm">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-20T10:28:18.420Z">
+<meta property="og:updated_time" content="2019-06-27T13:24:32.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 Realm For Android~ Migrations &amp; Encryption &amp; Working With Android（译文）">
-<meta name="twitter:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
+<meta name="twitter:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Realm">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -168,9 +168,9 @@
             
         </h1>
         <div class="content">
-            <a id="more"></a>
-<h2 id="迁移（Migrations）"><a href="#迁移（Migrations）" class="headerlink" title="迁移（Migrations）"></a>迁移（Migrations）</h2><p>所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。</p>
+            <h2 id="迁移（Migrations）"><a href="#迁移（Migrations）" class="headerlink" title="迁移（Migrations）"></a>迁移（Migrations）</h2><p>所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。</p>
 <p>如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 RealmConfiguration 设置 schema 版本和 migration 代码来正确处理并避免该异常抛出。</p>
+<a id="more"></a>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">    .schemaVersion(<span class="hljs-number">2</span>) <span class="hljs-comment">// Must be bumped when the schema changes</span></span><br><span class="line">    .migration(<span class="hljs-keyword">new</span> MyMigration()) <span class="hljs-comment">// Migration to run instead of throwing an exception</span></span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
 
 <p>如上示例使得相应的 migration 代码在迁移需要的时候被自动执行。我们提供了相关 API 用来升级已保存的 schema 以及对应之前 schema 的数据。</p>
@@ -549,7 +549,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 14.17px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.17px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.83px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.67px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 14.17px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 14.17px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.33px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.83px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.67px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.5px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 15px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.33px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 14.17px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.17px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 16.67px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.67px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 14.17px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 14.17px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.33px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.83px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.83px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.5px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 15.83px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.33px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -1427,7 +1427,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -2422,7 +2422,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 

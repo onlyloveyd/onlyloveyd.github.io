@@ -179,69 +179,17 @@
             
         </h1>
         <div class="content">
-            <a id="more"></a>
-
-<h2 id="SlideToggleView"><a href="#SlideToggleView" class="headerlink" title="SlideToggleView"></a>SlideToggleView</h2><p> 🍎A simple SlideToggleView for Android.</p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p><strong>Step 1.</strong> Add it in your root build.gradle at the end of repositories:</p>
-<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        ...</span><br><span class="line">        maven &#123; url <span class="hljs-string">'https://jitpack.io'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>Step 2.</strong> Add the dependency</p>
-<figure class="highlight groovy hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    iimplementation <span class="hljs-string">'com.github.onlyloveyd:SlideToggleView:1.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h2><p><strong>Step 1.</strong> Add <strong>SlideToggleView</strong> into your layout</p>
-<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">cn.onlyloveyd.slidetoggleview.SlideToggleView</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/slideToggleView"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"56dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"40dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@drawable/slide_bg"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_blockBottomMargin</span>=<span class="hljs-string">"2dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_blockLeftMargin</span>=<span class="hljs-string">"2dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_blockRightMargin</span>=<span class="hljs-string">"2dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_blockTopMargin</span>=<span class="hljs-string">"3dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_remain</span>=<span class="hljs-string">"80dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_slideBlock</span>=<span class="hljs-string">"@drawable/slide_block"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">app:stv_text</span>=<span class="hljs-string">"Slide To Unlock"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Step 2.</strong>(optional)add SlideToggleListener for SlideToggleView</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mBinding.slideToggleView.setSlideToggleListener(<span class="hljs-keyword">new</span> SlideToggleView.SlideToggleListener() &#123;</span><br><span class="line">       <span class="hljs-meta">@Override</span></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onBlockPositionChanged</span><span class="hljs-params">(SlideToggleView view, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> total,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">               <span class="hljs-keyword">int</span> slide)</span> </span>&#123;</span><br><span class="line">           String content = String.format(Locale.CHINESE, <span class="hljs-string">"left: %d - total: %d - slide: %d"</span>,</span><br><span class="line">                   left, total, slide);</span><br><span class="line">           mBinding.shimmerTextView.setText(content);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-meta">@Override</span></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSlideOpen</span><span class="hljs-params">(SlideToggleView view)</span> </span>&#123;</span><br><span class="line">           Toast.makeText(MainActivity.<span class="hljs-keyword">this</span>, <span class="hljs-string">"Slide Toggle is Open"</span>,</span><br><span class="line">                   Toast.LENGTH_SHORT).show();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h2><table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>stv_text</td>
-<td>居中文字内容</td>
-</tr>
-<tr>
-<td>stv_textSize</td>
-<td>居中文字大小</td>
-</tr>
-<tr>
-<td>stv_textColor</td>
-<td>居中文字颜色</td>
-</tr>
-<tr>
-<td>stv_slideBlock</td>
-<td>滑块图片</td>
-</tr>
-<tr>
-<td>stv_blockLeftMargin</td>
-<td>滑块左间距</td>
-</tr>
-<tr>
-<td>stv_blockRightMargin</td>
-<td>滑块左间距</td>
-</tr>
-<tr>
-<td>stv_blockTopMargin</td>
-<td>滑块顶部间距</td>
-</tr>
-<tr>
-<td>stv_blockBottomMargin</td>
-<td>滑块底部间距</td>
-</tr>
-<tr>
-<td>stv_remain</td>
-<td>滑块打开误差范围值</td>
-</tr>
-</tbody></table>
-<h2 id="Basic-Result"><a href="#Basic-Result" class="headerlink" title="Basic Result"></a>Basic Result</h2><p> <img src="http://www.onlyloveyd.cn/upload/2019/01/s9f8khun44i50og2c37kj6kikt.gif" alt="抽奖"></p>
-
+            <h2 id="SlideToggleView"><a href="#SlideToggleView" class="headerlink" title="SlideToggleView"></a>SlideToggleView</h2><p> 🍎A simple SlideToggleView for Android.</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/01/12/《Android 进阶（ 六）》Simple SlideToggleView For Android/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -283,7 +231,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="LazyApkShare"><a href="#LazyApkShare" class="headerlink" title="LazyApkShare"></a>LazyApkShare</h1><p>分享当前应用的简单实现。</p>
+            <h2 id="LazyApkShare"><a href="#LazyApkShare" class="headerlink" title="LazyApkShare"></a>LazyApkShare</h2><p>分享当前应用的简单实现。</p>
         </div>
         
         
@@ -335,7 +283,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="LazyOrgView"><a href="#LazyOrgView" class="headerlink" title="LazyOrgView"></a>LazyOrgView</h1><p> 通过自定义View简单实现组织结构图。在网上搜索并没有发现类似的View，由于项目需要，快速实现一个满足项目需求。另外一种实现方式：Google OrgChart或者其他OrgChart.js。</p>
+            <h2 id="LazyOrgView"><a href="#LazyOrgView" class="headerlink" title="LazyOrgView"></a>LazyOrgView</h2><p> 通过自定义View简单实现组织结构图。在网上搜索并没有发现类似的View，由于项目需要，快速实现一个满足项目需求。另外一种实现方式：Google OrgChart或者其他OrgChart.js。</p>
         </div>
         
         
@@ -387,7 +335,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h1><p><a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
+            <h2 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h2><p><a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
         </div>
         
         
@@ -895,7 +843,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 14.17px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.17px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.83px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.67px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 14.17px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 14.17px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.33px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.83px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.67px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.5px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 15px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.33px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 14.17px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.17px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 16.67px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.67px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 14.17px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 14.17px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.33px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15.83px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.83px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 15px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.5px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 15.83px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.33px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -1773,7 +1721,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -2768,7 +2716,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
