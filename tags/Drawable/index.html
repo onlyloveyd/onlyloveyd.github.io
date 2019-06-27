@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 296 个字)
+                    2 分钟 读完 (大约 301 个字)
                 </span>
                 
                 
@@ -180,77 +180,13 @@
         <div class="content">
             <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> LayerDrawable 是管理其他可绘制对象阵列的可绘制对象。列表中的每个可绘制对象按照列表的顺序绘制，列表中的最后一个可绘制对象绘于顶部。</p>
 <p> 每个可绘制对象由单一 &lt; layer-list &gt; 元素内的 &lt; item &gt; 元素表示。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layer-list</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</span><br><span class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</span><br><span class="line">        android:top=&quot;dimension&quot;</span><br><span class="line">        android:right=&quot;dimension&quot;</span><br><span class="line">        android:bottom=&quot;dimension&quot;</span><br><span class="line">        android:left=&quot;dimension&quot; /&gt;</span><br><span class="line">&lt;/layer-list&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p> layer-list，图层列表，可以帮助我们绘制一些特殊的图形。</p>
-<h2 id="部分实践"><a href="#部分实践" class="headerlink" title="部分实践"></a>部分实践</h2><h3 id="Line-amp-Dot"><a href="#Line-amp-Dot" class="headerlink" title="Line &amp; Dot"></a>Line &amp; Dot</h3><h4 id="layer-list"><a href="#layer-list" class="headerlink" title="layer-list"></a>layer-list</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:bottom=&quot;2dp&quot;</span><br><span class="line">        android:right=&quot;2dp&quot;</span><br><span class="line">        android:top=&quot;2dp&quot;&gt;</span><br><span class="line">        &lt;shape android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line">            &lt;solid android:color=&quot;#1750ff&quot; /&gt;</span><br><span class="line">        &lt;/shape&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">    &lt;item android:gravity=&quot;right&quot;&gt;</span><br><span class="line">        &lt;shape android:shape=&quot;oval&quot;&gt;</span><br><span class="line">            &lt;solid android:color=&quot;#1750ff&quot; /&gt;</span><br><span class="line">            &lt;size</span><br><span class="line">                android:width=&quot;5dp&quot;</span><br><span class="line">                android:height=&quot;5dp&quot; /&gt;</span><br><span class="line">        &lt;/shape&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">&lt;/layer-list&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="use-in-layout"><a href="#use-in-layout" class="headerlink" title="use in layout"></a>use in layout</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;View</span><br><span class="line">      android:layout_width=&quot;100dp&quot;</span><br><span class="line">      android:layout_height=&quot;5dp&quot;</span><br><span class="line">      android:layout_marginLeft=&quot;50dp&quot;</span><br><span class="line">      android:layout_marginTop=&quot;50dp&quot;</span><br><span class="line">      android:background=&quot;@drawable/horizontal_line_dot&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="result"><a href="#result" class="headerlink" title="result"></a>result</h4><p> <img src="https://img-blog.csdn.net/20180609075131231" alt="这里写图片描述"></p>
-<p> <img src="https://img-blog.csdn.net/20180609075334427" alt="这里写图片描述"></p>
-<h2 id="代码修改Drawable颜色"><a href="#代码修改Drawable颜色" class="headerlink" title="代码修改Drawable颜色"></a>代码修改Drawable颜色</h2><p> 通过LayerDrawable类中的部分方法，我们可以拿到每一层的Drawable，这样针对不通层级的Drawable，我们可以根据自己的需要，在用户交互过程中执行修改等操作。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bt_change_color.setOnClickListener(&#123;</span><br><span class="line">    var background: LayerDrawable = horizontal_line_dot.background as LayerDrawable</span><br><span class="line">    for (index in 0..(background.numberOfLayers - 1)) &#123;</span><br><span class="line">        var drawable: GradientDrawable = background.getDrawable(index) as GradientDrawable</span><br><span class="line">        drawable.setColor(Color.BLACK)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180609082051965" alt="这里写图片描述"></p>
-<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p> 关于Shape的用法，请阅<a href="https://blog.csdn.net/poorkick/article/details/51824524" target="_blank" rel="noopener">Shape</a><br> <img src="https://img-blog.csdn.net/20180609083337113" alt="这里写图片描述"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-07-05T00:03:48.000Z">2016-07-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 664 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/07/05/《Android 基础（十四）》 selector/">《Android 基础（十四）》 selector</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
-<p>A StateListDrawable is a drawable object defined in XML that uses a several different images to represent the same graphic, depending on the state of the object. For example, a Button widget can exist in one of several different states (pressed, focused, or niether) and, using a state list drawable, you can provide a different background image for each state. You can describe the state list in an XML file. Each graphic is represented by an “item” element inside a single “selector” element. Each “item” uses various attributes to describe the state in which it should be used as the graphic for the drawable.<br>During each state change, the state list is traversed top to bottom and the first item that matches the current state is used—the selection is not based on the “best match,” but simply the first item that meets the minimum criteria of the state.  </p>
-</blockquote>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/07/05/《Android 基础（十四）》 selector/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2018/06/09/《Android 基础（四十六）》 LayerDrawable & layer-list/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -309,7 +245,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -329,7 +265,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -420,7 +356,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -530,7 +466,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -724,7 +660,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1093,7 +1029,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1133,23 +1069,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1163,13 +1085,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1177,13 +1092,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1212,7 +1120,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1233,13 +1141,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1268,7 +1169,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1331,14 +1232,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1357,13 +1258,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1371,22 +1265,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1420,13 +1300,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1436,7 +1309,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1455,13 +1328,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1471,14 +1337,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1506,7 +1372,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1525,44 +1391,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1576,20 +1407,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1623,22 +1440,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1653,7 +1456,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1859,7 +1662,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2228,7 +2031,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2268,23 +2071,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2298,13 +2087,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2312,13 +2094,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2347,7 +2122,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2368,13 +2143,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2403,7 +2171,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2466,14 +2234,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2492,13 +2260,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2506,22 +2267,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2555,13 +2302,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2571,7 +2311,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2590,13 +2330,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2606,14 +2339,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2641,7 +2374,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2660,44 +2393,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2711,20 +2409,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2758,22 +2442,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2788,7 +2458,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

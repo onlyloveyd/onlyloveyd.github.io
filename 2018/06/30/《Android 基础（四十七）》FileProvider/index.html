@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="简介 FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。 由来 官文Android7.0行为变更说明：  对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件">
+    <meta name="description" content="简介FileProvider，是ContentProvider的子类，通过构建以”content://“开头的Uri取代之前以”file://“开头的Uri，以此实现应用间的文件共享。">
 <meta name="keywords" content="FileProvider">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（四十七）》FileProvider">
 <meta property="og:url" content="http://yoursite.com/2018/06/30/《Android 基础（四十七）》FileProvider/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="简介 FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。 由来 官文Android7.0行为变更说明：  对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件">
+<meta property="og:description" content="简介FileProvider，是ContentProvider的子类，通过构建以”content://“开头的Uri取代之前以”file://“开头的Uri，以此实现应用间的文件共享。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:05:37.941Z">
+<meta property="og:updated_time" content="2019-06-20T11:19:29.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四十七）》FileProvider">
-<meta name="twitter:description" content="简介 FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。 由来 官文Android7.0行为变更说明：  对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件">
+<meta name="twitter:description" content="简介FileProvider，是ContentProvider的子类，通过构建以”content://“开头的Uri取代之前以”file://“开头的Uri，以此实现应用间的文件共享。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1804 个字)
+                    12 分钟 读完 (大约 1767 个字)
                 </span>
                 
                 
@@ -168,65 +168,85 @@
             
         </h1>
         <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> FileProvider，是ContentProvider的子类，通过构建以”content://”开头的Uri取代之前以”file://”开头的Uri，以此实现应用间的文件共享。</p>
-<h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p> 官文Android7.0行为变更说明：</p>
-<p> 对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件 URI 的 intent 离开您的应用，则应用出现故障，并出现 FileUriExposedException 异常。</p>
-<p> 要在应用间共享文件，需要改用content:// 格式的URI，并授予 URI 临时访问权限。<br> 实现此类操作最简单的方法就是使用FileProvider。</p>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="定义FileProvider"><a href="#定义FileProvider" class="headerlink" title="定义FileProvider"></a>定义FileProvider</h3><p> FileProvider本身就能根据file生成content:// Uri，所以我们并没有必要去写一个单独的FileProvider子类。但是在某些情况下，我们可以简单的继承FileProvider，修改类名来实现与FileProvider在名字上的区分，毕竟在AndroidManifest.xml中，名字相同的provider是不被允许的。</p>
-<p> AndroidManifest.xml中申明FileProvider</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;manifest&gt;</span><br><span class="line">    ...</span><br><span class="line">    &lt;application&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;provider</span><br><span class="line">            android:name=&quot;android.support.v4.content.FileProvider&quot;</span><br><span class="line">            android:authorities=&quot;$&#123;applicationId&#125;.fileprovider&quot;</span><br><span class="line">            android:exported=&quot;false&quot;</span><br><span class="line">            android:grantUriPermissions=&quot;true&quot;&gt;</span><br><span class="line">            &lt;meta-data</span><br><span class="line">                android:name=&quot;android.support.FILE_PROVIDER_PATHS&quot;</span><br><span class="line">                android:resource=&quot;@xml/file_paths&quot; /&gt;</span><br><span class="line">        &lt;/provider&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/application&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>FileProvider，是ContentProvider的子类，通过构建以”content://“开头的Uri取代之前以”file://“开头的Uri，以此实现应用间的文件共享。</p>
+<a id="more"></a>
+<h3 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h3><p>官文Android7.0行为变更说明：</p>
+<p>对于面向 Android 7.0 的应用，Android 框架执行的 StrictMode API 政策禁止在应用外部公开 file:// URI。如果一项包含文件 URI 的 intent 离开您的应用，则应用出现故障，并出现 FileUriExposedException 异常。</p>
+<p>要在应用间共享文件，需要改用content:// 格式的URI，并授予 URI 临时访问权限。<br>实现此类操作最简单的方法就是使用FileProvider。</p>
+<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><h3 id="定义FileProvider"><a href="#定义FileProvider" class="headerlink" title="定义FileProvider"></a>定义FileProvider</h3><p>FileProvider本身就能根据file生成content:// Uri，所以我们并没有必要去写一个单独的FileProvider子类。但是在某些情况下，我们可以简单的继承FileProvider，修改类名来实现与FileProvider在名字上的区分，毕竟在AndroidManifest.xml中，名字相同的provider是不被允许的。</p>
+<p>AndroidManifest.xml中申明FileProvider</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">manifest</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">application</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">provider</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.support.v4.content.FileProvider"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:authorities</span>=<span class="hljs-string">"$&#123;applicationId&#125;.fileprovider"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:exported</span>=<span class="hljs-string">"false"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:grantUriPermissions</span>=<span class="hljs-string">"true"</span>&gt;</span></span><br><span class="line">            <span class="hljs-tag">&lt;<span class="hljs-name">meta-data</span></span></span><br><span class="line"><span class="hljs-tag">                <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.support.FILE_PROVIDER_PATHS"</span></span></span><br><span class="line"><span class="hljs-tag">                <span class="hljs-attr">android:resource</span>=<span class="hljs-string">"@xml/file_paths"</span> /&gt;</span></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">provider</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="明确可用文件"><a href="#明确可用文件" class="headerlink" title="明确可用文件"></a>明确可用文件</h3><p>上面明确来resource文件为”@xml/file_paths”。那么我们就在file_paths中明确我们的可用位置。</p>
+<p>FileProvider只能为你事先指定的目录中的文件生成内容URI。 要指定目录，请使用&lt; paths &gt;元素的子元素指定其存储区域和XML路径。 例如，以下路径元素告诉FileProvider你打算请求私有文件目录下的images /子目录的内容URI</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">paths</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">files-path</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"my_images"</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"images/"</span>/&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">paths</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="明确可用文件"><a href="#明确可用文件" class="headerlink" title="明确可用文件"></a>明确可用文件</h3><p> 上面明确来resource文件为”@xml/file_paths”。那么我们就在file_paths中明确我们的可用位置。</p>
-<p> FileProvider只能为你事先指定的目录中的文件生成内容URI。 要指定目录，请使用&lt; paths &gt;元素的子元素指定其存储区域和XML路径。 例如，以下路径元素告诉FileProvider你打算请求私有文件目录下的images /子目录的内容URI</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;files-path name=&quot;my_images&quot; path=&quot;images/&quot;/&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/paths&gt;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>paths元素                                                | 对应目录                                                                 
------------------------------------------------------- | --------------------------------------------------------------------- 
-&amp;lt; root-path/&amp;gt;                                    | “/”                                                                  
-&amp;lt; files-path name=”name” path=”path” /&amp;gt;          | Context.getFilesDir()                                                
-&amp;lt; cache-path name=”name” path=”path” /&amp;gt;          | Context.getCacheDir()                                                
-&amp;lt; external-path name=”name” path=”path” /&amp;gt;       | Environment.getExternalStorageDirectory()                            
-&amp;lt; external-files-path name=”name” path=”path” /&amp;gt; | Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)
-&amp;lt; external-cache-path name=”name” path=”path” /&amp;gt; | Context.getExternalCacheDir()                                        
-&amp;lt; external-media-path name=”name” path=”path” /&amp;gt; | Context.getExternalMediaDirs()(API21+)                               </code></pre><p> 这样看可能不太明显，随意新建一个Android工程，打印如上内容，示例工程包名为<br> cn.onlyloveyd.lazyshare</p>
-<p> <img src="https://img-blog.csdn.net/20180630102322857" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>paths元素</th>
+<th>对应目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt; root-path/&gt;</td>
+<td>“/“</td>
+</tr>
+<tr>
+<td>&lt; files-path name=”name” path=”path” /&gt;</td>
+<td>Context.getFilesDir()</td>
+</tr>
+<tr>
+<td>&lt; cache-path name=”name” path=”path” /&gt;</td>
+<td>Context.getCacheDir()</td>
+</tr>
+<tr>
+<td>&lt; external-path name=”name” path=”path” /&gt;</td>
+<td>Environment.getExternalStorageDirectory()</td>
+</tr>
+<tr>
+<td>&lt; external-files-path name=”name” path=”path” /&gt;</td>
+<td>Context#getExternalFilesDir(String) Context.getExternalFilesDir(null)</td>
+</tr>
+<tr>
+<td>&lt; external-cache-path name=”name” path=”path” /&gt;</td>
+<td>Context.getExternalCacheDir()</td>
+</tr>
+<tr>
+<td>&lt; external-media-path name=”name” path=”path” /&gt;</td>
+<td>Context.getExternalMediaDirs()(API21+)</td>
+</tr>
+</tbody></table>
+<p>这样看可能不太明显，随意新建一个Android工程，打印如上内容，示例工程包名为<br>cn.onlyloveyd.lazyshare</p>
+<p><img src="https://img-blog.csdn.net/20180630102322857" alt="这里写图片描述"></p>
 <h3 id="为File生成Content-Uri"><a href="#为File生成Content-Uri" class="headerlink" title="为File生成Content Uri"></a>为File生成Content Uri</h3><ul>
-<li>创建需要用Uri表示的文件File </li>
-<li>使用getUriForFile()方法获取对应的Uri.  官方示例:</li>
+<li>创建需要用Uri表示的文件File</li>
+<li>使用getUriForFile()方法获取对应的Uri.</li>
 </ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = new File(Context.getFilesDir(), &quot;images&quot;);</span><br><span class="line">File newFile = new File(imagePath, &quot;default_image.jpg&quot;);</span><br><span class="line">Uri contentUri = getUriForFile(getContext(), &quot;com.mydomain.fileprovider&quot;, newFile);</span><br></pre></td></tr></table></figure>
+<p>官方示例:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File imagePath = <span class="hljs-keyword">new</span> File(Context.getFilesDir(), <span class="hljs-string">"images"</span>);</span><br><span class="line">File newFile = <span class="hljs-keyword">new</span> File(imagePath, <span class="hljs-string">"default_image.jpg"</span>);</span><br><span class="line">Uri contentUri = getUriForFile(getContext(), <span class="hljs-string">"com.mydomain.fileprovider"</span>, newFile);</span><br></pre></td></tr></table></figure>
 
-<p> 生成的Uri就是</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content://com.mydomain.fileprovider/my_images/default_image.jpg.</span><br></pre></td></tr></table></figure>
+<p>生成的Uri就是</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content:<span class="hljs-comment">//com.mydomain.fileprovider/my_images/default_image.jpg.</span></span><br></pre></td></tr></table></figure>
 
-
-<h3 id="临时授权Uri"><a href="#临时授权Uri" class="headerlink" title="临时授权Uri"></a>临时授权Uri</h3><p> 给通过getUriForFile()方法返回的Uri授权的步骤：</p>
+<h3 id="临时授权Uri"><a href="#临时授权Uri" class="headerlink" title="临时授权Uri"></a>临时授权Uri</h3><p>给通过getUriForFile()方法返回的Uri授权的步骤：</p>
 <ul>
-<li><p>调用Context.grantUriPermission(package, Uri, mode_flags)。package为包名，Uri为需要临时授权的content Uri。mode_flags可以为FLAG_GRANT_READ_URI_PERMISSION, FLAG_GRANT_WRITE_URI_PERMISSION，根据需求而定。通过revokeUriPermission() 或者重启取消授权。 </p>
-</li>
-<li><p>Intent中setData方法设置Uri </p>
-</li>
-<li><p>Intent setFlags方法设置FLAG_GRANT_READ_URI_PERMISSION 或者FLAG_GRANT_WRITE_URI_PERMISSION。 </p>
-</li>
-<li><p>发送Intent到另一个App  </p>
+<li>调用Context.grantUriPermission(package, Uri, mode_flags)。package为包名，Uri为需要临时授权的content Uri。mode_flags可以为FLAG_GRANT_READ_URI_PERMISSION, FLAG_GRANT_WRITE_URI_PERMISSION，根据需求而定。通过revokeUriPermission() 或者重启取消授权。</li>
+<li>Intent中setData方法设置Uri</li>
+<li>Intent setFlags方法设置FLAG_GRANT_READ_URI_PERMISSION 或者FLAG_GRANT_WRITE_URI_PERMISSION。</li>
+<li>发送Intent到另一个App</li>
+</ul>
 <h3 id="传递Uri到另一个应用"><a href="#传递Uri到另一个应用" class="headerlink" title="传递Uri到另一个应用"></a>传递Uri到另一个应用</h3><p>将content:\ Uri提供给客户端应用程序的方式很多。 一种常见的方法是客户端应用程序通过调用startActivityResult()来启动应用程序，发送一个Intent以启动一个Activity，然后通过setResult() 的方式返回给客户端。</p>
 <p>另一种方式是通过调用Intent.setClipData()方法将content:\ Uri放入ClipData对象中，然后将该对象添加到发送给客户端应用程序的Intent中即可。</p>
-</li>
-</ul>
-<h2 id="源码看看"><a href="#源码看看" class="headerlink" title="源码看看"></a>源码看看</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p> <img src="https://img-blog.csdn.net/20180630104041245" alt="这里写图片描述"></p>
-<h3 id="SimplePathStrategy"><a href="#SimplePathStrategy" class="headerlink" title="SimplePathStrategy"></a>SimplePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">static class SimplePathStrategy implements PathStrategy &#123;</span><br><span class="line">    private final String mAuthority;</span><br><span class="line">    private final HashMap&lt;String, File&gt; mRoots = new HashMap&lt;String, File&gt;();</span><br><span class="line"></span><br><span class="line">    SimplePathStrategy(String authority) &#123;</span><br><span class="line">        mAuthority = authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Add a mapping from a name to a filesystem root. The provider only offers</span><br><span class="line">     * access to files that live under configured roots.</span><br><span class="line">     */</span><br><span class="line">     //读取xml配置文件，建立名称和目录的映射表</span><br><span class="line">    void addRoot(String name, File root) &#123;</span><br><span class="line">        //名字不能为空</span><br><span class="line">        if (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Name must not be empty&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            // Resolve to canonical path to keep path checking fast</span><br><span class="line">            root = root.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to resolve canonical path for &quot; + root, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mRoots.put(name, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Uri getUriForFile(File file) &#123;</span><br><span class="line">        String path;</span><br><span class="line">        try &#123;</span><br><span class="line">            //获取路径</span><br><span class="line">            path = file.getCanonicalPath();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Find the most-specific root path</span><br><span class="line">        Map.Entry&lt;String, File&gt; mostSpecific = null;</span><br><span class="line">        //遍历查找文件路径对应的名称</span><br><span class="line">        for (Map.Entry&lt;String, File&gt; root : mRoots.entrySet()) &#123;</span><br><span class="line">            final String rootPath = root.getValue().getPath();</span><br><span class="line">            if (path.startsWith(rootPath) &amp;&amp; (mostSpecific == null</span><br><span class="line">                    || rootPath.length() &gt; mostSpecific.getValue().getPath().length())) &#123;</span><br><span class="line">                mostSpecific = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //查询未果，说明在xml中未定义</span><br><span class="line">        if (mostSpecific == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(</span><br><span class="line">                    &quot;Failed to find configured root that contains &quot; + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Start at first char of path under root</span><br><span class="line">        final String rootPath = mostSpecific.getValue().getPath();</span><br><span class="line">        if (rootPath.endsWith(&quot;/&quot;)) &#123;</span><br><span class="line">            path = path.substring(rootPath.length());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            path = path.substring(rootPath.length() + 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // Encode the tag and path separately</span><br><span class="line">        path = Uri.encode(mostSpecific.getKey()) + &apos;/&apos; + Uri.encode(path, &quot;/&quot;);</span><br><span class="line">        //构建content Uri,这就是最后我们拿到的内容</span><br><span class="line">        return new Uri.Builder().scheme(&quot;content&quot;)</span><br><span class="line">                .authority(mAuthority).encodedPath(path).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public File getFileForUri(Uri uri) &#123;</span><br><span class="line">        String path = uri.getEncodedPath();</span><br><span class="line"></span><br><span class="line">        //通过uri反向寻找，和上面的原理差不多，不赘述</span><br><span class="line">        final int splitIndex = path.indexOf(&apos;/&apos;, 1);</span><br><span class="line">        final String tag = Uri.decode(path.substring(1, splitIndex));</span><br><span class="line">        path = Uri.decode(path.substring(splitIndex + 1));</span><br><span class="line"></span><br><span class="line">        final File root = mRoots.get(tag);</span><br><span class="line">        if (root == null) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Unable to find configured root for &quot; + uri);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        File file = new File(root, path);</span><br><span class="line">        try &#123;</span><br><span class="line">            file = file.getCanonicalFile();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;Failed to resolve canonical path for &quot; + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!file.getPath().startsWith(root.getPath())) &#123;</span><br><span class="line">            throw new SecurityException(&quot;Resolved path jumped beyond configured root&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return file;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="源码看看"><a href="#源码看看" class="headerlink" title="源码看看"></a>源码看看</h2><h3 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h3><p><img src="https://img-blog.csdn.net/20180630104041245" alt="这里写图片描述"></p>
+<h3 id="SimplePathStrategy"><a href="#SimplePathStrategy" class="headerlink" title="SimplePathStrategy"></a>SimplePathStrategy</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimplePathStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">PathStrategy</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String mAuthority;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> HashMap&lt;String, File&gt; mRoots = <span class="hljs-keyword">new</span> HashMap&lt;String, File&gt;();</span><br><span class="line"></span><br><span class="line">    SimplePathStrategy(String authority) &#123;</span><br><span class="line">        mAuthority = authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Add a mapping from a name to a filesystem root. The provider only offers</span></span><br><span class="line"><span class="hljs-comment">     * access to files that live under configured roots.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">     <span class="hljs-comment">//读取xml配置文件，建立名称和目录的映射表</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addRoot</span><span class="hljs-params">(String name, File root)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">//名字不能为空</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (TextUtils.isEmpty(name)) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Name must not be empty"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-comment">// Resolve to canonical path to keep path checking fast</span></span><br><span class="line">            root = root.getCanonicalFile();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(</span><br><span class="line">                    <span class="hljs-string">"Failed to resolve canonical path for "</span> + root, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mRoots.put(name, root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Uri <span class="hljs-title">getUriForFile</span><span class="hljs-params">(File file)</span> </span>&#123;</span><br><span class="line">        String path;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            <span class="hljs-comment">//获取路径</span></span><br><span class="line">            path = file.getCanonicalPath();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Failed to resolve canonical path for "</span> + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Find the most-specific root path</span></span><br><span class="line">        Map.Entry&lt;String, File&gt; mostSpecific = <span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-comment">//遍历查找文件路径对应的名称</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (Map.Entry&lt;String, File&gt; root : mRoots.entrySet()) &#123;</span><br><span class="line">            <span class="hljs-keyword">final</span> String rootPath = root.getValue().getPath();</span><br><span class="line">            <span class="hljs-keyword">if</span> (path.startsWith(rootPath) &amp;&amp; (mostSpecific == <span class="hljs-keyword">null</span></span><br><span class="line">                    || rootPath.length() &gt; mostSpecific.getValue().getPath().length())) &#123;</span><br><span class="line">                mostSpecific = root;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//查询未果，说明在xml中未定义</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mostSpecific == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(</span><br><span class="line">                    <span class="hljs-string">"Failed to find configured root that contains "</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Start at first char of path under root</span></span><br><span class="line">        <span class="hljs-keyword">final</span> String rootPath = mostSpecific.getValue().getPath();</span><br><span class="line">        <span class="hljs-keyword">if</span> (rootPath.endsWith(<span class="hljs-string">"/"</span>)) &#123;</span><br><span class="line">            path = path.substring(rootPath.length());</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            path = path.substring(rootPath.length() + <span class="hljs-number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// Encode the tag and path separately</span></span><br><span class="line">        path = Uri.encode(mostSpecific.getKey()) + <span class="hljs-string">'/'</span> + Uri.encode(path, <span class="hljs-string">"/"</span>);</span><br><span class="line">        <span class="hljs-comment">//构建content Uri,这就是最后我们拿到的内容</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Uri.Builder().scheme(<span class="hljs-string">"content"</span>)</span><br><span class="line">                .authority(mAuthority).encodedPath(path).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> File <span class="hljs-title">getFileForUri</span><span class="hljs-params">(Uri uri)</span> </span>&#123;</span><br><span class="line">        String path = uri.getEncodedPath();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//通过uri反向寻找，和上面的原理差不多，不赘述</span></span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> splitIndex = path.indexOf(<span class="hljs-string">'/'</span>, <span class="hljs-number">1</span>);</span><br><span class="line">        <span class="hljs-keyword">final</span> String tag = Uri.decode(path.substring(<span class="hljs-number">1</span>, splitIndex));</span><br><span class="line">        path = Uri.decode(path.substring(splitIndex + <span class="hljs-number">1</span>));</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> File root = mRoots.get(tag);</span><br><span class="line">        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Unable to find configured root for "</span> + uri);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        File file = <span class="hljs-keyword">new</span> File(root, path);</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            file = file.getCanonicalFile();</span><br><span class="line">        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Failed to resolve canonical path for "</span> + file);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (!file.getPath().startsWith(root.getPath())) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> SecurityException(<span class="hljs-string">"Resolved path jumped beyond configured root"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> file;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="parsePathStrategy"><a href="#parsePathStrategy" class="headerlink" title="parsePathStrategy"></a>parsePathStrategy</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> PathStrategy <span class="hljs-title">parsePathStrategy</span><span class="hljs-params">(Context context, String authority)</span></span></span><br><span class="line"><span class="hljs-function">           <span class="hljs-keyword">throws</span> IOException, XmlPullParserException </span>&#123;</span><br><span class="line">       <span class="hljs-keyword">final</span> SimplePathStrategy strat = <span class="hljs-keyword">new</span> SimplePathStrategy(authority);</span><br><span class="line"></span><br><span class="line">       <span class="hljs-comment">//获取Provider信息</span></span><br><span class="line">       <span class="hljs-keyword">final</span> ProviderInfo info = context.getPackageManager()</span><br><span class="line">               .resolveContentProvider(authority, PackageManager.GET_META_DATA);</span><br><span class="line">       <span class="hljs-comment">// 获取"android.support.FILE_PROVIDER_PATHS"对应的xml文件解析对吸纳个;</span></span><br><span class="line">       <span class="hljs-keyword">final</span> XmlResourceParser in = info.loadXmlMetaData(</span><br><span class="line">               context.getPackageManager(), META_DATA_FILE_PROVIDER_PATHS);</span><br><span class="line">       <span class="hljs-keyword">if</span> (in == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(</span><br><span class="line">                   <span class="hljs-string">"Missing "</span> + META_DATA_FILE_PROVIDER_PATHS + <span class="hljs-string">" meta-data"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-keyword">int</span> type;</span><br><span class="line">       <span class="hljs-keyword">while</span> ((type = in.next()) != END_DOCUMENT) &#123;</span><br><span class="line">           <span class="hljs-keyword">if</span> (type == START_TAG) &#123;</span><br><span class="line">               <span class="hljs-keyword">final</span> String tag = in.getName();</span><br><span class="line"></span><br><span class="line">               <span class="hljs-keyword">final</span> String name = in.getAttributeValue(<span class="hljs-keyword">null</span>, ATTR_NAME);</span><br><span class="line">               String path = in.getAttributeValue(<span class="hljs-keyword">null</span>, ATTR_PATH);</span><br><span class="line"></span><br><span class="line">               File target = <span class="hljs-keyword">null</span>;</span><br><span class="line">               <span class="hljs-comment">//"root-path"</span></span><br><span class="line">               <span class="hljs-keyword">if</span> (TAG_ROOT_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = DEVICE_ROOT;</span><br><span class="line">               <span class="hljs-comment">//"files-path"</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (TAG_FILES_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getFilesDir();</span><br><span class="line">               <span class="hljs-comment">//"cache-path"</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (TAG_CACHE_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getCacheDir();</span><br><span class="line">               <span class="hljs-comment">//"external-path"</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (TAG_EXTERNAL.equals(tag)) &#123;</span><br><span class="line">                   target = Environment.getExternalStorageDirectory();</span><br><span class="line">               <span class="hljs-comment">//"external-files-path"</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (TAG_EXTERNAL_FILES.equals(tag)) &#123;</span><br><span class="line">                   File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, <span class="hljs-keyword">null</span>);</span><br><span class="line">                   <span class="hljs-keyword">if</span> (externalFilesDirs.length &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                       <span class="hljs-comment">//取数组中的第一个</span></span><br><span class="line">                       target = externalFilesDirs[<span class="hljs-number">0</span>];</span><br><span class="line">                   &#125;</span><br><span class="line">               <span class="hljs-comment">// "external-cache-path"</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (TAG_EXTERNAL_CACHE.equals(tag)) &#123;</span><br><span class="line">                   File[] externalCacheDirs = ContextCompat.getExternalCacheDirs(context);</span><br><span class="line">                   <span class="hljs-keyword">if</span> (externalCacheDirs.length &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                       target = externalCacheDirs[<span class="hljs-number">0</span>];</span><br><span class="line">                   &#125;</span><br><span class="line">               <span class="hljs-comment">// "external-media-path" L版本以上才有</span></span><br><span class="line">               &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP</span><br><span class="line">                       &amp;&amp; TAG_EXTERNAL_MEDIA.equals(tag)) &#123;</span><br><span class="line">                   File[] externalMediaDirs = context.getExternalMediaDirs();</span><br><span class="line">                   <span class="hljs-keyword">if</span> (externalMediaDirs.length &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                       target = externalMediaDirs[<span class="hljs-number">0</span>];</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               <span class="hljs-keyword">if</span> (target != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                   strat.addRoot(name, buildPath(target, path));</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="hljs-keyword">return</span> strat;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="parsePathStrategy"><a href="#parsePathStrategy" class="headerlink" title="parsePathStrategy"></a>parsePathStrategy</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">private static PathStrategy parsePathStrategy(Context context, String authority)</span><br><span class="line">           throws IOException, XmlPullParserException &#123;</span><br><span class="line">       final SimplePathStrategy strat = new SimplePathStrategy(authority);</span><br><span class="line"></span><br><span class="line">       //获取Provider信息</span><br><span class="line">       final ProviderInfo info = context.getPackageManager()</span><br><span class="line">               .resolveContentProvider(authority, PackageManager.GET_META_DATA);</span><br><span class="line">       // 获取&quot;android.support.FILE_PROVIDER_PATHS&quot;对应的xml文件解析对吸纳个;</span><br><span class="line">       final XmlResourceParser in = info.loadXmlMetaData(</span><br><span class="line">               context.getPackageManager(), META_DATA_FILE_PROVIDER_PATHS);</span><br><span class="line">       if (in == null) &#123;</span><br><span class="line">           throw new IllegalArgumentException(</span><br><span class="line">                   &quot;Missing &quot; + META_DATA_FILE_PROVIDER_PATHS + &quot; meta-data&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       int type;</span><br><span class="line">       while ((type = in.next()) != END_DOCUMENT) &#123;</span><br><span class="line">           if (type == START_TAG) &#123;</span><br><span class="line">               final String tag = in.getName();</span><br><span class="line"></span><br><span class="line">               final String name = in.getAttributeValue(null, ATTR_NAME);</span><br><span class="line">               String path = in.getAttributeValue(null, ATTR_PATH);</span><br><span class="line"></span><br><span class="line">               File target = null;</span><br><span class="line">               //&quot;root-path&quot;</span><br><span class="line">               if (TAG_ROOT_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = DEVICE_ROOT;</span><br><span class="line">               //&quot;files-path&quot;</span><br><span class="line">               &#125; else if (TAG_FILES_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getFilesDir();</span><br><span class="line">               //&quot;cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_CACHE_PATH.equals(tag)) &#123;</span><br><span class="line">                   target = context.getCacheDir();</span><br><span class="line">               //&quot;external-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL.equals(tag)) &#123;</span><br><span class="line">                   target = Environment.getExternalStorageDirectory();</span><br><span class="line">               //&quot;external-files-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_FILES.equals(tag)) &#123;</span><br><span class="line">                   File[] externalFilesDirs = ContextCompat.getExternalFilesDirs(context, null);</span><br><span class="line">                   if (externalFilesDirs.length &gt; 0) &#123;</span><br><span class="line">                       //取数组中的第一个</span><br><span class="line">                       target = externalFilesDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-cache-path&quot;</span><br><span class="line">               &#125; else if (TAG_EXTERNAL_CACHE.equals(tag)) &#123;</span><br><span class="line">                   File[] externalCacheDirs = ContextCompat.getExternalCacheDirs(context);</span><br><span class="line">                   if (externalCacheDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalCacheDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               // &quot;external-media-path&quot; L版本以上才有</span><br><span class="line">               &#125; else if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP</span><br><span class="line">                       &amp;&amp; TAG_EXTERNAL_MEDIA.equals(tag)) &#123;</span><br><span class="line">                   File[] externalMediaDirs = context.getExternalMediaDirs();</span><br><span class="line">                   if (externalMediaDirs.length &gt; 0) &#123;</span><br><span class="line">                       target = externalMediaDirs[0];</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (target != null) &#123;</span><br><span class="line">                   strat.addRoot(name, buildPath(target, path));</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return strat;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>从上面这个方法可以很直观的了解到在AndroidManifest.xml文件中定义provider以及对应的共享文件路径定义xml的解析过程。以及xml中tag与真实文件路径的对应关系。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Intent takePictureIntent = <span class="hljs-keyword">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">        <span class="hljs-keyword">if</span> (takePictureIntent.resolveActivity(getPackageManager()) != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            String filename = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"yyyyMMdd-HHmmss"</span>, Locale.CHINA)</span><br><span class="line">                    .format(<span class="hljs-keyword">new</span> Date()) + <span class="hljs-string">".png"</span>;</span><br><span class="line">            File file = <span class="hljs-keyword">new</span> File(Environment.getExternalStorageDirectory(), filename);</span><br><span class="line">            mCurrentPhotoPath = file.getAbsolutePath();</span><br><span class="line"></span><br><span class="line">            Uri fileUri;</span><br><span class="line">            <span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">                fileUri = getUriForFile(context,</span><br><span class="line">                context.getPackageName() +<span class="hljs-string">".fileprovider"</span>, file);</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                fileUri = Uri.fromFile(file);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);</span><br><span class="line">            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);</span><br><span class="line">        &#125;</span><br><span class="line">……</span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onActivityResult</span><span class="hljs-params">(<span class="hljs-keyword">int</span> requestCode, <span class="hljs-keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">        <span class="hljs-keyword">if</span> (resultCode == RESULT_OK &amp;&amp; requestCode == REQUEST_CODE_TAKE_PHOTO) &#123;</span><br><span class="line">            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">// else tip?</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p> 从上面这个方法可以很直观的了解到在AndroidManifest.xml文件中定义provider以及对应的共享文件路径定义xml的解析过程。以及xml中tag与真实文件路径的对应关系。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="拍照"><a href="#拍照" class="headerlink" title="拍照"></a>拍照</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">        if (takePictureIntent.resolveActivity(getPackageManager()) != null) &#123;</span><br><span class="line">            String filename = new SimpleDateFormat(&quot;yyyyMMdd-HHmmss&quot;, Locale.CHINA)</span><br><span class="line">                    .format(new Date()) + &quot;.png&quot;;</span><br><span class="line">            File file = new File(Environment.getExternalStorageDirectory(), filename);</span><br><span class="line">            mCurrentPhotoPath = file.getAbsolutePath();</span><br><span class="line"></span><br><span class="line">            Uri fileUri;</span><br><span class="line">            if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">                fileUri = getUriForFile(context,</span><br><span class="line">                context.getPackageName() +&quot;.fileprovider&quot;, file);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                fileUri = Uri.fromFile(file);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);</span><br><span class="line">            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);</span><br><span class="line">        &#125;</span><br><span class="line">……</span><br><span class="line">@Override</span><br><span class="line">    protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">        super.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">        if (resultCode == RESULT_OK &amp;&amp; requestCode == REQUEST_CODE_TAKE_PHOTO) &#123;</span><br><span class="line">            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));</span><br><span class="line">        &#125;</span><br><span class="line">        // else tip?</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="应用安装"><a href="#应用安装" class="headerlink" title="应用安装"></a>应用安装</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 需要自己修改安装包路径</span><br><span class="line">File file = new File(Environment.getExternalStorageDirectory(),</span><br><span class="line">        &quot;/onlyloveyd/base.apk&quot;);</span><br><span class="line">Intent intent = new Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);    </span><br><span class="line"></span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    intent.setDataAndType(getUriForFile(context, file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    intent.setDataAndType(Uri.fromFile(file), &quot;application/vnd.android.package-archive&quot;);</span><br><span class="line">&#125;</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
-
+<h3 id="应用安装"><a href="#应用安装" class="headerlink" title="应用安装"></a>应用安装</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 需要自己修改安装包路径</span></span><br><span class="line">File file = <span class="hljs-keyword">new</span> File(Environment.getExternalStorageDirectory(),</span><br><span class="line">        <span class="hljs-string">"/onlyloveyd/base.apk"</span>);</span><br><span class="line">Intent intent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.N) &#123;</span><br><span class="line">    intent.setDataAndType(getUriForFile(context, file), <span class="hljs-string">"application/vnd.android.package-archive"</span>);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    intent.setDataAndType(Uri.fromFile(file), <span class="hljs-string">"application/vnd.android.package-archive"</span>);</span><br><span class="line">&#125;</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -366,7 +386,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -386,7 +406,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -477,7 +497,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -587,7 +607,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -781,7 +801,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1150,7 +1170,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1190,23 +1210,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1220,13 +1226,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1234,13 +1233,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1269,7 +1261,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1290,13 +1282,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1325,7 +1310,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1388,14 +1373,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1414,13 +1399,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1428,22 +1406,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1477,13 +1441,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1493,7 +1450,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1512,13 +1469,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1528,14 +1478,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1563,7 +1513,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1582,44 +1532,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1633,20 +1548,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1680,22 +1581,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1710,7 +1597,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1916,7 +1803,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2285,7 +2172,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2325,23 +2212,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2355,13 +2228,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2369,13 +2235,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2404,7 +2263,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2425,13 +2284,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2460,7 +2312,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2523,14 +2375,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2549,13 +2401,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2563,22 +2408,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2612,13 +2443,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2628,7 +2452,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2647,13 +2471,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2663,14 +2480,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2698,7 +2515,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2717,44 +2534,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2768,20 +2550,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2815,22 +2583,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2845,7 +2599,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

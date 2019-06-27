@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. 简介 看下源码中的英文介绍  /**   A view that shows items in a vertically scrolling two-level list. This  differs from the {@link ListView} by allowing two levels: groups which can  individually be expanded to">
+    <meta name="description" content="1. 简介看下源码中的英文介绍 123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * A view that shows items in a vertically scrolling two-level list. This * differs from the &amp;#123;">
 <meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（四十一）》 ExpandableListView">
 <meta property="og:url" content="http://yoursite.com/2017/08/27/《Android 基础（四十一）》 ExpandableListView/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="1. 简介 看下源码中的英文介绍  /**   A view that shows items in a vertically scrolling two-level list. This  differs from the {@link ListView} by allowing two levels: groups which can  individually be expanded to">
+<meta property="og:description" content="1. 简介看下源码中的英文介绍 123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * A view that shows items in a vertically scrolling two-level list. This * differs from the &amp;#123;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:05:22.758Z">
+<meta property="og:updated_time" content="2019-06-20T11:17:13.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四十一）》 ExpandableListView">
-<meta name="twitter:description" content="1. 简介 看下源码中的英文介绍  /**   A view that shows items in a vertically scrolling two-level list. This  differs from the {@link ListView} by allowing two levels: groups which can  individually be expanded to">
+<meta name="twitter:description" content="1. 简介看下源码中的英文介绍 123456789101112131415161718192021222324252627282930313233343536373839404142434445/** * A view that shows items in a vertically scrolling two-level list. This * differs from the &amp;#123;">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1689 个字)
+                    11 分钟 读完 (大约 1700 个字)
                 </span>
                 
                 
@@ -168,116 +168,102 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a><a href></a>1. 简介</h2><p> 看下源码中的英文介绍</p>
-<blockquote>
-<p>/**</p>
-</blockquote>
-<ul>
-<li>A view that shows items in a vertically scrolling two-level list. This </li>
-<li>differs from the {@link ListView} by allowing two levels: groups which can </li>
-<li>individually be expanded to show its children. The items come from the </li>
-<li>{@link ExpandableListAdapter} associated with this view. </li>
-<li></li>
-<li>Expandable lists are able to show an indicator beside each item to display </li>
-<li>the item’s current state (the states are usually one of expanded group, </li>
-<li>collapsed group, child, or last child). Use </li>
-<li>{@link #setChildIndicator(Drawable)} or {@link #setGroupIndicator(Drawable)} </li>
-<li>(or the corresponding XML attributes) to set these indicators (see the docs </li>
-<li>for each method to see additional state that each Drawable can have). The </li>
-<li>default style for an {@link ExpandableListView} provides indicators which </li>
-<li>will be shown next to Views given to the {@link ExpandableListView}. The </li>
-<li>layouts android.R.layout.simple_expandable_list_item_1 and </li>
-<li>android.R.layout.simple_expandable_list_item_2 (which should be used with </li>
-<li>{@link SimpleCursorTreeAdapter}) contain the preferred position information </li>
-<li>for indicators. </li>
-<li></li>
-<li>The context menu information set by an {@link ExpandableListView} will be a </li>
-<li>{@link ExpandableListContextMenuInfo} object with </li>
-<li>{@link ExpandableListContextMenuInfo#packedPosition} being a packed position </li>
-<li>that can be used with {@link #getPackedPositionType(long)} and the other </li>
-<li>similar methods. </li>
-<li></li>
-<li><em><strong>Note:</strong></em> You cannot use the value  <code>wrap_content</code>  </li>
-<li>for the  <code>android:layout_height</code>  attribute of a </li>
-<li>ExpandableListView in XML if the parent’s size is also not strictly specified </li>
-<li>(for example, if the parent were ScrollView you could not specify </li>
-<li>wrap_content since it also can be any length. However, you can use </li>
-<li>wrap_content if the ExpandableListView parent has a specific size, such as </li>
-<li>100 pixels. </li>
-<li></li>
-<li>@attr ref android.R.styleable#ExpandableListView_groupIndicator </li>
-<li>@attr ref android.R.styleable#ExpandableListView_indicatorLeft </li>
-<li>@attr ref android.R.styleable#ExpandableListView_indicatorRight </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childIndicator </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childIndicatorLeft </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childIndicatorRight </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childDivider </li>
-<li>@attr ref android.R.styleable#ExpandableListView_indicatorStart </li>
-<li>@attr ref android.R.styleable#ExpandableListView_indicatorEnd </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childIndicatorStart </li>
-<li>@attr ref android.R.styleable#ExpandableListView_childIndicatorEnd<br> */  ExpandableListView是不同于ListView的两级列表View，可以收起可以展开。通过ExpandableListAdapter来配置需要现实的items。</li>
-</ul>
-<hr>
-<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2. 基本使用"></a><a href></a>2. 基本使用</h2><h3 id="2-1-布局文件"><a href="#2-1-布局文件" class="headerlink" title="2.1 布局文件"></a><a href></a>2.1 布局文件</h3><p> group.xml(一级节点item布局)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    android:paddingLeft=&quot;30dp&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot; &gt;</span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/group_text&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:paddingTop=&quot;10dip&quot;</span><br><span class="line">        android:paddingBottom=&quot;10dip&quot;</span><br><span class="line">        android:text=&quot;&quot;</span><br><span class="line">        /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+            <a id="more"></a>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>看下源码中的英文介绍</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * A view that shows items in a vertically scrolling two-level list. This</span></span><br><span class="line"><span class="hljs-comment"> * differs from the &#123;<span class="hljs-doctag">@link</span> ListView&#125; by allowing two levels: groups which can</span></span><br><span class="line"><span class="hljs-comment"> * individually be expanded to show its children. The items come from the</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> ExpandableListAdapter&#125; associated with this view.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * Expandable lists are able to show an indicator beside each item to display</span></span><br><span class="line"><span class="hljs-comment"> * the item's current state (the states are usually one of expanded group,</span></span><br><span class="line"><span class="hljs-comment"> * collapsed group, child, or last child). Use</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> #setChildIndicator(Drawable)&#125; or &#123;<span class="hljs-doctag">@link</span> #setGroupIndicator(Drawable)&#125;</span></span><br><span class="line"><span class="hljs-comment"> * (or the corresponding XML attributes) to set these indicators (see the docs</span></span><br><span class="line"><span class="hljs-comment"> * for each method to see additional state that each Drawable can have). The</span></span><br><span class="line"><span class="hljs-comment"> * default style for an &#123;<span class="hljs-doctag">@link</span> ExpandableListView&#125; provides indicators which</span></span><br><span class="line"><span class="hljs-comment"> * will be shown next to Views given to the &#123;<span class="hljs-doctag">@link</span> ExpandableListView&#125;. The</span></span><br><span class="line"><span class="hljs-comment"> * layouts android.R.layout.simple_expandable_list_item_1 and</span></span><br><span class="line"><span class="hljs-comment"> * android.R.layout.simple_expandable_list_item_2 (which should be used with</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> SimpleCursorTreeAdapter&#125;) contain the preferred position information</span></span><br><span class="line"><span class="hljs-comment"> * for indicators.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * The context menu information set by an &#123;<span class="hljs-doctag">@link</span> ExpandableListView&#125; will be a</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> ExpandableListContextMenuInfo&#125; object with</span></span><br><span class="line"><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> ExpandableListContextMenuInfo#packedPosition&#125; being a packed position</span></span><br><span class="line"><span class="hljs-comment"> * that can be used with &#123;<span class="hljs-doctag">@link</span> #getPackedPositionType(long)&#125; and the other</span></span><br><span class="line"><span class="hljs-comment"> * similar methods.</span></span><br><span class="line"><span class="hljs-comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="hljs-comment"> * &lt;em&gt;&lt;b&gt;Note:&lt;/b&gt;&lt;/em&gt; You cannot use the value &lt;code&gt;wrap_content&lt;/code&gt;</span></span><br><span class="line"><span class="hljs-comment"> * for the &lt;code&gt;android:layout_height&lt;/code&gt; attribute of a</span></span><br><span class="line"><span class="hljs-comment"> * ExpandableListView in XML if the parent's size is also not strictly specified</span></span><br><span class="line"><span class="hljs-comment"> * (for example, if the parent were ScrollView you could not specify</span></span><br><span class="line"><span class="hljs-comment"> * wrap_content since it also can be any length. However, you can use</span></span><br><span class="line"><span class="hljs-comment"> * wrap_content if the ExpandableListView parent has a specific size, such as</span></span><br><span class="line"><span class="hljs-comment"> * 100 pixels.</span></span><br><span class="line"><span class="hljs-comment"> * </span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_groupIndicator</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_indicatorLeft</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_indicatorRight</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childIndicator</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childIndicatorLeft</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childIndicatorRight</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childDivider</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_indicatorStart</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_indicatorEnd</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childIndicatorStart</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@attr</span> ref android.R.styleable#ExpandableListView_childIndicatorEnd</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br></pre></td></tr></table></figure>
 
-<p> child.xml(二级节点item)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;horizontal&quot;</span><br><span class="line">    android:paddingLeft=&quot;40dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/textOne&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:text=&quot;&quot; /&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>ExpandableListView是不同于ListView的两级列表View，可以收起可以展开。通过ExpandableListAdapter来配置需要现实的items。</p>
+<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2. 基本使用"></a>2. 基本使用</h2><h3 id="2-1-布局文件"><a href="#2-1-布局文件" class="headerlink" title="2.1 布局文件"></a>2.1 布局文件</h3><p>group.xml(一级节点item布局)</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">"30dp"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span> &gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/group_text"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:paddingTop</span>=<span class="hljs-string">"10dip"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:paddingBottom</span>=<span class="hljs-string">"10dip"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:text</span>=<span class="hljs-string">""</span></span></span><br><span class="line"><span class="hljs-tag">        /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> actiivty_main.xml(主界面布局)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;cn.onlyloveyd.expandablelistviewdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;ExpandableListView</span><br><span class="line">        android:id=&quot;@+id/expandable_list&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        android:groupIndicator=&quot;@drawable/expand&quot;</span><br><span class="line">        android:childIndicator=&quot;@drawable/collapse&quot;</span><br><span class="line">        /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>child.xml(二级节点item)</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"horizontal"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:paddingLeft</span>=<span class="hljs-string">"40dp"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/textOne"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:text</span>=<span class="hljs-string">""</span> /&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>actiivty_main.xml(主界面布局)</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"cn.onlyloveyd.expandablelistviewdemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">ExpandableListView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/expandable_list"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:groupIndicator</span>=<span class="hljs-string">"@drawable/expand"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:childIndicator</span>=<span class="hljs-string">"@drawable/collapse"</span></span></span><br><span class="line"><span class="hljs-tag">        /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-代码"><a href="#2-2-代码" class="headerlink" title="2.2 代码"></a><a href></a>2.2 代码</h3><p> YEAdapter.java(可伸展列表对应的Adapter)</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">public class YEAdapter extends BaseExpandableListAdapter &#123;</span><br><span class="line"></span><br><span class="line">    //一级节点数据</span><br><span class="line">    private List&lt;GroupItem&gt; mGroupItems;</span><br><span class="line">    private Context mContext;</span><br><span class="line"></span><br><span class="line">    public YEAdapter(Context context, List&lt;GroupItem&gt; mData) &#123;</span><br><span class="line">        mGroupItems = mData;</span><br><span class="line">        mContext = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 一级节点数量</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int getGroupCount() &#123;</span><br><span class="line">        return mGroupItems.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 指定位置一级节点下二级节点数量</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public int getChildrenCount(int groupPosition) &#123;</span><br><span class="line">        return mGroupItems.get(groupPosition).mChildList.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取一级节点对象</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Object getGroup(int groupPosition) &#123;</span><br><span class="line">        return mGroupItems.get(groupPosition);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取二级节点对象</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @param childPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public Object getChild(int groupPosition, int childPosition) &#123;</span><br><span class="line">        return mGroupItems.get(groupPosition).mChildList.get(childPosition);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取一级节点ID，这里用位置值表示</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public long getGroupId(int groupPosition) &#123;</span><br><span class="line">        return groupPosition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取二级节点ID，这里用位置值表示</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @param childPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public long getChildId(int groupPosition, int childPosition) &#123;</span><br><span class="line">        return childPosition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * ID是否稳定</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public boolean hasStableIds() &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取一级节点view</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @param isExpanded</span><br><span class="line">     * @param convertView</span><br><span class="line">     * @param parent</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) &#123;</span><br><span class="line">        View view=null;</span><br><span class="line">        TextView mTv;</span><br><span class="line">        if(convertView!=null)&#123;</span><br><span class="line">            view = convertView;</span><br><span class="line">            mTv = (TextView) view.getTag();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            view = View.inflate(mContext,R.layout.group, null);</span><br><span class="line">            mTv = (TextView) view.findViewById(R.id.group_text);</span><br><span class="line">            view.setTag(mTv);</span><br><span class="line">        &#125;</span><br><span class="line">        mTv.setText(mGroupItems.get(groupPosition).title);</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取二级节点View</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @param childPosition</span><br><span class="line">     * @param isLastChild</span><br><span class="line">     * @param convertView</span><br><span class="line">     * @param parent</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) &#123;</span><br><span class="line">        View view=null;</span><br><span class="line">        TextView mTextView;</span><br><span class="line">        if(convertView!=null)&#123;</span><br><span class="line">            view = convertView;</span><br><span class="line">            mTextView = (TextView) view.getTag();</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            view = View.inflate(mContext,R.layout.child, null);</span><br><span class="line">            mTextView = (TextView) view.findViewById(R.id.textOne);</span><br><span class="line">            view.setTag(mTextView);</span><br><span class="line">        &#125;</span><br><span class="line">        mTextView.setText(mGroupItems.get(groupPosition).mChildList.get(childPosition).message);</span><br><span class="line">        return view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 二级菜单是否可选（true为可选，false为不可选，也就是响应和不响应点击事件）</span><br><span class="line">     * @param groupPosition</span><br><span class="line">     * @param childPosition</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public boolean isChildSelectable(int groupPosition, int childPosition) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 一级节点对象</span><br><span class="line">     */</span><br><span class="line">    public static class GroupItem &#123;</span><br><span class="line">        String title;</span><br><span class="line">        List&lt;ChildItem&gt; mChildList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 二级节点对象</span><br><span class="line">     */</span><br><span class="line">    public static class ChildItem &#123;</span><br><span class="line">        String message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-代码"><a href="#2-2-代码" class="headerlink" title="2.2  代码"></a>2.2  代码</h3><p>YEAdapter.java(可伸展列表对应的Adapter)</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">YEAdapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseExpandableListAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//一级节点数据</span></span><br><span class="line">    <span class="hljs-keyword">private</span> List&lt;GroupItem&gt; mGroupItems;</span><br><span class="line">    <span class="hljs-keyword">private</span> Context mContext;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">YEAdapter</span><span class="hljs-params">(Context context, List&lt;GroupItem&gt; mData)</span> </span>&#123;</span><br><span class="line">        mGroupItems = mData;</span><br><span class="line">        mContext = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 一级节点数量</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getGroupCount</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mGroupItems.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 指定位置一级节点下二级节点数量</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getChildrenCount</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mGroupItems.get(groupPosition).mChildList.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取一级节点对象</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getGroup</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mGroupItems.get(groupPosition);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取二级节点对象</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> childPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getChild</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">int</span> childPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mGroupItems.get(groupPosition).mChildList.get(childPosition);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取一级节点ID，这里用位置值表示</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getGroupId</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> groupPosition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取二级节点ID，这里用位置值表示</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> childPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getChildId</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">int</span> childPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> childPosition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * ID是否稳定</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasStableIds</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取一级节点view</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> isExpanded</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> convertView</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parent</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">getGroupView</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">boolean</span> isExpanded, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        View view=<span class="hljs-keyword">null</span>;</span><br><span class="line">        TextView mTv;</span><br><span class="line">        <span class="hljs-keyword">if</span>(convertView!=<span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            view = convertView;</span><br><span class="line">            mTv = (TextView) view.getTag();</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            view = View.inflate(mContext,R.layout.group, <span class="hljs-keyword">null</span>);</span><br><span class="line">            mTv = (TextView) view.findViewById(R.id.group_text);</span><br><span class="line">            view.setTag(mTv);</span><br><span class="line">        &#125;</span><br><span class="line">        mTv.setText(mGroupItems.get(groupPosition).title);</span><br><span class="line">        <span class="hljs-keyword">return</span> view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 获取二级节点View</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> childPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> isLastChild</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> convertView</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> parent</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> View <span class="hljs-title">getChildView</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">int</span> childPosition, <span class="hljs-keyword">boolean</span> isLastChild, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        View view=<span class="hljs-keyword">null</span>;</span><br><span class="line">        TextView mTextView;</span><br><span class="line">        <span class="hljs-keyword">if</span>(convertView!=<span class="hljs-keyword">null</span>)&#123;</span><br><span class="line">            view = convertView;</span><br><span class="line">            mTextView = (TextView) view.getTag();</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span>&#123;</span><br><span class="line">            view = View.inflate(mContext,R.layout.child, <span class="hljs-keyword">null</span>);</span><br><span class="line">            mTextView = (TextView) view.findViewById(R.id.textOne);</span><br><span class="line">            view.setTag(mTextView);</span><br><span class="line">        &#125;</span><br><span class="line">        mTextView.setText(mGroupItems.get(groupPosition).mChildList.get(childPosition).message);</span><br><span class="line">        <span class="hljs-keyword">return</span> view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 二级菜单是否可选（true为可选，false为不可选，也就是响应和不响应点击事件）</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> childPosition</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isChildSelectable</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">int</span> childPosition)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 一级节点对象</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GroupItem</span> </span>&#123;</span><br><span class="line">        String title;</span><br><span class="line">        List&lt;ChildItem&gt; mChildList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 二级节点对象</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChildItem</span> </span>&#123;</span><br><span class="line">        String message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 具体解释请查阅注释信息</p>
-<p> MainActivity.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        List&lt;YEAdapter.GroupItem&gt; mGroupItems = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">            YEAdapter.GroupItem item = new YEAdapter.GroupItem();</span><br><span class="line">            item.title = &quot;this is &quot; + i + &quot;nd group item&quot;;</span><br><span class="line">            List&lt;YEAdapter.ChildItem&gt; mChildItems = new ArrayList&lt;&gt;();</span><br><span class="line">            for (int j = 0; j &lt; 4; j++) &#123;</span><br><span class="line">                YEAdapter.ChildItem item1 = new YEAdapter.ChildItem();</span><br><span class="line">                item1.message = &quot;this is &quot; + i + &quot;nd group item&apos;s &quot; + j + &quot;nd child&quot;;</span><br><span class="line">                mChildItems.add(item1);</span><br><span class="line">            &#125;</span><br><span class="line">            item.mChildList = mChildItems;</span><br><span class="line">            mGroupItems.add(item);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ExpandableListView expandableListView = (ExpandableListView) this.findViewById(R.id.expandable_list);</span><br><span class="line"></span><br><span class="line">        YEAdapter yeAdapter = new YEAdapter(this, mGroupItems);</span><br><span class="line">        expandableListView.setAdapter(yeAdapter);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) &#123;</span><br><span class="line">                Toast.makeText(MainActivity.this,  groupPosition + &quot;nd group&apos;s &quot; + childPosition + &quot;nd Item is clicked!&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) &#123;</span><br><span class="line">                Toast.makeText(MainActivity.this, groupPosition + &quot;nd group is clicked&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onGroupCollapse(int groupPosition) &#123;</span><br><span class="line">                Toast.makeText(MainActivity.this, &quot;the &quot; + groupPosition + &quot;nd group is collapsed&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onGroupExpand(int groupPosition) &#123;</span><br><span class="line">                Toast.makeText(MainActivity.this, &quot;the &quot; + groupPosition + &quot;nd group is expanded&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体解释请查阅注释信息</p>
+<p>MainActivity.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        List&lt;YEAdapter.GroupItem&gt; mGroupItems = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;</span><br><span class="line">            YEAdapter.GroupItem item = <span class="hljs-keyword">new</span> YEAdapter.GroupItem();</span><br><span class="line">            item.title = <span class="hljs-string">"this is "</span> + i + <span class="hljs-string">"nd group item"</span>;</span><br><span class="line">            List&lt;YEAdapter.ChildItem&gt; mChildItems = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">4</span>; j++) &#123;</span><br><span class="line">                YEAdapter.ChildItem item1 = <span class="hljs-keyword">new</span> YEAdapter.ChildItem();</span><br><span class="line">                item1.message = <span class="hljs-string">"this is "</span> + i + <span class="hljs-string">"nd group item's "</span> + j + <span class="hljs-string">"nd child"</span>;</span><br><span class="line">                mChildItems.add(item1);</span><br><span class="line">            &#125;</span><br><span class="line">            item.mChildList = mChildItems;</span><br><span class="line">            mGroupItems.add(item);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        ExpandableListView expandableListView = (ExpandableListView) <span class="hljs-keyword">this</span>.findViewById(R.id.expandable_list);</span><br><span class="line"></span><br><span class="line">        YEAdapter yeAdapter = <span class="hljs-keyword">new</span> YEAdapter(<span class="hljs-keyword">this</span>, mGroupItems);</span><br><span class="line">        expandableListView.setAdapter(yeAdapter);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnChildClickListener(<span class="hljs-keyword">new</span> ExpandableListView.OnChildClickListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onChildClick</span><span class="hljs-params">(ExpandableListView parent, View v, <span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">int</span> childPosition, <span class="hljs-keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">                Toast.makeText(MainActivity.<span class="hljs-keyword">this</span>,  groupPosition + <span class="hljs-string">"nd group's "</span> + childPosition + <span class="hljs-string">"nd Item is clicked!"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupClickListener(<span class="hljs-keyword">new</span> ExpandableListView.OnGroupClickListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onGroupClick</span><span class="hljs-params">(ExpandableListView parent, View v, <span class="hljs-keyword">int</span> groupPosition, <span class="hljs-keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">                Toast.makeText(MainActivity.<span class="hljs-keyword">this</span>, groupPosition + <span class="hljs-string">"nd group is clicked"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupCollapseListener(<span class="hljs-keyword">new</span> ExpandableListView.OnGroupCollapseListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onGroupCollapse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition)</span> </span>&#123;</span><br><span class="line">                Toast.makeText(MainActivity.<span class="hljs-keyword">this</span>, <span class="hljs-string">"the "</span> + groupPosition + <span class="hljs-string">"nd group is collapsed"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        expandableListView.setOnGroupExpandListener(<span class="hljs-keyword">new</span> ExpandableListView.OnGroupExpandListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onGroupExpand</span><span class="hljs-params">(<span class="hljs-keyword">int</span> groupPosition)</span> </span>&#123;</span><br><span class="line">                Toast.makeText(MainActivity.<span class="hljs-keyword">this</span>, <span class="hljs-string">"the "</span> + groupPosition + <span class="hljs-string">"nd group is expanded"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="2-3-实际效果"><a href="#2-3-实际效果" class="headerlink" title="2.3 实际效果"></a>2.3 实际效果</h3><p><img src="http://img.blog.csdn.net/20170827112342875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="3-类结构"><a href="#3-类结构" class="headerlink" title="3. 类结构"></a>3. 类结构</h2><h3 id="3-1-属性值"><a href="#3-1-属性值" class="headerlink" title="3.1 属性值"></a>3.1 属性值</h3><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>groupIndicator</td>
+<td>一级节点指示器</td>
+</tr>
+<tr>
+<td>indicatorLeft</td>
+<td>一级节点指示器距离左边界距离</td>
+</tr>
+<tr>
+<td>indicatorRight</td>
+<td>一级节点指示器距离右边界距离</td>
+</tr>
+<tr>
+<td>childIndicator</td>
+<td>意义同group中相同</td>
+</tr>
+<tr>
+<td>childIndicatorLeft</td>
+<td>意义同group中相同</td>
+</tr>
+<tr>
+<td>childIndicatorRight</td>
+<td>意义同group中相同</td>
+</tr>
+<tr>
+<td>childDivider</td>
+<td>设置二级节点的分割想，颜色或者drawable</td>
+</tr>
+<tr>
+<td>indicatorStart</td>
+<td>同indicatorLeft</td>
+</tr>
+<tr>
+<td>indicatorEnd</td>
+<td>同indicatorRight</td>
+</tr>
+<tr>
+<td>childIndiatorStart</td>
+<td>同childIndicatorLeft</td>
+</tr>
+<tr>
+<td>childIndicatorEnd</td>
+<td>同childIndicatorRight</td>
+</tr>
+</tbody></table>
+<p>主要看看分割线效果<br>设置图片<br>divider.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">shape</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">solid</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:color</span>=<span class="hljs-string">"@color/colorAccent"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">corners</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:radius</span>=<span class="hljs-string">"3dp"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">shape</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-实际效果"><a href="#2-3-实际效果" class="headerlink" title="2.3 实际效果"></a><a href></a>2.3 实际效果</h3><p> <img src="https://img-blog.csdn.net/20170827112342875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h2 id="3-类结构"><a href="#3-类结构" class="headerlink" title="3. 类结构"></a><a href></a>3. 类结构</h2><h3 id="3-1-属性值"><a href="#3-1-属性值" class="headerlink" title="3.1 属性值"></a><a href></a>3.1 属性值</h3><pre><code>属性值                 | 含义                     
-------------------- | ----------------------- 
-groupIndicator      | 一级节点指示器                
-indicatorLeft       | 一级节点指示器距离左边界距离         
-indicatorRight      | 一级节点指示器距离右边界距离         
-childIndicator      | 意义同group中相同            
-childIndicatorLeft  | 意义同group中相同            
-childIndicatorRight | 意义同group中相同            
-childDivider        | 设置二级节点的分割想，颜色或者drawable
-indicatorStart      | 同indicatorLeft         
-indicatorEnd        | 同indicatorRight        
-childIndiatorStart  | 同childIndicatorLeft    
-childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分割线效果<br> 设置图片<br> divider.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;solid</span><br><span class="line">        android:color=&quot;@color/colorAccent&quot;/&gt;</span><br><span class="line">    &lt;corners</span><br><span class="line">        android:radius=&quot;3dp&quot;/&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170827114440803?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>设置颜色<br>android:childDivider=”@color/colorPrimary”<br><img src="http://img.blog.csdn.net/20170827114556034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>那么一级节点如何设置分割线?<br>看这个例子</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android:childDivider="@color/colorPrimary"</span><br><span class="line">android:divider="@drawable/divider"</span><br><span class="line">android:dividerHeight="2dp"</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://img-blog.csdn.net/20170827114440803?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 设置颜色<br> android:childDivider=”@color/colorPrimary”<br> <img src="https://img-blog.csdn.net/20170827114556034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 那么一级节点如何设置分割线?<br> 看这个例子</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android:childDivider=&quot;@color/colorPrimary&quot;</span><br><span class="line">android:divider=&quot;@drawable/divider&quot;</span><br><span class="line">android:dividerHeight=&quot;2dp&quot;</span><br></pre></td></tr></table></figure>
+<p>给一级菜单和二级菜单设置不同的分割线，看下效果</p>
+<p><img src="http://img.blog.csdn.net/20170827115316428?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>二级节点依然显示的时我们设置的分割线，但是当一级节点展开时，展开的节点的一级分割线变成了二级节点的分割线样式，收起后恢复成一级节点的分割线样式。</p>
+<h3 id="3-2-常用方法"><a href="#3-2-常用方法" class="headerlink" title="3.2 常用方法"></a>3.2 常用方法</h3><p><img src="http://img.blog.csdn.net/20170827125256438?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>具体内容请查阅源码。</p>
+<h2 id="4-设置上下文菜单"><a href="#4-设置上下文菜单" class="headerlink" title="4. 设置上下文菜单"></a>4. 设置上下文菜单</h2><h3 id="4-1-expandable-menu-xml"><a href="#4-1-expandable-menu-xml" class="headerlink" title="4.1 expandable_menu.xml"></a>4.1 expandable_menu.xml</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">menu</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span> &gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">item</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/menu_item1"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:title</span>=<span class="hljs-string">"菜单项1"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">item</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">item</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/menu_item2"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:title</span>=<span class="hljs-string">"菜单项2"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">item</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">menu</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> 给一级菜单和二级菜单设置不同的分割线，看下效果</p>
-<p> <img src="https://img-blog.csdn.net/20170827115316428?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 二级节点依然显示的时我们设置的分割线，但是当一级节点展开时，展开的节点的一级分割线变成了二级节点的分割线样式，收起后恢复成一级节点的分割线样式。</p>
-<h3 id="3-2-常用方法"><a href="#3-2-常用方法" class="headerlink" title="3.2 常用方法"></a><a href></a>3.2 常用方法</h3><p> <img src="https://img-blog.csdn.net/20170827125256438?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 具体内容请查阅源码。</p>
-<hr>
-<h2 id="4-设置上下文菜单"><a href="#4-设置上下文菜单" class="headerlink" title="4. 设置上下文菜单"></a><a href></a>4. 设置上下文菜单</h2><h3 id="4-1-expandable-menu-xml"><a href="#4-1-expandable-menu-xml" class="headerlink" title="4.1 expandable_menu.xml"></a><a href></a>4.1 expandable_menu.xml</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/menu_item1&quot;</span><br><span class="line">        android:title=&quot;菜单项1&quot;&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:id=&quot;@+id/menu_item2&quot;</span><br><span class="line">        android:title=&quot;菜单项2&quot;&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line"></span><br><span class="line">&lt;/menu&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-onCreateContextMenu"><a href="#4-2-onCreateContextMenu" class="headerlink" title="4.2 onCreateContextMenu"></a>4.2 onCreateContextMenu</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreateContextMenu</span><span class="hljs-params">(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.onCreateContextMenu(menu, v, menuInfo);</span><br><span class="line">    menu.setHeaderTitle(<span class="hljs-string">"expandable menu"</span>);</span><br><span class="line">    getMenuInflater().inflate(R.menu.expandable_menu, menu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="4-3-onContextItemSelected"><a href="#4-3-onContextItemSelected" class="headerlink" title="4.3 onContextItemSelected"></a>4.3 onContextItemSelected</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onContextItemSelected</span><span class="hljs-params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="hljs-keyword">super</span>.onContextItemSelected(item);</span><br><span class="line">    <span class="hljs-keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">        <span class="hljs-keyword">case</span> R.id.menu_item1:</span><br><span class="line">            Toast.makeText(<span class="hljs-keyword">this</span>, <span class="hljs-string">"this is first menu item"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">case</span> R.id.menu_item2:</span><br><span class="line">            Toast.makeText(<span class="hljs-keyword">this</span>, <span class="hljs-string">"this is second menu item"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">default</span>:</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onContextItemSelected(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-2-onCreateContextMenu"><a href="#4-2-onCreateContextMenu" class="headerlink" title="4.2 onCreateContextMenu"></a><a href></a>4.2 onCreateContextMenu</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) &#123;</span><br><span class="line">    super.onCreateContextMenu(menu, v, menuInfo);</span><br><span class="line">    menu.setHeaderTitle(&quot;expandable menu&quot;);</span><br><span class="line">    getMenuInflater().inflate(R.menu.expandable_menu, menu);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-item长按事件显示菜单并注册上下文菜单"><a href="#4-4-item长按事件显示菜单并注册上下文菜单" class="headerlink" title="4.4 item长按事件显示菜单并注册上下文菜单"></a>4.4 item长按事件显示菜单并注册上下文菜单</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">expandableListView.setOnItemLongClickListener(<span class="hljs-keyword">new</span> AdapterView.OnItemLongClickListener() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onItemLongClick</span><span class="hljs-params">(AdapterView&lt;?&gt; parent, View view, <span class="hljs-keyword">int</span> position, <span class="hljs-keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD)</span><br><span class="line">        &#123;</span><br><span class="line">            expandableListView.showContextMenu();</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">registerForContextMenu(expandableListView);</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="4-3-onContextItemSelected"><a href="#4-3-onContextItemSelected" class="headerlink" title="4.3 onContextItemSelected"></a><a href></a>4.3 onContextItemSelected</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onContextItemSelected(MenuItem item) &#123;</span><br><span class="line">    // TODO Auto-generated method stub</span><br><span class="line">    super.onContextItemSelected(item);</span><br><span class="line">    switch (item.getItemId()) &#123;</span><br><span class="line">        case R.id.menu_item1:</span><br><span class="line">            Toast.makeText(this, &quot;this is first menu item&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            break;</span><br><span class="line">        case R.id.menu_item2:</span><br><span class="line">            Toast.makeText(this, &quot;this is second menu item&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    return super.onContextItemSelected(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-4-item长按事件显示菜单并注册上下文菜单"><a href="#4-4-item长按事件显示菜单并注册上下文菜单" class="headerlink" title="4.4 item长按事件显示菜单并注册上下文菜单"></a><a href></a>4.4 item长按事件显示菜单并注册上下文菜单</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">expandableListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean onItemLongClick(AdapterView&lt;?&gt; parent, View view, int position, long id) &#123;</span><br><span class="line">        if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD)</span><br><span class="line">        &#123;</span><br><span class="line">            expandableListView.showContextMenu();</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">registerForContextMenu(expandableListView);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a><a href></a>5. 备注</h2><p> <a href="https://github.com/onlyloveyd/ExpandableListViewDemo" target="_blank" rel="noopener">程序源码</a></p>
+<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p><a href="https://github.com/onlyloveyd/ExpandableListViewDemo" target="_blank" rel="noopener">程序源码</a></p>
 
         </div>
         
@@ -416,7 +402,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -436,7 +422,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -527,7 +513,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -637,7 +623,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -831,7 +817,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1200,7 +1186,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1240,23 +1226,9 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1270,13 +1242,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1284,13 +1249,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1319,7 +1277,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1340,13 +1298,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1375,7 +1326,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1438,14 +1389,14 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1464,13 +1415,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1478,22 +1422,8 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1527,13 +1457,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1543,7 +1466,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1562,13 +1485,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1578,14 +1494,14 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1613,7 +1529,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1632,44 +1548,9 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1683,20 +1564,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1730,22 +1597,8 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1760,7 +1613,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1966,7 +1819,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2335,7 +2188,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2375,23 +2228,9 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2405,13 +2244,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2419,13 +2251,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2454,7 +2279,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2475,13 +2300,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2510,7 +2328,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2573,14 +2391,14 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2599,13 +2417,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2613,22 +2424,8 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2662,13 +2459,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2678,7 +2468,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2697,13 +2487,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2713,14 +2496,14 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2748,7 +2531,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2767,44 +2550,9 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2818,20 +2566,6 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2865,22 +2599,8 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2895,7 +2615,7 @@ childIndicatorEnd   | 同childIndicatorRight   </code></pre><p>主要看看分�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

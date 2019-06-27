@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. 前言 View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。  2. 小测试 写一个简单的测试Demo，看看运行过程 2.1 ChildView ChildView继承AppCo">
-<meta name="keywords" content="布局控件,View,事件分发">
+    <meta name="description" content="1. 前言View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。">
+<meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（四十四）》 View事件分发机制">
 <meta property="og:url" content="http://yoursite.com/2017/09/20/《Android 基础（四十四）》 View事件分发机制/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="1. 前言 View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。  2. 小测试 写一个简单的测试Demo，看看运行过程 2.1 ChildView ChildView继承AppCo">
+<meta property="og:description" content="1. 前言View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:07:15.799Z">
+<meta property="og:updated_time" content="2019-06-20T12:31:44.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四十四）》 View事件分发机制">
-<meta name="twitter:description" content="1. 前言 View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。  2. 小测试 写一个简单的测试Demo，看看运行过程 2.1 ChildView ChildView继承AppCo">
+<meta name="twitter:description" content="1. 前言View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1527 个字)
+                    10 分钟 读完 (大约 1534 个字)
                 </span>
                 
                 
@@ -168,42 +168,42 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。</p>
-<hr>
-<h2 id="2-小测试"><a href="#2-小测试" class="headerlink" title="2. 小测试"></a><a href></a>2. 小测试</h2><p> 写一个简单的测试Demo，看看运行过程</p>
-<h3 id="2-1-ChildView"><a href="#2-1-ChildView" class="headerlink" title="2.1 ChildView"></a><a href></a>2.1 ChildView</h3><p> ChildView继承AppCompatButton,然后添加一些log</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class ChildView extends android.support.v7.widget.AppCompatButton &#123;</span><br><span class="line">    public ChildView(Context context) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ChildView(Context context, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ChildView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- ChildView onTouchEvent event = &quot; + event.getAction());</span><br><span class="line">        return super.onTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean dispatchTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- ChildView dispatchTouchEvent event = &quot; + event.getAction());</span><br><span class="line">        return super.dispatchTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。</p>
+<a id="more"></a>
+<h2 id="2-小测试"><a href="#2-小测试" class="headerlink" title="2. 小测试"></a>2. 小测试</h2><p>写一个简单的测试Demo，看看运行过程</p>
+<h3 id="2-1-ChildView"><a href="#2-1-ChildView" class="headerlink" title="2.1 ChildView"></a>2.1 ChildView</h3><p>ChildView继承AppCompatButton,然后添加一些log</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChildView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">android</span>.<span class="hljs-title">support</span>.<span class="hljs-title">v7</span>.<span class="hljs-title">widget</span>.<span class="hljs-title">AppCompatButton</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChildView</span><span class="hljs-params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChildView</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChildView</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouchEvent</span><span class="hljs-params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- ChildView onTouchEvent event = "</span> + event.getAction());</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">dispatchTouchEvent</span><span class="hljs-params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- ChildView dispatchTouchEvent event = "</span> + event.getAction());</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.dispatchTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="2-2-ParentLayout"><a href="#2-2-ParentLayout" class="headerlink" title="2.2 ParentLayout"></a>2.2 ParentLayout</h3><p>ParentLayout继承LinearLayout，而LinearLayout时继承ViewGroup的添加一些log</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParentLayout</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LinearLayout</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParentLayout</span><span class="hljs-params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParentLayout</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParentLayout</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouchEvent</span><span class="hljs-params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- ParentLayout onTouchEvent event = "</span> + event.getAction());</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onInterceptTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- ParentLayout onInterceptTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">        <span class="hljs-comment">//return super.onInterceptTouchEvent(ev);</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">dispatchTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">        System.err.println(<span class="hljs-string">"yidong -- ParentLayout dispatchTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.dispatchTouchEvent(ev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-ParentLayout"><a href="#2-2-ParentLayout" class="headerlink" title="2.2 ParentLayout"></a><a href></a>2.2 ParentLayout</h3><p> ParentLayout继承LinearLayout，而LinearLayout时继承ViewGroup的添加一些log</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class ParentLayout extends LinearLayout &#123;</span><br><span class="line">    public ParentLayout(Context context) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ParentLayout(Context context, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ParentLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- ParentLayout onTouchEvent event = &quot; + event.getAction());</span><br><span class="line">        return super.onTouchEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onInterceptTouchEvent(MotionEvent ev) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- ParentLayout onInterceptTouchEvent event = &quot; + ev.getAction());</span><br><span class="line">        //return super.onInterceptTouchEvent(ev);</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean dispatchTouchEvent(MotionEvent ev) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- ParentLayout dispatchTouchEvent event = &quot; + ev.getAction());</span><br><span class="line">        return super.dispatchTouchEvent(ev);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-布局文件"><a href="#2-3-布局文件" class="headerlink" title="2.3 布局文件"></a>2.3 布局文件</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">cn.onlyloveyd.androideventdispatchdemo.ParentLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/parentLayout"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">tools:context</span>=<span class="hljs-string">"cn.onlyloveyd.androideventdispatchdemo.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">cn.onlyloveyd.androideventdispatchdemo.ChildView</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/childview"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:text</span>=<span class="hljs-string">"ChildView"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">cn.onlyloveyd.androideventdispatchdemo.ParentLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="2-4-MainActivity"><a href="#2-4-MainActivity" class="headerlink" title="2.4 MainActivity"></a>2.4 MainActivity</h3><p>测试一下事件的传递过程</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> ParentLayout parentLayout;</span><br><span class="line">    <span class="hljs-keyword">private</span> ChildView childView;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        parentLayout = (ParentLayout) findViewById(R.id.parentLayout);</span><br><span class="line">        childView = (ChildView) findViewById(R.id.childview);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        parentLayout.setOnTouchListener(<span class="hljs-keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouch</span><span class="hljs-params">(View view, MotionEvent motionEvent)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- ParentLayout onTouch event = "</span> + motionEvent.getAction());</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        childView.setOnTouchListener(<span class="hljs-keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouch</span><span class="hljs-params">(View view, MotionEvent motionEvent)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- ChildView onTouch event = "</span> + motionEvent.getAction());</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        childView.setOnClickListener(<span class="hljs-keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">                System.err.println(<span class="hljs-string">"yidong -- ChildView onClick"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-3-布局文件"><a href="#2-3-布局文件" class="headerlink" title="2.3 布局文件"></a><a href></a>2.3 布局文件</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;cn.onlyloveyd.androideventdispatchdemo.ParentLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:id=&quot;@+id/parentLayout&quot;</span><br><span class="line">    tools:context=&quot;cn.onlyloveyd.androideventdispatchdemo.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;cn.onlyloveyd.androideventdispatchdemo.ChildView</span><br><span class="line">        android:id=&quot;@+id/childview&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:text=&quot;ChildView&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/cn.onlyloveyd.androideventdispatchdemo.ParentLayout&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-4-MainActivity"><a href="#2-4-MainActivity" class="headerlink" title="2.4 MainActivity"></a><a href></a>2.4 MainActivity</h3><p> 测试一下事件的传递过程</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    private ParentLayout parentLayout;</span><br><span class="line">    private ChildView childView;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        parentLayout = (ParentLayout) findViewById(R.id.parentLayout);</span><br><span class="line">        childView = (ChildView) findViewById(R.id.childview);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        parentLayout.setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onTouch(View view, MotionEvent motionEvent) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- ParentLayout onTouch event = &quot; + motionEvent.getAction());</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        childView.setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean onTouch(View view, MotionEvent motionEvent) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- ChildView onTouch event = &quot; + motionEvent.getAction());</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        childView.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View view) &#123;</span><br><span class="line">                System.err.println(&quot;yidong -- ChildView onClick&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-4-1-ParentLayout不拦截事件"><a href="#2-4-1-ParentLayout不拦截事件" class="headerlink" title="2.4.1 ParentLayout不拦截事件"></a><a href></a>2.4.1 ParentLayout不拦截事件</h4><p> ParentLayout的onInterceptTouchEvent方法直接return false；虽然使用super方法也是返回false，因为ViewGroup中就是直接返回的false。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onInterceptTouchEvent(MotionEvent ev) &#123;</span><br><span class="line">    System.err.println(&quot;yidong -- ParentLayout onInterceptTouchEvent event = &quot; + ev.getAction());</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="2-4-1-ParentLayout不拦截事件"><a href="#2-4-1-ParentLayout不拦截事件" class="headerlink" title="2.4.1 ParentLayout不拦截事件"></a>2.4.1 ParentLayout不拦截事件</h4><p>ParentLayout的onInterceptTouchEvent方法直接return false；虽然使用super方法也是返回false，因为ViewGroup中就是直接返回的false。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onInterceptTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="hljs-string">"yidong -- ParentLayout onInterceptTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>点击Button<br> <img src="https://img-blog.csdn.net/20170921210813365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 解释：<br> ACTION_DOWN事件由ParentLayout开始分发（暂时不考虑从Activity开始，只考虑View和ViewGroup），经过dispatchTouchEvent方法，首先判断是否拦截该事件，由于我们没有设置拦截，事件继续传递到ChildView，ChildView拿到事件之后，也是通过dispatchTouchEvent来进行分发，由于没有子View，开始执行设置的onTouch方法，由于我们onTouch返回的是false，表示没有消耗事件，继续交给ChildView的onTouchEvent处理，而ChildView继承的时AppCompatButton，在onTouchEvent中会消耗掉事件，这样后续的ACTION_UP事件才会继续被处理，最后会ACTION_DOWN和ACTION_UP一起形成onClick事件。这里假设在ChildView的onTouchEvent返回的时false，我们将会看到另外一种log。</p>
-<p> <img src="https://img-blog.csdn.net/20170921213312836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 解释：<br> 由于ChildView在onTouch和onTouchEvent中都没有消耗掉ACTION_DOWN事件，事件被返回给ParentLayout，而ParentLayout的onTouch和onTouchEvent中也都是返回的false，表示没有消耗事件，因此，这个事件一直都没有被处理。就好像领导给你一个任务，你竟然说你完成不了，后续的任务，你觉得会给你嘛？所以后面的ACTION_UP的影子都看不到。假如我们在ParentLayout的onTouch或者onTouchEvent中返回true。<br> <strong>若ParentLayout.onTouch返回true</strong><br> <img src="https://img-blog.csdn.net/20170921214032049?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 可以看到对于ACTION_DOWN事件在ParentLayout.onTouch结束，没有执行ParentLayout.onTouchEvent方法。而ACTION_UP在没有执行拦截判断的情况下，直接把事件交给ParentLayout的onTouch处理。就好像一个项目中的同一个模块的第一个任务，你很好的完成来，那么第二个任务，自然就是你的。因为你有能力完成，并且两个任务也是同一个模块。<br> <strong>若ParentLayout.onTouchEvetn返回true</strong><br> 前提时ParentLayout.onTouch方法return false<br> <img src="https://img-blog.csdn.net/20170921214538156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 结果和上面的差不多，只是终点换来一个位置而已。</p>
-</li>
+<li>点击Button<br><img src="http://img.blog.csdn.net/20170921210813365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>ACTION_DOWN事件由ParentLayout开始分发（暂时不考虑从Activity开始，只考虑View和ViewGroup），经过dispatchTouchEvent方法，首先判断是否拦截该事件，由于我们没有设置拦截，事件继续传递到ChildView，ChildView拿到事件之后，也是通过dispatchTouchEvent来进行分发，由于没有子View，开始执行设置的onTouch方法，由于我们onTouch返回的是false，表示没有消耗事件，继续交给ChildView的onTouchEvent处理，而ChildView继承的时AppCompatButton，在onTouchEvent中会消耗掉事件，这样后续的ACTION_UP事件才会继续被处理，最后会ACTION_DOWN和ACTION_UP一起形成onClick事件。这里假设在ChildView的onTouchEvent返回的时false，我们将会看到另外一种log。<br><img src="http://img.blog.csdn.net/20170921213312836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>由于ChildView在onTouch和onTouchEvent中都没有消耗掉ACTION_DOWN事件，事件被返回给ParentLayout，而ParentLayout的onTouch和onTouchEvent中也都是返回的false，表示没有消耗事件，因此，这个事件一直都没有被处理。就好像领导给你一个任务，你竟然说你完成不了，后续的任务，你觉得会给你嘛？所以后面的ACTION_UP的影子都看不到。假如我们在ParentLayout的onTouch或者onTouchEvent中返回true。</li>
 </ul>
+<p><strong>若ParentLayout.onTouch返回true</strong></p>
+<p><img src="http://img.blog.csdn.net/20170921214032049?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>可以看到对于ACTION_DOWN事件在ParentLayout.onTouch结束，没有执行ParentLayout.onTouchEvent方法。而ACTION_UP在没有执行拦截判断的情况下，直接把事件交给ParentLayout的onTouch处理。就好像一个项目中的同一个模块的第一个任务，你很好的完成来，那么第二个任务，自然就是你的。因为你有能力完成，并且两个任务也是同一个模块。</p>
+<p><strong>若ParentLayout.onTouchEvetn返回true</strong></p>
+<p>前提时ParentLayout.onTouch方法return false<br><img src="http://img.blog.csdn.net/20170921214538156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>结果和上面的差不多，只是终点换来一个位置而已。</p>
 <ul>
-<li>点击Button外空白区域<br> <img src="https://img-blog.csdn.net/20170921211445086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 解释：<br> 由于ParentLayout的onTouch和onTouchEvent都是返回的false，ACTION_DOWN 事件并没有被消耗，所以后续的ACTION_UP事件自然是没有的，假如我们在onTouch或者onTouchEvent中return true。<br> <strong>若ParentLayout.onTouch返回true</strong><br> <img src="https://img-blog.csdn.net/20170921215200846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> <strong>若PatentLayout.onTouchEvent返回true</strong><br> <img src="https://img-blog.csdn.net/20170921214954710?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 解释基本和上面的一毛一样，不做赘述。</li>
+<li>点击Button外空白区域<br><img src="http://img.blog.csdn.net/20170921211445086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>由于ParentLayout的onTouch和onTouchEvent都是返回的false，ACTION_DOWN 事件并没有被消耗，所以后续的ACTION_UP事件自然是没有的，假如我们在onTouch或者onTouchEvent中return true。</li>
 </ul>
-<h3 id="2-4-2-ParentLayout拦截事件"><a href="#2-4-2-ParentLayout拦截事件" class="headerlink" title="2.4.2 ParentLayout拦截事件"></a><a href></a>2.4.2 ParentLayout拦截事件</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onInterceptTouchEvent(MotionEvent ev) &#123;</span><br><span class="line">    System.err.println(&quot;yidong -- ParentLayout onInterceptTouchEvent event = &quot; + ev.getAction());</span><br><span class="line">    //return super.onInterceptTouchEvent(ev);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>若ParentLayout.onTouch返回true</strong></p>
+<p><img src="http://img.blog.csdn.net/20170921215200846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><strong>若PatentLayout.onTouchEvent返回true</strong></p>
+<p><img src="http://img.blog.csdn.net/20170921214954710?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释基本和上面的一毛一样，不做赘述。</p>
+<h3 id="2-4-2-ParentLayout拦截事件"><a href="#2-4-2-ParentLayout拦截事件" class="headerlink" title="2.4.2 ParentLayout拦截事件"></a>2.4.2 ParentLayout拦截事件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onInterceptTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="hljs-string">"yidong -- ParentLayout onInterceptTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">    <span class="hljs-comment">//return super.onInterceptTouchEvent(ev);</span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 结果可想而知，你的组长把活都自己做来，作为组员的你，自然时看不到任务的。运行结果和上面不拦截的情况下点击Button外部相同。具体的log要看ParentLayout的onTouch和onTouchEvent的执行结果。</p>
-<h2 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5 总结"></a><a href></a>2.5 总结</h2><p> <img src="https://img-blog.csdn.net/20170921220951549?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h2 id="2-6-测试代码"><a href="#2-6-测试代码" class="headerlink" title="2.6 测试代码"></a><a href></a>2.6 测试代码</h2><p> <a href="https://github.com/onlyloveyd/AndroidEventDispatchDemo" target="_blank" rel="noopener">AndroidEventDispatchDemo</a></p>
+<h2 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5 总结"></a>2.5 总结</h2><p><img src="http://img.blog.csdn.net/20170921220951549?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="2-6-测试代码"><a href="#2-6-测试代码" class="headerlink" title="2.6 测试代码"></a>2.6 测试代码</h2><p><a href="https://github.com/onlyloveyd/AndroidEventDispatchDemo" target="_blank" rel="noopener">AndroidEventDispatchDemo</a></p>
 
         </div>
         
@@ -211,7 +211,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/View/">View</a>, <a class="has-link-grey -link" href="/tags/事件分发/">事件分发</a>, <a class="has-link-grey -link" href="/tags/布局控件/">布局控件</a>
+                    <a class="has-link-grey -link" href="/tags/布局控件/">布局控件</a>
                 </div>
             </div>
         </div>
@@ -342,7 +342,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -362,7 +362,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -453,7 +453,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -563,7 +563,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -757,7 +757,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1126,7 +1126,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1166,23 +1166,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1196,13 +1182,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1210,13 +1189,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1245,7 +1217,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1266,13 +1238,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1301,7 +1266,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1364,14 +1329,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1390,13 +1355,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1404,22 +1362,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1453,13 +1397,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1469,7 +1406,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1488,13 +1425,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1504,14 +1434,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1539,7 +1469,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1558,44 +1488,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1609,20 +1504,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1656,22 +1537,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1686,7 +1553,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1892,7 +1759,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2261,7 +2128,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2301,23 +2168,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2331,13 +2184,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2345,13 +2191,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2380,7 +2219,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2401,13 +2240,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2436,7 +2268,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2499,14 +2331,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2525,13 +2357,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2539,22 +2364,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2588,13 +2399,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2604,7 +2408,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2623,13 +2427,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2639,14 +2436,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2674,7 +2471,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2693,44 +2490,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2744,20 +2506,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2791,22 +2539,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2821,7 +2555,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. 前言 前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。 2. 目标 支持Gravity的ViewGroup。  支持的Gravity的种类：左上，右上，左下，右下，中心。 3. 实现步骤 自定义属性：custom_grav">
+    <meta name="description" content="1. 前言前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。">
 <meta name="keywords" content="自定义View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 进阶（三）》 自定义View之支持Gravity的ViewGroup">
 <meta property="og:url" content="http://yoursite.com/2017/10/20/《Android 进阶（三）》 自定义View之支持Gravity的ViewGroup/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="1. 前言 前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。 2. 目标 支持Gravity的ViewGroup。  支持的Gravity的种类：左上，右上，左下，右下，中心。 3. 实现步骤 自定义属性：custom_grav">
+<meta property="og:description" content="1. 前言前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:46:18.953Z">
+<meta property="og:updated_time" content="2019-06-27T12:06:48.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 进阶（三）》 自定义View之支持Gravity的ViewGroup">
-<meta name="twitter:description" content="1. 前言 前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。 2. 目标 支持Gravity的ViewGroup。  支持的Gravity的种类：左上，右上，左下，右下，中心。 3. 实现步骤 自定义属性：custom_grav">
+<meta name="twitter:description" content="1. 前言前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 938 个字)
+                    6 分钟 读完 (大约 877 个字)
                 </span>
                 
                 
@@ -168,32 +168,29 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。</p>
-<h2 id="2-目标"><a href="#2-目标" class="headerlink" title="2. 目标"></a><a href></a>2. 目标</h2><p> 支持Gravity的ViewGroup。</p>
-<p> 支持的Gravity的种类：左上，右上，左下，右下，中心。</p>
-<h2 id="3-实现步骤"><a href="#3-实现步骤" class="headerlink" title="3. 实现步骤"></a><a href></a>3. 实现步骤</h2><ol>
-<li>自定义属性：custom_gravity </li>
-<li>自定义属性的取值范围：1－5(topleft, topright, bottomleft, bottomright, center) </li>
-<li>自定义LayoutParam。参考LinearLayout，RelativeLayout等等 </li>
-<li>复写onMeasure， onLayout </li>
-<li>复写LayoutParam相关的几个方法  <h2 id="4-几点提醒"><a href="#4-几点提醒" class="headerlink" title="4. 几点提醒"></a><a href></a>4. 几点提醒</h2></li>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。</p>
+<a id="more"></a>
+<h2 id="2-目标"><a href="#2-目标" class="headerlink" title="2. 目标"></a>2. 目标</h2><p>支持Gravity的ViewGroup。</p>
+<p>支持的Gravity的种类：左上，右上，左下，右下，中心。</p>
+<h2 id="3-实现步骤"><a href="#3-实现步骤" class="headerlink" title="3. 实现步骤"></a>3. 实现步骤</h2><ol>
+<li>自定义属性：custom_gravity</li>
+<li>自定义属性的取值范围：1－5(topleft, topright, bottomleft, bottomright, center)</li>
+<li>自定义LayoutParam。参考LinearLayout，RelativeLayout等等</li>
+<li>复写onMeasure， onLayout</li>
+<li>复写LayoutParam相关的几个方法</li>
 </ol>
-<ol start="2">
-<li>onMeasure使用来确定子view的大小的，没有那么神秘，就是根据ViewGroup的大小和子View的LayoutParam来确定子View应该有的大小。通过<br> MeasureSpec.makeMeasureSpec的方式生成MeasureSpec，通过调用子View的measure方法，把数据传递给子View，方便确定大小。 </li>
-<li>onLayout方法同来确定子View的位置，传入的参数是当前View Group的上下左上角和右下角的位置，通过子View的属性值和一些其他判断条件，来计算子View应该摆放在哪个位置，然后通过调用子View的layout方法来摆放。 </li>
-<li>自定义LayoutParam。需要复写几个方法<br> <img src="https://img-blog.csdn.net/20171021092520901?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">  <h2 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a><a href></a>5. 代码实现</h2></li>
+<h2 id="4-几点提醒"><a href="#4-几点提醒" class="headerlink" title="4. 几点提醒"></a>4. 几点提醒</h2><ol>
+<li>onMeasure使用来确定子view的大小的，没有那么神秘，就是根据ViewGroup的大小和子View的LayoutParam来确定子View应该有的大小。通过<br>MeasureSpec.makeMeasureSpec的方式生成MeasureSpec，通过调用子View的measure方法，把数据传递给子View，方便确定大小。</li>
+<li>onLayout方法同来确定子View的位置，传入的参数是当前View Group的上下左上角和右下角的位置，通过子View的属性值和一些其他判断条件，来计算子View应该摆放在哪个位置，然后通过调用子View的layout方法来摆放。</li>
+<li>自定义LayoutParam。需要复写几个方法<br><img src="http://img.blog.csdn.net/20171021092520901?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></li>
 </ol>
-<h3 id="5-1-自定义属性"><a href="#5-1-自定义属性" class="headerlink" title="5.1 自定义属性"></a><a href></a>5.1 自定义属性</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;CustomViewGroup&quot;&gt;</span><br><span class="line">    &lt;attr name=&quot;custom_gravity&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/declare-styleable&gt;</span><br><span class="line">&lt;attr name=&quot;custom_gravity&quot;&gt;</span><br><span class="line">    &lt;flag name=&quot;topleft&quot; value=&quot;1&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;topright&quot; value=&quot;2&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;bottomleft&quot; value=&quot;3&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;bottomright&quot; value=&quot;4&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;center&quot; value=&quot;5&quot;/&gt;</span><br><span class="line">&lt;/attr&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a>5. 代码实现</h2><h3 id="5-1-自定义属性"><a href="#5-1-自定义属性" class="headerlink" title="5.1 自定义属性"></a>5.1 自定义属性</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">declare-styleable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CustomViewGroup"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"custom_gravity"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">declare-styleable</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"custom_gravity"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">flag</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"topleft"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">flag</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"topright"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"2"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">flag</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"bottomleft"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"3"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">flag</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"bottomright"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"4"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">flag</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"center"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"5"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">attr</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="5-2-CustomViewGroup"><a href="#5-2-CustomViewGroup" class="headerlink" title="5.2 CustomViewGroup"></a>5.2 CustomViewGroup</h3><p>代码写的比较简单，方便理解，把每个子View的大小全部设置成相同的大小。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomViewGroup</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ViewGroup</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomViewGroup</span><span class="hljs-params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomViewGroup</span><span class="hljs-params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomViewGroup</span><span class="hljs-params">(Context context, AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMeasure</span><span class="hljs-params">(<span class="hljs-keyword">int</span> widthMeasureSpec, <span class="hljs-keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">        <span class="hljs-keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">        <span class="hljs-keyword">int</span> heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 每个子View的大小都设置成相同大小</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            <span class="hljs-keyword">int</span> mode = MeasureSpec.EXACTLY;</span><br><span class="line">            <span class="hljs-keyword">int</span> childWidth = widthSize / <span class="hljs-number">4</span>;</span><br><span class="line">            <span class="hljs-keyword">int</span> childHeight = heightSize / <span class="hljs-number">4</span>;</span><br><span class="line">            child.measure(MeasureSpec.makeMeasureSpec(childWidth, mode),</span><br><span class="line">                    MeasureSpec.makeMeasureSpec(childHeight, mode));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLayout</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> changed, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> t, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            <span class="hljs-keyword">int</span> width = child.getMeasuredWidth();</span><br><span class="line">            <span class="hljs-keyword">int</span> height = child.getMeasuredHeight();</span><br><span class="line">            <span class="hljs-keyword">final</span> LayoutParams lp = (LayoutParams) child.getLayoutParams();</span><br><span class="line">            <span class="hljs-keyword">int</span> gravity = lp.gravity;</span><br><span class="line">            <span class="hljs-keyword">switch</span> (gravity) &#123;</span><br><span class="line">                <span class="hljs-keyword">case</span> LayoutParams.TOPLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, t, width, height);</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                <span class="hljs-keyword">case</span> LayoutParams.TOPRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, t, r, height);</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                <span class="hljs-keyword">case</span> LayoutParams.BOTTOMLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, b - height, width, b);</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                <span class="hljs-keyword">case</span> LayoutParams.BOTTOMRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, b - height, r, b);</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                <span class="hljs-keyword">case</span> LayoutParams.CENTER_GRAVITY:</span><br><span class="line">                    child.layout((r - width) / <span class="hljs-number">2</span>, (b - height) / <span class="hljs-number">2</span>, (r + width) / <span class="hljs-number">2</span>,</span><br><span class="line">                            (b + height) / <span class="hljs-number">2</span>);</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">                <span class="hljs-keyword">default</span>:</span><br><span class="line">                    <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">public</span> ViewGroup.<span class="hljs-function">LayoutParams <span class="hljs-title">generateLayoutParams</span><span class="hljs-params">(AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LayoutParams(getContext(), attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> ViewGroup.<span class="hljs-function">LayoutParams <span class="hljs-title">generateLayoutParams</span><span class="hljs-params">(ViewGroup.LayoutParams p)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LayoutParams(p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> ViewGroup.<span class="hljs-function">LayoutParams <span class="hljs-title">generateDefaultLayoutParams</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, <span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">checkLayoutParams</span><span class="hljs-params">(ViewGroup.LayoutParams p)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> p <span class="hljs-keyword">instanceof</span> LayoutParams;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LayoutParams</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ViewGroup</span>.<span class="hljs-title">LayoutParams</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNSPECIFIED_GRAVITY = -<span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOPLEFT_GRAVITY = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOPRIGHT_GRAVITY = <span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BOTTOMLEFT_GRAVITY = <span class="hljs-number">3</span>;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BOTTOMRIGHT_GRAVITY = <span class="hljs-number">4</span>;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> CENTER_GRAVITY = <span class="hljs-number">5</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> gravity = UNSPECIFIED_GRAVITY;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LayoutParams</span><span class="hljs-params">(@NonNull Context c, @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(c, attrs);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">final</span> TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.CustomViewGroup);</span><br><span class="line">            gravity = a.getInt(R.styleable.CustomViewGroup_custom_gravity, UNSPECIFIED_GRAVITY);</span><br><span class="line">            a.recycle();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LayoutParams</span><span class="hljs-params">(<span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height, <span class="hljs-keyword">int</span> gravity)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(width, height);</span><br><span class="line">            <span class="hljs-keyword">this</span>.gravity = gravity;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LayoutParams</span><span class="hljs-params">(@NonNull ViewGroup.LayoutParams source)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(source);</span><br><span class="line">            <span class="hljs-keyword">this</span>.gravity = TOPLEFT_GRAVITY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LayoutParams</span><span class="hljs-params">(@NonNull LayoutParams source)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(source);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">this</span>.gravity = source.gravity;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="5-2-CustomViewGroup"><a href="#5-2-CustomViewGroup" class="headerlink" title="5.2 CustomViewGroup"></a><a href></a>5.2 CustomViewGroup</h3><p> 代码写的比较简单，方便理解，把每个子View的大小全部设置成相同的大小。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">public class CustomViewGroup extends ViewGroup &#123;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context, AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context, AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</span><br><span class="line">        super.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">        int widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">        int heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 每个子View的大小都设置成相同大小</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            int mode = MeasureSpec.EXACTLY;</span><br><span class="line">            int childWidth = widthSize / 4;</span><br><span class="line">            int childHeight = heightSize / 4;</span><br><span class="line">            child.measure(MeasureSpec.makeMeasureSpec(childWidth, mode),</span><br><span class="line">                    MeasureSpec.makeMeasureSpec(childHeight, mode));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onLayout(boolean changed, int l, int t, int r, int b) &#123;</span><br><span class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            int width = child.getMeasuredWidth();</span><br><span class="line">            int height = child.getMeasuredHeight();</span><br><span class="line">            final LayoutParams lp = (LayoutParams) child.getLayoutParams();</span><br><span class="line">            int gravity = lp.gravity;</span><br><span class="line">            switch (gravity) &#123;</span><br><span class="line">                case LayoutParams.TOPLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, t, width, height);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.TOPRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, t, r, height);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.BOTTOMLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, b - height, width, b);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.BOTTOMRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, b - height, r, b);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.CENTER_GRAVITY:</span><br><span class="line">                    child.layout((r - width) / 2, (b - height) / 2, (r + width) / 2,</span><br><span class="line">                            (b + height) / 2);</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) &#123;</span><br><span class="line">        return new LayoutParams(getContext(), attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) &#123;</span><br><span class="line">        return new LayoutParams(p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ViewGroup.LayoutParams generateDefaultLayoutParams() &#123;</span><br><span class="line">        return new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) &#123;</span><br><span class="line">        return p instanceof LayoutParams;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class LayoutParams extends ViewGroup.LayoutParams &#123;</span><br><span class="line">        public static final int UNSPECIFIED_GRAVITY = -1;</span><br><span class="line">        public static final int TOPLEFT_GRAVITY = 1;</span><br><span class="line">        public static final int TOPRIGHT_GRAVITY = 2;</span><br><span class="line">        public static final int BOTTOMLEFT_GRAVITY = 3;</span><br><span class="line">        public static final int BOTTOMRIGHT_GRAVITY = 4;</span><br><span class="line">        public static final int CENTER_GRAVITY = 5;</span><br><span class="line"></span><br><span class="line">        public int gravity = UNSPECIFIED_GRAVITY;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull Context c, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">            super(c, attrs);</span><br><span class="line"></span><br><span class="line">            final TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.CustomViewGroup);</span><br><span class="line">            gravity = a.getInt(R.styleable.CustomViewGroup_custom_gravity, UNSPECIFIED_GRAVITY);</span><br><span class="line">            a.recycle();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(int width, int height, int gravity) &#123;</span><br><span class="line">            super(width, height);</span><br><span class="line">            this.gravity = gravity;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull ViewGroup.LayoutParams source) &#123;</span><br><span class="line">            super(source);</span><br><span class="line">            this.gravity = TOPLEFT_GRAVITY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull LayoutParams source) &#123;</span><br><span class="line">            super(source);</span><br><span class="line"></span><br><span class="line">            this.gravity = source.gravity;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="6-效果图"><a href="#6-效果图" class="headerlink" title="6. 效果图"></a><a href></a>6. 效果图</h2><p> <img src="https://img-blog.csdn.net/20171021094131844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="7-源代码"><a href="#7-源代码" class="headerlink" title="7. 源代码"></a><a href></a>7. 源代码</h2><p> 源代码还是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="6-效果图"><a href="#6-效果图" class="headerlink" title="6. 效果图"></a>6. 效果图</h2><p><img src="http://img.blog.csdn.net/20171021094131844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="7-源代码"><a href="#7-源代码" class="headerlink" title="7. 源代码"></a>7. 源代码</h2><p>源代码还是上传到Github<br><a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
 
         </div>
         
@@ -332,7 +329,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -352,7 +349,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -443,7 +440,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -553,7 +550,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -747,7 +744,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1116,7 +1113,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1156,23 +1153,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1186,13 +1169,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1200,13 +1176,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1235,7 +1204,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1256,13 +1225,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1291,7 +1253,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1354,14 +1316,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1380,13 +1342,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1394,22 +1349,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1443,13 +1384,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1459,7 +1393,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1478,13 +1412,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1494,14 +1421,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1529,7 +1456,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1548,44 +1475,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1599,20 +1491,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1646,22 +1524,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1676,7 +1540,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1882,7 +1746,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2251,7 +2115,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2291,23 +2155,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2321,13 +2171,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2335,13 +2178,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2370,7 +2206,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2391,13 +2227,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2426,7 +2255,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2489,14 +2318,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2515,13 +2344,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2529,22 +2351,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2578,13 +2386,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2594,7 +2395,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2613,13 +2414,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2629,14 +2423,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2664,7 +2458,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2683,44 +2477,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2734,20 +2493,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2781,22 +2526,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2811,7 +2542,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

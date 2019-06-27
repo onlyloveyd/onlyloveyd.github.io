@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 350 个字)
+                    2 分钟 读完 (大约 356 个字)
                 </span>
                 
                 
@@ -179,28 +179,16 @@
         </h1>
         <div class="content">
             <h1 id="LazyOrgView"><a href="#LazyOrgView" class="headerlink" title="LazyOrgView"></a>LazyOrgView</h1><p> 通过自定义View简单实现组织结构图。在网上搜索并没有发现类似的View，由于项目需要，快速实现一个满足项目需求。另外一种实现方式：Google OrgChart或者其他OrgChart.js。</p>
-<h2 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h2><p> <a href="https://github.com/onlyloveyd/LazyOrgView" target="_blank" rel="noopener">LazyOrgView</a></p>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>步骤 1.</strong> 工程根目录build.gradle 添加如下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">          maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 项目build.gradle 添加依赖</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyOrgView:v1.0&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p> <strong>步骤 1.</strong> 添加 <strong>LazyOrgView</strong> 至布局。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    tools:context=&quot;.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;cn.onlyloveyd.lazyorgview.widget.LazyOrgView</span><br><span class="line">        android:id=&quot;@+id/rv_content&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/FrameLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>步骤 2.</strong> 使用TreeNode构建跟节点以及其他节点，然后使用addChildNode组织节点关系。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">TreeNode root = new TreeNode(&quot;总经理&quot;);</span><br><span class="line">root.isRoot = true;</span><br><span class="line"></span><br><span class="line">TreeNode A = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Aa = new TreeNode(&quot;行政部&quot;);</span><br><span class="line">TreeNode Ab = new TreeNode(&quot;财务部&quot;);</span><br><span class="line">TreeNode Ac = new TreeNode(&quot;采购部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode B = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ba = new TreeNode(&quot;工程部&quot;);</span><br><span class="line">TreeNode Bb = new TreeNode(&quot;生产部&quot;);</span><br><span class="line"></span><br><span class="line">TreeNode C = new TreeNode(&quot;副经理&quot;);</span><br><span class="line">TreeNode Ca = new TreeNode(&quot;营销部&quot;);</span><br><span class="line">TreeNode Cb = new TreeNode(&quot;方案造价部&quot;);</span><br><span class="line">TreeNode Cc = new TreeNode(&quot;售后服务部&quot;);</span><br><span class="line"></span><br><span class="line">root.addChildNode(A);</span><br><span class="line">root.addChildNode(B);</span><br><span class="line">root.addChildNode(C);</span><br><span class="line"></span><br><span class="line">A.addChildNode(Aa);</span><br><span class="line">A.addChildNode(Ab);</span><br><span class="line">A.addChildNode(Ac);</span><br><span class="line"></span><br><span class="line">B.addChildNode(Ba);</span><br><span class="line">B.addChildNode(Bb);</span><br><span class="line"></span><br><span class="line">C.addChildNode(Ca);</span><br><span class="line">C.addChildNode(Cb);</span><br></pre></td></tr></table></figure>
-
-<p> <strong>步骤 3.</strong> 给LazyOrgView配置 LazyOrgConfig 以及 rootNode。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lazyOrgView.setRootNode(root);</span><br><span class="line">LazyOrgConfig lazyOrgConfig = new LazyOrgConfig();</span><br><span class="line">lazyOrgConfig.setLineColor(Color.BLUE).setTextSize(12)</span><br><span class="line">             .setLineWidth(1)</span><br><span class="line">             .setTextBgColor(Color.GREEN)</span><br><span class="line">             .setTextBgRes(R.drawable.rect_shape);</span><br><span class="line">lazyOrgView.setLazyOrgConfig(lazyOrgConfig);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本效果"><a href="#基本效果" class="headerlink" title="基本效果"></a>基本效果</h2><p> <img src="http://www.onlyloveyd.cn/upload/2018/08/q4ualhdpvuh3lo12iu3v50gt29.png" alt="1"><br> <img src="http://www.onlyloveyd.cn/upload/2018/08/7btem833lsh6fp1lhkqupcvk3l.png" alt="2"></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/08/12/《Android 进阶（四）》自定义组织机构图-LazyOrgView/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -229,7 +217,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 281 个字)
+                    2 分钟 读完 (大约 286 个字)
                 </span>
                 
                 
@@ -242,32 +230,17 @@
             
         </h1>
         <div class="content">
-            <h1 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h1><p> <a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><p> <strong>Step 1.</strong> 项目根目录下 build.gradle</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">    ...</span><br><span class="line">    maven &#123; url &apos;https://jitpack.io&apos; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 模块目录下build.gradle添加依赖</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;com.github.onlyloveyd:LazyKeyboard:v1.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p> <strong>Step 1.</strong> 添加 <strong>SecurityEditText</strong> 至界面布局。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;LinearLayout</span><br><span class="line">     android:id=&quot;@+id/container&quot;</span><br><span class="line">     ...&quot;&gt;</span><br><span class="line"></span><br><span class="line">     &lt;com.gs.keyboard.SecurityEditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard&quot;</span><br><span class="line">         android:layout_width=&quot;match_parent&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"></span><br><span class="line">     &lt;EditText</span><br><span class="line">         android:id=&quot;@+id/et_security_keyboard_two&quot;</span><br><span class="line">         ... /&gt;</span><br><span class="line"> &lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 初始化 <strong>SecurityKeyboard</strong></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//配置部分属性</span><br><span class="line">SecurityConfigure configure = new SecurityConfigure()</span><br><span class="line">        .setDefaultKeyboardType(KeyboardType.NUMBER)</span><br><span class="line">        .setLetterEnabled(false);</span><br><span class="line">//第一个参数为包含SecurityEditText的视图，安全键盘的显示以其为锚点</span><br><span class="line">securityKeyboard = new SecurityKeyboard(binding.loginLayout, configure);</span><br></pre></td></tr></table></figure>
-
-<p> <strong>Step 2.</strong> 目前支持自定义选项 </p>
-<pre><code>自定义选项               | 意义                             
-------------------- | ------------------------------- 
-selectedColor       | 选中键盘类型凸显颜色，默认为0xff66aeff       
-unSelectedColor     | 未选中键盘类型凸显颜色，默认为Color.BLACK     
-isNumberEnabled     | 是否显示数字键盘，默认为true               
-isLetterEnabled     | 是否显示字母键盘，默认为true               
-isSymbolEnabled     | 是否显示符号键盘，默认为true               
-defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</code></pre><h2 id="基础效果"><a href="#基础效果" class="headerlink" title="基础效果"></a>基础效果</h2><p> <img src="https://img-blog.csdn.net/20180622210946292" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622210957666" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180622211007566" alt="这里写图片描述"></p>
-
+            <h1 id="LazyKeyboard"><a href="#LazyKeyboard" class="headerlink" title="LazyKeyboard"></a>LazyKeyboard</h1><p><a href="https://github.com/onlyloveyd/LazyKeyboard" target="_blank" rel="noopener">LazyKeyboard</a>，利用PopupWindow实现，字母，符号，数字自定义安全键盘</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/06/22/《Android 进阶（三）》 自定义安全键盘-LazyKeyboard/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -296,7 +269,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 677 个字)
+                    4 分钟 读完 (大约 615 个字)
                 </span>
                 
                 
@@ -309,29 +282,22 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
             
         </h1>
         <div class="content">
-            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a><a href></a>1. 简介</h2><p> 使用华为手机，发现设置应用中的开关空间颜色听挺好看，所以自己想写一个类似的，当然不可能完全相同，但是大致的效果差不多。<br> 操作步骤：</p>
+            <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>使用华为手机，发现设置应用中的开关空间颜色听挺好看，所以自己想写一个类似的，当然不可能完全相同，但是大致的效果差不多。<br>操作步骤：</p>
 <ol>
-<li><p>截图。PS取色； </p>
-</li>
-<li><p>判断左右两边的半径； </p>
-</li>
-<li><p>继承View复写onDraw方法，手动绘制。 </p>
-</li>
-<li><p>控制开关的状态：on／off  </p>
-<h2 id="2-效果"><a href="#2-效果" class="headerlink" title="2. 效果"></a><a href></a>2. 效果</h2><p><img src="https://img-blog.csdn.net/20171109202409135?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-</ol>
-<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a><a href></a>3. 实现</h2><h3 id="3-1-自定义属性"><a href="#3-1-自定义属性" class="headerlink" title="3.1 自定义属性"></a><a href></a>3.1 自定义属性</h3><p> 没有定义，颜色和半径都是按照自己的效果写成固定的，当然也可以写成自定义属性。</p>
-<h3 id="3-2-自定义View代码"><a href="#3-2-自定义View代码" class="headerlink" title="3.2 自定义View代码"></a><a href></a>3.2 自定义View代码</h3><p> 涉及到一些动画的使用和View的事件处理</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line">public class CustomSwitchView extends View &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 开关圆点颜色</span><br><span class="line">     */</span><br><span class="line">    private final int SWITCH_DOT_COLOR = 0xffffffff;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 关闭状态下的背景颜色</span><br><span class="line">     */</span><br><span class="line">    private final int OFF_BACKGROUND_COLOR = 0xffe2e2e2;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 打开状态下的背景颜色</span><br><span class="line">     */</span><br><span class="line">    private final int ON_BACKGROUND_COLOR = 0xff007dff;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 边界和开关圆点的间距</span><br><span class="line">     */</span><br><span class="line">    private final int BOUND_DOT_GAP = 8;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 是否打开</span><br><span class="line">     */</span><br><span class="line">    private boolean isOn = false;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 圆点的半径和坐标位置</span><br><span class="line">     */</span><br><span class="line">    private int mRadius;</span><br><span class="line"></span><br><span class="line">    private int startX;</span><br><span class="line">    private int endX;</span><br><span class="line">    private float centerX;</span><br><span class="line">    private float centerY;</span><br><span class="line">    private RectF mRectF;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 开关的画笔</span><br><span class="line">     */</span><br><span class="line">    private Paint mSwitchPaint;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomSwitchView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 打开或者关闭</span><br><span class="line">     *</span><br><span class="line">     * @param on true 打开， false 关闭</span><br><span class="line">     */</span><br><span class="line">    public void setOn(boolean on) &#123;</span><br><span class="line">        isOn = on;</span><br><span class="line">        ValueAnimator animator;</span><br><span class="line">        if (on) &#123;</span><br><span class="line">            animator = ValueAnimator.ofFloat(centerX, endX);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            animator = ValueAnimator.ofFloat(centerX, startX);</span><br><span class="line">        &#125;</span><br><span class="line">        animator.setDuration(200);</span><br><span class="line">        animator.setRepeatCount(0);</span><br><span class="line">        animator.setInterpolator(new LinearInterpolator());</span><br><span class="line">        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">                centerX = (Float) animation.getAnimatedValue();</span><br><span class="line">                invalidate();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        animator.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        mSwitchPaint = new Paint();</span><br><span class="line">        mSwitchPaint.setColor(OFF_BACKGROUND_COLOR);</span><br><span class="line">        mSwitchPaint.setStrokeWidth(10f);</span><br><span class="line">        mSwitchPaint.setStrokeCap(Paint.Cap.ROUND);</span><br><span class="line">        mSwitchPaint.setAntiAlias(true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</span><br><span class="line">        super.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mRectF = new RectF(getLeft(), getTop(), getRight(), getBottom());</span><br><span class="line">        mRadius = h / 2 - BOUND_DOT_GAP;</span><br><span class="line">        startX = getLeft() + mRadius + BOUND_DOT_GAP / 2;</span><br><span class="line">        endX = getRight() - mRadius - BOUND_DOT_GAP / 2;</span><br><span class="line">        centerX = startX;</span><br><span class="line">        centerY = (getTop() + getBottom()) / 2.0f;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onLayout(boolean changed, int left, int top, int right, int bottom) &#123;</span><br><span class="line">        super.onLayout(changed, left, top, right, bottom);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        if (isOn) &#123;</span><br><span class="line">            mSwitchPaint.setColor(ON_BACKGROUND_COLOR);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mSwitchPaint.setColor(OFF_BACKGROUND_COLOR);</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.drawRoundRect(mRectF, mRadius, mRadius, mSwitchPaint);</span><br><span class="line">        mSwitchPaint.setColor(SWITCH_DOT_COLOR);</span><br><span class="line">        canvas.drawCircle(centerX, centerY, mRadius, mSwitchPaint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">        int action = event.getAction();</span><br><span class="line">        switch (action) &#123;</span><br><span class="line">            case MotionEvent.ACTION_DOWN:</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_UP:</span><br><span class="line">                setOn(!isOn);</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_MOVE: &#123;</span><br><span class="line">                float x = event.getX();</span><br><span class="line">                if (x &lt; endX &amp;&amp; x &gt; startX) &#123;</span><br><span class="line">                    centerX = x;</span><br><span class="line">                    invalidate();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="4-源码"><a href="#4-源码" class="headerlink" title="4. 源码"></a><a href></a>4. 源码</h2><p> 源码依然是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
+<li>截图。PS取色；</li>
+<li>判断左右两边的半径；</li>
+<li>继承View复写onDraw方法，手动绘制。</li>
+<li>控制开关的状态：on／off</li></ol>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/11/09/《Android 进阶（四）》 自定义View之仿Emui开关控件/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -360,7 +326,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item has-text-grey">
                     
                     
-                    6 分钟 读完 (大约 938 个字)
+                    6 分钟 读完 (大约 877 个字)
                 </span>
                 
                 
@@ -373,35 +339,17 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。</p>
-<h2 id="2-目标"><a href="#2-目标" class="headerlink" title="2. 目标"></a><a href></a>2. 目标</h2><p> 支持Gravity的ViewGroup。</p>
-<p> 支持的Gravity的种类：左上，右上，左下，右下，中心。</p>
-<h2 id="3-实现步骤"><a href="#3-实现步骤" class="headerlink" title="3. 实现步骤"></a><a href></a>3. 实现步骤</h2><ol>
-<li>自定义属性：custom_gravity </li>
-<li>自定义属性的取值范围：1－5(topleft, topright, bottomleft, bottomright, center) </li>
-<li>自定义LayoutParam。参考LinearLayout，RelativeLayout等等 </li>
-<li>复写onMeasure， onLayout </li>
-<li>复写LayoutParam相关的几个方法  <h2 id="4-几点提醒"><a href="#4-几点提醒" class="headerlink" title="4. 几点提醒"></a><a href></a>4. 几点提醒</h2></li>
-</ol>
-<ol start="2">
-<li>onMeasure使用来确定子view的大小的，没有那么神秘，就是根据ViewGroup的大小和子View的LayoutParam来确定子View应该有的大小。通过<br> MeasureSpec.makeMeasureSpec的方式生成MeasureSpec，通过调用子View的measure方法，把数据传递给子View，方便确定大小。 </li>
-<li>onLayout方法同来确定子View的位置，传入的参数是当前View Group的上下左上角和右下角的位置，通过子View的属性值和一些其他判断条件，来计算子View应该摆放在哪个位置，然后通过调用子View的layout方法来摆放。 </li>
-<li>自定义LayoutParam。需要复写几个方法<br> <img src="https://img-blog.csdn.net/20171021092520901?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">  <h2 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a><a href></a>5. 代码实现</h2></li>
-</ol>
-<h3 id="5-1-自定义属性"><a href="#5-1-自定义属性" class="headerlink" title="5.1 自定义属性"></a><a href></a>5.1 自定义属性</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;CustomViewGroup&quot;&gt;</span><br><span class="line">    &lt;attr name=&quot;custom_gravity&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/declare-styleable&gt;</span><br><span class="line">&lt;attr name=&quot;custom_gravity&quot;&gt;</span><br><span class="line">    &lt;flag name=&quot;topleft&quot; value=&quot;1&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;topright&quot; value=&quot;2&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;bottomleft&quot; value=&quot;3&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;bottomright&quot; value=&quot;4&quot;/&gt;</span><br><span class="line">    &lt;flag name=&quot;center&quot; value=&quot;5&quot;/&gt;</span><br><span class="line">&lt;/attr&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="5-2-CustomViewGroup"><a href="#5-2-CustomViewGroup" class="headerlink" title="5.2 CustomViewGroup"></a><a href></a>5.2 CustomViewGroup</h3><p> 代码写的比较简单，方便理解，把每个子View的大小全部设置成相同的大小。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">public class CustomViewGroup extends ViewGroup &#123;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context, AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomViewGroup(Context context, AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</span><br><span class="line">        super.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">        int widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">        int heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 每个子View的大小都设置成相同大小</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            int mode = MeasureSpec.EXACTLY;</span><br><span class="line">            int childWidth = widthSize / 4;</span><br><span class="line">            int childHeight = heightSize / 4;</span><br><span class="line">            child.measure(MeasureSpec.makeMeasureSpec(childWidth, mode),</span><br><span class="line">                    MeasureSpec.makeMeasureSpec(childHeight, mode));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onLayout(boolean changed, int l, int t, int r, int b) &#123;</span><br><span class="line">        for (int i = 0; i &lt; getChildCount(); i++) &#123;</span><br><span class="line">            View child = getChildAt(i);</span><br><span class="line">            int width = child.getMeasuredWidth();</span><br><span class="line">            int height = child.getMeasuredHeight();</span><br><span class="line">            final LayoutParams lp = (LayoutParams) child.getLayoutParams();</span><br><span class="line">            int gravity = lp.gravity;</span><br><span class="line">            switch (gravity) &#123;</span><br><span class="line">                case LayoutParams.TOPLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, t, width, height);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.TOPRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, t, r, height);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.BOTTOMLEFT_GRAVITY:</span><br><span class="line">                    child.layout(l, b - height, width, b);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.BOTTOMRIGHT_GRAVITY:</span><br><span class="line">                    child.layout(r - width, b - height, r, b);</span><br><span class="line">                    break;</span><br><span class="line">                case LayoutParams.CENTER_GRAVITY:</span><br><span class="line">                    child.layout((r - width) / 2, (b - height) / 2, (r + width) / 2,</span><br><span class="line">                            (b + height) / 2);</span><br><span class="line">                    break;</span><br><span class="line">                default:</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) &#123;</span><br><span class="line">        return new LayoutParams(getContext(), attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ViewGroup.LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) &#123;</span><br><span class="line">        return new LayoutParams(p);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected ViewGroup.LayoutParams generateDefaultLayoutParams() &#123;</span><br><span class="line">        return new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) &#123;</span><br><span class="line">        return p instanceof LayoutParams;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class LayoutParams extends ViewGroup.LayoutParams &#123;</span><br><span class="line">        public static final int UNSPECIFIED_GRAVITY = -1;</span><br><span class="line">        public static final int TOPLEFT_GRAVITY = 1;</span><br><span class="line">        public static final int TOPRIGHT_GRAVITY = 2;</span><br><span class="line">        public static final int BOTTOMLEFT_GRAVITY = 3;</span><br><span class="line">        public static final int BOTTOMRIGHT_GRAVITY = 4;</span><br><span class="line">        public static final int CENTER_GRAVITY = 5;</span><br><span class="line"></span><br><span class="line">        public int gravity = UNSPECIFIED_GRAVITY;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull Context c, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">            super(c, attrs);</span><br><span class="line"></span><br><span class="line">            final TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.CustomViewGroup);</span><br><span class="line">            gravity = a.getInt(R.styleable.CustomViewGroup_custom_gravity, UNSPECIFIED_GRAVITY);</span><br><span class="line">            a.recycle();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(int width, int height, int gravity) &#123;</span><br><span class="line">            super(width, height);</span><br><span class="line">            this.gravity = gravity;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull ViewGroup.LayoutParams source) &#123;</span><br><span class="line">            super(source);</span><br><span class="line">            this.gravity = TOPLEFT_GRAVITY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public LayoutParams(@NonNull LayoutParams source) &#123;</span><br><span class="line">            super(source);</span><br><span class="line"></span><br><span class="line">            this.gravity = source.gravity;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="6-效果图"><a href="#6-效果图" class="headerlink" title="6. 效果图"></a><a href></a>6. 效果图</h2><p> <img src="https://img-blog.csdn.net/20171021094131844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="7-源代码"><a href="#7-源代码" class="headerlink" title="7. 源代码"></a><a href></a>7. 源代码</h2><p> 源代码还是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>前面两篇博客主要是介绍直接继承View后复写onDraw方法来实现一些不规则图形的绘制，来达到满足不同自定义View的需求，更注重的是图形的绘制变换和效果展示，前两天学习一些自定义ViewGroup的相关内容，分享一下。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/10/20/《Android 进阶（三）》 自定义View之支持Gravity的ViewGroup/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -430,7 +378,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1639 个字)
+                    11 分钟 读完 (大约 1642 个字)
                 </span>
                 
                 
@@ -443,30 +391,17 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p> 最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。</p>
-<p> <img src="https://img-blog.csdn.net/20171017211254164" alt="这里写图片描述"></p>
-<h2 id="2-实现思路"><a href="#2-实现思路" class="headerlink" title="2. 实现思路"></a>2. 实现思路</h2><ol>
-<li>继承View，复写onDraw。 </li>
-<li>确定N边形和每个边对应的角度； </li>
-<li>确定多边形外接圆的半径以及圆心（也就是中心点） </li>
-<li>确定每条半径上的所有点的坐标。 </li>
-<li>确定每条数据在图形上的坐标； </li>
-<li>确定文字在图形上的位置； </li>
-<li>采用合适的绘制方式绘制；  <h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a>3. 实现</h2></li>
-</ol>
-<h3 id="3-1-定义自定义属性"><a href="#3-1-定义自定义属性" class="headerlink" title="3.1 定义自定义属性"></a>3.1 定义自定义属性</h3><p> 主要定义这几个属性，可以根据需要继续扩展。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;CustomRadarChart&quot;&gt;</span><br><span class="line">    &lt;!-- 蜘蛛网线条宽度 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineWidth&quot; format=&quot;dimension&quot;/&gt;</span><br><span class="line">    &lt;!-- 蜘蛛网颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;!-- 半径分成N段--&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineSegments&quot; format=&quot;integer&quot;/&gt;</span><br><span class="line">    &lt;!-- 文字颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarTextColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;!-- 文字字体大小--&gt;</span><br><span class="line">    &lt;attr name=&quot;radarTextSize&quot; format=&quot;integer&quot;/&gt;</span><br><span class="line">    &lt;!-- 数据展示覆盖区域颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarCoverColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="3-2-自定义View代码"><a href="#3-2-自定义View代码" class="headerlink" title="3.2 自定义View代码"></a>3.2 自定义View代码</h3><p> 注释代码中都有写出来，主要是看下实现的方式。没有过多的修饰和精简。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br></pre></td><td class="code"><pre><span class="line">public class CustomRadarChart extends View &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * N 边形，默认为6边形</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_PIECE_NUMBER = 7;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 线条宽度，默认为10px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_WIDTH = 4;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 线条颜色,默认为灰色</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_COLOR = 0xffd0d6dc;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 半径分成N段,默认为4段，圆心算一段</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_SEGMENTS = 4;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 外接圆半径，默认为50px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_RADIUS = 50;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 文本颜色和文本字体, 默认为黑色，10px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_TEXT_COLOR = 0xff647d91;</span><br><span class="line">    private final int DEFAULT_TEXT_SIZE = 10;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 覆盖面绘制颜色</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_COVER_COLOR = 0x55ced6dc;</span><br><span class="line"></span><br><span class="line">    private int mPieceNumber = DEFAULT_PIECE_NUMBER;</span><br><span class="line">    private int mRadius = DEFAULT_RADIUS;</span><br><span class="line"></span><br><span class="line">    private int mLineWidth = DEFAULT_LINE_WIDTH;</span><br><span class="line">    private int mLineColor = DEFAULT_LINE_COLOR;</span><br><span class="line">    private int mLineSegments = DEFAULT_LINE_SEGMENTS;</span><br><span class="line">    private int mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    private int mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line">    private int mCoverColor = DEFAULT_COVER_COLOR;</span><br><span class="line"></span><br><span class="line">    private double mAverageAngle = 0;</span><br><span class="line"></span><br><span class="line">    private Paint mRadarPaint;</span><br><span class="line">    private TextPaint mTextPaint;</span><br><span class="line">    private Paint mCoverPaint;</span><br><span class="line">    private Path mCoverPath;</span><br><span class="line"></span><br><span class="line">    List&lt;RadarPoints&gt; mRadarPointses = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;RadarEntry&gt; mRadarEntries = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mCoverPoints = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mTextPoints = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 外接圆中心位置</span><br><span class="line">     */</span><br><span class="line">    private int mPositionX = 0;</span><br><span class="line">    private int mPositionY = 0;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.CustomRadarChart);</span><br><span class="line"></span><br><span class="line">        mLineWidth = (int) attributes.getDimension(R.styleable.CustomRadarChart_radarLineWidth, DEFAULT_LINE_WIDTH);</span><br><span class="line">        mLineColor = attributes.getColor(R.styleable.CustomRadarChart_radarLineColor, DEFAULT_LINE_COLOR);</span><br><span class="line">        mLineSegments = attributes.getInteger(R.styleable.CustomRadarChart_radarLineSegments, DEFAULT_LINE_SEGMENTS);</span><br><span class="line">        mTextColor = attributes.getColor(R.styleable.CustomRadarChart_radarTextColor, DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                attributes.getInteger(R.styleable.CustomRadarChart_radarTextSize, DEFAULT_TEXT_SIZE), getResources().getDisplayMetrics());</span><br><span class="line">        mCoverColor = (int) attributes.getColor(R.styleable.CustomRadarChart_radarCoverColor, DEFAULT_COVER_COLOR);</span><br><span class="line"></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 蜘蛛网Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mRadarPaint = new Paint();</span><br><span class="line">        mRadarPaint.setColor(mLineColor);</span><br><span class="line">        mRadarPaint.setStrokeWidth(mLineWidth);</span><br><span class="line">        mRadarPaint.setAntiAlias(true);</span><br><span class="line">        mRadarPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 文字绘制Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mTextPaint = new TextPaint();</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextSize(mTextSize);</span><br><span class="line">        mTextPaint.setAntiAlias(true);</span><br><span class="line">        mTextPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         *覆盖面绘制Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mCoverPaint = new Paint();</span><br><span class="line">        mCoverPaint.setColor(mCoverColor);</span><br><span class="line">        mCoverPaint.setAntiAlias(true);</span><br><span class="line">        mCoverPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">        mCoverPath = new Path();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</span><br><span class="line">        super.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mPositionX = w / 2;</span><br><span class="line">        mPositionY = h / 2;</span><br><span class="line">        mAverageAngle = 360.0 / mPieceNumber;</span><br><span class="line"></span><br><span class="line">        int max = 0;</span><br><span class="line">        for(RadarEntry entry : mRadarEntries) &#123;</span><br><span class="line">            Rect textBound = new Rect();</span><br><span class="line">            mTextPaint.getTextBounds(entry.title, 0, entry.title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            max = Math.max(textBound.width(), max);</span><br><span class="line">        &#125;</span><br><span class="line">        mRadius = Math.min(w / 2 - max, h / 2);</span><br><span class="line"></span><br><span class="line">        if (mRadarEntries==null || mRadarEntries.size()==0) &#123;</span><br><span class="line">            throw new NullPointerException(&quot;请先设置数据集&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        /**</span><br><span class="line">         * 计算每一条轴线上的所有点</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            List&lt;PointF&gt; pointFs = new ArrayList&lt;&gt;();</span><br><span class="line">            for (int j = 0; j &lt; mLineSegments; j++) &#123;</span><br><span class="line">                PointF point = new PointF();</span><br><span class="line">                double percent = j * 1.0 / (mLineSegments - 1);</span><br><span class="line">                point.set(getPloygonX(mAverageAngle * i, percent),</span><br><span class="line">                        getPloygonY(mAverageAngle * i, percent));</span><br><span class="line">                pointFs.add(point);</span><br><span class="line">            &#125;</span><br><span class="line">            RadarPoints radarPoints = new RadarPoints(i, pointFs);</span><br><span class="line">            mRadarPointses.add(radarPoints);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 根据数据集计算覆盖多变形的点</span><br><span class="line">         */</span><br><span class="line">        for (int m = 0; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = new PointF();</span><br><span class="line">            double percent = mRadarEntries.get(m).level / 100.0;</span><br><span class="line">            pointF.set(getPloygonX(mAverageAngle * m, percent),</span><br><span class="line">                    getPloygonY(mAverageAngle * m, percent));</span><br><span class="line">            mCoverPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 设置文字显示位置</span><br><span class="line">         */</span><br><span class="line">        for (int m = 0; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = new PointF();</span><br><span class="line">            String title = mRadarEntries.get(m).title;</span><br><span class="line">            Rect textBound = new Rect();</span><br><span class="line">            mTextPaint.getTextBounds(title, 0, title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            float boundx = mRadarPointses.get(m).getPointFs().get(mLineSegments -1).x;</span><br><span class="line">            float boundy = mRadarPointses.get(m).getPointFs().get(mLineSegments -1).y;</span><br><span class="line">            if( boundx &gt; mRadius &amp;&amp; boundy &lt;= mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) - textBound.height()*2) ;</span><br><span class="line">            &#125; else if ( boundx &lt;= mRadius &amp;&amp; boundy &lt;= mRadius)&#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) - textBound.height()*2);</span><br><span class="line">            &#125; else if( boundx &lt;= mRadius &amp;&amp; boundy &gt; mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) );</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1));</span><br><span class="line">            &#125;</span><br><span class="line">            mTextPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置数据集，数据集的index决定位置，顺时针方向，起始角度为0度</span><br><span class="line">     */</span><br><span class="line">    public void setRadatEntries(List&lt;RadarEntry&gt; entries) &#123;</span><br><span class="line">        this.mRadarEntries = entries;</span><br><span class="line">        mPieceNumber = entries.size();</span><br><span class="line">        postInvalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        /**</span><br><span class="line">         * 绘制中心点</span><br><span class="line">         */</span><br><span class="line">        canvas.drawPoint(mPositionX, mPositionY, mRadarPaint);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制蜘蛛网</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mLineSegments; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; mPieceNumber - 1; j++) &#123;</span><br><span class="line">                canvas.drawLine(mRadarPointses.get(j).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                        j).getPointFs().get(i).y,</span><br><span class="line">                        mRadarPointses.get(j + 1).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                                j + 1).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">            &#125;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - 2).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 2).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            mPieceNumber - 1).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line"></span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(0).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            0).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制轴线</span><br><span class="line">         */</span><br><span class="line">        for (int k = 0; k &lt; mPieceNumber; k++) &#123;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(k).getPointFs().get(0).x,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(0).y,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(mLineSegments - 1).x, mRadarPointses.get(</span><br><span class="line">                            k).getPointFs().get(mLineSegments - 1).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制数据</span><br><span class="line">         */</span><br><span class="line">        if (mCoverPoints != null &amp;&amp; mCoverPoints.size() == mPieceNumber) &#123;</span><br><span class="line">            mCoverPath.reset();</span><br><span class="line">            mCoverPath.moveTo(mCoverPoints.get(0).x, mCoverPoints.get(0).y);</span><br><span class="line">            for (int i = 1; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">                mCoverPath.lineTo(mCoverPoints.get(i).x, mCoverPoints.get(i).y);</span><br><span class="line">            &#125;</span><br><span class="line">            mCoverPath.close();</span><br><span class="line">            canvas.drawPath(mCoverPath, mCoverPaint);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            throw new NullPointerException(&quot;请先设置数据集&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制文字,使用StaticLayout进行换行文字的绘制</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            canvas.save();</span><br><span class="line">            String str= mRadarEntries.get(i).title + &quot;\r\n&quot; + Math.floor(mRadarEntries.get(i).level*10)/10;</span><br><span class="line">            StaticLayout layout = new StaticLayout(str, mTextPaint, 300,</span><br><span class="line">                    Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);</span><br><span class="line">            canvas.translate(mTextPoints.get(i).x,mTextPoints.get(i).y);</span><br><span class="line">            layout.draw(canvas);</span><br><span class="line">            canvas.restore();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public float getPloygonX(double angle, double percent) &#123;</span><br><span class="line">        return Float.parseFloat(</span><br><span class="line">                String.valueOf(</span><br><span class="line">                        mPositionX + Math.cos(angle / 360.0 * 2 * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public float getPloygonY(double angle, double percent) &#123;</span><br><span class="line">        return Float.parseFloat(String.valueOf(</span><br><span class="line">                mPositionY + Math.sin(angle / 360.0 * 2 * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 雷达图数据载体</span><br><span class="line">     */</span><br><span class="line">    public static class RadarEntry &#123;</span><br><span class="line">        private String title;</span><br><span class="line">        private Float level;</span><br><span class="line"></span><br><span class="line">        public RadarEntry(String title, float level) &#123;</span><br><span class="line">            this.title = title;</span><br><span class="line">            this.level = level;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 每一条线上的所有点集合</span><br><span class="line">     */</span><br><span class="line">    public class RadarPoints &#123;</span><br><span class="line">        int index;</span><br><span class="line">        List&lt;PointF&gt; mPointFs;</span><br><span class="line"></span><br><span class="line">        public RadarPoints(int index, List&lt;PointF&gt; pointFs) &#123;</span><br><span class="line">            this.index = index;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int getIndex() &#123;</span><br><span class="line">            return index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setIndex(int index) &#123;</span><br><span class="line">            this.index = index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public List&lt;PointF&gt; getPointFs() &#123;</span><br><span class="line">            return mPointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPointFs(List&lt;PointF&gt; pointFs) &#123;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 可能画图过程中的实现方式优点粗糙，大家可以根据自己的方式，改写即可。<br> 个人是先将每条半径上的端点全部计算出来进行保存，然后一次连接，然后把每个半径首尾端点连接，然后绘制覆盖区域，覆盖区域也是采用先计算点位置，然后连接的方式实现，最后确定文本的显示位置和文字的绘制。由于这里涉及到绘制换行文字，使用到来StaticLayout。使用方法请查阅对应API。</p>
-<h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4. 效果"></a>4. 效果</h2><p> <img src="https://img-blog.csdn.net/20171017215345906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="5-源码"><a href="#5-源码" class="headerlink" title="5. 源码"></a>5. 源码</h2><p> 源码依然是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/10/17/《Android 进阶（二）》 自定义View之Dota2能力雷达图/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -495,7 +430,7 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1388 个字)
+                    9 分钟 读完 (大约 1325 个字)
                 </span>
                 
                 
@@ -508,63 +443,25 @@ defaultKeyboardType | 默认选中的键盘，默认值为KeyboardType.LETTER</c
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：</p>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：</p>
 <ol>
-<li>继承View重写onDraw方法； </li>
-<li>继承ViewGroup派生特殊Layout； </li>
-<li>继承特定View； </li>
-<li>继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。</li>
-</ol>
-<h2 id="2-实现思路"><a href="#2-实现思路" class="headerlink" title="2. 实现思路"></a><a href></a>2. 实现思路</h2><ol start="2">
-<li><p>继承View； </p>
+<li><p>继承View重写onDraw方法；</p>
 </li>
-<li><p>自定义属性值：arcColor，bgColor，arc_textColor，arc_textSize，分别是前景色，背景色，进度文字颜色，进度文字字体大小； </p>
+<li><p>继承ViewGroup派生特殊Layout；</p>
 </li>
-<li><p>确定弧形绘制位置和文字绘制位置 </p>
+<li><p>继承特定View；</p>
 </li>
-<li><p>实现onDraw()方法  </p>
-<h2 id="3-效果"><a href="#3-效果" class="headerlink" title="3. 效果"></a><a href></a>3. 效果</h2><p><img src="https://img-blog.csdn.net/20171013165354844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-</li>
-</ol>
-<h2 id="4-知识点"><a href="#4-知识点" class="headerlink" title="4. 知识点"></a><a href></a>4. 知识点</h2><h3 id="4-1-MeasureSpec"><a href="#4-1-MeasureSpec" class="headerlink" title="4.1 MeasureSpec"></a><a href></a>4.1 MeasureSpec</h3><p> MeasureSpec代表一个32位int值，高2位代表SpecMode，低30位代表SpecSize。SpecMode指的是测量模式，SpecSize指的是对应测量模式下的大小。</p>
-<p> SpecMode有下面如下3中模式：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Measure specification mode: The parent has not imposed any constraint</span><br><span class="line"> * on the child. It can be whatever size it wants.</span><br><span class="line"> */</span><br><span class="line">public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Measure specification mode: The parent has determined an exact size</span><br><span class="line"> * for the child. The child is going to be given those bounds regardless</span><br><span class="line"> * of how big it wants to be.</span><br><span class="line"> */</span><br><span class="line">public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Measure specification mode: The child can be as large as it wants up</span><br><span class="line"> * to the specified size.</span><br><span class="line"> */</span><br><span class="line">public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>SpecMode    | 描述                                                                
------------ | ------------------------------------------------------------------ 
-UNSPECIFIED | 父容器不对View有任何限制，系统涉及，平时很少涉及                                        
-EXACTLY     | 父容器已经检测出View所需要的精准大小，即SpecSize的大小。对应match_parent和固定数值两种情况         
-AT_MOST     | 父容器指定一个View可用的大小。View的大小不能超过这个值，具体是什么值要看View的具体实现。对应wrap_content情况</code></pre><p>SpecSize大小单位px。</p>
-<p> 生成MeasureSpec方式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static int makeMeasureSpec(@IntRange(from = 0, to = (1 &lt;&lt; MeasureSpec.MODE_SHIFT) - 1) int size,</span><br><span class="line">                                          @MeasureSpecMode int mode) &#123;</span><br><span class="line">            if (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">                return size + mode;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 获取size和mode的方式</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Extracts the mode from the supplied measure specification.</span><br><span class="line"> *</span><br><span class="line"> * @param measureSpec the measure specification to extract the mode from</span><br><span class="line"> * @return &#123;@link android.view.View.MeasureSpec#UNSPECIFIED&#125;,</span><br><span class="line"> *         &#123;@link android.view.View.MeasureSpec#AT_MOST&#125; or</span><br><span class="line"> *         &#123;@link android.view.View.MeasureSpec#EXACTLY&#125;</span><br><span class="line"> */</span><br><span class="line">@MeasureSpecMode</span><br><span class="line">public static int getMode(int measureSpec) &#123;</span><br><span class="line">    //noinspection ResourceType</span><br><span class="line">    return (measureSpec &amp; MODE_MASK);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Extracts the size from the supplied measure specification.</span><br><span class="line"> *</span><br><span class="line"> * @param measureSpec the measure specification to extract the size from</span><br><span class="line"> * @return the size in pixels defined in the supplied measure specification</span><br><span class="line"> */</span><br><span class="line">public static int getSize(int measureSpec) &#123;</span><br><span class="line">    return (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-2-View的工作流程"><a href="#4-2-View的工作流程" class="headerlink" title="4.2 View的工作流程"></a><a href></a>4.2 View的工作流程</h3><pre><code>过程        | 描述                                                        
---------- | ---------------------------------------------------------- 
-onMeasure | 测量过程，确定View的宽度和高度，传入的参数是widthMeasureSpec，heightMeasureSpec
-onLayout  | 布局过程，确定View的上下左右四个角的位置                                    
-onDraw    | 绘制过程，一般用来绘制特殊图形                                           </code></pre><p>继承View的自定义View基本只需要关注onDraw()和onMeasure()。由于没有子View所以不需要关注onLayout()。</p>
-<h3 id="4-3-图形绘制"><a href="#4-3-图形绘制" class="headerlink" title="4.3 图形绘制"></a><a href></a>4.3 图形绘制</h3><p> 具体请查看Canvas类和Paint类，这两个类内容比较多，可以自己研究一下，有很多有用的东西。</p>
-<h4 id="4-3-1-Canvas绘制方法"><a href="#4-3-1-Canvas绘制方法" class="headerlink" title="4.3.1 Canvas绘制方法"></a><a href></a>4.3.1 Canvas绘制方法</h4><p> <img src="https://img-blog.csdn.net/20171014120820574?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="4-3-2-Paint属性值"><a href="#4-3-2-Paint属性值" class="headerlink" title="4.3.2 Paint属性值"></a><a href></a>4.3.2 Paint属性值</h4><p> Paint枚举值<br> <img src="https://img-blog.csdn.net/20171014121033871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 设置属性方法<br> <img src="https://img-blog.csdn.net/20171014121203375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="5-关键代码"><a href="#5-关键代码" class="headerlink" title="5. 关键代码"></a><a href></a>5. 关键代码</h2><h3 id="5-1-attrs-xml"><a href="#5-1-attrs-xml" class="headerlink" title="5.1 attrs.xml"></a><a href></a>5.1 attrs.xml</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;ArcView&quot;&gt;</span><br><span class="line">    &lt;attr name=&quot;arcColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;bgColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;arc_textColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;arc_textSize&quot; format=&quot;dimension&quot;/&gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="5-2-ArcView"><a href="#5-2-ArcView" class="headerlink" title="5.2 ArcView"></a><a href></a>5.2 ArcView</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line">public class ArcView extends View &#123;</span><br><span class="line"></span><br><span class="line">    private final int MAX_SWEEP_ANGLE = 240;</span><br><span class="line">    private final int START_SWEEP_ANGLE = 150;</span><br><span class="line">    private final int DEFAULT_MAX_PROGRESS = 100;</span><br><span class="line"></span><br><span class="line">    private final int DEFAULT_ARC_COLOR = Color.RED;</span><br><span class="line">    private final int DEFAULT_BG_COLOR = Color.DKGRAY;</span><br><span class="line">    private final int DEFAULT_TEXT_COLOR = Color.BLACK;</span><br><span class="line">    private final int DEFAULT_TEXT_SIZE = 40;</span><br><span class="line"></span><br><span class="line">    private int mArcColor = DEFAULT_ARC_COLOR;</span><br><span class="line">    private int mBgColor = DEFAULT_BG_COLOR;</span><br><span class="line">    private int mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    private int mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line"></span><br><span class="line">    private int progress = 0;</span><br><span class="line">    private int mMaxProgress = DEFAULT_MAX_PROGRESS;</span><br><span class="line"></span><br><span class="line">    private Paint mCirclePaint;</span><br><span class="line">    private Paint mBgPaint;</span><br><span class="line">    private Paint mTextPaint;</span><br><span class="line"></span><br><span class="line">    private final Rect mTextBound = new Rect();</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        final TypedArray attributes = getContext().obtainStyledAttributes(attrs,</span><br><span class="line">                R.styleable.ArcView);</span><br><span class="line"></span><br><span class="line">        mArcColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arcColor,</span><br><span class="line">                        DEFAULT_ARC_COLOR);</span><br><span class="line"></span><br><span class="line">        mBgColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_bgColor,</span><br><span class="line">                        DEFAULT_BG_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arc_textColor,</span><br><span class="line">                        DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (int) attributes</span><br><span class="line">                .getDimension(</span><br><span class="line">                        R.styleable.ArcView_arc_textSize,</span><br><span class="line">                        DEFAULT_TEXT_SIZE);</span><br><span class="line">        attributes.recycle();</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        mCirclePaint = new Paint();</span><br><span class="line">        mCirclePaint.setColor(mArcColor);</span><br><span class="line">        mCirclePaint.setStrokeWidth(8.0F);</span><br><span class="line">        mCirclePaint.setDither(true);</span><br><span class="line">        mCirclePaint.setAntiAlias(true);</span><br><span class="line">        mCirclePaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mBgPaint = new Paint();</span><br><span class="line">        mBgPaint.setColor(mBgColor);</span><br><span class="line">        mBgPaint.setStrokeWidth(20.0F);</span><br><span class="line">        mBgPaint.setAntiAlias(true);</span><br><span class="line">        mBgPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line">        mBgPaint.setStrokeCap(Paint.Cap.ROUND);</span><br><span class="line"></span><br><span class="line">        mTextPaint = new Paint();</span><br><span class="line">        mTextPaint.setStrokeWidth(4);</span><br><span class="line"></span><br><span class="line">        //字体SP单位转换成PX</span><br><span class="line">        int size =  (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                mTextSize, getResources().getDisplayMetrics());</span><br><span class="line">        mTextPaint.setTextSize(size);</span><br><span class="line">        mTextPaint.setAntiAlias(true);</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextAlign(Paint.Align.LEFT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        int paddingLeft = getPaddingLeft();</span><br><span class="line">        int paddingRight = getPaddingRight();</span><br><span class="line">        int paddingTop = getPaddingTop();</span><br><span class="line">        int paddingBottom = getPaddingBottom();</span><br><span class="line"></span><br><span class="line">        int circleWidth = getWidth() - paddingLeft - paddingRight;</span><br><span class="line">        int circleHeight = getHeight() - paddingTop - paddingBottom;</span><br><span class="line"></span><br><span class="line">        int radius = Math.min(circleWidth, circleHeight) / 2;</span><br><span class="line"></span><br><span class="line">        int left = getLeft() + paddingLeft;</span><br><span class="line">        int right = left + radius * 2;</span><br><span class="line">        int top = getTop() + getPaddingTop();</span><br><span class="line">        int bottom = top + 2 * radius;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, MAX_SWEEP_ANGLE, false,</span><br><span class="line">                mBgPaint);</span><br><span class="line"></span><br><span class="line">        int sweepArc = MAX_SWEEP_ANGLE * progress / mMaxProgress;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, sweepArc, false, mCirclePaint);</span><br><span class="line"></span><br><span class="line">        String text = String.valueOf(progress) + &quot;%&quot;;</span><br><span class="line">        mTextPaint.getTextBounds(text, 0, text.length(),</span><br><span class="line">                mTextBound);</span><br><span class="line">        canvas.drawText(text, (left + right) / 2 - mTextBound.width() / 2,</span><br><span class="line">                (top + bottom) / 2 + mTextBound.height() / 2, mTextPaint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置进度大小</span><br><span class="line">     */</span><br><span class="line">    public void setProgress(int progress) &#123;</span><br><span class="line">        if (progress &lt; 0 || progress &gt; mMaxProgress) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        this.progress = progress;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置最大进度值</span><br><span class="line">     */</span><br><span class="line">    public void setMaxProgress(int maxProgress) &#123;</span><br><span class="line">        this.mMaxProgress = maxProgress;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="6-源码"><a href="#6-源码" class="headerlink" title="6. 源码"></a><a href></a>6. 源码</h2><p> 源码已上传Github，后续自定义View的学习Demo也会陆续上传</p>
-<p> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
+<li><p>继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。</p></li></ol>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2017/10/13/《Android 进阶（一）》 自定义View之仪表盘进度条/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -724,7 +621,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -744,7 +641,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -835,7 +732,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -945,7 +842,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -1139,7 +1036,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1508,7 +1405,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1548,23 +1445,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1578,13 +1461,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1592,13 +1468,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1627,7 +1496,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1648,13 +1517,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1683,7 +1545,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1746,14 +1608,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1772,13 +1634,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1786,22 +1641,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1835,13 +1676,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1851,7 +1685,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1870,13 +1704,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1886,14 +1713,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1921,7 +1748,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1940,44 +1767,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1991,20 +1783,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2038,22 +1816,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2068,7 +1832,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2274,7 +2038,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2643,7 +2407,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2683,23 +2447,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2713,13 +2463,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2727,13 +2470,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2762,7 +2498,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2783,13 +2519,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2818,7 +2547,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2881,14 +2610,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2907,13 +2636,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2921,22 +2643,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2970,13 +2678,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2986,7 +2687,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3005,13 +2706,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3021,14 +2715,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3056,7 +2750,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -3075,44 +2769,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3126,20 +2785,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3173,22 +2818,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3203,7 +2834,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

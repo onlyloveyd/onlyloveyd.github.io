@@ -165,7 +165,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    28 分钟 读完 (大约 4198 个字)
+                    28 分钟 读完 (大约 4221 个字)
                 </span>
                 
                 
@@ -178,263 +178,18 @@
             
         </h1>
         <div class="content">
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><a href></a>介绍</h2><p> <a href="https://github.com/greenrobot/EventBus" target="_blank" rel="noopener">EventBus</a>是一个使用发布者/订阅者模式 并且低耦合的Android开源库，。 EventBus只需几行代码即可实现中央通信解耦类：简化代码，删除依赖关系，加快应用程序开发速度。</p>
-<p> <img src="https://img-blog.csdn.net/20170214140817726?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<hr>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a><a href></a>优势</h2><ul>
-<li>简化组件通信 </li>
-<li>解耦事件发送端和接收端 </li>
-<li>在Activity,Fragment和后天线程之间运行良好 </li>
-<li>避免复杂且易出错的依赖问题和生命周期问题 </li>
-<li>运行速度快。为了高性能专门做过优化 </li>
-<li>jar包小（&lt;50K） </li>
-<li>在实践中已通过100,000,000次安装的应用程序证明 </li>
-<li>具有指定分发线程和用户优先级等高级特性  </li>
-</ul>
-<hr>
-<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a><a href></a>特性</h2><ul>
-<li>简单但强大：EventBus是一个微小的库，具有超级容易学习的API。然而，您的软件架构可能因组件解耦而受益：订阅者在使用事件时不用关心这个事件是谁发送的。</li>
-</ul>
-<ul>
-<li>大量验证：EventBus是最常用的Android库之一：成千上万的应用程序使用EventBus，其中不乏非常受欢迎的应用程序。我们认为差不多有十亿应用程序使用EventBus。</li>
-</ul>
-<ul>
-<li>高性能：Android系统上，性能尤为重要。 EventBus被针对性的做了大量的分析和优化;EventBus可能是这类开源库中速度最快的 解决方案。</li>
-</ul>
-<ul>
-<li>基于API的便捷注解（不牺牲性能）：只需将@Subscribe注解添加订阅方法即可。由于构建的时候花费了时间来建立注解的索引，所以EventBus不需要在应用程序的运行时间执行注释反射，注解反射的方式在Android上相当慢。</li>
-</ul>
-<ul>
-<li>Android主线程发送：当与UI交互时，EventBus可以在主线程中传递事件，而不用去关心事件是从如何发布的。</li>
-</ul>
-<ul>
-<li>后台线程发送：如果您的订阅者长时间运行任务，EventBus也可以使用后台线程来避免UI阻塞。</li>
-</ul>
-<ul>
-<li>事件和订阅者继承：在EventBus中，面向对象的范例适用于事件和订阅者类。让我们假设事件类A是B的父类。类型B的发布事件也将被发布到对A感兴趣的订阅者。类似地，考虑订阅类的继承。</li>
-</ul>
-<ul>
-<li>零配置：您可以从代码中的任何地方立即使用默认的EventBus实例。</li>
-</ul>
-<ul>
-<li>可配置：要根据需要调整EventBus，可以使用构建器模式调整其行为。</li>
-</ul>
-<hr>
-<h2 id="添加EventBus到工程"><a href="#添加EventBus到工程" class="headerlink" title="添加EventBus到工程"></a><a href></a>添加EventBus到工程</h2><p> EventBus在JCenter和Maven Central上可用，因此只需将依赖项添加到项目中。</p>
-<ul>
-<li>Gradle  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li>Maven  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.greenrobot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;eventbus&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li><a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.greenrobot%22%20AND%20a%3A%22eventbus%22" target="_blank" rel="noopener">jar包</a>  </li>
-</ul>
-<hr>
-<h2 id="开始使用EventBus"><a href="#开始使用EventBus" class="headerlink" title="开始使用EventBus"></a><a href></a>开始使用EventBus</h2><h4 id="一、简单的三步教你使用EvnetBus"><a href="#一、简单的三步教你使用EvnetBus" class="headerlink" title="一、简单的三步教你使用EvnetBus"></a><a href></a>一、简单的三步教你使用EvnetBus</h4><h5 id="定义事件"><a href="#定义事件" class="headerlink" title="定义事件"></a><a href></a><strong>定义事件</strong></h5><p> 事件是纯Java对象，没有其他的特殊要求</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class MessageEvent &#123;</span><br><span class="line"> </span><br><span class="line">    public final String message;</span><br><span class="line"> </span><br><span class="line">    public MessageEvent(String message) &#123;</span><br><span class="line">        this.message = message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> #####<strong>准备订阅者</strong></p>
-<p> 订阅者需要实现在事件发布时将被调用的事件处理方法（也称为“订阅方法”）。 这些订阅方法将用@Subscribe注释定义。<br> 注意，使用EventBus 3可以自由选择方法名（没有像EventBus 2中的命名约定）。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// This method will be called when a MessageEvent is posted (in the UI thread for Toast)</span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onMessageEvent(MessageEvent event) &#123;</span><br><span class="line">    Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// This method will be called when a SomeOtherEvent is posted</span><br><span class="line">@Subscribe</span><br><span class="line">public void handleSomethingElse(SomeOtherEvent event) &#123;</span><br><span class="line">    doSomethingWith(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 订阅者还需要向总线注册和注销。 只有订阅者注册后，他们才会收到事件。 在Android的在活动和片段中，通常应该根据其生命周期进行注册。 对于大多数情况下在onStart中注册，在onStop中销毁就OK了。</p>
-<p> #####<strong>发布事件</strong><br> 在代码的任意地方发布事件，所有与当前事件匹配且注册过的订阅者都将会收到事件。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="二、传递线程"><a href="#二、传递线程" class="headerlink" title="二、传递线程"></a><a href></a>二、传递线程</h4><p> EventBus可以为你处理线程：事件可以发布在不同于发布线程的线程中。事件可以发布在和发布线程不同的线程里。一个普遍的场景就是处理UI的变化。在Android系统中，UI更改必须在UI（主）线程中完成。另一方面，网络或者任何耗时的任务，都不允许在主线程中执行。EventBus帮助你处理这些任务并且与UI线程同步（无需深入了解线程转换，使用AsyncTask等）。</p>
-<p> 在EventBus中，你可以通过使用四个ThreadMode中的一个来定义将调用事件处理方法的线程。</p>
-<h5 id="ThreadMode-POSTING"><a href="#ThreadMode-POSTING" class="headerlink" title="ThreadMode: POSTING"></a><a href></a><strong>ThreadMode: POSTING</strong></h5><p> 订阅者将会在事件发布的线程中被调用。这是默认模式。事件的传递是同步完成的，一旦事件发布完成，所有的订阅者都将会被调用。由于完全避免了线程切换，这种模式的开销是最小的。所以，针对那些不需要主线程并且能在很短时间内完成的简单任务，我们推荐使用这种模式。这种模式下的事件处理方法必须快速返回，避免阻塞发布事件的线程，因为这个线程有可能是主线程。<br> 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Called in the same thread (default)</span><br><span class="line">// ThreadMode is optional here</span><br><span class="line">@Subscribe(threadMode = ThreadMode.POSTING)</span><br><span class="line">public void onMessage(MessageEvent event) &#123;</span><br><span class="line">    log(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="ThreadMode-MAIN"><a href="#ThreadMode-MAIN" class="headerlink" title="ThreadMode: MAIN"></a><a href></a><strong>ThreadMode: MAIN</strong></h5><p> 订阅者将在Android的主线程（有时称为UI线程）中调用。 如果发布线程是主线程，则将直接调用事件处理方法（与ThreadMode.POSTING描述的同步）。 使用此模式的事件处理程序必须快速返回，以避免阻塞主线程。<br> 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in Android UI&apos;s main thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onMessage(MessageEvent event) &#123;</span><br><span class="line">textField.setText(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="ThreadMode-BACKGROUND"><a href="#ThreadMode-BACKGROUND" class="headerlink" title="ThreadMode: BACKGROUND"></a><a href></a><strong>ThreadMode: BACKGROUND</strong></h5><p> 订阅者将在后台线程中调用。 如果发布线程不是主线程，事件处理程序方法将直接在发布线程中调用。 如果发布线程是主线程，EventBus使用单个后台线程来按顺序传递所有事件。 使用此模式的事件处理方法应尽快返回以避免阻塞后台线程。<br> 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in the background thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.BACKGROUND)</span><br><span class="line">public void onMessage(MessageEvent event)&#123;</span><br><span class="line">    saveToDisk(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="ThreadMode-ASYNC"><a href="#ThreadMode-ASYNC" class="headerlink" title="ThreadMode: ASYNC"></a><a href></a><strong>ThreadMode: ASYNC</strong></h5><p> 事件处理方法在单独的线程中调用。 这个线程总是独立于发布线程和主线程。 这种模式下，发布事件不会等待事件处理方法的执行结果。 如果事件处理方法的执行需要一些时间，则应该使用此模式，如网络访问。 避免同时触发大量长时间运行的异步处理方法以限制并发线程的数量。 EventBus使用线程池来有效地重用已完成任务的线程。<br> 例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Called in a separate thread</span><br><span class="line">@Subscribe(threadMode = ThreadMode.ASYNC)</span><br><span class="line">public void onMessage(MessageEvent event)&#123;</span><br><span class="line">    backend.send(event.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h4 id="三、配置"><a href="#三、配置" class="headerlink" title="三、配置"></a><a href></a>三、配置</h4><p> 通过EventBusBuilder，我们可以配置EventBus的各个方面。 例如，下面是如何构建一个当发送的事件没有订阅者时不报异常的EventBus</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder()</span><br><span class="line">    .logNoSubscriberMessages(false)</span><br><span class="line">    .sendNoSubscriberEvent(false)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
-
-<p> 另外一个例子是，如何构建一个在订阅者排除异常时报错的EventBus</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder().throwSubscriberException(true).build();</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>注意：默认情况下，EventBus捕获从订阅者方法抛出的异常，并发送不强制要求处理的SubscriberExceptionEvent。</strong></em></p>
-<p> 使用EventBus.getDefault()是一种从应用程序的任何位置获取共享EventBus实例的简单方法。 EventBusBuilder还允许使用方法installDefaultEventBus()配置此默认实例。</p>
-<p> 例如，可以配置默认的EventBus实例来重新抛出在订阅方法中发生的异常。 但是让我们只对DEBUG构建，因为这可能会崩溃的应用程序异常</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.builder().throwSubscriberException(BuildConfig.DEBUG).installDefaultEventBus();</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>注意：在第一次使用默认EventBus实例之前，只能执行一次。 后续调用installDefaultEventBus()将抛出异常。 这可确保应用程序中的行为一致。 您的应用程序类是在使用之前配置默认EventBus实例的不错地方。</strong></em></p>
-<hr>
-<p> ####四、粘性事件<br> 一些事件携带在事件发布之后感兴趣的信息。 例如，事件表示某些初始化完成。 或者如果您有一些传感器或位置数据，并且想要保持最近的值。 而不是实现自己的缓存，你可以使用粘性事件。 所以EventBus保持内存中某个类型的最后一个粘性事件。 然后粘性事件可以传递给订阅者或明确地查询。 因此，您不需要任何特殊的逻辑来考虑已有的数据</p>
-<h5 id="粘性示例"><a href="#粘性示例" class="headerlink" title="粘性示例"></a><a href></a><strong>粘性示例</strong></h5><p> 下面表示，一个粘性事件发布了一段时间以前：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus.getDefault().postSticky(new MessageEvent(&quot;Hello everyone!&quot;));</span><br></pre></td></tr></table></figure>
-
-<p> 现在一个新的活动开始。 在注册期间，所有粘性订阅者方法将立即获得先前发布的粘性事件：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    super.onStart();</span><br><span class="line">    EventBus.getDefault().register(this);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// UI updates must run on MainThread</span><br><span class="line">@Subscribe(sticky = true, threadMode = ThreadMode.MAIN)</span><br><span class="line">public void onEvent(MessageEvent event) &#123;   </span><br><span class="line">    textField.setText(event.message);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Override</span><br><span class="line">public void onStop() &#123;</span><br><span class="line">    EventBus.getDefault().unregister(this);    </span><br><span class="line">    super.onStop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> #####<strong>手动获取和删除粘性事件</strong><br> 如你所见，最后一个粘性事件在注册时自动传递给匹配的订阅者。 但有时手动检查粘性事件可能会更方便。 另外，可能需要移除（消费）粘性事件才能使得它们不再被递送。 例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MessageEvent stickyEvent = EventBus.getDefault().getStickyEvent(MessageEvent.class);</span><br><span class="line">// Better check that an event was actually posted before</span><br><span class="line">if(stickyEvent != null) &#123;</span><br><span class="line">    // &quot;Consume&quot; the sticky event</span><br><span class="line">    EventBus.getDefault().removeStickyEvent(stickyEvent);</span><br><span class="line">    // Now do something with it</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 方法removeStickyEvent是重载的：当你传入类时，它将返回先前持有的粘性事件。 使用这个变化，我们可以改进前面的例子：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MessageEvent stickyEvent = EventBus.getDefault().removeStickyEvent(MessageEvent.class);</span><br><span class="line">// Better check that an event was actually posted before</span><br><span class="line">if(stickyEvent != null) &#123;</span><br><span class="line">    // Now do something with it</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h4 id="五、优先级和事件取消"><a href="#五、优先级和事件取消" class="headerlink" title="五、优先级和事件取消"></a><a href></a>五、优先级和事件取消</h4><p> 尽管EventBus的大多数用例不需要优先级或事件取消，但在某些特殊情况下它们可能派上用场。 例如，如果应用处于前台，则事件可以触发一些UI逻辑，但如果应用当前对用户不可见，则事件可以不同地反应。</p>
-<p> #####<strong>订阅者优先级</strong><br> 你可以通过在注册期间为订阅者提供优先级来更改事件传递的顺序。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Subscribe(priority = 1);</span><br><span class="line">public void onEvent(MessageEvent event) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 在相同的传递线程（ThreadMode）中，较高优先级的订阅者将在其他优先级较低的订阅者之前接收事件。 默认优先级为0。<br> <em><strong>注意：优先级不影响不同线程模式的订阅者之间的传递顺序！</strong></em></p>
-<h5 id="取消事件传送"><a href="#取消事件传送" class="headerlink" title="取消事件传送"></a><a href></a><strong>取消事件传送</strong></h5><p> 你可以通过从订阅者的事件处理方法调用cancelEventDelivery（Object event）来取消事件传递过程。 任何其他活动传送将被取消，后续订阅者将不会收到活动。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Called in the same thread (default)</span><br><span class="line">@Subscribe</span><br><span class="line">public void onEvent(MessageEvent event)&#123;</span><br><span class="line">    // Process the event</span><br><span class="line">    ...</span><br><span class="line">    // Prevent delivery to other subscribers</span><br><span class="line">    EventBus.getDefault().cancelEventDelivery(event) ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 事件通常由更高优先级的订阅者取消。 取消仅限于在发布线程（ThreadMode.PostThread）中运行的事件处理方法。</p>
-<hr>
-<h4 id="六、订阅者索引"><a href="#六、订阅者索引" class="headerlink" title="六、订阅者索引"></a><a href></a>六、订阅者索引</h4><p> 订阅者索引是EventBus 3的一个新功能。它是一个可选的优化，以加速初始订阅者注册。</p>
-<p> 订阅者索引可以在构建时通过EventBus注解创建。 因为不需要使用索引，为了更好的性能建议在Android上使用。</p>
-<h5 id="索引前提条件"><a href="#索引前提条件" class="headerlink" title="索引前提条件"></a><a href></a><strong>索引前提条件</strong></h5><p> 注意，只有@Subscriber方法可以索引，其中订阅者和事件类是public的。 此外，由于Java的注释处理本身的技术限制，@Subscribe注释不能在匿名类中识别。</p>
-<p> 当EventBus不能使用索引时，它会在运行时自动回退到反射。 因此，它仍然可以工作，只是有点慢。</p>
-<h5 id="如何生成索引"><a href="#如何生成索引" class="headerlink" title="如何生成索引"></a><a href></a><strong>如何生成索引</strong></h5><ul>
-<li>使用注解<br> 如果你不使用Android Gradle插件版本2.2.0或更高版本，请使用配置与android-apt。<br> 要启用索引生成，需要使用annotationProcessor属性将EventBus注释处理器添加到构建中。 还要设置参数eventBusIndex来指定要生成的索引的完全限定类。 例如，将以下部分添加到Gradle构建脚本中：  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        javaCompileOptions &#123;</span><br><span class="line">            annotationProcessorOptions &#123;</span><br><span class="line">                arguments = [ eventBusIndex : &apos;com.example.myapp.MyEventBusIndex&apos; ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br><span class="line">    annotationProcessor &apos;org.greenrobot:eventbus-annotation-processor:3.0.1&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ul>
-<li><p>使用android-apt<br> 如果上述方法不适用于你，你可以使用android-apt Gradle插件添加EventBus注释处理器到你的构建中。 将以下部分添加到Gradle构建脚本中：  </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;com.neenbedankt.gradle.plugins:android-apt:1.8&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">apply plugin: &apos;com.neenbedankt.android-apt&apos;</span><br><span class="line"> </span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.greenrobot:eventbus:3.0.0&apos;</span><br><span class="line">    apt &apos;org.greenrobot:eventbus-annotation-processor:3.0.1&apos;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">apt &#123;</span><br><span class="line">    arguments &#123;</span><br><span class="line">        eventBusIndex &quot;com.example.myapp.MyEventBusIndex&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>下次构建项目时（没有错误），将为您生成由eventBusIndex指定的类。 然后当设置EventBus通过它像这样：</p>
-</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder().addIndex(new MyEventBusIndex()).build();</span><br></pre></td></tr></table></figure>
-
-<p> 或者，如果您想在整个应用程序中使用默认实例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EventBus.builder().addIndex(new MyEventBusIndex()).installDefaultEventBus();</span><br><span class="line">// Now the default instance uses the given index. Use it like this:</span><br><span class="line">EventBus eventBus = EventBus.getDefault();</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="索引你的开源库"><a href="#索引你的开源库" class="headerlink" title="索引你的开源库"></a><a href></a><strong>索引你的开源库</strong></h5><p> 你可以将相同的原则应用于作为库（而不是最终应用程序）的一部分的代码。 这样，您可能有多个索引类，您可以在EventBus设置期间添加所有索引类，例如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">EventBus eventBus = EventBus.builder()</span><br><span class="line">    .addIndex(new MyEventBusAppIndex())</span><br><span class="line">    .addIndex(new MyEventBusLibIndex()).build();</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h4 id="七、ProGuard"><a href="#七、ProGuard" class="headerlink" title="七、ProGuard"></a><a href></a>七、ProGuard</h4><p> ProGuard模糊方法名称并可能删除不被调用的方法（死代码删除）。 因为Subscriber方法不是直接调用，ProGuard假定它们未被使用。 因此，如果您启用ProGuard缩减，您必须告诉Proguard保留这些Subscriber方法。</p>
-<p> 在ProGuard配置文件（proguard.cfg）中使用以下规则以防止订阅者被删除：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-keepattributes *Annotation*</span><br><span class="line">-keepclassmembers class ** &#123;</span><br><span class="line">    @org.greenrobot.eventbus.Subscribe &lt;methods&gt;;</span><br><span class="line">&#125;</span><br><span class="line">-keep enum org.greenrobot.eventbus.ThreadMode &#123; *; &#125;</span><br><span class="line"> </span><br><span class="line"># Only required if you use AsyncExecutor</span><br><span class="line">-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent &#123;</span><br><span class="line">    &lt;init&gt;(java.lang.Throwable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <em><strong>注意：无论是否使用订户索引，您都需要此配置。</strong></em></p>
-<hr>
-<h4 id="八、AsyncExecutor"><a href="#八、AsyncExecutor" class="headerlink" title="八、AsyncExecutor"></a><a href></a>八、AsyncExecutor</h4><h5 id="AsyncExecutor"><a href="#AsyncExecutor" class="headerlink" title="AsyncExecutor"></a><a href></a><strong>AsyncExecutor</strong></h5><p> AsyncExecutor就像一个线程池，但是具有失败（异常）处理。 失败会抛出异常，AsyncExecutor会将这些异常包装在事件中，并自动发布。</p>
-<p> 免责声明：AsyncExecutor是一个非核心实用程序类。 它可能会在后台线程中保存一些错误处理代码，但它不是一个核心的EventBus类。</p>
-<p> 通常，调用AsyncExecutor.create（）创建一个实例并将其保存在应用程序范围中。 然后执行某些东西，实现RunnableEx接口并将其传递给AsyncExecutor的execute方法。 与Runnable不同，RunnableEx可能会抛出异常。</p>
-<p> 如果RunnableEx实现抛出异常，它将被捕获并被包装到ThrowableFailureEvent中，这将被发布。</p>
-<p> 执行部分示例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AsyncExecutor.create().execute(</span><br><span class="line">    new AsyncExecutor.RunnableEx() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() throws LoginException &#123;</span><br><span class="line">            // No need to catch any Exception (here: LoginException)</span><br><span class="line">            remote.login();</span><br><span class="line">            EventBus.getDefault().postSticky(new LoggedInEvent());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p> 接收部分示例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void handleLoginEvent(LoggedInEvent event) &#123;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Subscribe(threadMode = ThreadMode.MAIN)</span><br><span class="line">public void handleFailureEvent(ThrowableFailureEvent event) &#123;</span><br><span class="line">    // do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="AsyncExecutor-Builder"><a href="#AsyncExecutor-Builder" class="headerlink" title="AsyncExecutor Builder"></a><a href></a><strong>AsyncExecutor Builder</strong></h5><p> 如果要自定义AsyncExecutor实例，请调用静态方法AsyncExecutor.builder（）。 它将返回一个构建器，您可以自定义EventBus实例，线程池和失败事件的类。</p>
-<p> 另一个定制选项是执行范围，它提供故障事件上下文信息。 例如，失败事件可能仅与特定的Activity实例或类相关。</p>
-<p> 如果您的自定义失败事件类实现了HasExecutionScope接口，AsyncExecutor将自动设置执行范围。 像这样，您的订阅者可以查询失败事件的执行范围，并根据它做出反应。</p>
-<h2 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a><a href></a>原文出处</h2><p> 翻译原文：<br> <a href="http://greenrobot.org/eventbus/" target="_blank" rel="noopener">http://greenrobot.org/eventbus/</a></p>
-
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="noopener">EventBus</a>是一个使用发布者/订阅者模式 并且低耦合的Android开源库，。 EventBus只需几行代码即可实现中央通信解耦类：简化代码，删除依赖关系，加快应用程序开发速度。</p>
+<p><img src="http://img.blog.csdn.net/20170214140817726?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
         </div>
         
         
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2017-01-23T08:31:18.000Z">2017-01-23</time>
-                
+        <div class="level is-mobile">
+            <div class="level-start">
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                <a class="button is-size-7 is-light" href="/2017/02/14/《Android开源库》 EventBus 用法详解（译文）/#more">阅读更多</a>
                 </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    12 分钟 读完 (大约 1742 个字)
-                </span>
-                
-                
             </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2017/01/23/《Android开源库》 Google 最新Hover Menu(悬浮菜单)/">《Android开源库》 Google 最新Hover Menu(悬浮菜单)</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h2><p> <a href="https://github.com/google/hover" target="_blank" rel="noopener">Hover</a>，这些天大家讨论的比较多的一个开源库，google组织下的一个项目，但是项目介绍中又出现了</p>
-<p> <img src="https://img-blog.csdn.net/20170123145312251?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> Why ?</p>
-<p> 但是这和我又有什么关系，我是来看源码的，优秀的开源代码，不关心出处。 …………_</p>
-<h2 id="官网Demo"><a href="#官网Demo" class="headerlink" title="官网Demo"></a><a href></a>官网Demo</h2><p> <img src="https://raw.githubusercontent.com/matthew-carroll/hover/gh-pages/images/screenrecords/hover-demo-screenrecord.gif" alt="这里写图片描述"></p>
-<p> ##简单使用</p>
-<ol>
-<li>自定义MyNavigationContent，用来显示每个不同的Tab下的内容页  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class MyNavigationContent extends FrameLayout implements NavigatorContent &#123;</span><br><span class="line">    private ImageView imageViewLogo;</span><br><span class="line">    private TextView textViewTitle;</span><br><span class="line">    private int imageResId;</span><br><span class="line">    private String title;</span><br><span class="line"></span><br><span class="line">    public MyNavigationContent(@NonNull Context context, int imageRedId, String title) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">        this.imageResId = imageRedId;</span><br><span class="line">        this.title = title;</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        LayoutInflater.from(getContext()).inflate(R.layout.view_content_text_icon, this, true);</span><br><span class="line">        imageViewLogo = (ImageView) findViewById(R.id.iv_logo);</span><br><span class="line">        textViewTitle = (TextView) findViewById(R.id.tv_title);</span><br><span class="line">        imageViewLogo.setImageResource(imageResId);</span><br><span class="line">        textViewTitle.setText(title);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @NonNull</span><br><span class="line">    @Override</span><br><span class="line">    public View getView() &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onShown(@NonNull Navigator navigator) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onHidden() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<hr>
-<p> 2.自定义HoverMenuAdapter，用于将tab和NavigationContent联系起来</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class HoverDemoMenuAdapter implements HoverMenuAdapter &#123;</span><br><span class="line"></span><br><span class="line">    private final Context mContext;</span><br><span class="line">    private final List&lt;String&gt; mTabIds;</span><br><span class="line">    private final Map&lt;String, NavigatorContent&gt; mData;</span><br><span class="line">    private final Set&lt;ContentChangeListener&gt; mContentChangeListeners = new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    public HoverDemoMenuAdapter(@NonNull Context context, @NonNull Map&lt;String, NavigatorContent&gt; data) throws IOException &#123;</span><br><span class="line">        mContext = context;</span><br><span class="line">        mData = data;</span><br><span class="line"></span><br><span class="line">        mTabIds = new ArrayList&lt;&gt;();</span><br><span class="line">        for (String tabId : mData.keySet()) &#123;</span><br><span class="line">            mTabIds.add(tabId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getTabCount() &#123;</span><br><span class="line">        return mTabIds.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View getTabView(int index) &#123;</span><br><span class="line">        ImageView imageView = new ImageView(mContext);</span><br><span class="line">        imageView.setBackgroundResource(R.drawable.bg);</span><br><span class="line">        switch (index) &#123;</span><br><span class="line">            case 0:        imageView.setImageResource(R.drawable.bike);break;</span><br><span class="line">            case 1:        imageView.setImageResource(R.drawable.run);break;</span><br><span class="line">            case 2:        imageView.setImageResource(R.drawable.android);break;</span><br><span class="line">            default:break;</span><br><span class="line">        &#125;</span><br><span class="line">        imageView.setPadding(30,30,30,30);</span><br><span class="line"></span><br><span class="line">        return imageView;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public long getTabId(int position) &#123;</span><br><span class="line">        return position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public NavigatorContent getNavigatorContent(int index) &#123;</span><br><span class="line">        String tabId = mTabIds.get(index);</span><br><span class="line">        return mData.get(tabId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addContentChangeListener(@NonNull ContentChangeListener listener) &#123;</span><br><span class="line">        mContentChangeListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void removeContentChangeListener(@NonNull ContentChangeListener listener) &#123;</span><br><span class="line">        mContentChangeListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p> 3.创建继承HoverMenuService的自定义Service</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class HoverDemoService extends HoverMenuService &#123;</span><br><span class="line"></span><br><span class="line">    private HoverDemoMenuAdapter mDemoHoverMenuAdapter;</span><br><span class="line"></span><br><span class="line">    /*显示悬浮按钮*/</span><br><span class="line">    public static void showFloatingMenu(Context context) &#123;</span><br><span class="line">        context.startService(new Intent(context, HoverDemoService.class));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected HoverMenuAdapter createHoverMenuAdapter() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Map&lt;String, NavigatorContent&gt; data = new HashMap&lt;&gt;();</span><br><span class="line">            /*添加tab和对应的NavigationContent*/</span><br><span class="line">            data.put(&quot;1&quot;, new MyNavigationContent(this, R.drawable.bike, &quot;1，自行车是克服心脏功能毛病的最佳工具之一。世界上有半数以上的人是死于心脏病的，骑单车不只能藉腿部的运动压缩血液流动，以及把备注从血管末梢抽回心脏，事实上却同时强化了微血管组织，这叫“附带循环”。强化血管可以使你不受年龄的威胁，青春永驻。 \n&quot; +</span><br><span class="line">                    &quot;2，习惯性的单车运动，更能扩大你的心脏。否则血管愈来愈细，心脏愈来愈退化，到了晚年，你就会体验到它所带来的烦恼，那时你会发现，自行车运动是多么的完美。单车是需要大量氧气的运动，曾经有个老年人以6天时间，完成了460公里的单车旅行。他说：“老年人一周至少要有3次运动，使心脏强化起来，恢复正常功能。你要使心脏激烈跳动，但不可过久。如此它将能适应紧急状况，如赶车或抵抗困境。”\n&quot; +</span><br><span class="line">                    &quot;3，单车运动同时也能防止高血压，有时比药物更有效。还能防止发胖、血管硬化，并使骨骼强半。自行车使你不必用药物来维持健康，而且毫无害处。&quot;));</span><br><span class="line">            data.put(&quot;2&quot;, new MyNavigationContent(this,R.drawable.run, &quot;1.告别臃肿身材。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;许多人开始跑步就是因为减肥，跑步确实减肥的最好运动方式，跑步每分钟比起其他运动燃烧更多的卡路里。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;2.防止你的骨骼，肌肉退化。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;我们的骨骼是和你的身体需求相互协调的。长期坐在显示器前的我们让我们的骨骼越来越脆弱。而长期的，经常的运动会使你的骨骼保持健康。更进一步说就是防止我们身体内部老化的更快。经常的高强度锻炼，例如跑步，被证明可以促进人体荷尔蒙的生长，荷尔蒙就是那些名人为了看起来更年轻而持续注射的药剂。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;3.抵抗疾病\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;跑步可以降低得中风和乳腺癌的风险。经常的跑步已经成为医生对那些容易引发或在已经处在早期的骨质疏松，糖尿病，高血压病人的治疗建议。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;4.维持并提高总体的身体水平。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; +</span><br><span class="line">                    &quot;跑步是是人们可以采取的最好的锻炼身体的运动。它可以提高胆固醇,降低血液凝块的危险，锻炼你的50%的经常处于闲置状态的肺。跑步还可以通过增加你的淋巴细胞来增强你的免疫力。\n&quot; +</span><br><span class="line">                    &quot;\n&quot; ));</span><br><span class="line">            data.put(&quot;3&quot;, new MyNavigationContent(this,R.drawable.android,&quot;Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑，由Google公司和开放手机联盟领导及开发。尚未有统一中文名称，中国大陆地区较多人使用“安卓”或“安致”。Android操作系统最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。2007年11月，Google与84家硬件制造商、软件开发商及电信营运商组建开放手机联盟共同研发改良Android系统。随后Google以Apache开源许可证的授权方式，发布了Android的源代码。第一部Android智能手机发布于2008年10月。Android逐渐扩展到平板电脑及其他领域上，如电视、数码相机、游戏机等。2011年第一季度，Android在全球的市场份额首次超过塞班系统，跃居全球第一。 2013年的第四季度，Android平台手机的全球市场份额已经达到78.1%。[1]  2013年09月24日谷歌开发的操作系统Android在迎来了5岁生日，全世界采用这款系统的设备数量已经达到10亿台。&quot;));</span><br><span class="line"></span><br><span class="line">            /*创建Adapter*/</span><br><span class="line">            mDemoHoverMenuAdapter = new HoverDemoMenuAdapter(this, data);</span><br><span class="line">            return mDemoHoverMenuAdapter;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p> 4.入口Activity中设置一个点击事件显示悬浮框</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class DeActivity extends AppCompatActivity &#123;</span><br><span class="line"></span><br><span class="line">    Button btShow;</span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_de);</span><br><span class="line"></span><br><span class="line">        btShow = (Button)findViewById(R.id.bt_show);</span><br><span class="line">        btShow.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                HoverDemoService.showFloatingMenu(DeActivity.this);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<p> ##实际效果<br> <img src="https://img-blog.csdn.net/20170123163238822?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> ##写在最后<br> 博文内容基于如下版本</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;io.mattcarroll.hover:hover:0.9.6&apos;</span><br></pre></td></tr></table></figure>
-
-<p> 个人创建类的方式和Github上推荐的使用方式是相反的，依据个人习惯使用即可。</p>
-
-        </div>
-        
         
         
     </div>
@@ -645,7 +400,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -665,7 +420,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -756,7 +511,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -866,7 +621,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -1060,7 +815,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1429,7 +1184,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1469,23 +1224,9 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1499,13 +1240,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1513,13 +1247,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1548,7 +1275,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1569,13 +1296,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1604,7 +1324,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1667,14 +1387,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1693,13 +1413,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1707,22 +1420,8 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1756,13 +1455,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1772,7 +1464,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1791,13 +1483,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1807,14 +1492,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1842,7 +1527,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1861,44 +1546,9 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1912,20 +1562,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1959,22 +1595,8 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1989,7 +1611,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2195,7 +1817,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2564,7 +2186,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2604,23 +2226,9 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2634,13 +2242,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2648,13 +2249,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2683,7 +2277,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2704,13 +2298,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2739,7 +2326,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2802,14 +2389,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2828,13 +2415,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2842,22 +2422,8 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2891,13 +2457,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2907,7 +2466,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2926,13 +2485,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2942,14 +2494,14 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2977,7 +2529,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2996,44 +2548,9 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3047,20 +2564,6 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3094,22 +2597,8 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3124,7 +2613,7 @@ tabsContainer        | 内部容器，用户所见文本指示器和图标指示
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

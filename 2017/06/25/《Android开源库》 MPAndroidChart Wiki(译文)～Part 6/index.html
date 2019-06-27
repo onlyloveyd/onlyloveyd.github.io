@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="22. ViewPortHandler ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。  和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟">
-<meta name="keywords" content="MPAndroidChart,开源库,译文">
+    <meta name="description" content="22. ViewPortHandlerViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。 和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉">
+<meta name="keywords" content="译文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 6">
 <meta property="og:url" content="http://yoursite.com/2017/06/25/《Android开源库》 MPAndroidChart Wiki(译文)～Part 6/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="22. ViewPortHandler ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。  和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟">
+<meta property="og:description" content="22. ViewPortHandlerViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。 和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T14:17:24.922Z">
+<meta property="og:updated_time" content="2019-06-27T12:52:02.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 6">
-<meta name="twitter:description" content="22. ViewPortHandler ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。  和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟">
+<meta name="twitter:description" content="22. ViewPortHandlerViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。 和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1083 个字)
+                    7 分钟 读完 (大约 1084 个字)
                 </span>
                 
                 
@@ -168,90 +168,221 @@
             
         </h1>
         <div class="content">
-            <h2 id="22-ViewPortHandler"><a href="#22-ViewPortHandler" class="headerlink" title="22. ViewPortHandler"></a><a href></a>22. ViewPortHandler</h2><p> ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。</p>
-<p> 和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉你也需要很小心的使用它。不恰当的使用可能会导致意想不到的结果。然而，ViewPortHandler提供了很多高阶的方法来修改视窗。</p>
-<h3 id="22-1-获取实例"><a href="#22-1-获取实例" class="headerlink" title="22.1 获取实例"></a><a href></a>22.1 获取实例</h3><p> 可以通过如下方式获取实例：</p>
+            <a id="more"></a>
+<h2 id="22-ViewPortHandler"><a href="#22-ViewPortHandler" class="headerlink" title="22. ViewPortHandler"></a>22. ViewPortHandler</h2><p>ViewPortHandler负责处理图表的视窗。也就是说它负责图表视图中的展示给用户的那部分内容。包括图表位移，缩放级别，图表大小和绘制区域以及当前偏移量。ViewPortHandler允许我们访问以上提到的所有书属性并修改它。</p>
+<p>和通过Chart类修改视窗不一样的是，通过ViewPortHandler直接修改可见取悦并不是完全安全的。即使你对API比较熟悉你也需要很小心的使用它。不恰当的使用可能会导致意想不到的结果。然而，ViewPortHandler提供了很多高阶的方法来修改视窗。</p>
+<h3 id="22-1-获取实例"><a href="#22-1-获取实例" class="headerlink" title="22.1 获取实例"></a>22.1 获取实例</h3><p>可以通过如下方式获取实例：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ViewPortHandler handler = chart.getViewPortHandler();</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="22-2-缩放-amp-位移"><a href="#22-2-缩放-amp-位移" class="headerlink" title="22.2 缩放&amp;位移"></a><a href></a>22.2 缩放&amp;位移</h3><pre><code>方法          | 使用        
------------ | ---------- 
-getScaleX() | 返回X轴上的缩放级别
-getScaleY() | 返回Y轴上的缩放级别
-getTransX() | 返回X轴方向上的位移
-getTransY() | 返回Y轴方向上的位移</code></pre><hr>
-<h3 id="22-3-图表尺寸-amp-内容"><a href="#22-3-图表尺寸-amp-内容" class="headerlink" title="22.3 图表尺寸&amp;内容"></a><a href></a>22.3 图表尺寸&amp;内容</h3><pre><code>方法               | 使用                  
----------------- | -------------------- 
-getChartWidth()  | 返回图表的宽度             
-getChartHeight() | 返回图表的高度             
-getContentRect() | 返回一个RectF对象表示当前的内容区域</code></pre><p>更多方法请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki#javadoc" target="_blank" rel="noopener">JavaDoc</a>或者学习API</p>
+<h3 id="22-2-缩放-amp-位移"><a href="#22-2-缩放-amp-位移" class="headerlink" title="22.2 缩放&amp;位移"></a>22.2 缩放&amp;位移</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getScaleX()</td>
+<td>返回X轴上的缩放级别</td>
+</tr>
+<tr>
+<td>getScaleY()</td>
+<td>返回Y轴上的缩放级别</td>
+</tr>
+<tr>
+<td>getTransX()</td>
+<td>返回X轴方向上的位移</td>
+</tr>
+<tr>
+<td>getTransY()</td>
+<td>返回Y轴方向上的位移</td>
+</tr>
+<tr>
+<td><strong>****</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 22.3 图表尺寸&amp;内容</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>—–</td>
+<td>——</td>
+</tr>
+<tr>
+<td>getChartWidth()</td>
+<td>返回图表的宽度</td>
+</tr>
+<tr>
+<td>getChartHeight()</td>
+<td>返回图表的高度</td>
+</tr>
+<tr>
+<td>getContentRect()</td>
+<td>返回一个RectF对象表示当前的内容区域</td>
+</tr>
+<tr>
+<td>更多方法请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki#javadoc" target="_blank" rel="noopener">JavaDoc</a>或者学习API</td>
+<td></td>
+</tr>
+</tbody></table>
 <hr>
-<h2 id="23-FillFormatter"><a href="#23-FillFormatter" class="headerlink" title="23. FillFormatter"></a><a href></a>23. FillFormatter</h2><p> FillFormatter接口允许自定义LineDataSet的填充行应该在哪里结束。 所有需要做的都是创建一个新类并实现FillFormatter接口。 使用：</p>
+<h2 id="23-FillFormatter"><a href="#23-FillFormatter" class="headerlink" title="23. FillFormatter"></a>23. FillFormatter</h2><p>FillFormatter接口允许自定义LineDataSet的填充行应该在哪里结束。 所有需要做的都是创建一个新类并实现FillFormatter接口。 使用：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public float getFillLinePosition(LineDataSet dataSet, LineDataProvider provider)</span><br></pre></td></tr></table></figure>
 
-<p> 用于实现自定义逻辑的接口的方法，该自定义逻辑计算单个LineDataSet的填充行的结束点。</p>
-<p> 创建一个类实现该接口：</p>
+<p>用于实现自定义逻辑的接口的方法，该自定义逻辑计算单个LineDataSet的填充行的结束点。</p>
+<p>创建一个类实现该接口：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class MyCustomFillFormatter implements FillFormatter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public float getFillLinePosition(LineDataSet dataSet, LineDataProvider dataProvider) &#123;</span><br><span class="line"></span><br><span class="line">        float myDesiredFillPosition = ...;</span><br><span class="line">        // put your logic here...</span><br><span class="line"></span><br><span class="line">        return myDesiredFillPosition;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 然后把自定义的formatter设置到LineDataSet：</p>
+<p>然后把自定义的formatter设置到LineDataSet：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineDataSet.setFillFormatter(new MyCustomFillFormatter());</span><br></pre></td></tr></table></figure>
 
-<p> 查看<a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/com/github/mikephil/charting/formatter/DefaultFillFormatter.java" target="_blank" rel="noopener">DefaultFillFormatter</a>的实现</p>
+<p>查看<a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/com/github/mikephil/charting/formatter/DefaultFillFormatter.java" target="_blank" rel="noopener">DefaultFillFormatter</a>的实现</p>
 <hr>
-<h2 id="24-ProGuard"><a href="#24-ProGuard" class="headerlink" title="24. ProGuard"></a><a href></a>24. ProGuard</h2><p> 使用Proguard,需要添加如下配置：</p>
+<h2 id="24-ProGuard"><a href="#24-ProGuard" class="headerlink" title="24. ProGuard"></a>24. ProGuard</h2><p> 使用Proguard,需要添加如下配置：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-keep class com.github.mikephil.charting.** &#123; *; &#125;</span><br></pre></td></tr></table></figure>
 
-<p> 如果使用proguard但是不配置以上规则，动画会失效。<br> Realm.io对应配置：</p>
+<p>如果使用proguard但是不配置以上规则，动画会失效。<br>Realm.io对应配置：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-dontwarn io.realm.**</span><br></pre></td></tr></table></figure>
 
-<p> <a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="noopener">其他ProGuard信息</a></p>
+<p><a href="http://developer.android.com/tools/help/proguard.html" target="_blank" rel="noopener">其他ProGuard信息</a></p>
 <hr>
-<h2 id="25-Realm-io数据库集成"><a href="#25-Realm-io数据库集成" class="headerlink" title="25. Realm.io数据库集成"></a><a href></a>25. Realm.io数据库集成</h2><p> 请移步官方<a href="https://github.com/PhilJay/MPAndroidChart-Realm" target="_blank" rel="noopener">MPAndroidChart-Realm</a>来了解如何从Realm.io数据库中提取数据填充MPAndroidChart。</p>
-<p> 具体操作指南请查阅<a href="https://github.com/PhilJay/MPAndroidChart-Realm/wiki/Realm.io-database-integration" target="_blank" rel="noopener">此处</a></p>
+<h2 id="25-Realm-io数据库集成"><a href="#25-Realm-io数据库集成" class="headerlink" title="25. Realm.io数据库集成"></a>25. Realm.io数据库集成</h2><p>请移步官方<a href="https://github.com/PhilJay/MPAndroidChart-Realm" target="_blank" rel="noopener">MPAndroidChart-Realm</a>来了解如何从Realm.io数据库中提取数据填充MPAndroidChart。</p>
+<p>具体操作指南请查阅<a href="https://github.com/PhilJay/MPAndroidChart-Realm/wiki/Realm.io-database-integration" target="_blank" rel="noopener">此处</a></p>
 <hr>
-<h2 id="26-自定义DataSets"><a href="#26-自定义DataSets" class="headerlink" title="26. 自定义DataSets"></a><a href></a>26. 自定义DataSets</h2><p> 从<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v.2.2.0</a>开始，MP AndroidChart允许你创建自定义的DataSets并在图表中使用它们。</p>
-<h3 id="26-1-必需操作"><a href="#26-1-必需操作" class="headerlink" title="26.1 必需操作"></a><a href></a>26.1 必需操作</h3><ul>
-<li>创建自定义类（如：CustomDataSet） </li>
-<li>继承BaseDataSet&lt; ? extends Entry&gt; </li>
-<li>根据需求实现对应的IDataSet接口。如IBarDataSet </li>
-<li>实现接口对应的方法并返回你期望的结果  </li>
+<h2 id="26-自定义DataSets"><a href="#26-自定义DataSets" class="headerlink" title="26. 自定义DataSets"></a>26. 自定义DataSets</h2><p>从<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v.2.2.0</a>开始，MP AndroidChart允许你创建自定义的DataSets并在图表中使用它们。</p>
+<h3 id="26-1-必需操作"><a href="#26-1-必需操作" class="headerlink" title="26.1 必需操作"></a>26.1 必需操作</h3><ul>
+<li>创建自定义类（如：CustomDataSet）</li>
+<li>继承BaseDataSet&lt; ? extends Entry&gt;</li>
+<li>根据需求实现对应的IDataSet接口。如IBarDataSet</li>
+<li>实现接口对应的方法并返回你期望的结果</li>
 </ul>
 <hr>
-<h3 id="26-2-示例"><a href="#26-2-示例" class="headerlink" title="26.2 示例"></a><a href></a>26.2 示例</h3><p> 创建一个BarDataSet供BarChart使用：</p>
+<h3 id="26-2-示例"><a href="#26-2-示例" class="headerlink" title="26.2 示例"></a>26.2 示例</h3><p>创建一个BarDataSet供BarChart使用：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class CustomBarDataSet extends BaseDataSet&lt;BarEntry&gt; implements IBarDataSet &#123;</span><br><span class="line">    // implement all by the extended class and interface required methods</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 创建CustomBarDataSet后实现所有接口需要实现的方法，然后它就可以像BarDataSet一样在所有的BarChart中使用了。</p>
+<p>创建CustomBarDataSet后实现所有接口需要实现的方法，然后它就可以像BarDataSet一样在所有的BarChart中使用了。</p>
 <hr>
-<h2 id="27-其他方法"><a href="#27-其他方法" class="headerlink" title="27. 其他方法"></a><a href></a>27. 其他方法</h2><h3 id="27-1-图表内容"><a href="#27-1-图表内容" class="headerlink" title="27.1 图表内容"></a><a href></a>27.1 图表内容</h3><pre><code>方法            | 使用                                            
-------------- | ---------------------------------------------- 
-clear()       | 清空图表中的所有数据（通过设置数据对象为null实现）。调用invalidate()刷新数据
-clearValues() | 清空图表中的数据集，X轴上数据不做修改                           
-isEmpty()     | 判断图表中数据是否为空                                   </code></pre><hr>
-<h3 id="27-2-好用的Getter方法"><a href="#27-2-好用的Getter方法" class="headerlink" title="27.2 好用的Getter方法"></a><a href></a>27.2 好用的Getter方法</h3><pre><code>方法                             | 使用                   
------------------------------- | --------------------- 
-getData()                      | 返回图表中的Data对象         
-getViewPortHandler()           | 返回ViewPortHandler对象  
-getRenderer()                  | 返回负责绘制图表的DataRender对象
-getCenter()                    | 返回整个图表的中心点.          
-getCenterOffsets()             | 返回图表绘制区域的中心点         
-getPercentOfTotal(float value) | 返回提供的值构成图表内总和的百分比.   
-getYMin()                      | 返回Y轴最小值              
-getYMax()                      | 返回Y轴最大值              
-getLowestVisibleXIndex()       | 返回X轴方向上最小可见索引        
-getHighestVisibleXIndex()      | 返回X轴方向上最大可见索引        </code></pre><hr>
-<h3 id="27-3-更多Chart类方法"><a href="#27-3-更多Chart类方法" class="headerlink" title="27.3 更多Chart类方法"></a><a href></a>27.3 更多Chart类方法</h3><pre><code>方法                                              | 使用                                                  
------------------------------------------------ | ---------------------------------------------------- 
-saveToGallery(String title)                     | 将当前图表状态以图片的形式保存到图库。记得添加&quot;WRITE_EXTERNAL_STORAGE&quot;权限.  
-saveToPath(String title, String pathOnSD)       | 将当前图表状态以图片的形式保存到指定路径。记得添加&quot;WRITE_EXTERNAL_STORAGE&quot;权限.
-getChartBitmap()                                | 将当前图表状态以Bitmap的形式返回.                                
-setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬件加速, 仅针对API级别11+的设备.                      </code></pre>
+<h2 id="27-其他方法"><a href="#27-其他方法" class="headerlink" title="27. 其他方法"></a>27. 其他方法</h2><h3 id="27-1-图表内容"><a href="#27-1-图表内容" class="headerlink" title="27.1 图表内容"></a>27.1 图表内容</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clear()</td>
+<td>清空图表中的所有数据（通过设置数据对象为null实现）。调用invalidate()刷新数据</td>
+</tr>
+<tr>
+<td>clearValues()</td>
+<td>清空图表中的数据集，X轴上数据不做修改</td>
+</tr>
+<tr>
+<td>isEmpty()</td>
+<td>判断图表中数据是否为空</td>
+</tr>
+<tr>
+<td><strong><strong>**</strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 27.2 好用的Getter方法</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——</td>
+<td>——</td>
+</tr>
+<tr>
+<td>getData()</td>
+<td>返回图表中的Data对象</td>
+</tr>
+<tr>
+<td>getViewPortHandler()</td>
+<td>返回ViewPortHandler对象</td>
+</tr>
+<tr>
+<td>getRenderer()</td>
+<td>返回负责绘制图表的DataRender对象</td>
+</tr>
+<tr>
+<td>getCenter()</td>
+<td>返回整个图表的中心点.</td>
+</tr>
+<tr>
+<td>getCenterOffsets()</td>
+<td>返回图表绘制区域的中心点</td>
+</tr>
+<tr>
+<td>getPercentOfTotal(float value)</td>
+<td>返回提供的值构成图表内总和的百分比.</td>
+</tr>
+<tr>
+<td>getYMin()</td>
+<td>返回Y轴最小值</td>
+</tr>
+<tr>
+<td>getYMax()</td>
+<td>返回Y轴最大值</td>
+</tr>
+<tr>
+<td>getLowestVisibleXIndex()</td>
+<td>返回X轴方向上最小可见索引</td>
+</tr>
+<tr>
+<td>getHighestVisibleXIndex()</td>
+<td>返回X轴方向上最大可见索引</td>
+</tr>
+<tr>
+<td><strong><strong><strong>**</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 27.3 更多Chart类方法</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——</td>
+<td>——</td>
+</tr>
+<tr>
+<td>saveToGallery(String title)</td>
+<td>将当前图表状态以图片的形式保存到图库。记得添加”WRITE_EXTERNAL_STORAGE”权限.</td>
+</tr>
+<tr>
+<td>saveToPath(String title, String pathOnSD)</td>
+<td>将当前图表状态以图片的形式保存到指定路径。记得添加”WRITE_EXTERNAL_STORAGE”权限.</td>
+</tr>
+<tr>
+<td>getChartBitmap()</td>
+<td>将当前图表状态以Bitmap的形式返回.</td>
+</tr>
+<tr>
+<td>setHardwareAccelerationEnabled(boolean enabled)</td>
+<td>启用／禁用图表绘制硬件加速, 仅针对API级别11+的设备.</td>
+</tr>
+</tbody></table>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/MPAndroidChart/">MPAndroidChart</a>, <a class="has-link-grey -link" href="/tags/开源库/">开源库</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
+                    <a class="has-link-grey -link" href="/tags/译文/">译文</a>
                 </div>
             </div>
         </div>
@@ -382,7 +513,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -402,7 +533,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -493,7 +624,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -603,7 +734,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -797,7 +928,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1166,7 +1297,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1206,23 +1337,9 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1236,13 +1353,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1250,13 +1360,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1285,7 +1388,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1306,13 +1409,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1341,7 +1437,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1404,14 +1500,14 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1430,13 +1526,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1444,22 +1533,8 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1493,13 +1568,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1509,7 +1577,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1528,13 +1596,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1544,14 +1605,14 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1579,7 +1640,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1598,44 +1659,9 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1649,20 +1675,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1696,22 +1708,8 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1726,7 +1724,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1932,7 +1930,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2301,7 +2299,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2341,23 +2339,9 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2371,13 +2355,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2385,13 +2362,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2420,7 +2390,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2441,13 +2411,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2476,7 +2439,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2539,14 +2502,14 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2565,13 +2528,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2579,22 +2535,8 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2628,13 +2570,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2644,7 +2579,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2663,13 +2598,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2679,14 +2607,14 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2714,7 +2642,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2733,44 +2661,9 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2784,20 +2677,6 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2831,22 +2710,8 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2861,7 +2726,7 @@ setHardwareAccelerationEnabled(boolean enabled) | 启用／禁用图表绘制硬
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

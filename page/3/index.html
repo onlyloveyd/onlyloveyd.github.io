@@ -145,69 +145,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-09T00:34:04.000Z">2018-06-09</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Android基础/">Android基础</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 296 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/09/《Android 基础（四十六）》 LayerDrawable & layer-list/">《Android 基础（四十六）》 LayerDrawable &amp; layer-list</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> LayerDrawable 是管理其他可绘制对象阵列的可绘制对象。列表中的每个可绘制对象按照列表的顺序绘制，列表中的最后一个可绘制对象绘于顶部。</p>
-<p> 每个可绘制对象由单一 &lt; layer-list &gt; 元素内的 &lt; item &gt; 元素表示。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layer-list</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; &gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@[package:]drawable/drawable_resource&quot;</span><br><span class="line">        android:id=&quot;@[+][package:]id/resource_name&quot;</span><br><span class="line">        android:top=&quot;dimension&quot;</span><br><span class="line">        android:right=&quot;dimension&quot;</span><br><span class="line">        android:bottom=&quot;dimension&quot;</span><br><span class="line">        android:left=&quot;dimension&quot; /&gt;</span><br><span class="line">&lt;/layer-list&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p> layer-list，图层列表，可以帮助我们绘制一些特殊的图形。</p>
-<h2 id="部分实践"><a href="#部分实践" class="headerlink" title="部分实践"></a>部分实践</h2><h3 id="Line-amp-Dot"><a href="#Line-amp-Dot" class="headerlink" title="Line &amp; Dot"></a>Line &amp; Dot</h3><h4 id="layer-list"><a href="#layer-list" class="headerlink" title="layer-list"></a>layer-list</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:bottom=&quot;2dp&quot;</span><br><span class="line">        android:right=&quot;2dp&quot;</span><br><span class="line">        android:top=&quot;2dp&quot;&gt;</span><br><span class="line">        &lt;shape android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line">            &lt;solid android:color=&quot;#1750ff&quot; /&gt;</span><br><span class="line">        &lt;/shape&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">    &lt;item android:gravity=&quot;right&quot;&gt;</span><br><span class="line">        &lt;shape android:shape=&quot;oval&quot;&gt;</span><br><span class="line">            &lt;solid android:color=&quot;#1750ff&quot; /&gt;</span><br><span class="line">            &lt;size</span><br><span class="line">                android:width=&quot;5dp&quot;</span><br><span class="line">                android:height=&quot;5dp&quot; /&gt;</span><br><span class="line">        &lt;/shape&gt;</span><br><span class="line">    &lt;/item&gt;</span><br><span class="line">&lt;/layer-list&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="use-in-layout"><a href="#use-in-layout" class="headerlink" title="use in layout"></a>use in layout</h4><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;View</span><br><span class="line">      android:layout_width=&quot;100dp&quot;</span><br><span class="line">      android:layout_height=&quot;5dp&quot;</span><br><span class="line">      android:layout_marginLeft=&quot;50dp&quot;</span><br><span class="line">      android:layout_marginTop=&quot;50dp&quot;</span><br><span class="line">      android:background=&quot;@drawable/horizontal_line_dot&quot; /&gt;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="result"><a href="#result" class="headerlink" title="result"></a>result</h4><p> <img src="https://img-blog.csdn.net/20180609075131231" alt="这里写图片描述"></p>
-<p> <img src="https://img-blog.csdn.net/20180609075334427" alt="这里写图片描述"></p>
-<h2 id="代码修改Drawable颜色"><a href="#代码修改Drawable颜色" class="headerlink" title="代码修改Drawable颜色"></a>代码修改Drawable颜色</h2><p> 通过LayerDrawable类中的部分方法，我们可以拿到每一层的Drawable，这样针对不通层级的Drawable，我们可以根据自己的需要，在用户交互过程中执行修改等操作。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bt_change_color.setOnClickListener(&#123;</span><br><span class="line">    var background: LayerDrawable = horizontal_line_dot.background as LayerDrawable</span><br><span class="line">    for (index in 0..(background.numberOfLayers - 1)) &#123;</span><br><span class="line">        var drawable: GradientDrawable = background.getDrawable(index) as GradientDrawable</span><br><span class="line">        drawable.setColor(Color.BLACK)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180609082051965" alt="这里写图片描述"></p>
-<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p> 关于Shape的用法，请阅<a href="https://blog.csdn.net/poorkick/article/details/51824524" target="_blank" rel="noopener">Shape</a><br> <img src="https://img-blog.csdn.net/20180609083337113" alt="这里写图片描述"></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-05-12T14:51:05.000Z">2018-05-12</time>
                 
                 <div class="level-item">
@@ -430,7 +367,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1564 个字)
+                    10 分钟 读完 (大约 1572 个字)
                 </span>
                 
                 
@@ -443,54 +380,17 @@
             
         </h1>
         <div class="content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> RecyclerView目前来说，是日常开发中使用最多的控件，功能强大而且复杂。而Item Decoration作为RecyclerView开发过程中不可或缺的部分，需要深入的了解一下。</p>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * An ItemDecoration allows the application to add a special drawing and layout offset</span><br><span class="line"> * to specific item views from the adapter&apos;s data set. This can be useful for drawing dividers</span><br><span class="line"> * between items, highlights, visual grouping boundaries and more.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;All ItemDecorations are drawn in the order they were added, before the item</span><br><span class="line"> * views (in &#123;@link ItemDecoration#onDraw(Canvas, RecyclerView, RecyclerView.State) onDraw()&#125;</span><br><span class="line"> * and after the items (in &#123;@link ItemDecoration#onDrawOver(Canvas, RecyclerView,</span><br><span class="line"> * RecyclerView.State)&#125;.&lt;/p&gt;</span><br><span class="line"> */</span><br><span class="line">public abstract static class ItemDecoration &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.</span><br><span class="line">     * Any content drawn by this method will be drawn before the item views are drawn,</span><br><span class="line">     * and will thus appear underneath the views.</span><br><span class="line">     *</span><br><span class="line">     * @param c Canvas to draw into</span><br><span class="line">     * @param parent RecyclerView this ItemDecoration is drawing into</span><br><span class="line">     * @param state The current state of RecyclerView</span><br><span class="line">     */</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent, State state) &#123;</span><br><span class="line">        onDraw(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Override &#123;@link #onDraw(Canvas, RecyclerView, RecyclerView.State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Draw any appropriate decorations into the Canvas supplied to the RecyclerView.</span><br><span class="line">     * Any content drawn by this method will be drawn after the item views are drawn</span><br><span class="line">     * and will thus appear over the views.</span><br><span class="line">     *</span><br><span class="line">     * @param c Canvas to draw into</span><br><span class="line">     * @param parent RecyclerView this ItemDecoration is drawing into</span><br><span class="line">     * @param state The current state of RecyclerView.</span><br><span class="line">     */</span><br><span class="line">    public void onDrawOver(Canvas c, RecyclerView parent, State state) &#123;</span><br><span class="line">        onDrawOver(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Override &#123;@link #onDrawOver(Canvas, RecyclerView, RecyclerView.State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void onDrawOver(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @deprecated</span><br><span class="line">     * Use &#123;@link #getItemOffsets(Rect, View, RecyclerView, State)&#125;</span><br><span class="line">     */</span><br><span class="line">    @Deprecated</span><br><span class="line">    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) &#123;</span><br><span class="line">        outRect.set(0, 0, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Retrieve any offsets for the given item. Each field of &lt;code&gt;outRect&lt;/code&gt; specifies</span><br><span class="line">     * the number of pixels that the item view should be inset by, similar to padding or margin.</span><br><span class="line">     * The default implementation sets the bounds of outRect to 0 and returns.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * If this ItemDecoration does not affect the positioning of item views, it should set</span><br><span class="line">     * all four fields of &lt;code&gt;outRect&lt;/code&gt; (left, top, right, bottom) to zero</span><br><span class="line">     * before returning.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * If you need to access Adapter for additional data, you can call</span><br><span class="line">     * &#123;@link RecyclerView#getChildAdapterPosition(View)&#125; to get the adapter position of the</span><br><span class="line">     * View.</span><br><span class="line">     *</span><br><span class="line">     * @param outRect Rect to receive the output.</span><br><span class="line">     * @param view    The child view to decorate</span><br><span class="line">     * @param parent  RecyclerView this ItemDecoration is decorating</span><br><span class="line">     * @param state   The current state of RecyclerView.</span><br><span class="line">     */</span><br><span class="line">    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, State state) &#123;</span><br><span class="line">        getItemOffsets(outRect, ((LayoutParams) view.getLayoutParams()).getViewLayoutPosition(),</span><br><span class="line">                parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 注意看英文注释，ItemDecoration是用于装饰RecyclerView的Item的，主要关注如下三个方法</p>
-<h2 id="getItemOffsets"><a href="#getItemOffsets" class="headerlink" title="getItemOffsets"></a>getItemOffsets</h2><pre><code>参数      | 意义                          
-------- | ---------------------------- 
-outRect | ItemView的外围矩形               
-view    | ItemView                    
-parent  | RecyclerView,ItemView的Parent
-state   | RecyclerView的状态             </code></pre><p> 直接这样子说看不出效果，上几张图区分一下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =20;</span><br><span class="line">outRect.bottom =20;</span><br><span class="line"></span><br><span class="line">outRect.left=60;</span><br><span class="line">outRect.right =60;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180409205118149?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =20;</span><br><span class="line">outRect.bottom =20;</span><br><span class="line"></span><br><span class="line">outRect.left=60;</span><br><span class="line">outRect.right =0;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180409205141863?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">outRect.top =60;</span><br><span class="line">outRect.bottom =60;</span><br><span class="line"></span><br><span class="line">outRect.left=20;</span><br><span class="line">outRect.right =20;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180409205207700?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 看上去设置outRect设置top,left,right,bottom有一种padding的效果，但是实际上只是它是ItemView外围的空间，你可以将其理解成RecyclerView针对每个ItemView设置的Padding，而不是ItemView自身的padding。</p>
-<h2 id="onDraw"><a href="#onDraw" class="headerlink" title="onDraw"></a>onDraw</h2><pre><code>参数     | 意义                          
------- | ---------------------------- 
-c      | RecyclerView的Canvas         
-parent | RecyclerView,ItemView的Parent
-state  | RecyclerView的状态             </code></pre><p> onDraw操作是在RecyclerView所在的画布上绘制内容，也就是在ItemView的背后绘制内容，重叠部分会被ItemView遮挡。<br> 比如我们在Item View的背后画一个圆圈圈。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public YdDividerItemDecoration()&#123;</span><br><span class="line">    mPaint = new Paint();</span><br><span class="line">    mPaint.setColor(Color.GREEN);</span><br><span class="line">    mPaint.setAntiAlias(true);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">    super.onDraw(c, parent, state);</span><br><span class="line">    Logger.d(&quot;yidong -- onDraw&quot;);</span><br><span class="line"></span><br><span class="line">    int width = parent.getWidth();</span><br><span class="line">    int height = parent.getHeight();</span><br><span class="line"></span><br><span class="line">    int radius = Math.min(width, height)/2;</span><br><span class="line"></span><br><span class="line">    c.drawCircle(width/2, height/2, radius, mPaint);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> <img src="https://img-blog.csdn.net/20180409210308167?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 这个是为了说明，我们操作的画布是RecyclerView的画布，而不是针对ItemView，所以一般情况下，我们需要针对每个ItemView做操作，比如画分割线，官方给出的DividerItemDecoration的onDraw方法</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">    if (parent.getLayoutManager() == null || mDivider == null) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if (mOrientation == VERTICAL) &#123;</span><br><span class="line">        drawVertical(c, parent);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        drawHorizontal(c, parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">private void drawVertical(Canvas canvas, RecyclerView parent) &#123;</span><br><span class="line">     canvas.save();</span><br><span class="line">     final int left;</span><br><span class="line">     final int right;</span><br><span class="line">     //noinspection AndroidLintNewApi - NewApi lint fails to handle overrides.</span><br><span class="line">     if (parent.getClipToPadding()) &#123;</span><br><span class="line">         left = parent.getPaddingLeft();</span><br><span class="line">         right = parent.getWidth() - parent.getPaddingRight();</span><br><span class="line">         canvas.clipRect(left, parent.getPaddingTop(), right,</span><br><span class="line">                 parent.getHeight() - parent.getPaddingBottom());</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">         left = 0;</span><br><span class="line">         right = parent.getWidth();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     final int childCount = parent.getChildCount();</span><br><span class="line">     for (int i = 0; i &lt; childCount; i++) &#123;</span><br><span class="line">         final View child = parent.getChildAt(i);</span><br><span class="line">         parent.getDecoratedBoundsWithMargins(child, mBounds);</span><br><span class="line">         final int bottom = mBounds.bottom + Math.round(child.getTranslationY());</span><br><span class="line">         final int top = bottom - mDivider.getIntrinsicHeight();</span><br><span class="line">         mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">         mDivider.draw(canvas);</span><br><span class="line">     &#125;</span><br><span class="line">     canvas.restore();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 可以看出都是便利RecyclerView的Item来做操作的。</p>
-<h2 id="onDrawOver"><a href="#onDrawOver" class="headerlink" title="onDrawOver"></a>onDrawOver</h2><pre><code>参数     | 意义                          
------- | ---------------------------- 
-c      | RecyclerView的Canvas         
-parent | RecyclerView,ItemView的Parent
-state  | RecyclerView的状态             </code></pre><p> 参数类型和意义和onDraw一模一样，但是效果确实在RecyclerView的ItemView之上。<br> 还是换个圆圈圈，代码和上面一样，只是移动到onDrawOver方法下执行。<br> <img src="https://img-blog.csdn.net/20180409210936439?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 可以很明显的看到，我们的圆圈圈覆盖了ItemView。至于谁覆盖谁，显然是绘制顺序的问题。<br> <img src="https://img-blog.csdn.net/2018040921134330?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br> 可以看到执行顺序，onDrawOver是在onDraw之后的，但是ItemView的绘制是否在这个两个操作之前，从最后的效果来看，是的，但是需要代码证实。直接看RecyclerView绘制相关的方法即可。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void draw(Canvas c) &#123;</span><br><span class="line">    //这里是RecyclerView的绘制过程，和View的绘制过程类似，先是背景，然后是调用</span><br><span class="line">    //recyclerview的onDraw方法绘制自身，然后通过dispatchDraw来绘制子View</span><br><span class="line">    // 而onDraw(下面)执行的就是ItemDecoration的onDraw方法，所以顺序很明显了。</span><br><span class="line">    //ItemDecoration－&gt; ItemView -&gt; ItemDecoration.onDrawOver</span><br><span class="line">    super.draw(c);</span><br><span class="line">    // 执行ItemDecoration onDrawOver方法，最顶层</span><br><span class="line">    final int count = mItemDecorations.size();</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        mItemDecorations.get(i).onDrawOver(c, this, mState);</span><br><span class="line">    &#125;</span><br><span class="line">    ……</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onDraw(Canvas c) &#123;</span><br><span class="line">    super.onDraw(c);</span><br><span class="line"></span><br><span class="line">    // 执行ItemDecoration的onDraw方法，最底层</span><br><span class="line">    final int count = mItemDecorations.size();</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        mItemDecorations.get(i).onDraw(c, this, mState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p> 看清楚了ItemDecoration的实现原理，具体通过什么方式绘制出什么样的图形，应该只是设计和时间的问题，Github上有不错的一些实现，大家有空可以去学习借鉴一下。</p>
-
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>RecyclerView目前来说，是日常开发中使用最多的控件，功能强大而且复杂。而Item Decoration作为RecyclerView开发过程中不可或缺的部分，需要深入的了解一下。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/04/09/《Android 基础（四十五）》 RecyclerView.ItemDecoration源码浅析/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -623,7 +523,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分钟 读完 (大约 1204 个字)
+                    8 分钟 读完 (大约 1175 个字)
                 </span>
                 
                 
@@ -636,60 +536,21 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             
         </h1>
         <div class="content">
-            <p> 版权声明：本文为博主原创文章，未经博主允许不得转载。 <a href="https://blog.csdn.net/poorkick/article/details/79183920" target="_blank" rel="noopener">https://blog.csdn.net/poorkick/article/details/79183920</a>   </p>
-<h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 最近工作中需要使用到WebService接口，个人比较喜欢Restful的接口风格，对WebService不是很了解。</p>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近工作中需要使用到WebService接口，个人比较喜欢Restful的接口风格，对WebService不是很了解。</p>
 <blockquote>
 <p>Web Service也叫XML Web Service WebService是一种可以接收从Internet或者Intranet上的其它系统中传递过来的请求，轻量级的独立的通讯技术。是:通过SOAP在Web上提供的软件服务，使用WSDL文件进行说明，并通过UDDI进行注册。</p>
-<p> 而对于我们移动开发人员而言，它就是一种数据交互的通道。我们需要了解他的请求结构体和响应结构体。</p>
 </blockquote>
-<h2 id="2-WebService调试工具SoapUI"><a href="#2-WebService调试工具SoapUI" class="headerlink" title="2. WebService调试工具SoapUI"></a><a href></a>2. WebService调试工具SoapUI</h2><p> SoapUI是一个开源测试工具，通过soap/http来检查、调用、实现Web Service的功能/负载/符合性测试。该工具既可作为一个单独的测试软件使用，也可利用插件集成到Eclipse，maven2.X，Netbeans 和intellij中使用。SoapUI Pro是SoapUI的商业非开源版本，实现的功能较开源的SoapUI更多。<br> (找不到资源的可以在文章下方留言)<br> <img src="https://img-blog.csdn.net/20180127220625998?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="3-接口分析（以getMobileCodeInfo为例）"><a href="#3-接口分析（以getMobileCodeInfo为例）" class="headerlink" title="3. 接口分析（以getMobileCodeInfo为例）"></a><a href></a>3. 接口分析（以getMobileCodeInfo为例）</h2><p> 以 <a href="http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl" target="_blank" rel="noopener">http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl</a> 为测试例子</p>
-<p> <img src="https://img-blog.csdn.net/20180127220823070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20180127220831236?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 从上面两个图可以看到我们得请求体和响应体的结构和内容，以XML格式作为数据交互的结构类型。</p>
-<h2 id="4-程序设计"><a href="#4-程序设计" class="headerlink" title="4. 程序设计"></a><a href></a>4. 程序设计</h2><h3 id="4-1-添加依赖"><a href="#4-1-添加依赖" class="headerlink" title="4.1 添加依赖"></a><a href></a>4.1 添加依赖</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">implementation &apos;com.squareup.okhttp3:okhttp:3.8.0&apos;</span><br><span class="line">implementation &apos;com.parkingwang:okhttp3-loginterceptor:0.5&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:retrofit:2.3.0&apos;</span><br><span class="line">implementation &apos;com.squareup.retrofit2:adapter-rxjava2:2.3.0&apos;</span><br><span class="line">implementation(&apos;com.squareup.retrofit2:converter-simplexml:2.3.0&apos;) &#123;</span><br><span class="line">    exclude module: &apos;stax&apos;</span><br><span class="line">    exclude module: &apos;stax-api&apos;</span><br><span class="line">    exclude module: &apos;xpp3&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-2-请求体设计"><a href="#4-2-请求体设计" class="headerlink" title="4.2 请求体设计"></a><a href></a>4.2 请求体设计</h3><p> 从请求体XML结构而言</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:web=&quot;http://WebXml.com.cn/&quot;&gt;</span><br><span class="line">   &lt;soap:Header/&gt;</span><br><span class="line">   &lt;soap:Body&gt;</span><br><span class="line">      &lt;web:getMobileCodeInfo&gt;</span><br><span class="line">         &lt;!--Optional:--&gt;</span><br><span class="line">         </span><br><span class="line">         &lt;!--Optional:--&gt;</span><br><span class="line">         &lt;web:mobileCode&gt;18507152743&lt;/web:mobileCode&gt;</span><br><span class="line">      &lt;/web:getMobileCodeInfo&gt;</span><br><span class="line">   &lt;/soap:Body&gt;</span><br><span class="line">&lt;/soap:Envelope&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 最外层soap:Envelope<br> 其次soap:Body<br> 最后web:getMobileCodeInfo，而web:getMobileCodeInfo中有一个mobileCode我们可以用变量表示，所以创建如下三个类：<br> MobileCodeRequestEnvelope.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Envelope&quot;)</span><br><span class="line">@NamespaceList(&#123;</span><br><span class="line">        @Namespace(prefix = &quot;xsi&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema-instance&quot;),</span><br><span class="line">        @Namespace(prefix = &quot;xsd&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema&quot;),</span><br><span class="line">        @Namespace(prefix = &quot;soap&quot;, reference = &quot;http://www.w3.org/2003/05/soap-envelope&quot;)</span><br><span class="line">&#125;)</span><br><span class="line">public class MobileCodeRequestEnvelope &#123;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;soap:Body&quot;, required = false)</span><br><span class="line">    private MobileCodeRequestBody body;</span><br><span class="line"></span><br><span class="line">    public MobileCodeRequestBody getBody() &#123;</span><br><span class="line">        return body;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBody(MobileCodeRequestBody body) &#123;</span><br><span class="line">        this.body = body;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MobileCodeRequestBody.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Body&quot;, strict = false)</span><br><span class="line">public class MobileCodeRequestBody &#123;</span><br><span class="line">    @Element(name = &quot;getMobileCodeInfo&quot;, required = false)</span><br><span class="line">    private MobileCodeRequestData mMobileCodeRequestData;</span><br><span class="line"></span><br><span class="line">    public MobileCodeRequestData getMobileCodeRequestData() &#123;</span><br><span class="line">        return mMobileCodeRequestData;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeRequestData(</span><br><span class="line">            MobileCodeRequestData mobileCodeRequestData) &#123;</span><br><span class="line">        mMobileCodeRequestData = mobileCodeRequestData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MobileCodeRequestData.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;getMobileCodeInfo&quot;, strict = false)</span><br><span class="line">@Namespace(reference = &quot;http://WebXml.com.cn/&quot;)</span><br><span class="line">public class MobileCodeRequestData &#123;</span><br><span class="line">    @Element(name = &quot;mobileCode&quot;, required = false)</span><br><span class="line">    private String mobileCode;</span><br><span class="line"></span><br><span class="line">    public String getMobileCode() &#123;</span><br><span class="line">        return mobileCode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCode(String mobileCode) &#123;</span><br><span class="line">        this.mobileCode = mobileCode;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-3-响应体设计"><a href="#4-3-响应体设计" class="headerlink" title="4.3 响应体设计"></a><a href></a>4.3 响应体设计</h3><p> 从响应体XML而言</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;</span><br><span class="line">   &lt;soap:Body&gt;</span><br><span class="line">      &lt;getMobileCodeInfoResponse xmlns=&quot;http://WebXml.com.cn/&quot;&gt;</span><br><span class="line">         &lt;getMobileCodeInfoResult&gt;18507152743：湖北 武汉 湖北联通GSM卡&lt;/getMobileCodeInfoResult&gt;</span><br><span class="line">      &lt;/getMobileCodeInfoResponse&gt;</span><br><span class="line">   &lt;/soap:Body&gt;</span><br><span class="line">&lt;/soap:Envelope&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 最外层soap:Envelope<br> 其次soap:Body<br> 然后getMobileCodeInfoResponse，最后getMobileCodeInfoResult，我们可以用变量表示，所以创建如下三个类：</p>
-<p> MobileCodeResponseEnvelope.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;soap:Envelope&quot;)</span><br><span class="line">@NamespaceList(&#123;</span><br><span class="line">        @Namespace( prefix = &quot;xsi&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema-instance&quot;),</span><br><span class="line">        @Namespace( prefix = &quot;xsd&quot;, reference = &quot;http://www.w3.org/2001/XMLSchema&quot;),</span><br><span class="line">        @Namespace( prefix = &quot;soap&quot;, reference = &quot;http://www.w3.org/2003/05/soap-envelope&quot;)</span><br><span class="line">&#125;)</span><br><span class="line">public class MobileCodeResponseEnvelope &#123;</span><br><span class="line">    @Element(name = &quot;Body&quot;, required = false)</span><br><span class="line">    private MobileCodeResponseBody mMobildCodeResponseBody;</span><br><span class="line"></span><br><span class="line">    public MobileCodeResponseBody getMobildCodeResponseBody() &#123;</span><br><span class="line">        return mMobildCodeResponseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobildCodeResponseBody(</span><br><span class="line">            MobileCodeResponseBody mobildCodeResponseBody) &#123;</span><br><span class="line">        mMobildCodeResponseBody = mobildCodeResponseBody;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MobileCodeResponseBody.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;Body&quot;)</span><br><span class="line">public class MobileCodeResponseBody &#123;</span><br><span class="line">    public MobileCodeResponseInfo getMobileCodeResponseInfo() &#123;</span><br><span class="line">        return mMobileCodeResponseInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeResponseInfo(</span><br><span class="line">            MobileCodeResponseInfo mobileCodeResponseInfo) &#123;</span><br><span class="line">        mMobileCodeResponseInfo = mobileCodeResponseInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;getMobileCodeInfoResponse&quot;, required = false)</span><br><span class="line">    private MobileCodeResponseInfo mMobileCodeResponseInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> MobileCodeResponseInfo.java</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Root(name = &quot;getMobileCodeInfoResponse&quot;,strict = false)</span><br><span class="line">public class MobileCodeResponseInfo &#123;</span><br><span class="line"></span><br><span class="line">    public String getMobileCodeResult() &#123;</span><br><span class="line">        return MobileCodeResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMobileCodeResult(String mobileCodeResult) &#123;</span><br><span class="line">        MobileCodeResult = mobileCodeResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Element(name = &quot;getMobileCodeInfoResult&quot;, required = false)</span><br><span class="line">    private String MobileCodeResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-4-接口设计"><a href="#4-4-接口设计" class="headerlink" title="4.4 接口设计"></a><a href></a>4.4 接口设计</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface mobileCodeApi &#123;</span><br><span class="line">    @Headers(&#123;</span><br><span class="line">            &quot;Content-Type: text/xml&quot;,</span><br><span class="line">            &quot;Accept-Charset: utf-8&quot;</span><br><span class="line">    &#125;)</span><br><span class="line">    @POST(&quot;MobileCodeWS.asmx&quot;)</span><br><span class="line">    Call&lt;MobileCodeResponseEnvelope&gt; getMobileCodeInfo(</span><br><span class="line">            @Body MobileCodeRequestEnvelope requestEnvelope);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-5-Retrofit创建"><a href="#4-5-Retrofit创建" class="headerlink" title="4.5 Retrofit创建"></a><a href></a>4.5 Retrofit创建</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class Retrofitance &#123;</span><br><span class="line">    private static Strategy strategy = new AnnotationStrategy();</span><br><span class="line">    private static Serializer serializer = new Persister(strategy);</span><br><span class="line"></span><br><span class="line">    private static OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();</span><br><span class="line"></span><br><span class="line">    private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()</span><br><span class="line">            .addConverterFactory(SimpleXmlConverterFactory.create(serializer))</span><br><span class="line">            .baseUrl(Constant.BASE_URL);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T createMobileCodeService(Class&lt;T&gt; serviceClass) &#123;</span><br><span class="line">        okHttpClient.interceptors().add(new Interceptor() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException &#123;</span><br><span class="line">                Request original = chain.request();</span><br><span class="line"></span><br><span class="line">                Request.Builder requestBuilder = original.newBuilder()</span><br><span class="line">                        .header(&quot;Content-Type&quot;, &quot;text/xml;charset=UTF-8&quot;)</span><br><span class="line">                        .method(original.method(), original.body());</span><br><span class="line"></span><br><span class="line">                Request request = requestBuilder.build();</span><br><span class="line">                return chain.proceed(request);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        OkHttpClient client = okHttpClient.connectTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .addInterceptor(new LogInterceptor())</span><br><span class="line">                .writeTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .readTimeout(1, TimeUnit.MINUTES)</span><br><span class="line">                .build();</span><br><span class="line">        Retrofit retrofit = retrofitBuilder.client(client).build();</span><br><span class="line">        return retrofit.create(serviceClass);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-6-请求数据"><a href="#4-6-请求数据" class="headerlink" title="4.6 请求数据"></a><a href></a>4.6 请求数据</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mobileCodeApi apiService = Retrofitance.createMobileCodeService(mobileCodeApi.class);</span><br><span class="line">MobileCodeRequestEnvelope requestEnvelope = new MobileCodeRequestEnvelope();</span><br><span class="line">MobileCodeRequestBody requestBody = new MobileCodeRequestBody();</span><br><span class="line">MobileCodeRequestData requestData = new MobileCodeRequestData();</span><br><span class="line"></span><br><span class="line">requestData.setMobileCode(&quot;18507152743&quot;);</span><br><span class="line">requestBody.setMobileCodeRequestData(requestData);</span><br><span class="line">requestEnvelope.setBody(requestBody);</span><br><span class="line"></span><br><span class="line">Call&lt;MobileCodeResponseEnvelope&gt; call = apiService.getMobileCodeInfo(requestEnvelope);</span><br><span class="line">call.enqueue(new Callback&lt;MobileCodeResponseEnvelope&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onResponse(Call&lt;MobileCodeResponseEnvelope&gt; call,</span><br><span class="line">            Response&lt;MobileCodeResponseEnvelope&gt; response) &#123;</span><br><span class="line">        MobileCodeResponseEnvelope mobileCodeResponseEnvelope = response.body();</span><br><span class="line">        if (mobileCodeResponseEnvelope != null) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;请求成功&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">            String result =</span><br><span class="line">                    mobileCodeResponseEnvelope.getMobildCodeResponseBody()</span><br><span class="line">                            .getMobileCodeResponseInfo().getMobileCodeResult();</span><br><span class="line">            mTvMobileResult.setText(result);</span><br><span class="line">            System.err.println(&quot;yidong -- result = &quot; + result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onFailure(Call&lt;MobileCodeResponseEnvelope&gt; call, Throwable t) &#123;</span><br><span class="line">        System.err.println(&quot;yidong -- onFailure&quot;);</span><br><span class="line">        Toast.makeText(MainActivity.this, &quot;请求失败&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="4-7-效果"><a href="#4-7-效果" class="headerlink" title="4.7 效果"></a><a href></a>4.7 效果</h3><p> <img src="https://img-blog.csdn.net/20180127222506868?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="5-源码地址"><a href="#5-源码地址" class="headerlink" title="5. 源码地址"></a><a href></a>5. 源码地址</h2><p> <a href="https://github.com/onlyloveyd/RetrofitWebService" target="_blank" rel="noopener">RetrofitWebService</a></p>
-
+<p>而对于我们移动开发人员而言，它就是一种数据交互的通道。我们需要了解他的请求结构体和响应结构体。</p>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/01/27/《Android开源库》 Retrofit & WebService/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -739,6 +600,58 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
             <div class="level-start">
                 <div class="level-item">
                 <a class="button is-size-7 is-light" href="/2018/01/22/AngularJS小白（1）：开发环境准备/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-01-08T13:00:11.000Z">2018-01-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Android开源库/">Android开源库</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 分钟 读完 (大约 737 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/01/08/RxJava2小白手册（3）- map/">RxJava2-map</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> 操作符map，字面理解一下，就是映射，那么这个操作符如何使用呢？</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2018/01/08/RxJava2小白手册（3）- map/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -824,7 +737,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -844,7 +757,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -935,7 +848,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -1045,7 +958,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -1239,7 +1152,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1608,7 +1521,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1648,23 +1561,9 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1678,13 +1577,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1692,13 +1584,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1727,7 +1612,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1748,13 +1633,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1783,7 +1661,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1846,14 +1724,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1872,13 +1750,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1886,22 +1757,8 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1935,13 +1792,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1951,7 +1801,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1970,13 +1820,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1986,14 +1829,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2021,7 +1864,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2040,44 +1883,9 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2091,20 +1899,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2138,22 +1932,8 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2168,7 +1948,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2374,7 +2154,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2743,7 +2523,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2783,23 +2563,9 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2813,13 +2579,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2827,13 +2586,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2862,7 +2614,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2883,13 +2635,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2918,7 +2663,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2981,14 +2726,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -3007,13 +2752,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -3021,22 +2759,8 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3070,13 +2794,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -3086,7 +2803,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3105,13 +2822,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -3121,14 +2831,14 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -3156,7 +2866,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -3175,44 +2885,9 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -3226,20 +2901,6 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3273,22 +2934,8 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -3303,7 +2950,7 @@ state  | RecyclerView的状态             </code></pre><p> 参数类型和意�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

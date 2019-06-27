@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. 前言 最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。   2. 实现思路 继承View，复写onDraw。  确定N边形和每个边对应的角度；  确定多边形外接圆的半径以及圆心（也就是中心点）  确定每条半径上的所有点的坐标。  确定每条数据在图形上的坐标；  确定文字在图形上的位置；  采用合适的绘制方式绘制；  3. 实">
+    <meta name="description" content="1. 前言最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。">
 <meta name="keywords" content="自定义View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 进阶（二）》 自定义View之Dota2能力雷达图">
 <meta property="og:url" content="http://yoursite.com/2017/10/17/《Android 进阶（二）》 自定义View之Dota2能力雷达图/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="1. 前言 最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。   2. 实现思路 继承View，复写onDraw。  确定N边形和每个边对应的角度；  确定多边形外接圆的半径以及圆心（也就是中心点）  确定每条半径上的所有点的坐标。  确定每条数据在图形上的坐标；  确定文字在图形上的位置；  采用合适的绘制方式绘制；  3. 实">
+<meta property="og:description" content="1. 前言最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:46:30.665Z">
+<meta property="og:updated_time" content="2019-06-27T12:09:14.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 进阶（二）》 自定义View之Dota2能力雷达图">
-<meta name="twitter:description" content="1. 前言 最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。   2. 实现思路 继承View，复写onDraw。  确定N边形和每个边对应的角度；  确定多边形外接圆的半径以及圆心（也就是中心点）  确定每条半径上的所有点的坐标。  确定每条数据在图形上的坐标；  确定文字在图形上的位置；  采用合适的绘制方式绘制；  3. 实">
+<meta name="twitter:description" content="1. 前言最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1639 个字)
+                    11 分钟 读完 (大约 1642 个字)
                 </span>
                 
                 
@@ -168,27 +168,27 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p> 最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。</p>
-<p> <img src="https://img-blog.csdn.net/20171017211254164" alt="这里写图片描述"></p>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>最近看Dota2的比赛的时候无意在一个应用中看到来一个能力分析的雷达图，就是展示你的各方面数据。你可能看见过这个图。</p>
+<a id="more"></a>
+<p><img src="http://img.blog.csdn.net/20171017211254164" alt="这里写图片描述"></p>
 <h2 id="2-实现思路"><a href="#2-实现思路" class="headerlink" title="2. 实现思路"></a>2. 实现思路</h2><ol>
-<li>继承View，复写onDraw。 </li>
-<li>确定N边形和每个边对应的角度； </li>
-<li>确定多边形外接圆的半径以及圆心（也就是中心点） </li>
-<li>确定每条半径上的所有点的坐标。 </li>
-<li>确定每条数据在图形上的坐标； </li>
-<li>确定文字在图形上的位置； </li>
-<li>采用合适的绘制方式绘制；  <h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a>3. 实现</h2></li>
+<li>继承View，复写onDraw。</li>
+<li>确定N边形和每个边对应的角度；</li>
+<li>确定多边形外接圆的半径以及圆心（也就是中心点）</li>
+<li>确定每条半径上的所有点的坐标。</li>
+<li>确定每条数据在图形上的坐标；</li>
+<li>确定文字在图形上的位置；</li>
+<li>采用合适的绘制方式绘制；</li>
 </ol>
-<h3 id="3-1-定义自定义属性"><a href="#3-1-定义自定义属性" class="headerlink" title="3.1 定义自定义属性"></a>3.1 定义自定义属性</h3><p> 主要定义这几个属性，可以根据需要继续扩展。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;CustomRadarChart&quot;&gt;</span><br><span class="line">    &lt;!-- 蜘蛛网线条宽度 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineWidth&quot; format=&quot;dimension&quot;/&gt;</span><br><span class="line">    &lt;!-- 蜘蛛网颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;!-- 半径分成N段--&gt;</span><br><span class="line">    &lt;attr name=&quot;radarLineSegments&quot; format=&quot;integer&quot;/&gt;</span><br><span class="line">    &lt;!-- 文字颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarTextColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;!-- 文字字体大小--&gt;</span><br><span class="line">    &lt;attr name=&quot;radarTextSize&quot; format=&quot;integer&quot;/&gt;</span><br><span class="line">    &lt;!-- 数据展示覆盖区域颜色 --&gt;</span><br><span class="line">    &lt;attr name=&quot;radarCoverColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-实现"><a href="#3-实现" class="headerlink" title="3. 实现"></a>3. 实现</h2><h3 id="3-1-定义自定义属性"><a href="#3-1-定义自定义属性" class="headerlink" title="3.1 定义自定义属性"></a>3.1 定义自定义属性</h3><p>主要定义这几个属性，可以根据需要继续扩展。</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">declare-styleable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CustomRadarChart"</span>&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 蜘蛛网线条宽度 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarLineWidth"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"dimension"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 蜘蛛网颜色 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarLineColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 半径分成N段--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarLineSegments"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"integer"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 文字颜色 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarTextColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 文字字体大小--&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarTextSize"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"integer"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-comment">&lt;!-- 数据展示覆盖区域颜色 --&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radarCoverColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="3-2-自定义View代码"><a href="#3-2-自定义View代码" class="headerlink" title="3.2 自定义View代码"></a>3.2 自定义View代码</h3><p>注释代码中都有写出来，主要是看下实现的方式。没有过多的修饰和精简。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomRadarChart</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">View</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * N 边形，默认为6边形</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_PIECE_NUMBER = <span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 线条宽度，默认为10px</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_LINE_WIDTH = <span class="hljs-number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 线条颜色,默认为灰色</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_LINE_COLOR = <span class="hljs-number">0xffd0d6dc</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 半径分成N段,默认为4段，圆心算一段</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_LINE_SEGMENTS = <span class="hljs-number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 外接圆半径，默认为50px</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_RADIUS = <span class="hljs-number">50</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 文本颜色和文本字体, 默认为黑色，10px</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_TEXT_COLOR = <span class="hljs-number">0xff647d91</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_TEXT_SIZE = <span class="hljs-number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 覆盖面绘制颜色</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_COVER_COLOR = <span class="hljs-number">0x55ced6dc</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mPieceNumber = DEFAULT_PIECE_NUMBER;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mRadius = DEFAULT_RADIUS;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mLineWidth = DEFAULT_LINE_WIDTH;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mLineColor = DEFAULT_LINE_COLOR;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mLineSegments = DEFAULT_LINE_SEGMENTS;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mCoverColor = DEFAULT_COVER_COLOR;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> mAverageAngle = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Paint mRadarPaint;</span><br><span class="line">    <span class="hljs-keyword">private</span> TextPaint mTextPaint;</span><br><span class="line">    <span class="hljs-keyword">private</span> Paint mCoverPaint;</span><br><span class="line">    <span class="hljs-keyword">private</span> Path mCoverPath;</span><br><span class="line"></span><br><span class="line">    List&lt;RadarPoints&gt; mRadarPointses = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;RadarEntry&gt; mRadarEntries = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mCoverPoints = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mTextPoints = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 外接圆中心位置</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mPositionX = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mPositionY = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomRadarChart</span><span class="hljs-params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>(context, <span class="hljs-keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomRadarChart</span><span class="hljs-params">(Context context,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">            @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>(context, attrs, <span class="hljs-number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomRadarChart</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.CustomRadarChart);</span><br><span class="line"></span><br><span class="line">        mLineWidth = (<span class="hljs-keyword">int</span>) attributes.getDimension(R.styleable.CustomRadarChart_radarLineWidth, DEFAULT_LINE_WIDTH);</span><br><span class="line">        mLineColor = attributes.getColor(R.styleable.CustomRadarChart_radarLineColor, DEFAULT_LINE_COLOR);</span><br><span class="line">        mLineSegments = attributes.getInteger(R.styleable.CustomRadarChart_radarLineSegments, DEFAULT_LINE_SEGMENTS);</span><br><span class="line">        mTextColor = attributes.getColor(R.styleable.CustomRadarChart_radarTextColor, DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (<span class="hljs-keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                attributes.getInteger(R.styleable.CustomRadarChart_radarTextSize, DEFAULT_TEXT_SIZE), getResources().getDisplayMetrics());</span><br><span class="line">        mCoverColor = (<span class="hljs-keyword">int</span>) attributes.getColor(R.styleable.CustomRadarChart_radarCoverColor, DEFAULT_COVER_COLOR);</span><br><span class="line"></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 蜘蛛网Paint初始化</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        mRadarPaint = <span class="hljs-keyword">new</span> Paint();</span><br><span class="line">        mRadarPaint.setColor(mLineColor);</span><br><span class="line">        mRadarPaint.setStrokeWidth(mLineWidth);</span><br><span class="line">        mRadarPaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mRadarPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 文字绘制Paint初始化</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        mTextPaint = <span class="hljs-keyword">new</span> TextPaint();</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextSize(mTextSize);</span><br><span class="line">        mTextPaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mTextPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         *覆盖面绘制Paint初始化</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        mCoverPaint = <span class="hljs-keyword">new</span> Paint();</span><br><span class="line">        mCoverPaint.setColor(mCoverColor);</span><br><span class="line">        mCoverPaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mCoverPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">        mCoverPath = <span class="hljs-keyword">new</span> Path();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSizeChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> w, <span class="hljs-keyword">int</span> h, <span class="hljs-keyword">int</span> oldw, <span class="hljs-keyword">int</span> oldh)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mPositionX = w / <span class="hljs-number">2</span>;</span><br><span class="line">        mPositionY = h / <span class="hljs-number">2</span>;</span><br><span class="line">        mAverageAngle = <span class="hljs-number">360.0</span> / mPieceNumber;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span>(RadarEntry entry : mRadarEntries) &#123;</span><br><span class="line">            Rect textBound = <span class="hljs-keyword">new</span> Rect();</span><br><span class="line">            mTextPaint.getTextBounds(entry.title, <span class="hljs-number">0</span>, entry.title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            max = Math.max(textBound.width(), max);</span><br><span class="line">        &#125;</span><br><span class="line">        mRadius = Math.min(w / <span class="hljs-number">2</span> - max, h / <span class="hljs-number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (mRadarEntries==<span class="hljs-keyword">null</span> || mRadarEntries.size()==<span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException(<span class="hljs-string">"请先设置数据集"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 计算每一条轴线上的所有点</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            List&lt;PointF&gt; pointFs = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; mLineSegments; j++) &#123;</span><br><span class="line">                PointF point = <span class="hljs-keyword">new</span> PointF();</span><br><span class="line">                <span class="hljs-keyword">double</span> percent = j * <span class="hljs-number">1.0</span> / (mLineSegments - <span class="hljs-number">1</span>);</span><br><span class="line">                point.set(getPloygonX(mAverageAngle * i, percent),</span><br><span class="line">                        getPloygonY(mAverageAngle * i, percent));</span><br><span class="line">                pointFs.add(point);</span><br><span class="line">            &#125;</span><br><span class="line">            RadarPoints radarPoints = <span class="hljs-keyword">new</span> RadarPoints(i, pointFs);</span><br><span class="line">            mRadarPointses.add(radarPoints);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 根据数据集计算覆盖多变形的点</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> m = <span class="hljs-number">0</span>; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = <span class="hljs-keyword">new</span> PointF();</span><br><span class="line">            <span class="hljs-keyword">double</span> percent = mRadarEntries.get(m).level / <span class="hljs-number">100.0</span>;</span><br><span class="line">            pointF.set(getPloygonX(mAverageAngle * m, percent),</span><br><span class="line">                    getPloygonY(mAverageAngle * m, percent));</span><br><span class="line">            mCoverPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 设置文字显示位置</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> m = <span class="hljs-number">0</span>; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = <span class="hljs-keyword">new</span> PointF();</span><br><span class="line">            String title = mRadarEntries.get(m).title;</span><br><span class="line">            Rect textBound = <span class="hljs-keyword">new</span> Rect();</span><br><span class="line">            mTextPaint.getTextBounds(title, <span class="hljs-number">0</span>, title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            <span class="hljs-keyword">float</span> boundx = mRadarPointses.get(m).getPointFs().get(mLineSegments -<span class="hljs-number">1</span>).x;</span><br><span class="line">            <span class="hljs-keyword">float</span> boundy = mRadarPointses.get(m).getPointFs().get(mLineSegments -<span class="hljs-number">1</span>).y;</span><br><span class="line">            <span class="hljs-keyword">if</span>( boundx &gt; mRadius &amp;&amp; boundy &lt;= mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, <span class="hljs-number">1</span>),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, <span class="hljs-number">1</span>) - textBound.height()*<span class="hljs-number">2</span>) ;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( boundx &lt;= mRadius &amp;&amp; boundy &lt;= mRadius)&#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, <span class="hljs-number">1</span>) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, <span class="hljs-number">1</span>) - textBound.height()*<span class="hljs-number">2</span>);</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( boundx &lt;= mRadius &amp;&amp; boundy &gt; mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, <span class="hljs-number">1</span>) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, <span class="hljs-number">1</span>) );</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, <span class="hljs-number">1</span>),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, <span class="hljs-number">1</span>));</span><br><span class="line">            &#125;</span><br><span class="line">            mTextPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 设置数据集，数据集的index决定位置，顺时针方向，起始角度为0度</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setRadatEntries</span><span class="hljs-params">(List&lt;RadarEntry&gt; entries)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mRadarEntries = entries;</span><br><span class="line">        mPieceNumber = entries.size();</span><br><span class="line">        postInvalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDraw</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onDraw(canvas);</span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 绘制中心点</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        canvas.drawPoint(mPositionX, mPositionY, mRadarPaint);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 绘制蜘蛛网</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mLineSegments; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; mPieceNumber - <span class="hljs-number">1</span>; j++) &#123;</span><br><span class="line">                canvas.drawLine(mRadarPointses.get(j).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                        j).getPointFs().get(i).y,</span><br><span class="line">                        mRadarPointses.get(j + <span class="hljs-number">1</span>).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                                j + <span class="hljs-number">1</span>).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">            &#125;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - <span class="hljs-number">2</span>).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - <span class="hljs-number">2</span>).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - <span class="hljs-number">1</span>).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            mPieceNumber - <span class="hljs-number">1</span>).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line"></span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - <span class="hljs-number">1</span>).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - <span class="hljs-number">1</span>).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(<span class="hljs-number">0</span>).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            <span class="hljs-number">0</span>).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 绘制轴线</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; mPieceNumber; k++) &#123;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(k).getPointFs().get(<span class="hljs-number">0</span>).x,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(<span class="hljs-number">0</span>).y,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(mLineSegments - <span class="hljs-number">1</span>).x, mRadarPointses.get(</span><br><span class="line">                            k).getPointFs().get(mLineSegments - <span class="hljs-number">1</span>).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 绘制数据</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mCoverPoints != <span class="hljs-keyword">null</span> &amp;&amp; mCoverPoints.size() == mPieceNumber) &#123;</span><br><span class="line">            mCoverPath.reset();</span><br><span class="line">            mCoverPath.moveTo(mCoverPoints.get(<span class="hljs-number">0</span>).x, mCoverPoints.get(<span class="hljs-number">0</span>).y);</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">                mCoverPath.lineTo(mCoverPoints.get(i).x, mCoverPoints.get(i).y);</span><br><span class="line">            &#125;</span><br><span class="line">            mCoverPath.close();</span><br><span class="line">            canvas.drawPath(mCoverPath, mCoverPaint);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException(<span class="hljs-string">"请先设置数据集"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">         * 绘制文字,使用StaticLayout进行换行文字的绘制</span></span><br><span class="line"><span class="hljs-comment">         */</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            canvas.save();</span><br><span class="line">            String str= mRadarEntries.get(i).title + <span class="hljs-string">"\r\n"</span> + Math.floor(mRadarEntries.get(i).level*<span class="hljs-number">10</span>)/<span class="hljs-number">10</span>;</span><br><span class="line">            StaticLayout layout = <span class="hljs-keyword">new</span> StaticLayout(str, mTextPaint, <span class="hljs-number">300</span>,</span><br><span class="line">                    Layout.Alignment.ALIGN_NORMAL, <span class="hljs-number">1.0F</span>, <span class="hljs-number">0.0F</span>, <span class="hljs-keyword">true</span>);</span><br><span class="line">            canvas.translate(mTextPoints.get(i).x,mTextPoints.get(i).y);</span><br><span class="line">            layout.draw(canvas);</span><br><span class="line">            canvas.restore();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getPloygonX</span><span class="hljs-params">(<span class="hljs-keyword">double</span> angle, <span class="hljs-keyword">double</span> percent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> Float.parseFloat(</span><br><span class="line">                String.valueOf(</span><br><span class="line">                        mPositionX + Math.cos(angle / <span class="hljs-number">360.0</span> * <span class="hljs-number">2</span> * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getPloygonY</span><span class="hljs-params">(<span class="hljs-keyword">double</span> angle, <span class="hljs-keyword">double</span> percent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> Float.parseFloat(String.valueOf(</span><br><span class="line">                mPositionY + Math.sin(angle / <span class="hljs-number">360.0</span> * <span class="hljs-number">2</span> * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 雷达图数据载体</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RadarEntry</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">private</span> String title;</span><br><span class="line">        <span class="hljs-keyword">private</span> Float level;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RadarEntry</span><span class="hljs-params">(String title, <span class="hljs-keyword">float</span> level)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">this</span>.title = title;</span><br><span class="line">            <span class="hljs-keyword">this</span>.level = level;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 每一条线上的所有点集合</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RadarPoints</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> index;</span><br><span class="line">        List&lt;PointF&gt; mPointFs;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RadarPoints</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, List&lt;PointF&gt; pointFs)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">this</span>.index = index;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getIndex</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setIndex</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">this</span>.index = index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;PointF&gt; <span class="hljs-title">getPointFs</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> mPointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPointFs</span><span class="hljs-params">(List&lt;PointF&gt; pointFs)</span> </span>&#123;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-2-自定义View代码"><a href="#3-2-自定义View代码" class="headerlink" title="3.2 自定义View代码"></a>3.2 自定义View代码</h3><p> 注释代码中都有写出来，主要是看下实现的方式。没有过多的修饰和精简。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br></pre></td><td class="code"><pre><span class="line">public class CustomRadarChart extends View &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * N 边形，默认为6边形</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_PIECE_NUMBER = 7;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 线条宽度，默认为10px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_WIDTH = 4;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 线条颜色,默认为灰色</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_COLOR = 0xffd0d6dc;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 半径分成N段,默认为4段，圆心算一段</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_LINE_SEGMENTS = 4;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 外接圆半径，默认为50px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_RADIUS = 50;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 文本颜色和文本字体, 默认为黑色，10px</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_TEXT_COLOR = 0xff647d91;</span><br><span class="line">    private final int DEFAULT_TEXT_SIZE = 10;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 覆盖面绘制颜色</span><br><span class="line">     */</span><br><span class="line">    private final int DEFAULT_COVER_COLOR = 0x55ced6dc;</span><br><span class="line"></span><br><span class="line">    private int mPieceNumber = DEFAULT_PIECE_NUMBER;</span><br><span class="line">    private int mRadius = DEFAULT_RADIUS;</span><br><span class="line"></span><br><span class="line">    private int mLineWidth = DEFAULT_LINE_WIDTH;</span><br><span class="line">    private int mLineColor = DEFAULT_LINE_COLOR;</span><br><span class="line">    private int mLineSegments = DEFAULT_LINE_SEGMENTS;</span><br><span class="line">    private int mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    private int mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line">    private int mCoverColor = DEFAULT_COVER_COLOR;</span><br><span class="line"></span><br><span class="line">    private double mAverageAngle = 0;</span><br><span class="line"></span><br><span class="line">    private Paint mRadarPaint;</span><br><span class="line">    private TextPaint mTextPaint;</span><br><span class="line">    private Paint mCoverPaint;</span><br><span class="line">    private Path mCoverPath;</span><br><span class="line"></span><br><span class="line">    List&lt;RadarPoints&gt; mRadarPointses = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;RadarEntry&gt; mRadarEntries = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mCoverPoints = new ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;PointF&gt; mTextPoints = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 外接圆中心位置</span><br><span class="line">     */</span><br><span class="line">    private int mPositionX = 0;</span><br><span class="line">    private int mPositionY = 0;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public CustomRadarChart(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.CustomRadarChart);</span><br><span class="line"></span><br><span class="line">        mLineWidth = (int) attributes.getDimension(R.styleable.CustomRadarChart_radarLineWidth, DEFAULT_LINE_WIDTH);</span><br><span class="line">        mLineColor = attributes.getColor(R.styleable.CustomRadarChart_radarLineColor, DEFAULT_LINE_COLOR);</span><br><span class="line">        mLineSegments = attributes.getInteger(R.styleable.CustomRadarChart_radarLineSegments, DEFAULT_LINE_SEGMENTS);</span><br><span class="line">        mTextColor = attributes.getColor(R.styleable.CustomRadarChart_radarTextColor, DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                attributes.getInteger(R.styleable.CustomRadarChart_radarTextSize, DEFAULT_TEXT_SIZE), getResources().getDisplayMetrics());</span><br><span class="line">        mCoverColor = (int) attributes.getColor(R.styleable.CustomRadarChart_radarCoverColor, DEFAULT_COVER_COLOR);</span><br><span class="line"></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        /**</span><br><span class="line">         * 蜘蛛网Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mRadarPaint = new Paint();</span><br><span class="line">        mRadarPaint.setColor(mLineColor);</span><br><span class="line">        mRadarPaint.setStrokeWidth(mLineWidth);</span><br><span class="line">        mRadarPaint.setAntiAlias(true);</span><br><span class="line">        mRadarPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 文字绘制Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mTextPaint = new TextPaint();</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextSize(mTextSize);</span><br><span class="line">        mTextPaint.setAntiAlias(true);</span><br><span class="line">        mTextPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         *覆盖面绘制Paint初始化</span><br><span class="line">         */</span><br><span class="line">        mCoverPaint = new Paint();</span><br><span class="line">        mCoverPaint.setColor(mCoverColor);</span><br><span class="line">        mCoverPaint.setAntiAlias(true);</span><br><span class="line">        mCoverPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">        mCoverPath = new Path();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;</span><br><span class="line">        super.onSizeChanged(w, h, oldw, oldh);</span><br><span class="line">        mPositionX = w / 2;</span><br><span class="line">        mPositionY = h / 2;</span><br><span class="line">        mAverageAngle = 360.0 / mPieceNumber;</span><br><span class="line"></span><br><span class="line">        int max = 0;</span><br><span class="line">        for(RadarEntry entry : mRadarEntries) &#123;</span><br><span class="line">            Rect textBound = new Rect();</span><br><span class="line">            mTextPaint.getTextBounds(entry.title, 0, entry.title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            max = Math.max(textBound.width(), max);</span><br><span class="line">        &#125;</span><br><span class="line">        mRadius = Math.min(w / 2 - max, h / 2);</span><br><span class="line"></span><br><span class="line">        if (mRadarEntries==null || mRadarEntries.size()==0) &#123;</span><br><span class="line">            throw new NullPointerException(&quot;请先设置数据集&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        /**</span><br><span class="line">         * 计算每一条轴线上的所有点</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            List&lt;PointF&gt; pointFs = new ArrayList&lt;&gt;();</span><br><span class="line">            for (int j = 0; j &lt; mLineSegments; j++) &#123;</span><br><span class="line">                PointF point = new PointF();</span><br><span class="line">                double percent = j * 1.0 / (mLineSegments - 1);</span><br><span class="line">                point.set(getPloygonX(mAverageAngle * i, percent),</span><br><span class="line">                        getPloygonY(mAverageAngle * i, percent));</span><br><span class="line">                pointFs.add(point);</span><br><span class="line">            &#125;</span><br><span class="line">            RadarPoints radarPoints = new RadarPoints(i, pointFs);</span><br><span class="line">            mRadarPointses.add(radarPoints);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 根据数据集计算覆盖多变形的点</span><br><span class="line">         */</span><br><span class="line">        for (int m = 0; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = new PointF();</span><br><span class="line">            double percent = mRadarEntries.get(m).level / 100.0;</span><br><span class="line">            pointF.set(getPloygonX(mAverageAngle * m, percent),</span><br><span class="line">                    getPloygonY(mAverageAngle * m, percent));</span><br><span class="line">            mCoverPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 设置文字显示位置</span><br><span class="line">         */</span><br><span class="line">        for (int m = 0; m &lt; mPieceNumber; m++) &#123;</span><br><span class="line">            PointF pointF = new PointF();</span><br><span class="line">            String title = mRadarEntries.get(m).title;</span><br><span class="line">            Rect textBound = new Rect();</span><br><span class="line">            mTextPaint.getTextBounds(title, 0, title.length(),</span><br><span class="line">                    textBound);</span><br><span class="line">            float boundx = mRadarPointses.get(m).getPointFs().get(mLineSegments -1).x;</span><br><span class="line">            float boundy = mRadarPointses.get(m).getPointFs().get(mLineSegments -1).y;</span><br><span class="line">            if( boundx &gt; mRadius &amp;&amp; boundy &lt;= mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) - textBound.height()*2) ;</span><br><span class="line">            &#125; else if ( boundx &lt;= mRadius &amp;&amp; boundy &lt;= mRadius)&#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) - textBound.height()*2);</span><br><span class="line">            &#125; else if( boundx &lt;= mRadius &amp;&amp; boundy &gt; mRadius) &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1) - textBound.width(),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1) );</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                pointF.set(getPloygonX(mAverageAngle * m, 1),</span><br><span class="line">                        getPloygonY(mAverageAngle * m, 1));</span><br><span class="line">            &#125;</span><br><span class="line">            mTextPoints.add(pointF);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置数据集，数据集的index决定位置，顺时针方向，起始角度为0度</span><br><span class="line">     */</span><br><span class="line">    public void setRadatEntries(List&lt;RadarEntry&gt; entries) &#123;</span><br><span class="line">        this.mRadarEntries = entries;</span><br><span class="line">        mPieceNumber = entries.size();</span><br><span class="line">        postInvalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        /**</span><br><span class="line">         * 绘制中心点</span><br><span class="line">         */</span><br><span class="line">        canvas.drawPoint(mPositionX, mPositionY, mRadarPaint);</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制蜘蛛网</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mLineSegments; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; mPieceNumber - 1; j++) &#123;</span><br><span class="line">                canvas.drawLine(mRadarPointses.get(j).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                        j).getPointFs().get(i).y,</span><br><span class="line">                        mRadarPointses.get(j + 1).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                                j + 1).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">            &#125;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - 2).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 2).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            mPieceNumber - 1).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line"></span><br><span class="line">            canvas.drawLine(mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).x,</span><br><span class="line">                    mRadarPointses.get(mPieceNumber - 1).getPointFs().get(i).y,</span><br><span class="line">                    mRadarPointses.get(0).getPointFs().get(i).x, mRadarPointses.get(</span><br><span class="line">                            0).getPointFs().get(i).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制轴线</span><br><span class="line">         */</span><br><span class="line">        for (int k = 0; k &lt; mPieceNumber; k++) &#123;</span><br><span class="line">            canvas.drawLine(mRadarPointses.get(k).getPointFs().get(0).x,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(0).y,</span><br><span class="line">                    mRadarPointses.get(k).getPointFs().get(mLineSegments - 1).x, mRadarPointses.get(</span><br><span class="line">                            k).getPointFs().get(mLineSegments - 1).y, mRadarPaint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制数据</span><br><span class="line">         */</span><br><span class="line">        if (mCoverPoints != null &amp;&amp; mCoverPoints.size() == mPieceNumber) &#123;</span><br><span class="line">            mCoverPath.reset();</span><br><span class="line">            mCoverPath.moveTo(mCoverPoints.get(0).x, mCoverPoints.get(0).y);</span><br><span class="line">            for (int i = 1; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">                mCoverPath.lineTo(mCoverPoints.get(i).x, mCoverPoints.get(i).y);</span><br><span class="line">            &#125;</span><br><span class="line">            mCoverPath.close();</span><br><span class="line">            canvas.drawPath(mCoverPath, mCoverPaint);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            throw new NullPointerException(&quot;请先设置数据集&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /**</span><br><span class="line">         * 绘制文字,使用StaticLayout进行换行文字的绘制</span><br><span class="line">         */</span><br><span class="line">        for (int i = 0; i &lt; mPieceNumber; i++) &#123;</span><br><span class="line">            canvas.save();</span><br><span class="line">            String str= mRadarEntries.get(i).title + &quot;\r\n&quot; + Math.floor(mRadarEntries.get(i).level*10)/10;</span><br><span class="line">            StaticLayout layout = new StaticLayout(str, mTextPaint, 300,</span><br><span class="line">                    Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);</span><br><span class="line">            canvas.translate(mTextPoints.get(i).x,mTextPoints.get(i).y);</span><br><span class="line">            layout.draw(canvas);</span><br><span class="line">            canvas.restore();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public float getPloygonX(double angle, double percent) &#123;</span><br><span class="line">        return Float.parseFloat(</span><br><span class="line">                String.valueOf(</span><br><span class="line">                        mPositionX + Math.cos(angle / 360.0 * 2 * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public float getPloygonY(double angle, double percent) &#123;</span><br><span class="line">        return Float.parseFloat(String.valueOf(</span><br><span class="line">                mPositionY + Math.sin(angle / 360.0 * 2 * Math.PI) * mRadius * percent));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 雷达图数据载体</span><br><span class="line">     */</span><br><span class="line">    public static class RadarEntry &#123;</span><br><span class="line">        private String title;</span><br><span class="line">        private Float level;</span><br><span class="line"></span><br><span class="line">        public RadarEntry(String title, float level) &#123;</span><br><span class="line">            this.title = title;</span><br><span class="line">            this.level = level;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 每一条线上的所有点集合</span><br><span class="line">     */</span><br><span class="line">    public class RadarPoints &#123;</span><br><span class="line">        int index;</span><br><span class="line">        List&lt;PointF&gt; mPointFs;</span><br><span class="line"></span><br><span class="line">        public RadarPoints(int index, List&lt;PointF&gt; pointFs) &#123;</span><br><span class="line">            this.index = index;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int getIndex() &#123;</span><br><span class="line">            return index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setIndex(int index) &#123;</span><br><span class="line">            this.index = index;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public List&lt;PointF&gt; getPointFs() &#123;</span><br><span class="line">            return mPointFs;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setPointFs(List&lt;PointF&gt; pointFs) &#123;</span><br><span class="line">            mPointFs = pointFs;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 可能画图过程中的实现方式优点粗糙，大家可以根据自己的方式，改写即可。<br> 个人是先将每条半径上的端点全部计算出来进行保存，然后一次连接，然后把每个半径首尾端点连接，然后绘制覆盖区域，覆盖区域也是采用先计算点位置，然后连接的方式实现，最后确定文本的显示位置和文字的绘制。由于这里涉及到绘制换行文字，使用到来StaticLayout。使用方法请查阅对应API。</p>
-<h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4. 效果"></a>4. 效果</h2><p> <img src="https://img-blog.csdn.net/20171017215345906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="5-源码"><a href="#5-源码" class="headerlink" title="5. 源码"></a>5. 源码</h2><p> 源码依然是上传到Github<br> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
+<p>可能画图过程中的实现方式优点粗糙，大家可以根据自己的方式，改写即可。<br>个人是先将每条半径上的端点全部计算出来进行保存，然后一次连接，然后把每个半径首尾端点连接，然后绘制覆盖区域，覆盖区域也是采用先计算点位置，然后连接的方式实现，最后确定文本的显示位置和文字的绘制。由于这里涉及到绘制换行文字，使用到来StaticLayout。使用方法请查阅对应API。</p>
+<h2 id="4-效果"><a href="#4-效果" class="headerlink" title="4. 效果"></a>4. 效果</h2><p><img src="http://img.blog.csdn.net/20171017215345906?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="5-源码"><a href="#5-源码" class="headerlink" title="5. 源码"></a>5. 源码</h2><p>源码依然是上传到Github<br><a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
 
         </div>
         
@@ -327,7 +327,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -347,7 +347,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -438,7 +438,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -548,7 +548,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -742,7 +742,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1111,7 +1111,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1151,23 +1151,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1181,13 +1167,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1195,13 +1174,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1230,7 +1202,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1251,13 +1223,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1286,7 +1251,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1349,14 +1314,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1375,13 +1340,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1389,22 +1347,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1438,13 +1382,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1454,7 +1391,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1473,13 +1410,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1489,14 +1419,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1524,7 +1454,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1543,44 +1473,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1594,20 +1489,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1641,22 +1522,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1671,7 +1538,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1877,7 +1744,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2246,7 +2113,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2286,23 +2153,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2316,13 +2169,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2330,13 +2176,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2365,7 +2204,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2386,13 +2225,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2421,7 +2253,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2484,14 +2316,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2510,13 +2342,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2524,22 +2349,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2573,13 +2384,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2589,7 +2393,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2608,13 +2412,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2624,14 +2421,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2659,7 +2456,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2678,44 +2475,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2729,20 +2491,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2776,22 +2524,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2806,7 +2540,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

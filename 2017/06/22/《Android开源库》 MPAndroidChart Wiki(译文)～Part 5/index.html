@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="19. ChartData子类 这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData方法                           | 使用                                                 ----------------------------">
-<meta name="keywords" content="MPAndroidChart,开源库,译文">
+    <meta name="description" content="19. ChartData子类这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData   方法 使用    setGroupSpace(float percent) 按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%   isGrouped() 如果此数">
+<meta name="keywords" content="译文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 5">
 <meta property="og:url" content="http://yoursite.com/2017/06/22/《Android开源库》 MPAndroidChart Wiki(译文)～Part 5/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="19. ChartData子类 这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData方法                           | 使用                                                 ----------------------------">
+<meta property="og:description" content="19. ChartData子类这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData   方法 使用    setGroupSpace(float percent) 按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%   isGrouped() 如果此数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T14:17:24.922Z">
+<meta property="og:updated_time" content="2019-06-27T12:51:25.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 5">
-<meta name="twitter:description" content="19. ChartData子类 这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData方法                           | 使用                                                 ----------------------------">
+<meta name="twitter:description" content="19. ChartData子类这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。 BarData   方法 使用    setGroupSpace(float percent) 按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%   isGrouped() 如果此数">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -168,108 +168,457 @@
             
         </h1>
         <div class="content">
-            <h2 id="19-ChartData子类"><a href="#19-ChartData子类" class="headerlink" title="19. ChartData子类"></a><a href></a>19. ChartData子类</h2><p> 这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。</p>
-<h3 id="BarData"><a href="#BarData" class="headerlink" title="BarData"></a><a href></a>BarData</h3><pre><code>方法                           | 使用                                                
----------------------------- | -------------------------------------------------- 
-setGroupSpace(float percent) | 按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%
-isGrouped()                  | 如果此数据对象分组（由多个DataSet组成），则返回true，否则返回false         </code></pre><hr>
-<h3 id="ScatterData"><a href="#ScatterData" class="headerlink" title="ScatterData"></a><a href></a>ScatterData</h3><pre><code>方法                     | 使用                                 
----------------------- | ----------------------------------- 
-getGreatestShapeSize() | 返回此数据对象包含的所有ScatterDataSets的最大形状大小。</code></pre><hr>
-<h3 id="PieData"><a href="#PieData" class="headerlink" title="PieData"></a><a href></a>PieData</h3><pre><code>方法                         | 使用                                         
--------------------------- | ------------------------------------------- 
-getDataSet()               | 返回包含的PieDataSet对象。PieData不能包含多个PieDataSet对象
-setDataSet(PieDataSet set) | 设置PieDataSet                               </code></pre><hr>
-<h3 id="BubbleData"><a href="#BubbleData" class="headerlink" title="BubbleData"></a><a href></a>BubbleData</h3><pre><code>方法                                   | 使用                                                  
------------------------------------- | ---------------------------------------------------- 
-setHighlightCircleWidth(float width) | 设置当数据对象包含的所有BubbleDataSet对象处于突出显示状态时的环绕该气泡的圆的宽度。单位dp</code></pre><hr>
-<h3 id="CombinedData"><a href="#CombinedData" class="headerlink" title="CombinedData"></a><a href></a>CombinedData</h3><p> 该数据对象被设计为包含所有其他数据对象的实例。使用setData（…）方法提供此对象的数据。这仅用于CombinedChart。</p>
+            <a id="more"></a>
+<h2 id="19-ChartData子类"><a href="#19-ChartData子类" class="headerlink" title="19. ChartData子类"></a>19. ChartData子类</h2><p>这篇wiki主要关注ChartData子类的具体介绍。至于此部分没有提及到的ChartData的子类，代表他们没有特性功能需要介绍。</p>
+<h3 id="BarData"><a href="#BarData" class="headerlink" title="BarData"></a>BarData</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setGroupSpace(float percent)</td>
+<td>按照一个栏的总宽度的百分比设置不同数据集的条形组之间的空间.100%代表一个条形的宽度。默认为80%</td>
+</tr>
+<tr>
+<td>isGrouped()</td>
+<td>如果此数据对象分组（由多个DataSet组成），则返回true，否则返回false</td>
+</tr>
+<tr>
+<td><strong><strong><strong><strong>***</strong></strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### ScatterData</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————-</td>
+<td>————</td>
+</tr>
+<tr>
+<td>getGreatestShapeSize()</td>
+<td>返回此数据对象包含的所有ScatterDataSets的最大形状大小。</td>
+</tr>
+<tr>
+<td><strong><strong>*****</strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### PieData</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————-</td>
+<td>————</td>
+</tr>
+<tr>
+<td>getDataSet()</td>
+<td>返回包含的PieDataSet对象。PieData不能包含多个PieDataSet对象</td>
+</tr>
+<tr>
+<td>setDataSet(PieDataSet set)</td>
+<td>设置PieDataSet</td>
+</tr>
+<tr>
+<td><strong><strong><strong>***</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### BubbleData</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————-</td>
+<td>————</td>
+</tr>
+<tr>
+<td>setHighlightCircleWidth(float width)</td>
+<td>设置当数据对象包含的所有BubbleDataSet对象处于突出显示状态时的环绕该气泡的圆的宽度。单位dp</td>
+</tr>
+<tr>
+<td><strong><strong>****</strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### CombinedData</td>
+<td></td>
+</tr>
+<tr>
+<td>该数据对象被设计为包含所有其他数据对象的实例。使用setData（…）方法提供此对象的数据。这仅用于CombinedChart。</td>
+<td></td>
+</tr>
+</tbody></table>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class CombinedData extends ChartData &#123;</span><br><span class="line">    </span><br><span class="line">    // ...</span><br><span class="line"></span><br><span class="line">    public CombinedData(List&lt;String&gt; xVals) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public CombinedData(String[] xVals) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(LineData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(BarData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(ScatterData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    public void setData(CandleData data) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
 <hr>
-<h2 id="20-DataSet类（通用样式）"><a href="#20-DataSet类（通用样式）" class="headerlink" title="20. DataSet类（通用样式）"></a><a href></a>20. DataSet类（通用样式）</h2><p> DataSet是如LineDataSet,BarDataSet等所有数据集类的基类。</p>
+<h2 id="20-DataSet类（通用样式）"><a href="#20-DataSet类（通用样式）" class="headerlink" title="20. DataSet类（通用样式）"></a>20. DataSet类（通用样式）</h2><p>DataSet是如LineDataSet,BarDataSet等所有数据集类的基类。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class LineDataSet extends DataSet &#123; ...</span><br></pre></td></tr></table></figure>
 
-<p> DataSet代表一组或者一类在图表中归结在一起的数据条目集合。设计它的目的是为了将图表中的不同组数据进行逻辑分离。（比如线形图中的特定一条线，柱形图中的特定一组柱形）</p>
-<p> 以下提到的方法在DataSet类中实现，因此可用于所有子类。</p>
-<h3 id="20-1-数据样式"><a href="#20-1-数据样式" class="headerlink" title="20.1 数据样式"></a><a href></a>20.1 数据样式</h3><pre><code>方法                                  | 使用                                                              
------------------------------------ | ---------------------------------------------------------------- 
-setValueTextColor(int color)        | 设置 DataSet 数据对象包含的数据的值文本的颜色                                     
-setValueTextColors(List colors)     | 设置一个颜色列表用于显示值                                                   
-setValueTextSize(float size)        | 设置 DataSet 数据对象包含的数据的值文本的大小（单位是dp）                              
-setValueTypeface(Typeface tf)       | 设置 DataSet 数据对象包含的数据的值文本的字体                                     
-setValueFormatter(ValueFormatter f) | 为DataSet 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅此处
-setDrawValues(boolean enabled)      | 启用/禁用 绘制所有 DataSet 数据对象包含的数据的值文本                                </code></pre><p>以上方法同样适用于ChartData对象，只是操作结果针对的是其包含的所有的DataSet。</p>
+<p>DataSet代表一组或者一类在图表中归结在一起的数据条目集合。设计它的目的是为了将图表中的不同组数据进行逻辑分离。（比如线形图中的特定一条线，柱形图中的特定一组柱形）</p>
+<p>以下提到的方法在DataSet类中实现，因此可用于所有子类。</p>
+<h3 id="20-1-数据样式"><a href="#20-1-数据样式" class="headerlink" title="20.1 数据样式"></a>20.1 数据样式</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setValueTextColor(int color)</td>
+<td>设置 DataSet 数据对象包含的数据的值文本的颜色</td>
+</tr>
+<tr>
+<td>setValueTextColors(List colors)</td>
+<td>设置一个颜色列表用于显示值</td>
+</tr>
+<tr>
+<td>setValueTextSize(float size)</td>
+<td>设置 DataSet 数据对象包含的数据的值文本的大小（单位是dp）</td>
+</tr>
+<tr>
+<td>setValueTypeface(Typeface tf)</td>
+<td>设置 DataSet 数据对象包含的数据的值文本的字体</td>
+</tr>
+<tr>
+<td>setValueFormatter(ValueFormatter f)</td>
+<td>为DataSet 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-ValueFormatter-interface" target="_blank" rel="noopener">此处</a></td>
+</tr>
+<tr>
+<td>setDrawValues(boolean enabled)</td>
+<td>启用/禁用 绘制所有 DataSet 数据对象包含的数据的值文本</td>
+</tr>
+</tbody></table>
+<p>以上方法同样适用于ChartData对象，只是操作结果针对的是其包含的所有的DataSet。</p>
 <hr>
-<h3 id="20-2-高亮"><a href="#20-2-高亮" class="headerlink" title="20.2 高亮"></a><a href></a>20.2 高亮</h3><pre><code>方法                                                   | 使用                                        
----------------------------------------------------- | ------------------------------------------ 
-setHighlightEnabled(boolean enabled)                 | 设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets
-setDrawVerticalHighlightIndicator(boolean enabled)   | 启用／禁用纵向选中高亮指示线。如果禁用，指示线将不会被绘制             
-setDrawHorizontalHighlightIndicator(boolean enabled) | 启用／禁用横向选中高亮指示线。如果禁用，指示线将不会被绘制             </code></pre><hr>
-<h3 id="20-3-Getter-Convenience"><a href="#20-3-Getter-Convenience" class="headerlink" title="20.3 Getter/Convenience"></a><a href></a>20.3 Getter/Convenience</h3><pre><code>方法                    | 使用                                              
---------------------- | ------------------------------------------------ 
-contains(Entry entry) | 检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。</code></pre><hr>
-<h2 id="21-DataSet子类（特定样式）"><a href="#21-DataSet子类（特定样式）" class="headerlink" title="21. DataSet子类（特定样式）"></a><a href></a>21. DataSet子类（特定样式）</h2><p> 本章wiki专注于DataSet类的子类。此处未提及的DataSet的所有其他子类代表它们没有特定的增强功能。</p>
-<h3 id="21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet"><a href="#21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet" class="headerlink" title="21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet"></a><a href></a>21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet</h3><pre><code>方法                           | 使用                                                                                 
----------------------------- | ----------------------------------------------------------------------------------- 
-setHighLightColor(int color) | 设置高亮颜色。不要忘记用getResources().getColor(…) 或者 Color.rgb(…)来解析颜色（或者使用Color.BLACK这种简单的方式）</code></pre><hr>
-<h3 id="21-2-Line-Bar-Scatter-Candle-amp-RadarDataSet"><a href="#21-2-Line-Bar-Scatter-Candle-amp-RadarDataSet" class="headerlink" title="21.2 Line-, Bar-, Scatter-, Candle- &amp; RadarDataSet"></a><a href></a>21.2 Line-, Bar-, Scatter-, Candle- &amp; RadarDataSet</h3><pre><code>方法                                          | 使用                                                                                                   
-------------------------------------------- | ----------------------------------------------------------------------------------------------------- 
-setDrawHighlightIndicators(boolean enabled) | 启用/禁用垂直和水平高亮指示线。调用setDrawVerticalHighlightIndicator（…）和setDrawHorizo​​ntalHighlightIndicator（…）进行单独配置
-setHighlightLineWidth(float width)          | 设置高亮线（十字准线）的宽度。单位dp                                                                                  </code></pre><hr>
-<h3 id="21-3-Line-amp-RadarDataSet"><a href="#21-3-Line-amp-RadarDataSet" class="headerlink" title="21.3 Line- &amp; RadarDataSet"></a><a href></a>21.3 Line- &amp; RadarDataSet</h3><pre><code>方法                            | 使用                                                                                                                                                  
------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- 
-setFillColor(int color)       | 设置用于填充线条表面的颜色                                                                                                                                       
-setFillAlpha(int alpha)       | 设置用于填充线条表面（0-255）的Alpha值（透明度），默认值：85,255 =完全不透明，0 =完全透明                                                                                             
-setFillDrawable(Drawable d)   | 设置一个可以覆盖填充区域的Drawable。这也允许使用渐变Drawable                                                                                                              
-setDrawFilled(boolean filled) | 如果DataSet需要绘制填充（表面，区域），而不单单是一条线，那么将此项设置为true，禁用此功能将提升性能。请注意，此方法使用canvas.clipPath（…）方法绘制填充区域。对于API级别&amp;lt;18（Android 4.3）的设备，应关闭图表的硬件加速。具体查阅此处,默认为false
-setLineWidth(float width)     | 设置线条宽度（最小=0.2f,最大10f）;默认1f。注意：细线性能更好，粗线性能更差                                                                                                         </code></pre><hr>
-<p> 以下提到的方法仅适用于具体提到的DataSet子类。</p>
-<h3 id="21-4-LineDataSet"><a href="#21-4-LineDataSet" class="headerlink" title="21.4 LineDataSet"></a><a href></a>21.4 LineDataSet</h3><pre><code>方法                                                                 | 使用                                                                                           
------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- 
-setCircleRadius(float size)                                        | 设置的圆形值指示符的大小（半径），默认大小= 4F                                                                    
-setDrawCircles(boolean enabled)                                    | 设置为true启用LineDataSet的圆形指示器。默认为true                                                           
-setDrawCubic(boolean enabled)                                      | 如果设置为true，则线条图线将以立方式而不是线性绘制。这对性能有负面影响！默认值：false                                              
-setCubicIntensity(float intensity)                                 | 设置立方体线的强度（如果启用）。 Max = 1f =非常立方，Min = 0.05f =低立方效应，默认值：0.2f                                  
-setCircleColor(int color)                                          | 设置圆形指示器的颜色                                                                                   
-setCircleColors(List colors)                                       | 设置此LineDataSet外圈应具有的颜色。还有需要其他的方法来设置外圈的颜色                                                     
-setCircleColorHole(int color)                                      | 设置内圈的颜色                                                                                      
-setDrawCircleHole(boolean enabled)                                 | 设置为true.在绘制内圈，否则不绘制内圈                                                                        
-enableDashedLine(float lineLength, float spaceLength, float phase) | 启动虚线绘制，具体像&quot;- - - - - -&quot;这样. &quot;lineLength&quot;虚线段长度, &quot;spaceLength&quot;虚线段之间的空隙, &quot;phase&quot;是偏移量，以度数为单位（通常为0）</code></pre><hr>
-<h3 id="21-5-BarDataSet"><a href="#21-5-BarDataSet" class="headerlink" title="21.5 BarDataSet"></a><a href></a>21.5 BarDataSet</h3><pre><code>方法                                | 使用                                                                                   
---------------------------------- | ------------------------------------------------------------------------------------- 
-setBarSpacePercent(float percent) | 以总条宽的百分比设置条之间的间距                                                                     
-setBarShadowColor(int color)      | 设置用于绘制条形阴影的颜色。条形图的阴影部分是一个用来表示最大值的界面。使用getResources().getColor(…) 或者Color.rgb(…)来设置这个值
-setHighLightAlpha(int alpha)      | 设置用于绘制高亮指示条的alpha值（透明度）。最小值=0（完全透明），最大值=255（完全不透明）                                   
-setStackLabels(String[] labels)   | 设置不同值的条形堆栈的标签，如果有标签的话                                                                </code></pre><hr>
-<h3 id="21-6-ScatterDataSet"><a href="#21-6-ScatterDataSet" class="headerlink" title="21.6 ScatterDataSet"></a><a href></a>21.6 ScatterDataSet</h3><pre><code>方法                                  | 使用                             
------------------------------------ | ------------------------------- 
-setScatterShapeSize(float size)     | 设置绘制的散点图将具有的密度像素的大小。这仅适用于非自定义形状
-setScatterShape(ScatterShape shape) | 设置在值所在的位置绘制的形状                 </code></pre><hr>
-<h3 id="21-7-CandleDataSet"><a href="#21-7-CandleDataSet" class="headerlink" title="21.7 CandleDataSet"></a><a href></a>21.7 CandleDataSet</h3><pre><code>方法                                         | 使用                                         
------------------------------------------- | ------------------------------------------- 
-setBodySpace(float space)                  | 设置每个蜡烛体左侧和右侧留出的空间，默认为0.1f（10％），最大0.45f，最小0f
-setShadowWidth(float width)                | 设置蜡烛线的宽度，单位dp。默认3f                         
-setShadowColor(int color)                  | 设置蜡烛线的颜色                                   
-setDecreasingColor(int color)              | 设置当打开&amp;gt;关闭时应该用于此DataSet的唯一的颜色             
-setIncreasingColor(int color)              | 设置当打开&amp;lt;=关闭时应该用于此DataSet的唯一的颜色            
-setDecreasingPaintStyle(Paint.Style style) | 设置当打开&amp;gt;关闭时的Paint风格（填充或者线条）               
-setIncreasingPaintStyle(Paint.Style style) | 设置当打开&amp;lt;=关闭时的Paint风格（填充或者线条）              </code></pre><hr>
-<h3 id="21-8-BubbleDataSet"><a href="#21-8-BubbleDataSet" class="headerlink" title="21.8 BubbleDataSet"></a><a href></a>21.8 BubbleDataSet</h3><pre><code>方法                                   | 使用                      
------------------------------------- | ------------------------ 
-setHighlightCircleWidth(float width) | 设置在突出显示状态下气泡周围的圆的宽度，单位dp</code></pre><hr>
-<h3 id="21-9-PieDataSet"><a href="#21-9-PieDataSet" class="headerlink" title="21.9 PieDataSet"></a><a href></a>21.9 PieDataSet</h3><pre><code>方法                             | 使用                                      
------------------------------- | ---------------------------------------- 
-setSliceSpace(float degrees)   | 设置饼图切片之间的空隙。默认：0-&amp;gt;没有空隙，最大20，最小0（没有空隙）
-setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片距离图表中心“偏移”的距离，默认为12f</code></pre>
+<h3 id="20-2-高亮"><a href="#20-2-高亮" class="headerlink" title="20.2 高亮"></a>20.2 高亮</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setHighlightEnabled(boolean enabled)</td>
+<td>设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets</td>
+</tr>
+<tr>
+<td>setDrawVerticalHighlightIndicator(boolean enabled)</td>
+<td>启用／禁用纵向选中高亮指示线。如果禁用，指示线将不会被绘制</td>
+</tr>
+<tr>
+<td>setDrawHorizontalHighlightIndicator(boolean enabled)</td>
+<td>启用／禁用横向选中高亮指示线。如果禁用，指示线将不会被绘制</td>
+</tr>
+<tr>
+<td><strong><strong><strong>***</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 20.3 Getter/Convenience</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>————–</td>
+</tr>
+<tr>
+<td>contains(Entry entry)</td>
+<td>检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="21-DataSet子类（特定样式）"><a href="#21-DataSet子类（特定样式）" class="headerlink" title="21. DataSet子类（特定样式）"></a>21. DataSet子类（特定样式）</h2><p>本章wiki专注于DataSet类的子类。此处未提及的DataSet的所有其他子类代表它们没有特定的增强功能。</p>
+<h3 id="21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet"><a href="#21-1-Line-Bar-Scatter-Bubble-amp-CandleDataSet" class="headerlink" title="21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet"></a>21.1 Line-, Bar-, Scatter-, Bubble- &amp; CandleDataSet</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setHighLightColor(int color)</td>
+<td>设置高亮颜色。不要忘记用getResources().getColor(…) 或者 Color.rgb(…)来解析颜色（或者使用Color.BLACK这种简单的方式）</td>
+</tr>
+<tr>
+<td><strong><strong><strong>*****</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.2 Line-, Bar-, Scatter-, Candle- &amp; RadarDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setDrawHighlightIndicators(boolean enabled)</td>
+<td>启用/禁用垂直和水平高亮指示线。调用setDrawVerticalHighlightIndicator（…）和setDrawHorizo​​ntalHighlightIndicator（…）进行单独配置</td>
+</tr>
+<tr>
+<td>setHighlightLineWidth(float width)</td>
+<td>设置高亮线（十字准线）的宽度。单位dp</td>
+</tr>
+<tr>
+<td><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.3 Line- &amp; RadarDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setFillColor(int color)</td>
+<td>设置用于填充线条表面的颜色</td>
+</tr>
+<tr>
+<td>setFillAlpha(int alpha)</td>
+<td>设置用于填充线条表面（0-255）的Alpha值（透明度），默认值：85,255 =完全不透明，0 =完全透明</td>
+</tr>
+<tr>
+<td>setFillDrawable(Drawable d)</td>
+<td>设置一个可以覆盖填充区域的Drawable。这也允许使用渐变Drawable</td>
+</tr>
+<tr>
+<td>setDrawFilled(boolean filled)</td>
+<td>如果DataSet需要绘制填充（表面，区域），而不单单是一条线，那么将此项设置为true，禁用此功能将提升性能。请注意，此方法使用canvas.clipPath（…）方法绘制填充区域。对于API级别&lt;18（Android 4.3）的设备，应关闭图表的硬件加速。具体查阅<a href="http://stackoverflow.com/a/30354461/1590502" target="_blank" rel="noopener">此处</a>,默认为false</td>
+</tr>
+<tr>
+<td>setLineWidth(float width)</td>
+<td>设置线条宽度（最小=0.2f,最大10f）;默认1f。注意：细线==性能更好，粗线==性能更差</td>
+</tr>
+<tr>
+<td><strong><strong><strong><strong><strong>**</strong></strong></strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>以下提到的方法仅适用于具体提到的DataSet子类。</td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.4 LineDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setCircleRadius(float size)</td>
+<td>设置的圆形值指示符的大小（半径），默认大小= 4F</td>
+</tr>
+<tr>
+<td>setDrawCircles(boolean enabled)</td>
+<td>设置为true启用LineDataSet的圆形指示器。默认为true</td>
+</tr>
+<tr>
+<td>setDrawCubic(boolean enabled)</td>
+<td>如果设置为true，则线条图线将以立方式而不是线性绘制。这对性能有负面影响！默认值：false</td>
+</tr>
+<tr>
+<td>setCubicIntensity(float intensity)</td>
+<td>设置立方体线的强度（如果启用）。 Max = 1f =非常立方，Min = 0.05f =低立方效应，默认值：0.2f</td>
+</tr>
+<tr>
+<td>setCircleColor(int color)</td>
+<td>设置圆形指示器的颜色</td>
+</tr>
+<tr>
+<td>setCircleColors(List colors)</td>
+<td>设置此LineDataSet外圈应具有的颜色。还有需要其他的方法来设置外圈的颜色</td>
+</tr>
+<tr>
+<td>setCircleColorHole(int color)</td>
+<td>设置内圈的颜色</td>
+</tr>
+<tr>
+<td>setDrawCircleHole(boolean enabled)</td>
+<td>设置为true.在绘制内圈，否则不绘制内圈</td>
+</tr>
+<tr>
+<td>enableDashedLine(float lineLength, float spaceLength, float phase)</td>
+<td>启动虚线绘制，具体像”- - - - - -“这样. “lineLength”虚线段长度, “spaceLength”虚线段之间的空隙, “phase”是偏移量，以度数为单位（通常为0）</td>
+</tr>
+<tr>
+<td><strong><strong><strong>****</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.5 BarDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setBarSpacePercent(float percent)</td>
+<td>以总条宽的百分比设置条之间的间距</td>
+</tr>
+<tr>
+<td>setBarShadowColor(int color)</td>
+<td>设置用于绘制条形阴影的颜色。条形图的阴影部分是一个用来表示最大值的界面。使用getResources().getColor(…) 或者Color.rgb(…)来设置这个值</td>
+</tr>
+<tr>
+<td>setHighLightAlpha(int alpha)</td>
+<td>设置用于绘制高亮指示条的alpha值（透明度）。最小值=0（完全透明），最大值=255（完全不透明）</td>
+</tr>
+<tr>
+<td>setStackLabels(String[] labels)</td>
+<td>设置不同值的条形堆栈的标签，如果有标签的话</td>
+</tr>
+<tr>
+<td><strong><strong><strong><strong>****</strong></strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.6 ScatterDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setScatterShapeSize(float size)</td>
+<td>设置绘制的散点图将具有的密度像素的大小。这仅适用于非自定义形状</td>
+</tr>
+<tr>
+<td>setScatterShape(ScatterShape shape)</td>
+<td>设置在值所在的位置绘制的形状</td>
+</tr>
+<tr>
+<td><strong><strong><strong><strong>****</strong></strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.7 CandleDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setBodySpace(float space)</td>
+<td>设置每个蜡烛体左侧和右侧留出的空间，默认为0.1f（10％），最大0.45f，最小0f</td>
+</tr>
+<tr>
+<td>setShadowWidth(float width)</td>
+<td>设置蜡烛线的宽度，单位dp。默认3f</td>
+</tr>
+<tr>
+<td>setShadowColor(int color)</td>
+<td>设置蜡烛线的颜色</td>
+</tr>
+<tr>
+<td>setDecreasingColor(int color)</td>
+<td>设置当打开&gt;关闭时应该用于此DataSet的唯一的颜色</td>
+</tr>
+<tr>
+<td>setIncreasingColor(int color)</td>
+<td>设置当打开&lt;=关闭时应该用于此DataSet的唯一的颜色</td>
+</tr>
+<tr>
+<td>setDecreasingPaintStyle(Paint.Style style)</td>
+<td>设置当打开&gt;关闭时的Paint风格（填充或者线条）</td>
+</tr>
+<tr>
+<td>setIncreasingPaintStyle(Paint.Style style)</td>
+<td>设置当打开&lt;=关闭时的Paint风格（填充或者线条）</td>
+</tr>
+<tr>
+<td><strong><strong><strong>****</strong></strong></strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 21.8 BubbleDataSet</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>————</td>
+<td>——————</td>
+</tr>
+<tr>
+<td>setHighlightCircleWidth(float width)</td>
+<td>设置在突出显示状态下气泡周围的圆的宽度，单位dp</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="21-9-PieDataSet"><a href="#21-9-PieDataSet" class="headerlink" title="21.9 PieDataSet"></a>21.9 PieDataSet</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setSliceSpace(float degrees)</td>
+<td>设置饼图切片之间的空隙。默认：0-&gt;没有空隙，最大20，最小0（没有空隙）</td>
+</tr>
+<tr>
+<td>setSelectionShift(float shift)</td>
+<td>设置此DataSet的突出显示的饼图切片距离图表中心“偏移”的距离，默认为12f</td>
+</tr>
+</tbody></table>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/MPAndroidChart/">MPAndroidChart</a>, <a class="has-link-grey -link" href="/tags/开源库/">开源库</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
+                    <a class="has-link-grey -link" href="/tags/译文/">译文</a>
                 </div>
             </div>
         </div>
@@ -400,7 +749,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -420,7 +769,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -511,7 +860,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -621,7 +970,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -815,7 +1164,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1184,7 +1533,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1224,23 +1573,9 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1254,13 +1589,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1268,13 +1596,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1303,7 +1624,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1324,13 +1645,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1359,7 +1673,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1422,14 +1736,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1448,13 +1762,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1462,22 +1769,8 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1511,13 +1804,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1527,7 +1813,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1546,13 +1832,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1562,14 +1841,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1597,7 +1876,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1616,44 +1895,9 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1667,20 +1911,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1714,22 +1944,8 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1744,7 +1960,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1950,7 +2166,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2319,7 +2535,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2359,23 +2575,9 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2389,13 +2591,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2403,13 +2598,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2438,7 +2626,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2459,13 +2647,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2494,7 +2675,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2557,14 +2738,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2583,13 +2764,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2597,22 +2771,8 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2646,13 +2806,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2662,7 +2815,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2681,13 +2834,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2697,14 +2843,14 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2732,7 +2878,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2751,44 +2897,9 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2802,20 +2913,6 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2849,22 +2946,8 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2879,7 +2962,7 @@ setSelectionShift(float shift) | 设置此DataSet的突出显示的饼图切片�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

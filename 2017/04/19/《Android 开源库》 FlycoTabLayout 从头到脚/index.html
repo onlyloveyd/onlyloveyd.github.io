@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="简介 FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout   CommonTabLayout   SegmentTabLayout  具体介绍和使用方法参考开源库的Wiki 官方示例：    源码分析共有属性名称                     | 格式">
+    <meta name="description" content="简介FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout  CommonTabLayout  SegmentTabLayout">
 <meta name="keywords" content="开源库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 开源库》 FlycoTabLayout 从头到脚">
 <meta property="og:url" content="http://yoursite.com/2017/04/19/《Android 开源库》 FlycoTabLayout 从头到脚/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="简介 FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout   CommonTabLayout   SegmentTabLayout  具体介绍和使用方法参考开源库的Wiki 官方示例：    源码分析共有属性名称                     | 格式">
+<meta property="og:description" content="简介FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout  CommonTabLayout  SegmentTabLayout">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:44:09.170Z">
+<meta property="og:updated_time" content="2019-06-26T13:55:02.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 开源库》 FlycoTabLayout 从头到脚">
-<meta name="twitter:description" content="简介 FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout   CommonTabLayout   SegmentTabLayout  具体介绍和使用方法参考开源库的Wiki 官方示例：    源码分析共有属性名称                     | 格式">
+<meta name="twitter:description" content="简介FlycoTabLayout，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：  SlidingTabLayout  CommonTabLayout  SegmentTabLayout">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    28 分钟 读完 (大约 4179 个字)
+                    28 分钟 读完 (大约 4194 个字)
                 </span>
                 
                 
@@ -168,194 +168,517 @@
             
         </h1>
         <div class="content">
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a><a href></a>简介</h2><p> <a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="noopener">FlycoTabLayout</a>，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：</p>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/H07000223/FlycoTabLayout" target="_blank" rel="noopener">FlycoTabLayout</a>，是一个比Google原生TabLayout 功能更强大的TabLayout库。目前有3种TabLayout：</p>
 <ul>
-<li><p>SlidingTabLayout </p>
+<li><p>SlidingTabLayout</p>
 </li>
-<li><p>CommonTabLayout </p>
+<li><p>CommonTabLayout</p>
 </li>
-<li><p>SegmentTabLayout  具体介绍和使用方法参考开源库的<a href="https://github.com/H07000223/FlycoTabLayout/blob/master/README_CN.md" target="_blank" rel="noopener">Wiki</a></p>
-<p>官方示例：<br><img src="https://img-blog.csdn.net/20170417203132272" alt="这里写图片描述"></p>
+<li><p>SegmentTabLayout</p>
+<a id="more"></a>
+<p>具体介绍和使用方法参考开源库的<a href="https://github.com/H07000223/FlycoTabLayout/blob/master/README_CN.md" target="_blank" rel="noopener">Wiki</a></p>
+<p>官方示例：<br><img src="http://img.blog.csdn.net/20170417203132272" alt="这里写图片描述"></p>
 </li>
 </ul>
-<hr>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a><a href></a>源码分析</h2><pre><code>共有属性名称                     | 格式        | 描述                                
--------------------------- | --------- | ---------------------------------- 
-tl_indicator_color         | color     | 设置显示器颜色                           
-tl_indicator_height        | dimension | 设置显示器高度                           
-tl_indicator_margin_left   | dimension | 设置显示器margin,当indicator_width大于0,无效
-tl_indicator_margin_top    | dimension | 设置显示器margin,当indicator_width大于0,无效
-tl_indicator_margin_right  | dimension | 设置显示器margin,当indicator_width大于0,无效
-tl_indicator_margin_bottom | dimension | 设置显示器margin,当indicator_width大于0,无效
-tl_indicator_corner_radius | dimension | 设置显示器圆角弧度                         
-tl_divider_color           | color     | 设置分割线颜色                           
-tl_divider_width           | dimension | 设置分割线宽度                           
-tl_divider_padding         | dimension | 设置分割线的paddingTop和paddingBottom    
-tl_tab_padding             | dimension | 设置tab的paddingLeft和paddingRight    
-tl_tab_space_equal         | boolean   | 设置tab大小等分                         
-tl_tab_width               | dimension | 设置tab固定大小                         
-tl_textsize                | dimension | 设置字体大小                            
-tl_textSelectColor         | color     | 设置字体选中颜色                          
-tl_textUnselectColor       | color     | 设置字体未选中颜色                         
-tl_textBold                | boolean   | 设置字体加粗                            
-tl_textAllCaps             | boolean   | 设置字体全大写                           </code></pre><h3 id="1-SlidingTabLayout"><a href="#1-SlidingTabLayout" class="headerlink" title="1. SlidingTabLayout"></a><a href></a>1. SlidingTabLayout</h3><h4 id="1-1-特有属性"><a href="#1-1-特有属性" class="headerlink" title="1.1 特有属性"></a><a href></a>1.1 特有属性</h4><pre><code>特有属性                           | 格式        | 描述                                        
------------------------------- | --------- | ------------------------------------------ 
-tl_indicator_width             | dimension | 设置显示器固定宽度                                 
-tl_indicator_gravity           | enum      | 设置显示器上方(TOP)还是下方(BOTTOM),只对常规显示器有用        
-tl_indicator_style             | enum      | 设置显示器为常规(NORMAL)或三角形(TRIANGLE)或背景色块(BLOCK)
-tl_indicator_width_equal_title | boolean   | 设置显示器与标题一样长(only for SlidingTabLayout)    
-tl_underline_color             | color     | 设置下划线颜色                                   
-tl_underline_height            | dimension | 设置下划线高度                                   
-tl_underline_gravity           | enum      | 设置下划线上方(TOP)还是下方(BOTTOM)                  </code></pre><h4 id="1-2-类结构"><a href="#1-2-类结构" class="headerlink" title="1.2 类结构"></a><a href></a>1.2 类结构</h4><h5 id="1-2-1-构造方法"><a href="#1-2-1-构造方法" class="headerlink" title="1.2.1 构造方法"></a><a href></a>1.2.1 构造方法</h5><p> <img src="https://img-blog.csdn.net/20170418144706207" alt="这里写图片描述"><br> 第一个调用第二个，第二个调用第三个，第三个获取自定义属性值。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public SlidingTabLayout(Context context, AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">    super(context, attrs, defStyleAttr);</span><br><span class="line">    setFillViewport(true);//设置滚动视图是否可以伸缩其内容以填充视口</span><br><span class="line">    setWillNotDraw(false);//重写onDraw方法,需要调用这个方法来清除flag</span><br><span class="line">    setClipChildren(false);//不限制child在其范围内绘制</span><br><span class="line">    setClipToPadding(false);//滚动时child可以绘制到padding区域</span><br><span class="line"></span><br><span class="line">    this.mContext = context;</span><br><span class="line">    mTabsContainer = new LinearLayout(context);//tab容器</span><br><span class="line">    addView(mTabsContainer);//添加到HorizontalScrollView中</span><br><span class="line"></span><br><span class="line">    obtainAttributes(context, attrs);//获取自定义属性，常用的方法，TypedArray记得回收</span><br><span class="line"></span><br><span class="line">    //获取layout_height属性的值，这个方法比较溜，之前没见过</span><br><span class="line">    String height = attrs.getAttributeValue(&quot;http://schemas.android.com/apk/res/android&quot;, &quot;layout_height&quot;);</span><br><span class="line"></span><br><span class="line">   //针对height做处理</span><br><span class="line">   if (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + &quot;&quot;)) &#123;</span><br><span class="line">    &#125; else if (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + &quot;&quot;)) &#123;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        int[] systemAttrs = &#123;android.R.attr.layout_height&#125;;</span><br><span class="line">        TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);</span><br><span class="line">        //获取高度</span><br><span class="line">        mHeight = a.getDimensionPixelSize(0, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">        a.recycle();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><table>
+<thead>
+<tr>
+<th align="center">共有属性名称</th>
+<th align="center">格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tl_indicator_color</td>
+<td align="center">color</td>
+<td align="center">设置显示器颜色</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_height</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器高度</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_margin_left</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器margin,当indicator_width大于0,无效</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_margin_top</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器margin,当indicator_width大于0,无效</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_margin_right</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器margin,当indicator_width大于0,无效</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_margin_bottom</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器margin,当indicator_width大于0,无效</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_corner_radius</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器圆角弧度</td>
+</tr>
+<tr>
+<td align="center">tl_divider_color</td>
+<td align="center">color</td>
+<td align="center">设置分割线颜色</td>
+</tr>
+<tr>
+<td align="center">tl_divider_width</td>
+<td align="center">dimension</td>
+<td align="center">设置分割线宽度</td>
+</tr>
+<tr>
+<td align="center">tl_divider_padding</td>
+<td align="center">dimension</td>
+<td align="center">设置分割线的paddingTop和paddingBottom</td>
+</tr>
+<tr>
+<td align="center">tl_tab_padding</td>
+<td align="center">dimension</td>
+<td align="center">设置tab的paddingLeft和paddingRight</td>
+</tr>
+<tr>
+<td align="center">tl_tab_space_equal</td>
+<td align="center">boolean</td>
+<td align="center">设置tab大小等分</td>
+</tr>
+<tr>
+<td align="center">tl_tab_width</td>
+<td align="center">dimension</td>
+<td align="center">设置tab固定大小</td>
+</tr>
+<tr>
+<td align="center">tl_textsize</td>
+<td align="center">dimension</td>
+<td align="center">设置字体大小</td>
+</tr>
+<tr>
+<td align="center">tl_textSelectColor</td>
+<td align="center">color</td>
+<td align="center">设置字体选中颜色</td>
+</tr>
+<tr>
+<td align="center">tl_textUnselectColor</td>
+<td align="center">color</td>
+<td align="center">设置字体未选中颜色</td>
+</tr>
+<tr>
+<td align="center">tl_textBold</td>
+<td align="center">boolean</td>
+<td align="center">设置字体加粗</td>
+</tr>
+<tr>
+<td align="center">tl_textAllCaps</td>
+<td align="center">boolean</td>
+<td align="center">设置字体全大写</td>
+</tr>
+</tbody></table>
+<h3 id="1-SlidingTabLayout"><a href="#1-SlidingTabLayout" class="headerlink" title="1. SlidingTabLayout"></a>1. SlidingTabLayout</h3><h4 id="1-1-特有属性"><a href="#1-1-特有属性" class="headerlink" title="1.1 特有属性"></a>1.1 特有属性</h4><table>
+<thead>
+<tr>
+<th align="center">特有属性</th>
+<th align="center">格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tl_indicator_width</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器固定宽度</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_gravity</td>
+<td align="center">enum</td>
+<td align="center">设置显示器上方(TOP)还是下方(BOTTOM),只对常规显示器有用</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_style</td>
+<td align="center">enum</td>
+<td align="center">设置显示器为常规(NORMAL)或三角形(TRIANGLE)或背景色块(BLOCK)</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_width_equal_title</td>
+<td align="center">boolean</td>
+<td align="center">设置显示器与标题一样长(only for SlidingTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_underline_color</td>
+<td align="center">color</td>
+<td align="center">设置下划线颜色</td>
+</tr>
+<tr>
+<td align="center">tl_underline_height</td>
+<td align="center">dimension</td>
+<td align="center">设置下划线高度</td>
+</tr>
+<tr>
+<td align="center">tl_underline_gravity</td>
+<td align="center">enum</td>
+<td align="center">设置下划线上方(TOP)还是下方(BOTTOM)</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-类结构"><a href="#1-2-类结构" class="headerlink" title="1.2 类结构"></a>1.2 类结构</h4><h5 id="1-2-1-构造方法"><a href="#1-2-1-构造方法" class="headerlink" title="1.2.1 构造方法"></a>1.2.1 构造方法</h5><p><img src="http://img.blog.csdn.net/20170418144706207" alt="这里写图片描述"><br>第一个调用第二个，第二个调用第三个，第三个获取自定义属性值。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SlidingTabLayout</span><span class="hljs-params">(Context context, AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">    setFillViewport(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//设置滚动视图是否可以伸缩其内容以填充视口</span></span><br><span class="line">    setWillNotDraw(<span class="hljs-keyword">false</span>);<span class="hljs-comment">//重写onDraw方法,需要调用这个方法来清除flag</span></span><br><span class="line">    setClipChildren(<span class="hljs-keyword">false</span>);<span class="hljs-comment">//不限制child在其范围内绘制</span></span><br><span class="line">    setClipToPadding(<span class="hljs-keyword">false</span>);<span class="hljs-comment">//滚动时child可以绘制到padding区域</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.mContext = context;</span><br><span class="line">    mTabsContainer = <span class="hljs-keyword">new</span> LinearLayout(context);<span class="hljs-comment">//tab容器</span></span><br><span class="line">    addView(mTabsContainer);<span class="hljs-comment">//添加到HorizontalScrollView中</span></span><br><span class="line"></span><br><span class="line">    obtainAttributes(context, attrs);<span class="hljs-comment">//获取自定义属性，常用的方法，TypedArray记得回收</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//获取layout_height属性的值，这个方法比较溜，之前没见过</span></span><br><span class="line">    String height = attrs.getAttributeValue(<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span>, <span class="hljs-string">"layout_height"</span>);</span><br><span class="line"></span><br><span class="line">   <span class="hljs-comment">//针对height做处理</span></span><br><span class="line">   <span class="hljs-keyword">if</span> (height.equals(ViewGroup.LayoutParams.MATCH_PARENT + <span class="hljs-string">""</span>)) &#123;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (height.equals(ViewGroup.LayoutParams.WRAP_CONTENT + <span class="hljs-string">""</span>)) &#123;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span>[] systemAttrs = &#123;android.R.attr.layout_height&#125;;</span><br><span class="line">        TypedArray a = context.obtainStyledAttributes(attrs, systemAttrs);</span><br><span class="line">        <span class="hljs-comment">//获取高度</span></span><br><span class="line">        mHeight = a.getDimensionPixelSize(<span class="hljs-number">0</span>, ViewGroup.LayoutParams.WRAP_CONTENT);</span><br><span class="line">        a.recycle();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h5 id="1-2-2-ViewPager"><a href="#1-2-2-ViewPager" class="headerlink" title="1.2.2 ViewPager"></a>1.2.2 ViewPager</h5><p><img src="http://img.blog.csdn.net/20170418151748031" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170418151831172" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setViewPager(ViewPager vp)</td>
+<td>设置ViewPager内容</td>
+</tr>
+<tr>
+<td>public void setViewPager(ViewPager vp, String[] titles)</td>
+<td>设置ViewPager内容和标签页的标题</td>
+</tr>
+</tbody></table>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 关联ViewPager */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setViewPager</span><span class="hljs-params">(ViewPager vp)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vp == <span class="hljs-keyword">null</span> || vp.getAdapter() == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"ViewPager or ViewPager adapter can not be NULL !"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">/*本地赋值*/</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager = vp;</span><br><span class="line">    <span class="hljs-comment">/*重新绑定OnPageChangeListener*/</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager.removeOnPageChangeListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager.addOnPageChangeListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">    <span class="hljs-comment">/*viewpager变化，tab页响应处理处理*/</span></span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="1-2-2-ViewPager"><a href="#1-2-2-ViewPager" class="headerlink" title="1.2.2 ViewPager"></a><a href></a>1.2.2 ViewPager</h5><p> <img src="https://img-blog.csdn.net/20170418151748031" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20170418151831172" alt="这里写图片描述"></p>
-<pre><code>方法                                                      | 描述                  
-------------------------------------------------------- | -------------------- 
-setViewPager(ViewPager vp)                              | 设置ViewPager内容       
-public void setViewPager(ViewPager vp, String[] titles) | 设置ViewPager内容和标签页的标题</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/** 关联ViewPager */</span><br><span class="line">public void setViewPager(ViewPager vp) &#123;</span><br><span class="line">    if (vp == null || vp.getAdapter() == null) &#123;</span><br><span class="line">        throw new IllegalStateException(&quot;ViewPager or ViewPager adapter can not be NULL !&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    /*本地赋值*/</span><br><span class="line">    this.mViewPager = vp;</span><br><span class="line">    /*重新绑定OnPageChangeListener*/</span><br><span class="line">    this.mViewPager.removeOnPageChangeListener(this);</span><br><span class="line">    this.mViewPager.addOnPageChangeListener(this);</span><br><span class="line">    /*viewpager变化，tab页响应处理处理*/</span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 更新数据 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyDataSetChanged</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    mTabsContainer.removeAllViews();<span class="hljs-comment">//清空tab</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mTabCount = mTitles == <span class="hljs-keyword">null</span> ? mViewPager.getAdapter().getCount() : mTitles.size();<span class="hljs-comment">//获取tab数量，优先级mTitles &gt; ViewPager的默认标题</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*添加tab*/</span></span><br><span class="line">    View tabView;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        tabView = View.inflate(mContext, R.layout.layout_tab, <span class="hljs-keyword">null</span>);</span><br><span class="line">        CharSequence pageTitle = mTitles == <span class="hljs-keyword">null</span> ? mViewPager.getAdapter().getPageTitle(i) : mTitles.get(i);</span><br><span class="line">        addTab(i, pageTitle.toString(), tabView);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//更新选中未选中状态更新tab</span></span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 创建并添加tab */</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addTab</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> position, String title, View tabView)</span> </span>&#123;</span><br><span class="line">      <span class="hljs-comment">//设置标题</span></span><br><span class="line">      TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">      <span class="hljs-keyword">if</span> (tv_tab_title != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">if</span> (title != <span class="hljs-keyword">null</span>) tv_tab_title.setText(title);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">//绑定点击事件，与ViewPager联动</span></span><br><span class="line">      tabView.setOnClickListener(<span class="hljs-keyword">new</span> OnClickListener() &#123;</span><br><span class="line">          <span class="hljs-meta">@Override</span></span><br><span class="line">          <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;</span><br><span class="line">              <span class="hljs-keyword">int</span> position = mTabsContainer.indexOfChild(v);</span><br><span class="line">              <span class="hljs-keyword">if</span> (position != -<span class="hljs-number">1</span>) &#123;</span><br><span class="line">                  <span class="hljs-keyword">if</span> (mViewPager.getCurrentItem() != position) &#123;</span><br><span class="line">                      <span class="hljs-keyword">if</span> (mSnapOnTabClick) &#123;</span><br><span class="line">                         <span class="hljs-comment">// transition immediately</span></span><br><span class="line">                         mViewPager.setCurrentItem(position, <span class="hljs-keyword">false</span>);</span><br><span class="line">                      &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                          <span class="hljs-comment">//smoothly scroll to</span></span><br><span class="line">                          mViewPager.setCurrentItem(position);</span><br><span class="line">                      &#125;</span><br><span class="line"></span><br><span class="line">                      <span class="hljs-keyword">if</span> (mListener != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                          <span class="hljs-comment">//自定义tab点击事件处理</span></span><br><span class="line">                          mListener.onTabSelect(position);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                      <span class="hljs-keyword">if</span> (mListener != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                          <span class="hljs-comment">//自定义Reselect事件处理</span></span><br><span class="line">                          mListener.onTabReselect(position);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">/** 每一个Tab的布局参数，mTabSpaceEqual 属性控制是否均分 */</span></span><br><span class="line">      LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ?</span><br><span class="line">              <span class="hljs-keyword">new</span> LinearLayout.LayoutParams(<span class="hljs-number">0</span>,  </span><br><span class="line">              LayoutParams.MATCH_PARENT, <span class="hljs-number">1.0f</span>) :</span><br><span class="line">              <span class="hljs-keyword">new</span> </span><br><span class="line">              LinearLayout.LayoutParams(</span><br><span class="line">              LayoutParams.WRAP_CONTENT,    </span><br><span class="line">              LayoutParams.MATCH_PARENT);</span><br><span class="line">      <span class="hljs-keyword">if</span> (mTabWidth &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">          lp_tab = <span class="hljs-keyword">new</span> LinearLayout.LayoutParams((<span class="hljs-keyword">int</span>) mTabWidth, LayoutParams.MATCH_PARENT);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-comment">//添加到Tab容器</span></span><br><span class="line">      mTabsContainer.addView(tabView, position, lp_tab);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/** 更新数据 */</span><br><span class="line">public void notifyDataSetChanged() &#123;</span><br><span class="line">    mTabsContainer.removeAllViews();//清空tab</span><br><span class="line">    this.mTabCount = mTitles == null ? mViewPager.getAdapter().getCount() : mTitles.size();//获取tab数量，优先级mTitles &gt; ViewPager的默认标题</span><br><span class="line"></span><br><span class="line">    /*添加tab*/</span><br><span class="line">    View tabView;</span><br><span class="line">    for (int i = 0; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        tabView = View.inflate(mContext, R.layout.layout_tab, null);</span><br><span class="line">        CharSequence pageTitle = mTitles == null ? mViewPager.getAdapter().getPageTitle(i) : mTitles.get(i);</span><br><span class="line">        addTab(i, pageTitle.toString(), tabView);</span><br><span class="line">    &#125;</span><br><span class="line">    //更新选中未选中状态更新tab</span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateTabStyles</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//遍历设置标题选中颜色，未选中颜色，字体大小，大小写，粗体字</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        View v = mTabsContainer.getChildAt(i);</span><br><span class="line">        TextView tv_tab_title = (TextView) v.findViewById(R.id.tv_tab_title);</span><br><span class="line">        <span class="hljs-keyword">if</span> (tv_tab_title != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">            tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);</span><br><span class="line">            tv_tab_title.setPadding((<span class="hljs-keyword">int</span>) mTabPadding, <span class="hljs-number">0</span>, (<span class="hljs-keyword">int</span>) mTabPadding, <span class="hljs-number">0</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (mTextAllCaps) &#123;</span><br><span class="line">                tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (mTextBold == TEXT_BOLD_BOTH) &#123;</span><br><span class="line">                tv_tab_title.getPaint().setFakeBoldText(<span class="hljs-keyword">true</span>);</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mTextBold == TEXT_BOLD_NONE) &#123;</span><br><span class="line">                tv_tab_title.getPaint().setFakeBoldText(<span class="hljs-keyword">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setViewPager(ViewPager vp, String[] titles, FragmentActivity fa, ArrayList&lt; Fragment &gt; fragments)</td>
+<td>设置ViewPager，标题内容，FragmentActivity和用于显示的Fragment,用来设置ViewPager的Adapter</td>
+</tr>
+</tbody></table>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 关联ViewPager,用于连适配器都不想自己实例化的情况 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setViewPager</span><span class="hljs-params">(ViewPager vp, String[] titles, FragmentActivity fa, ArrayList&lt;Fragment&gt; fragments)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vp == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"ViewPager can not be NULL !"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (titles == <span class="hljs-keyword">null</span> || titles.length == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"Titles can not be EMPTY !"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager = vp;</span><br><span class="line">    <span class="hljs-comment">/*通过传入的参数构建FragmentPagerAdapter，设置到ViewPager*/</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager.setAdapter(<span class="hljs-keyword">new</span> InnerPagerAdapter(fa.getSupportFragmentManager(), fragments, titles));</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager.removeOnPageChangeListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.mViewPager.addOnPageChangeListener(<span class="hljs-keyword">this</span>);</span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/** 创建并添加tab */</span><br><span class="line">  private void addTab(final int position, String title, View tabView) &#123;</span><br><span class="line">      //设置标题</span><br><span class="line">      TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">      if (tv_tab_title != null) &#123;</span><br><span class="line">          if (title != null) tv_tab_title.setText(title);</span><br><span class="line">      &#125;</span><br><span class="line">      //绑定点击事件，与ViewPager联动</span><br><span class="line">      tabView.setOnClickListener(new OnClickListener() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onClick(View v) &#123;</span><br><span class="line">              int position = mTabsContainer.indexOfChild(v);</span><br><span class="line">              if (position != -1) &#123;</span><br><span class="line">                  if (mViewPager.getCurrentItem() != position) &#123;</span><br><span class="line">                      if (mSnapOnTabClick) &#123;</span><br><span class="line">                         // transition immediately</span><br><span class="line">                         mViewPager.setCurrentItem(position, false);</span><br><span class="line">                      &#125; else &#123;</span><br><span class="line">                          //smoothly scroll to</span><br><span class="line">                          mViewPager.setCurrentItem(position);</span><br><span class="line">                      &#125;</span><br><span class="line"></span><br><span class="line">                      if (mListener != null) &#123;</span><br><span class="line">                          //自定义tab点击事件处理</span><br><span class="line">                          mListener.onTabSelect(position);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                      if (mListener != null) &#123;</span><br><span class="line">                          //自定义Reselect事件处理</span><br><span class="line">                          mListener.onTabReselect(position);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      /** 每一个Tab的布局参数，mTabSpaceEqual 属性控制是否均分 */</span><br><span class="line">      LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ?</span><br><span class="line">              new LinearLayout.LayoutParams(0,  </span><br><span class="line">              LayoutParams.MATCH_PARENT, 1.0f) :</span><br><span class="line">              new </span><br><span class="line">              LinearLayout.LayoutParams(</span><br><span class="line">              LayoutParams.WRAP_CONTENT,    </span><br><span class="line">              LayoutParams.MATCH_PARENT);</span><br><span class="line">      if (mTabWidth &gt; 0) &#123;</span><br><span class="line">          lp_tab = new LinearLayout.LayoutParams((int) mTabWidth, LayoutParams.MATCH_PARENT);</span><br><span class="line">      &#125;</span><br><span class="line">      //添加到Tab容器</span><br><span class="line">      mTabsContainer.addView(tabView, position, lp_tab);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>看下这个内部的InnerPagerAdapter,静态Fragment,不销毁重建，只更新数据内容。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InnerPagerAdapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList&lt;Fragment&gt; fragments = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="hljs-keyword">private</span> String[] titles;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">InnerPagerAdapter</span><span class="hljs-params">(FragmentManager fm, ArrayList&lt;Fragment&gt; fragments, String[] titles)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(fm);</span><br><span class="line">        <span class="hljs-keyword">this</span>.fragments = fragments;</span><br><span class="line">        <span class="hljs-keyword">this</span>.titles = titles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> fragments.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> CharSequence <span class="hljs-title">getPageTitle</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> titles[position];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Fragment <span class="hljs-title">getItem</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> fragments.get(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">destroyItem</span><span class="hljs-params">(ViewGroup container, <span class="hljs-keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 覆写destroyItem并且空实现,这样每个Fragment中的视图就不会被销毁</span></span><br><span class="line">        <span class="hljs-comment">// super.destroyItem(container, position, object);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getItemPosition</span><span class="hljs-params">(Object object)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> PagerAdapter.POSITION_NONE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">private void updateTabStyles() &#123;</span><br><span class="line">    //遍历设置标题选中颜色，未选中颜色，字体大小，大小写，粗体字</span><br><span class="line">    for (int i = 0; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        View v = mTabsContainer.getChildAt(i);</span><br><span class="line">        TextView tv_tab_title = (TextView) v.findViewById(R.id.tv_tab_title);</span><br><span class="line">        if (tv_tab_title != null) &#123;</span><br><span class="line">            tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">            tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);</span><br><span class="line">            tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);</span><br><span class="line">            if (mTextAllCaps) &#123;</span><br><span class="line">                tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (mTextBold == TEXT_BOLD_BOTH) &#123;</span><br><span class="line">                tv_tab_title.getPaint().setFakeBoldText(true);</span><br><span class="line">            &#125; else if (mTextBold == TEXT_BOLD_NONE) &#123;</span><br><span class="line">                tv_tab_title.getPaint().setFakeBoldText(false);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>方法                                                                                                      | 描述                                                                   
-------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- 
-setViewPager(ViewPager vp, String[] titles, FragmentActivity fa, ArrayList&amp;lt; Fragment &amp;gt; fragments) | 设置ViewPager，标题内容，FragmentActivity和用于显示的Fragment,用来设置ViewPager的Adapter</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/** 关联ViewPager,用于连适配器都不想自己实例化的情况 */</span><br><span class="line">public void setViewPager(ViewPager vp, String[] titles, FragmentActivity fa, ArrayList&lt;Fragment&gt; fragments) &#123;</span><br><span class="line">    if (vp == null) &#123;</span><br><span class="line">        throw new IllegalStateException(&quot;ViewPager can not be NULL !&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (titles == null || titles.length == 0) &#123;</span><br><span class="line">        throw new IllegalStateException(&quot;Titles can not be EMPTY !&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.mViewPager = vp;</span><br><span class="line">    /*通过传入的参数构建FragmentPagerAdapter，设置到ViewPager*/</span><br><span class="line">    this.mViewPager.setAdapter(new InnerPagerAdapter(fa.getSupportFragmentManager(), fragments, titles));</span><br><span class="line"></span><br><span class="line">    this.mViewPager.removeOnPageChangeListener(this);</span><br><span class="line">    this.mViewPager.addOnPageChangeListener(this);</span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 看下这个内部的InnerPagerAdapter,静态Fragment,不销毁重建，只更新数据内容。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class InnerPagerAdapter extends FragmentPagerAdapter &#123;</span><br><span class="line">    private ArrayList&lt;Fragment&gt; fragments = new ArrayList&lt;&gt;();</span><br><span class="line">    private String[] titles;</span><br><span class="line"></span><br><span class="line">    public InnerPagerAdapter(FragmentManager fm, ArrayList&lt;Fragment&gt; fragments, String[] titles) &#123;</span><br><span class="line">        super(fm);</span><br><span class="line">        this.fragments = fragments;</span><br><span class="line">        this.titles = titles;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getCount() &#123;</span><br><span class="line">        return fragments.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public CharSequence getPageTitle(int position) &#123;</span><br><span class="line">        return titles[position];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public Fragment getItem(int position) &#123;</span><br><span class="line">        return fragments.get(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroyItem(ViewGroup container, int position, Object object) &#123;</span><br><span class="line">        // 覆写destroyItem并且空实现,这样每个Fragment中的视图就不会被销毁</span><br><span class="line">        // super.destroyItem(container, position, object);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemPosition(Object object) &#123;</span><br><span class="line">        return PagerAdapter.POSITION_NONE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>方法                                                                           | 描述                                                                                      
----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- 
-onPageScrolled(int position, float positionOffset, int positionOffsetPixels) | 页面滚动，position为当前位置，positionOffset范围[0,1),从当前到下一页，positionOffsetPixels从当前位置滚动的offset,单位px
-onPageSelected(int position)                                                 | 选中位置                                                                                    
-onPageScrollStateChanged(int state)                                          | 滚动状态改变                                                                                  </code></pre><blockquote>
-<p>SCROLL_STATE_IDLE(pager处于空闲状态)<br> SCROLL_STATE_DRAGGING( pager处于正在拖拽中)<br> SCROLL_STATE_SETTLING(pager正在自动沉降，相当于松手后，pager恢复到一个完整pager的过程)</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onPageScrolled(int position, float positionOffset, int positionOffsetPixels)</td>
+<td>页面滚动，position为当前位置，positionOffset范围[0,1),从当前到下一页，positionOffsetPixels从当前位置滚动的offset,单位px</td>
+</tr>
+<tr>
+<td>onPageSelected(int position)</td>
+<td>选中位置</td>
+</tr>
+<tr>
+<td>onPageScrollStateChanged(int state)</td>
+<td>滚动状态改变</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>SCROLL_STATE_IDLE(pager处于空闲状态)<br>SCROLL_STATE_DRAGGING( pager处于正在拖拽中)<br>SCROLL_STATE_SETTLING(pager正在自动沉降，相当于松手后，pager恢复到一个完整pager的过程)</p>
 </blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) &#123;</span><br><span class="line">    /**</span><br><span class="line">     * position:当前View的位置</span><br><span class="line">     * mCurrentPositionOffset:当前View的偏移量比例.[0,1)</span><br><span class="line">     */</span><br><span class="line">    this.mCurrentTab = position;</span><br><span class="line">    this.mCurrentPositionOffset = positionOffset;</span><br><span class="line">    /*标签栏根据ViewPager的滚动状态联动，滚动到对应位置*/</span><br><span class="line">    scrollToCurrentTab();</span><br><span class="line">    /*触发重绘*/</span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onPageSelected(int position) &#123;</span><br><span class="line">    /*根据ViewPager选中状态调整标签页的选中状态*/</span><br><span class="line">    updateTabSelection(position);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onPageScrollStateChanged(int state) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrolled</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position, <span class="hljs-keyword">float</span> positionOffset, <span class="hljs-keyword">int</span> positionOffsetPixels)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * position:当前View的位置</span></span><br><span class="line"><span class="hljs-comment">     * mCurrentPositionOffset:当前View的偏移量比例.[0,1)</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mCurrentTab = position;</span><br><span class="line">    <span class="hljs-keyword">this</span>.mCurrentPositionOffset = positionOffset;</span><br><span class="line">    <span class="hljs-comment">/*标签栏根据ViewPager的滚动状态联动，滚动到对应位置*/</span></span><br><span class="line">    scrollToCurrentTab();</span><br><span class="line">    <span class="hljs-comment">/*触发重绘*/</span></span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageSelected</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/*根据ViewPager选中状态调整标签页的选中状态*/</span></span><br><span class="line">    updateTabSelection(position);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPageScrollStateChanged</span><span class="hljs-params">(<span class="hljs-keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** HorizontalScrollView滚到当前tab,并且居中显示 */</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">scrollToCurrentTab</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (mTabCount &lt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">          <span class="hljs-keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">int</span> offset = (<span class="hljs-keyword">int</span>) (mCurrentPositionOffset * mTabsContainer.getChildAt(mCurrentTab).getWidth());</span><br><span class="line">      <span class="hljs-comment">/**当前Tab的left+当前Tab的Width乘以positionOffset*/</span></span><br><span class="line">      <span class="hljs-keyword">int</span> newScrollX = mTabsContainer.getChildAt(mCurrentTab).getLeft() + offset;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">if</span> (mCurrentTab &gt; <span class="hljs-number">0</span> || offset &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">          <span class="hljs-comment">/**HorizontalScrollView移动到当前tab,并居中*/</span></span><br><span class="line">          newScrollX -= getWidth() / <span class="hljs-number">2</span> - getPaddingLeft();</span><br><span class="line">          calcIndicatorRect();</span><br><span class="line">          newScrollX += ((mTabRect.right - mTabRect.left) / <span class="hljs-number">2</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="hljs-keyword">if</span> (newScrollX != mLastScrollX) &#123;</span><br><span class="line">          mLastScrollX = newScrollX;</span><br><span class="line">          <span class="hljs-comment">/** scrollTo（int x,int y）:x,y代表的不是坐标点,而是偏移量</span></span><br><span class="line"><span class="hljs-comment">           *  x:表示离起始位置的x水平方向的偏移量</span></span><br><span class="line"><span class="hljs-comment">           *  y:表示离起始位置的y垂直方向的偏移量</span></span><br><span class="line"><span class="hljs-comment">           */</span></span><br><span class="line">          scrollTo(newScrollX, <span class="hljs-number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/** HorizontalScrollView滚到当前tab,并且居中显示 */</span><br><span class="line">  private void scrollToCurrentTab() &#123;</span><br><span class="line">      if (mTabCount &lt;= 0) &#123;</span><br><span class="line">          return;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      int offset = (int) (mCurrentPositionOffset * mTabsContainer.getChildAt(mCurrentTab).getWidth());</span><br><span class="line">      /**当前Tab的left+当前Tab的Width乘以positionOffset*/</span><br><span class="line">      int newScrollX = mTabsContainer.getChildAt(mCurrentTab).getLeft() + offset;</span><br><span class="line"></span><br><span class="line">      if (mCurrentTab &gt; 0 || offset &gt; 0) &#123;</span><br><span class="line">          /**HorizontalScrollView移动到当前tab,并居中*/</span><br><span class="line">          newScrollX -= getWidth() / 2 - getPaddingLeft();</span><br><span class="line">          calcIndicatorRect();</span><br><span class="line">          newScrollX += ((mTabRect.right - mTabRect.left) / 2);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (newScrollX != mLastScrollX) &#123;</span><br><span class="line">          mLastScrollX = newScrollX;</span><br><span class="line">          /** scrollTo（int x,int y）:x,y代表的不是坐标点,而是偏移量</span><br><span class="line">           *  x:表示离起始位置的x水平方向的偏移量</span><br><span class="line">           *  y:表示离起始位置的y垂直方向的偏移量</span><br><span class="line">           */</span><br><span class="line">          scrollTo(newScrollX, 0);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*根据是否选中设置字体颜色和粗体*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateTabSelection</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mTabCount; ++i) &#123;</span><br><span class="line">        View tabView = mTabsContainer.getChildAt(i);</span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isSelect = i == position;</span><br><span class="line">        TextView tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (tab_title != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">            <span class="hljs-keyword">if</span> (mTextBold == TEXT_BOLD_WHEN_SELECT) &#123;</span><br><span class="line">                tab_title.getPaint().setFakeBoldText(isSelect);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h5 id="1-2-3-Tab相关"><a href="#1-2-3-Tab相关" class="headerlink" title="1.2.3 Tab相关"></a>1.2.3 Tab相关</h5><p><img src="http://img.blog.csdn.net/20170419083258479" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170419083307602" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170419083321901" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addNewTab(String title)</td>
+<td>提供给外部使用的新增tab的方法</td>
+</tr>
+</tbody></table>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addNewTab</span><span class="hljs-params">(String title)</span> </span>&#123;</span><br><span class="line">    View tabView = View.inflate(mContext, R.layout.layout_tab, <span class="hljs-keyword">null</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span> (mTitles != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        mTitles.add(title);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CharSequence pageTitle = mTitles == <span class="hljs-keyword">null</span> ? mViewPager.getAdapter().getPageTitle(mTabCount) : mTitles.get(mTabCount);</span><br><span class="line">    addTab(mTabCount, pageTitle.toString(), tabView);</span><br><span class="line">    <span class="hljs-keyword">this</span>.mTabCount = mTitles == <span class="hljs-keyword">null</span> ? mViewPager.getAdapter().getCount() : mTitles.size();</span><br><span class="line"></span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/*根据是否选中设置字体颜色和粗体*/</span><br><span class="line">private void updateTabSelection(int position) &#123;</span><br><span class="line">    for (int i = 0; i &lt; mTabCount; ++i) &#123;</span><br><span class="line">        View tabView = mTabsContainer.getChildAt(i);</span><br><span class="line">        final boolean isSelect = i == position;</span><br><span class="line">        TextView tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line"></span><br><span class="line">        if (tab_title != null) &#123;</span><br><span class="line">            tab_title.setTextColor(isSelect ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">            if (mTextBold == TEXT_BOLD_WHEN_SELECT) &#123;</span><br><span class="line">                tab_title.getPaint().setFakeBoldText(isSelect);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setCurrentTab(int currentTab)</td>
+<td>跳转到指定tab,是否平滑的滚动过去由系统控制</td>
+</tr>
+<tr>
+<td>setCurrentTab(int currentTab, boolean smoothScroll)</td>
+<td>跳转到制指定tab, smoothScroll控制是否平滑的滚动过去</td>
+</tr>
+</tbody></table>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCurrentTab</span><span class="hljs-params">(<span class="hljs-keyword">int</span> currentTab)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.mCurrentTab = currentTab;</span><br><span class="line">    mViewPager.setCurrentItem(currentTab);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCurrentTab</span><span class="hljs-params">(<span class="hljs-keyword">int</span> currentTab, <span class="hljs-keyword">boolean</span> smoothScroll)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.mCurrentTab = currentTab;</span><br><span class="line">    mViewPager.setCurrentItem(currentTab, smoothScroll);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-<h5 id="1-2-3-Tab相关"><a href="#1-2-3-Tab相关" class="headerlink" title="1.2.3 Tab相关"></a><a href></a>1.2.3 Tab相关</h5><p> <img src="https://img-blog.csdn.net/20170419083258479" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20170419083307602" alt="这里写图片描述"><br> <img src="https://img-blog.csdn.net/20170419083321901" alt="这里写图片描述"></p>
-<pre><code>方法                      | 描述              
------------------------ | ---------------- 
-addNewTab(String title) | 提供给外部使用的新增tab的方法</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void addNewTab(String title) &#123;</span><br><span class="line">    View tabView = View.inflate(mContext, R.layout.layout_tab, null);</span><br><span class="line">    if (mTitles != null) &#123;</span><br><span class="line">        mTitles.add(title);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CharSequence pageTitle = mTitles == null ? mViewPager.getAdapter().getPageTitle(mTabCount) : mTitles.get(mTabCount);</span><br><span class="line">    addTab(mTabCount, pageTitle.toString(), tabView);</span><br><span class="line">    this.mTabCount = mTitles == null ? mViewPager.getAdapter().getCount() : mTitles.size();</span><br><span class="line"></span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<pre><code>方法                                                  | 描述                                
---------------------------------------------------- | ---------------------------------- 
-setCurrentTab(int currentTab)                       | 跳转到指定tab,是否平滑的滚动过去由系统控制           
-setCurrentTab(int currentTab, boolean smoothScroll) | 跳转到制指定tab, smoothScroll控制是否平滑的滚动过去</code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void setCurrentTab(int currentTab) &#123;</span><br><span class="line">    this.mCurrentTab = currentTab;</span><br><span class="line">    mViewPager.setCurrentItem(currentTab);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void setCurrentTab(int currentTab, boolean smoothScroll) &#123;</span><br><span class="line">    this.mCurrentTab = currentTab;</span><br><span class="line">    mViewPager.setCurrentItem(currentTab, smoothScroll);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="1-2-4-Getter和Setter"><a href="#1-2-4-Getter和Setter" class="headerlink" title="1.2.4 Getter和Setter"></a><a href></a>1.2.4 Getter和Setter</h5><p> 不做赘述</p>
-<h5 id="1-2-5-MsgView相关（未读信息）"><a href="#1-2-5-MsgView相关（未读信息）" class="headerlink" title="1.2.5 MsgView相关（未读信息）"></a><a href></a>1.2.5 MsgView相关（未读信息）</h5><p> <img src="https://img-blog.csdn.net/20170419084106280" alt="这里写图片描述"></p>
-<pre><code>方法                                                                 | 描述                                           
------------------------------------------------------------------- | --------------------------------------------- 
-showMsg(int position, int num)                                     | 显示未读消息，position为tab位置，num小于等于0显示红点,num大于0显示数字
-showDot(int position)                                              | 显示未读红点， position为tab位置                       
-hideMsg(int position)                                              | 隐藏未读消息， position为tab位置                       
-setMsgMargin(int position, float leftPadding, float bottomPadding) | 设置未读消息偏移,原点为文字的右上角.当控件高度固定,消息提示位置易控制,显示效果佳   
-getMsgView(int position)                                           | 当前类只提供了少许设置未读消息属性的方法,可以通过该方法获取MsgView对象从而各种设置</code></pre><h3 id="2-CommonTabLayout"><a href="#2-CommonTabLayout" class="headerlink" title="2. CommonTabLayout"></a><a href></a>2. CommonTabLayout</h3><h4 id="2-1-特有属性"><a href="#2-1-特有属性" class="headerlink" title="2.1 特有属性"></a><a href></a>2.1 特有属性</h4><pre><code>特有属性                       | 格式        | 描述                                                                     
--------------------------- | --------- | ----------------------------------------------------------------------- 
-tl_indicator_width         | dimension | 设置显示器固定宽度                                                              
-tl_indicator_gravity       | enum      | 设置显示器上方(TOP)还是下方(BOTTOM),只对常规显示器有用                                     
-tl_indicator_style         | enum      | 设置显示器为常规(NORMAL)或三角形(TRIANGLE)或背景色块(BLOCK)                             
-tl_indicator_anim_enable   | boolean   | 设置显示器支持动画(only for CommonTabLayout)                                    
-tl_indicator_anim_duration | integer   | 设置显示器动画时间(only for CommonTabLayout)                                    
-tl_indicator_bounce_enable | boolean   | 设置显示器支持动画回弹效果(only for CommonTabLayout)                                
-tl_underline_color         | color     | 设置下划线颜色                                                                
-tl_underline_height        | dimension | 设置下划线高度                                                                
-tl_underline_gravity       | enum      | 设置下划线上方(TOP)还是下方(BOTTOM)                                               
-tl_iconWidth               | dimension | 设置icon宽度(仅支持CommonTabLayout)                                           
-tl_iconHeight              | dimension | 设置icon高度(仅支持CommonTabLayout)                                           
-tl_iconVisible             | boolean   | 设置icon是否可见(仅支持CommonTabLayout)                                         
-tl_iconGravity             | enum      | 设置icon显示位置,对应Gravity中常量值,左上右下(仅支持CommonTabLayout)，LEFT，RIGHT，TOP，BOTTOM
-tl_iconMargin              | dimension | 设置icon与文字间距(仅支持CommonTabLayout)                                        </code></pre><h4 id="2-2-区别于SlidingTabLayout"><a href="#2-2-区别于SlidingTabLayout" class="headerlink" title="2.2 区别于SlidingTabLayout"></a><a href></a>2.2 区别于SlidingTabLayout</h4><ul>
-<li>不依赖于ViewPager，可以与其他组件搭配 </li>
-<li>支持自定义Tab样式，主要体现在常用的图标+文字的形式。 </li>
-<li>SlidingTabLayout继承HorizontalScrollView而CommonTabLayout继承FrameLayout  <h4 id="2-3-类结构"><a href="#2-3-类结构" class="headerlink" title="2.3 类结构"></a><a href></a>2.3 类结构</h4></li>
+<h5 id="1-2-4-Getter和Setter"><a href="#1-2-4-Getter和Setter" class="headerlink" title="1.2.4 Getter和Setter"></a>1.2.4 Getter和Setter</h5><p>不做赘述</p>
+<h5 id="1-2-5-MsgView相关（未读信息）"><a href="#1-2-5-MsgView相关（未读信息）" class="headerlink" title="1.2.5 MsgView相关（未读信息）"></a>1.2.5 MsgView相关（未读信息）</h5><p><img src="http://img.blog.csdn.net/20170419084106280" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>showMsg(int position, int num)</td>
+<td>显示未读消息，position为tab位置，num小于等于0显示红点,num大于0显示数字</td>
+</tr>
+<tr>
+<td>showDot(int position)</td>
+<td>显示未读红点， position为tab位置</td>
+</tr>
+<tr>
+<td>hideMsg(int position)</td>
+<td>隐藏未读消息， position为tab位置</td>
+</tr>
+<tr>
+<td>setMsgMargin(int position, float leftPadding, float bottomPadding)</td>
+<td>设置未读消息偏移,原点为文字的右上角.当控件高度固定,消息提示位置易控制,显示效果佳</td>
+</tr>
+<tr>
+<td>getMsgView(int position)</td>
+<td>当前类只提供了少许设置未读消息属性的方法,可以通过该方法获取MsgView对象从而各种设置</td>
+</tr>
+</tbody></table>
+<h3 id="2-CommonTabLayout"><a href="#2-CommonTabLayout" class="headerlink" title="2. CommonTabLayout"></a>2. CommonTabLayout</h3><h4 id="2-1-特有属性"><a href="#2-1-特有属性" class="headerlink" title="2.1 特有属性"></a>2.1 特有属性</h4><table>
+<thead>
+<tr>
+<th align="center">特有属性</th>
+<th align="center">格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tl_indicator_width</td>
+<td align="center">dimension</td>
+<td align="center">设置显示器固定宽度</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_gravity</td>
+<td align="center">enum</td>
+<td align="center">设置显示器上方(TOP)还是下方(BOTTOM),只对常规显示器有用</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_style</td>
+<td align="center">enum</td>
+<td align="center">设置显示器为常规(NORMAL)或三角形(TRIANGLE)或背景色块(BLOCK)</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_anim_enable</td>
+<td align="center">boolean</td>
+<td align="center">设置显示器支持动画(only for CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_anim_duration</td>
+<td align="center">integer</td>
+<td align="center">设置显示器动画时间(only for CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_bounce_enable</td>
+<td align="center">boolean</td>
+<td align="center">设置显示器支持动画回弹效果(only for CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_underline_color</td>
+<td align="center">color</td>
+<td align="center">设置下划线颜色</td>
+</tr>
+<tr>
+<td align="center">tl_underline_height</td>
+<td align="center">dimension</td>
+<td align="center">设置下划线高度</td>
+</tr>
+<tr>
+<td align="center">tl_underline_gravity</td>
+<td align="center">enum</td>
+<td align="center">设置下划线上方(TOP)还是下方(BOTTOM)</td>
+</tr>
+<tr>
+<td align="center">tl_iconWidth</td>
+<td align="center">dimension</td>
+<td align="center">设置icon宽度(仅支持CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_iconHeight</td>
+<td align="center">dimension</td>
+<td align="center">设置icon高度(仅支持CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_iconVisible</td>
+<td align="center">boolean</td>
+<td align="center">设置icon是否可见(仅支持CommonTabLayout)</td>
+</tr>
+<tr>
+<td align="center">tl_iconGravity</td>
+<td align="center">enum</td>
+<td align="center">设置icon显示位置,对应Gravity中常量值,左上右下(仅支持CommonTabLayout)，LEFT，RIGHT，TOP，BOTTOM</td>
+</tr>
+<tr>
+<td align="center">tl_iconMargin</td>
+<td align="center">dimension</td>
+<td align="center">设置icon与文字间距(仅支持CommonTabLayout)</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-区别于SlidingTabLayout"><a href="#2-2-区别于SlidingTabLayout" class="headerlink" title="2.2 区别于SlidingTabLayout"></a>2.2 区别于SlidingTabLayout</h4><ul>
+<li>不依赖于ViewPager，可以与其他组件搭配</li>
+<li>支持自定义Tab样式，主要体现在常用的图标+文字的形式。</li>
+<li>SlidingTabLayout继承HorizontalScrollView而CommonTabLayout继承FrameLayout</li>
 </ul>
-<h5 id="2-3-1-构造方法"><a href="#2-3-1-构造方法" class="headerlink" title="2.3.1 构造方法"></a><a href></a>2.3.1 构造方法</h5><p> <img src="https://img-blog.csdn.net/20170419085601117" alt="这里写图片描述"><br> 与SlidingTabLayout实现类似，获取的属性值不太一样而已。多出一个动画的内容，点击某一个Tab后，indicator的移动动画效果</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mValueAnimator = ValueAnimator.ofObject(new PointEvaluator(), mLastP, mCurrentP);</span><br><span class="line">mValueAnimator.addUpdateListener(this);</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-类结构"><a href="#2-3-类结构" class="headerlink" title="2.3 类结构"></a>2.3 类结构</h4><h5 id="2-3-1-构造方法"><a href="#2-3-1-构造方法" class="headerlink" title="2.3.1 构造方法"></a>2.3.1 构造方法</h5><p><img src="http://img.blog.csdn.net/20170419085601117" alt="这里写图片描述"><br>与SlidingTabLayout实现类似，获取的属性值不太一样而已。多出一个动画的内容，点击某一个Tab后，indicator的移动动画效果</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mValueAnimator = ValueAnimator.ofObject(<span class="hljs-keyword">new</span> PointEvaluator(), mLastP, mCurrentP);</span><br><span class="line">mValueAnimator.addUpdateListener(<span class="hljs-keyword">this</span>);</span><br></pre></td></tr></table></figure>
 
+<h5 id="2-3-2-动画相关"><a href="#2-3-2-动画相关" class="headerlink" title="2.3.2 动画相关"></a>2.3.2 动画相关</h5><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IndicatorPoint</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> left;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">private</span> IndicatorPoint mCurrentP = <span class="hljs-keyword">new</span> IndicatorPoint();</span><br><span class="line"><span class="hljs-keyword">private</span> IndicatorPoint mLastP = <span class="hljs-keyword">new</span> IndicatorPoint();</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PointEvaluator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">TypeEvaluator</span>&lt;<span class="hljs-title">IndicatorPoint</span>&gt; </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> IndicatorPoint <span class="hljs-title">evaluate</span><span class="hljs-params">(<span class="hljs-keyword">float</span> fraction, IndicatorPoint startValue, IndicatorPoint endValue)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">float</span> left = startValue.left + fraction * (endValue.left - startValue.left);</span><br><span class="line">        <span class="hljs-keyword">float</span> right = startValue.right + fraction * (endValue.right - startValue.right);</span><br><span class="line">        IndicatorPoint point = <span class="hljs-keyword">new</span> IndicatorPoint();</span><br><span class="line">        point.left = left;</span><br><span class="line">        point.right = right;</span><br><span class="line">        <span class="hljs-keyword">return</span> point;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-3-2-动画相关"><a href="#2-3-2-动画相关" class="headerlink" title="2.3.2 动画相关"></a><a href></a>2.3.2 动画相关</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class IndicatorPoint &#123;</span><br><span class="line">    public float left;</span><br><span class="line">    public float right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private IndicatorPoint mCurrentP = new IndicatorPoint();</span><br><span class="line">private IndicatorPoint mLastP = new IndicatorPoint();</span><br><span class="line"></span><br><span class="line">class PointEvaluator implements TypeEvaluator&lt;IndicatorPoint&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public IndicatorPoint evaluate(float fraction, IndicatorPoint startValue, IndicatorPoint endValue) &#123;</span><br><span class="line">        float left = startValue.left + fraction * (endValue.left - startValue.left);</span><br><span class="line">        float right = startValue.right + fraction * (endValue.right - startValue.right);</span><br><span class="line">        IndicatorPoint point = new IndicatorPoint();</span><br><span class="line">        point.left = left;</span><br><span class="line">        point.right = right;</span><br><span class="line">        return point;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span><span class="hljs-params">(ValueAnimator animation)</span> </span>&#123;</span><br><span class="line">    View currentTabView = mTabsContainer.getChildAt(<span class="hljs-keyword">this</span>.mCurrentTab);</span><br><span class="line">    IndicatorPoint p = (IndicatorPoint) animation.getAnimatedValue();</span><br><span class="line">    mIndicatorRect.left = (<span class="hljs-keyword">int</span>) p.left;</span><br><span class="line">    mIndicatorRect.right = (<span class="hljs-keyword">int</span>) p.right;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (mIndicatorWidth &lt; <span class="hljs-number">0</span>) &#123;   <span class="hljs-comment">//indicatorWidth小于0时,原jpardogo's PagerSlidingTabStrip</span></span><br><span class="line"></span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//indicatorWidth大于0时,圆角矩形以及三角形</span></span><br><span class="line">        <span class="hljs-keyword">float</span> indicatorLeft = p.left + (currentTabView.getWidth() - mIndicatorWidth) / <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">        mIndicatorRect.left = (<span class="hljs-keyword">int</span>) indicatorLeft;</span><br><span class="line">        mIndicatorRect.right = (<span class="hljs-keyword">int</span>) (mIndicatorRect.left + mIndicatorWidth);</span><br><span class="line">    &#125;</span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h5 id="2-3-3-Tab相关"><a href="#2-3-3-Tab相关" class="headerlink" title="2.3.3 Tab相关"></a>2.3.3 Tab相关</h5><p><img src="http://img.blog.csdn.net/20170419090336135" alt="这里写图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setTabData(ArrayList&lt; CustomTabEntity&gt; tabEntitys)</td>
+<td>设置tab entity</td>
+</tr>
+<tr>
+<td>setTabData(ArrayList&lt; CustomTabEntity&gt; tabEntitys, FragmentActivity fa, int containerViewId, ArrayList&lt; Fragment&gt; fragments)</td>
+<td>关联数据支持同时切换fragments</td>
+</tr>
+<tr>
+<td>notifyDataSetChanged()</td>
+<td>更新数据</td>
+</tr>
+<tr>
+<td>setCurrentTab(int currentTab)</td>
+<td>设置当前tab</td>
+</tr>
+</tbody></table>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTabData</span><span class="hljs-params">(ArrayList&lt;CustomTabEntity&gt; tabEntitys)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (tabEntitys == <span class="hljs-keyword">null</span> || tabEntitys.size() == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"TabEntitys can not be NULL or EMPTY !"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">this</span>.mTabEntitys.clear();</span><br><span class="line">    <span class="hljs-comment">/*设置tab标签*/</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.mTabEntitys.addAll(tabEntitys);</span><br><span class="line">    <span class="hljs-comment">/*更新数据*/</span></span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onAnimationUpdate(ValueAnimator animation) &#123;</span><br><span class="line">    View currentTabView = mTabsContainer.getChildAt(this.mCurrentTab);</span><br><span class="line">    IndicatorPoint p = (IndicatorPoint) animation.getAnimatedValue();</span><br><span class="line">    mIndicatorRect.left = (int) p.left;</span><br><span class="line">    mIndicatorRect.right = (int) p.right;</span><br><span class="line"></span><br><span class="line">    if (mIndicatorWidth &lt; 0) &#123;   //indicatorWidth小于0时,原jpardogo&apos;s PagerSlidingTabStrip</span><br><span class="line"></span><br><span class="line">    &#125; else &#123;//indicatorWidth大于0时,圆角矩形以及三角形</span><br><span class="line">        float indicatorLeft = p.left + (currentTabView.getWidth() - mIndicatorWidth) / 2;</span><br><span class="line"></span><br><span class="line">        mIndicatorRect.left = (int) indicatorLeft;</span><br><span class="line">        mIndicatorRect.right = (int) (mIndicatorRect.left + mIndicatorWidth);</span><br><span class="line">    &#125;</span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 更新数据 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyDataSetChanged</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/*清空容器中的tab*/</span></span><br><span class="line">    mTabsContainer.removeAllViews();</span><br><span class="line">    <span class="hljs-keyword">this</span>.mTabCount = mTabEntitys.size();</span><br><span class="line">    View tabView;</span><br><span class="line">    <span class="hljs-comment">/*根据图标的gravity构建不同的tab样式，图标支持上下左右*/</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (mIconGravity == Gravity.LEFT) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_left, <span class="hljs-keyword">null</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mIconGravity == Gravity.RIGHT) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_right, <span class="hljs-keyword">null</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mIconGravity == Gravity.BOTTOM) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_bottom, <span class="hljs-keyword">null</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_top, <span class="hljs-keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-comment">/*i添加到tag,但从这个类的方法上看，这一步没有什么必要，因为addTab会传入i,addTab中直接使用i就好，但是如果我们在外部拿到tabView,就可以直接指导它的position,不用循环遍历，还是挺方便的*/</span></span><br><span class="line">        tabView.setTag(i);</span><br><span class="line">        <span class="hljs-comment">/*添加tab*/</span></span><br><span class="line">        addTab(i, tabView);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">/*根据选中未选中状态更新tab显示效果*/</span></span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 创建并添加tab */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addTab</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> position, View tabView)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/*设置文本内容，title*/</span></span><br><span class="line">    TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">    tv_tab_title.setText(mTabEntitys.get(position).getTabTitle());</span><br><span class="line">    <span class="hljs-comment">/*设置图标内容，添加未选中内容，后面根据选中未选中重新刷一次图片*/</span></span><br><span class="line">    ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);</span><br><span class="line">    iv_tab_icon.setImageResource(mTabEntitys.get(position).getTabUnselectedIcon());</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*设置tabView的点击事件*/</span></span><br><span class="line">    tabView.setOnClickListener(<span class="hljs-keyword">new</span> OnClickListener() &#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View v)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-comment">/*前面设置的tab,也就是position*/</span></span><br><span class="line">            <span class="hljs-keyword">int</span> position = (Integer) v.getTag();</span><br><span class="line">            <span class="hljs-keyword">if</span> (mCurrentTab != position) &#123;</span><br><span class="line">                <span class="hljs-comment">/*设置当前tab*/</span></span><br><span class="line">                setCurrentTab(position);</span><br><span class="line">                <span class="hljs-comment">//有OnTabSelectListener则执行对应的处理</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (mListener != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    mListener.onTabSelect(position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (mListener != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                    mListener.onTabReselect(position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 每一个Tab的布局参数 ，根据是否均分设置不同的布局，若宽度不为0，则设置宽度*/</span></span><br><span class="line">    LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ?</span><br><span class="line">            <span class="hljs-keyword">new</span> LinearLayout.LayoutParams(<span class="hljs-number">0</span>, LayoutParams.MATCH_PARENT, <span class="hljs-number">1.0f</span>) :</span><br><span class="line">            <span class="hljs-keyword">new</span> LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);</span><br><span class="line">    <span class="hljs-keyword">if</span> (mTabWidth &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        lp_tab = <span class="hljs-keyword">new</span> LinearLayout.LayoutParams((<span class="hljs-keyword">int</span>) mTabWidth, LayoutParams.MATCH_PARENT);</span><br><span class="line">    &#125;</span><br><span class="line">    mTabsContainer.addView(tabView, position, lp_tab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-3-3-Tab相关"><a href="#2-3-3-Tab相关" class="headerlink" title="2.3.3 Tab相关"></a><a href></a>2.3.3 Tab相关</h5><p> <img src="https://img-blog.csdn.net/20170419090336135" alt="这里写图片描述"></p>
-<pre><code>方法                                                                                                                                       | 描述                 
----------------------------------------------------------------------------------------------------------------------------------------- | ------------------- 
-setTabData(ArrayList&amp;lt; CustomTabEntity&amp;gt; tabEntitys)                                                                                 | 设置tab entity       
-setTabData(ArrayList&amp;lt; CustomTabEntity&amp;gt; tabEntitys, FragmentActivity fa, int containerViewId, ArrayList&amp;lt; Fragment&amp;gt; fragments) | 关联数据支持同时切换fragments
-notifyDataSetChanged()                                                                                                                   | 更新数据               
-setCurrentTab(int currentTab)                                                                                                            | 设置当前tab            </code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void setTabData(ArrayList&lt;CustomTabEntity&gt; tabEntitys) &#123;</span><br><span class="line">    if (tabEntitys == null || tabEntitys.size() == 0) &#123;</span><br><span class="line">        throw new IllegalStateException(&quot;TabEntitys can not be NULL or EMPTY !&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.mTabEntitys.clear();</span><br><span class="line">    /*设置tab标签*/</span><br><span class="line">    this.mTabEntitys.addAll(tabEntitys);</span><br><span class="line">    /*更新数据*/</span><br><span class="line">    notifyDataSetChanged();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*和SlidingTabLayout相似，多了一个图标的处理*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateTabStyles</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        View tabView = mTabsContainer.getChildAt(i);</span><br><span class="line">        tabView.setPadding((<span class="hljs-keyword">int</span>) mTabPadding, <span class="hljs-number">0</span>, (<span class="hljs-keyword">int</span>) mTabPadding, <span class="hljs-number">0</span>);</span><br><span class="line">        TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">        tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">        tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);</span><br><span class="line"><span class="hljs-comment">//            tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (mTextAllCaps) &#123;</span><br><span class="line">            tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (mTextBold == TEXT_BOLD_BOTH) &#123;</span><br><span class="line">            tv_tab_title.getPaint().setFakeBoldText(<span class="hljs-keyword">true</span>);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mTextBold == TEXT_BOLD_NONE) &#123;</span><br><span class="line">            tv_tab_title.getPaint().setFakeBoldText(<span class="hljs-keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);</span><br><span class="line">        <span class="hljs-keyword">if</span> (mIconVisible) &#123;</span><br><span class="line">            iv_tab_icon.setVisibility(View.VISIBLE);</span><br><span class="line">            CustomTabEntity tabEntity = mTabEntitys.get(i);</span><br><span class="line">            iv_tab_icon.setImageResource(i == mCurrentTab ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());</span><br><span class="line">            LinearLayout.LayoutParams lp = <span class="hljs-keyword">new</span> LinearLayout.LayoutParams(</span><br><span class="line">                    mIconWidth &lt;= <span class="hljs-number">0</span> ? LinearLayout.LayoutParams.WRAP_CONTENT : (<span class="hljs-keyword">int</span>) mIconWidth,</span><br><span class="line">                    mIconHeight &lt;= <span class="hljs-number">0</span> ? LinearLayout.LayoutParams.WRAP_CONTENT : (<span class="hljs-keyword">int</span>) mIconHeight);</span><br><span class="line">            <span class="hljs-keyword">if</span> (mIconGravity == Gravity.LEFT) &#123;</span><br><span class="line">                lp.rightMargin = (<span class="hljs-keyword">int</span>) mIconMargin;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mIconGravity == Gravity.RIGHT) &#123;</span><br><span class="line">                lp.leftMargin = (<span class="hljs-keyword">int</span>) mIconMargin;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mIconGravity == Gravity.BOTTOM) &#123;</span><br><span class="line">                lp.topMargin = (<span class="hljs-keyword">int</span>) mIconMargin;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                lp.bottomMargin = (<span class="hljs-keyword">int</span>) mIconMargin;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            iv_tab_icon.setLayoutParams(lp);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            iv_tab_icon.setVisibility(View.GONE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>另外一个setTabData</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 关联数据支持同时切换fragments */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTabData</span><span class="hljs-params">(ArrayList&lt;CustomTabEntity&gt; tabEntitys, FragmentActivity fa, <span class="hljs-keyword">int</span> containerViewId, ArrayList&lt;Fragment&gt; fragments)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/*拿到一个mFragmentChangeManager ，后面setCurrentTab的时候 ，如果这个值不为空，根据这个来切换fragment,实现一种类似FragmentPagerAdapter的效果*/</span></span><br><span class="line">    mFragmentChangeManager = <span class="hljs-keyword">new</span> FragmentChangeManager(fa.getSupportFragmentManager(), containerViewId, fragments);</span><br><span class="line">    setTabData(tabEntitys);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/** 更新数据 */</span><br><span class="line">public void notifyDataSetChanged() &#123;</span><br><span class="line">    /*清空容器中的tab*/</span><br><span class="line">    mTabsContainer.removeAllViews();</span><br><span class="line">    this.mTabCount = mTabEntitys.size();</span><br><span class="line">    View tabView;</span><br><span class="line">    /*根据图标的gravity构建不同的tab样式，图标支持上下左右*/</span><br><span class="line">    for (int i = 0; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        if (mIconGravity == Gravity.LEFT) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_left, null);</span><br><span class="line">        &#125; else if (mIconGravity == Gravity.RIGHT) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_right, null);</span><br><span class="line">        &#125; else if (mIconGravity == Gravity.BOTTOM) &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_bottom, null);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            tabView = View.inflate(mContext, R.layout.layout_tab_top, null);</span><br><span class="line">        &#125;</span><br><span class="line">        /*i添加到tag,但从这个类的方法上看，这一步没有什么必要，因为addTab会传入i,addTab中直接使用i就好，但是如果我们在外部拿到tabView,就可以直接指导它的position,不用循环遍历，还是挺方便的*/</span><br><span class="line">        tabView.setTag(i);</span><br><span class="line">        /*添加tab*/</span><br><span class="line">        addTab(i, tabView);</span><br><span class="line">    &#125;</span><br><span class="line">    /*根据选中未选中状态更新tab显示效果*/</span><br><span class="line">    updateTabStyles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCurrentTab</span><span class="hljs-params">(<span class="hljs-keyword">int</span> currentTab)</span> </span>&#123;</span><br><span class="line">    mLastTab = <span class="hljs-keyword">this</span>.mCurrentTab;</span><br><span class="line">    <span class="hljs-keyword">this</span>.mCurrentTab = currentTab;</span><br><span class="line">    <span class="hljs-comment">/*遍历更新tab选中未选中状态*/</span></span><br><span class="line">    updateTabSelection(currentTab);</span><br><span class="line">    <span class="hljs-comment">/*如果mFragmentChangeManager 不为空，就根据当前选中的tab显示对应的Fragment*/</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (mFragmentChangeManager != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">        mFragmentChangeManager.setFragments(currentTab);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">/*indicator动画效果，计算后重绘*/</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (mIndicatorAnimEnable) &#123;</span><br><span class="line">        calcOffset();</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h5 id="2-3-4-FragmentChangeManager"><a href="#2-3-4-FragmentChangeManager" class="headerlink" title="2.3.4 FragmentChangeManager"></a>2.3.4 FragmentChangeManager</h5><p><img src="http://img.blog.csdn.net/20170419093139353" alt="这里写图片描述"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FragmentChangeManager</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> FragmentManager mFragmentManager;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mContainerViewId;</span><br><span class="line">    <span class="hljs-comment">/** Fragment切换数组 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList&lt;Fragment&gt; mFragments;</span><br><span class="line">    <span class="hljs-comment">/** 当前选中的Tab */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mCurrentTab;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*构造方法，setTabData的时候看到过*/</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FragmentChangeManager</span><span class="hljs-params">(FragmentManager fm, <span class="hljs-keyword">int</span> containerViewId, ArrayList&lt;Fragment&gt; fragments)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mFragmentManager = fm;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mContainerViewId = containerViewId;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mFragments = fragments;</span><br><span class="line">        initFragments();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 初始化fragments */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initFragments</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (Fragment fragment : mFragments) &#123;</span><br><span class="line">            mFragmentManager.beginTransaction().add(mContainerViewId, fragment).hide(fragment).commit();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setFragments(<span class="hljs-number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 界面切换控制,CommonTabLayout中的setCurrentTab方法可以控制*/</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFragments</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mFragments.size(); i++) &#123;</span><br><span class="line">            FragmentTransaction ft = mFragmentManager.beginTransaction();</span><br><span class="line">            Fragment fragment = mFragments.get(i);</span><br><span class="line">            <span class="hljs-keyword">if</span> (i == index) &#123;</span><br><span class="line">                ft.show(fragment);</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                ft.hide(fragment);</span><br><span class="line">            &#125;</span><br><span class="line">            ft.commit();</span><br><span class="line">        &#125;</span><br><span class="line">        mCurrentTab = index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCurrentTab</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mCurrentTab;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Fragment <span class="hljs-title">getCurrentFragment</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mFragments.get(mCurrentTab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/** 创建并添加tab */</span><br><span class="line">private void addTab(final int position, View tabView) &#123;</span><br><span class="line">    /*设置文本内容，title*/</span><br><span class="line">    TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">    tv_tab_title.setText(mTabEntitys.get(position).getTabTitle());</span><br><span class="line">    /*设置图标内容，添加未选中内容，后面根据选中未选中重新刷一次图片*/</span><br><span class="line">    ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);</span><br><span class="line">    iv_tab_icon.setImageResource(mTabEntitys.get(position).getTabUnselectedIcon());</span><br><span class="line"></span><br><span class="line">    /*设置tabView的点击事件*/</span><br><span class="line">    tabView.setOnClickListener(new OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View v) &#123;</span><br><span class="line">            /*前面设置的tab,也就是position*/</span><br><span class="line">            int position = (Integer) v.getTag();</span><br><span class="line">            if (mCurrentTab != position) &#123;</span><br><span class="line">                /*设置当前tab*/</span><br><span class="line">                setCurrentTab(position);</span><br><span class="line">                //有OnTabSelectListener则执行对应的处理</span><br><span class="line">                if (mListener != null) &#123;</span><br><span class="line">                    mListener.onTabSelect(position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (mListener != null) &#123;</span><br><span class="line">                    mListener.onTabReselect(position);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    /** 每一个Tab的布局参数 ，根据是否均分设置不同的布局，若宽度不为0，则设置宽度*/</span><br><span class="line">    LinearLayout.LayoutParams lp_tab = mTabSpaceEqual ?</span><br><span class="line">            new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f) :</span><br><span class="line">            new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);</span><br><span class="line">    if (mTabWidth &gt; 0) &#123;</span><br><span class="line">        lp_tab = new LinearLayout.LayoutParams((int) mTabWidth, LayoutParams.MATCH_PARENT);</span><br><span class="line">    &#125;</span><br><span class="line">    mTabsContainer.addView(tabView, position, lp_tab);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">/*和SlidingTabLayout相似，多了一个图标的处理*/</span><br><span class="line">private void updateTabStyles() &#123;</span><br><span class="line">    for (int i = 0; i &lt; mTabCount; i++) &#123;</span><br><span class="line">        View tabView = mTabsContainer.getChildAt(i);</span><br><span class="line">        tabView.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);</span><br><span class="line">        TextView tv_tab_title = (TextView) tabView.findViewById(R.id.tv_tab_title);</span><br><span class="line">        tv_tab_title.setTextColor(i == mCurrentTab ? mTextSelectColor : mTextUnselectColor);</span><br><span class="line">        tv_tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextsize);</span><br><span class="line">//            tv_tab_title.setPadding((int) mTabPadding, 0, (int) mTabPadding, 0);</span><br><span class="line">        if (mTextAllCaps) &#123;</span><br><span class="line">            tv_tab_title.setText(tv_tab_title.getText().toString().toUpperCase());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (mTextBold == TEXT_BOLD_BOTH) &#123;</span><br><span class="line">            tv_tab_title.getPaint().setFakeBoldText(true);</span><br><span class="line">        &#125; else if (mTextBold == TEXT_BOLD_NONE) &#123;</span><br><span class="line">            tv_tab_title.getPaint().setFakeBoldText(false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ImageView iv_tab_icon = (ImageView) tabView.findViewById(R.id.iv_tab_icon);</span><br><span class="line">        if (mIconVisible) &#123;</span><br><span class="line">            iv_tab_icon.setVisibility(View.VISIBLE);</span><br><span class="line">            CustomTabEntity tabEntity = mTabEntitys.get(i);</span><br><span class="line">            iv_tab_icon.setImageResource(i == mCurrentTab ? tabEntity.getTabSelectedIcon() : tabEntity.getTabUnselectedIcon());</span><br><span class="line">            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(</span><br><span class="line">                    mIconWidth &lt;= 0 ? LinearLayout.LayoutParams.WRAP_CONTENT : (int) mIconWidth,</span><br><span class="line">                    mIconHeight &lt;= 0 ? LinearLayout.LayoutParams.WRAP_CONTENT : (int) mIconHeight);</span><br><span class="line">            if (mIconGravity == Gravity.LEFT) &#123;</span><br><span class="line">                lp.rightMargin = (int) mIconMargin;</span><br><span class="line">            &#125; else if (mIconGravity == Gravity.RIGHT) &#123;</span><br><span class="line">                lp.leftMargin = (int) mIconMargin;</span><br><span class="line">            &#125; else if (mIconGravity == Gravity.BOTTOM) &#123;</span><br><span class="line">                lp.topMargin = (int) mIconMargin;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                lp.bottomMargin = (int) mIconMargin;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            iv_tab_icon.setLayoutParams(lp);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            iv_tab_icon.setVisibility(View.GONE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 另外一个setTabData</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/** 关联数据支持同时切换fragments */</span><br><span class="line">public void setTabData(ArrayList&lt;CustomTabEntity&gt; tabEntitys, FragmentActivity fa, int containerViewId, ArrayList&lt;Fragment&gt; fragments) &#123;</span><br><span class="line">    /*拿到一个mFragmentChangeManager ，后面setCurrentTab的时候 ，如果这个值不为空，根据这个来切换fragment,实现一种类似FragmentPagerAdapter的效果*/</span><br><span class="line">    mFragmentChangeManager = new FragmentChangeManager(fa.getSupportFragmentManager(), containerViewId, fragments);</span><br><span class="line">    setTabData(tabEntitys);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public void setCurrentTab(int currentTab) &#123;</span><br><span class="line">    mLastTab = this.mCurrentTab;</span><br><span class="line">    this.mCurrentTab = currentTab;</span><br><span class="line">    /*遍历更新tab选中未选中状态*/</span><br><span class="line">    updateTabSelection(currentTab);</span><br><span class="line">    /*如果mFragmentChangeManager 不为空，就根据当前选中的tab显示对应的Fragment*/</span><br><span class="line">    if (mFragmentChangeManager != null) &#123;</span><br><span class="line">        mFragmentChangeManager.setFragments(currentTab);</span><br><span class="line">    &#125;</span><br><span class="line">    /*indicator动画效果，计算后重绘*/</span><br><span class="line">    if (mIndicatorAnimEnable) &#123;</span><br><span class="line">        calcOffset();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="2-3-4-FragmentChangeManager"><a href="#2-3-4-FragmentChangeManager" class="headerlink" title="2.3.4 FragmentChangeManager"></a><a href></a>2.3.4 FragmentChangeManager</h5><p> <img src="https://img-blog.csdn.net/20170419093139353" alt="这里写图片描述"></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class FragmentChangeManager &#123;</span><br><span class="line">    private FragmentManager mFragmentManager;</span><br><span class="line">    private int mContainerViewId;</span><br><span class="line">    /** Fragment切换数组 */</span><br><span class="line">    private ArrayList&lt;Fragment&gt; mFragments;</span><br><span class="line">    /** 当前选中的Tab */</span><br><span class="line">    private int mCurrentTab;</span><br><span class="line"></span><br><span class="line">    /*构造方法，setTabData的时候看到过*/</span><br><span class="line">    public FragmentChangeManager(FragmentManager fm, int containerViewId, ArrayList&lt;Fragment&gt; fragments) &#123;</span><br><span class="line">        this.mFragmentManager = fm;</span><br><span class="line">        this.mContainerViewId = containerViewId;</span><br><span class="line">        this.mFragments = fragments;</span><br><span class="line">        initFragments();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 初始化fragments */</span><br><span class="line">    private void initFragments() &#123;</span><br><span class="line">        for (Fragment fragment : mFragments) &#123;</span><br><span class="line">            mFragmentManager.beginTransaction().add(mContainerViewId, fragment).hide(fragment).commit();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        setFragments(0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /** 界面切换控制,CommonTabLayout中的setCurrentTab方法可以控制*/</span><br><span class="line">    public void setFragments(int index) &#123;</span><br><span class="line">        for (int i = 0; i &lt; mFragments.size(); i++) &#123;</span><br><span class="line">            FragmentTransaction ft = mFragmentManager.beginTransaction();</span><br><span class="line">            Fragment fragment = mFragments.get(i);</span><br><span class="line">            if (i == index) &#123;</span><br><span class="line">                ft.show(fragment);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                ft.hide(fragment);</span><br><span class="line">            &#125;</span><br><span class="line">            ft.commit();</span><br><span class="line">        &#125;</span><br><span class="line">        mCurrentTab = index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getCurrentTab() &#123;</span><br><span class="line">        return mCurrentTab;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Fragment getCurrentFragment() &#123;</span><br><span class="line">        return mFragments.get(mCurrentTab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="2-3-5-Getter-Setter以及MsgView先关"><a href="#2-3-5-Getter-Setter以及MsgView先关" class="headerlink" title="2.3.5 Getter,Setter以及MsgView先关"></a><a href></a>2.3.5 Getter,Setter以及MsgView先关</h5><p> Getter和Setter方法是属性值的获取和设置，MsgView相关方法和SlidingTabLayout比较相似。</p>
-<hr>
-<h3 id="3-SegmentTabLayout"><a href="#3-SegmentTabLayout" class="headerlink" title="3. SegmentTabLayout"></a><a href></a>3. SegmentTabLayout</h3><h4 id="3-1-特有属性"><a href="#3-1-特有属性" class="headerlink" title="3.1 特有属性"></a><a href></a>3.1 特有属性</h4><pre><code>特有属性                       | 格式        | 描述           
--------------------------- | --------- | ------------- 
-tl_indicator_anim_enable   | boolean   | 设置显示器支持动画    
-tl_indicator_anim_duration | integer   | 设置显示器动画时间    
-tl_indicator_bounce_enable | boolean   | 设置显示器支持动画回弹效果
-tl_bar_color               | color     | 设置整体颜色       
-tl_bar_stroke_color        | color     | 设置边框颜色       
-tl_bar_stroke_width        | dimension | 设置边框粗细       </code></pre><h4 id="3-2-区别于CommonTabLayout"><a href="#3-2-区别于CommonTabLayout" class="headerlink" title="3.2 区别于CommonTabLayout"></a><a href></a>3.2 区别于CommonTabLayout</h4><ul>
-<li><p>不支持图标，但是可以看做是一个特殊的CommonTabLayout.  </p>
-<h4 id="3-3-类结构"><a href="#3-3-类结构" class="headerlink" title="3.3 类结构"></a><a href></a>3.3 类结构</h4><p>整体来说，内容基本上和CommonTabLayout，只是少了Icon的对应处理，多出的是Segment样式的处理。</p>
-</li>
+<h5 id="2-3-5-Getter-Setter以及MsgView先关"><a href="#2-3-5-Getter-Setter以及MsgView先关" class="headerlink" title="2.3.5 Getter,Setter以及MsgView先关"></a>2.3.5 Getter,Setter以及MsgView先关</h5><p>Getter和Setter方法是属性值的获取和设置，MsgView相关方法和SlidingTabLayout比较相似。</p>
+<h3 id="3-SegmentTabLayout"><a href="#3-SegmentTabLayout" class="headerlink" title="3. SegmentTabLayout"></a>3. SegmentTabLayout</h3><h4 id="3-1-特有属性"><a href="#3-1-特有属性" class="headerlink" title="3.1 特有属性"></a>3.1 特有属性</h4><table>
+<thead>
+<tr>
+<th align="center">特有属性</th>
+<th align="center">格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tl_indicator_anim_enable</td>
+<td align="center">boolean</td>
+<td align="center">设置显示器支持动画</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_anim_duration</td>
+<td align="center">integer</td>
+<td align="center">设置显示器动画时间</td>
+</tr>
+<tr>
+<td align="center">tl_indicator_bounce_enable</td>
+<td align="center">boolean</td>
+<td align="center">设置显示器支持动画回弹效果</td>
+</tr>
+<tr>
+<td align="center">tl_bar_color</td>
+<td align="center">color</td>
+<td align="center">设置整体颜色</td>
+</tr>
+<tr>
+<td align="center">tl_bar_stroke_color</td>
+<td align="center">color</td>
+<td align="center">设置边框颜色</td>
+</tr>
+<tr>
+<td align="center">tl_bar_stroke_width</td>
+<td align="center">dimension</td>
+<td align="center">设置边框粗细</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-区别于CommonTabLayout"><a href="#3-2-区别于CommonTabLayout" class="headerlink" title="3.2 区别于CommonTabLayout"></a>3.2 区别于CommonTabLayout</h4><ul>
+<li>不支持图标，但是可以看做是一个特殊的CommonTabLayout.</li>
 </ul>
-<hr>
-<h3 id="4-MsgView"><a href="#4-MsgView" class="headerlink" title="4. MsgView"></a><a href></a>4. MsgView</h3><h4 id="4-1-自定义属性"><a href="#4-1-自定义属性" class="headerlink" title="4.1 自定义属性"></a><a href></a>4.1 自定义属性</h4><pre><code>属性值                   | 格式        | 描述              
---------------------- | --------- | ---------------- 
-mv_backgroundColor    | color     | 圆角矩形背景色         
-mv_cornerRadius       | dimension | 圆角弧度,单位dp       
-mv_strokeWidth        | dimension | 边框粗细，单位dp       
-mv_strokeColor        | color     | 圆角边框颜色          
-mv_isRadiusHalfHeight | boolean   | 圆角弧度是高度一半       
-mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大值</code></pre><h4 id="4-2-类结构"><a href="#4-2-类结构" class="headerlink" title="4.2 类结构"></a><a href></a>4.2 类结构</h4><p> <img src="https://img-blog.csdn.net/20170419094953865" alt="这里写图片描述"></p>
-<hr>
-<h2 id="项目使用"><a href="#项目使用" class="headerlink" title="项目使用"></a><a href></a>项目使用</h2><p> 个人项目<a href="https://github.com/onlyloveyd/GankIOClient" target="_blank" rel="noopener">Gank.io Android 客户端</a>中使用效果,底部使用的CommonTabLayout，顶部使用的是SlidingTabLayout。整体而言，日常开发过程中，FlycoTabLayout还是很实用的。</p>
-<p> <img src="https://img-blog.csdn.net/20170413220349937" alt="这里写图片描述"></p>
-<hr>
-<p> <img src="https://img-blog.csdn.net/20170413220424449" alt="这里写图片描述"></p>
+<h4 id="3-3-类结构"><a href="#3-3-类结构" class="headerlink" title="3.3 类结构"></a>3.3 类结构</h4><p>整体来说，内容基本上和CommonTabLayout，只是少了Icon的对应处理，多出的是Segment样式的处理。</p>
+<h3 id="4-MsgView"><a href="#4-MsgView" class="headerlink" title="4. MsgView"></a>4. MsgView</h3><h4 id="4-1-自定义属性"><a href="#4-1-自定义属性" class="headerlink" title="4.1 自定义属性"></a>4.1 自定义属性</h4><table>
+<thead>
+<tr>
+<th align="center">属性值</th>
+<th align="center">格式</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">mv_backgroundColor</td>
+<td align="center">color</td>
+<td align="center">圆角矩形背景色</td>
+</tr>
+<tr>
+<td align="center">mv_cornerRadius</td>
+<td align="center">dimension</td>
+<td align="center">圆角弧度,单位dp</td>
+</tr>
+<tr>
+<td align="center">mv_strokeWidth</td>
+<td align="center">dimension</td>
+<td align="center">边框粗细，单位dp</td>
+</tr>
+<tr>
+<td align="center">mv_strokeColor</td>
+<td align="center">color</td>
+<td align="center">圆角边框颜色</td>
+</tr>
+<tr>
+<td align="center">mv_isRadiusHalfHeight</td>
+<td align="center">boolean</td>
+<td align="center">圆角弧度是高度一半</td>
+</tr>
+<tr>
+<td align="center">mv_isWidthHeightEqual</td>
+<td align="center">boolean</td>
+<td align="center">圆角矩形宽高相等,取较宽高中大值</td>
+</tr>
+</tbody></table>
+<h4 id="4-2-类结构"><a href="#4-2-类结构" class="headerlink" title="4.2 类结构"></a>4.2 类结构</h4><p><img src="http://img.blog.csdn.net/20170419094953865" alt="这里写图片描述"></p>
+<h2 id="项目使用"><a href="#项目使用" class="headerlink" title="项目使用"></a>项目使用</h2><p>个人项目<a href="https://github.com/onlyloveyd/GankIOClient" target="_blank" rel="noopener">Gank.io Android 客户端</a>中使用效果,底部使用的CommonTabLayout，顶部使用的是SlidingTabLayout。整体而言，日常开发过程中，FlycoTabLayout还是很实用的。</p>
+<p><img src="http://img.blog.csdn.net/20170413220349937" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170413220424449" alt="这里写图片描述"></p>
 
         </div>
         
@@ -494,7 +817,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -514,7 +837,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -605,7 +928,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -715,7 +1038,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -909,7 +1232,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1278,7 +1601,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1318,23 +1641,9 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1348,13 +1657,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1362,13 +1664,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1397,7 +1692,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1418,13 +1713,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1453,7 +1741,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1516,14 +1804,14 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1542,13 +1830,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1556,22 +1837,8 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1605,13 +1872,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1621,7 +1881,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1640,13 +1900,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1656,14 +1909,14 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1691,7 +1944,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1710,44 +1963,9 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1761,20 +1979,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1808,22 +2012,8 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1838,7 +2028,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2044,7 +2234,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2413,7 +2603,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2453,23 +2643,9 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2483,13 +2659,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2497,13 +2666,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2532,7 +2694,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2553,13 +2715,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2588,7 +2743,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2651,14 +2806,14 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2677,13 +2832,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2691,22 +2839,8 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2740,13 +2874,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2756,7 +2883,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2775,13 +2902,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2791,14 +2911,14 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2826,7 +2946,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2845,44 +2965,9 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2896,20 +2981,6 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2943,22 +3014,8 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2973,7 +3030,7 @@ mv_isWidthHeightEqual | boolean   | 圆角矩形宽高相等,取较宽高中大�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="16. 动画 注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效 在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。  所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。 三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。 方法">
-<meta name="keywords" content="MPAndroidChart,开源库,译文">
+    <meta name="description" content="16. 动画注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。 所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。|方法|使用||——|————||animateX(int durationMilli">
+<meta name="keywords" content="译文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 4">
 <meta property="og:url" content="http://yoursite.com/2017/06/17/《Android开源库》 MPAndroidChart Wiki(译文)～Part 4/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="16. 动画 注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效 在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。  所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。 三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。 方法">
+<meta property="og:description" content="16. 动画注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。 所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。|方法|使用||——|————||animateX(int durationMilli">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:51:27.799Z">
+<meta property="og:updated_time" content="2019-06-27T12:50:53.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 MPAndroidChart Wiki(译文)～Part 4">
-<meta name="twitter:description" content="16. 动画 注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效 在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。  所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。 三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。 方法">
+<meta name="twitter:description" content="16. 动画注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。 所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。|方法|使用||——|————||animateX(int durationMilli">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分钟 读完 (大约 2031 个字)
+                    14 分钟 读完 (大约 2035 个字)
                 </span>
                 
                 
@@ -168,102 +168,199 @@
             
         </h1>
         <div class="content">
-            <h2 id="16-动画"><a href="#16-动画" class="headerlink" title="16. 动画"></a><a href></a>16. 动画</h2><p> <strong>注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效</strong><br> 在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。</p>
-<p> 所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。<br> 三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。</p>
-<pre><code>方法                                      | 使用                             
---------------------------------------- | ------------------------------- 
-animateX(int durationMillis)            | X水平轴的图表值动画，这意味着在指定的时间内从左到右 建立图表
-animateY(int durationMillis)            | 垂直轴的图表值动画，这意味着在指定的时间内从下到上 建立图表。
-animateXY(int xDuration, int yDuration) | 两个轴的图表值动画，从左到右，从下到上 建立图表。      </code></pre><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mChart.animateX(3000); // animate horizontal 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateY(3000); // animate vertical 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateXY(3000, 3000); // animate horizontal and vertical 3000 milliseconds</span><br></pre></td></tr></table></figure>
+            <a id="more"></a>
+<h2 id="16-动画"><a href="#16-动画" class="headerlink" title="16. 动画"></a>16. 动画</h2><p><strong>注意：本章的动画效果只会在API 11（Android3.0.x）及以上的Android版本上生效</strong><br>在低于上述的Android版本中，动画将不会被执行，并不会导致程序崩溃。</p>
+<p>所有类型的图标都可以用一种看上去比较炫酷的动画效果来进行构建。<br>三种不同的动画方法来让我们在X轴，Y轴或则两个轴同时显示动画效果。<br>|方法|使用|<br>|——|————|<br>|animateX(int durationMillis)|X水平轴的图表值动画，这意味着在指定的时间内从左到右 建立图表|<br>|animateY(int durationMillis)|垂直轴的图表值动画，这意味着在指定的时间内从下到上 建立图表。|<br>|animateXY(int xDuration, int yDuration)|两个轴的图表值动画，从左到右，从下到上 建立图表。|</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mChart.animateX(3000); // animate horizontal 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateY(3000); // animate vertical 3000 milliseconds</span><br><span class="line">// or:</span><br><span class="line">mChart.animateXY(3000, 3000); // animate horizontal and vertical 3000 milliseconds</span><br></pre></td></tr></table></figure>
 
-<p> 任意一种 animate(…) 动画方法被调用后，无需再调用 invalidate() 方法。</p>
-<h3 id="16-1-缓动动画"><a href="#16-1-缓动动画" class="headerlink" title="16.1 缓动动画"></a><a href></a>16.1 缓动动画</h3><p> 这个库可以让你对动画应用”缓动函数”。<br> 你可以选择以下预定义的静态 Easing.EasingOption :</p>
+<p>任意一种 animate(…) 动画方法被调用后，无需再调用 invalidate() 方法。</p>
+<h3 id="16-1-缓动动画"><a href="#16-1-缓动动画" class="headerlink" title="16.1 缓动动画"></a>16.1 缓动动画</h3><p>这个库可以让你对动画应用”缓动函数”。<br>你可以选择以下预定义的静态 Easing.EasingOption :</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public enum EasingOption &#123;</span><br><span class="line">    Linear,</span><br><span class="line">    EaseInQuad,</span><br><span class="line">    EaseOutQuad,</span><br><span class="line">    EaseInOutQuad,</span><br><span class="line">    EaseInCubic,</span><br><span class="line">    EaseOutCubic,</span><br><span class="line">    EaseInOutCubic,</span><br><span class="line">    EaseInQuart,</span><br><span class="line">    EaseOutQuart,</span><br><span class="line">    EaseInOutQuart,</span><br><span class="line">    EaseInSine,</span><br><span class="line">    EaseOutSine,</span><br><span class="line">    EaseInOutSine,</span><br><span class="line">    EaseInExpo,</span><br><span class="line">    EaseOutExpo,</span><br><span class="line">    EaseInOutExpo,</span><br><span class="line">    EaseInCirc,</span><br><span class="line">    EaseOutCirc,</span><br><span class="line">    EaseInOutCirc,</span><br><span class="line">    EaseInElastic,</span><br><span class="line">    EaseOutElastic,</span><br><span class="line">    EaseInOutElastic,</span><br><span class="line">    EaseInBack,</span><br><span class="line">    EaseOutBack,</span><br><span class="line">    EaseInOutBack,</span><br><span class="line">    EaseInBounce,</span><br><span class="line">    EaseOutBounce,</span><br><span class="line">    EaseInOutBounce,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 基本上，有以下两种方式进行 easing 你的动画。</p>
-<ol start="2">
-<li><p>预定义的缓动选项：（下面代码可在所有 Android 版本运行）  </p>
+<p>基本上，有以下两种方式进行 easing 你的动画。</p>
+<ol>
+<li>预定义的缓动选项：（下面代码可在所有 Android 版本运行）</li>
+</ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public void animateY(int durationmillis, Easing.EasingOption option);</span><br></pre></td></tr></table></figure>
 
 <p>例如，调用带有预定义缓动选项的动画方法</p>
-</li>
-</ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// animate both axes with easing</span><br><span class="line">mChart.animateY(3000, Easing.EasingOption.EaseOutBack);</span><br></pre></td></tr></table></figure>
 
-<p> 当你想代码运行在 Android 3.0 (API 11) 以下时，要使用 Easing.EasingOption 。  </p>
+<p>当你想代码运行在 Android 3.0 (API 11) 以下时，要使用 Easing.EasingOption 。</p>
 <ol start="2">
 <li>自定义缓动函数（在 Android 3.0 自定义缓动函数会使应用 crash）：</li>
 </ol>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public void animateY(int durationmillis, EasingFunction function);</span><br></pre></td></tr></table></figure>
 
-<p> 通过创建你自己的easing-function类并且实现EasingFunction接口，你可以实现你自己的easing功能</p>
+<p>通过创建你自己的easing-function类并且实现EasingFunction接口，你可以实现你自己的easing功能</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Interface for creating custom made easing functions. </span><br><span class="line"> */</span><br><span class="line"> public interface EasingFunction &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Called everytime the animation is updated.</span><br><span class="line">     * @param input - the time passed since the animation started (value between 0 and 1)</span><br><span class="line">     */</span><br><span class="line">     public float getInterpolation(float input);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<p> 然后，按照如下方式使用(注意，这个不能在小于Android3.0的版本上使用，将会导致程序崩溃)</p>
+<p>然后，按照如下方式使用(注意，这个不能在小于Android3.0的版本上使用，将会导致程序崩溃)</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// animate both axes with easing</span><br><span class="line">mChart.animateY(3000, new MyEasingFunction());</span><br></pre></td></tr></table></figure>
 
-
 <hr>
-<h2 id="17-IMarker接口"><a href="#17-IMarker接口" class="headerlink" title="17. IMarker接口"></a><a href></a>17. IMarker接口</h2><p> 自<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a>以来，图表中的标记（弹出窗口）由IMarker接口表示。</p>
-<h3 id="17-1-IMarker接口"><a href="#17-1-IMarker接口" class="headerlink" title="17.1 IMarker接口"></a><a href></a>17.1 IMarker接口</h3><p> 这个接口可以帮助你实现在图表中条目高亮的时候显示自定义的Marker窗口。这个接口给我们提供了如下需要实现的方法：</p>
+<h2 id="17-IMarker接口"><a href="#17-IMarker接口" class="headerlink" title="17. IMarker接口"></a>17. IMarker接口</h2><p>自<a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a>以来，图表中的标记（弹出窗口）由IMarker接口表示。</p>
+<h3 id="17-1-IMarker接口"><a href="#17-1-IMarker接口" class="headerlink" title="17.1 IMarker接口"></a>17.1 IMarker接口</h3><p>这个接口可以帮助你实现在图表中条目高亮的时候显示自定义的Marker窗口。这个接口给我们提供了如下需要实现的方法：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public interface IMarker &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @return The desired (general) offset you wish the IMarker to have on the x- and y-axis.</span><br><span class="line">     *         By returning x: -(width / 2) you will center the IMarker horizontally.</span><br><span class="line">     *         By returning y: -(height / 2) you will center the IMarker vertically.</span><br><span class="line">     */</span><br><span class="line">    MPPointF getOffset();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @return The offset for drawing at the specific `point`. This allows conditional adjusting of the Marker position.</span><br><span class="line">     *         If you have no adjustments to make, return getOffset().</span><br><span class="line">     *</span><br><span class="line">     * @param posX This is the X position at which the marker wants to be drawn.</span><br><span class="line">     *             You can adjust the offset conditionally based on this argument.</span><br><span class="line">     * @param posY This is the X position at which the marker wants to be drawn.</span><br><span class="line">     *             You can adjust the offset conditionally based on this argument.</span><br><span class="line">     */</span><br><span class="line">    MPPointF getOffsetForDrawingAtPos(float posX, float posY);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * This method enables a specified custom IMarker to update it&apos;s content every time the IMarker is redrawn.</span><br><span class="line">     *</span><br><span class="line">     * @param e         The Entry the IMarker belongs to. This can also be any subclass of Entry, like BarEntry or</span><br><span class="line">     *                  CandleEntry, simply cast it at runtime.</span><br><span class="line">     * @param highlight The highlight object contains information about the highlighted value such as it&apos;s dataset-index, the</span><br><span class="line">     *                  selected range or stack-index (only stacked bar entries).</span><br><span class="line">     */</span><br><span class="line">    void refreshContent(Entry e, Highlight highlight);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Draws the IMarker on the given position on the screen with the given Canvas object.</span><br><span class="line">     *</span><br><span class="line">     * @param canvas</span><br><span class="line">     * @param posX</span><br><span class="line">     * @param posY</span><br><span class="line">     */</span><br><span class="line">    void draw(Canvas canvas, float posX, float posY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
 <hr>
-<h3 id="17-2-创建一个标记视图"><a href="#17-2-创建一个标记视图" class="headerlink" title="17.2 创建一个标记视图"></a><a href></a>17.2 创建一个标记视图</h3><p> 为了创建一个自定义的标记视图，你需要创建一个实现了IMarker接口的类：</p>
+<h3 id="17-2-创建一个标记视图"><a href="#17-2-创建一个标记视图" class="headerlink" title="17.2 创建一个标记视图"></a>17.2 创建一个标记视图</h3><p>为了创建一个自定义的标记视图，你需要创建一个实现了IMarker接口的类：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class YourMarkerView implements IMarker &#123; ... &#125;</span><br></pre></td></tr></table></figure>
 
-<p> 实现IMarker接口时返回什么样的值，完全取决于你自己的需求。所以，看看上面关于每个方法的介绍是很有必要的。</p>
-<p> 除了通过实现IMarker接口来创建自己的标记视图，我们还可以通过继承下面提到的一个类来达到同样的目的。这个方法比较简单，并且我们也不需要实现IMarker接口中的所有方法。只有几个特定的方法需要我们复写和自定义。最重要的是复写refreshContent（…）方法来调整标记视图中的数据。一个简单的示例如下：</p>
+<p>实现IMarker接口时返回什么样的值，完全取决于你自己的需求。所以，看看上面关于每个方法的介绍是很有必要的。</p>
+<p>除了通过实现IMarker接口来创建自己的标记视图，我们还可以通过继承下面提到的一个类来达到同样的目的。这个方法比较简单，并且我们也不需要实现IMarker接口中的所有方法。只有几个特定的方法需要我们复写和自定义。最重要的是复写refreshContent（…）方法来调整标记视图中的数据。一个简单的示例如下：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public class YourMarkerView extends MarkerView &#123;</span><br><span class="line"></span><br><span class="line">    private TextView tvContent;</span><br><span class="line"></span><br><span class="line">    public MyMarkerView(Context context, int layoutResource) &#123;</span><br><span class="line">        super(context, layoutResource);</span><br><span class="line"></span><br><span class="line">        // find your layout components</span><br><span class="line">        tvContent = (TextView) findViewById(R.id.tvContent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // callbacks everytime the MarkerView is redrawn, can be used to update the</span><br><span class="line">    // content (user-interface)</span><br><span class="line">    @Override</span><br><span class="line">    public void refreshContent(Entry e, Highlight highlight) &#123;</span><br><span class="line"></span><br><span class="line">        tvContent.setText(&quot;&quot; + e.getY());</span><br><span class="line"></span><br><span class="line">        // this will perform necessary layouting</span><br><span class="line">        super.refreshContent(e, highlight);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private MPPointF mOffset; </span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public MPPointF getOffset() &#123;</span><br><span class="line"></span><br><span class="line">        if(mOffset == null) &#123;</span><br><span class="line">           // center the marker horizontally and vertically</span><br><span class="line">           mOffset = new MPPointF(-(getWidth() / 2), -getHeight());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return mOffset;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
 <hr>
-<h3 id="17-3-获取／设置Marker"><a href="#17-3-获取／设置Marker" class="headerlink" title="17.3 获取／设置Marker"></a><a href></a>17.3 获取／设置Marker</h3><p> 给图表设置一个Marker，使用setMarker(…)方法：</p>
+<h3 id="17-3-获取／设置Marker"><a href="#17-3-获取／设置Marker" class="headerlink" title="17.3 获取／设置Marker"></a>17.3 获取／设置Marker</h3><p>给图表设置一个Marker，使用setMarker(…)方法：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IMarker marker = new YourMarkerView();</span><br><span class="line">chart.setMarker(marker);</span><br></pre></td></tr></table></figure>
 
-<p> 要访问图表上的一个Marker，使用getMarker()方法：</p>
+<p>要访问图表上的一个Marker，使用getMarker()方法：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IMarker marker = chart.getMarker();</span><br></pre></td></tr></table></figure>
 
-
 <hr>
-<h3 id="17-4-预定义Markers"><a href="#17-4-预定义Markers" class="headerlink" title="17.4 预定义Markers"></a><a href></a>17.4 预定义Markers</h3><p> 除了你自定义的MarkerView，开源库中也给我们提供了几个预定义的markers以供方便快捷的使用。其中包括：</p>
+<h3 id="17-4-预定义Markers"><a href="#17-4-预定义Markers" class="headerlink" title="17.4 预定义Markers"></a>17.4 预定义Markers</h3><p>除了你自定义的MarkerView，开源库中也给我们提供了几个预定义的markers以供方便快捷的使用。其中包括：</p>
 <ul>
-<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerView.java" target="_blank" rel="noopener">MarkerView</a> :基本marker。允许提供布局文件作为图表上呈现的标记。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。 </li>
-<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerImage.java" target="_blank" rel="noopener">MarkerImage</a>:一种绘制图片的标记视图。允许提供一个图片资源作为图表上的标记视图。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。  </li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerView.java" target="_blank" rel="noopener">MarkerView</a> :基本marker。允许提供布局文件作为图表上呈现的标记。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。</li>
+<li><a href="https://github.com/PhilJay/MPAndroidChart/blob/master/MPChartLib/src/main/java/com/github/mikephil/charting/components/MarkerImage.java" target="_blank" rel="noopener">MarkerImage</a>:一种绘制图片的标记视图。允许提供一个图片资源作为图表上的标记视图。继承这个类并且复写refreshContent(…)方法来调整标记视图中的内容。</li>
 </ul>
 <hr>
-<h3 id="17-5-旧版MarkerView"><a href="#17-5-旧版MarkerView" class="headerlink" title="17.5 旧版MarkerView"></a><a href></a>17.5 旧版MarkerView</h3><p> <a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a> 之前，MarkerView类负责在图表高亮部分绘制标记视图。详情请查阅老版的the old <a href="https://github.com/PhilJay/MPAndroidChart/wiki/MarkerView" target="_blank" rel="noopener">MarkerView wiki page</a>.</p>
+<h3 id="17-5-旧版MarkerView"><a href="#17-5-旧版MarkerView" class="headerlink" title="17.5 旧版MarkerView"></a>17.5 旧版MarkerView</h3><p><a href="https://github.com/PhilJay/MPAndroidChart/releases" target="_blank" rel="noopener">版本v3.0.0</a> 之前，MarkerView类负责在图表高亮部分绘制标记视图。详情请查阅老版的the old <a href="https://github.com/PhilJay/MPAndroidChart/wiki/MarkerView" target="_blank" rel="noopener">MarkerView wiki page</a>.</p>
 <hr>
-<h2 id="18-ChartData类"><a href="#18-ChartData类" class="headerlink" title="18. ChartData类"></a><a href></a>18. ChartData类</h2><p> 本章旨在让你更深入的了解MPAndroidChart中的数据模型。</p>
-<p> ChartData类是像LineData，BarData等等这些数据类的父类。setData()方法可以将数据设置到图表中。</p>
+<h2 id="18-ChartData类"><a href="#18-ChartData类" class="headerlink" title="18. ChartData类"></a>18. ChartData类</h2><p>本章旨在让你更深入的了解MPAndroidChart中的数据模型。</p>
+<p>ChartData类是像LineData，BarData等等这些数据类的父类。setData()方法可以将数据设置到图表中。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class LineData extends ChartData &#123; ...&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 下面介绍一些ChartData类中的方法，可以直接在它的子类中使用。</p>
-<h3 id="18-1-数据样式"><a href="#18-1-数据样式" class="headerlink" title="18.1 数据样式"></a><a href></a>18.1 数据样式</h3><pre><code>方法                                  | 使用                                                               
------------------------------------ | ----------------------------------------------------------------- 
-setValueTextColor(int color)        | 设置 DataSets 数据对象包含的数据的值文本的颜色                                     
-setValueTextColors(List colors)     | 设置一个颜色列表用于显示值                                                    
-setValueTextSize(float size)        | 设置 DataSets 数据对象包含的数据的值文本的大小（单位是dp）                              
-setValueTypeface(Typeface tf)       | 设置 DataSets 数据对象包含的数据的值文本的字体                                     
-setValueFormatter(ValueFormatter f) | 为DataSets 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅此处
-setDrawValues(boolean enabled)      | 启用/禁用 绘制所有 DataSets 数据对象包含的数据的值文本                                </code></pre><hr>
-<h3 id="18-2-Getter方法"><a href="#18-2-Getter方法" class="headerlink" title="18.2 Getter方法"></a><a href></a>18.2 Getter方法</h3><pre><code>方法                           | 使用                                              
----------------------------- | ------------------------------------------------ 
-getDataSetByIndex(int index) | 返回目标 DataSet 列表中给定索引的数据对象。                      
-contains(Entry entry)        | 检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。
-contains(T dataSet)          | 如果数据中包含指定dataSet,返回true否则返回false                </code></pre><hr>
-<h3 id="18-3-清除"><a href="#18-3-清除" class="headerlink" title="18.3 清除"></a><a href></a>18.3 清除</h3><pre><code>方法            | 使用                                                
-------------- | -------------------------------------------------- 
-clearValues() | 清除所有 DataSet 对象和所有 Entries 的数据 。 不会删除所提供的 x-values</code></pre><hr>
-<h3 id="18-4-选中高亮"><a href="#18-4-选中高亮" class="headerlink" title="18.4 选中高亮"></a><a href></a>18.4 选中高亮</h3><pre><code>方法                                                   | 使用                                        
----------------------------------------------------- | ------------------------------------------ 
-setHighlightEnabled(boolean enabled)                 | 设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets
-setDrawVerticalHighlightIndicator(boolean enabled)   | 启用／即用纵向选中高亮指示线。如果禁用，指示线将不会被绘制             
-setDrawHorizontalHighlightIndicator(boolean enabled) | 用／即用横向选中高亮指示线。如果禁用，指示线将不会被绘制              </code></pre><hr>
-<h3 id="18-5-动态数据"><a href="#18-5-动态数据" class="headerlink" title="18.5 动态数据"></a><a href></a>18.5 动态数据</h3><pre><code>方法                  | 使用                        
-------------------- | -------------------------- 
-notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行所有必需的计算</code></pre><p>想了解如何在数据对象上增加或者移除数据，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Dynamic-&amp;-Realtime-Data" target="_blank" rel="noopener">dynamic &amp; realtime data</a>章节</p>
+<p>下面介绍一些ChartData类中的方法，可以直接在它的子类中使用。</p>
+<h3 id="18-1-数据样式"><a href="#18-1-数据样式" class="headerlink" title="18.1 数据样式"></a>18.1 数据样式</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setValueTextColor(int color)</td>
+<td>设置 DataSets 数据对象包含的数据的值文本的颜色</td>
+</tr>
+<tr>
+<td>setValueTextColors(List colors)</td>
+<td>设置一个颜色列表用于显示值</td>
+</tr>
+<tr>
+<td>setValueTextSize(float size)</td>
+<td>设置 DataSets 数据对象包含的数据的值文本的大小（单位是dp）</td>
+</tr>
+<tr>
+<td>setValueTypeface(Typeface tf)</td>
+<td>设置 DataSets 数据对象包含的数据的值文本的字体</td>
+</tr>
+<tr>
+<td>setValueFormatter(ValueFormatter f)</td>
+<td>为DataSets 数据对象包含的数据设置自定义的 ValueFormatter。更多关于ValueFormatter，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/The-ValueFormatter-interface" target="_blank" rel="noopener">此处</a></td>
+</tr>
+<tr>
+<td>setDrawValues(boolean enabled)</td>
+<td>启用/禁用 绘制所有 DataSets 数据对象包含的数据的值文本</td>
+</tr>
+<tr>
+<td><strong>****</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 18.2 Getter方法</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>———</td>
+</tr>
+<tr>
+<td>getDataSetByIndex(int index)</td>
+<td>返回目标 DataSet 列表中给定索引的数据对象。</td>
+</tr>
+<tr>
+<td>contains(Entry entry)</td>
+<td>检查此数据对象是否包含指定的Entry 。 注：这个相当影响性能，性能严峻情况下，不要过度使用。</td>
+</tr>
+<tr>
+<td>contains(T dataSet)</td>
+<td>如果数据中包含指定dataSet,返回true否则返回false</td>
+</tr>
+<tr>
+<td><strong>****</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 18.3 清除</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>———</td>
+</tr>
+<tr>
+<td>clearValues()</td>
+<td>清除所有 DataSet 对象和所有 Entries 的数据 。 不会删除所提供的 x-values</td>
+</tr>
+<tr>
+<td><strong>****</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 18.4 选中高亮</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>———</td>
+</tr>
+<tr>
+<td>setHighlightEnabled(boolean enabled)</td>
+<td>设置为true，允许通过点击高亮突出 ChartData 对象和其 DataSets</td>
+</tr>
+<tr>
+<td>setDrawVerticalHighlightIndicator(boolean enabled)</td>
+<td>启用／即用纵向选中高亮指示线。如果禁用，指示线将不会被绘制</td>
+</tr>
+<tr>
+<td>setDrawHorizontalHighlightIndicator(boolean enabled)</td>
+<td>用／即用横向选中高亮指示线。如果禁用，指示线将不会被绘制</td>
+</tr>
+<tr>
+<td><strong>****</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>### 18.5 动态数据</td>
+<td></td>
+</tr>
+<tr>
+<td>方法</td>
+<td>使用</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>———</td>
+</tr>
+<tr>
+<td>notifyDataChanged()</td>
+<td>通知数据对象，底层数据发生变化，候执行所有必需的计算</td>
+</tr>
+</tbody></table>
+<p>想了解如何在数据对象上增加或者移除数据，请查阅<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Dynamic-&-Realtime-Data" target="_blank" rel="noopener">dynamic &amp; realtime data</a>章节</p>
 
         </div>
         
@@ -271,7 +368,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/MPAndroidChart/">MPAndroidChart</a>, <a class="has-link-grey -link" href="/tags/开源库/">开源库</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
+                    <a class="has-link-grey -link" href="/tags/译文/">译文</a>
                 </div>
             </div>
         </div>
@@ -402,7 +499,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -422,7 +519,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -513,7 +610,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -623,7 +720,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -817,7 +914,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1186,7 +1283,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1226,23 +1323,9 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1256,13 +1339,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1270,13 +1346,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1305,7 +1374,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1326,13 +1395,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1361,7 +1423,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1424,14 +1486,14 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1450,13 +1512,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1464,22 +1519,8 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1513,13 +1554,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1529,7 +1563,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1548,13 +1582,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1564,14 +1591,14 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1599,7 +1626,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1618,44 +1645,9 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1669,20 +1661,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1716,22 +1694,8 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1746,7 +1710,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1952,7 +1916,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2321,7 +2285,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2361,23 +2325,9 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2391,13 +2341,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2405,13 +2348,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2440,7 +2376,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2461,13 +2397,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2496,7 +2425,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2559,14 +2488,14 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2585,13 +2514,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2599,22 +2521,8 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2648,13 +2556,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2664,7 +2565,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2683,13 +2584,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2699,14 +2593,14 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2734,7 +2628,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2753,44 +2647,9 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2804,20 +2663,6 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2851,22 +2696,8 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2881,7 +2712,7 @@ notifyDataChanged() | 通知数据对象，底层数据发生变化，候执行�
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

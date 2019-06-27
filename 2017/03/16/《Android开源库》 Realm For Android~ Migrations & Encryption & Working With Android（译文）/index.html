@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="迁移（Migrations） 所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。  如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Rea">
-<meta name="keywords" content="开源库,译文,Realm">
+    <meta name="description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
+<meta name="keywords" content="译文,Realm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 Realm For Android~ Migrations &amp; Encryption &amp; Working With Android（译文）">
 <meta property="og:url" content="http://yoursite.com/2017/03/16/《Android开源库》 Realm For Android~ Migrations & Encryption & Working With Android（译文）/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="迁移（Migrations） 所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。  如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Rea">
+<meta property="og:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:52:14.595Z">
+<meta property="og:updated_time" content="2019-06-20T10:28:18.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 Realm For Android~ Migrations &amp; Encryption &amp; Working With Android（译文）">
-<meta name="twitter:description" content="迁移（Migrations） 所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。  如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Rea">
+<meta name="twitter:description" content="迁移（Migrations）所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 Real">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 821 个字)
+                    5 分钟 读完 (大约 819 个字)
                 </span>
                 
                 
@@ -168,31 +168,28 @@
             
         </h1>
         <div class="content">
-            <h2 id="迁移（Migrations）"><a href="#迁移（Migrations）" class="headerlink" title="迁移（Migrations）"></a><a href></a>迁移（Migrations）</h2><p> 所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。</p>
-<p> 如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 RealmConfiguration 设置 schema 版本和 migration 代码来正确处理并避免该异常抛出。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = new RealmConfiguration.Builder()</span><br><span class="line">    .schemaVersion(2) // Must be bumped when the schema changes</span><br><span class="line">    .migration(new MyMigration()) // Migration to run instead of throwing an exception</span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
+            <a id="more"></a>
+<h2 id="迁移（Migrations）"><a href="#迁移（Migrations）" class="headerlink" title="迁移（Migrations）"></a>迁移（Migrations）</h2><p>所有数据库都要处理模型改变的情况。Realm 的数据模型用标准 Java 对象来定义，改变Scheme和改变数据RealmObject子类对应的机构一样容易。</p>
+<p>如果没有旧 Realm 数据文件存在，那么代码的改变即会反应到相应的 Realm 数据文件改变。但如果已经有旧版本的 Realm 数据文件存在，Realm 会抛出异常提示数据库文件需要迁移。请在相应的 RealmConfiguration 设置 schema 版本和 migration 代码来正确处理并避免该异常抛出。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">    .schemaVersion(<span class="hljs-number">2</span>) <span class="hljs-comment">// Must be bumped when the schema changes</span></span><br><span class="line">    .migration(<span class="hljs-keyword">new</span> MyMigration()) <span class="hljs-comment">// Migration to run instead of throwing an exception</span></span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
 
-<p> 如上示例使得相应的 migration 代码在迁移需要的时候被自动执行。我们提供了相关 API 用来升级已保存的 schema 以及对应之前 schema 的数据。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// Example migration adding a new class</span><br><span class="line">RealmMigration migration = new RealmMigration() &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void migrate(DynamicRealm realm, long oldVersion, long newVersion) &#123;</span><br><span class="line"></span><br><span class="line">     // DynamicRealm exposes an editable schema</span><br><span class="line">     RealmSchema schema = realm.getSchema();</span><br><span class="line"></span><br><span class="line">     // Migrate to version 1: Add a new class.</span><br><span class="line">     // Example:</span><br><span class="line">     // public Person extends RealmObject &#123;</span><br><span class="line">     //     private String name;</span><br><span class="line">     //     private int age;</span><br><span class="line">     //     // getters and setters left out for brevity</span><br><span class="line">     // &#125;</span><br><span class="line">     if (oldVersion == 0) &#123;</span><br><span class="line">        schema.create(&quot;Person&quot;)</span><br><span class="line">            .addField(&quot;name&quot;, String.class)</span><br><span class="line">            .addField(&quot;age&quot;, int.class);</span><br><span class="line">        oldVersion++;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     // Migrate to version 2: Add a primary key + object references</span><br><span class="line">     // Example:</span><br><span class="line">     // public Person extends RealmObject &#123;</span><br><span class="line">     //     private String name;</span><br><span class="line">     //     @PrimaryKey</span><br><span class="line">     //     private int age;</span><br><span class="line">     //     private Dog favoriteDog;</span><br><span class="line">     //     private RealmList&lt;Dog&gt; dogs;</span><br><span class="line">     //     // getters and setters left out for brevity</span><br><span class="line">     // &#125;</span><br><span class="line">     if (oldVersion == 1) &#123;</span><br><span class="line">        schema.get(&quot;Person&quot;)</span><br><span class="line">            .addField(&quot;id&quot;, long.class, FieldAttribute.PRIMARY_KEY)</span><br><span class="line">            .addRealmObjectField(&quot;favoriteDog&quot;, schema.get(&quot;Dog&quot;))</span><br><span class="line">            .addRealmListField(&quot;dogs&quot;, schema.get(&quot;Dog&quot;));</span><br><span class="line">        oldVersion++;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上示例使得相应的 migration 代码在迁移需要的时候被自动执行。我们提供了相关 API 用来升级已保存的 schema 以及对应之前 schema 的数据。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Example migration adding a new class</span></span><br><span class="line">RealmMigration migration = <span class="hljs-keyword">new</span> RealmMigration() &#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">migrate</span><span class="hljs-params">(DynamicRealm realm, <span class="hljs-keyword">long</span> oldVersion, <span class="hljs-keyword">long</span> newVersion)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="hljs-comment">// DynamicRealm exposes an editable schema</span></span><br><span class="line">     RealmSchema schema = realm.getSchema();</span><br><span class="line"></span><br><span class="line">     <span class="hljs-comment">// Migrate to version 1: Add a new class.</span></span><br><span class="line">     <span class="hljs-comment">// Example:</span></span><br><span class="line">     <span class="hljs-comment">// public Person extends RealmObject &#123;</span></span><br><span class="line">     <span class="hljs-comment">//     private String name;</span></span><br><span class="line">     <span class="hljs-comment">//     private int age;</span></span><br><span class="line">     <span class="hljs-comment">//     // getters and setters left out for brevity</span></span><br><span class="line">     <span class="hljs-comment">// &#125;</span></span><br><span class="line">     <span class="hljs-keyword">if</span> (oldVersion == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">        schema.create(<span class="hljs-string">"Person"</span>)</span><br><span class="line">            .addField(<span class="hljs-string">"name"</span>, String.class)</span><br><span class="line">            .addField(<span class="hljs-string">"age"</span>, <span class="hljs-keyword">int</span>.class);</span><br><span class="line">        oldVersion++;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="hljs-comment">// Migrate to version 2: Add a primary key + object references</span></span><br><span class="line">     <span class="hljs-comment">// Example:</span></span><br><span class="line">     <span class="hljs-comment">// public Person extends RealmObject &#123;</span></span><br><span class="line">     <span class="hljs-comment">//     private String name;</span></span><br><span class="line">     <span class="hljs-comment">//     @PrimaryKey</span></span><br><span class="line">     <span class="hljs-comment">//     private int age;</span></span><br><span class="line">     <span class="hljs-comment">//     private Dog favoriteDog;</span></span><br><span class="line">     <span class="hljs-comment">//     private RealmList&lt;Dog&gt; dogs;</span></span><br><span class="line">     <span class="hljs-comment">//     // getters and setters left out for brevity</span></span><br><span class="line">     <span class="hljs-comment">// &#125;</span></span><br><span class="line">     <span class="hljs-keyword">if</span> (oldVersion == <span class="hljs-number">1</span>) &#123;</span><br><span class="line">        schema.get(<span class="hljs-string">"Person"</span>)</span><br><span class="line">            .addField(<span class="hljs-string">"id"</span>, <span class="hljs-keyword">long</span>.class, FieldAttribute.PRIMARY_KEY)</span><br><span class="line">            .addRealmObjectField(<span class="hljs-string">"favoriteDog"</span>, schema.get(<span class="hljs-string">"Dog"</span>))</span><br><span class="line">            .addRealmListField(<span class="hljs-string">"dogs"</span>, schema.get(<span class="hljs-string">"Dog"</span>));</span><br><span class="line">        oldVersion++;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 请查阅这个<a href="https://github.com/realm/realm-java/tree/master/examples/migrationExample" target="_blank" rel="noopener">数据迁移例子</a>来获取这方面的细节。</p>
-<p> 如果没有旧 Realm 数据文件存在，那么迁移并不需要，在这种情况下，Realm 会创建一个新的以 .realm 为后缀，基于新的对象模型的数据文件。在开发和调试过程中，假如你需要频繁改变数据模型，并且不介意损失旧数据，你可以直接删除 .realm 文件（这里包含所有的数据！）而不用关心迁移的问题。这在你应用的开发早期阶段非常有用。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">RealmConfiguration config = new RealmConfiguration.Builder()</span><br><span class="line">    .deleteRealmIfMigrationNeeded()</span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
+<p>请查阅这个<a href="https://github.com/realm/realm-java/tree/master/examples/migrationExample" target="_blank" rel="noopener">数据迁移例子</a>来获取这方面的细节。</p>
+<p>如果没有旧 Realm 数据文件存在，那么迁移并不需要，在这种情况下，Realm 会创建一个新的以 .realm 为后缀，基于新的对象模型的数据文件。在开发和调试过程中，假如你需要频繁改变数据模型，并且不介意损失旧数据，你可以直接删除 .realm 文件（这里包含所有的数据！）而不用关心迁移的问题。这在你应用的开发早期阶段非常有用。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">    .deleteRealmIfMigrationNeeded()</span><br><span class="line">    .build()</span><br></pre></td></tr></table></figure>
 
-
-<hr>
-<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a><a href></a>加密</h2><blockquote>
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><blockquote>
 <p>请注意我们的许可证的出口合规性部分，因为如果你位于从美国出口限制或禁运的国家，则会限制使用Realm。</p>
-<p> Realm 文件可以通过传递一个512位（64字节）的密钥参数给 Realm.getInstance().encryptionKey() 来加密存储在磁盘上。</p>
 </blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">byte[] key = new byte[64];</span><br><span class="line">new SecureRandom().nextBytes(key);</span><br><span class="line">RealmConfiguration config = new RealmConfiguration.Builder()</span><br><span class="line">  .encryptionKey(key)</span><br><span class="line">  .build();</span><br><span class="line">Realm realm = Realm.getInstance(config);</span><br></pre></td></tr></table></figure>
+<p>Realm 文件可以通过传递一个512位（64字节）的密钥参数给 Realm.getInstance().encryptionKey() 来加密存储在磁盘上。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">64</span>];</span><br><span class="line"><span class="hljs-keyword">new</span> SecureRandom().nextBytes(key);</span><br><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">  .encryptionKey(key)</span><br><span class="line">  .build();</span><br><span class="line">Realm realm = Realm.getInstance(config);</span><br></pre></td></tr></table></figure>
 
-<p> 这保证了所有永久性存储在磁盘上的数据都是通过标准 AES-256 加密的。每次创建新的 Realm 实例的时候，都需要提供相同的密钥。</p>
-<p> 参考 <a href="https://github.com/realm/realm-java/tree/master/examples/encryptionExample" target="_blank" rel="noopener">examples/encryptionExample</a>。这个例子演示了如何通过 Android KeyStore 来安全地存储密钥。</p>
-<hr>
-<h2 id="与-Android-相关"><a href="#与-Android-相关" class="headerlink" title="与 Android 相关"></a><a href></a>与 Android 相关</h2><p> Realm 可以无缝地引入安卓开发。你需要谨记 RealmObject 的<a href="https://realm.io/cn/docs/java/latest/#threading" target="_blank" rel="noopener">线程限制</a>。当你需要跨 activity、service或者 broadcast receiver 传递 Realm 对象的时候，请牢记这一点.</p>
-<hr>
-<h2 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a><a href></a>原文地址</h2><p> <a href="https://realm.io/docs/java/latest/#migrations" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#migrations</a></p>
+<p>这保证了所有永久性存储在磁盘上的数据都是通过标准 AES-256 加密的。每次创建新的 Realm 实例的时候，都需要提供相同的密钥。</p>
+<p>参考 <a href="https://github.com/realm/realm-java/tree/master/examples/encryptionExample" target="_blank" rel="noopener">examples/encryptionExample</a>。这个例子演示了如何通过 Android KeyStore 来安全地存储密钥。</p>
+<h2 id="与-Android-相关"><a href="#与-Android-相关" class="headerlink" title="与 Android 相关"></a>与 Android 相关</h2><p>Realm 可以无缝地引入安卓开发。你需要谨记 RealmObject 的<a href="https://realm.io/cn/docs/java/latest/#threading" target="_blank" rel="noopener">线程限制</a>。当你需要跨 activity、service或者 broadcast receiver 传递 Realm 对象的时候，请牢记这一点.</p>
+<h2 id="原文地址"><a href="#原文地址" class="headerlink" title="原文地址"></a>原文地址</h2><p><a href="https://realm.io/docs/java/latest/#migrations" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#migrations</a></p>
 
         </div>
         
@@ -200,7 +197,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Realm/">Realm</a>, <a class="has-link-grey -link" href="/tags/开源库/">开源库</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
+                    <a class="has-link-grey -link" href="/tags/Realm/">Realm</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
                 </div>
             </div>
         </div>
@@ -331,7 +328,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -351,7 +348,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -442,7 +439,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -552,7 +549,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -746,7 +743,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1115,7 +1112,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1155,23 +1152,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1185,13 +1168,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1199,13 +1175,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1234,7 +1203,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1255,13 +1224,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1290,7 +1252,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1353,14 +1315,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1379,13 +1341,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1393,22 +1348,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1442,13 +1383,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1458,7 +1392,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1477,13 +1411,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1493,14 +1420,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1528,7 +1455,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1547,44 +1474,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1598,20 +1490,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1645,22 +1523,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1675,7 +1539,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1881,7 +1745,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2250,7 +2114,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2290,23 +2154,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2320,13 +2170,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2334,13 +2177,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2369,7 +2205,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2390,13 +2226,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2425,7 +2254,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2488,14 +2317,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2514,13 +2343,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2528,22 +2350,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2577,13 +2385,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2593,7 +2394,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2612,13 +2413,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2628,14 +2422,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2663,7 +2457,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2682,44 +2476,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2733,20 +2492,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2780,22 +2525,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2810,7 +2541,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="1. 前言 一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。  2. 实现思路 继承View；   自定义属性值：arcColor，bgColor，arc_tex">
+    <meta name="description" content="1. 前言一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。">
 <meta name="keywords" content="自定义View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 进阶（一）》 自定义View之仪表盘进度条">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/《Android 进阶（一）》 自定义View之仪表盘进度条/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="1. 前言 一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。  2. 实现思路 继承View；   自定义属性值：arcColor，bgColor，arc_tex">
+<meta property="og:description" content="1. 前言一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:46:11.345Z">
+<meta property="og:updated_time" content="2019-06-27T12:04:42.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 进阶（一）》 自定义View之仪表盘进度条">
-<meta name="twitter:description" content="1. 前言 一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。  2. 实现思路 继承View；   自定义属性值：arcColor，bgColor，arc_tex">
+<meta name="twitter:description" content="1. 前言一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：  继承View重写onDraw方法；  继承ViewGroup派生特殊Layout；  继承特定View；  继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1388 个字)
+                    9 分钟 读完 (大约 1325 个字)
                 </span>
                 
                 
@@ -168,60 +168,90 @@
             
         </h1>
         <div class="content">
-            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a><a href></a>1. 前言</h2><p> 一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：</p>
+            <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>一点一点学习自定义View，按照《Android开发艺术探索》中的说法，自定义View大致可以分为4类：</p>
 <ol>
-<li>继承View重写onDraw方法； </li>
-<li>继承ViewGroup派生特殊Layout； </li>
-<li>继承特定View； </li>
-<li>继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。</li>
-</ol>
-<h2 id="2-实现思路"><a href="#2-实现思路" class="headerlink" title="2. 实现思路"></a><a href></a>2. 实现思路</h2><ol start="2">
-<li><p>继承View； </p>
+<li><p>继承View重写onDraw方法；</p>
 </li>
-<li><p>自定义属性值：arcColor，bgColor，arc_textColor，arc_textSize，分别是前景色，背景色，进度文字颜色，进度文字字体大小； </p>
+<li><p>继承ViewGroup派生特殊Layout；</p>
+</li>
+<li><p>继承特定View；</p>
+</li>
+<li><p>继承特定ViewGroup  看下第一种，制作一个简单的仪表盘进度条。</p>
+<a id="more"></a>
+<h2 id="2-实现思路"><a href="#2-实现思路" class="headerlink" title="2. 实现思路"></a>2. 实现思路</h2></li>
+<li><p>继承View；</p>
+</li>
+<li><p>自定义属性值：arcColor，bgColor，arc_textColor，arc_textSize分别是前景色，背景色，进度文字颜色，进度文字字体大小； </p>
 </li>
 <li><p>确定弧形绘制位置和文字绘制位置 </p>
 </li>
-<li><p>实现onDraw()方法  </p>
-<h2 id="3-效果"><a href="#3-效果" class="headerlink" title="3. 效果"></a><a href></a>3. 效果</h2><p><img src="https://img-blog.csdn.net/20171013165354844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<li><p>实现onDraw()方法</p>
 </li>
 </ol>
-<h2 id="4-知识点"><a href="#4-知识点" class="headerlink" title="4. 知识点"></a><a href></a>4. 知识点</h2><h3 id="4-1-MeasureSpec"><a href="#4-1-MeasureSpec" class="headerlink" title="4.1 MeasureSpec"></a><a href></a>4.1 MeasureSpec</h3><p> MeasureSpec代表一个32位int值，高2位代表SpecMode，低30位代表SpecSize。SpecMode指的是测量模式，SpecSize指的是对应测量模式下的大小。</p>
+<h2 id="3-效果"><a href="#3-效果" class="headerlink" title="3. 效果"></a>3. 效果</h2><p> <img src="https://img-blog.csdn.net/20171013165354844?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="4-知识点"><a href="#4-知识点" class="headerlink" title="4. 知识点"></a>4. 知识点</h2><h3 id="4-1-MeasureSpec"><a href="#4-1-MeasureSpec" class="headerlink" title="4.1 MeasureSpec"></a>4.1 MeasureSpec</h3><p> MeasureSpec代表一个32位int值，高2位代表SpecMode，低30位代表SpecSize。SpecMode指的是测量模式，SpecSize指的是对应测量模式下的大小。</p>
 <p> SpecMode有下面如下3中模式：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Measure specification mode: The parent has not imposed any constraint</span><br><span class="line"> * on the child. It can be whatever size it wants.</span><br><span class="line"> */</span><br><span class="line">public static final int UNSPECIFIED = 0 &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Measure specification mode: The parent has determined an exact size</span><br><span class="line"> * for the child. The child is going to be given those bounds regardless</span><br><span class="line"> * of how big it wants to be.</span><br><span class="line"> */</span><br><span class="line">public static final int EXACTLY     = 1 &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Measure specification mode: The child can be as large as it wants up</span><br><span class="line"> * to the specified size.</span><br><span class="line"> */</span><br><span class="line">public static final int AT_MOST     = 2 &lt;&lt; MODE_SHIFT;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Measure specification mode: The parent has not imposed any constraint</span></span><br><span class="line"><span class="hljs-comment"> * on the child. It can be whatever size it wants.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNSPECIFIED = <span class="hljs-number">0</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Measure specification mode: The parent has determined an exact size</span></span><br><span class="line"><span class="hljs-comment"> * for the child. The child is going to be given those bounds regardless</span></span><br><span class="line"><span class="hljs-comment"> * of how big it wants to be.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> EXACTLY     = <span class="hljs-number">1</span> &lt;&lt; MODE_SHIFT;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Measure specification mode: The child can be as large as it wants up</span></span><br><span class="line"><span class="hljs-comment"> * to the specified size.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> AT_MOST     = <span class="hljs-number">2</span> &lt;&lt; MODE_SHIFT;</span><br></pre></td></tr></table></figure>
 
 
-<pre><code>SpecMode    | 描述                                                                
------------ | ------------------------------------------------------------------ 
-UNSPECIFIED | 父容器不对View有任何限制，系统涉及，平时很少涉及                                        
-EXACTLY     | 父容器已经检测出View所需要的精准大小，即SpecSize的大小。对应match_parent和固定数值两种情况         
-AT_MOST     | 父容器指定一个View可用的大小。View的大小不能超过这个值，具体是什么值要看View的具体实现。对应wrap_content情况</code></pre><p>SpecSize大小单位px。</p>
-<p> 生成MeasureSpec方式如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static int makeMeasureSpec(@IntRange(from = 0, to = (1 &lt;&lt; MeasureSpec.MODE_SHIFT) - 1) int size,</span><br><span class="line">                                          @MeasureSpecMode int mode) &#123;</span><br><span class="line">            if (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">                return size + mode;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>SpecMode</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UNSPECIFIED</td>
+<td>父容器不对View有任何限制，系统涉及，平时很少涉及</td>
+</tr>
+<tr>
+<td>EXACTLY</td>
+<td>父容器已经检测出View所需要的精准大小，即SpecSize大小。对应match_parent和固定数值两种情况</td>
+</tr>
+<tr>
+<td>AT_MOST</td>
+<td>父容器指定一个View可用的大小。View的大小不能超过这值，具体是什么值要看View的具体实现。对应wrap_content情况</td>
+</tr>
+</tbody></table>
+<p>SpecSize大小单位px。</p>
+<p>生成MeasureSpec方式如下：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">makeMeasureSpec</span><span class="hljs-params">(@IntRange(from = <span class="hljs-number">0</span>, to = (<span class="hljs-number">1</span> &lt;&lt; MeasureSpec.MODE_SHIFT)</span> - 1) <span class="hljs-keyword">int</span> size,</span></span><br><span class="line"><span class="hljs-function">                                          @MeasureSpecMode <span class="hljs-keyword">int</span> mode) </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (sUseBrokenMakeMeasureSpec) &#123;</span><br><span class="line">                <span class="hljs-keyword">return</span> size + mode;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                <span class="hljs-keyword">return</span> (size &amp; ~MODE_MASK) | (mode &amp; MODE_MASK);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p> 获取size和mode的方式</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Extracts the mode from the supplied measure specification.</span><br><span class="line"> *</span><br><span class="line"> * @param measureSpec the measure specification to extract the mode from</span><br><span class="line"> * @return &#123;@link android.view.View.MeasureSpec#UNSPECIFIED&#125;,</span><br><span class="line"> *         &#123;@link android.view.View.MeasureSpec#AT_MOST&#125; or</span><br><span class="line"> *         &#123;@link android.view.View.MeasureSpec#EXACTLY&#125;</span><br><span class="line"> */</span><br><span class="line">@MeasureSpecMode</span><br><span class="line">public static int getMode(int measureSpec) &#123;</span><br><span class="line">    //noinspection ResourceType</span><br><span class="line">    return (measureSpec &amp; MODE_MASK);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Extracts the size from the supplied measure specification.</span><br><span class="line"> *</span><br><span class="line"> * @param measureSpec the measure specification to extract the size from</span><br><span class="line"> * @return the size in pixels defined in the supplied measure specification</span><br><span class="line"> */</span><br><span class="line">public static int getSize(int measureSpec) &#123;</span><br><span class="line">    return (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取size和mode的方式</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Extracts the mode from the supplied measure specification.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> measureSpec the measure specification to extract the mode from</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> &#123;<span class="hljs-doctag">@link</span> android.view.View.MeasureSpec#UNSPECIFIED&#125;,</span></span><br><span class="line"><span class="hljs-comment"> *         &#123;<span class="hljs-doctag">@link</span> android.view.View.MeasureSpec#AT_MOST&#125; or</span></span><br><span class="line"><span class="hljs-comment"> *         &#123;<span class="hljs-doctag">@link</span> android.view.View.MeasureSpec#EXACTLY&#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-meta">@MeasureSpecMode</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getMode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//noinspection ResourceType</span></span><br><span class="line">    <span class="hljs-keyword">return</span> (measureSpec &amp; MODE_MASK);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Extracts the size from the supplied measure specification.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> measureSpec the measure specification to extract the size from</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> the size in pixels defined in the supplied measure specification</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSize</span><span class="hljs-params">(<span class="hljs-keyword">int</span> measureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (measureSpec &amp; ~MODE_MASK);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="4-2-View的工作流程"><a href="#4-2-View的工作流程" class="headerlink" title="4.2 View的工作流程"></a>4.2 View的工作流程</h3><table>
+<thead>
+<tr>
+<th>过程</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onMeasure</td>
+<td>测量过程，确定View的宽度和高度，传入的参widthMeasureSpec，heightMeasureSpec</td>
+</tr>
+<tr>
+<td>onLayout</td>
+<td>布局过程，确定View的上下左右四个角的位置</td>
+</tr>
+<tr>
+<td>onDraw</td>
+<td>绘制过程，一般用来绘制特殊图形</td>
+</tr>
+</tbody></table>
+<p>继承View的自定义View基本只需要关注onDraw()和onMeasure()。由于没有子View所以不需要关注onLayout()。</p>
+<h3 id="4-3-图形绘制"><a href="#4-3-图形绘制" class="headerlink" title="4.3 图形绘制"></a>4.3 图形绘制</h3><p>具体请查看Canvas类和Paint类，这两个类内容比较多，可以自己研究一下，有很多有用的东西。</p>
+<h4 id="4-3-1-Canvas绘制方法"><a href="#4-3-1-Canvas绘制方法" class="headerlink" title="4.3.1 Canvas绘制方法"></a>4.3.1 Canvas绘制方法</h4><p><img src="https://img-blog.csdn.net/20171014120820574?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h4 id="4-3-2-Paint属性值"><a href="#4-3-2-Paint属性值" class="headerlink" title="4.3.2 Paint属性值"></a>4.3.2 Paint属性值</h4><p>Paint枚举值<br><img src="https://img-blog.csdn.net/20171014121033871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>设置属性方法<br><img src="https://img-blog.csdn.net/20171014121203375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="5-关键代码"><a href="#5-关键代码" class="headerlink" title="5. 关键代码"></a>5. 关键代码</h2><h3 id="5-1-attrs-xml"><a href="#5-1-attrs-xml" class="headerlink" title="5.1 attrs.xml"></a>5.1 attrs.xml</h3><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">declare-styleable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"ArcView"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"arcColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"bgColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"arc_textColor"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">attr</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"arc_textSize"</span> <span class="hljs-attr">format</span>=<span class="hljs-string">"dimension"</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="4-2-View的工作流程"><a href="#4-2-View的工作流程" class="headerlink" title="4.2 View的工作流程"></a><a href></a>4.2 View的工作流程</h3><pre><code>过程        | 描述                                                        
---------- | ---------------------------------------------------------- 
-onMeasure | 测量过程，确定View的宽度和高度，传入的参数是widthMeasureSpec，heightMeasureSpec
-onLayout  | 布局过程，确定View的上下左右四个角的位置                                    
-onDraw    | 绘制过程，一般用来绘制特殊图形                                           </code></pre><p>继承View的自定义View基本只需要关注onDraw()和onMeasure()。由于没有子View所以不需要关注onLayout()。</p>
-<h3 id="4-3-图形绘制"><a href="#4-3-图形绘制" class="headerlink" title="4.3 图形绘制"></a><a href></a>4.3 图形绘制</h3><p> 具体请查看Canvas类和Paint类，这两个类内容比较多，可以自己研究一下，有很多有用的东西。</p>
-<h4 id="4-3-1-Canvas绘制方法"><a href="#4-3-1-Canvas绘制方法" class="headerlink" title="4.3.1 Canvas绘制方法"></a><a href></a>4.3.1 Canvas绘制方法</h4><p> <img src="https://img-blog.csdn.net/20171014120820574?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h4 id="4-3-2-Paint属性值"><a href="#4-3-2-Paint属性值" class="headerlink" title="4.3.2 Paint属性值"></a><a href></a>4.3.2 Paint属性值</h4><p> Paint枚举值<br> <img src="https://img-blog.csdn.net/20171014121033871?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p> 设置属性方法<br> <img src="https://img-blog.csdn.net/20171014121203375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="5-关键代码"><a href="#5-关键代码" class="headerlink" title="5. 关键代码"></a><a href></a>5. 关键代码</h2><h3 id="5-1-attrs-xml"><a href="#5-1-attrs-xml" class="headerlink" title="5.1 attrs.xml"></a><a href></a>5.1 attrs.xml</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;declare-styleable name=&quot;ArcView&quot;&gt;</span><br><span class="line">    &lt;attr name=&quot;arcColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;bgColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;arc_textColor&quot; format=&quot;color&quot;/&gt;</span><br><span class="line">    &lt;attr name=&quot;arc_textSize&quot; format=&quot;dimension&quot;/&gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-ArcView"><a href="#5-2-ArcView" class="headerlink" title="5.2 ArcView"></a>5.2 ArcView</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArcView</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">View</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_SWEEP_ANGLE = <span class="hljs-number">240</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> START_SWEEP_ANGLE = <span class="hljs-number">150</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_MAX_PROGRESS = <span class="hljs-number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_ARC_COLOR = Color.RED;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_BG_COLOR = Color.DKGRAY;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_TEXT_COLOR = Color.BLACK;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_TEXT_SIZE = <span class="hljs-number">40</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mArcColor = DEFAULT_ARC_COLOR;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mBgColor = DEFAULT_BG_COLOR;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> progress = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mMaxProgress = DEFAULT_MAX_PROGRESS;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Paint mCirclePaint;</span><br><span class="line">    <span class="hljs-keyword">private</span> Paint mBgPaint;</span><br><span class="line">    <span class="hljs-keyword">private</span> Paint mTextPaint;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Rect mTextBound = <span class="hljs-keyword">new</span> Rect();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArcView</span><span class="hljs-params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>(context, <span class="hljs-keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArcView</span><span class="hljs-params">(Context context,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">            @Nullable AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>(context, attrs, <span class="hljs-number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArcView</span><span class="hljs-params">(Context context, @Nullable AttributeSet attrs, <span class="hljs-keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        <span class="hljs-keyword">final</span> TypedArray attributes = getContext().obtainStyledAttributes(attrs,</span><br><span class="line">                R.styleable.ArcView);</span><br><span class="line"></span><br><span class="line">        mArcColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arcColor,</span><br><span class="line">                        DEFAULT_ARC_COLOR);</span><br><span class="line"></span><br><span class="line">        mBgColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_bgColor,</span><br><span class="line">                        DEFAULT_BG_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arc_textColor,</span><br><span class="line">                        DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (<span class="hljs-keyword">int</span>) attributes</span><br><span class="line">                .getDimension(</span><br><span class="line">                        R.styleable.ArcView_arc_textSize,</span><br><span class="line">                        DEFAULT_TEXT_SIZE);</span><br><span class="line">        attributes.recycle();</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        mCirclePaint = <span class="hljs-keyword">new</span> Paint();</span><br><span class="line">        mCirclePaint.setColor(mArcColor);</span><br><span class="line">        mCirclePaint.setStrokeWidth(<span class="hljs-number">8.0F</span>);</span><br><span class="line">        mCirclePaint.setDither(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mCirclePaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mCirclePaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mBgPaint = <span class="hljs-keyword">new</span> Paint();</span><br><span class="line">        mBgPaint.setColor(mBgColor);</span><br><span class="line">        mBgPaint.setStrokeWidth(<span class="hljs-number">20.0F</span>);</span><br><span class="line">        mBgPaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mBgPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line">        mBgPaint.setStrokeCap(Paint.Cap.ROUND);</span><br><span class="line"></span><br><span class="line">        mTextPaint = <span class="hljs-keyword">new</span> Paint();</span><br><span class="line">        mTextPaint.setStrokeWidth(<span class="hljs-number">4</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">//字体SP单位转换成PX</span></span><br><span class="line">        <span class="hljs-keyword">int</span> size =  (<span class="hljs-keyword">int</span>) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                mTextSize, getResources().getDisplayMetrics());</span><br><span class="line">        mTextPaint.setTextSize(size);</span><br><span class="line">        mTextPaint.setAntiAlias(<span class="hljs-keyword">true</span>);</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextAlign(Paint.Align.LEFT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDraw</span><span class="hljs-params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onDraw(canvas);</span><br><span class="line">        <span class="hljs-keyword">int</span> paddingLeft = getPaddingLeft();</span><br><span class="line">        <span class="hljs-keyword">int</span> paddingRight = getPaddingRight();</span><br><span class="line">        <span class="hljs-keyword">int</span> paddingTop = getPaddingTop();</span><br><span class="line">        <span class="hljs-keyword">int</span> paddingBottom = getPaddingBottom();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> circleWidth = getWidth() - paddingLeft - paddingRight;</span><br><span class="line">        <span class="hljs-keyword">int</span> circleHeight = getHeight() - paddingTop - paddingBottom;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> radius = Math.min(circleWidth, circleHeight) / <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> left = getLeft() + paddingLeft;</span><br><span class="line">        <span class="hljs-keyword">int</span> right = left + radius * <span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> top = getTop() + getPaddingTop();</span><br><span class="line">        <span class="hljs-keyword">int</span> bottom = top + <span class="hljs-number">2</span> * radius;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, MAX_SWEEP_ANGLE, <span class="hljs-keyword">false</span>,</span><br><span class="line">                mBgPaint);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> sweepArc = MAX_SWEEP_ANGLE * progress / mMaxProgress;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, sweepArc, <span class="hljs-keyword">false</span>, mCirclePaint);</span><br><span class="line"></span><br><span class="line">        String text = String.valueOf(progress) + <span class="hljs-string">"%"</span>;</span><br><span class="line">        mTextPaint.getTextBounds(text, <span class="hljs-number">0</span>, text.length(),</span><br><span class="line">                mTextBound);</span><br><span class="line">        canvas.drawText(text, (left + right) / <span class="hljs-number">2</span> - mTextBound.width() / <span class="hljs-number">2</span>,</span><br><span class="line">                (top + bottom) / <span class="hljs-number">2</span> + mTextBound.height() / <span class="hljs-number">2</span>, mTextPaint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 设置进度大小</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setProgress</span><span class="hljs-params">(<span class="hljs-keyword">int</span> progress)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (progress &lt; <span class="hljs-number">0</span> || progress &gt; mMaxProgress) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">this</span>.progress = progress;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 设置最大进度值</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMaxProgress</span><span class="hljs-params">(<span class="hljs-keyword">int</span> maxProgress)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mMaxProgress = maxProgress;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="5-2-ArcView"><a href="#5-2-ArcView" class="headerlink" title="5.2 ArcView"></a><a href></a>5.2 ArcView</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line">public class ArcView extends View &#123;</span><br><span class="line"></span><br><span class="line">    private final int MAX_SWEEP_ANGLE = 240;</span><br><span class="line">    private final int START_SWEEP_ANGLE = 150;</span><br><span class="line">    private final int DEFAULT_MAX_PROGRESS = 100;</span><br><span class="line"></span><br><span class="line">    private final int DEFAULT_ARC_COLOR = Color.RED;</span><br><span class="line">    private final int DEFAULT_BG_COLOR = Color.DKGRAY;</span><br><span class="line">    private final int DEFAULT_TEXT_COLOR = Color.BLACK;</span><br><span class="line">    private final int DEFAULT_TEXT_SIZE = 40;</span><br><span class="line"></span><br><span class="line">    private int mArcColor = DEFAULT_ARC_COLOR;</span><br><span class="line">    private int mBgColor = DEFAULT_BG_COLOR;</span><br><span class="line">    private int mTextColor = DEFAULT_TEXT_COLOR;</span><br><span class="line">    private int mTextSize = DEFAULT_TEXT_SIZE;</span><br><span class="line"></span><br><span class="line">    private int progress = 0;</span><br><span class="line">    private int mMaxProgress = DEFAULT_MAX_PROGRESS;</span><br><span class="line"></span><br><span class="line">    private Paint mCirclePaint;</span><br><span class="line">    private Paint mBgPaint;</span><br><span class="line">    private Paint mTextPaint;</span><br><span class="line"></span><br><span class="line">    private final Rect mTextBound = new Rect();</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context) &#123;</span><br><span class="line">        this(context, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context,</span><br><span class="line">            @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        this(context, attrs, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public ArcView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr);</span><br><span class="line">        final TypedArray attributes = getContext().obtainStyledAttributes(attrs,</span><br><span class="line">                R.styleable.ArcView);</span><br><span class="line"></span><br><span class="line">        mArcColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arcColor,</span><br><span class="line">                        DEFAULT_ARC_COLOR);</span><br><span class="line"></span><br><span class="line">        mBgColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_bgColor,</span><br><span class="line">                        DEFAULT_BG_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextColor = attributes</span><br><span class="line">                .getColor(</span><br><span class="line">                        R.styleable.ArcView_arc_textColor,</span><br><span class="line">                        DEFAULT_TEXT_COLOR);</span><br><span class="line"></span><br><span class="line">        mTextSize = (int) attributes</span><br><span class="line">                .getDimension(</span><br><span class="line">                        R.styleable.ArcView_arc_textSize,</span><br><span class="line">                        DEFAULT_TEXT_SIZE);</span><br><span class="line">        attributes.recycle();</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        mCirclePaint = new Paint();</span><br><span class="line">        mCirclePaint.setColor(mArcColor);</span><br><span class="line">        mCirclePaint.setStrokeWidth(8.0F);</span><br><span class="line">        mCirclePaint.setDither(true);</span><br><span class="line">        mCirclePaint.setAntiAlias(true);</span><br><span class="line">        mCirclePaint.setStyle(Paint.Style.STROKE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mBgPaint = new Paint();</span><br><span class="line">        mBgPaint.setColor(mBgColor);</span><br><span class="line">        mBgPaint.setStrokeWidth(20.0F);</span><br><span class="line">        mBgPaint.setAntiAlias(true);</span><br><span class="line">        mBgPaint.setStyle(Paint.Style.STROKE);</span><br><span class="line">        mBgPaint.setStrokeCap(Paint.Cap.ROUND);</span><br><span class="line"></span><br><span class="line">        mTextPaint = new Paint();</span><br><span class="line">        mTextPaint.setStrokeWidth(4);</span><br><span class="line"></span><br><span class="line">        //字体SP单位转换成PX</span><br><span class="line">        int size =  (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,</span><br><span class="line">                mTextSize, getResources().getDisplayMetrics());</span><br><span class="line">        mTextPaint.setTextSize(size);</span><br><span class="line">        mTextPaint.setAntiAlias(true);</span><br><span class="line">        mTextPaint.setColor(mTextColor);</span><br><span class="line">        mTextPaint.setTextAlign(Paint.Align.LEFT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        super.onDraw(canvas);</span><br><span class="line">        int paddingLeft = getPaddingLeft();</span><br><span class="line">        int paddingRight = getPaddingRight();</span><br><span class="line">        int paddingTop = getPaddingTop();</span><br><span class="line">        int paddingBottom = getPaddingBottom();</span><br><span class="line"></span><br><span class="line">        int circleWidth = getWidth() - paddingLeft - paddingRight;</span><br><span class="line">        int circleHeight = getHeight() - paddingTop - paddingBottom;</span><br><span class="line"></span><br><span class="line">        int radius = Math.min(circleWidth, circleHeight) / 2;</span><br><span class="line"></span><br><span class="line">        int left = getLeft() + paddingLeft;</span><br><span class="line">        int right = left + radius * 2;</span><br><span class="line">        int top = getTop() + getPaddingTop();</span><br><span class="line">        int bottom = top + 2 * radius;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, MAX_SWEEP_ANGLE, false,</span><br><span class="line">                mBgPaint);</span><br><span class="line"></span><br><span class="line">        int sweepArc = MAX_SWEEP_ANGLE * progress / mMaxProgress;</span><br><span class="line">        canvas.drawArc(left, top, right, bottom, START_SWEEP_ANGLE, sweepArc, false, mCirclePaint);</span><br><span class="line"></span><br><span class="line">        String text = String.valueOf(progress) + &quot;%&quot;;</span><br><span class="line">        mTextPaint.getTextBounds(text, 0, text.length(),</span><br><span class="line">                mTextBound);</span><br><span class="line">        canvas.drawText(text, (left + right) / 2 - mTextBound.width() / 2,</span><br><span class="line">                (top + bottom) / 2 + mTextBound.height() / 2, mTextPaint);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置进度大小</span><br><span class="line">     */</span><br><span class="line">    public void setProgress(int progress) &#123;</span><br><span class="line">        if (progress &lt; 0 || progress &gt; mMaxProgress) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        this.progress = progress;</span><br><span class="line">        invalidate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 设置最大进度值</span><br><span class="line">     */</span><br><span class="line">    public void setMaxProgress(int maxProgress) &#123;</span><br><span class="line">        this.mMaxProgress = maxProgress;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="6-源码"><a href="#6-源码" class="headerlink" title="6. 源码"></a><a href></a>6. 源码</h2><p> 源码已上传Github，后续自定义View的学习Demo也会陆续上传</p>
-<p> <a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
-<hr>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href></a>最后</h2><p> 关注「码道长」，了解最前沿的技术知识，抬高自己的天花板。<br> <img src="https://img-blog.csdn.net/20180101122148924?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="6-源码"><a href="#6-源码" class="headerlink" title="6. 源码"></a>6. 源码</h2><p>源码已上传Github，后续自定义View的学习Demo也会陆续上传</p>
+<p><a href="https://github.com/onlyloveyd/CustomViewDemo" target="_blank" rel="noopener">CustomViewDemo</a></p>
 
         </div>
         
@@ -360,7 +390,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -380,7 +410,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -471,7 +501,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -581,7 +611,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -775,7 +805,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1144,7 +1174,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1184,23 +1214,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1214,13 +1230,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1228,13 +1237,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1263,7 +1265,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1284,13 +1286,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1319,7 +1314,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1382,14 +1377,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1408,13 +1403,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1422,22 +1410,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1471,13 +1445,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1487,7 +1454,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1506,13 +1473,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1522,14 +1482,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1557,7 +1517,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1576,44 +1536,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1627,20 +1552,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1674,22 +1585,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1704,7 +1601,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1910,7 +1807,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2279,7 +2176,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2319,23 +2216,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2349,13 +2232,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2363,13 +2239,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2398,7 +2267,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2419,13 +2288,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2454,7 +2316,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2517,14 +2379,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2543,13 +2405,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2557,22 +2412,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2606,13 +2447,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2622,7 +2456,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2641,13 +2475,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2657,14 +2484,14 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2692,7 +2519,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2711,44 +2538,9 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2762,20 +2554,6 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2809,22 +2587,8 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2839,7 +2603,7 @@ onDraw    | 绘制过程，一般用来绘制特殊图形                       
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

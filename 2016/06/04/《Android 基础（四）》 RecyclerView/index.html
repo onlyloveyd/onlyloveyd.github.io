@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="###介绍  RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。   ###相对优势  ViewHolder ListView需要自己实现ViewHol">
-<meta name="keywords" content="布局控件,RecyclerView">
+    <meta name="description" content="介绍 RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。">
+<meta name="keywords" content="布局控件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android 基础（四）》 RecyclerView">
 <meta property="og:url" content="http://yoursite.com/2016/06/04/《Android 基础（四）》 RecyclerView/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="###介绍  RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。   ###相对优势  ViewHolder ListView需要自己实现ViewHol">
+<meta property="og:description" content="介绍 RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:05:05.823Z">
+<meta property="og:updated_time" content="2019-06-20T10:39:14.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四）》 RecyclerView">
-<meta name="twitter:description" content="###介绍  RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。   ###相对优势  ViewHolder ListView需要自己实现ViewHol">
+<meta name="twitter:description" content="介绍 RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1787 个字)
+                    12 分钟 读完 (大约 1764 个字)
                 </span>
                 
                 
@@ -168,64 +168,52 @@
             
         </h1>
         <div class="content">
-            <p>  ###介绍</p>
-<blockquote>
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
 <p>RecyclerView是ListView的豪华增强版。它主要包含以下几处新的特性，如ViewHolder，ItemDecorator，LayoutManager，SmothScroller以及增加或删除item时item动画等。官方推荐我们采用RecyclerView来取代ListView。</p>
 </blockquote>
-<p> ###相对优势</p>
+<a id="more"></a>
+
+<h2 id="相对优势"><a href="#相对优势" class="headerlink" title="相对优势"></a>相对优势</h2><h3 id="ViewHolder"><a href="#ViewHolder" class="headerlink" title="ViewHolder"></a>ViewHolder</h3><p>ListView需要自己实现ViewHolder来提高性能，或者不使用ViewHolder,但是使用ViewHolder来绑定对象是一个很好的习惯。RecyclerView很好的帮我们解决了这个问题，RecyclerView.ViewHolder在使用RecyclerView过程中必须实现，因为它是一个抽象类无法直接创建，需要自己完成对应子类的建立然后使用  </p>
+<h3 id="LayoutManager"><a href="#LayoutManager" class="headerlink" title="LayoutManager"></a>LayoutManager</h3><p>ListView只能在垂直方向上滚动，不支持其他的滚动方式，当然开发者有很多自定义的方式完成这些功能，这里就不做争辩，从设计的角度上看，ListView设计之初应该就没有想过让它完成这些复杂的功能，只是为了单纯的列表显示。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：</p>
 <ul>
-<li>ViewHolder<br> ListView需要自己实现ViewHolder来提高性能，或者不使用ViewHolder,但是使用ViewHolder来绑定对象是一个很好的习惯。RecyclerView很好的帮我们解决了这个问题，RecyclerView.ViewHolder在使用RecyclerView过程中必须实现，因为它是一个抽象类无法直接创建，需要自己完成对应子类的建立然后使用  </li>
+<li>GridLayoutManager，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。</li>
+<li>LinearLayoutManager ，可以支持水平和竖直方向上滚动的列表。<br>8 StaggeredGridLayoutManager ，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。  </li>
+<li>ItemAnimation,ItemAnimation是RecyclerView中子项在增加，删除或者移动的情况下显示的动画效果，Google越来越重视用户体验，从属性动画的推出开始，这就是一个趋势，开发者在这里可以自己实现自己想要添加的动画效果，当然，如果你是个懒汉，请使用new DefaultItemAnimator()</li>
+<li>ItemDecoration<br>ItemDecoration，名字起的很文艺，子项的装饰，RecyclerView在默认情况下并不在item之间展示间隔符。如果你想要添加间隔符，你必须使用RecyclerView.ItemDecoration类来实现。懒汉请使用DividerItemDecoration.java。</li>
 </ul>
-<hr>
-<ul>
-<li>LayoutManager<br> ListView只能在垂直方向上滚动，不支持其他的滚动方式，当然开发者有很多自定义的方式完成这些功能，这里就不做争辩，从设计的角度上看，ListView设计之初应该就没有想过让它完成这些复杂的功能，只是为了单纯的列表显示。但是RecyclerView相较于ListView，在滚动上面的功能扩展了许多。它可以支持多种类型列表的展示要求，主要如下：<br> <strong>GridLayoutManager</strong> ，支持网格展示，可以水平或者竖直滚动，如展示图片的画廊。<br> <strong>LinearLayoutManager</strong> ，可以支持水平和竖直方向上滚动的列表。<br> <strong>StaggeredGridLayoutManager</strong> ，可以支持交叉网格风格的列表，类似于瀑布流或者Pinterest。  </li>
-</ul>
-<hr>
-<ul>
-<li>ItemAnimation<br> ItemAnimation是RecyclerView中子项在增加，删除或者移动的情况下显示的动画效果，Google越来越重视用户体验，从属性动画的推出开始，这就是一个趋势，开发者在这里可以自己实现自己想要添加的动画效果，当然，如果你是个懒汉，请使用<strong>new DefaultItemAnimator()</strong> 。  </li>
-</ul>
-<hr>
-<ul>
-<li><p>ItemDecoration<br> ItemDecoration，名字起的很文艺，子项的装饰，RecyclerView在默认情况下并不在item之间展示间隔符。如果你想要添加间隔符，你必须使用RecyclerView.ItemDecoration类来实现。懒汉请使用<strong>DividerItemDecoration.java</strong>。  ###Recycler示例<br>####<strong>实际效果图</strong><br><img src="https://img-blog.csdn.net/20160604112139280" alt="这里写图片描述"></p>
+<h2 id="Recycler示例"><a href="#Recycler示例" class="headerlink" title="Recycler示例"></a>Recycler示例</h2><h3 id="实际效果图"><a href="#实际效果图" class="headerlink" title="实际效果图"></a>实际效果图</h3><p><img src="https://img-blog.csdn.net/20160604112139280" alt="这里写图片描述"></p>
 <p>上面这个效果图是使用的StaggeredGridLayoutManager</p>
-<p>####<strong>代码层面</strong><br><em><strong>布局文件</strong></em><br>activity_main.xml</p>
-</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:id=&quot;@+id/root_layout&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;</span><br><span class="line">    android:background=&quot;@color/colorMainBackground&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;include layout=&quot;@layout/toolbar&quot;&gt;&lt;/include&gt;</span><br><span class="line"></span><br><span class="line">    &lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">        xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        tools:context=&quot;.model.View.MainActivity&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;android.support.v7.widget.RecyclerView</span><br><span class="line">            android:id=&quot;@+id/rv_content&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/android.support.v7.widget.RecyclerView&gt;</span><br><span class="line"></span><br><span class="line">        &lt;android.support.design.widget.FloatingActionButton</span><br><span class="line">            android:id=&quot;@+id/fab_add&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_gravity=&quot;bottom|right&quot;</span><br><span class="line">            android:layout_marginBottom=&quot;30dp&quot;</span><br><span class="line">            android:layout_marginRight=&quot;30dp&quot;</span><br><span class="line">            android:src=&quot;@drawable/addone&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;android.support.design.widget.FloatingActionButton</span><br><span class="line">            android:id=&quot;@+id/fab_del&quot;</span><br><span class="line">            android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">            android:layout_gravity=&quot;bottom|left&quot;</span><br><span class="line">            android:layout_marginBottom=&quot;30dp&quot;</span><br><span class="line">            android:layout_marginLeft=&quot;30dp&quot;</span><br><span class="line">            android:src=&quot;@drawable/delone&quot; /&gt;</span><br><span class="line">    &lt;/FrameLayout&gt;</span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><h4 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h4><p>activity_main.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/root_layout"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:orientation</span>=<span class="hljs-string">"vertical"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@color/colorMainBackground"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">"@layout/toolbar"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">FrameLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">xmlns:tools</span>=<span class="hljs-string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">tools:context</span>=<span class="hljs-string">".model.View.MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.RecyclerView</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/rv_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.RecyclerView</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_add"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"bottom|right"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"30dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_marginRight</span>=<span class="hljs-string">"30dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/addone"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">android.support.design.widget.FloatingActionButton</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/fab_del"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_gravity</span>=<span class="hljs-string">"bottom|left"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_marginBottom</span>=<span class="hljs-string">"30dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"30dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:src</span>=<span class="hljs-string">"@drawable/delone"</span> /&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">FrameLayout</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> recycler_item.xml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;FrameLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;android.support.v7.widget.CardView</span><br><span class="line">            android:layout_margin=&quot;10dp&quot;</span><br><span class="line">            android:id=&quot;@+id/cv_bg&quot;</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            app:cardCornerRadius=&quot;20dp&quot;</span><br><span class="line">            app:cardElevation=&quot;5dp&quot;&gt;</span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:id=&quot;@+id/tv_name&quot;</span><br><span class="line">                    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">                    android:gravity=&quot;center&quot; /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;/android.support.v7.widget.CardView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/FrameLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>recycler_item.xml</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">FrameLayout</span> <span class="hljs-attr">xmlns:android</span>=<span class="hljs-string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;<span class="hljs-name">android.support.v7.widget.CardView</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_margin</span>=<span class="hljs-string">"10dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/cv_bg"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">app:cardCornerRadius</span>=<span class="hljs-string">"20dp"</span></span></span><br><span class="line"><span class="hljs-tag">            <span class="hljs-attr">app:cardElevation</span>=<span class="hljs-string">"5dp"</span>&gt;</span></span><br><span class="line">                <span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span></span><br><span class="line"><span class="hljs-tag">                    <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/tv_name"</span></span></span><br><span class="line"><span class="hljs-tag">                    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">                    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"match_parent"</span></span></span><br><span class="line"><span class="hljs-tag">                    <span class="hljs-attr">android:gravity</span>=<span class="hljs-string">"center"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="hljs-tag">&lt;/<span class="hljs-name">android.support.v7.widget.CardView</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">FrameLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p> <em><strong>主Activity</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    @Bind(R.id.rv_content)</span><br><span class="line">    RecyclerView rvContent;</span><br><span class="line">    @Bind(R.id.fab_add)</span><br><span class="line">    FloatingActionButton fabAdd;</span><br><span class="line">    @Bind(R.id.fab_del)</span><br><span class="line">    FloatingActionButton fabDel;</span><br><span class="line">    @Bind(R.id.root_layout)</span><br><span class="line">    LinearLayout rootLayout;</span><br><span class="line"></span><br><span class="line">    private LayoutManager mLayoutManager; //LayoutManager</span><br><span class="line">    private RVAdapter recyclerAdapter;    //RecyclerView对应的Adapter</span><br><span class="line">    private ArrayList&lt;String&gt; mContentList; //内容list这里只是使用了字符串，当然也可以替换成其他的JavaBean类</span><br><span class="line">    private Random mRandom = new Random(); //用于产生随机字符串</span><br><span class="line">    private int mSum = 50; //初始化子项数目</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(this);  //ButterKnife注入，减少代码负担</span><br><span class="line"></span><br><span class="line">        mContentList = new ArrayList&lt;String&gt;();</span><br><span class="line">        for (int i = 0; i &lt; mSum; i++) &#123;</span><br><span class="line">            mContentList.add(getRandomString());</span><br><span class="line">        &#125; //随机生成数据</span><br><span class="line">        recyclerAdapter = new RVAdapter(mContentList);</span><br><span class="line">        mLayoutManager = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL); //3列纵向</span><br><span class="line">        rvContent.setAdapter(recyclerAdapter);</span><br><span class="line">        rvContent.setLayoutManager(mLayoutManager);</span><br><span class="line">        rvContent.setItemAnimator(new DefaultItemAnimator()); //设置动画效果，可以看下上面的效果图，动画效果还是比较明显的</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnClick(&#123;R.id.fab_add, R.id.fab_del&#125;)</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        switch (view.getId()) &#123;</span><br><span class="line">            case R.id.fab_add:</span><br><span class="line">                recyclerAdapter.addData(1); //加一个</span><br><span class="line">                makeSnackBar(rootLayout, &quot;添加一个 :)&quot;, null, null);//显示一个Snackbar</span><br><span class="line">                break;</span><br><span class="line">            case R.id.fab_del:</span><br><span class="line">                recyclerAdapter.removeData(1); //去掉一个</span><br><span class="line">                makeSnakeBar(rootLayout, &quot;删除一个 :(&quot;, null, null); //显示一个Snackbar</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //用于产生随机字符串的方法</span><br><span class="line">    public String getRandomString() &#123;</span><br><span class="line">        String src = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890&quot;;</span><br><span class="line">        StringBuilder dst = new StringBuilder(4);</span><br><span class="line">        for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">            dst.append(src.charAt(mRandom.nextInt(62)));</span><br><span class="line">        &#125;</span><br><span class="line">        return dst.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //构建一个Snackbar并显示出来</span><br><span class="line">    private void makeSnackBar(View view, String message, String buttonText, View.OnClickListener onClickListener) &#123;</span><br><span class="line">        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)</span><br><span class="line">                .setAction(buttonText, onClickListener)</span><br><span class="line">                .show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主Activity</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="hljs-meta">@Bind</span>(R.id.rv_content)</span><br><span class="line">    RecyclerView rvContent;</span><br><span class="line">    <span class="hljs-meta">@Bind</span>(R.id.fab_add)</span><br><span class="line">    FloatingActionButton fabAdd;</span><br><span class="line">    <span class="hljs-meta">@Bind</span>(R.id.fab_del)</span><br><span class="line">    FloatingActionButton fabDel;</span><br><span class="line">    <span class="hljs-meta">@Bind</span>(R.id.root_layout)</span><br><span class="line">    LinearLayout rootLayout;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> LayoutManager mLayoutManager; <span class="hljs-comment">//LayoutManager</span></span><br><span class="line">    <span class="hljs-keyword">private</span> RVAdapter recyclerAdapter;    <span class="hljs-comment">//RecyclerView对应的Adapter</span></span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList&lt;String&gt; mContentList; <span class="hljs-comment">//内容list这里只是使用了字符串，当然也可以替换成其他的JavaBean类</span></span><br><span class="line">    <span class="hljs-keyword">private</span> Random mRandom = <span class="hljs-keyword">new</span> Random(); <span class="hljs-comment">//用于产生随机字符串</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mSum = <span class="hljs-number">50</span>; <span class="hljs-comment">//初始化子项数目</span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        ButterKnife.bind(<span class="hljs-keyword">this</span>);  <span class="hljs-comment">//ButterKnife注入，减少代码负担</span></span><br><span class="line"></span><br><span class="line">        mContentList = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; mSum; i++) &#123;</span><br><span class="line">            mContentList.add(getRandomString());</span><br><span class="line">        &#125; <span class="hljs-comment">//随机生成数据</span></span><br><span class="line">        recyclerAdapter = <span class="hljs-keyword">new</span> RVAdapter(mContentList);</span><br><span class="line">        mLayoutManager = <span class="hljs-keyword">new</span> StaggeredGridLayoutManager(<span class="hljs-number">3</span>, LinearLayoutManager.VERTICAL); <span class="hljs-comment">//3列纵向</span></span><br><span class="line">        rvContent.setAdapter(recyclerAdapter);</span><br><span class="line">        rvContent.setLayoutManager(mLayoutManager);</span><br><span class="line">        rvContent.setItemAnimator(<span class="hljs-keyword">new</span> DefaultItemAnimator()); <span class="hljs-comment">//设置动画效果，可以看下上面的效果图，动画效果还是比较明显的</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@OnClick</span>(&#123;R.id.fab_add, R.id.fab_del&#125;)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span><span class="hljs-params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (view.getId()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.fab_add:</span><br><span class="line">                recyclerAdapter.addData(<span class="hljs-number">1</span>); <span class="hljs-comment">//加一个</span></span><br><span class="line">                makeSnackBar(rootLayout, <span class="hljs-string">"添加一个 :)"</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>);<span class="hljs-comment">//显示一个Snackbar</span></span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> R.id.fab_del:</span><br><span class="line">                recyclerAdapter.removeData(<span class="hljs-number">1</span>); <span class="hljs-comment">//去掉一个</span></span><br><span class="line">                makeSnakeBar(rootLayout, <span class="hljs-string">"删除一个 :("</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>); <span class="hljs-comment">//显示一个Snackbar</span></span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">default</span>:</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//用于产生随机字符串的方法</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getRandomString</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        String src = <span class="hljs-string">"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"</span>;</span><br><span class="line">        StringBuilder dst = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-number">4</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;</span><br><span class="line">            dst.append(src.charAt(mRandom.nextInt(<span class="hljs-number">62</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> dst.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//构建一个Snackbar并显示出来</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">makeSnackBar</span><span class="hljs-params">(View view, String message, String buttonText, View.OnClickListener onClickListener)</span> </span>&#123;</span><br><span class="line">        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)</span><br><span class="line">                .setAction(buttonText, onClickListener)</span><br><span class="line">                .show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> <em><strong>适配器</strong></em></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">public class RVAdapter extends RecyclerView.Adapter&lt;RVAdapter.MyViewHolder&gt;&#123;</span><br><span class="line">    ArrayList&lt;String&gt; mContentList;</span><br><span class="line">    Random mRandom = new Random();</span><br><span class="line">    //ViewHolder继承自RecyclerView.ViewHolder  子View拿到方便后面访问</span><br><span class="line">    public class MyViewHolder  extends RecyclerView.ViewHolder &#123;</span><br><span class="line">        TextView textView;</span><br><span class="line">        CardView cardView;</span><br><span class="line">        public MyViewHolder(View itemView) &#123;</span><br><span class="line">            super(itemView);</span><br><span class="line">            textView = (TextView) itemView.findViewById(R.id.tv_name);</span><br><span class="line">            cardView = (CardView) itemView.findViewById(R.id.cv_bg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public RVAdapter(ArrayList&lt;String&gt; mContentList) &#123;</span><br><span class="line">        this.mContentList = mContentList;</span><br><span class="line">    &#125;</span><br><span class="line">    //创建ViewHolder，由于RecyclerView.ViewHolder是一个抽象类无法实例化，所以必须实现一个子类才能使用，这里自己尝试的过程中走了一些弯路，注意inflate最后一个参数设置成false不然可能会出现crash</span><br><span class="line">    @Override</span><br><span class="line">    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) &#123;</span><br><span class="line">        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);</span><br><span class="line">        return new MyViewHolder(view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //onBindView  用于设置需要显示的View中的内容和一些属性值</span><br><span class="line">    @Override</span><br><span class="line">    public void onBindViewHolder(MyViewHolder holder, int position) &#123;</span><br><span class="line">        holder.cardView.setCardBackgroundColor(getRandomColor());</span><br><span class="line">        holder.textView.setText(mContentList.get(position));</span><br><span class="line">        holder.itemView.getLayoutParams().height = getRandomHeight(200,400);//产生随机高度，看上去像瀑布</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int getItemCount() &#123;</span><br><span class="line">        return mContentList.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //产生随机颜色</span><br><span class="line">    private int getRandomColor() &#123;</span><br><span class="line">        return (0xff000000|mRandom.nextInt(0x00ffffff));</span><br><span class="line">    &#125;</span><br><span class="line">    //产生随机高度</span><br><span class="line">    private int getRandomHeight(int min , int max) &#123;</span><br><span class="line">        return (mRandom.nextInt(max - min) + min );</span><br><span class="line">    &#125;</span><br><span class="line">    //添加一个子项</span><br><span class="line">    public void addData(int position) &#123;</span><br><span class="line">        mContentList.add(position, &quot;Insert One&quot;);</span><br><span class="line">        notifyItemInserted(position);//不调用这个没有动画效果</span><br><span class="line">    &#125;</span><br><span class="line">    //删除一个子项</span><br><span class="line">    public void removeData(int position) &#123;</span><br><span class="line">        mContentList.remove(position);</span><br><span class="line">        notifyItemRemoved(position);//不调用这个没有动画效果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>适配器</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RVAdapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RecyclerView</span>.<span class="hljs-title">Adapter</span>&lt;<span class="hljs-title">RVAdapter</span>.<span class="hljs-title">MyViewHolder</span>&gt;</span>&#123;</span><br><span class="line">    ArrayList&lt;String&gt; mContentList;</span><br><span class="line">    Random mRandom = <span class="hljs-keyword">new</span> Random();</span><br><span class="line">    <span class="hljs-comment">//ViewHolder继承自RecyclerView.ViewHolder  子View拿到方便后面访问</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyViewHolder</span>  <span class="hljs-keyword">extends</span> <span class="hljs-title">RecyclerView</span>.<span class="hljs-title">ViewHolder</span> </span>&#123;</span><br><span class="line">        TextView textView;</span><br><span class="line">        CardView cardView;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyViewHolder</span><span class="hljs-params">(View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="hljs-keyword">super</span>(itemView);</span><br><span class="line">            textView = (TextView) itemView.findViewById(R.id.tv_name);</span><br><span class="line">            cardView = (CardView) itemView.findViewById(R.id.cv_bg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RVAdapter</span><span class="hljs-params">(ArrayList&lt;String&gt; mContentList)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mContentList = mContentList;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//创建ViewHolder，由于RecyclerView.ViewHolder是一个抽象类无法实例化，所以必须实现一个子类才能使用，这里自己尝试的过程中走了一些弯路，注意inflate最后一个参数设置成false不然可能会出现crash</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> MyViewHolder <span class="hljs-title">onCreateViewHolder</span><span class="hljs-params">(ViewGroup parent, <span class="hljs-keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, <span class="hljs-keyword">false</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MyViewHolder(view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//onBindView  用于设置需要显示的View中的内容和一些属性值</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onBindViewHolder</span><span class="hljs-params">(MyViewHolder holder, <span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        holder.cardView.setCardBackgroundColor(getRandomColor());</span><br><span class="line">        holder.textView.setText(mContentList.get(position));</span><br><span class="line">        holder.itemView.getLayoutParams().height = getRandomHeight(<span class="hljs-number">200</span>,<span class="hljs-number">400</span>);<span class="hljs-comment">//产生随机高度，看上去像瀑布</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getItemCount</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mContentList.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//产生随机颜色</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getRandomColor</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> (<span class="hljs-number">0xff000000</span>|mRandom.nextInt(<span class="hljs-number">0x00ffffff</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//产生随机高度</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getRandomHeight</span><span class="hljs-params">(<span class="hljs-keyword">int</span> min , <span class="hljs-keyword">int</span> max)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> (mRandom.nextInt(max - min) + min );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//添加一个子项</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        mContentList.add(position, <span class="hljs-string">"Insert One"</span>);</span><br><span class="line">        notifyItemInserted(position);<span class="hljs-comment">//不调用这个没有动画效果</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">//删除一个子项</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        mContentList.remove(position);</span><br><span class="line">        notifyItemRemoved(position);<span class="hljs-comment">//不调用这个没有动画效果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 需要注意的几个地方：</p>
+<p>需要注意的几个地方：</p>
 <ol>
-<li>实现自己的ViewHolder继承recyclerView,ViewHolder，因为抽象类不能实例化 </li>
-<li>inflate子项的时候，最后一个参数设置成false </li>
-<li>动画效果需要在Adapter中调用notifyItem<strong><em>方法才行  *</em>StaggeredGridLayoutManager</strong>的效果图上面已经有显示了</li>
+<li>实现自己的ViewHolder继承recyclerView,ViewHolder，因为抽象类不实例化</li>
+<li>inflate子项的时候，最后一个参数设置成false</li>
+<li>动画效果需要在Adapter中调用notifyItem方法才行  StaggeredGridLayoutManager的效果图上面已经有显示了</li>
 </ol>
-<hr>
-<p> ###其他效果<br> <strong>LinearLayoutManager</strong>效果图<br> 对应修改代码</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = new LinearLayoutManager(this);</span><br><span class="line">rvContent.addItemDecoration(new DividerItemDecoration(this, StaggeredGridLayoutManager.VERTICAL));</span><br></pre></td></tr></table></figure>
+<h3 id="其他效果"><a href="#其他效果" class="headerlink" title="其他效果"></a>其他效果</h3><h4 id="LinearLayoutManager"><a href="#LinearLayoutManager" class="headerlink" title="LinearLayoutManager"></a>LinearLayoutManager</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = <span class="hljs-keyword">new</span> LinearLayoutManager(<span class="hljs-keyword">this</span>);</span><br><span class="line">rvContent.addItemDecoration(<span class="hljs-keyword">new</span> DividerItemDecoration(<span class="hljs-keyword">this</span>, StaggeredGridLayoutManager.VERTICAL));</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://img-blog.csdn.net/20160604120735667" alt="这里写图片描述"></p>
-<hr>
-<p> <strong>GridLayoutManager</strong>效果图<br> 对应修改代码</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = new GridLayoutManager(this, 3);//3列</span><br><span class="line">rvContent.addItemDecoration(new DividerItemDecoration(this, StaggeredGridLayoutManager.VERTICAL));</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20160604120735667" alt="这里写图片描述"></p>
+<h4 id="GridLayoutManager"><a href="#GridLayoutManager" class="headerlink" title="GridLayoutManager"></a>GridLayoutManager</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = <span class="hljs-keyword">new</span> GridLayoutManager(<span class="hljs-keyword">this</span>, <span class="hljs-number">3</span>);<span class="hljs-comment">//3列</span></span><br><span class="line">rvContent.addItemDecoration(<span class="hljs-keyword">new</span> DividerItemDecoration(<span class="hljs-keyword">this</span>, StaggeredGridLayoutManager.VERTICAL));</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://img-blog.csdn.net/20160604121322170" alt="这里写图片描述"></p>
-<p> <strong>StaggeredGridLayoutManager.HORIZONTAL</strong>横向的效果图<br> 对应修改代码</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);</span><br><span class="line"></span><br><span class="line">RVAdapter.java中onBindViewHolder</span><br><span class="line">holder.itemView.getLayoutParams().width = getRandomHeight(200,400);</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20160604121322170" alt="这里写图片描述"></p>
+<h4 id="StaggeredGridLayoutManager-HORIZONTAL"><a href="#StaggeredGridLayoutManager-HORIZONTAL" class="headerlink" title="StaggeredGridLayoutManager.HORIZONTAL"></a>StaggeredGridLayoutManager.HORIZONTAL</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mLayoutManager = <span class="hljs-keyword">new</span> StaggeredGridLayoutManager(<span class="hljs-number">3</span>, StaggeredGridLayoutManager.HORIZONTAL);</span><br><span class="line"></span><br><span class="line">RVAdapter.java中onBindViewHolder</span><br><span class="line">holder.itemView.getLayoutParams().width = getRandomHeight(<span class="hljs-number">200</span>,<span class="hljs-number">400</span>);</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://img-blog.csdn.net/20160604122805353" alt="这里写图片描述"></p>
-<p> ###关于ItemDecoration<br> 这里附上Google Sample中的DividerItemDecoration.java代码 希望可以帮助到大家</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">public class DividerItemDecoration extends RecyclerView.ItemDecoration &#123;</span><br><span class="line"></span><br><span class="line">    private static final int[] ATTRS = new int[]&#123;</span><br><span class="line">            android.R.attr.listDivider</span><br><span class="line">    &#125;;</span><br><span class="line">    public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;</span><br><span class="line">    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;</span><br><span class="line">    private Drawable mDivider;</span><br><span class="line">    private int mOrientation;</span><br><span class="line"></span><br><span class="line">    public DividerItemDecoration(Context context, int orientation) &#123;</span><br><span class="line">        final TypedArray a = context.obtainStyledAttributes(ATTRS);</span><br><span class="line">        mDivider = a.getDrawable(0);</span><br><span class="line">        a.recycle();</span><br><span class="line">        setOrientation(orientation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setOrientation(int orientation) &#123;</span><br><span class="line">        if (orientation != HORIZONTAL_LIST &amp;&amp; orientation != VERTICAL_LIST) &#123;</span><br><span class="line">            throw new IllegalArgumentException(&quot;invalid orientation&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        mOrientation = orientation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">        if (mOrientation == VERTICAL_LIST) &#123;</span><br><span class="line">            drawVertical(c, parent);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            drawHorizontal(c, parent);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void drawVertical(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">        final int left = parent.getPaddingLeft();</span><br><span class="line">        final int right = parent.getWidth() - parent.getPaddingRight();</span><br><span class="line"></span><br><span class="line">        final int childCount = parent.getChildCount();</span><br><span class="line">        for (int i = 0; i &lt; childCount; i++) &#123;</span><br><span class="line">            final View child = parent.getChildAt(i);</span><br><span class="line">            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child</span><br><span class="line">                    .getLayoutParams();</span><br><span class="line">            final int top = child.getBottom() + params.bottomMargin +</span><br><span class="line">                    Math.round(ViewCompat.getTranslationY(child));</span><br><span class="line">            final int bottom = top + mDivider.getIntrinsicHeight();</span><br><span class="line">            mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">            mDivider.draw(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void drawHorizontal(Canvas c, RecyclerView parent) &#123;</span><br><span class="line">        final int top = parent.getPaddingTop();</span><br><span class="line">        final int bottom = parent.getHeight() - parent.getPaddingBottom();</span><br><span class="line"></span><br><span class="line">        final int childCount = parent.getChildCount();</span><br><span class="line">        for (int i = 0; i &lt; childCount; i++) &#123;</span><br><span class="line">            final View child = parent.getChildAt(i);</span><br><span class="line">            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child</span><br><span class="line">                    .getLayoutParams();</span><br><span class="line">            final int left = child.getRight() + params.rightMargin +</span><br><span class="line">                    Math.round(ViewCompat.getTranslationX(child));</span><br><span class="line">            final int right = left + mDivider.getIntrinsicHeight();</span><br><span class="line">            mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">            mDivider.draw(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) &#123;</span><br><span class="line">        if (mOrientation == VERTICAL_LIST) &#123;</span><br><span class="line">            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20160604122805353" alt="这里写图片描述"></p>
+<h3 id="关于ItemDecoration"><a href="#关于ItemDecoration" class="headerlink" title="关于ItemDecoration"></a>关于ItemDecoration</h3><p>这里附上Google Sample中的DividerItemDecoration.java代码 希望可以帮助到大家</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DividerItemDecoration</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">RecyclerView</span>.<span class="hljs-title">ItemDecoration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] ATTRS = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;</span><br><span class="line">            android.R.attr.listDivider</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> VERTICAL_LIST = LinearLayoutManager.VERTICAL;</span><br><span class="line">    <span class="hljs-keyword">private</span> Drawable mDivider;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> mOrientation;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DividerItemDecoration</span><span class="hljs-params">(Context context, <span class="hljs-keyword">int</span> orientation)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">final</span> TypedArray a = context.obtainStyledAttributes(ATTRS);</span><br><span class="line">        mDivider = a.getDrawable(<span class="hljs-number">0</span>);</span><br><span class="line">        a.recycle();</span><br><span class="line">        setOrientation(orientation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setOrientation</span><span class="hljs-params">(<span class="hljs-keyword">int</span> orientation)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (orientation != HORIZONTAL_LIST &amp;&amp; orientation != VERTICAL_LIST) &#123;</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"invalid orientation"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        mOrientation = orientation;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDraw</span><span class="hljs-params">(Canvas c, RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (mOrientation == VERTICAL_LIST) &#123;</span><br><span class="line">            drawVertical(c, parent);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            drawHorizontal(c, parent);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawVertical</span><span class="hljs-params">(Canvas c, RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> left = parent.getPaddingLeft();</span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> right = parent.getWidth() - parent.getPaddingRight();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> childCount = parent.getChildCount();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">final</span> View child = parent.getChildAt(i);</span><br><span class="line">            <span class="hljs-keyword">final</span> RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child</span><br><span class="line">                    .getLayoutParams();</span><br><span class="line">            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> top = child.getBottom() + params.bottomMargin +</span><br><span class="line">                    Math.round(ViewCompat.getTranslationY(child));</span><br><span class="line">            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> bottom = top + mDivider.getIntrinsicHeight();</span><br><span class="line">            mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">            mDivider.draw(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">drawHorizontal</span><span class="hljs-params">(Canvas c, RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> top = parent.getPaddingTop();</span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> bottom = parent.getHeight() - parent.getPaddingBottom();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> childCount = parent.getChildCount();</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">final</span> View child = parent.getChildAt(i);</span><br><span class="line">            <span class="hljs-keyword">final</span> RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child</span><br><span class="line">                    .getLayoutParams();</span><br><span class="line">            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> left = child.getRight() + params.rightMargin +</span><br><span class="line">                    Math.round(ViewCompat.getTranslationX(child));</span><br><span class="line">            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> right = left + mDivider.getIntrinsicHeight();</span><br><span class="line">            mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">            mDivider.draw(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getItemOffsets</span><span class="hljs-params">(Rect outRect, <span class="hljs-keyword">int</span> itemPosition, RecyclerView parent)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (mOrientation == VERTICAL_LIST) &#123;</span><br><span class="line">            outRect.set(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, mDivider.getIntrinsicHeight());</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            outRect.set(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, mDivider.getIntrinsicWidth(), <span class="hljs-number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> ###备注<br> Android源码中有很多关于这些View的使用方法，大家可以查阅并参考使用。<br> 博文中部分代码：<br> <a href="http://download.csdn.net/detail/poorkick/9541326" target="_blank" rel="noopener">http://download.csdn.net/detail/poorkick/9541326</a></p>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>Android源码中有很多关于这些View的使用方法，大家可以查阅并参考使用。<br>博文中部分代码：<br><a href="http://download.csdn.net/detail/poorkick/9541326" target="_blank" rel="noopener">http://download.csdn.net/detail/poorkick/9541326</a></p>
 
         </div>
         
@@ -233,7 +221,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/RecyclerView/">RecyclerView</a>, <a class="has-link-grey -link" href="/tags/布局控件/">布局控件</a>
+                    <a class="has-link-grey -link" href="/tags/布局控件/">布局控件</a>
                 </div>
             </div>
         </div>
@@ -364,7 +352,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -384,7 +372,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -475,7 +463,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -585,7 +573,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -779,7 +767,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1148,7 +1136,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1188,23 +1176,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1218,13 +1192,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1232,13 +1199,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1267,7 +1227,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1288,13 +1248,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1323,7 +1276,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1386,14 +1339,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1412,13 +1365,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1426,22 +1372,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1475,13 +1407,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1491,7 +1416,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1510,13 +1435,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1526,14 +1444,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1561,7 +1479,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1580,44 +1498,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1631,20 +1514,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1678,22 +1547,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1708,7 +1563,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1914,7 +1769,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2283,7 +2138,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2323,23 +2178,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2353,13 +2194,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2367,13 +2201,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2402,7 +2229,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2423,13 +2250,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2458,7 +2278,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2521,14 +2341,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2547,13 +2367,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2561,22 +2374,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2610,13 +2409,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2626,7 +2418,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2645,13 +2437,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2661,14 +2446,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2696,7 +2481,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2715,44 +2500,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2766,20 +2516,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2813,22 +2549,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2843,7 +2565,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 

@@ -7,19 +7,19 @@
 
 
 
-    <meta name="description" content="Realm Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);   你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 1234">
-<meta name="keywords" content="开源库,译文,Realm">
+    <meta name="description" content="RealmRealm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);  你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 12345">
+<meta name="keywords" content="译文,Realm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Android开源库》 Realm For Android~ Realm（译文）">
 <meta property="og:url" content="http://yoursite.com/2017/03/07/《Android开源库》 Realm For Android~ Realm（译文）/index.html">
 <meta property="og:site_name" content="onlyloveyd">
-<meta property="og:description" content="Realm Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);   你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 1234">
+<meta property="og:description" content="RealmRealm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);  你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 12345">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-15T10:52:22.187Z">
+<meta property="og:updated_time" content="2019-06-20T10:28:18.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android开源库》 Realm For Android~ Realm（译文）">
-<meta name="twitter:description" content="Realm Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);   你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 1234">
+<meta name="twitter:description" content="RealmRealm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作： 1Realm.init(context);  你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。 12345">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    11 分钟 读完 (大约 1662 个字)
+                    11 分钟 读完 (大约 1669 个字)
                 </span>
                 
                 
@@ -168,71 +168,63 @@
             
         </h1>
         <div class="content">
-            <h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a><a href></a>Realm</h2><p> Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Realm.init(context);</span><br></pre></td></tr></table></figure>
+            <a id="more"></a>
+<h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h2><p>Realm(s) 是我们对数据库的称谓：它包含多个不同的对象，并对应磁盘中的一个文件。在使用之前，需要对 Realm 库进行初始化操作：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Realm.init(context);</span><br></pre></td></tr></table></figure>
 
-<p> 你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">    Realm.init(this);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你需要提供一个安卓的 Context 对象来对 Realm 进行初始化。初始化操作只要进行一次。继承 Application 并在重载的 onCreate() 方法中进行初始化是个不错的主意。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.onCreate();</span><br><span class="line">    Realm.init(<span class="hljs-keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 请别忘了修改 AndroidManifest.xml:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">  android:name=&quot;.MyApplication&quot;</span><br><span class="line">  ...</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<p>请别忘了修改 AndroidManifest.xml:</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">application</span></span></span><br><span class="line"><span class="hljs-tag">  <span class="hljs-attr">android:name</span>=<span class="hljs-string">".MyApplication"</span></span></span><br><span class="line"><span class="hljs-tag">  <span class="hljs-attr">...</span></span></span><br><span class="line"><span class="hljs-tag">/&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="配置Realm"><a href="#配置Realm" class="headerlink" title="配置Realm"></a>配置Realm</h3><p>RealmConfiguration 用来配置要被创建的 Realm 的各种特性。最简配置如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder().build();</span><br></pre></td></tr></table></figure>
 
-<h4 id="配置Realm"><a href="#配置Realm" class="headerlink" title="配置Realm"></a><a href></a>配置Realm</h4><p> RealmConfiguration 用来配置要被创建的 Realm 的各种特性。最简配置如下所示：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration config = new RealmConfiguration.Builder().build();</span><br></pre></td></tr></table></figure>
+<p>如上配置的 Realm 会被存储在 Context.getFilesDir() 并且命名为 default.realm。</p>
+<p>一个典型的配置如下所示：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// The RealmConfiguration is created using the builder pattern.</span></span><br><span class="line"><span class="hljs-comment">// The Realm file will be located in Context.getFilesDir() with name "myrealm.realm"</span></span><br><span class="line">RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">  .name(<span class="hljs-string">"myrealm.realm"</span>)</span><br><span class="line">  .encryptionKey(getKey())</span><br><span class="line">  .schemaVersion(<span class="hljs-number">42</span>)</span><br><span class="line">  .modules(<span class="hljs-keyword">new</span> MySchemaModule())</span><br><span class="line">  .migration(<span class="hljs-keyword">new</span> MyMigration())</span><br><span class="line">  .build();</span><br><span class="line"><span class="hljs-comment">// Use the config</span></span><br><span class="line">Realm realm = Realm.getInstance(config);</span><br></pre></td></tr></table></figure>
 
-<p> 如上配置的 Realm 会被存储在 Context.getFilesDir() 并且命名为 default.realm。</p>
-<p> 一个典型的配置如下所示：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// The RealmConfiguration is created using the builder pattern.</span><br><span class="line">// The Realm file will be located in Context.getFilesDir() with name &quot;myrealm.realm&quot;</span><br><span class="line">RealmConfiguration config = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;myrealm.realm&quot;)</span><br><span class="line">  .encryptionKey(getKey())</span><br><span class="line">  .schemaVersion(42)</span><br><span class="line">  .modules(new MySchemaModule())</span><br><span class="line">  .migration(new MyMigration())</span><br><span class="line">  .build();</span><br><span class="line">// Use the config</span><br><span class="line">Realm realm = Realm.getInstance(config);</span><br></pre></td></tr></table></figure>
+<p>你还可以有多个RealmConfiguration。如此，你便可以控制Realm的版本、结构（schema）和路径。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">  .name(<span class="hljs-string">"myrealm.realm"</span>)</span><br><span class="line">  .schemaVersion(<span class="hljs-number">2</span>)</span><br><span class="line">  .modules(<span class="hljs-keyword">new</span> MyCustomSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">RealmConfiguration otherConfig = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">  .name(<span class="hljs-string">"otherrealm.realm"</span>)</span><br><span class="line">  .schemaVersion(<span class="hljs-number">5</span>)</span><br><span class="line">  .modules(<span class="hljs-keyword">new</span> MyOtherSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Realm myRealm = Realm.getInstance(myConfig);</span><br><span class="line">Realm otherRealm = Realm.getInstance(otherConfig);</span><br></pre></td></tr></table></figure>
 
-<p> 你还可以有多个RealmConfiguration。如此，你便可以控制Realm的版本、结构（schema）和路径。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;myrealm.realm&quot;)</span><br><span class="line">  .schemaVersion(2)</span><br><span class="line">  .modules(new MyCustomSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">RealmConfiguration otherConfig = new RealmConfiguration.Builder()</span><br><span class="line">  .name(&quot;otherrealm.realm&quot;)</span><br><span class="line">  .schemaVersion(5)</span><br><span class="line">  .modules(new MyOtherSchema())</span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Realm myRealm = Realm.getInstance(myConfig);</span><br><span class="line">Realm otherRealm = Realm.getInstance(otherConfig);</span><br></pre></td></tr></table></figure>
+<p>你可以使用 Realm.getPath() 来获取 Realm 文件的绝对路径。</p>
+<p>很重要的一点是 Realm 实例是线程单例化的，也就是说多次在同一线程调用静态构建器会返回同一 Realm 实例。</p>
+<h3 id="默认-RealmConfiguration"><a href="#默认-RealmConfiguration" class="headerlink" title="默认 RealmConfiguration"></a>默认 RealmConfiguration</h3><p>RealmConfiguration可以保存为默认配置。通过在自定义的Application设置默认的Realm配置，可以使你在代码中的其他地方更加方便地创建针对该默认配置的Realm。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.onCreate();</span><br><span class="line">    <span class="hljs-comment">// The Realm file will be located in Context.getFilesDir() with name "default.realm"</span></span><br><span class="line">    Realm.init(<span class="hljs-keyword">this</span>);</span><br><span class="line">    RealmConfiguration config = <span class="hljs-keyword">new</span> RealmConfiguration.Builder().build();</span><br><span class="line">    Realm.setDefaultConfiguration(config);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> </span>&#123;</span><br><span class="line">  <span class="hljs-meta">@Override</span></span><br><span class="line">  <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">      <span class="hljs-comment">// ... Do something ...</span></span><br><span class="line">    &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">      realm.close();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 你可以使用 Realm.getPath() 来获取 Realm 文件的绝对路径。</p>
-<p> 很重要的一点是 Realm 实例是线程单例化的，也就是说多次在同一线程调用静态构建器会返回同一 Realm 实例。</p>
-<hr>
-<h4 id="默认-RealmConfiguration"><a href="#默认-RealmConfiguration" class="headerlink" title="默认 RealmConfiguration"></a><a href></a>默认 RealmConfiguration</h4><p> RealmConfiguration可以保存为默认配置。通过在自定义的Application设置默认的Realm配置，可以使你在代码中的其他地方更加方便地创建针对该默认配置的Realm。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">    // The Realm file will be located in Context.getFilesDir() with name &quot;default.realm&quot;</span><br><span class="line">    Realm.init(this);</span><br><span class="line">    RealmConfiguration config = new RealmConfiguration.Builder().build();</span><br><span class="line">    Realm.setDefaultConfiguration(config);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class MyActivity extends Activity &#123;</span><br><span class="line">  @Override</span><br><span class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    try &#123;</span><br><span class="line">      // ... Do something ...</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      realm.close();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="In-Memory-Realm"><a href="#In-Memory-Realm" class="headerlink" title="In-Memory Realm"></a>In-Memory Realm</h3><p>定义一个非持久化的、存在于内存中的 Realm 实例：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = <span class="hljs-keyword">new</span> RealmConfiguration.Builder()</span><br><span class="line">    .name(<span class="hljs-string">"myrealm.realm"</span>)</span><br><span class="line">    .inMemory()</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
 
+<p>这样就可以创建一个存在于“内存中的” Realm。“内存中的”Realm 在内存紧张的情况下仍有可能使用到磁盘存储，但是这些磁盘空间都会在Realm实例完全关闭的时候被释放。</p>
+<p>请注意使用同样的名称同时创建“内存中的”Realm 和常规的（持久化）Realm 是不允许的。</p>
+<p>当某个“内存中的”Realm 的所有实例引用都被释放，该 Realm 下的数据也同时会被清除。建议在你的应用生命周期中保持对“内存中的” Realm 实例的引用以避免非期望的数据丢失。</p>
+<h3 id="Dynamic-Realm"><a href="#Dynamic-Realm" class="headerlink" title="Dynamic Realm"></a>Dynamic Realm</h3><p>对于普通的 Realm 来说，数据模型被定义成了 RealmObject 的子类。这样做保证了类型安全，但有时候某些数据模型在编译期是无法获得的。例如在处理数据迁移（migration）或CSV文件的时候。</p>
+<p>DynamicRealm 是普通 Realm 的一个变种。它可以在没有 RealmObject 子类的情况下操作 Realm 数据。其对数据的访问是基于字符串而非 RealmObject 的定义。</p>
+<p>创建 Dynamic Realm 使用与创建普通 Realm 相同的RealmConfiguration，但是它的创建过程会忽略对 schema、migration以及 schema 版本的检查。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration realmConfig = <span class="hljs-keyword">new</span> RealmConfiguration.Builder().build();</span><br><span class="line">DynamicRealm realm = DynamicRealm.getInstance(realmConfig);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// In a DynamicRealm all objects are DynamicRealmObjects</span></span><br><span class="line">DynamicRealmObject person = realm.createObject(<span class="hljs-string">"Person"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// All fields are accessed using strings</span></span><br><span class="line">String name = person.getString(<span class="hljs-string">"name"</span>);</span><br><span class="line"><span class="hljs-keyword">int</span> age = person.getInt(<span class="hljs-string">"age"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// An underlying schema still exists, so accessing a field that does not exist</span></span><br><span class="line"><span class="hljs-comment">// will throw an exception</span></span><br><span class="line">person.getString(<span class="hljs-string">"I don't exist"</span>);</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// Queries still work normally</span></span><br><span class="line">RealmResults&lt;DynamicRealmObject&gt; persons = realm.where(<span class="hljs-string">"Person"</span>)</span><br><span class="line">    .equalTo(<span class="hljs-string">"name"</span>, <span class="hljs-string">"John"</span>)</span><br><span class="line">    .findAll();</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h4 id="In-Memory-Realm"><a href="#In-Memory-Realm" class="headerlink" title="In-Memory Realm"></a><a href></a>In-Memory Realm</h4><p> 定义一个非持久化的、存在于内存中的 Realm 实例：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration myConfig = new RealmConfiguration.Builder()</span><br><span class="line">    .name(&quot;myrealm.realm&quot;)</span><br><span class="line">    .inMemory()</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+<p>DynamicRealm 以类型安全和性能为代价，换来了更多的灵活性。请在你确实需要这些灵活性的情况下使用。</p>
+<h3 id="关闭Realm实例"><a href="#关闭Realm实例" class="headerlink" title="关闭Realm实例"></a>关闭Realm实例</h3><p>Realm 实现了 Closeable 接口以便与释放 native 内存和文件描述符，请务必在使用完毕后关闭 Realm 实例。</p>
+<p>Realm 实例是基于引用计数的, 也就是说假设你在同一个线程中调用了 getInstance() 两次，你需要同样调用 close() 两次以关闭该实例。举例来说，如果你需要实现 Runnable，简单地在函数开始的时候调用 getInstance()，在函数结束的时候调用 close() 即可！</p>
+<p>对于UI线程，你可以选择在 onDestroy() 方法内调用 realm.close()。</p>
+<p>如果你想使用除 UI 线程外的 Looper 线程，可以参考以下代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Realm realm;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            <span class="hljs-comment">//... Setup the handlers using the Realm instance ...</span></span><br><span class="line">            Lopper.loop();</span><br><span class="line">        &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (realm != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 这样就可以创建一个存在于“内存中的” Realm。“内存中的”Realm 在内存紧张的情况下仍有可能使用到磁盘存储，但是这些磁盘空间都会在Realm实例完全关闭的时候被释放。</p>
-<p> 请注意使用同样的名称同时创建“内存中的”Realm 和常规的（持久化）Realm 是不允许的。</p>
-<p> 当某个“内存中的”Realm 的所有实例引用都被释放，该 Realm 下的数据也同时会被清除。建议在你的应用生命周期中保持对“内存中的” Realm 实例的引用以避免非期望的数据丢失。</p>
-<hr>
-<h4 id="Dynamic-Realm"><a href="#Dynamic-Realm" class="headerlink" title="Dynamic Realm"></a><a href></a>Dynamic Realm</h4><p> 对于普通的 Realm 来说，数据模型被定义成了 RealmObject 的子类。这样做保证了类型安全，但有时候某些数据模型在编译期是无法获得的。例如在处理数据迁移（migration）或CSV文件的时候。</p>
-<p> DynamicRealm 是普通 Realm 的一个变种。它可以在没有 RealmObject 子类的情况下操作 Realm 数据。其对数据的访问是基于字符串而非 RealmObject 的定义。</p>
-<p> 创建 Dynamic Realm 使用与创建普通 Realm 相同的RealmConfiguration，但是它的创建过程会忽略对 schema、migration以及 schema 版本的检查。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();</span><br><span class="line">DynamicRealm realm = DynamicRealm.getInstance(realmConfig);</span><br><span class="line"></span><br><span class="line">// In a DynamicRealm all objects are DynamicRealmObjects</span><br><span class="line">DynamicRealmObject person = realm.createObject(&quot;Person&quot;);</span><br><span class="line"></span><br><span class="line">// All fields are accessed using strings</span><br><span class="line">String name = person.getString(&quot;name&quot;);</span><br><span class="line">int age = person.getInt(&quot;age&quot;);</span><br><span class="line"></span><br><span class="line">// An underlying schema still exists, so accessing a field that does not exist</span><br><span class="line">// will throw an exception</span><br><span class="line">person.getString(&quot;I don&apos;t exist&quot;);</span><br><span class="line"></span><br><span class="line">// Queries still work normally</span><br><span class="line">RealmResults&lt;DynamicRealmObject&gt; persons = realm.where(&quot;Person&quot;)</span><br><span class="line">    .equalTo(&quot;name&quot;, &quot;John&quot;)</span><br><span class="line">    .findAll();</span><br></pre></td></tr></table></figure>
+<p>对于 AsyncTask，这里有个不错的例子可以参考：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">protected</span> Void <span class="hljs-title">doInBackground</span><span class="hljs-params">(Void... params)</span> </span>&#123;</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">        <span class="hljs-comment">// ... Use the Realm instance ...</span></span><br><span class="line">    &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">        realm.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> DynamicRealm 以类型安全和性能为代价，换来了更多的灵活性。请在你确实需要这些灵活性的情况下使用。</p>
-<hr>
-<h4 id="关闭Realm实例"><a href="#关闭Realm实例" class="headerlink" title="关闭Realm实例"></a><a href></a>关闭Realm实例</h4><p> Realm 实现了 Closeable 接口以便与释放 native 内存和文件描述符，请务必在使用完毕后关闭 Realm 实例。</p>
-<p> Realm 实例是基于引用计数的, 也就是说假设你在同一个线程中调用了 getInstance() 两次，你需要同样调用 close() 两次以关闭该实例。举例来说，如果你需要实现 Runnable，简单地在函数开始的时候调用 getInstance()，在函数结束的时候调用 close() 即可！</p>
-<p> 对于UI线程，你可以选择在 onDestroy() 方法内调用 realm.close()。</p>
-<p> 如果你想使用除 UI 线程外的 Looper 线程，可以参考以下代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class MyThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private Realm realm;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        Looper.prepare();</span><br><span class="line">        try &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            //... Setup the handlers using the Realm instance ...</span><br><span class="line">            Lopper.loop();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            if (realm != null) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你想使用 Thread 和 Runnable 进行一些短期任务，参考如下代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/ Run a non-Looper thread with a Realm instance.</span><br><span class="line">Thread thread = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        Realm realm = <span class="hljs-keyword">null</span>;</span><br><span class="line">        <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            <span class="hljs-comment">// ... Use the Realm instance ...</span></span><br><span class="line">        &#125; <span class="hljs-keyword">finally</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (realm != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
 
-<p> 对于 AsyncTask，这里有个不错的例子可以参考：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected Void doInBackground(Void... params) &#123;</span><br><span class="line">    Realm realm = Realm.getDefaultInstance();</span><br><span class="line">    try &#123;</span><br><span class="line">        // ... Use the Realm instance ...</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        realm.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你很幸运地工作在 minSdkVersion &gt;= 19 且 Java &gt;= 7 之下，可以使用try-with-resources：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">try</span> (Realm realm = Realm.getDefaultInstance()) &#123;</span><br><span class="line">    <span class="hljs-comment">// No need to close the Realm instance manually</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p> 如果你想使用 Thread 和 Runnable 进行一些短期任务，参考如下代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/ Run a non-Looper thread with a Realm instance.</span><br><span class="line">Thread thread = new Thread(new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        Realm realm = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            realm = Realm.getDefaultInstance();</span><br><span class="line">            // ... Use the Realm instance ...</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            if (realm != null) &#123;</span><br><span class="line">                realm.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
-
-<p> 如果你很幸运地工作在 minSdkVersion &gt;= 19 且 Java &gt;= 7 之下，可以使用try-with-resources：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">try (Realm realm = Realm.getDefaultInstance()) &#123;</span><br><span class="line">    // No need to close the Realm instance manually</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<h4 id="自动刷新"><a href="#自动刷新" class="headerlink" title="自动刷新"></a><a href></a>自动刷新</h4><p> 如果 Realm 实例存在于一个带有 Looper 的线程，那么这个 Realm 实例即具有自动更新的功能。这意味这如果发生了 Realm 数据库的变化，那么该 Realm 实例会在下一个事件循环（event loop）中自动更新。这个便捷的功能使你不必花费太多的精力就能保证的UI与数据的实时同步。</p>
-<p> 如果 Realm 的实例所在线程没有绑定 Looper，那么该实例不会被更新直到你手动调用 waitForChange() 方法。请注意，不更新 Realm 以保持对旧数据的引用会造成而外的磁盘和内存开销。这也是为什么要在线程结束时调用 close() 关闭 Realm 实例的一个重要原因。</p>
-<p> 如果你想确定当前 Realm 实例是否有自动更新功能，可以通过调用 isAutoRefresh() 方法查询。</p>
-<hr>
-<h4 id="查找-Realm-数据库文件"><a href="#查找-Realm-数据库文件" class="headerlink" title="查找 Realm 数据库文件"></a><a href></a>查找 Realm 数据库文件</h4><p> 如果你想知道你应用的 Realm 文件的具体路径，请参见这个 StackOverflow上的答案。</p>
-<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a><a href></a>原文链接</h2><p> <a href="https://realm.io/docs/java/latest/#realms" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#realms</a></p>
+<h3 id="自动刷新"><a href="#自动刷新" class="headerlink" title="自动刷新"></a>自动刷新</h3><p>如果 Realm 实例存在于一个带有 Looper 的线程，那么这个 Realm 实例即具有自动更新的功能。这意味这如果发生了 Realm 数据库的变化，那么该 Realm 实例会在下一个事件循环（event loop）中自动更新。这个便捷的功能使你不必花费太多的精力就能保证的UI与数据的实时同步。</p>
+<p>如果 Realm 的实例所在线程没有绑定 Looper，那么该实例不会被更新直到你手动调用 waitForChange() 方法。请注意，不更新 Realm 以保持对旧数据的引用会造成而外的磁盘和内存开销。这也是为什么要在线程结束时调用 close() 关闭 Realm 实例的一个重要原因。</p>
+<p>如果你想确定当前 Realm 实例是否有自动更新功能，可以通过调用 isAutoRefresh() 方法查询。</p>
+<h3 id="查找-Realm-数据库文件"><a href="#查找-Realm-数据库文件" class="headerlink" title="查找 Realm 数据库文件"></a>查找 Realm 数据库文件</h3><p>如果你想知道你应用的 Realm 文件的具体路径，请参见这个 StackOverflow上的答案。</p>
+<h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h2><p><a href="https://realm.io/docs/java/latest/#realms" target="_blank" rel="noopener">https://realm.io/docs/java/latest/#realms</a></p>
 
         </div>
         
@@ -240,7 +232,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Realm/">Realm</a>, <a class="has-link-grey -link" href="/tags/开源库/">开源库</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
+                    <a class="has-link-grey -link" href="/tags/Realm/">Realm</a>, <a class="has-link-grey -link" href="/tags/译文/">译文</a>
                 </div>
             </div>
         </div>
@@ -371,7 +363,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        163
+                        162
                     </p>
                 </div>
             </div>
@@ -391,7 +383,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        82
+                        63
                     </p>
                 </div>
             </div>
@@ -482,7 +474,7 @@
                 <span class="level-item">Android基础</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">57</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Android安全/">
@@ -592,7 +584,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 12.5px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 18.33px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.67px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BroadcastReceiver/" style="font-size: 10px;">BroadcastReceiver</a> <a href="/tags/CentOS/" style="font-size: 11.67px;">CentOS</a> <a href="/tags/CodeStyle/" style="font-size: 10px;">CodeStyle</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10.83px;">Drawable</a> <a href="/tags/EditText/" style="font-size: 10px;">EditText</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flex/" style="font-size: 10px;">Flex</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.5px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 12.5px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/JetPack/" style="font-size: 10px;">JetPack</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.5px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 15.83px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.83px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 15px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 11.67px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.67px;">RxJava</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Smali/" style="font-size: 10.83px;">Smali</a> <a href="/tags/TabLayout/" style="font-size: 10px;">TabLayout</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/View/" style="font-size: 10px;">View</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.67px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/事件分发/" style="font-size: 10px;">事件分发</a> <a href="/tags/动画/" style="font-size: 11.67px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/屏幕适配/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 17.5px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.83px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 19.17px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.83px;">微信小程序</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/手电筒/" style="font-size: 10px;">手电筒</a> <a href="/tags/技术选型/" style="font-size: 10px;">技术选型</a> <a href="/tags/文本/" style="font-size: 10px;">文本</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/源码分析/" style="font-size: 11.67px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.5px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/聚合数据/" style="font-size: 10px;">聚合数据</a> <a href="/tags/自定义View/" style="font-size: 14.17px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.67px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.83px;">设计模式</a> <a href="/tags/译文/" style="font-size: 16.67px;">译文</a> <a href="/tags/贪吃蛇/" style="font-size: 10px;">贪吃蛇</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/资源配置/" style="font-size: 10px;">资源配置</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 12.5px;">配置</a>
+        <a href="/tags/Aandroid实战/" style="font-size: 10px;">Aandroid实战</a> <a href="/tags/Android-Studio/" style="font-size: 13.64px;">Android Studio</a> <a href="/tags/Android基础/" style="font-size: 10px;">Android基础</a> <a href="/tags/Android实战/" style="font-size: 19.09px;">Android实战</a> <a href="/tags/Android开源库/" style="font-size: 11.82px;">Android开源库</a> <a href="/tags/Android源码/" style="font-size: 10px;">Android源码</a> <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/CentOS/" style="font-size: 11.82px;">CentOS</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Drawable/" style="font-size: 10px;">Drawable</a> <a href="/tags/FileProvider/" style="font-size: 10px;">FileProvider</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/Fragment/" style="font-size: 12.73px;">Fragment</a> <a href="/tags/Framework/" style="font-size: 15.45px;">Framework</a> <a href="/tags/Gank-io/" style="font-size: 11.82px;">Gank.io</a> <a href="/tags/Gitlab/" style="font-size: 10px;">Gitlab</a> <a href="/tags/HAL/" style="font-size: 10px;">HAL</a> <a href="/tags/IDEA插件/" style="font-size: 10px;">IDEA插件</a> <a href="/tags/Kotlin/" style="font-size: 13.64px;">Kotlin</a> <a href="/tags/LeetCode/" style="font-size: 12.73px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.64px;">Linux</a> <a href="/tags/MPAndroidChart/" style="font-size: 13.64px;">MPAndroidChart</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MultiDex/" style="font-size: 10px;">MultiDex</a> <a href="/tags/Mysql/" style="font-size: 10.91px;">Mysql</a> <a href="/tags/NDK/" style="font-size: 10px;">NDK</a> <a href="/tags/PMDReader/" style="font-size: 10px;">PMDReader</a> <a href="/tags/Picasso/" style="font-size: 10px;">Picasso</a> <a href="/tags/PowerDesign/" style="font-size: 10px;">PowerDesign</a> <a href="/tags/Realm/" style="font-size: 14.55px;">Realm</a> <a href="/tags/RecyclerView/" style="font-size: 10px;">RecyclerView</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/RxJava/" style="font-size: 11.82px;">RxJava</a> <a href="/tags/Smali/" style="font-size: 10.91px;">Smali</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/WanANdroid/" style="font-size: 10px;">WanANdroid</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/Xen/" style="font-size: 11.82px;">Xen</a> <a href="/tags/allowBackup/" style="font-size: 10px;">allowBackup</a> <a href="/tags/动画/" style="font-size: 11.82px;">动画</a> <a href="/tags/四大组件/" style="font-size: 10.91px;">四大组件</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/局域网/" style="font-size: 10px;">局域网</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/布局控件/" style="font-size: 20px;">布局控件</a> <a href="/tags/应用/" style="font-size: 16.36px;">应用</a> <a href="/tags/开发问题/" style="font-size: 10px;">开发问题</a> <a href="/tags/开机动画/" style="font-size: 10.91px;">开机动画</a> <a href="/tags/开源/" style="font-size: 10px;">开源</a> <a href="/tags/开源库/" style="font-size: 17.27px;">开源库</a> <a href="/tags/微信公众号/" style="font-size: 10px;">微信公众号</a> <a href="/tags/微信小程序/" style="font-size: 10.91px;">微信小程序</a> <a href="/tags/源码分析/" style="font-size: 10.91px;">源码分析</a> <a href="/tags/百度地图/" style="font-size: 12.73px;">百度地图</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a> <a href="/tags/自定义View/" style="font-size: 14.55px;">自定义View</a> <a href="/tags/虚拟化/" style="font-size: 11.82px;">虚拟化</a> <a href="/tags/设计模式/" style="font-size: 10.91px;">设计模式</a> <a href="/tags/译文/" style="font-size: 18.18px;">译文</a> <a href="/tags/资源/" style="font-size: 10px;">资源</a> <a href="/tags/辅助工具/" style="font-size: 10px;">辅助工具</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a>
     </div>
 </div>
 
@@ -786,7 +778,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1155,7 +1147,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1195,23 +1187,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1225,13 +1203,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1239,13 +1210,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1274,7 +1238,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1295,13 +1259,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1330,7 +1287,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -1393,14 +1350,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1419,13 +1376,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -1433,22 +1383,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1482,13 +1418,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -1498,7 +1427,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1517,13 +1446,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -1533,14 +1455,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -1568,7 +1490,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -1587,44 +1509,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1638,20 +1525,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1685,22 +1558,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1715,7 +1574,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1921,7 +1780,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -2290,7 +2149,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Android-Studio/">
                         <span class="tag">Android Studio</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2330,23 +2189,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/BroadcastReceiver/">
-                        <span class="tag">BroadcastReceiver</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/CentOS/">
                         <span class="tag">CentOS</span>
                         <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/CodeStyle/">
-                        <span class="tag">CodeStyle</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2360,13 +2205,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Drawable/">
                         <span class="tag">Drawable</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/EditText/">
-                        <span class="tag">EditText</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2374,13 +2212,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/FileProvider/">
                         <span class="tag">FileProvider</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Flex/">
-                        <span class="tag">Flex</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2409,7 +2240,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Gank-io/">
                         <span class="tag">Gank.io</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -2430,13 +2261,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/IDEA插件/">
                         <span class="tag">IDEA插件</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/JetPack/">
-                        <span class="tag">JetPack</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2465,7 +2289,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/MPAndroidChart/">
                         <span class="tag">MPAndroidChart</span>
-                        <span class="tag is-grey">11</span>
+                        <span class="tag is-grey">6</span>
                     </a>
                 </div>
                 
@@ -2528,14 +2352,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/Realm/">
                         <span class="tag">Realm</span>
-                        <span class="tag is-grey">9</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/RecyclerView/">
                         <span class="tag">RecyclerView</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -2554,13 +2378,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Service/">
-                        <span class="tag">Service</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Smali/">
                         <span class="tag">Smali</span>
                         <span class="tag is-grey">2</span>
@@ -2568,22 +2385,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/TabLayout/">
-                        <span class="tag">TabLayout</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Tomcat/">
                         <span class="tag">Tomcat</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/View/">
-                        <span class="tag">View</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2617,13 +2420,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/事件分发/">
-                        <span class="tag">事件分发</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/动画/">
                         <span class="tag">动画</span>
                         <span class="tag is-grey">3</span>
@@ -2633,7 +2429,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/四大组件/">
                         <span class="tag">四大组件</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2652,13 +2448,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/屏幕适配/">
-                        <span class="tag">屏幕适配</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/工具/">
                         <span class="tag">工具</span>
                         <span class="tag is-grey">1</span>
@@ -2668,14 +2457,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/布局控件/">
                         <span class="tag">布局控件</span>
-                        <span class="tag is-grey">31</span>
+                        <span class="tag is-grey">33</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/应用/">
                         <span class="tag">应用</span>
-                        <span class="tag is-grey">24</span>
+                        <span class="tag is-grey">11</span>
                     </a>
                 </div>
                 
@@ -2703,7 +2492,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/开源库/">
                         <span class="tag">开源库</span>
-                        <span class="tag is-grey">28</span>
+                        <span class="tag is-grey">14</span>
                     </a>
                 </div>
                 
@@ -2722,44 +2511,9 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/快捷键/">
-                        <span class="tag">快捷键</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/手电筒/">
-                        <span class="tag">手电筒</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/技术选型/">
-                        <span class="tag">技术选型</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/文本/">
-                        <span class="tag">文本</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/框架/">
-                        <span class="tag">框架</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/源码分析/">
                         <span class="tag">源码分析</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -2773,20 +2527,6 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/系统源码/">
                         <span class="tag">系统源码</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/终端/">
-                        <span class="tag">终端</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/聚合数据/">
-                        <span class="tag">聚合数据</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2820,22 +2560,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/贪吃蛇/">
-                        <span class="tag">贪吃蛇</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/资源/">
                         <span class="tag">资源</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/资源配置/">
-                        <span class="tag">资源配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2850,7 +2576,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/配置/">
                         <span class="tag">配置</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
