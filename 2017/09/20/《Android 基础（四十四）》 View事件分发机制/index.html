@@ -16,7 +16,7 @@
 <meta property="og:description" content="1. 前言View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-20T12:31:44.321Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四十四）》 View事件分发机制">
 <meta name="twitter:description" content="1. 前言View的事件分发机制，指的时当一个点击事件或者一个触摸事件发生时，Android系统如何讲这个事件进行处理，“分发“表示这里存在上下级关系，就如同部门经理分发任务一样，这就涉及到任务从何而来，分发到谁手上，是否继续分发或者返回上级，直到最终确定任务谁来处理，如何处理。">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1534 个字)
+                    9 分钟 读完 (大约 1358 个字)
                 </span>
                 
                 
@@ -186,23 +186,23 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onInterceptTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="hljs-string">"yidong -- ParentLayout onInterceptTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>点击Button<br><img src="http://img.blog.csdn.net/20170921210813365?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>ACTION_DOWN事件由ParentLayout开始分发（暂时不考虑从Activity开始，只考虑View和ViewGroup），经过dispatchTouchEvent方法，首先判断是否拦截该事件，由于我们没有设置拦截，事件继续传递到ChildView，ChildView拿到事件之后，也是通过dispatchTouchEvent来进行分发，由于没有子View，开始执行设置的onTouch方法，由于我们onTouch返回的是false，表示没有消耗事件，继续交给ChildView的onTouchEvent处理，而ChildView继承的时AppCompatButton，在onTouchEvent中会消耗掉事件，这样后续的ACTION_UP事件才会继续被处理，最后会ACTION_DOWN和ACTION_UP一起形成onClick事件。这里假设在ChildView的onTouchEvent返回的时false，我们将会看到另外一种log。<br><img src="http://img.blog.csdn.net/20170921213312836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>由于ChildView在onTouch和onTouchEvent中都没有消耗掉ACTION_DOWN事件，事件被返回给ParentLayout，而ParentLayout的onTouch和onTouchEvent中也都是返回的false，表示没有消耗事件，因此，这个事件一直都没有被处理。就好像领导给你一个任务，你竟然说你完成不了，后续的任务，你觉得会给你嘛？所以后面的ACTION_UP的影子都看不到。假如我们在ParentLayout的onTouch或者onTouchEvent中返回true。</li>
+<li>点击Button<br><img src="http://img.blog.csdn.net/20170921210813365" alt="这里写图片描述"><br>解释：<br>ACTION_DOWN事件由ParentLayout开始分发（暂时不考虑从Activity开始，只考虑View和ViewGroup），经过dispatchTouchEvent方法，首先判断是否拦截该事件，由于我们没有设置拦截，事件继续传递到ChildView，ChildView拿到事件之后，也是通过dispatchTouchEvent来进行分发，由于没有子View，开始执行设置的onTouch方法，由于我们onTouch返回的是false，表示没有消耗事件，继续交给ChildView的onTouchEvent处理，而ChildView继承的时AppCompatButton，在onTouchEvent中会消耗掉事件，这样后续的ACTION_UP事件才会继续被处理，最后会ACTION_DOWN和ACTION_UP一起形成onClick事件。这里假设在ChildView的onTouchEvent返回的时false，我们将会看到另外一种log。<br><img src="http://img.blog.csdn.net/20170921213312836" alt="这里写图片描述"><br>解释：<br>由于ChildView在onTouch和onTouchEvent中都没有消耗掉ACTION_DOWN事件，事件被返回给ParentLayout，而ParentLayout的onTouch和onTouchEvent中也都是返回的false，表示没有消耗事件，因此，这个事件一直都没有被处理。就好像领导给你一个任务，你竟然说你完成不了，后续的任务，你觉得会给你嘛？所以后面的ACTION_UP的影子都看不到。假如我们在ParentLayout的onTouch或者onTouchEvent中返回true。</li>
 </ul>
 <p><strong>若ParentLayout.onTouch返回true</strong></p>
-<p><img src="http://img.blog.csdn.net/20170921214032049?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>可以看到对于ACTION_DOWN事件在ParentLayout.onTouch结束，没有执行ParentLayout.onTouchEvent方法。而ACTION_UP在没有执行拦截判断的情况下，直接把事件交给ParentLayout的onTouch处理。就好像一个项目中的同一个模块的第一个任务，你很好的完成来，那么第二个任务，自然就是你的。因为你有能力完成，并且两个任务也是同一个模块。</p>
+<p><img src="http://img.blog.csdn.net/20170921214032049" alt="这里写图片描述"><br>可以看到对于ACTION_DOWN事件在ParentLayout.onTouch结束，没有执行ParentLayout.onTouchEvent方法。而ACTION_UP在没有执行拦截判断的情况下，直接把事件交给ParentLayout的onTouch处理。就好像一个项目中的同一个模块的第一个任务，你很好的完成来，那么第二个任务，自然就是你的。因为你有能力完成，并且两个任务也是同一个模块。</p>
 <p><strong>若ParentLayout.onTouchEvetn返回true</strong></p>
-<p>前提时ParentLayout.onTouch方法return false<br><img src="http://img.blog.csdn.net/20170921214538156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>结果和上面的差不多，只是终点换来一个位置而已。</p>
+<p>前提时ParentLayout.onTouch方法return false<br><img src="http://img.blog.csdn.net/20170921214538156" alt="这里写图片描述"><br>结果和上面的差不多，只是终点换来一个位置而已。</p>
 <ul>
-<li>点击Button外空白区域<br><img src="http://img.blog.csdn.net/20170921211445086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释：<br>由于ParentLayout的onTouch和onTouchEvent都是返回的false，ACTION_DOWN 事件并没有被消耗，所以后续的ACTION_UP事件自然是没有的，假如我们在onTouch或者onTouchEvent中return true。</li>
+<li>点击Button外空白区域<br><img src="http://img.blog.csdn.net/20170921211445086" alt="这里写图片描述"><br>解释：<br>由于ParentLayout的onTouch和onTouchEvent都是返回的false，ACTION_DOWN 事件并没有被消耗，所以后续的ACTION_UP事件自然是没有的，假如我们在onTouch或者onTouchEvent中return true。</li>
 </ul>
 <p><strong>若ParentLayout.onTouch返回true</strong></p>
-<p><img src="http://img.blog.csdn.net/20170921215200846?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170921215200846" alt="这里写图片描述"></p>
 <p><strong>若PatentLayout.onTouchEvent返回true</strong></p>
-<p><img src="http://img.blog.csdn.net/20170921214954710?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>解释基本和上面的一毛一样，不做赘述。</p>
+<p><img src="http://img.blog.csdn.net/20170921214954710" alt="这里写图片描述"><br>解释基本和上面的一毛一样，不做赘述。</p>
 <h3 id="2-4-2-ParentLayout拦截事件"><a href="#2-4-2-ParentLayout拦截事件" class="headerlink" title="2.4.2 ParentLayout拦截事件"></a>2.4.2 ParentLayout拦截事件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onInterceptTouchEvent</span><span class="hljs-params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    System.err.println(<span class="hljs-string">"yidong -- ParentLayout onInterceptTouchEvent event = "</span> + ev.getAction());</span><br><span class="line">    <span class="hljs-comment">//return super.onInterceptTouchEvent(ev);</span></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 结果可想而知，你的组长把活都自己做来，作为组员的你，自然时看不到任务的。运行结果和上面不拦截的情况下点击Button外部相同。具体的log要看ParentLayout的onTouch和onTouchEvent的执行结果。</p>
-<h2 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5 总结"></a>2.5 总结</h2><p><img src="http://img.blog.csdn.net/20170921220951549?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5 总结"></a>2.5 总结</h2><p><img src="http://img.blog.csdn.net/20170921220951549" alt="这里写图片描述"></p>
 <h2 id="2-6-测试代码"><a href="#2-6-测试代码" class="headerlink" title="2.6 测试代码"></a>2.6 测试代码</h2><p><a href="https://github.com/onlyloveyd/AndroidEventDispatchDemo" target="_blank" rel="noopener">AndroidEventDispatchDemo</a></p>
 
         </div>

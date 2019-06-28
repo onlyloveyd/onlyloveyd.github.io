@@ -16,7 +16,7 @@
 <meta property="og:description" content="介绍 LayerDrawable 是管理其他可绘制对象阵列的可绘制对象。列表中的每个可绘制对象按照列表的顺序绘制，列表中的最后一个可绘制对象绘于顶部。  每个可绘制对象由单一 &amp;lt; layer-list &amp;gt; 元素内的 &amp;lt; item &amp;gt; 元素表示。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-20T12:28:42.991Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（四十六）》 LayerDrawable &amp; layer-list">
 <meta name="twitter:description" content="介绍 LayerDrawable 是管理其他可绘制对象阵列的可绘制对象。列表中的每个可绘制对象按照列表的顺序绘制，列表中的最后一个可绘制对象绘于顶部。  每个可绘制对象由单一 &amp;lt; layer-list &amp;gt; 元素内的 &amp;lt; item &amp;gt; 元素表示。">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 301 个字)
+                    2 分钟 读完 (大约 297 个字)
                 </span>
                 
                 
@@ -178,13 +178,13 @@
 
 <h4 id="use-in-layout"><a href="#use-in-layout" class="headerlink" title="use in layout"></a>use in layout</h4><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">View</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"100dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"5dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_marginLeft</span>=<span class="hljs-string">"50dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:layout_marginTop</span>=<span class="hljs-string">"50dp"</span></span></span><br><span class="line"><span class="hljs-tag">      <span class="hljs-attr">android:background</span>=<span class="hljs-string">"@drawable/horizontal_line_dot"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="result"><a href="#result" class="headerlink" title="result"></a>result</h4><p> <img src="https://img-blog.csdn.net/20180609075131231" alt="这里写图片描述"></p>
-<p> <img src="https://img-blog.csdn.net/20180609075334427" alt="这里写图片描述"></p>
+<h4 id="result"><a href="#result" class="headerlink" title="result"></a>result</h4><p> <img src="http://qiniu.fultter.club/20180609075131231" alt="这里写图片描述"></p>
+<p> <img src="http://qiniu.fultter.club/20180609075334427" alt="这里写图片描述"></p>
 <h2 id="代码修改Drawable颜色"><a href="#代码修改Drawable颜色" class="headerlink" title="代码修改Drawable颜色"></a>代码修改Drawable颜色</h2><p> 通过LayerDrawable类中的部分方法，我们可以拿到每一层的Drawable，这样针对不通层级的Drawable，我们可以根据自己的需要，在用户交互过程中执行修改等操作。</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bt_change_color.setOnClickListener(&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> background: LayerDrawable = horizontal_line_dot.background as LayerDrawable</span><br><span class="line">    <span class="hljs-keyword">for</span> (index in <span class="hljs-number">0</span>..(background.numberOfLayers - <span class="hljs-number">1</span>)) &#123;</span><br><span class="line">        <span class="hljs-keyword">var</span> drawable: GradientDrawable = background.getDrawable(index) as GradientDrawable</span><br><span class="line">        drawable.setColor(Color.BLACK)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p> <img src="https://img-blog.csdn.net/20180609082051965" alt="这里写图片描述"></p>
-<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p> 关于Shape的用法，请阅<a href="https://blog.csdn.net/poorkick/article/details/51824524" target="_blank" rel="noopener">Shape</a><br> <img src="https://img-blog.csdn.net/20180609083337113" alt="这里写图片描述"></p>
+<p> <img src="http://qiniu.fultter.club/20180609082051965" alt="这里写图片描述"></p>
+<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p> 关于Shape的用法，请阅<a href="https://blog.csdn.net/poorkick/article/details/51824524" target="_blank" rel="noopener">Shape</a><br> <img src="http://qiniu.fultter.club/20180609083337113" alt="这里写图片描述"></p>
 
         </div>
         

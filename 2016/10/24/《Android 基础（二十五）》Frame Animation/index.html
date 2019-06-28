@@ -16,7 +16,7 @@
 <meta property="og:description" content="简介Frame Animation, 逐帧动画，通过定义一系列的Drawable对象来实现动画效果，可以用来作为视图的背景。Frame Animation在代码中体现为AnimationDrawable对象，可以通过xml文件快创建，放在在/res/drawable/目录下，设置为视图背景后，调用start()方法即可执行逐帧动画。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-16T05:31:58.315Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（二十五）》Frame Animation">
 <meta name="twitter:description" content="简介Frame Animation, 逐帧动画，通过定义一系列的Drawable对象来实现动画效果，可以用来作为视图的背景。Frame Animation在代码中体现为AnimationDrawable对象，可以通过xml文件快创建，放在在/res/drawable/目录下，设置为视图背景后，调用start()方法即可执行逐帧动画。">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 333 个字)
+                    2 分钟 读完 (大约 332 个字)
                 </span>
                 
                 
@@ -207,7 +207,7 @@
 
 <h3 id="纯代码实现"><a href="#纯代码实现" class="headerlink" title="纯代码实现"></a>纯代码实现</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">imageView.setBackground(createAnimationDrawable());<span class="hljs-comment">//设置背景</span></span><br><span class="line">Drawable bg = imageView.getBackground();</span><br><span class="line"><span class="hljs-keyword">if</span>(bg <span class="hljs-keyword">instanceof</span> AnimationDrawable) &#123;</span><br><span class="line">    ((AnimationDrawable) bg).start();<span class="hljs-comment">//开始动画</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">……</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> AnimationDrawable <span class="hljs-title">createAnimationDrawable</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    AnimationDrawable animationDrawable = <span class="hljs-keyword">new</span> AnimationDrawable();</span><br><span class="line">    animationDrawable.addFrame(getResources().getDrawable(R.drawable.ic_action_add), <span class="hljs-number">500</span>);</span><br><span class="line">    animationDrawable.addFrame(getResources().getDrawable(R.drawable.ic_action_anchor), <span class="hljs-number">500</span>);</span><br><span class="line">    animationDrawable.addFrame(getResources().getDrawable(R.drawable.ic_action_alarm), <span class="hljs-number">500</span>);</span><br><span class="line">    animationDrawable.addFrame(getResources().getDrawable(R.drawable.ic_action_amazon), <span class="hljs-number">500</span>);</span><br><span class="line">    animationDrawable.addFrame(getResources().getDrawable(R.drawable.ic_action_ac), <span class="hljs-number">500</span>);</span><br><span class="line">    animationDrawable.setOneShot(<span class="hljs-keyword">false</span>);</span><br><span class="line">    animationDrawable.setVisible(<span class="hljs-keyword">true</span>,<span class="hljs-keyword">true</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> animationDrawable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="https://img-blog.csdn.net/20161024112419820" alt="这里写图片描述"></p>
+<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><p><img src="http://qiniu.fultter.club/20161024112419820" alt="这里写图片描述"></p>
 
         </div>
         

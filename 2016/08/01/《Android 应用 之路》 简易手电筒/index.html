@@ -16,7 +16,7 @@
 <meta property="og:description" content="前言 快一个月没有写自己的博客了，由于最近换了工作，换了居住地，所以有一些杂事需要处理，从今天开始恢复正常，不赘述了。进入今天的主题 —– 简易的手电筒。 这个Demo中使用的是比较新的API，M版本之后添加的针对于手电筒的接口。这里使用的是Camera的API2接口，主要使用CameraManager中针对于闪光灯的一些方法，对于Camera API2的接口，后面在涉及相机应用的时候，API1和">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-25T12:21:09.463Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 应用 之路》 简易手电筒">
 <meta name="twitter:description" content="前言 快一个月没有写自己的博客了，由于最近换了工作，换了居住地，所以有一些杂事需要处理，从今天开始恢复正常，不赘述了。进入今天的主题 —– 简易的手电筒。 这个Demo中使用的是比较新的API，M版本之后添加的针对于手电筒的接口。这里使用的是Camera的API2接口，主要使用CameraManager中针对于闪光灯的一些方法，对于Camera API2的接口，后面在涉及相机应用的时候，API1和">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分钟 读完 (大约 1725 个字)
+                    11 分钟 读完 (大约 1721 个字)
                 </span>
                 
                 
@@ -176,7 +176,7 @@
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><blockquote>
 <p>实现一个简单的手电筒，考虑到M版本上新增的接口，可以直接通过setTorchMode来改变闪光灯的状态，实现开关，然后根据当前的闪光灯状态，有回调函数，若其他的应用打开了闪光灯或者是关闭了闪光灯，该应用要作出对应的调整，同时，开启和关闭的过程，需要有明显的用户感知和提示，这就要结合NotificationManager和CameraManager的接口一起实现了。</p>
 </blockquote>
-<h3 id="接口介绍"><a href="#接口介绍" class="headerlink" title="接口介绍"></a>接口介绍</h3><p>CameraManager.java(frameworks/base/core/java/android/hardware/camera2)<br><img src="https://img-blog.csdn.net/20160801212332050" alt="这里写图片描述"></p>
+<h3 id="接口介绍"><a href="#接口介绍" class="headerlink" title="接口介绍"></a>接口介绍</h3><p>CameraManager.java(frameworks/base/core/java/android/hardware/camera2)<br><img src="http://qiniu.fultter.club/20160801212332050" alt="这里写图片描述"></p>
 <table>
 <thead>
 <tr>
@@ -242,11 +242,11 @@
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> mraz.com.custombutton;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> android.annotation.TargetApi;</span><br><span class="line"><span class="hljs-keyword">import</span> android.content.BroadcastReceiver;</span><br><span class="line"><span class="hljs-keyword">import</span> android.content.Context;</span><br><span class="line"><span class="hljs-keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="hljs-keyword">import</span> android.hardware.camera2.CameraAccessException;</span><br><span class="line"><span class="hljs-keyword">import</span> android.hardware.camera2.CameraManager;</span><br><span class="line"><span class="hljs-keyword">import</span> android.os.Build;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlashCloseReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    CameraManager mCameraManager = <span class="hljs-keyword">null</span>;</span><br><span class="line">    String[] mCameraIds = <span class="hljs-keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FlashCloseReceiver</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@TargetApi</span>(Build.VERSION_CODES.M)</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"onReceiver"</span>);</span><br><span class="line">        mCameraManager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);</span><br><span class="line">        <span class="hljs-keyword">if</span> (mCameraManager != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                mCameraIds = mCameraManager.getCameraIdList();</span><br><span class="line">            &#125; <span class="hljs-keyword">catch</span> (CameraAccessException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        String action = intent.getAction();</span><br><span class="line">        <span class="hljs-keyword">if</span> (action.equals(FlashActivity.CLOSE_FLASH_ACTION)) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mCameraManager != <span class="hljs-keyword">null</span> &amp;&amp; mCameraIds != <span class="hljs-keyword">null</span> &amp;&amp; mCameraIds.length != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">try</span> &#123;</span><br><span class="line">                    System.out.println(<span class="hljs-string">"setTorchMode"</span>);</span><br><span class="line">                    mCameraManager.setTorchMode(mCameraIds[<span class="hljs-number">0</span>], <span class="hljs-keyword">false</span>);</span><br><span class="line">                &#125; <span class="hljs-keyword">catch</span> (CameraAccessException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="实际效果图"><a href="#实际效果图" class="headerlink" title="实际效果图"></a>实际效果图</h3><p>手电筒关闭状态</p>
-<p><img src="https://img-blog.csdn.net/20160801214413684" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20160801214413684" alt="这里写图片描述"></p>
 <p>手电筒开启状态</p>
-<p><img src="https://img-blog.csdn.net/20160801214435257" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20160801214435257" alt="这里写图片描述"></p>
 <p>手电筒开启状态提示信息  </p>
-<p><img src="https://img-blog.csdn.net/20160801214456663" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20160801214456663" alt="这里写图片描述"></p>
 <h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>由于开发时间比较短，测试可能不充分，有问题欢迎留言讨论~</p>
 
         </div>

@@ -16,7 +16,7 @@
 <meta property="og:description" content="简介 View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlip">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-16T00:38:16.386Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 基础（三十二）》 ViewFlipper">
 <meta name="twitter:description" content="简介 View Flipper，是ViewAnimator的子类，而ViewAnimator又是继承自FrameLayout，而FrameLayout就是平时基本上只显示一个子视图的布局，由于FrameLayout下不好确定子视图的位置，所以很多情况下子视图之前存在相互遮挡，这样就造成了很多时候我们基本上只要求FrameLayout显示一个子视图，然后通过某些控制来实现切换。正好，ViewFlip">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 419 个字)
+                    3 分钟 读完 (大约 417 个字)
                 </span>
                 
                 
@@ -173,7 +173,7 @@
 </blockquote>
 <a id="more"></a>
 
-<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p><img src="https://img-blog.csdn.net/20161128084313469" alt="这里写图片描述"></p>
+<h2 id="类结构"><a href="#类结构" class="headerlink" title="类结构"></a>类结构</h2><p><img src="http://qiniu.fultter.club/20161128084313469" alt="这里写图片描述"></p>
 <table>
 <thead>
 <tr>
@@ -221,7 +221,7 @@
 
 <h3 id="左右滑动切换"><a href="#左右滑动切换" class="headerlink" title="左右滑动切换"></a>左右滑动切换</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> ViewFlipper viewFlipper = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-keyword">float</span> PosX = <span class="hljs-number">0</span>, CurrentX = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);</span><br><span class="line">        toolbar.setNavigationIcon(R.drawable.left);</span><br><span class="line">        setSupportActionBar(toolbar);<span class="hljs-comment">//设置ActionBar</span></span><br><span class="line"></span><br><span class="line">        viewFlipper = (ViewFlipper) findViewById(R.id.vf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouchEvent</span><span class="hljs-params">(MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">switch</span> (event.getAction()) &#123;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">                PosX = event.getX();</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">                CurrentX = event.getX();</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">case</span> MotionEvent.ACTION_UP:</span><br><span class="line">                <span class="hljs-keyword">if</span> (CurrentX - PosX &gt; <span class="hljs-number">25.0</span>) &#123;<span class="hljs-comment">//向右滑动切换到上一页</span></span><br><span class="line">                    viewFlipper.showPrevious();</span><br><span class="line">                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (CurrentX - PosX &lt; -<span class="hljs-number">25.0</span>) &#123;<span class="hljs-comment">//向左滑动，切换到下一页</span></span><br><span class="line">                    viewFlipper.showNext();</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p><img src="https://img-blog.csdn.net/20161128091235217" alt="这里写图片描述"></p>
+<h2 id="实际效果"><a href="#实际效果" class="headerlink" title="实际效果"></a>实际效果</h2><p><img src="http://qiniu.fultter.club/20161128091235217" alt="这里写图片描述"></p>
 
         </div>
         

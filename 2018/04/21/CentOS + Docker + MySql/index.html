@@ -16,7 +16,7 @@
 <meta property="og:description" content="Docker安装与启动搜索1yum search docker">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-19T13:08:42.448Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS + Docker + MySql">
 <meta name="twitter:description" content="Docker安装与启动搜索1yum search docker">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 440 个字)
+                    2 分钟 读完 (大约 330 个字)
                 </span>
                 
                 
@@ -186,23 +186,23 @@
 <h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>一般情况下，我都是使用官方镜像或者阿里镜像</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdn.net/20180421212533766?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20180421212533766" alt="这里写图片描述"></p>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name onlyloveyd-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql:latest</span><br></pre></td></tr></table></figure>
 
-<p> –name 指定数据库名称<br> －e MYSQL_ROOT_PASSWORD=my-secret-pw 配置root账号密码<br> －p 指定端口映射<br> －d 指定镜像<br> <img src="https://img-blog.csdn.net/20180421213041710?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p> –name 指定数据库名称<br> －e MYSQL_ROOT_PASSWORD=my-secret-pw 配置root账号密码<br> －p 指定端口映射<br> －d 指定镜像<br> <img src="http://qiniu.fultter.club/20180421213041710" alt="这里写图片描述"></p>
 <h3 id="查看运行状态"><a href="#查看运行状态" class="headerlink" title="查看运行状态"></a>查看运行状态</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdn.net/20180421213203762?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20180421213203762" alt="这里写图片描述"></p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="进入Mysql-Docker环境"><a href="#进入Mysql-Docker环境" class="headerlink" title="进入Mysql Docker环境"></a>进入Mysql Docker环境</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="hljs-built_in">exec</span> -it onlyloveyd-mysql /bin/bash</span><br></pre></td></tr></table></figure>
 
 <p>onlyloveyd-mysql 替换成 对应容器名</p>
 <h4 id="进入mysql"><a href="#进入mysql" class="headerlink" title="进入mysql"></a>进入mysql</h4><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
 
-<p>输入密码后进入mysql<br><img src="https://img-blog.csdn.net/20180421213747913?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>输入密码后进入mysql<br><img src="http://qiniu.fultter.club/20180421213747913" alt="这里写图片描述"></p>
 <h4 id="配置允许Mysql远程连接"><a href="#配置允许Mysql远程连接" class="headerlink" title="配置允许Mysql远程连接"></a>配置允许Mysql远程连接</h4><p>使用mysql命令的时候注意以分号结尾。</p>
 <figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select host,user,authentication_string from user;</span><br><span class="line">update user <span class="hljs-built_in">set</span> host = <span class="hljs-string">'%'</span> <span class="hljs-built_in">where</span> user = <span class="hljs-string">'root'</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdn.net/20180421214755807?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bvb3JraWNr/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20180421214755807" alt="这里写图片描述"></p>
 <p>存在host为‘％‘，user为‘root‘的记录就代表用户可以在任何一台机器上使用root账号登陆。</p>
 
         </div>

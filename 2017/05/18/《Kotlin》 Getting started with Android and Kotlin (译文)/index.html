@@ -16,7 +16,7 @@
 <meta property="og:description" content="原文链接http://kotlinlang.org/docs/tutorials/kotlin-android.html 写在前面Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。今天凌晨Google I/O 上，Google官方表示了对Kotlin语言的支持。所以决定今天开始入坑，学习Kotlin.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-19T13:49:31.661Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Kotlin》 Getting started with Android and Kotlin (译文)">
 <meta name="twitter:description" content="原文链接http://kotlinlang.org/docs/tutorials/kotlin-android.html 写在前面Kotlin 是一个基于 JVM 的新的编程语言，由 JetBrains 开发。今天凌晨Google I/O 上，Google官方表示了对Kotlin语言的支持。所以决定今天开始入坑，学习Kotlin.">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1376 个字)
+                    8 分钟 读完 (大约 1156 个字)
                 </span>
                 
                 
@@ -174,23 +174,23 @@
 <h2 id="Kotlin在Android上的使用入门"><a href="#Kotlin在Android上的使用入门" class="headerlink" title="Kotlin在Android上的使用入门"></a>Kotlin在Android上的使用入门</h2><h3 id="安装Kotlin插件"><a href="#安装Kotlin插件" class="headerlink" title="安装Kotlin插件"></a>安装Kotlin插件</h3><p>Kotlin插件从3.0版本开始和Android Studio绑定。如果你使用的是之前的版本，你就需要手动安装Kotlin插件。点击<br><strong>“FIle”-&gt;”Settings”-&gt;”Plugins “-&gt;”Install JetBrains plugin…”</strong>,
  然后搜索Kotlin并安装。如果你在“Welcome to Android Studio”界面，选择<br> <strong>“Configure“-&gt;”Plugins”-&gt;”Install JetBrains plugin… “</strong>,然后搜索Kotlini并安装。安装完成后需要重启IDE。</p>
 <h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>开始使用Kotlin进行Android开发是非常容易的。 在本教程中，我们将使用Android Studio进行操作。 如果使用Intellij IDEA开发Android，这个过程几乎是一样的。<br>首先让我们创建一个新的项目。 选择 <strong>“Start a new Android Studio project”</strong>或者<strong>“File”-&gt;”New project”</strong>。 以下对话框将引导你完成新项目创建过程。 你需要为项目命名，并选择你安装的Android SDK版本。 大多数选项可以保留其默认值，因此你只需要按几次“Enter”。</p>
-<p>命名项目:<br><img src="http://img.blog.csdn.net/20170518092843172?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>Android Studio 3.0在上面这个界面上回提供一个启用Kotlin支持的选项。勾选上这个选项你就可以跳过下面的<strong>“在项目中配置Kotlin”</strong>步骤。</p>
-<p>选择Android版本:<br><img src="http://img.blog.csdn.net/20170518092901025?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>选择一个自动生成的Activity:<br><img src="http://img.blog.csdn.net/20170518093230077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>命名Activity:<br><img src="http://img.blog.csdn.net/20170518093239517?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>命名项目:<br><img src="http://img.blog.csdn.net/20170518092843172" alt="这里写图片描述"><br>Android Studio 3.0在上面这个界面上回提供一个启用Kotlin支持的选项。勾选上这个选项你就可以跳过下面的<strong>“在项目中配置Kotlin”</strong>步骤。</p>
+<p>选择Android版本:<br><img src="http://img.blog.csdn.net/20170518092901025" alt="这里写图片描述"></p>
+<p>选择一个自动生成的Activity:<br><img src="http://img.blog.csdn.net/20170518093230077" alt="这里写图片描述"></p>
+<p>命名Activity:<br><img src="http://img.blog.csdn.net/20170518093239517" alt="这里写图片描述"></p>
 <p>在Android Studio3.0中，你可以直接通过菜单选项新建Kotlin Activity,这样的话，你就可以跳过下面<strong>“转换Java代码为Kotlin”</strong>步骤。低于3.0的版本，需要使用java创建activity，然后用自动转换工具将其转换成 Kotlin。<br>一般来说，开始使用Kotlin的最简单方法是将Java Activity自动转换为Kotlin。 请注意，无论何时，与其通过查阅文档来寻找用Kotlin表单旧的表达式的方式，不如直接先使用Java编写它，然后将Java代码复制粘贴到Kotlin文件中，IntelliJ IDEA（或Android Studio）会建议我们转换，然后就可以自动转换成Kotlin。</p>
 <h4 id="转换Java代码为Kotlin"><a href="#转换Java代码为Kotlin" class="headerlink" title="转换Java代码为Kotlin"></a>转换Java代码为Kotlin</h4><p>打开MainActivity.java文件。然后调用动作将Java文件转换为Kotlin文件。 你可以通过几种方法来实现。 最简单的一个是调用<strong>Find Action</strong>并开始输入一个动作名称（如下面的截图）。 或者，您可以通过<strong>“Code”-&gt;”Convert Java File to Kotlin File”</strong>菜单项或者对应的快捷键将Java文件转换为Kotlin。</p>
-<p><img src="http://img.blog.csdn.net/20170518095143746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095143746" alt="这里写图片描述"></p>
 <p>转换完成后，用Kotlin编写的Activity将出现在你眼前</p>
-<p><img src="http://img.blog.csdn.net/20170518095232012?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095232012" alt="这里写图片描述"></p>
 <h4 id="在项目中配置Kotlin"><a href="#在项目中配置Kotlin" class="headerlink" title="在项目中配置Kotlin"></a>在项目中配置Kotlin</h4><p>当你开始编辑Kotlin文件时，Android Studio会向显示Kotlin未配置的提示，所以这个时候你需要配置一下。</p>
-<p><img src="http://img.blog.csdn.net/20170518095437531?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095437531" alt="这里写图片描述"></p>
 <p>然后系统提示你输入Kotlin版本。 从安装版本列表中选择最新版本。</p>
-<p><img src="http://img.blog.csdn.net/20170518095544858?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095544858" alt="这里写图片描述"></p>
 <p>配置Kotlin后，应用程序的build.gradle文件应该会被更新一些内容。 现在你可以看到 <strong>“apply plugin: ‘kotlin-android’”</strong>以及一些依赖项。</p>
-<p><img src="http://img.blog.csdn.net/20170518095758124?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095758124" alt="这里写图片描述"></p>
 <p>最后一件事件就是sync项目。</p>
-<p><img src="http://img.blog.csdn.net/20170518095838912?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcG9vcmtpY2s=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170518095838912" alt="这里写图片描述"></p>
 <h3 id="构建并发布使用Kotlin编写的Android应用程序"><a href="#构建并发布使用Kotlin编写的Android应用程序" class="headerlink" title="构建并发布使用Kotlin编写的Android应用程序"></a>构建并发布使用Kotlin编写的Android应用程序</h3><p>你现在可以构建应用程序并在模拟器或真机上运行它。 这与Java中的工作方式完全相同。 你可以发布应用程序，并以类似于使用Java编写的Android应用程序的方式进行签名。</p>
 <p>Kotlin有一个相当小的运行时文件大小：库大约是859KB（从1.1.2-2开始）。 这意味着Kotlin对.apk文件大小增加了一点。</p>
 <p>Kotlin编译器生成字节码，因此Kotlin应用程序与Java编写的应用程序的外观和感觉确实没有差别。</p>

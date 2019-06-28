@@ -16,7 +16,7 @@
 <meta property="og:description" content="问题类型Layout中添加一个Button 12345&amp;lt;Button android:id=&quot;@+id/bt_showerror&quot;    android:layout_width=&quot;200dp&quot;    android:layout_height=&quot;wrap_content&quot;    android:text=&quot;ShowError&quot;/&amp;gt;">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-19T13:34:18.926Z">
+<meta property="og:updated_time" content="2019-06-28T12:20:49.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Studio 小技巧（2）：AS中Button文字默认大写的问题">
 <meta name="twitter:description" content="问题类型Layout中添加一个Button 12345&amp;lt;Button android:id=&quot;@+id/bt_showerror&quot;    android:layout_width=&quot;200dp&quot;    android:layout_height=&quot;wrap_content&quot;    android:text=&quot;ShowError&quot;/&amp;gt;">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    2 分钟 读完 (大约 235 个字)
                 </span>
                 
                 
@@ -173,13 +173,13 @@
 
 <a id="more"></a>
 <p> 预览界面和真机运行却显示：</p>
-<p> <img src="https://img-blog.csdn.net/20160703172930538" alt="这里写图片描述"></p>
+<p> <img src="http://qiniu.fultter.club/20160703172930538" alt="这里写图片描述"></p>
 <p> 与直接设置的字符串的显示不一样，显示的文字都显示了大写。</p>
 <h3 id="原因探索"><a href="#原因探索" class="headerlink" title="原因探索"></a>原因探索</h3><p> AS中针对Activity中设置<br> android:theme=”@style/AppTheme”<br> 而<br> 而AppTheme的父主题是Theme.AppCompat.Light.DarkActionBar，一直追溯，追溯的过程中关注一个属性值：<br> <code>android:textAllCaps</code><br> 最后可以找到主题中已经将这个属性设置为true，导致最后出现了你看到的现象。</p>
 <h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p> 默认的SDK中的设置属性是无法改变的，除非你重新编译对应的framework代码。<br> 这里我们可以直接在对应的Button中设置属性：<br> <code>android:textAllCaps=”false”</code><br> 这样字体的大小写就正常了</p>
 <figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">android:id</span>=<span class="hljs-string">"@+id/bt_showerror"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">"200dp"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">"wrap_content"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:text</span>=<span class="hljs-string">"ShowError"</span></span></span><br><span class="line"><span class="hljs-tag">    <span class="hljs-attr">android:textAllCaps</span>=<span class="hljs-string">"false"</span></span></span><br><span class="line"><span class="hljs-tag">   /&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdn.net/20160703174107010" alt="这里写图片描述"></p>
+<p><img src="http://qiniu.fultter.club/20160703174107010" alt="这里写图片描述"></p>
 
         </div>
         
