@@ -16,7 +16,7 @@
 <meta property="og:description" content="前言“ android:allowBackup”是一个是否允许备份系统和用户数据的属性。当这个标志被设置为true时应用程序数据可以在手机未获取 ROOT 的情况下通过adb调试工具来备份和恢复。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="og:updated_time" content="2019-06-20T12:33:40.374Z">
+<meta property="og:updated_time" content="2019-06-29T00:38:13.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android 安全（一）》AndroidManifest.xml之allowBackup属性">
 <meta name="twitter:description" content="前言“ android:allowBackup”是一个是否允许备份系统和用户数据的属性。当这个标志被设置为true时应用程序数据可以在手机未获取 ROOT 的情况下通过adb调试工具来备份和恢复。">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 769 个字)
+                    5 分钟 读完 (大约 758 个字)
                 </span>
                 
                 
@@ -171,18 +171,19 @@
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>“ android:allowBackup”是一个是否允许备份系统和用户数据的属性。<br>当这个标志被设置为true时应用程序数据可以在手机未获取 ROOT 的情况下通过adb调试工具来备份和恢复。</p>
 <a id="more"></a>
 <h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><p>从应用商城里下载一个“密码本”之类的应用。</p>
-<h3 id="1-使用AndroidStudio分析应用"><a href="#1-使用AndroidStudio分析应用" class="headerlink" title="1. 使用AndroidStudio分析应用"></a>1. 使用AndroidStudio分析应用</h3><p>“Build” 》“Analyze APK…”，选择对应的应用进行分析，关注<code>包名</code>和<code>allowBackup</code>属性<br><img src="http://www.onlyloveyd.cn/upload/2018/12/pt8ls9vnpiifmov8esb2av98rf.png" alt="在这里插入图片描述"></p>
+<h3 id="1-使用AndroidStudio分析应用"><a href="#1-使用AndroidStudio分析应用" class="headerlink" title="1. 使用AndroidStudio分析应用"></a>1. 使用AndroidStudio分析应用</h3><p>“Build” 》“Analyze APK…”，选择对应的应用进行分析，关注<font color="red">包名</font>和<font color="red">allowBackup</font>属性<br><img src="http://qiniu.fultter.club/pt8ls9vnpiifmov8esb2av98rf.png" alt="在这里插入图片描述"></p>
 <p>若“allowBackup”属性为true，才能继续往下进行。</p>
-<p><img src="http://www.onlyloveyd.cn/upload/2018/12/3i837kg02ki8vr6oc6dv1fug7q.png" alt="在这里插入图片描述"></p>
-<h3 id="2-安装应用"><a href="#2-安装应用" class="headerlink" title="2. 安装应用"></a>2. 安装应用</h3><h3 id="3-使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“"><a href="#3-使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“" class="headerlink" title="3. 使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“"></a>3. 使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“</h3><p><img src="http://www.onlyloveyd.cn/upload/2018/12/qbluqlf3kuihfobh41h09afk5f.png" alt></p>
-<p><img src="http://www.onlyloveyd.cn/upload/2018/12/661klh5us6g27qb54r01dga074.png" alt></p>
-<h3 id="4-使用abe工具解压ab文件"><a href="#4-使用abe工具解压ab文件" class="headerlink" title="4. 使用abe工具解压ab文件"></a>4. 使用abe工具解压ab文件</h3><p>使用abe-all.jar文件解析ab文件为rar文件，jar包下载地址为：<a href="https://github.com/nelenkov/android-backup-extractor/releases/download/20181012025725-d750899/abe-all.jar" target="_blank" rel="noopener">abe-all.jar</a><br><img src="http://www.onlyloveyd.cn/upload/2018/12/6sikc4435shs4rm5o7ddevt09g.png" alt></p>
-<h3 id="5-查看备份文件"><a href="#5-查看备份文件" class="headerlink" title="5. 查看备份文件"></a>5. 查看备份文件</h3><p>解压文件，查看里面有很多有用的数据文件，如数据库db文件和SharedPreference文件<br><img src="http://www.onlyloveyd.cn/upload/2018/12/0bur4lnaikggcrtfmrdfg9rihj.png" alt><br><img src="http://www.onlyloveyd.cn/upload/2018/12/tvnteijhssi34ratokhu9p5ote.png" alt></p>
-<p>查看一下数据库文件,里面有一条我之前保存的测试数据<br><img src="http://www.onlyloveyd.cn/upload/2018/12/p6l7d3g89ogdkouq423aqmbeif.png" alt></p>
-<p>查看一下sp文件中的xml，里面有我设置的数字密码虽然是加过密的<br><img src="http://www.onlyloveyd.cn/upload/2018/12/7lvuha0ji6jdtpfvjkeerb1m81.png" alt></p>
+<p><img src="http://qiniu.fultter.club/3i837kg02ki8vr6oc6dv1fug7q.png" alt="在这里插入图片描述"></p>
+<h3 id="2-安装应用"><a href="#2-安装应用" class="headerlink" title="2. 安装应用"></a>2. 安装应用</h3><h3 id="3-使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“"><a href="#3-使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“" class="headerlink" title="3. 使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“"></a>3. 使用adb命令导出该应用数据，过程中手机会要求设置密码，设置密码后点击”备份我的数据“</h3><p><img src="http://qiniu.fultter.club/qbluqlf3kuihfobh41h09afk5f.png" alt></p>
+<p><img src="http://qiniu.fultter.club/661klh5us6g27qb54r01dga074.png" alt></p>
+<h3 id="4-使用abe工具解压ab文件"><a href="#4-使用abe工具解压ab文件" class="headerlink" title="4. 使用abe工具解压ab文件"></a>4. 使用abe工具解压ab文件</h3><p>使用abe-all.jar文件解析ab文件为rar文件，jar包下载地址为：<a href="https://github.com/nelenkov/android-backup-extractor/releases/download/20181012025725-d750899/abe-all.jar" target="_blank" rel="noopener">abe-all.jar</a><br><img src="http://qiniu.fultter.club/6sikc4435shs4rm5o7ddevt09g.png" alt></p>
+<h3 id="5-查看备份文件"><a href="#5-查看备份文件" class="headerlink" title="5. 查看备份文件"></a>5. 查看备份文件</h3><p>解压文件，查看里面有很多有用的数据文件，如数据库db文件和SharedPreference文件</p>
+<p><img src="http://qiniu.fultter.club/0bur4lnaikggcrtfmrdfg9rihj.png" alt><br><img src="http://qiniu.fultter.club/tvnteijhssi34ratokhu9p5ote.png" alt></p>
+<p>查看一下数据库文件,里面有一条我之前保存的测试数据<br><img src="http://qiniu.fultter.club/p6l7d3g89ogdkouq423aqmbeif.png" alt></p>
+<p>查看一下sp文件中的xml，里面有我设置的数字密码虽然是加过密的<br><img src="http://qiniu.fultter.club/7lvuha0ji6jdtpfvjkeerb1m81.png" alt></p>
 <h3 id="6-修改内容并恢复数据"><a href="#6-修改内容并恢复数据" class="headerlink" title="6. 修改内容并恢复数据"></a>6. 修改内容并恢复数据</h3><p>数据库文件稍作修改“pwd”字段修改为“23456789”并保存。恢复过程中要求输入密码，和之前一样就行</p>
-<p><img src="http://www.onlyloveyd.cn/upload/2018/12/tg9m2f2upui5koitnn80nk95ej.png" alt></p>
-<p><img src="http://www.onlyloveyd.cn/upload/2018/12/rpkf2aotn2g0arffs9f2d66l2n.png" alt></p>
+<p><img src="http://qiniu.fultter.club/tg9m2f2upui5koitnn80nk95ej.png" alt></p>
+<p><img src="http://qiniu.fultter.club/rpkf2aotn2g0arffs9f2d66l2n.png" alt></p>
 <h3 id="7-恢复结果"><a href="#7-恢复结果" class="headerlink" title="7. 恢复结果"></a>7. 恢复结果</h3><p>使用adb restore恢复数据后，应用内显示的数据依然是“234567”，也就是我们修改后的数据没有被接受。两方面认证：</p>
 <ol>
 <li>重新导出数据（依然是“234567”）</li>
