@@ -27,6 +27,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: touch .vitepress/dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .vitepress/dist
