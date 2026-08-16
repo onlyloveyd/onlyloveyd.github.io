@@ -4,12 +4,12 @@ const SITE = 'https://onlyloveyd.github.io/'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'onlyloveyd · 作品集',
+  title: 'OhCode',
   description: '把想法做成作品：Focus 与更多开源项目、文章。',
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
-    ['meta', { property: 'og:site_name', content: 'onlyloveyd · 作品集' }],
-    ['meta', { property: 'og:title', content: 'onlyloveyd · 作品集' }],
+    ['meta', { property: 'og:site_name', content: 'OhCode' }],
+    ['meta', { property: 'og:title', content: 'OhCode · 作品集' }],
     ['meta', { property: 'og:description', content: '把想法做成作品：Focus 与更多开源项目、文章。' }],
     ['meta', { property: 'og:image', content: SITE + 'images/focus-fierce.png' }],
     ['meta', { property: 'og:url', content: SITE }],

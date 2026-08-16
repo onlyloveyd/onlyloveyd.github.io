@@ -5,6 +5,4 @@ aside: false
 lastUpdated: false
 ---
 
-# 文章
-
-<ArticlesList />
+<ArticlesPage />

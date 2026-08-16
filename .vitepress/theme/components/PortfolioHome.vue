@@ -19,7 +19,7 @@ const works = [
 <template>
   <div class="ph">
     <header class="hero">
-      <p class="hero-kicker">ONLYLOVEYD · PORTFOLIO</p>
+      <p class="hero-kicker">OHCODE · PORTFOLIO</p>
       <h1 class="hero-title">把想法做成作品</h1>
       <p class="hero-sub">
         一个工程师的注意力工具、写作与方法论。<br />
@@ -55,17 +55,8 @@ const works = [
       </article>
     </section>
 
-    <section class="section">
-      <h2 class="section-title">文章 <span class="section-en">WRITING</span></h2>
-      <ArticlesList />
-    </section>
-
     <footer class="ph-footer">
-      <p>
-        © 2026 onlyloveyd · 微信公众号：赛博禅心 ·
-        <a href="https://github.com/onlyloveyd/onlyloveyd.github.io/tree/hexo-archive" target="_blank" rel="noopener">旧博客（2014–2019）</a>
-        存于 hexo-archive 分支
-      </p>
+      <p>© 2026 OhCode · 微信公众号：OhCode</p>
     </footer>
   </div>
 </template>
