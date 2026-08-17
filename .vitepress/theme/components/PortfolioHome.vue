@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
 const works = [
   {
     name: 'Focus',
@@ -11,9 +13,22 @@ const works = [
     release: 'https://github.com/onlyloveyd/Focus/releases',
     article: '/articles/focus-25-times.html',
     facts: ['三种人格随时切换', '拦截名单自定义', '每一笔都有账可查'],
-    status: 'v0.1.1',
+    status: 'v0.1.2',
   },
 ]
+
+// 版本号运行时取 GitHub 最新 Release，失败则回退到上面的静态值
+const liveVersions = ref<Record<string, string>>({})
+onMounted(async () => {
+  try {
+    const res = await fetch('https://api.github.com/repos/onlyloveyd/Focus/releases/latest')
+    if (!res.ok) return
+    const data = await res.json()
+    if (data.tag_name) liveVersions.value = { 'https://github.com/onlyloveyd/Focus': data.tag_name }
+  } catch {
+    /* 离线或限流时保持静态兜底值 */
+  }
+})
 </script>
 
 <template>
@@ -36,7 +51,7 @@ const works = [
         <div class="work-body">
           <div class="work-name-row">
             <h3 class="work-name">{{ w.name }}</h3>
-            <span class="work-status">{{ w.status }}</span>
+            <span class="work-status">{{ liveVersions[w.repo] || w.status }}</span>
           </div>
           <p class="work-tagline">{{ w.tagline }}</p>
           <p class="work-desc">{{ w.description }}</p>
