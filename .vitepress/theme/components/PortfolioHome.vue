@@ -3,6 +3,20 @@ import { ref, onMounted } from 'vue'
 
 const works = [
   {
+    name: 'LazyKeyboard',
+    tagline: '把敏感输入从输入法手里拿回来',
+    description:
+      'Android 安全键盘：换一个 EditText 标签，密码框就从绑定层拒绝一切输入法，弹出应用内自绘键盘——数字每次乱序、防遮挡、纯 Java 零 Kotlin 运行时，v1.8 起提供可选的 Compose 适配。金融、政务类合规场景的轻量开源解法。',
+    image: 'https://blog-1256167984.cos.ap-guangzhou.myqcloud.com/card_number.png',
+    chips: ['Android', '开源免费 · MIT', '纯 Java 轻依赖', 'Compose 可选适配'],
+    repo: 'https://github.com/onlyloveyd/LazyKeyboard',
+    release: 'https://github.com/onlyloveyd/LazyKeyboard/releases',
+    releaseLabel: '查看 Releases',
+    article: '/articles/lazykeyboard-security-keyboard.html',
+    facts: ['输入法从绑定层断路，系统键盘无路径可弹', '数字键盘每次展示重新乱序，防肩窥防录屏', '输入回调 API：按键序列先于文本变化交付'],
+    status: 'v1.8',
+  },
+  {
     name: 'Focus',
     tagline: '给「顺手点开」加一道闸门',
     description:
@@ -11,23 +25,31 @@ const works = [
     chips: ['macOS', '开源免费', '无账号 · 不联网', '本地优先'],
     repo: 'https://github.com/onlyloveyd/Focus',
     release: 'https://github.com/onlyloveyd/Focus/releases',
+    releaseLabel: '下载 DMG',
     article: '/articles/focus-25-times.html',
     facts: ['三种人格随时切换', '拦截名单自定义', '每一笔都有账可查'],
     status: 'v0.1.2',
   },
 ]
 
-// 版本号运行时取 GitHub 最新 Release，失败则回退到上面的静态值
+// 版本号运行时取各作品 GitHub 最新 Release，失败则回退到上面的静态值
 const liveVersions = ref<Record<string, string>>({})
 onMounted(async () => {
-  try {
-    const res = await fetch('https://api.github.com/repos/onlyloveyd/Focus/releases/latest')
-    if (!res.ok) return
-    const data = await res.json()
-    if (data.tag_name) liveVersions.value = { 'https://github.com/onlyloveyd/Focus': data.tag_name }
-  } catch {
-    /* 离线或限流时保持静态兜底值 */
-  }
+  const repos = [...new Set(works.map((w) => w.repo))]
+  const entries = await Promise.all(
+    repos.map(async (repo) => {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo.replace('https://github.com/', '')}/releases/latest`)
+        if (!res.ok) return null
+        const data = await res.json()
+        return data.tag_name ? ([repo, data.tag_name] as const) : null
+      } catch {
+        /* 离线或限流时保持静态兜底值 */
+        return null
+      }
+    })
+  )
+  liveVersions.value = Object.fromEntries(entries.filter(Boolean))
 })
 </script>
 
@@ -37,7 +59,7 @@ onMounted(async () => {
       <p class="hero-kicker">OHCODE · PORTFOLIO</p>
       <h1 class="hero-title">把想法做成作品</h1>
       <p class="hero-sub">
-        一个工程师的注意力工具、写作与方法论。<br />
+        一个工程师的开源工具、写作与方法论。<br />
         所有作品开源、免费、本地优先。
       </p>
     </header>
@@ -63,7 +85,7 @@ onMounted(async () => {
           </div>
           <div class="work-actions">
             <a class="btn primary" :href="w.repo" target="_blank" rel="noopener">GitHub 仓库</a>
-            <a class="btn" :href="w.release" target="_blank" rel="noopener">下载 DMG</a>
+            <a class="btn" :href="w.release" target="_blank" rel="noopener">{{ w.releaseLabel || '下载 DMG' }}</a>
             <a class="btn ghost" :href="w.article">读实现故事 →</a>
           </div>
         </div>
