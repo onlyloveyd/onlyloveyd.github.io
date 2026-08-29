@@ -24,7 +24,7 @@ description: LazyKeyboard：Android 安全键盘开源库。从绑定层面断�
 
 一句话：**把敏感输入框的键盘，换成一个不经过任何输入法的应用内自绘键盘。**
 
-![演示：输入、长按连删、数字乱序、符号键盘](/images/lazykeyboard_demo.gif "真机录制：字母输入、长按连删、数字乱序、符号键盘")
+![演示：输入、长按连删、数字乱序、符号键盘](https://blog-1256167984.cos.ap-guangzhou.myqcloud.com/lazykeyboard_demo.gif "真机录制：字母输入、长按连删、数字乱序、符号键盘")
 
 它管三件事：
 
@@ -67,7 +67,7 @@ dependencies {
 
 完了。不需要写任何 Java 代码：点击弹出、失焦收起、返回键关闭，全部自动处理。聚焦它，弹出来的是这个：
 
-![数字乱序键盘](/images/lazykeyboard-number.png "数字每次展示都重新乱序")
+![数字乱序键盘](https://blog-1256167984.cos.ap-guangzhou.myqcloud.com/lazykeyboard-number.png "数字每次展示都重新乱序")
 
 ## 进阶用法
 
