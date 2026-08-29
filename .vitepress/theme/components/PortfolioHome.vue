@@ -7,11 +7,11 @@ const works = [
     tagline: '把敏感输入从输入法手里拿回来',
     description:
       'Android 安全键盘：换一个 EditText 标签，密码框就从绑定层拒绝一切输入法，弹出应用内自绘键盘——数字每次乱序、防遮挡、纯 Java 零 Kotlin 运行时，v1.8 起提供可选的 Compose 适配。金融、政务类合规场景的轻量开源解法。',
-    image: 'https://blog-1256167984.cos.ap-guangzhou.myqcloud.com/card_number.png',
+    image: 'https://blog-1256167984.cos.ap-guangzhou.myqcloud.com/card_keyboard.png',
     chips: ['Android', '开源免费 · MIT', '纯 Java 轻依赖', 'Compose 可选适配'],
     repo: 'https://github.com/onlyloveyd/LazyKeyboard',
     release: 'https://github.com/onlyloveyd/LazyKeyboard/releases',
-    releaseLabel: '查看 Releases',
+    releaseLabel: 'Releases',
     article: '/articles/lazykeyboard-security-keyboard.html',
     facts: ['输入法从绑定层断路，系统键盘无路径可弹', '数字键盘每次展示重新乱序，防肩窥防录屏', '输入回调 API：按键序列先于文本变化交付'],
     status: 'v1.8',
