@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import BusuanziCounter from './BusuanziCounter.vue'
 
 const works = [
   {
@@ -93,7 +94,7 @@ onMounted(async () => {
     </section>
 
     <footer class="ph-footer">
-      <p>© 2026 OhCode · 微信公众号：OhCode</p>
+      <p>© 2026 OhCode · 微信公众号:OhCode · <BusuanziCounter /></p>
     </footer>
   </div>
 </template>
